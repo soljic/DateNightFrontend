@@ -7,7 +7,7 @@ import { SpiritusResponse } from "../models/SpirirtusResponse";
 import { StoryRequest } from "../models/StoryRequest";
 import { StoryResponse } from "../models/StoryResponse";
 
-axios.defaults.baseURL = "https://cors-anywhere.herokuapp.com/http://46.101.182.89:8080";
+axios.defaults.baseURL = "http://46.101.182.89:8080";
 
 const responseBody = function <T>(response: AxiosResponse<T>) {
   return response.data;
