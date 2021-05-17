@@ -8,7 +8,7 @@ function NavBar() {
 
     return (
 
-        <Menu inverted fixed="top">
+        <Menu inverted fixed="top" class>
                 <Container>
                     <Menu.Item as={NavLink} to='/' exact header>
                         <img src="/assets/logo.png" alt="logo" style={{marginRight: '10px'}}/>
