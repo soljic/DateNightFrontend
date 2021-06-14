@@ -1,10 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Activity } from "../models/activity";
+import { SpiritusResponse } from "../models/SpirirtusResponse";
 
 export default class ActivityStore {
   activityRegistry = new Map<string, Activity>();
   selectedActivity: Activity | undefined = undefined;
+  selectedSpiritus: SpiritusResponse | undefined = undefined;
+  popularSpiritus: SpiritusResponse | undefined = undefined;
   editMode = false;
   loading = false;
   loadingInitial = true;
@@ -35,7 +38,35 @@ export default class ActivityStore {
     this.loadingInitial = true;
     try {
       const response = await agent.Spiritus.list();
-      console.log(response);
+
+     /* runInAction(() => {
+        activities.forEach((item) => {
+          this.setActivity(item);
+        });
+        this.loadingInitial = false;
+      });*/
+    } catch (error) {
+      console.log(error);
+      runInAction(() => {
+        this.loadingInitial = false;
+      });
+    }
+  };
+
+  
+  loadPopularSpiritus = async () => {
+    this.loadingInitial = true;
+    try {
+      const response = await agent.Spiritus.popularList();
+      response.content.map(image =>(
+        image.images.map(item =>(
+          console.log(item)   
+        ))
+
+        ))
+      ;
+      
+      return response.content;
 
      /* runInAction(() => {
         activities.forEach((item) => {
