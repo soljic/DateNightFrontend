@@ -1,10 +1,17 @@
-.navbar {
+.container{
   display: flex;
-  width: 97%;
+}
+
+.col-navbar{
+  display: flex;
   justify-content: space-around;
-  align-content: center;
+}
+.navbar {
+  width: 90%;
+  justify-content: space-between;
   background: #1a1612;
   padding-top: 1em;
+  border:2px solid maroon;
  
 }
 .nav-items {

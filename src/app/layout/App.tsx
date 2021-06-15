@@ -1,5 +1,6 @@
 
 import { Container } from 'semantic-ui-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/navBar/NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { observer } from 'mobx-react-lite';
