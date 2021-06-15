@@ -1,0 +1,63 @@
+.carousel-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  top: 16em;
+  margin: 0 10%;
+  overflow: hidden;
+  border: 2px solid magenta;
+  
+}
+
+.fetaured-stories {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+}
+
+.expand-stories {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  /* identical to box height */
+
+  text-align: right;
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+
+  opacity: 0.6;
+}
+
+.line {
+  position: relative;
+  top: 16.5em;
+  margin: 0 10%;
+  opacity: 0.08;
+ 
+ 
+}
+
+.carousel{
+  position: relative;
+  margin: 0 auto;
+  width: 90%;
+  top: 16.5em;
+  border: 2px solid magenta;
+}
+

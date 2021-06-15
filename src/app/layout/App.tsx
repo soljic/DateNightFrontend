@@ -1,6 +1,6 @@
 
 import { Container } from 'semantic-ui-react';
-import NavBar from './NavBar';
+import NavBar from './components/navBar/NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { observer } from 'mobx-react-lite';
 import { Route } from 'react-router';
@@ -22,7 +22,7 @@ function App() {
         <>
           <NavBar/>
      <Container style={{marginTop: '7em'}} >
-      <Route exact path='/spiritus' component={ActivityDashboard} />
+      <Route exact path='/stories' component={ActivityDashboard} />
       <Route  path='/spiritus/:id' component={ActivityDetails} />
       <Route key={location.key}  path={['/createActivity', '/manage/:id']} component={ActivityForm} />
      </Container>
