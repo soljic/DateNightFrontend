@@ -1,8 +1,10 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
 .carousel-container {
   position: relative;
   display: flex;
   justify-content: space-between;
-  top: 16em;
   margin: 0 10%;
   overflow: hidden;
   border: 2px solid magenta;
@@ -46,8 +48,6 @@
 
 .line {
   position: relative;
-  top: 16.5em;
-  margin: 0 10%;
   opacity: 0.08;
  
  
@@ -57,7 +57,47 @@
   position: relative;
   margin: 0 auto;
   width: 90%;
-  top: 16.5em;
   border: 2px solid magenta;
+}
+
+.slide img {
+  width: 20em;
+  margin: 0 auto;
+}
+
+.slide {
+  transform: scale(0.2);
+  transition: transform 300ms;
+  opacity: 0.5;
+}
+
+.activeSlide {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.arrow {
+  background-color: #fff;
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow svg {
+  transition: color 300ms;
+}
+
+.arrow svg:hover {
+  color: #68edff;
+}
+
+.next {
+  right: 0%;
+  top: 50%;
+}
+
+.prev {
+  left: 0%;
+  top: 50%;
 }
 
