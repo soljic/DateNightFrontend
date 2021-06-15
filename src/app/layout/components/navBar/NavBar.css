@@ -1,6 +1,9 @@
-.container {
+.container{
 }
-
+.logo-wrap {
+    display: flex;
+    align-items: center;
+}
 .col-navbar{
   display: flex;
   justify-content: space-around;
