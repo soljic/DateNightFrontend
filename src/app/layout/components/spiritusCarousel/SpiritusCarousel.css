@@ -1,7 +1,7 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-.carousel-container {
+.slider-container {
   display: flex;
   justify-content: space-between;
 
@@ -53,12 +53,13 @@
  
 }
 
-.carousel{
+.slider {
   position: relative;
   margin: 0 auto;
   width: 90%;
   border: 2px solid magenta;
 }
+
 
 .slide img {
   width: 20em;

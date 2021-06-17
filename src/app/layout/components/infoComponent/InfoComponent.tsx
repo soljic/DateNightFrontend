@@ -4,7 +4,7 @@ import Feature_Icon_with_circle  from "../../img/Feature_Icon_with_circle.svg";
 import Logo2  from "../../img/Logo2.svg";
 import Logo3  from "../../img/Logo3.svg";
 import Logo4  from "../../img/Logo4.svg";
-import Phone_Mockup  from "../../img/Phone_Mockup.jpg";
+import Phone_Mockup  from "../../img/Phone_Mockup.png";
 
 
 function InfoComponent() {

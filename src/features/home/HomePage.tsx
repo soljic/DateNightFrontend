@@ -45,11 +45,11 @@ function HomePage() {
           <Header />
           <HeaderThree />
 
-          <div className="row">
-            <div className="col col-4 "></div>
-            <div className="col col-4  ">
-              <EmailInput />
-              <div className="col col-4 "></div>
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col col-4">
+                <EmailInput />
+              </div>
             </div>
           </div>
 
@@ -74,20 +74,20 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col col-1 "></div>
-            <div className="col col-10  ">
-              <InfoComponent />
-              <div className="col col-1 "></div>
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col col-10  ">
+                <InfoComponent />
+              </div>
             </div>
           </div>
           <CommingSoon/>
-       
+
           {DataAccordion.map((item, index) => (
           <Accordion title={item.title} key={index}  text1={item.text1} text2={item.text2} />
           ))}
-          
-       
+
+
         </main>
         <Footer/>
       </div>

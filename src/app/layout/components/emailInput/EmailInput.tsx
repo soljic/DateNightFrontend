@@ -35,7 +35,7 @@ function EmailInput() {
     <div className="beFirst"> <p> Be the first to know when we are ready to beta-test our new Android app (iOS coming later).</p></div>
     </>
   ) : (
-    <form  onSubmit={handleSubmit(onSubmit)}>
+    <form className="d-flex flex-column justify-content-center align-items-center"  onSubmit={handleSubmit(onSubmit)}>
       <div className="emailComp">
         <input
           className="emailInput"

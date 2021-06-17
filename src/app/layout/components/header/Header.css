@@ -1,20 +1,14 @@
 .headerOne {
-  margin: 0 auto !important;
-  top: 4px;
   color: #f0efed;
-  width: 846px;
-  height: 148px;
   font-family: Inter;
   font-style: normal;
   font-weight: bold;
   font-size: 72px;
   line-height: 74px;
-  /* or 103% */
+  text-align: center;
 
   letter-spacing: -0.03em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
-  /* Light */
 }
 
 .headerPosition {

@@ -1,82 +1,67 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import "./SpiritusCarousel.css";
-import Slider, {LazyLoadTypes} from "react-slick";
-import { SpiritusResponse } from "../../../models/SpirirtusResponse";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import {Link} from "react-router-dom";
+import {Swiper, SwiperSlide} from 'swiper/react';
+import {SpiritusResponse} from "../../../models/SpirirtusResponse";
+import './SpiritusCarouselTest.css';
+// Import Swiper styles
+import 'swiper/swiper.min.css';
+
+import SliderImage1 from '../../img/slider-1.jpeg';
+import SliderImage2 from '../../img/slider-2.jpeg';
+import SliderImage3 from '../../img/slider-3.jpeg';
 
 interface Props {
-  popularSpiritus: SpiritusResponse[] | undefined;
- 
+    popularSpiritus: SpiritusResponse[] | undefined;
+
 }
+function SpiritusCarousel({popularSpiritus}: Props) {
 
-function SpiritusCarousel({ popularSpiritus }: Props) {
-
-  interface Carousle {
-    onClick: () => void
-  }
-
-
-  const NextArrow = ({ onClick }: Carousle ) => {
+    // className={idx === imageIndex ? "slide activeSlide" : "slide"}
     return (
-      <div className="arrow next" onClick={onClick}>
-        <FaArrowRight />
-      </div>
+        <>
+            <div className="slider-container">
+                <Link to="/featured">
+                    <div className="fetaured-stories">FEATURED STORIES</div>
+                </Link>
+
+            </div>
+            <hr className="line"></hr>
+            <div className="slider">
+                <div className="container">
+                    <div className="row">
+                        <div className="col col-8">
+                            <Swiper
+                                spaceBetween={1}
+                                slidesPerView={3}
+                                loop={true}
+                                onSlideChange={() => console.log('slide change')}
+                                onSwiper={(swiper) => console.log(swiper)}
+                            >
+                                <SwiperSlide>
+                                    <div className="slider-image-wrap">
+                                        <img className="slider-image" src={SliderImage1}/>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider-image-wrap">
+                                        <img className="slider-image" src={SliderImage2}/>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider-image-wrap">
+                                        <img className="slider-image" src={SliderImage3}/>
+                                    </div>
+                                </SwiperSlide>
+                            </Swiper>
+                        </div>
+                        <div className="col col-4">
+                            Text
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
-  };
-
-  const PrevArrow = ({ onClick }: Carousle ) => {
-    return (
-      <div className="arrow prev" onClick={onClick}>
-        <FaArrowLeft />
-      </div>
-    );
-  };
-  const settings = {
-    infinite: true,
-    lazyLoad: 'ondemand' as LazyLoadTypes,
-    speed: 300,
-    slidesToShow: 3,
-    centerMode: true,
-    centerPadding: '0',
-    nextArrow: <NextArrow onClick={() => {}} />,
-    prevArrow: <PrevArrow onClick={() => {}} />,
-    beforeChange: (current: number, next: number) => setImageIndex(next),
-  };
-  const [imageIndex, setImageIndex] = useState(0);
-
-
- 
-  return (
-    <>
-      <div className="carousel-container">
-        <Link to="/featured">
-          <div className="fetaured-stories">FEATURED STORIES </div>
-        </Link>
-  
-      </div>
-      <hr className="line"></hr>
-      <div className="carousel">
-      <Slider {...settings} >
-          {popularSpiritus?.map((item) =>
-            item.images.map((image, idx) => (
-              <div key={idx} className={idx === imageIndex ? "slide activeSlide" : "slide"}>
-                <img key={idx} src={`http://46.101.182.89:8080${item.images[0].url}`} />
-              </div>
-            ))
-          )}
-        </Slider>
-
-        <div>
-          {popularSpiritus?.map((item) => (
-            <li key={item.id}>
-              {item.images.map((image, i) => console.log(item.images[0].url  ))}
-            </li>
-          ))}
-        </div>
-      </div>
-    </>
-  );
 }
 
 export default SpiritusCarousel;
