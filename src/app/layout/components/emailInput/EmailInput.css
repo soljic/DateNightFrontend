@@ -1,0 +1,104 @@
+.emailComp {
+  display: flex;
+  justify-content: space-between;
+  width: 335px;
+  height: 56px;
+  border: 1px solid #f0efed;
+  box-sizing: border-box;
+  border-radius: 40px;
+  background-color: #1a1612;
+}
+
+.beFirst p {
+  width: 335px; 
+  height: 32px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+}
+
+.emailInput {
+  border: none;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  background-color: #1a1612;
+  color: #f0efed;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  margin-left: 0.5em;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+  border-radius: 90px;
+  opacity: 0.6;
+}
+
+.emailInput:hover {
+  border: none;
+  cursor: pointer;
+}
+.emailInput:focus {
+  outline: none;
+}
+
+.emailSubmit {
+  margin-top: 0.25em;
+  width: 80px;
+  height: 48px;
+  background: #e3aa6d;
+  border-radius: 40px;
+  border: none;
+  margin-right: .2em;
+}
+
+.emailSuccess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 335px;
+  height: 56px;
+
+  /* Dark */
+
+  background: #1a1612;
+  opacity: 0.2;
+  /* Light */
+
+  border: 1px solid #f0efed;
+  box-sizing: border-box;
+  border-radius: 40px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+}
+
+.beFirst{
+margin-top: .75em;
+}

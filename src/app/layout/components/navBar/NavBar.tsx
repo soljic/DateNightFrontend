@@ -1,25 +1,31 @@
 import React from "react";
-import NavItem from "../navItem/NavItem";
 import Logo from "../logo/Logo";
 import { Button } from "antd";
 import "./NavBar.css";
-import { NavLink } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function NavBar() {
   return (
-    <>
-      <div className="navbar">
-        <Logo />
-        <div className="nav-items">
-          <NavItem name={"Stories"} />
-          <NavItem name={"About"} />
-          <NavItem name={"Contact"} />
+      <>
+        <div className="container">
+          <div className="row" id="rowNavbar">
+            <div className="col col-12">
+              <div className="d-flex justify-content-between align-items-center">
+                <div className="logo-wrap">
+                  <Logo/>
+                  <p>Spiritus</p>
+                </div>
+                <div>
+                  <Button className="button-link" type="link">
+                    Get notified
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr className="lineFooter"></hr>
         </div>
-        <div className="button-navbar">
-        <Button className="button-link" type="link">Get early acces</Button>
-      </div>
-      </div>
-    </>
+      </>
   );
 }
 

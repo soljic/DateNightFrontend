@@ -1,5 +1,6 @@
 import { RoseResponse } from "./RoseResponse";
 import { StoryResponse } from "./StoryResponse";
+import { ImageResponse } from "./ImageResponse";
 
 export interface SpiritusResponse {
     id: number;
@@ -12,7 +13,7 @@ export interface SpiritusResponse {
     guardians: number[];
     roses: RoseResponse[];
     stories: StoryResponse[];
-    images: string[];
+    images: ImageResponse[];
     status: string;
 
 

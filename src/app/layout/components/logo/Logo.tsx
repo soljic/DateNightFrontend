@@ -1,16 +1,14 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
-import './Logo.css';
-import icon from  '../../img/SpiritusIcon2.JPG';
+import React from "react";
+import "./Logo.css";
+import {ReactComponent as LogoImg} from "../../img/logo_splash.svg";
+
 
 function Logo() {
-    var imageName = require('../../img/SpiritusIcon.PNG')
     return (
-        <div className="l-item">
-            <img src={icon}  />
-             <a href={`/`}>Spiritus</a>
-        </div>
-    )
+        
+            <LogoImg />
+       
+    );
 }
 
-export default Logo
+export default Logo;

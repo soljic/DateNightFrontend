@@ -1,0 +1,24 @@
+.arrowDown {
+  width: 31px;
+  height: 35px;
+  
+
+  /* mobile app/title */
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 110.9%;
+  /* or 35px */
+
+  text-align: right;
+  letter-spacing: -0.03em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+
+  opacity: 0.2;
+}
