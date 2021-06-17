@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../../app/layout/components/navBar/NavBar";
+import Header from "../../app/layout/components/header/Header";
+import EmailInput from "../../app/layout/components/emailInput/EmailInput";
+import HeaderThree from "../../app/layout/components/headerThree/HeaderThree";
+import CommingSoon from "../../app/layout/components/comingSoon/CommingSoon";
+import Accordion from "../../app/layout/components/accordion/Accordion";
+import Footer from "../../app/layout/components/footer/Footer";
+import {DataAccordion} from "../../app/layout/components/accordion/DataAccordion";
 import { useStore } from "../../app/stores/store";
 import "./HomePage.css";
 import { Button } from "antd";
@@ -14,6 +21,9 @@ function HomePage() {
   const [popularSpiritus, setPopular] =
     useState<SpiritusResponse[] | undefined>(undefined);
 
+    const [active, setActive] =
+    useState<string | undefined>("What is Spiritus?");
+
   useEffect(() => {
     const getPopular = loadPopularSpiritus().then((response) => {
       const popular: SpiritusResponse[] | undefined = response;
@@ -24,35 +34,62 @@ function HomePage() {
 
   console.log(popularSpiritus);
 
+
+
   return (
     <>
       <NavBar />
-      <div className="container-top">
-        <div className="containerCenter">
-          <main className="col-item">
-            <div className="header-text">
-              <h1>Kep memories of your loved ones, forever</h1>
-              <h3>
-                Spiritus is platform for creating and storing <br /> digital
-                memorials in a storytelling way.
-              </h3>
+
+      <div className="">
+        <main>
+          <Header />
+          <HeaderThree />
+
+          <div className="row">
+            <div className="col col-4 "></div>
+            <div className="col col-4  ">
+              <EmailInput />
+              <div className="col col-4 "></div>
             </div>
-            <div className="col-item">
-            {" "}
-            <Button className="button-link button-yellow" type="link">
-              Get early acces
-            </Button>
           </div>
+
+          <SpiritusCarousel popularSpiritus={popularSpiritus} />
+          <div className="container">
+            <div className="row">
+              <div className="col col-1 "></div>
+              <div className="col col-10  ">
+                <div className="text-container">
+                  <p>
+                    {" "}
+                    Life is much more than some dates and names.{" "}
+                    <span className="text-highlight">
+                      Life is about memorable stories that your loved ones left
+                      behind. That's why we created a platform for posting
+                      digital memorials.
+                    </span>
+                  </p>
+                </div>
+
+                <div className="col col-1 "></div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col col-1 "></div>
+            <div className="col col-10  ">
+              <InfoComponent />
+              <div className="col col-1 "></div>
+            </div>
+          </div>
+          <CommingSoon/>
        
-        <SpiritusCarousel popularSpiritus={popularSpiritus} />
-        <div className="text-container">
-         Life is much more than some dates and names. <span className="text-highlight" >Life is about memorable
-          stories that your loved ones left behind. That's why we created a
-          platform for posting digital memorials.</span>
-        </div>
-        <InfoComponent />
-          </main>
-          </div>
+          {DataAccordion.map((item, index) => (
+          <Accordion title={item.title} key={index}  text1={item.text1} text2={item.text2} />
+          ))}
+          
+       
+        </main>
+        <Footer/>
       </div>
     </>
   );

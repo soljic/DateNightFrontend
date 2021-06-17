@@ -1,21 +1,23 @@
 .container-info {
-  position: relative;
   display: flex;
+  justify-content: space-around;
   top: 13em;
   bottom: 4em;
-  border: 2px solid blue;
+  height: 80%;
+  
+  margin-top: 5em;
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 5px;
+  justify-content:  space-around;;
+ 
 }
 .div-info {
   display: flex;
-  justify-content: space-between;
-  width: 567px;
+  justify-content: start;
+  width: 420px;
 }
 .div-info img {
     opacity: 0.7;
@@ -27,8 +29,7 @@
   
 }
 .div-info-text {
-  position: relative;
-  right: 9em;
+  margin-top: .9em;
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
@@ -43,27 +44,28 @@
 
   color: #f0efed;
   opacity: 0.8;
+  margin-left: 2em;
 }
 .two {
-  position: relative;
-  right: 10.2em;
+  margin-left: 2em;
 }
 .three {
-  position: relative;
-  right: 9.4em;
+  margin-left: 2em;
 }
 .four {
-  position: relative;
-  right: 8.1em;
+  margin-left: 2em;
 }
 
 .image{
-    position: relative;
     right: 8em;
     bottom: 2em;
    
 }
 .image img {
+  position: relative;
+  right: 11em;
+  bottom: 4em;
   width: 369.41px;
   height: 500.51px;
+ 
 }

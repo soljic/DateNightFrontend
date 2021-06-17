@@ -13,19 +13,19 @@ function InfoComponent() {
             <div className="info">
                 <div className="div-info">
                     <img src={Feature_Icon_with_circle} alt="" className="" /> 
-                    <h5 className="div-info-text">Create a unique Spiritus by which <br /> they will be remembered for.</h5>
+                    <p className="div-info-text">Create a unique Spiritus by which <br /> they will be remembered for.</p>
                 </div>
                 <div className="div-info">
                 <img src={Logo2} alt="" className="" /> 
-                    <h5 className="div-info-text two">Post memorable photos which <br />  caption them the best.</h5>
+                    <p className="div-info-text two">Post memorable photos which <br />  caption them the best.</p>
                 </div>
                 <div className="div-info">
                 <img src={Logo3}alt="" className="" /> 
-                    <h5 className="div-info-text three">Create inspiring, memorable and <br /> immortal stories about them.</h5>
+                    <p className="div-info-text three">Create inspiring, memorable and <br /> immortal stories about them.</p>
                 </div>
                 <div className="div-info">
                 <img src={Logo4} alt="" className="" /> 
-                    <h5 className="div-info-text four">That way your loved ones will never <br />  be forgotten.</h5>
+                    <p className="div-info-text four">That way your loved ones will never <br />  be forgotten.</p>
                 </div>
             </div>
             <div className="image">

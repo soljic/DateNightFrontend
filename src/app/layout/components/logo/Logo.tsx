@@ -5,9 +5,9 @@ import {ReactComponent as LogoImg} from "../../img/logo_splash.svg";
 
 function Logo() {
     return (
-        <div className="">
+        
             <LogoImg />
-        </div>
+       
     );
 }
 

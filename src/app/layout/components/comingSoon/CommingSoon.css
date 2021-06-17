@@ -1,0 +1,71 @@
+#csoon{
+width: 1280px;
+height: 525px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
+/* Dark Medium */
+
+background: #2B2724;
+border-radius: 14px;
+margin-bottom: 4em;
+}
+
+.commingSoon{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+}
+.commingSoon h1{
+    width: 443px;
+    height: 74px;
+    
+    /* big */
+    
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 72px;
+    line-height: 74px;
+    /* identical to box height, or 103% */
+    
+    text-align: center;
+    letter-spacing: -0.03em;
+    font-feature-settings: 'ordn' on, 'ss03' on, 'cv01' on, 'cv02' on;
+    
+    /* Light */
+    
+    color: #F0EFED;
+}
+
+.commingSoon h3{
+    width: 514px;
+    height: 28px;
+    margin-top: .7em;
+    margin-bottom: 1.5em;
+    
+    /* subtitle */
+    
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    /* identical to box height, or 117% */
+    
+    text-align: center;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'ordn' on, 'ss03' on, 'cv01' on, 'cv02' on;
+    
+    /* Light */
+    
+    color: #F0EFED;
+}
+
+.csooncontainer{
+    margin-bottom: 6em;
+}

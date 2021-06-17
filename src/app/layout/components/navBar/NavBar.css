@@ -1,9 +1,35 @@
-.container{
-}
+
 .logo-wrap {
     display: flex;
+    width: 7.6%;
+    justify-content: space-between;
     align-items: center;
+    justify-items: center;
 }
+
+.logo-wrap  svg{
+  position: relative;
+  bottom: .5em;
+}
+
+.logo-wrap p{
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 21px;
+  /* identical to box height */
+  
+  letter-spacing: -0.01em;
+  font-feature-settings: 'ordn' on, 'ss03' on, 'cv01' on, 'cv02' on;
+  
+  /* Light */
+  
+  color: #F0EFED;
+}
+
+
 .col-navbar{
   display: flex;
   justify-content: space-around;
@@ -77,3 +103,8 @@ a {
     color:#F0EFED;
     text-decoration: none;
 }
+
+#rowNavbar{
+  margin-top: 2em;
+}
+

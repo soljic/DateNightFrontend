@@ -8,21 +8,22 @@ function NavBar() {
   return (
       <>
         <div className="container">
-          <div className="row">
+          <div className="row" id="rowNavbar">
             <div className="col col-12">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="logo-wrap">
                   <Logo/>
-                  <a href={`/`}>Spiritus</a>
+                  <p>Spiritus</p>
                 </div>
                 <div>
                   <Button className="button-link" type="link">
-                    Get early acces
+                    Get notified
                   </Button>
                 </div>
               </div>
             </div>
           </div>
+          <hr className="lineFooter"></hr>
         </div>
       </>
   );

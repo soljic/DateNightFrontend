@@ -2,10 +2,10 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 .carousel-container {
-  position: relative;
   display: flex;
   justify-content: space-between;
-  margin: 0 10%;
+
+  margin: 7em 2em;
   overflow: hidden;
   border: 2px solid magenta;
   

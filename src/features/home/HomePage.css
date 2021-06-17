@@ -16,22 +16,6 @@
   border: 2px solid magenta;
 }
 
-.containerCenter h1 {
-  margin: 0 auto;
-  top: 4px;
-  color: #f0efed;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 74px;
-  /* or 103% */
-
-  letter-spacing: -0.03em;
-  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
-  /* Light */
-}
 .containerCenter h3 {
   right: 1.7em;
   bottom: 1em;
@@ -74,11 +58,9 @@
 }
 
 .text-container {
-    position: relative;
     width: 1064px;
     height: 105px;
-    right: 6em;
-    top: 4em;
+    margin-bottom: 2.5em;
     
     /* mobile app/title */
     
