@@ -16,12 +16,12 @@
 }
 
 .headerPosition {
-    padding-top: 8em;
+    padding-top: 20px;
 }
 
 @media (max-width: 992px) {
   .headerPosition {
-    padding-top: 4em;
+    padding-top: 20px;
   }
 }
 

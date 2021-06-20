@@ -45,7 +45,7 @@ function HomePage() {
                 <main>
                     <div className="container">
                         <div className="row justify-content-center">
-                            <div className="col col-2">
+                            <div className="col col-12">
                                 <CsButton/>
                             </div>
                         </div>
