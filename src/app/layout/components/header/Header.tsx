@@ -8,9 +8,8 @@ function Header() {
         <div className="container">
             <div className="row justify-content-center">
          
-                <div className="col-lg-8 col-sm-10 headerPosition ">
-                   
-                    <h1 className="headerOne">Keep memories of your <br/>loved ones, forever </h1>
+                <div className="col-lg-8 col-md-12 col-sm-12 col-12 headerPosition ">
+                    <h1 className="headerOne">Keep memories of your loved ones, forever </h1>
                 </div>
             </div>
         </div>

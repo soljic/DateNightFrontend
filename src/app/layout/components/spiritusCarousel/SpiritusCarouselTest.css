@@ -18,36 +18,95 @@
   position: relative;
 }
 
+.slider .swiper-slide {
+  width: 410px;
+  height: 510px;
+}
+
+.slider .swiper-slide img {
+  width: 410px;
+  height: 510px;
+}
+
+
+@media (max-width: 1400px) {
+  .slider .swiper-slide {
+    width: 321px;
+    height: 400px;
+  }
+
+  .slider .swiper-slide img {
+    width: 321px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .slider .swiper-slide {
+    width: 281px;
+    height: 350px;
+  }
+
+  .slider .swiper-slide img {
+    width: 281px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider .swiper-slide {
+    width: 246.67px;
+    height: 307.54px;
+  }
+
+  .slider .swiper-slide img {
+    width: 246.67px;
+    height: 307.54px;
+  }
+}
+
+.slider .swiper-container {
+  padding: 70px 0;
+}
+
 .slider .swiper-slide-prev .slider-image-wrap {
   opacity: 0.2;
-  transform: scale(1) rotate(-9deg) translateX(50%);
+  transform: scale(0.85) rotate(-10deg) translate(65%, 40px);
   position: relative;
-  top: 3.5em;
   border: none !important;
+}
+
+@media (max-width: 768px) {
+  .slider .swiper-slide-prev .slider-image-wrap {
+    transform: scale(0.85) rotate(-10deg) translate(65%, 40px);
+  }
 }
 
 .slider .swiper-slide-next .slider-image-wrap {
   opacity: 0.2;
-  transform: scale(1) rotate(9deg) translateX(-30%);
+  transform: scale(0.85) rotate(10deg) translate(-65%, 40px);
   z-index: 0;
-  position: relative;
-  top: 3em;
   border: none !important;
+}
+
+@media (max-width: 768px) {
+  .slider .swiper-slide-next .slider-image-wrap {
+    transform: scale(0.85) rotate(10deg) translate(-65%, 40px);
+  }
 }
 
 .slider .swiper-slide-active .slider-image-wrap {
   opacity: 1;
-  width: 350.36px;
-  height: 500.62px;
   transform: rotate(-4deg);
+  z-index: 2;
 }
+
 
 .slider .swiper-wrapper {
   padding: 20px;
 }
 
 .slider-image-wrap {
-  height: 410px;
   border-radius: 17px;
   overflow: hidden;
   border: 15px solid rgba(227, 170, 109, 0.1);
@@ -138,11 +197,6 @@
 }
 
 .textParagraph {
-  width: 413px;
-  height: 112px;
-
-  /* subtitle */
-
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
@@ -159,7 +213,13 @@
 }
 
 .colDiv {
-  padding-top: 4.5em;
+  padding-top: 11.5em;
+}
+
+@media (max-width: 992px) {
+  .colDiv {
+    padding-top: 4.5em;
+  }
 }
 
 .storiesCsbutton {

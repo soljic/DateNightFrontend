@@ -1,46 +1,56 @@
 .headerOne {
-  color: #f0efed;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 72px;
-  line-height: 74px;
-  text-align: center;
+    color: #f0efed;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 72px;
+    line-height: 74px;
+    text-align: center;
+}
 
-  letter-spacing: -0.03em;
-  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+@media (max-width: 992px) {
+  .headerOne {
+    font-size: 40px;
+    line-height: 42px;
+  }
 }
 
 .headerPosition {
-  padding-top: 8em;
+    padding-top: 8em;
+}
+
+@media (max-width: 992px) {
+  .headerPosition {
+    padding-top: 4em;
+  }
 }
 
 .headerPosition > span {
-  text-align: center;
+    text-align: center;
 }
 
 @media (max-width: 360px) {
-  .headerOne {
-      margin: 0 28px;
-      width: 319px;
-      height: 126px;
+    .headerOne {
+        margin: 0 28px;
+        width: 319px;
+        height: 126px;
 
 
-/* big mobile */
+        /* big mobile */
 
-font-family: Inter;
-font-style: normal;
-font-weight: bold;
-font-size: 40px;
-line-height: 42px;
-/* or 105% */
+        font-family: Inter;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 42px;
+        /* or 105% */
 
-text-align: center;
-letter-spacing: -0.03em;
-font-feature-settings: 'ordn' on, 'ss03' on, 'cv01' on, 'cv02' on;
+        text-align: center;
+        letter-spacing: -0.03em;
+        font-feature-settings: 'ordn' on, 'ss03' on, 'cv01' on, 'cv02' on;
 
-/* Light */
+        /* Light */
 
-color: #F0EFED;
-  }
+        color: #F0EFED;
+    }
 }

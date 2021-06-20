@@ -9,10 +9,6 @@ import {DataSwipper} from './DataSwiper';
 import './SpiritusCarouselTest.css';
 import 'swiper/swiper.min.css';
 
-
-import SliderImage1 from '../../img/slider-1.jpeg';
-import SliderImage2 from '../../img/slider-2.jpeg';
-import SliderImage3 from '../../img/slider-3.jpeg';
 import Arrow from '../../img/arrow.svg';
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
@@ -28,20 +24,21 @@ function SpiritusCarousel({popularSpiritus}: Props) {
     const navigationNext = React.useRef(null);
     const [index, setIndex] = useState(0);
     console.log(index);
+    const selectedData = DataSwipper[index];
     return (
         <>
         
             <div className="slider">
                 <div className="container sliderCont">
                     <div className="row sliderCont">
-                        <div className="col col-8">
+                        <div className="col col-lg-8 col-md-12 col-12">
                             <Swiper
                                 spaceBetween={10}
                                 autoplay = {{
                                   delay: 2500,
                                   disableOnInteraction: true
                                  } }
-                                slidesPerView={3}
+                                slidesPerView='auto'
                                 loop={true}
                                 onSlideChange={(swiper) => {
                                     setIndex(swiper.realIndex)
@@ -64,21 +61,15 @@ function SpiritusCarousel({popularSpiritus}: Props) {
                                     }
                                 }
                             >
-                                <SwiperSlide style={{height:'540px'}}>
-                                    <div className="slider-image-wrap">
-                                        <img className="slider-image" src={SliderImage1} alt="SliderImage1"/>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider-image-wrap">
-                                        <img className="slider-image" src={SliderImage2} alt="SliderImage1"/>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider-image-wrap">
-                                        <img className="slider-image" src={SliderImage3} alt="SliderImage1"/>
-                                    </div>
-                                </SwiperSlide>
+                                {DataSwipper.map(item => {
+                                    return (
+                                        <SwiperSlide>
+                                            <div className="slider-image-wrap">
+                                                <img className="slider-image" src={item.image} alt={item.name} />
+                                            </div>
+                                        </SwiperSlide>
+                                    )
+                                })}
                             </Swiper>
                             <div className="slider-nav">
                                 <div className="slider-arrow-left" ref={navigationPrev}>
@@ -90,11 +81,11 @@ function SpiritusCarousel({popularSpiritus}: Props) {
                                 </div>
                             </div>
                         </div>
-                        <div className="col col-4 colDiv">
+                        <div className="col col-lg-4 col-md-12 col-12 colDiv">
                             <div className="sliderName">
                                 <img src={ShapeShape} alt="" />
                                 <p className="dateBirth">1926—1998 • FORTALEZA, MEXICO</p>
-                                <p className="fullName">Ronald Richards</p>
+                                <p className="fullName">{selectedData.name}</p>
                             </div>
                             <div className="sliderText">
                                 <img src={commas} alt="" />
@@ -103,7 +94,6 @@ function SpiritusCarousel({popularSpiritus}: Props) {
                             <div className="storiesCsbutton">
                                 Stories coming soon
                             </div>
-                         
                         </div>
                     </div>
                 </div>
