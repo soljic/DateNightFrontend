@@ -66,6 +66,16 @@
   height: 500.51px;
 }
 
+
+@media (max-width: 1400px) { 
+  .image img {
+    position: relative;
+    left: 10px;
+    bottom: 30px;
+  }
+ }
+
+
 @media (max-width: 366px) {
   .container-info {
     flex-direction: column-reverse;
