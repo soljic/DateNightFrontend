@@ -34,3 +34,9 @@
     margin-top: 20px;
   }
 }
+
+@media (max-width: 366px) {
+    .csDiv {
+      margin-left: 60px;
+    }
+  }

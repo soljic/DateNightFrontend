@@ -64,7 +64,7 @@
   margin-bottom: 6em;
 }
 
-@media (max-width: 366px) {
+@media (max-width: 365px) {
   .csooncontainer {
     width: 375px;
     height: 474px;
@@ -74,7 +74,7 @@
   }
   #csoon {
     position: relative;
-    left: 3em;
+    left: .5em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

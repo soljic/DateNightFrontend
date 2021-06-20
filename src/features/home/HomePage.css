@@ -81,3 +81,9 @@
 .text-highlight{
     opacity: 0.6;
 }
+
+@media (max-width: 366px) {
+  #firstEmailInput {
+    margin-left: 20px;
+  }
+}

@@ -10,7 +10,7 @@
 }
 
 
-@media (max-width: 330px) {
+@media (max-width: 366px) {
   .emailComp{
     width: 280px;
   }
@@ -34,7 +34,7 @@
 }
 
 
-@media (max-width: 330px) {
+@media (max-width: 366px) {
   .beFirst p {
     width: 250px;
 

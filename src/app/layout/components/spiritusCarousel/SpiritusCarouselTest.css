@@ -247,3 +247,11 @@
       margin-top: 0;
   }
 }
+
+
+@media (max-width: 366px) {
+  .slider-nav {
+    
+      margin-left: 4em;
+  }
+}

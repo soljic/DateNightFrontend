@@ -18,5 +18,9 @@
     }
 }
 
-.headerThreePosition {
+@media (max-width: 365px) {
+    .headerThree {
+        width: 115%;
 }
+}
+

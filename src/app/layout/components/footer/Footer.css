@@ -1,113 +1,113 @@
 .logo-wrap {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .col-navbar {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .navbar {
-    width: 90%;
-    justify-content: space-between;
-    background: #1a1612;
-    padding-top: 1em;
-    border: 2px solid maroon;
+  width: 90%;
+  justify-content: space-between;
+  background: #1a1612;
+  padding-top: 1em;
+  border: 2px solid maroon;
 }
 
 .nav-items {
-    position: relative;
-    right: 0.2em;
-    display: flex;
-    width: 17%;
-    justify-content: space-around;
-    align-items: center;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 17px;
-    line-height: 21px;
-    /* identical to box height */
+  position: relative;
+  right: 0.2em;
+  display: flex;
+  width: 17%;
+  justify-content: space-around;
+  align-items: center;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  /* identical to box height */
 
-    letter-spacing: -0.01em;
-    font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
 
-    /* Light */
+  /* Light */
 
-    color: #f0efed;
+  color: #f0efed;
 }
 
 .button-link {
-    position: relative;
-    width: 110%;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 17px;
-    line-height: 115.14%;
-    /* identical to box height, or 20px */
+  position: relative;
+  width: 110%;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 115.14%;
+  /* identical to box height, or 20px */
 
-    letter-spacing: -0.01em;
-    font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
 
-    /* Light */
+  /* Light */
 
-    color: #f0efed;
-    border-radius: 35px;
-    background-color: #1f1b16;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    padding: 7px 11px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    opacity: 0.6;
+  color: #f0efed;
+  border-radius: 35px;
+  background-color: #1f1b16;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 7px 11px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  opacity: 0.6;
 }
 
 .button-navbar {
-    position: relative;
-    right: 1em;
-    top: 0.63em;
+  position: relative;
+  right: 1em;
+  top: 0.63em;
 }
 
 a {
-    color: #f0efed;
-    text-decoration: none;
+  color: #f0efed;
+  text-decoration: none;
 }
 
 .lineFooter {
-    opacity: 0.99;
+  opacity: 0.99;
 }
 
 .bootomContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .copyRight {
-    /* mobile app/small medium */
+  /* mobile app/small medium */
 
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 16px;
-    /* identical to box height */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  /* identical to box height */
 
-    letter-spacing: -0.01em;
-    font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
 
-    /* Light */
+  /* Light */
 
-    color: #f0efed;
+  color: #f0efed;
 
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .socialMedia {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .socialMedia a {
@@ -115,6 +115,48 @@ a {
 }
 
 #footerRow {
-    margin-top: 11em;
-    margin-bottom: 3em;
+  margin-top: 11em;
+  margin-bottom: 3em;
 }
+
+@media (max-width: 365px) {
+  #footerCont {
+    width: 110%;
+  }
+}
+
+.partners {
+  margin-top: 20px;
+}
+
+.partners p {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  color: #f0efed;
+}
+
+.img_footer {
+  display: flex;
+  justify-content: space-around;
+  margin-right: 29em;
+}
+
+@media (max-width: 992px) {
+    .img_footer {
+        margin-right: 0em;
+    }
+  }
+
+  @media (max-width: 436px) {
+    .img_footer {
+        display: flex;
+        flex-direction: column;
+    }
+  }

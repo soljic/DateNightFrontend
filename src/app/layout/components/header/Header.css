@@ -29,9 +29,9 @@
     text-align: center;
 }
 
-@media (max-width: 360px) {
+@media (max-width: 366px) {
     .headerOne {
-        margin: 0 28px;
+        margin-left: 20px;
         width: 319px;
         height: 126px;
 
@@ -53,4 +53,11 @@
 
         color: #F0EFED;
     }
+}
+
+@media (max-width: 330px) {
+  .headerOne {
+      margin: 0 2px;
+      
+  }
 }
