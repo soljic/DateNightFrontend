@@ -18,3 +18,29 @@
 .headerPosition > span {
   text-align: center;
 }
+
+@media (max-width: 360px) {
+  .headerOne {
+      margin: 0 28px;
+      width: 319px;
+      height: 126px;
+
+
+/* big mobile */
+
+font-family: Inter;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 42px;
+/* or 105% */
+
+text-align: center;
+letter-spacing: -0.03em;
+font-feature-settings: 'ordn' on, 'ss03' on, 'cv01' on, 'cv02' on;
+
+/* Light */
+
+color: #F0EFED;
+  }
+}

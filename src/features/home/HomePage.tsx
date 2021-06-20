@@ -4,6 +4,7 @@ import Header from "../../app/layout/components/header/Header";
 import EmailInput from "../../app/layout/components/emailInput/EmailInput";
 import HeaderThree from "../../app/layout/components/headerThree/HeaderThree";
 import CommingSoon from "../../app/layout/components/comingSoon/CommingSoon";
+import FetauredStories from "../../app/layout/components/fetauredStories/FetauredStories";
 import Accordion from "../../app/layout/components/accordion/Accordion";
 import Footer from "../../app/layout/components/footer/Footer";
 import {DataAccordion} from "../../app/layout/components/accordion/DataAccordion";
@@ -14,6 +15,7 @@ import { Link } from "react-router-dom";
 import SpiritusCarousel from "../../app/layout/components/spiritusCarousel/SpiritusCarousel";
 import { SpiritusResponse } from "../../app/models/SpirirtusResponse";
 import InfoComponent from "../../app/layout/components/infoComponent/InfoComponent";
+import CsButton from "../../app/layout/components/csbutton/CsButton";
 
 function HomePage() {
   const { activityStore } = useStore();
@@ -42,6 +44,13 @@ function HomePage() {
 
       <div className="">
         <main>
+        <div className="container">
+            <div className="row justify-content-center">
+              <div className="col col-2">
+              <CsButton/>
+              </div>
+            </div>
+          </div>
           <Header />
           <HeaderThree />
 
@@ -52,7 +61,7 @@ function HomePage() {
               </div>
             </div>
           </div>
-
+          <FetauredStories />
           <SpiritusCarousel popularSpiritus={popularSpiritus} />
           <div className="container">
             <div className="row">
@@ -76,7 +85,7 @@ function HomePage() {
           </div>
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col col-10  ">
+              <div className=" col-lg-10 col-sm-10 ">
                 <InfoComponent />
               </div>
             </div>

@@ -1,4 +1,6 @@
-import React from "react";
+import React, {  MouseEvent } from "react";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../../stores/store";
 import Logo from "../logo/Logo";
 import { Button } from "antd";
 import "./Footer.css";
@@ -8,6 +10,9 @@ import instagram from "../../img/instagram.svg";
 import linkedin from "../../img/linkedin.svg";
 
 function Footer() {
+  const { activityStore } = useStore();
+  const { isClicked, setIsClicked } = activityStore;
+
   return (
       <>
         <div className="container">
@@ -18,9 +23,15 @@ function Footer() {
                   <Logo/>
                 </div>
                 <div>
-                  <Button className="button-link" type="link">
-                    Get notified
-                  </Button>
+                <Button
+                  onClick={() => {
+                    setIsClicked(!isClicked);
+                  }}
+                  className="button-link"
+                  type="link"
+                >
+                  Get notified
+                </Button>
                 </div>
               </div>
               <hr className="lineFooter"></hr>
@@ -41,4 +52,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default observer(Footer);

@@ -1,19 +1,14 @@
 
 .logo-wrap {
-    display: flex;
-    width: 7.6%;
-    justify-content: space-between;
-    align-items: center;
-    justify-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.logo-wrap  svg{
-  position: relative;
-  bottom: .5em;
-}
 
-.logo-wrap p{
 
+.navParagraph {
+  margin-top: revert !important;
   font-family: Inter;
   font-style: normal;
   font-weight: bold;
@@ -27,6 +22,8 @@
   /* Light */
   
   color: #F0EFED;
+  margin-left: 10px;
+
 }
 
 
@@ -106,5 +103,13 @@ a {
 
 #rowNavbar{
   margin-top: 2em;
+}
+
+@media (max-width: 366px) {
+  .navCont {
+    position: relative;
+    left: 2em;
+    width: 140%;
+  }
 }
 

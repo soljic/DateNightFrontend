@@ -57,6 +57,20 @@
   outline: none;
 }
 
+
+/* Change the white to any color */
+.emailInput:-webkit-autofill,
+.emailInput:-webkit-autofill:hover, 
+.emailInput:-webkit-autofill:focus, 
+.emailInput:-webkit-autofill:active
+{
+ -webkit-box-shadow: 0 0 0 30px #1a1612 inset !important;
+ box-shadow: 0 0 0 30px #1a1612 inset !important;
+ -webkit-text-fill-color:  #f0efed !important;
+
+}
+
+
 .emailSubmit {
   margin-top: 0.25em;
   width: 80px;

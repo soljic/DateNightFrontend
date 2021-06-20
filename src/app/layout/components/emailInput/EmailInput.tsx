@@ -1,5 +1,7 @@
-import React, { useState, useRef, SyntheticEvent } from "react";
+import React, { useState,useEffect, useRef, SyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../../stores/store";
 import "./EmailInput.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ArrowButton from "../../img/ArrowButton.svg";
@@ -9,7 +11,7 @@ type EmailScore = {
   email: string;
 };
 
-function EmailInput() {
+function EmailInput() {  
   const {
     register,
     handleSubmit,
@@ -17,15 +19,33 @@ function EmailInput() {
     formState: { errors },
   } = useForm<EmailScore>();
 
+
+  const { activityStore } = useStore();
+  const { isClicked, setIsClicked } = activityStore;
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isSent, setSending] = useState<boolean>(false);
+  const inputReff = useRef<HTMLInputElement | null>(null);;
+  const { ref,onBlur, ...rest } = register("email",
+  {
+   required: "Email is required",
+   pattern: {
+     value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+     message: "Please enter a valid email.",
+   },
+ });
+  
+  useEffect(() => {
+    isClicked && inputReff.current?.focus()
+    return () => {
+    
+    }
+  }, [isClicked])
 
   setTimeout(() => setSending(false), 10000);
   const onSubmit = (data: EmailScore, e: any) => {
     e.preventDefault();
     console.log(data);
     setSending(true);
-   /* setTimeout(() => setSending(false), 3000);*/
     reset();
   };
 
@@ -42,22 +62,22 @@ function EmailInput() {
           placeholder="Your email address"
           disabled={isLoading}
           type="text"
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-              message: "Please enter a valid email.",
-            },
-          })}
+          {...rest}
+          ref={inputReff}
+          onBlur={() => {
+            setIsClicked(false);
+          }}
+         
         />
         <button className="emailSubmit" disabled={isLoading} type="submit">
           {isLoading ? "Loading" : <img src={ArrowButton} alt="ArrowImage" />}
         </button>
       </div>
-      <div className="beFirst"> <p> Be the first to know when we are ready to beta-test our new Android app (iOS coming later).</p></div>
       {errors?.email && <div>{errors.email.message}</div>}
+      <div className="beFirst"> <p> Be the first to know when we are ready to beta-test our new Android app (iOS coming later).</p></div>
+      
     </form>
   );
 }
 
-export default EmailInput;
+export default observer(EmailInput);

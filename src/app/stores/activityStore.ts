@@ -11,6 +11,8 @@ export default class ActivityStore {
   editMode = false;
   loading = false;
   loadingInitial = true;
+  isClicked= false;
+  
 
   constructor() {
     makeAutoObservable(this);
@@ -57,15 +59,7 @@ export default class ActivityStore {
   loadPopularSpiritus = async () => {
     this.loadingInitial = true;
     try {
-      const response = await agent.Spiritus.popularList();
-      response.content.map(image =>(
-        image.images.map(item =>(
-          console.log(item)   
-        ))
-
-        ))
-      ;
-      
+      const response = await agent.Spiritus.popularList(); 
       return response.content;
 
      /* runInAction(() => {
@@ -112,6 +106,10 @@ export default class ActivityStore {
   private setActivity = (activity: Activity) => {
     activity.date = activity.date.split("T")[0];
     this.activityRegistry.set(activity.id, activity);
+  };
+
+   setIsClicked = (click: boolean) => {
+   this.isClicked = click;
   };
 
   createActivity = async (activity: Activity) => {

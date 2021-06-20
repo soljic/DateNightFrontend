@@ -40,3 +40,10 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 366px) {
+  .main {
+    max-width: 84%;
+    margin: auto;
+  }
+}

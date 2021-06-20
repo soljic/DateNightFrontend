@@ -2,88 +2,188 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 .slider-image {
-    max-width: 100%;
-    width: 100%;
-    height: 100%;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  background-blend-mode: overlay, normal;
+  border-radius: 16.5333px;
 }
 .slider {
-    margin-bottom: 200px;
+  margin-bottom: 200px;
 }
 
 .slider .slider-image-wrap {
-    opacity: 0;
-    transition: all 1s ease;
-    position: relative;
+  opacity: 0;
+  transition: all 1s ease;
+  position: relative;
 }
 
-
 .slider .swiper-slide-prev .slider-image-wrap {
-    opacity: 0.2;
-    transform: scale(0.8) rotate(-10deg) translateX(20%);
+  opacity: 0.2;
+  transform: scale(1) rotate(-9deg) translateX(50%);
+  position: relative;
+  top: 3.5em;
+  border: none !important;
 }
 
 .slider .swiper-slide-next .slider-image-wrap {
-    opacity: 0.2;
-    transform: scale(0.8) rotate(10deg) translateX(-20%);
-    z-index: 2;
+  opacity: 0.2;
+  transform: scale(1) rotate(9deg) translateX(-30%);
+  z-index: 0;
+  position: relative;
+  top: 3em;
+  border: none !important;
 }
 
 .slider .swiper-slide-active .slider-image-wrap {
-    opacity: 1;
+  opacity: 1;
+  width: 350.36px;
+  height: 500.62px;
+  transform: rotate(-4deg);
 }
 
 .slider .swiper-wrapper {
-    padding: 20px;
+  padding: 20px;
 }
 
 .slider-image-wrap {
-    height: 410px;
-    border-radius: 17px;
-    overflow: hidden;
-    border: 15px solid rgba(227, 170, 109, 0.1);
-    z-index: 1;
+  height: 410px;
+  border-radius: 17px;
+  overflow: hidden;
+  border: 15px solid rgba(227, 170, 109, 0.1);
+  z-index: 1;
 }
 
 .slider-nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slider-arrow-left {
-    margin-right: 8px;
-    cursor: pointer;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .slider-arrow-right {
-    cursor: pointer;
-    margin-left: 8px;
-    transform: rotate(180deg);
-    margin-top: 2px;
+  cursor: pointer;
+  margin-left: 8px;
+  transform: rotate(180deg);
+  margin-top: 2px;
 }
 
 .swiper-pagination-bullets {
-    display:flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slider .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
-    background-color: #F0EFED;
-    margin-right: 5px;
-    display: inline-block;
-    border-radius: 50%;
-    opacity: 0.2;
-    cursor: pointer;
+  width: 8px;
+  height: 8px;
+  background-color: #f0efed;
+  margin-right: 5px;
+  display: inline-block;
+  border-radius: 50%;
+  opacity: 0.2;
+  cursor: pointer;
 }
 
 .slider .swiper-pagination-bullet:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .slider .swiper-pagination-bullet-active {
-    opacity: 1;
+  opacity: 1;
+}
+
+.fullName {
+  width: 335px;
+  height: 35px;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 110.9%;
+  /* or 35px */
+
+  letter-spacing: -0.03em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  color: #f0efed;
+}
+
+.dateBirth {
+  width: 335px;
+  height: 16px;
+
+  /* mobile app/small medium */
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+  margin-bottom: 0.5em;
+}
+
+.textParagraph {
+  width: 413px;
+  height: 112px;
+
+  /* subtitle */
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+  /* or 117% */
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+}
+
+.colDiv {
+  padding-top: 4.5em;
+}
+
+.storiesCsbutton {
+  width: 189px;
+  padding: 0.3em 0.2em;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+  border: 4px solid #f0efed;
+  border-radius: 30px;
+  text-align: center;
+  background-color: #1a1612;
+  color: #f0efed;
+  margin-top: 3.6em;
+  opacity: 0.2;
+}
+
+@media (max-width: 768px) {
+  .sliderCont {
+      flex-direction: column;
+      margin-top: 0;
+  }
 }
