@@ -20,7 +20,6 @@
   align-items: center;
 }
 .commingSoon h1 {
-
   /* big */
 
   font-family: Inter;
@@ -73,21 +72,34 @@
 
     background: #2b2724;
   }
-  #csoon{
+  #csoon {
     position: relative;
     left: 3em;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 100px 20px;
-    ;
     width: 375px;
     height: 474px;
-    
-    /* Dark Medium */
-    
-    background: #2B2724;
-  }
 
- 
+    /* Dark Medium */
+
+    background: #2b2724;
+  }
+}
+
+@media (max-width: 365px) {
+  #csoon {
+    position: relative;
+    left: 1em;
+  }
+}
+
+
+
+@media (max-width: 320px){
+#csoon {
+    position: relative;
+    left: 2em;
+}
 }

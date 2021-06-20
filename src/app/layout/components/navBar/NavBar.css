@@ -113,3 +113,9 @@ a {
   }
 }
 
+@media (max-width: 365px) {
+  #contNavbar {
+    width: 110%;
+  }
+}
+

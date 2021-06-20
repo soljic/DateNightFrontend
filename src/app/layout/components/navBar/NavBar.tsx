@@ -12,7 +12,7 @@ function NavBar() {
 
   return (
     <>
-      <div className="container ">
+      <div className="container" id="contNavbar">
         <div className="row" id="rowNavbar">
           <div className=" col-lg-12 col-sm-12 col-xs-12">
             <div className="d-flex justify-content-between align-items-center">
