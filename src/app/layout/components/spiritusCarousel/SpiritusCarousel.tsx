@@ -23,7 +23,6 @@ function SpiritusCarousel({popularSpiritus}: Props) {
     const navigationPrev = React.useRef(null);
     const navigationNext = React.useRef(null);
     const [index, setIndex] = useState(0);
-    console.log(index);
     const selectedData = DataSwipper[index];
     return (
         <>

@@ -9,15 +9,14 @@
   background-color: #1a1612;
 }
 
-
 @media (max-width: 366px) {
-  .emailComp{
+  .emailComp {
     width: 280px;
   }
 }
 
 .beFirst p {
-  width: 335px; 
+  width: 335px;
   height: 32px;
   font-family: Inter;
   font-style: normal;
@@ -33,11 +32,9 @@
   color: #f0efed;
 }
 
-
 @media (max-width: 366px) {
   .beFirst p {
     width: 250px;
-
   }
 }
 
@@ -72,28 +69,24 @@
   outline: none;
 }
 
-
 /* Change the white to any color */
 .emailInput:-webkit-autofill,
-.emailInput:-webkit-autofill:hover, 
-.emailInput:-webkit-autofill:focus, 
-.emailInput:-webkit-autofill:active
-{
- -webkit-box-shadow: 0 0 0 30px #1a1612 inset !important;
- box-shadow: 0 0 0 30px #1a1612 inset !important;
- -webkit-text-fill-color:  #f0efed !important;
-
+.emailInput:-webkit-autofill:hover,
+.emailInput:-webkit-autofill:focus,
+.emailInput:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #1a1612 inset !important;
+  box-shadow: 0 0 0 30px #1a1612 inset !important;
+  -webkit-text-fill-color: #f0efed !important;
 }
 
-
 .emailSubmit {
-  margin-top: 0.25em;
+  margin-top: 0.18em;
   width: 80px;
   height: 48px;
   background: #e3aa6d;
   border-radius: 40px;
   border: none;
-  margin-right: .2em;
+  margin-right: 0.2em;
 }
 
 .emailSuccess {
@@ -128,6 +121,24 @@
   color: #f0efed;
 }
 
-.beFirst{
-margin-top: .75em;
+.beFirst {
+  margin-top: 0.75em;
+}
+
+.errorMessage {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 21px;
+  /* identical to box height */
+
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+
+  /* Light */
+
+  color: #f0efed;
+
+  opacity: 0.6;
 }

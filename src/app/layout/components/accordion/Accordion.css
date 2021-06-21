@@ -55,5 +55,79 @@
 .accordionHeading {
   padding-right: 44px;
   position: relative;
+
 }
 
+
+@media (min-width: 0px) and  (max-width: 366px) {
+  .accordionContent {
+    width: 107%;
+    
+  }
+}
+
+@media (min-width:366px) and  (max-width: 391px) {
+  .accordionContent {
+    width: 107%;
+    
+  }
+}
+
+@media (min-width:386px) and  (max-width: 391px) {
+  .accordionContent {
+    width: 105%;
+    
+  }
+}
+
+
+@media (min-width: 391px) and (max-width: 422px) {
+  .accordionContent {
+    width: 94%;
+    
+  }
+}
+
+@media (min-width: 422px) and (max-width: 1200px) {
+  .accordionContent {
+    width: 85%;
+    
+  }
+}
+
+
+@media (min-width: 991px) and (max-width: 1200px) {
+  .accordionContent {
+    width: 78%;
+    
+  }
+}
+
+@media (min-width:1200px) and (max-width: 1400px) {
+  .accordionContent {
+    width: 65%;
+    
+  }
+}
+
+
+@media (min-width:1400px) {
+  .accordionContent{
+    width: 55%;
+    
+  }
+}
+
+
+
+
+
+
+
+
+@media (max-width: 365px) {
+  .accordionContent {
+    width: 105%;
+    
+  }
+}
