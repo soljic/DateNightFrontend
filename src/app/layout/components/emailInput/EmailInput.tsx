@@ -7,6 +7,7 @@ import "./EmailInput.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ArrowButton from "../../img/ArrowButton.svg";
 import { ImageGroup } from "semantic-ui-react";
+import emailjs from 'emailjs-com';
 
 type EmailScore = {
   email: string;
@@ -49,7 +50,12 @@ function EmailInput() {
   setTimeout(() => setSending(false), 10000);
   const onSubmit = (data: EmailScore, e: any) => {
     e.preventDefault();
-    console.log(data);
+    emailjs.sendForm('service_zomflxh', 'template_k2ksm42', e.target, 'user_IiK5JT4yWOe2TqUtOFC3N')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
     setSending(true);
     reset();
   };

@@ -29,7 +29,7 @@ export const DataSwipper = [{
         name: 'Ronald Richards',
         city: 'Chigago',
         country: 'USA',
-        text1: 'While the extreme poverty has declined everywhere, the middle class has hardly expanded at all in South Asia and Africa.',
+        text1: 'He could have left me, but he decided to be a father, grandfather and friend, all in one person.',
         image: SliderImage1
     }
 ];
