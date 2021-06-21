@@ -121,7 +121,8 @@ a {
 
 @media (max-width: 365px) {
   #footerCont {
-    width: 110%;
+    width: 105%;
+    padding-left: 1em;
   }
 }
 

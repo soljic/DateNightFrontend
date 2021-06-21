@@ -6,7 +6,7 @@ export const DataSwipper = [{
     id: 98769,
     born: 1949,
     deceased: 2013,
-    name: 'Ankica Modirć',
+    name: 'Ankica Modrić',
     city: 'Zagreb',
     country: 'Croatia',
     text1: ' How she and her husband saved me. My parents were refuges during the war',

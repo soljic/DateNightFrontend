@@ -84,12 +84,12 @@ function SpiritusCarousel({popularSpiritus}: Props) {
                         <div className="col col-lg-4 col-md-12 col-12 colDiv">
                             <div className="sliderName">
                                 <img src={ShapeShape} alt="" />
-                                <p className="dateBirth">1926—1998 • FORTALEZA, MEXICO</p>
+                                <p className="dateBirth">{selectedData.born}—{selectedData.deceased} • {selectedData.city}, {selectedData.country}</p>
                                 <p className="fullName">{selectedData.name}</p>
                             </div>
                             <div className="sliderText">
                                 <img src={commas} alt="" />
-                                <p className="textParagraph">While the extreme poverty has declined everywhere, the middle class has hardly expanded at all in South Asia and Africa.</p>
+                                <p className="textParagraph">{selectedData.text1}</p>
                             </div>
                             <div className="storiesCsbutton">
                                 Stories coming soon
