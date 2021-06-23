@@ -1,5 +1,6 @@
 {
   "name": "client-app",
+  "homepage": "http://spiritus.app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
