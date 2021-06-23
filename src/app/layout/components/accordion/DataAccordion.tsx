@@ -15,13 +15,13 @@ export const DataAccordion = [
         text2: ''
     },
     {
-        title: 'Where I can download the apps?',
+        title: 'Where can I download the apps?',
         text1: ' At the moment, we are still working on making the best version of the Spiritus mobile apps. Public launch is set for September of this year.',
         text2: 'However, we are always looking for beta testers of our app. If you are interested in testing and giving us your feedback, be sure to sign up here.'
     },
     {
         title: ' Can I be a beta tester for the app?',
-        text1: '   We are always looking for beta testers of our app. If you are interested in testing and giving us your feedback, be sure to sign up here (scroll na “coming soon” sekciju i aktivira se input field za email).',
+        text1: '   We are always looking for beta testers of our app. If you are interested in testing and giving us your feedback, be sure to sign up here.',
         text2: ''
     },
   ];
