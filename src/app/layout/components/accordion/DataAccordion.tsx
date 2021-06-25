@@ -17,7 +17,7 @@ export const DataAccordion = [
     {
         title: 'Where can I download the apps?',
         text1: ' At the moment, we are still working on making the best version of the Spiritus mobile apps. Public launch is set for September of this year.',
-        text2: 'However, we are always looking for beta testers of our app. If you are interested in testing and giving us your feedback, be sure to leave you mail in our input field.'
+        
     },
     {
         title: ' Can I be a beta tester for the app?',

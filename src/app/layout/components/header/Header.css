@@ -29,20 +29,16 @@
     text-align: center;
 }
 
-@media (max-width: 366px) {
+@media (max-width: 371px) {
     .headerOne {
-        margin-left: 20px;
-        width: 319px;
-        height: 126px;
-
-
+      margin: 0px 20px;
         /* big mobile */
 
         font-family: Inter;
         font-style: normal;
         font-weight: bold;
-        font-size: 40px;
-        line-height: 42px;
+        font-size: 34px;
+        line-height: 38px;
         /* or 105% */
 
         text-align: center;

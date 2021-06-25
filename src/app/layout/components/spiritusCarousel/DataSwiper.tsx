@@ -9,7 +9,7 @@ export const DataSwipper = [{
     name: 'Ankica Modrić',
     city: 'Zagreb',
     country: 'Croatia',
-    text1: ' How she and her husband saved me. My parents were refuges during the war',
+    text1: ' How she and her husband saved me. My parents were refugees during the war',
     image: SliderImage3
 },
     {

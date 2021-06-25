@@ -83,18 +83,25 @@
 }
 
 
-@media (max-width: 366px) {
+@media (max-width: 371px) {
     .container-info {
         flex-direction: column-reverse;
         margin: 0 auto;
+        margin-bottom: 122px;
     }
 
     .image img {
-        position: relative;
-        width: 335px;
-        height: 419.54px;
-        left: 2px;
-        top: 19px;
+    width: 344px;
+    height: 429.54px;
+  
+    }
+
+    .infoPosition{
+        padding: 0px 20px;
+    }
+
+    .div-info {
+        padding-left: 5px;
     }
 
 }

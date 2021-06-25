@@ -9,10 +9,16 @@
   background-color: #1a1612;
 }
 
-@media (max-width: 366px) {
+@media (max-width: 371px) {
   .emailComp {
     width: 280px;
   }
+}
+
+.beFirst{
+  margin-top: 0.75em;
+  display: flex;
+  justify-content: center;
 }
 
 .beFirst p {
@@ -32,11 +38,6 @@
   color: #f0efed;
 }
 
-@media (max-width: 366px) {
-  .beFirst p {
-    width: 250px;
-  }
-}
 
 .emailInput {
   border: none;
@@ -141,4 +142,16 @@
   color: #f0efed;
 
   opacity: 0.6;
+}
+
+
+@media (max-width: 371px) {
+  .beFirst p {
+    width:250px;
+  }
+
+  .emailSuccess {
+    width:280px;
+  }
+
 }

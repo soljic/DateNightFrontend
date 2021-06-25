@@ -28,7 +28,6 @@ function Accordion({title, text1, text2, key}: Props) {
 
     return (
                     <div className="accordion">
-                        <hr className="lineAccordion"></hr>
                         <div className="accordionHeading">
                             <div onClick={() => toggle(key)} key={key} className="accordionContainer">
                                 <p>{title}</p>
@@ -37,8 +36,8 @@ function Accordion({title, text1, text2, key}: Props) {
                         </div>
                         {clicked === key ? (
                             <div className="accordionContent">
-                                <p>{text1} </p>
-                                <p>{text2} </p>
+                                <p className="firstText">{text1} </p>
+                                <p className="secondText">{text2} </p>
                             </div>
                         ) : null}
                     </div>

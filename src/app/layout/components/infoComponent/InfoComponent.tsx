@@ -10,7 +10,7 @@ import Phone_Mockup from "../../img/Phone_Mockup.png";
 function InfoComponent() {
     return (
         <div className="row justify-content-center">
-            <div className=" col-lg-5 col-12 order-2 order-lg-1">
+            <div className=" col-lg-5 col-12 order-2 order-lg-1 infoPosition">
                 <div className="info">
                     <div className="div-info">
                         <img src={Feature_Icon_with_circle} alt="" className=""/>

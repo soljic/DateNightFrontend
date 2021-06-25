@@ -30,7 +30,7 @@ function SpiritusCarousel({popularSpiritus}: Props) {
             <div className="slider">
                 <div className="container sliderCont">
                     <div className="row sliderCont">
-                        <div className="col col-lg-8 col-md-12 col-12">
+                        <div className="col col-lg-8 col-md-12 col-12 carouselWidth">
                             <Swiper
                                 spaceBetween={10}
                                 autoplay = {{

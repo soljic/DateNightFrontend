@@ -88,10 +88,9 @@
   }
 }
 
-@media (max-width: 366px) {
+@media (max-width: 371px) {
   #csoon {
-    position: relative;
-    left: 1.2em;
+  border-radius: 0px;
   }
 }
 

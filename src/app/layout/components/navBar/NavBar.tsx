@@ -12,29 +12,31 @@ function NavBar() {
 
   return (
     <>
-      <div className="container" id="contNavbar">
-        <div className="row" id="rowNavbar">
+    <div className="navbarWrapper">
+      <div className="container">
+        <div className="row">
           <div className=" col-lg-12 col-sm-12 col-xs-12">
-            <div className="d-flex justify-content-between align-items-center">
-              <div className="logo-wrap">
-                <Logo />
-                <p className="navParagraph">Spiritus</p>
-              </div>
-              <div>
-                <Button
-                  onClick={() => {
-                    setIsClicked(!isClicked);
-                  }}
-                  className="button-link"
-                  type="link"
-                >
-                  Get notified
-                </Button>
+            <div className="d-flex justify-content-between align-items-center colNavbar">
+              
+                <div className="logo-wrap">
+                  <Logo />
+                  <p className="navParagraph">Spiritus</p>
+                </div>
+                <div>
+                  <Button
+                    onClick={() => {
+                      setIsClicked(!isClicked);
+                    }}
+                    className="button-link-header"
+                    type="link"
+                  >
+                    Get notified
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <hr className="lineFooter"></hr>
       </div>
     </>
   );
