@@ -91,7 +91,7 @@
 }
 
 
-@media (max-width: 386px) {
+@media (max-width: 391px) {
   .container-info {
     flex-direction: column-reverse;
     margin: 0 auto;
