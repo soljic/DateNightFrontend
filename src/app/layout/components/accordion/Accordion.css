@@ -65,7 +65,7 @@
 }
 
 
-@media (min-width: 0px) and  (max-width: 391px) {
+@media (min-width: 0px) and  (max-width: 450px) {
   .accordionContent {
     width: 107%;  
   }
@@ -93,14 +93,14 @@
 
 }
 
-@media (min-width:366px) and  (max-width: 391px) {
+@media (min-width:366px) and  (max-width: 450px) {
   .accordionContent {
     width: 107%;
     
   }
 }
 
-@media (min-width:386px) and  (max-width: 391px) {
+@media (min-width:386px) and  (max-width: 450px) {
   .accordionContent {
     width: 105%;
     

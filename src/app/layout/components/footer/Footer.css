@@ -182,7 +182,7 @@ a {
   }
 }
 
-@media (max-width: 391px) {
+@media (max-width: 450px) {
   .logo-wrap-footer {
     margin-left: 14px;
     padding-top: 46px;

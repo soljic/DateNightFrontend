@@ -164,7 +164,7 @@
   opacity: 0.6;
 }
 
-@media (max-width: 391px) {
+@media (max-width: 450px) {
   .beFirst p {
     width: 250px;
   }
