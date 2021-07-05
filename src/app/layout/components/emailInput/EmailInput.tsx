@@ -98,12 +98,13 @@ function EmailInput() {
             className="emailInput"
             placeholder="Your email address"
             disabled={isLoading}
-            type="text"
             {...rest}
             ref={inputReff}
             onBlur={() => {
               setIsClicked(false);
             }}
+            type="email"
+            required
           />
           <button className="emailSubmit" disabled={isLoading} type="submit">
             {isLoading ? "Loading" : <img src={ArrowButton} alt="ArrowImage" />}
