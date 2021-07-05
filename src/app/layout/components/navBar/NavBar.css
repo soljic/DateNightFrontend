@@ -110,7 +110,7 @@ a {
 }
 
 
-@media (max-width: 375px) {
+@media (max-width: 380px) {
   .colNavbar {
     border-bottom: none;
     padding-right: 9px;

@@ -91,7 +91,7 @@
 }
 
 
-@media (max-width: 375px) {
+@media (max-width: 380px) {
   .container-info {
     flex-direction: column-reverse;
     margin: 0 auto;
@@ -113,8 +113,8 @@
   }
 
   .div-info-text {
-    font-size: 19px;
-    line-height: 21px;
+    font-size: 20px;
+    line-height: 23px;
   }
 
   .div-info img {

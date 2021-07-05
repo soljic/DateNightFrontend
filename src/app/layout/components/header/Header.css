@@ -29,7 +29,7 @@
     text-align: center;
 }
 
-@media (max-width: 371px) {
+@media (max-width: 380px) {
     .headerOne {
       margin: 0px 20px;
         /* big mobile */
