@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Autoplay ,Pagination, Navigation} from "swiper/core";
 import {SpiritusResponse} from "../../../models/SpirirtusResponse";
-import ShapeShape from  "../../img/ShapeShape.svg"
+import iconStrelica from  "../../img/iconStrelica.svg"
 import commas from  "../../img/commas.svg"
 import {DataSwipper} from './DataSwiper';
 
@@ -82,8 +82,8 @@ function SpiritusCarousel({popularSpiritus}: Props) {
                         </div>
                         <div className="col col-lg-4 col-md-12 col-12 colDiv">
                             <div className="sliderName">
-                                <img src={ShapeShape} alt="" />
-                                <p className="dateBirth">{selectedData.born}—{selectedData.deceased} • {selectedData.city}, {selectedData.country}</p>
+                                <img src={iconStrelica} alt="" />
+                                <p className="dateBirth">{selectedData.born}—{selectedData.deceased} • {selectedData.city.toUpperCase()}, {selectedData.country.toUpperCase()}</p>
                                 <p className="fullName">{selectedData.name}</p>
                             </div>
                             <div className="sliderText">

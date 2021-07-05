@@ -9,13 +9,22 @@
   background-color: #1a1612;
 }
 
-@media (max-width: 371px) {
-  .emailComp {
-    width: 280px;
-  }
+.emailComp:hover {
+  cursor: pointer;
+  background: #2b2724;
+  border: 1px solid #f0efed;
 }
 
-.beFirst{
+.emailComp > .emailSubmit:hover   {
+  cursor: pointer;
+ 
+}
+
+.emailComp:focus-within {
+  border: 1px solid darkgoldenrod;
+}
+
+.beFirst {
   margin-top: 0.75em;
   display: flex;
   justify-content: center;
@@ -38,7 +47,6 @@
   color: #f0efed;
 }
 
-
 .emailInput {
   border: none;
   width: 200px;
@@ -52,19 +60,26 @@
   font-size: 17px;
   line-height: 21px;
   margin-left: 0.5em;
-  /* identical to box height */
-
   letter-spacing: -0.01em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
-  /* Light */
   border-radius: 90px;
   opacity: 0.6;
+  text-align: left;
 }
 
 .emailInput:hover {
   border: none;
   cursor: pointer;
+  background: #2b2724;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 21px;
+  letter-spacing: -0.01em;
+  font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+  color: #f0efed;
+  opacity: 1;
 }
 .emailInput:focus {
   outline: none;
@@ -84,7 +99,7 @@
   margin-top: 0.18em;
   width: 80px;
   height: 48px;
-  background: #e3aa6d;
+  background-color: #e3aa6d;
   border-radius: 40px;
   border: none;
   margin-right: 0.2em;
@@ -144,14 +159,22 @@
   opacity: 0.6;
 }
 
-
-@media (max-width: 371px) {
+@media (max-width: 375px) {
   .beFirst p {
-    width:250px;
+    width: 250px;
   }
 
   .emailSuccess {
-    width:280px;
+    width: 280px;
   }
+  .emailComp {
+    width: 280px;
+  }
+}
 
+@media (min-width: 992px) {
+  .emailInput {
+    padding-left: 16px;
+    width: 239px;
+  }
 }

@@ -55,17 +55,15 @@ function HomePage() {
 
           <FetauredStories />
           <SpiritusCarousel popularSpiritus={popularSpiritus} />
-          <div className="container">
+          <div className="container topContainer">
             <div className="row">
               <div className="col col-10 lifeText ">
-                <div className="text-container">
+                <div className="text-container contLife">
                   <p>
                     {" "}
                     Life is much more than some dates and names.{" "}
                     <span className="text-highlight">
-                      Life is about memorable stories that your loved ones left
-                      behind. That's why we created a platform for posting
-                      digital memorials.
+                      Life is about memorable stories that your loved ones left behind.That's why we created a platform for posting digital memorials.
                     </span>
                   </p>
                 </div>
@@ -82,6 +80,7 @@ function HomePage() {
           <div className="container accordionCont">
             <div className="row justify-content-center accordionRow">
               <div className="col col-11 col-md-10">
+                <div className="borderBottom">
                 {DataAccordion.map((item, index) => (
                   <Accordion
                     title={item.title}
@@ -90,6 +89,7 @@ function HomePage() {
                     text2={item.text2}
                   />
                 ))}
+              </div>
               </div>
             </div>
           </div>

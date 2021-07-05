@@ -1,4 +1,4 @@
-#csoon {
+.csoon {
   height: 525px;
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
 
   background: #2b2724;
   border-radius: 14px;
-  margin-bottom: 4em;
+ 
 }
 
 .commingSoon {
@@ -72,7 +72,7 @@
 
     background: #2b2724;
   }
-  #csoon {
+  .csoon {
     position: relative;
     left: .5em;
     display: flex;
@@ -88,16 +88,21 @@
   }
 }
 
-@media (max-width: 371px) {
-  #csoon {
+@media (max-width: 375px) {
+  .csoon {
   border-radius: 0px;
   }
 }
 
+@media (min-width: 992px) {
+  .csoon {
+    margin-bottom: 144px;
+  }
+}
 
 
 @media (max-width: 320px){
-#csoon {
+.csoon {
     position: relative;
     left: 1em;
 }

@@ -8,9 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import facebook from "../../img/facebook.svg";
 import instagram from "../../img/instagram.svg";
 import linkedin from "../../img/linkedin.svg";
-import esif from "../../img/esif.svg";
-import eUnion from "../../img/eUnion.svg";
-import filRouge from "../../img/filRouge.svg";
+import partners_single_image from "../../img/partners_single_image.png";
 
 function Footer() {
   const { activityStore } = useStore();
@@ -18,14 +16,14 @@ function Footer() {
 
   return (
     <>
-      <div className="container" id="footerCont">
+      <div className="container footerCont">
         <div className="row" id="footerRow">
           <div className="col col-12">
-            <div className="d-flex justify-content-between align-items-center">
-              <div className="logo-wrap">
+            <div className="d-flex  justify-content-around align-items-center flexCol">
+              <div className="logo-wrap-footer">
                 <Logo />
               </div>
-              <div>
+              <div className="buttonDiv">
                 <Button
                   onClick={() => {
                     setIsClicked(!isClicked);
@@ -67,13 +65,7 @@ function Footer() {
           <div className="partners">
             <p>Proud partners with:</p>
             <div className="img_footer">
-              <img src={filRouge} alt="" />
-              <img
-                className="esif"
-                src={esif}
-                alt=""
-              />
-              <img    src={eUnion} alt="eu-image" />
+              <img src={ partners_single_image} alt="" />
             </div>
           </div>
         </div>

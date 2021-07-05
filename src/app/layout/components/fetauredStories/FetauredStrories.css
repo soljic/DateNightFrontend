@@ -23,7 +23,15 @@
   padding-bottom: 10px;
 }
 
-@media (max-width: 371px) {
+@media (min-width: 992px) {
+
+
+  .hrLine{
+    width: 153%;
+  }
+  }
+
+@media (max-width: 375px) {
 
 
 .hrLine{

@@ -1,4 +1,8 @@
-.logo-wrap {
+.flexCol {
+  justify-content: space-between !important;
+}
+
+.logo-wrap-footer {
   display: flex;
   align-items: center;
 }
@@ -64,6 +68,11 @@
   opacity: 0.6;
 }
 
+.button-link:hover {
+  background-color: #3d3d3d;
+  border: 2px solid #F0EFED;
+}
+
 .button-navbar {
   position: relative;
   right: 1em;
@@ -119,15 +128,8 @@ a {
   margin-bottom: 3em;
 }
 
-@media (max-width: 365px) {
-  #footerCont {
-    width: 105%;
-    padding-left: 1em;
-  }
-}
-
 .partners {
-  margin-top: 20px;
+  margin-top: -3px;
 }
 
 .partners p {
@@ -141,23 +143,112 @@ a {
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
 
   color: #f0efed;
+
+  opacity: 0.3;
 }
 
 .img_footer {
   display: flex;
   justify-content: space-around;
-  margin-right: 29em;
+  margin-right: 61em;
+}
+
+.img_footer img {
+  width: 327px;
 }
 
 @media (max-width: 992px) {
-    .img_footer {
-        margin-right: 0em;
-    }
+  .img_footer {
+    margin-right: 0em;
+  }
+}
+
+@media (min-width: 992px) {
+  .flexCol {
+    height: 40px;
   }
 
-  @media (max-width: 436px) {
-    .img_footer {
-        display: flex;
-        flex-direction: column;
-    }
+  .socialMedia img:hover {
+ background-color: #70706f;
+ border-radius: 18px;
+ opacity: 1;
+}
+}
+
+@media (max-width: 436px) {
+  .img_footer {
+    display: flex;
+    flex-direction: column;
   }
+}
+
+@media (max-width: 375px) {
+  .logo-wrap-footer {
+    margin-left: 14px;
+    padding-top: 46px;
+  }
+
+  .lineFooter {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #f0efed;
+    opacity: 0.1;
+  }
+
+  .buttonDiv {
+    margin-top: 30px;
+    margin-bottom: 32px;
+  }
+
+  .bootomContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 24px;
+  }
+
+  .socialMedia {
+    margin-bottom: 24px;
+  }
+
+  .socialMedia img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .partners {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+  }
+
+  .partners p {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
+    color: #f0efed;
+    margin-bottom: 10px;
+    opacity: 0.3;
+  }
+
+  .img_footer {
+    padding: 0px 32px;
+  }
+  .img_footer img {
+    width: 100%;
+  }
+
+  .footerCont {
+    background-color: #2b2724;
+    padding-bottom: 40px;
+  }
+
+  .flexCol {
+    flex-direction: column;
+  }
+}

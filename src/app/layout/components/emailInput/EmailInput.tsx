@@ -107,7 +107,7 @@ function EmailInput() {
           />
           <button className="emailSubmit" disabled={isLoading} type="submit">
             {isLoading ? "Loading" : <img src={ArrowButton} alt="ArrowImage" />}
-          </button>
+          </button> 
         </div>
         {errors?.email && (
           <div className="errorMessage">{errors.email.message}</div>

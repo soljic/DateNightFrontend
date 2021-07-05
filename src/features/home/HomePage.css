@@ -56,22 +56,16 @@
 
 .text-container {
   margin-bottom: 2.5em;
-
-  /* mobile app/title */
-
   font-family: Inter;
   font-style: normal;
   font-weight: bold;
-  font-size: 32px;
-  line-height: 110.9%;
-  /* or 35px */
-
+  font-size: 30px;
+  line-height: 32.9px;
   letter-spacing: -0.03em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
-  /* Light */
-
   color: #f0efed;
+  text-align: center;
+  padding-left: 3em;
 }
 .text-highlight {
   opacity: 0.6;
@@ -87,18 +81,35 @@
   padding-bottom: 64px;
 }
 
-@media (max-width: 371px) {
+@media (min-width: 992px) {
+  .contLife{
+    position: relative;
+      left: 1em;
+      margin-bottom: 34px;
+  }
+
+  .topContainer{
+    margin-top: -24px;
+  }
+
+  .accordionCont{
+    height: 422px;
+  }
+}
+
+@media (max-width: 375px) {
   .text-container {
     margin-bottom: 2.5em;
     font-family: Inter;
     font-style: normal;
     font-weight: bold;
-    font-size: 26px;
-    line-height: 29px;
-     letter-spacing: -0.03em;
+    font-size: 27px;
+    line-height: 31px;
+    letter-spacing: -0.03em;
     font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
     color: #f0efed;
     padding: 0px 3px;
+    text-align: start;
   }
 
   .lifeText{
@@ -109,6 +120,10 @@
   }
 .accordionRow{
   padding: 0px 4px;
+}
+
+.accordionCont{
+  height: 442px;
 }
 
 }

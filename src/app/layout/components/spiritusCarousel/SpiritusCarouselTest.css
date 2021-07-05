@@ -28,7 +28,6 @@
   height: 510px;
 }
 
-
 @media (max-width: 1400px) {
   .slider .swiper-slide {
     width: 321px;
@@ -101,9 +100,6 @@
   z-index: 2;
 }
 
-
-
-
 .slider-image-wrap {
   border-radius: 36px;
   overflow: hidden;
@@ -112,7 +108,6 @@
 }
 
 .slider-nav {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,6 +123,15 @@
   margin-left: 8px;
   transform: rotate(180deg);
   margin-top: 2px;
+}
+
+.slider-arrow-left img:hover{
+  width: 120%;
+}
+
+.slider-arrow-right img:hover{
+  width: 120%;
+  border-radius: 14px;
 }
 
 .swiper-pagination-bullets {
@@ -164,31 +168,20 @@
   font-weight: bold;
   font-size: 32px;
   line-height: 110.9%;
-  /* or 35px */
-
   letter-spacing: -0.03em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
   color: #f0efed;
 }
 
 .dateBirth {
-  width: 335px;
-  height: 16px;
-
-  /* mobile app/small medium */
-
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
-  /* identical to box height */
 
   letter-spacing: -0.01em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
-  /* Light */
 
   color: #f0efed;
   margin-bottom: 0.5em;
@@ -200,13 +193,8 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
-  /* or 117% */
-
   letter-spacing: -0.01em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-
-  /* Light */
-
   color: #f0efed;
 }
 
@@ -214,7 +202,7 @@
   padding-top: 11.5em;
 }
 
-@media (max-width: 371px) {
+@media (max-width: 375px) {
   .colDiv {
     padding: 20px 25px;
   }
@@ -230,42 +218,52 @@
 
   letter-spacing: -0.01em;
   font-feature-settings: "ordn" on, "ss03" on, "cv01" on, "cv02" on;
-  border: 4px solid #f0efed;
-  border-radius: 30px;
   text-align: center;
   background-color: #1a1612;
   color: #f0efed;
   margin-top: 3.6em;
   opacity: 0.2;
+  border: 1px solid #f0efed;
+  box-sizing: border-box;
+  border-radius: 40px;
 }
 
 @media (max-width: 768px) {
   .sliderCont {
-      flex-direction: column;
-      margin-top: 0;
+    flex-direction: column;
+    margin-top: 0;
   }
 }
 
 
-@media (max-width: 366px) {
+@media (min-width: 992px) {
+  .slider {
+    margin-bottom: 200px;
+    margin-top: 44px;
+  }
+
   .slider-nav {
-    
-      margin-left: 4em;
+    margin-top: 10px;
+    height: 30px;
   }
-}
+  }
+
 @media (max-width: 366px) {
   .slider {
-    
     width: 110%;
   }
 }
 
-@media (max-width: 371px) {
+@media (max-width: 375px) {
   .carouselWidth {
     padding: 1px;
   }
 
-  .slider{
+  .slider {
     margin-bottom: 120px;
+  }
+
+  .slider-nav {
+    margin-top: 8px;
   }
 }
