@@ -125,13 +125,29 @@
   margin-top: 2px;
 }
 
-.slider-arrow-left img:hover{
-  width: 120%;
+.slider-arrow-left:hover svg{
+  background-color: white;
+  border-radius: 12px;
+  border:none;
+  
 }
 
-.slider-arrow-right img:hover{
-  width: 120%;
-  border-radius: 14px;
+.slider-arrow-left:hover path{
+  border-radius: 17px;
+  fill: black;
+  
+  
+}
+
+.slider-arrow-right:hover svg{
+  border-radius: 12px;
+  background: white;
+}
+
+
+.slider-arrow-right:hover path{
+ outline: none;
+  fill: black;
 }
 
 .swiper-pagination-bullets {
