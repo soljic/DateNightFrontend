@@ -93,29 +93,8 @@
 
 }
 
-@media (min-width:366px) and  (max-width: 450px) {
-  .accordionContent {
-    width: 107%;
-    
-  }
-}
 
-@media (min-width:386px) and  (max-width: 450px) {
-  .accordionContent {
-    width: 105%;
-    
-  }
-}
-
-
-@media (min-width: 391px) and (max-width: 422px) {
-  .accordionContent {
-    width: 94%;
-    
-  }
-}
-
-@media (min-width: 422px) and (max-width: 1200px) {
+@media (min-width: 450px) and (max-width: 991px) {
   .accordionContent {
     width: 85%;
     
@@ -141,20 +120,6 @@
 @media (min-width:1400px) {
   .accordionContent{
     width: 55%;
-    
-  }
-}
-
-
-
-
-
-
-
-
-@media (max-width: 365px) {
-  .accordionContent {
-    width: 105%;
     
   }
 }

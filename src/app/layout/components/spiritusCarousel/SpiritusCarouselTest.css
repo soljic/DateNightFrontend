@@ -264,11 +264,6 @@
   }
   }
 
-@media (max-width: 366px) {
-  .slider {
-    width: 110%;
-  }
-}
 
 @media (max-width: 450px) {
   .carouselWidth {

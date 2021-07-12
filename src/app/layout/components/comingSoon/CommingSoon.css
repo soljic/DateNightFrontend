@@ -64,29 +64,7 @@
   margin-bottom: 6em;
 }
 
-@media (max-width: 365px) {
-  .csooncontainer {
-    width: 375px;
-    height: 474px;
-    /* Dark Medium */
 
-    background: #2b2724;
-  }
-  .csoon {
-    position: relative;
-    left: .5em;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 100px 20px;
-    width: 375px;
-    height: 474px;
-
-    /* Dark Medium */
-
-    background: #2b2724;
-  }
-}
 
 @media (max-width: 450px) {
   .csoon {
@@ -98,12 +76,4 @@
   .csoon {
     margin-bottom: 144px;
   }
-}
-
-
-@media (max-width: 320px){
-.csoon {
-    position: relative;
-    left: 1em;
-}
 }
