@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import Collapsible from 'react-collapsible';
+
 import "./Accordion.css";
 import ArrowUp from "../arrows/ArrowUp";
 import ArrowDown from "../arrows/ArrowDown";
-import { animated, Spring } from "react-spring";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 interface Props {
@@ -23,34 +24,27 @@ function Accordion({ title, text1, text2, key }: Props) {
 
     setClicked(index);
   };
-
-  return (
-    <div className="accordion">
-      <div className="accordionHeading">
-        <div
+  const AccordionHeading = () => {
+    return(<div className="accordionHeading">
+      <div
           onClick={() => toggle(key)}
           key={key}
           className="accordionContainer"
-        >
-          <p>{title}</p>
-          <span>{clicked === key ? <ArrowUp /> : <ArrowDown />}</span>
-        </div>
+      >
+        <p>{title}</p>
+        <span>{clicked === key ? <ArrowUp /> : <ArrowDown />}</span>
       </div>
-      {clicked === key ? (
-        <Spring
-        from={{opacity: 0}}
-        to={{opacity: 1}}
-        config={{duration: 6000}}>
-          {() => (
-           
-              <animated.div className="accordionContent">
-                <p className="firstText">{text1} </p>
-                <p className="secondText">{text2} </p>
-              </animated.div>
-            
-          )}
-        </Spring>
-      ) : null}
+    </div>)
+  }
+
+  return (
+    <div className="accordion">
+          <Collapsible transitionTime={400} trigger={<AccordionHeading />}>
+            <div className="accordionContent">
+              <p className="firstText">{text1} </p>
+              <p className="secondText">{text2} </p>
+            </div>
+          </Collapsible>
     </div>
   );
 }

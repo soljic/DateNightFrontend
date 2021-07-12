@@ -149,8 +149,6 @@ a {
 
 .img_footer {
   display: flex;
-  justify-content: space-around;
-  margin-right: 61em;
 }
 
 .img_footer img {
@@ -237,10 +235,12 @@ a {
   }
 
   .img_footer {
-    padding: 0px 32px;
+    padding: 0 32px;
   }
+
   .img_footer img {
     width: 100%;
+    max-width: 270px;
   }
 
   .footerCont {
