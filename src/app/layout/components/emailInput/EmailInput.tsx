@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef, SyntheticEvent } from "react";
-import { DeepMap, FormState, useForm, useFormState } from "react-hook-form";
+import  { useState, useEffect, useRef } from "react";
+import {  useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../stores/store";
 import OutsideClickHandler from "react-outside-click-handler";
 import "./EmailInput.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ArrowButton from "../../img/ArrowButton.svg";
-import { ImageGroup } from "semantic-ui-react";
 import emailjs from "emailjs-com";
 
 type EmailScore = {
@@ -20,8 +19,6 @@ function EmailInput() {
     reset,
     formState: { errors },
   } = useForm<EmailScore>();
-
-  let error = useForm<EmailScore>().formState.errors.email?.message;
 
   const { activityStore } = useStore();
   const { isClicked, setIsClicked } = activityStore;

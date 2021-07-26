@@ -5,6 +5,7 @@ import { SpiritusResponse } from "../../../models/SpirirtusResponse";
 import iconStrelica from "../../img/iconStrelica.svg";
 import commas from "../../img/commas.svg";
 import { DataSwipper } from "./DataSwiper";
+import  useHoover  from "../../../hooks/useHoover";
 
 import "./SpiritusCarouselTest.css";
 import "swiper/swiper.min.css";
@@ -22,6 +23,7 @@ function SpiritusCarousel({ popularSpiritus }: Props) {
   const navigationNext = React.useRef(null);
   const [index, setIndex] = useState(0);
   const selectedData = DataSwipper[index];
+  const [hoverRef, isHovered] = useHoover();
   return (
     <>
       <div className="slider">
@@ -85,7 +87,7 @@ function SpiritusCarousel({ popularSpiritus }: Props) {
                   </svg>
                 </div>
                 <div className="swiper-pagination" />
-                <div className="slider-arrow-right" ref={navigationNext}>
+                <div className="slider-arrow-right" ref={navigationPrev}>
                   <svg
                     width="24"
                     height="24"
