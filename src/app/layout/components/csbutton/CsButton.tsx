@@ -1,5 +1,5 @@
 import React from 'react';
-import './CsButton.css';
+import './CsButton.scss';
 
 function CsButton() {
     return (

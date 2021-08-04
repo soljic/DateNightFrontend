@@ -1,5 +1,5 @@
 import React from 'react';
-import "./InfoComponent.css";
+import "./InfoComponent.scss";
 import Feature_Icon_with_circle from "../../img/Feature_Icon_with_circle.svg";
 import Logo2 from "../../img/Logo2.svg";
 import Logo3 from "../../img/Logo3.svg";

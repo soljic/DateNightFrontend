@@ -1,0 +1,21 @@
+.modal-video-movie-wrap{
+    margin-top: 131px !important;
+}
+
+.modal-video-close-btn{
+    width: 15px !important;
+    right: -29px !important;
+}
+
+@media (max-width: 451px) {
+    .modal-video-close-btn{
+    top: -31px;
+    right: 0px !important;
+    }
+}
+
+@media (min-height: 756px) {
+    .modal-video-movie-wrap{
+        margin-top: -52px !important;
+    }
+}

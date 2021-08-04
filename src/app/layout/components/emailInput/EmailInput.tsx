@@ -3,7 +3,7 @@ import {  useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../stores/store";
 import OutsideClickHandler from "react-outside-click-handler";
-import "./EmailInput.css";
+import "./EmailInput.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ArrowButton from "../../img/ArrowButton.svg";
 import emailjs from "emailjs-com";

@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../stores/store";
 import Logo from "../logo/Logo";
 import { Button } from "antd";
-import "./Footer.css";
+import "./Footer.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import facebook from "../../img/facebook.svg";
 import instagram from "../../img/instagram.svg";

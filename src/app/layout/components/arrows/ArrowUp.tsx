@@ -1,5 +1,5 @@
 import React from 'react';
-import "./ArrowUp.css";
+import "./ArrowUp.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function ArrowUp() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Header.css";
+import "./Header.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CsButton from '../csbutton/CsButton';
 

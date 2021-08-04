@@ -1,5 +1,5 @@
 import React from "react";
-import "./CommingSoon.css";
+import "./CommingSoon.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EmailInput from "../emailInput/EmailInput";
 
