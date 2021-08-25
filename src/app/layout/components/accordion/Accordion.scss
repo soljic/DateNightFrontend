@@ -58,7 +58,12 @@
   border-top: 1px solid #2B2724;
   padding-top: 20px;
   padding-bottom: 8px;
+  &:hover{
+    cursor: pointer;
+  }
 }
+
+
 
 .borderBottom{
   border-bottom: 1px solid #2B2724;

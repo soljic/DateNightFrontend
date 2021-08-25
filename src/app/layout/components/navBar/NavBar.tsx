@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../../stores/store";
 import Logo from "../logo/Logo";
 import { Button } from "antd";
-import "./NavBar.css";
+import "./NavBar.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function NavBar() {

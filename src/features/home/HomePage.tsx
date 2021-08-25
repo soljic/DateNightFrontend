@@ -9,23 +9,27 @@ import Accordion from "../../app/layout/components/accordion/Accordion";
 import Footer from "../../app/layout/components/footer/Footer";
 import { DataAccordion } from "../../app/layout/components/accordion/DataAccordion";
 import { useStore } from "../../app/stores/store";
-import "./HomePage.css";
+import "./HomePage.scss";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import SpiritusCarousel from "../../app/layout/components/spiritusCarousel/SpiritusCarousel";
 import { SpiritusResponse } from "../../app/models/SpirirtusResponse";
 import InfoComponent from "../../app/layout/components/infoComponent/InfoComponent";
 import CsButton from "../../app/layout/components/csbutton/CsButton";
+import PlayButton from "../../app/layout/components/playButton/PlayButton";
+import ResponsivePlayer from "../../app/layout/components/responsivePlayer/ResponsivePlayer";
+import { observer } from "mobx-react-lite";
+import VideoModal from "../../app/layout/components/videoModal/VideoModal";
 
 function HomePage() {
   const { activityStore } = useStore();
-  const { loadPopularSpiritus } = activityStore;
+  const { loadPopularSpiritus, isPlay } = activityStore;
   const [popularSpiritus, setPopular] = useState<
     SpiritusResponse[] | undefined
   >(undefined);
 
   const [active, setActive] = useState<string | undefined>("What is Spiritus?");
-
+ 
   useEffect(() => {
     const getPopular = loadPopularSpiritus().then((response) => {
       const popular: SpiritusResponse[] | undefined = response;
@@ -39,9 +43,9 @@ function HomePage() {
   return (
     <>
       <NavBar />
-
       <div className="">
         <main>
+        
           <div className="container">
             <div className="row justify-content-center rowHeaders">
               <div className="col col-12">
@@ -50,6 +54,7 @@ function HomePage() {
                 <HeaderThree />
                 <EmailInput />
               </div>
+              <VideoModal />  
             </div>
           </div>
 
@@ -100,4 +105,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default observer(HomePage);

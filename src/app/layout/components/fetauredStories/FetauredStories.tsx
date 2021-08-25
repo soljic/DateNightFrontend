@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import "./FetauredStrories.css";
+import "./FetauredStrories.scss";
 
 function FetauredStories() {
     return (

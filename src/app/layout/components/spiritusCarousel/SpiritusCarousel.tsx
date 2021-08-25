@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
 import { SpiritusResponse } from "../../../models/SpirirtusResponse";
 import iconStrelica from "../../img/iconStrelica.svg";
 import commas from "../../img/commas.svg";
 import { DataSwipper } from "./DataSwiper";
-import  useHoover  from "../../../hooks/useHoover";
+import  useHover  from "../../../hooks/useHoover";
 
-import "./SpiritusCarouselTest.css";
+import "./SpiritusCarouselTest.scss";
 import "swiper/swiper.min.css";
 
 import Arrow from "../../img/arrow.svg";
@@ -23,7 +23,7 @@ function SpiritusCarousel({ popularSpiritus }: Props) {
   const navigationNext = React.useRef(null);
   const [index, setIndex] = useState(0);
   const selectedData = DataSwipper[index];
-  const [hoverRef, isHovered] = useHoover();
+  const [hoverRef, isHovered] = useHover();
   return (
     <>
       <div className="slider">
@@ -87,7 +87,7 @@ function SpiritusCarousel({ popularSpiritus }: Props) {
                   </svg>
                 </div>
                 <div className="swiper-pagination" />
-                <div className="slider-arrow-right" ref={navigationPrev}>
+                <div className="slider-arrow-right" ref={navigationNext}>
                   <svg
                     width="24"
                     height="24"

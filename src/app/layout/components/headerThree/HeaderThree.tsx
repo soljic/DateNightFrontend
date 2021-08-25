@@ -1,5 +1,5 @@
 import React from "react";
-import "./HeaderThree.css";
+import "./HeaderThree.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function HeaderThree() {

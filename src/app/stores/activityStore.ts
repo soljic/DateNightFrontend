@@ -12,6 +12,7 @@ export default class ActivityStore {
   loading = false;
   loadingInitial = true;
   isClicked= false;
+  isPlay= false;
   
 
   constructor() {
@@ -111,6 +112,10 @@ export default class ActivityStore {
    setIsClicked = (click: boolean) => {
    this.isClicked = click;
   };
+
+  setIsPlayed = (click: boolean) => {
+    this.isPlay = click;
+   };
 
   createActivity = async (activity: Activity) => {
     this.loading = true;
