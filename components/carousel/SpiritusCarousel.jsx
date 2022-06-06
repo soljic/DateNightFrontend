@@ -54,39 +54,37 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 export default function SpiritusCarousel({ images }) {
   const [index, setIndex] = useState(0);
   return (
-    <div className="slider">
-      <Swiper
-        spaceBetween={120}
-        // autoplay={{
-        // delay: 2500,
-        // disableOnInteraction: true,
-        // }}
-        slidesPerView="auto"
-        loop={false}
-        onSlideChange={(swiper) => {
-          setIndex(swiper.realIndex);
-        }}
-        onSwiper={(swiper) => {
-          setIndex(swiper.realIndex);
-        }}
-        centeredSlides={true}
-      >
-        {images.map((img) => {
-          return (
+    images.legth && (
+      <div className="slider">
+        <Swiper
+          spaceBetween={120}
+          // autoplay={{
+          // delay: 2500,
+          // disableOnInteraction: true,
+          // }}
+          slidesPerView="auto"
+          loop={false}
+          onSlideChange={(swiper) => {
+            setIndex(swiper.realIndex);
+          }}
+          onSwiper={(swiper) => {
+            setIndex(swiper.realIndex);
+          }}
+          centeredSlides={true}
+        >
+          {images.map((img) => {
+            return (
               <SwiperSlide>
                 <div className="slider-image-wrap my-4">
                   <div className="slider-image">
-                    <img
-                      src={img.url}
-                      alt={""}
-                      className="rounded-xl"
-                    />
+                    <img src={img.url} alt={""} className="rounded-xl" />
                   </div>
                 </div>
               </SwiperSlide>
-          );
-        })}
-      </Swiper>
-    </div>
+            );
+          })}
+        </Swiper>
+      </div>
+    )
   );
 }
