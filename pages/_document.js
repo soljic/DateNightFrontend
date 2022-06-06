@@ -16,10 +16,10 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           /> */}
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&amp;display=swap"
             rel="stylesheet"
-          />
+          /> */}
           <link
             rel="stylesheet"
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
