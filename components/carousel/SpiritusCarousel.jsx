@@ -72,9 +72,9 @@ export default function SpiritusCarousel({ images }) {
           }}
           centeredSlides={true}
         >
-          {DataSwipper().map((img) => {
+          {images.map((img, i) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={`slider-image-${i}`}>
                 <div className="slider-image-wrap my-4">
                   <div className="slider-image">
                     <img src={img.url} alt={""} className="rounded-xl" />
