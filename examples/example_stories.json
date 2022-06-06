@@ -1,0 +1,77 @@
+{
+  "content": [
+    {
+      "id": 33,
+      "title": "Osnivanje Muzeja grada Koprivnice",
+      "subtitle": null,
+      "date": null,
+      "description": "Muzejske ljepote",
+      "status": "APPROVED",
+      "paragraphs": [
+        {
+          "id": 40,
+          "index": 0,
+          "text": "Na adresi Trga Leandera Brozovića 1 u Koprivnici stoji Muzej grada Koprivnice koji je svečano otvoren 27. srpnja 1951. godine unutar reprezentativne gradske kuće dr. Sulimanovića u Esterovoj ulici. \n\r\nUpravo je volonterski rad Leandera Brozovića temelj nastanka Muzeja. \nNaime, Brozović je pokretanjem Zbornika Muzeja grada Koprivnice 1946. godine Leandera Brozovića, koji je u osam svezaka izlazio sve do 1953. godine i koji je prethodnik današnjeg Podravskog zbornika, donio veliki preobrat te otvorio vrata budućem nastanku Muzeja grada. U ovom je Zborniku Leander objavljivao tekstove o velikoj i maloj Koprivnici, kao i popis umrlih svjetovnjaka iz kripte franjevačkog samostana u Koprivnici.\r\nOvakvim Podravskim zbornikom 1957. Brozović stvara same začetke Muzeja koji će Vas osvojiti svojim ostavštinama na područjima povijesti, etnologije, arheologije, sakralne umjetnosti. \n\nNa središnjem trgu Koprivnice Muzej predstavlja klasičnu i suvremenu umjetnost te više od pola stoljeća stoji za mjesto izravnog susreta s kulturnom baštinom. \n\r\nMuzej se sastoji od čak tri galerije od kojih svaka ima svoju čar – posjetite Galeriju Mijo Kovačić kojoj je glavna odrednica slikanje na platnu, potom zavirite u Galeriju naivne umjetnosti u Hlebinama koja poseban naglasak stavlja na radove Ivana Generalića te nakon prošetajte Galerijom skulptura Ivana Sabolića gdje u parku ispred galerije možete uživati u skulpturi Zimsko Sunce u kojoj je pohranjena Sabolićeva urna. \n\r\nPredstavljajući šaroliku povijest grada, Muzej stoji za vrelo eksponata koji intrigiraju, odličnu postavu educiranih djelatnika koji se trude posjetiteljima približiti Koprivnicu u svom njezinu sjaju. \n\r\nAko Vas put nanese prema Koprivnici, prisjetite se ovih detalja iza kojih se skriva ponosno lice Leandera Brozovića – utemeljitelja i ravnatelja Muzeja grada Koprivnice!",
+          "imageUrl": null
+        }
+      ],
+      "tags": [
+        {
+          "id": 36,
+          "value": "Hobi",
+          "featured": false,
+          "special": false
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Leander Brozović – bezuvjetan trud i rad",
+      "subtitle": null,
+      "date": null,
+      "description": " Povjesničar vrijedan spomena",
+      "status": "APPROVED",
+      "paragraphs": [
+        {
+          "id": 39,
+          "index": 0,
+          "text": "Leander Brozović čovjek je kojeg zasigurno ubrajamo u velike povjesničare veterine. Rođen u Budimpešti 1897. Godine Leander je smatran i jednim od najzaslužnijih građana grada Koprivnice koji je svojim bezuvjetnim radom i trudom zadužio svoj rodni grad.\n\r\nLeander gimnaziju završava u Osijeku 1918. te odlučuje studirati na Veterinarskom fakultetu u Budimpešti, Brnu, Drezdenu i Lavovu. \nKao zaljubljenik u kulturnu ostavštinu, Leander se uz veterinu kao prvu ljubav ujedno bavi i skupljanjem različite muzejske građe.\r\nNa taj način prikuplja raznolike etnografske predmete, cijeli opus narodnih pjesama i pripovijetki, dok u isto vrijeme izvrsno barata i pučkom medicinskom terminologijom zahvaljujući svojim člancima tokom studiranja u kojima je obrađivao tematike poput čuvanja zdravlja stoke i obrane od zaraznih bolesti. \n\r\nOvaj svestrani povjesničar ostavi je veliki utisak na povijest Koprivnice takvim elanom te je ujedno smatran i prvim povjesničarom koji je detaljnije ukazao na bunu kunovečkih seljaka protiv nenarodnog mađarskog režima. \r\nGovoreći i pišući samo ono najbolje o svome gradu, Leander Brozović zaista zaslužuje sve dobivene titule te postaje uzorom i dikom drugih građana Koprivnice.",
+          "imageUrl": null
+        }
+      ],
+      "tags": [
+        {
+          "id": 33,
+          "value": "Život",
+          "featured": false,
+          "special": false
+        }
+      ]
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 10,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalElements": 2,
+  "totalPages": 1,
+  "last": true,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "numberOfElements": 2,
+  "first": true,
+  "empty": false
+}

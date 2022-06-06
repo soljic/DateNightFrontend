@@ -1,0 +1,131 @@
+{
+  "content": [
+    {
+      "id": 50423,
+      "name": "Leander",
+      "surname": "Brozović",
+      "birth": "1897-10-02",
+      "death": "1962-08-31",
+      "location": {
+        "id": 50426,
+        "latitude": 46.17076,
+        "longitude": 16.815322,
+        "graveyard": {
+          "id": 8,
+          "name": "Pri Sv. Duhu Koprivnica",
+          "latitude": 46.17158,
+          "longitude": 16.8146,
+          "image": {
+            "url": null,
+            "height": 0,
+            "width": 0
+          },
+          "vertices": [
+            {
+              "id": 1,
+              "latitude": 46.17374,
+              "longitude": 16.81431,
+              "index": 1
+            },
+            {
+              "id": 2,
+              "latitude": 46.17155,
+              "longitude": 16.81211,
+              "index": 2
+            },
+            {
+              "id": 3,
+              "latitude": 46.16943,
+              "longitude": 16.81508,
+              "index": 3
+            },
+            {
+              "id": 4,
+              "latitude": 46.17133,
+              "longitude": 16.81694,
+              "index": 4
+            },
+            {
+              "id": 5,
+              "latitude": 46.17227,
+              "longitude": 16.81706,
+              "index": 5
+            },
+            {
+              "id": 6,
+              "latitude": 46.17273,
+              "longitude": 16.81625,
+              "index": 6
+            },
+            {
+              "id": 7,
+              "latitude": 46.17348,
+              "longitude": 16.81641,
+              "index": 7
+            },
+            {
+              "id": 8,
+              "latitude": 46.17374,
+              "longitude": 16.81431,
+              "index": 8
+            }
+          ],
+          "isMemoryWalk": true,
+          "numberOfSpiritus": null,
+          "numberOfFeaturedSpiritus": null
+        }
+      },
+      "description": "Povjesničar vrijedan spomena",
+      "users": [
+        10
+      ],
+      "userResponses": [
+        {
+          "id": 10,
+          "name": "Dino",
+          "surname": "Spiritus",
+          "email": "dino@spiritus.app",
+          "code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+        }
+      ],
+      "images": [
+        {
+          "url": "/images/514/spiritus",
+          "height": 604,
+          "width": 469
+        },
+        {
+          "url": "/images/515/spiritus",
+          "height": 810,
+          "width": 1080
+        }
+      ],
+      "status": "APPROVED"
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 1,
+    "pageNumber": 1,
+    "pageSize": 1,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalElements": 47602,
+  "totalPages": 47602,
+  "last": false,
+  "size": 1,
+  "number": 1,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "numberOfElements": 1,
+  "first": false,
+  "empty": false
+}

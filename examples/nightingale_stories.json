@@ -1,0 +1,113 @@
+{
+	"content": [
+	  {
+		"id": 19,
+		"title": "Paint me red / Elizabeth Arden",
+		"subtitle": null,
+		"date": null,
+		"description": " Red lipstick revolution",
+		"status": "APPROVED",
+		"paragraphs": [
+		  {
+			"id": 21,
+			"index": 0,
+			"text": "Elizabeth Arden, the founder of all things girly (read makeup), very early in her career finds a focal point of passion that drives her through life. She falls in love with cosmetics and make-up and soon after opens her beauty salon, which has changed the world of cosmetics to the core.\n\r\nWanting to change the previous view of make-up, which in the eyes of observers was reserved for prostitutes, Arden devises a marketing campaign that makes make-up socially acceptable. The spread of her good reputation continues with the opening of the Paris Salon and Florence suspects she might succeed in her plan of presenting make-up as an innovative and creative art and decides to merge her two loves into one big hit.\n\r\nA suffragette as she was, she opened her salon on Fifth Avenue and marched through it in a parade for women's rights for the first time wearing red lipstick and offering lipstick to other girls to show the strength and courage of the female gender. Shortly afterward, red lipstick became a symbol of female expansion and equality.\n\r\nThe myth about the procession of girls wearing red lipstick or not, one fact is certain - Elizabeth Arden certainly proudly put it on her lips that day and gave the world a revolution.",
+			"imageUrl": null
+		  },
+		  {
+			"id": 22,
+			"index": 1,
+			"text": null,
+			"imageUrl": "/images/498/paragraph"
+		  }
+		],
+		"tags": [
+		  {
+			"id": 36,
+			"value": "Hobi",
+			"featured": false,
+			"special": false
+		  }
+		]
+	  },
+	  {
+		"id": 15,
+		"title": "Test",
+		"subtitle": null,
+		"date": null,
+		"description": "Tedt",
+		"status": "APPROVED",
+		"paragraphs": [
+		  {
+			"id": 17,
+			"index": 0,
+			"text": "Test",
+			"imageUrl": null
+		  }
+		],
+		"tags": [
+		  {
+			"id": 34,
+			"value": "Family",
+			"featured": false,
+			"special": false
+		  }
+		]
+	  },
+	  {
+		"id": 1,
+		"title": "Elizabeth Arden or The Queen – or maybe both?",
+		"subtitle": null,
+		"date": null,
+		"description": "How did Florence Nightingale become Elizabeth Arden?",
+		"status": "APPROVED",
+		"paragraphs": [
+		  {
+			"id": 1,
+			"index": 0,
+			"text": "Florence Nightingale Graham is best known as Elizabeth Arden, the founder of today's cosmetic empire called \"Elizabeth Arden Inc.\"\n\r\nElizabeth Arden was named after the famous nurse Florence Nightingale, who in the 19th century introduced the novelty of nursing into the profession since she believed that taking care of patients was the right way of treatment.\n\r\nMost likely, you are all asking yourself the same question – what were the reasons behind changing the name from Florence Nightingale to Elizabeth Arden?\n\r\nBecause Frances opened up a salon she wished to trade her name to save money on her salon signs. While picking a name, she has chosen the surname Arden reminding herself of the farm nearby. The name Elizabeth she decided to take after her business relationship with Elizabeth Hubbard has dissolved. \n\r\nCome to think of it now, Elizabeth Arden could have easily been inspired by Queen Elizabeth, channeling her inner fabulousness!\n\r\nOnly Elizabeth knows!",
+			"imageUrl": null
+		  },
+		  {
+			"id": 2,
+			"index": 1,
+			"text": null,
+			"imageUrl": "/images/466/paragraph"
+		  }
+		],
+		"tags": [
+		  {
+			"id": 33,
+			"value": "Život",
+			"featured": false,
+			"special": false
+		  }
+		]
+	  }
+	],
+	"pageable": {
+	  "sort": {
+		"sorted": true,
+		"unsorted": false,
+		"empty": false
+	  },
+	  "offset": 0,
+	  "pageNumber": 0,
+	  "pageSize": 5,
+	  "paged": true,
+	  "unpaged": false
+	},
+	"totalElements": 3,
+	"totalPages": 1,
+	"last": true,
+	"size": 5,
+	"number": 0,
+	"sort": {
+	  "sorted": true,
+	  "unsorted": false,
+	  "empty": false
+	},
+	"numberOfElements": 3,
+	"first": true,
+	"empty": false
+  }

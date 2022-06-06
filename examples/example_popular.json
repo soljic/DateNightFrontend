@@ -1,0 +1,996 @@
+{
+	"content": [
+	  {
+		"id": 13346,
+		"name": "Elizabeth",
+		"surname": "Arden",
+		"birth": "1878-12-31",
+		"death": "1966-10-18",
+		"location": {
+		  "id": 13349,
+		  "latitude": 46.55694748820923,
+		  "longitude": 15.653926022350786,
+		  "graveyard": {
+			"id": 40,
+			"name": "Maribor-Podim",
+			"latitude": 46.556744898419154,
+			"longitude": 15.652645443539024,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 386,
+				"latitude": 46.55632,
+				"longitude": 15.65211,
+				"index": 1
+			  },
+			  {
+				"id": 387,
+				"latitude": 46.55624,
+				"longitude": 15.65335,
+				"index": 2
+			  },
+			  {
+				"id": 388,
+				"latitude": 46.55643,
+				"longitude": 15.65339,
+				"index": 3
+			  },
+			  {
+				"id": 389,
+				"latitude": 46.55642,
+				"longitude": 15.65402,
+				"index": 4
+			  },
+			  {
+				"id": 390,
+				"latitude": 46.55702,
+				"longitude": 15.65403,
+				"index": 5
+			  },
+			  {
+				"id": 391,
+				"latitude": 46.55709,
+				"longitude": 15.65219,
+				"index": 6
+			  },
+			  {
+				"id": 392,
+				"latitude": 46.55632,
+				"longitude": 15.65211,
+				"index": 7
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "How did Florence Nightingale become Elizabeth Arden?",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/465/spiritus",
+			"height": 580,
+			"width": 380
+		  },
+		  {
+			"url": "/images/467/spiritus",
+			"height": 425,
+			"width": 680
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50423,
+		"name": "Leander",
+		"surname": "Brozović",
+		"birth": "1897-10-02",
+		"death": "1962-08-31",
+		"location": {
+		  "id": 50426,
+		  "latitude": 46.17076,
+		  "longitude": 16.815322,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Povjesničar vrijedan spomena",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/514/spiritus",
+			"height": 604,
+			"width": 469
+		  },
+		  {
+			"url": "/images/515/spiritus",
+			"height": 810,
+			"width": 1080
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 33506,
+		"name": "MAGDALENA",
+		"surname": "LITVAN",
+		"birth": null,
+		"death": null,
+		"location": {
+		  "id": 33509,
+		  "latitude": 46.170878,
+		  "longitude": 16.815736,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "",
+		"users": [],
+		"userResponses": [],
+		"images": [],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50419,
+		"name": "Vinko",
+		"surname": "Vošicki",
+		"birth": "1885-02-24",
+		"death": "1957-10-28",
+		"location": {
+		  "id": 50422,
+		  "latitude": 46.171059,
+		  "longitude": 16.814836,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Ideali koji ne posustaju.",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/506/spiritus",
+			"height": 400,
+			"width": 600
+		  },
+		  {
+			"url": "/images/507/spiritus",
+			"height": 1080,
+			"width": 764
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50433,
+		"name": "Tomo",
+		"surname": "Šestak",
+		"birth": "1852-12-16",
+		"death": "1921-05-16",
+		"location": {
+		  "id": 50436,
+		  "latitude": 46.170288,
+		  "longitude": 16.815371,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Osnivanje prvog limenog orkestra",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/532/spiritus",
+			"height": 420,
+			"width": 272
+		  },
+		  {
+			"url": "/images/533/spiritus",
+			"height": 176,
+			"width": 286
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50430,
+		"name": "Fedor",
+		"surname": "Malančec",
+		"birth": "1902-02-12",
+		"death": "1985-08-09",
+		"location": {
+		  "id": 50433,
+		  "latitude": 46.170361,
+		  "longitude": 16.814816,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Od slikanja do glazbe",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/526/spiritus",
+			"height": 690,
+			"width": 919
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 32091,
+		"name": "LUKA",
+		"surname": "PERVAN",
+		"birth": null,
+		"death": null,
+		"location": {
+		  "id": 32094,
+		  "latitude": 46.170262,
+		  "longitude": 16.815107,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "",
+		"users": [],
+		"userResponses": [],
+		"images": [],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50418,
+		"name": "Zlata",
+		"surname": "Bartl",
+		"birth": "1920-02-20",
+		"death": "2008-07-28",
+		"location": {
+		  "id": 50421,
+		  "latitude": 46.17063,
+		  "longitude": 16.815218,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Kraj 1950-ih godina obilježio našu današnjicu",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/504/spiritus",
+			"height": 500,
+			"width": 426
+		  },
+		  {
+			"url": "/images/505/spiritus",
+			"height": 500,
+			"width": 348
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50420,
+		"name": "Velimir",
+		"surname": "Chytil",
+		"birth": "1925-07-21",
+		"death": "2009-04-09",
+		"location": {
+		  "id": 50423,
+		  "latitude": 46.171036,
+		  "longitude": 16.815803,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Ugledni hrvatski lutkarski umjetnik",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/508/spiritus",
+			"height": 275,
+			"width": 214
+		  },
+		  {
+			"url": "/images/509/spiritus",
+			"height": 216,
+			"width": 148
+		  }
+		],
+		"status": "APPROVED"
+	  },
+	  {
+		"id": 50421,
+		"name": "Pavao Vuk",
+		"surname": "Pavlović",
+		"birth": "1894-02-09",
+		"death": "1976-11-13",
+		"location": {
+		  "id": 50424,
+		  "latitude": 46.171578028043086,
+		  "longitude": 16.813865147056134,
+		  "graveyard": {
+			"id": 8,
+			"name": "Pri Sv. Duhu Koprivnica",
+			"latitude": 46.17158,
+			"longitude": 16.8146,
+			"image": {
+			  "url": null,
+			  "height": 0,
+			  "width": 0
+			},
+			"vertices": [
+			  {
+				"id": 1,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 1
+			  },
+			  {
+				"id": 2,
+				"latitude": 46.17155,
+				"longitude": 16.81211,
+				"index": 2
+			  },
+			  {
+				"id": 3,
+				"latitude": 46.16943,
+				"longitude": 16.81508,
+				"index": 3
+			  },
+			  {
+				"id": 4,
+				"latitude": 46.17133,
+				"longitude": 16.81694,
+				"index": 4
+			  },
+			  {
+				"id": 5,
+				"latitude": 46.17227,
+				"longitude": 16.81706,
+				"index": 5
+			  },
+			  {
+				"id": 6,
+				"latitude": 46.17273,
+				"longitude": 16.81625,
+				"index": 6
+			  },
+			  {
+				"id": 7,
+				"latitude": 46.17348,
+				"longitude": 16.81641,
+				"index": 7
+			  },
+			  {
+				"id": 8,
+				"latitude": 46.17374,
+				"longitude": 16.81431,
+				"index": 8
+			  }
+			],
+			"isMemoryWalk": true,
+			"numberOfSpiritus": null,
+			"numberOfFeaturedSpiritus": null
+		  }
+		},
+		"description": "Filozofska i pedagoška aktivnost",
+		"users": [
+		  10
+		],
+		"userResponses": [
+		  {
+			"id": 10,
+			"name": "Dino",
+			"surname": "Spiritus",
+			"email": "dino@spiritus.app",
+			"code": "42b5ff3e-8cc8-4123-b02f-6ffd2a245166"
+		  }
+		],
+		"images": [
+		  {
+			"url": "/images/510/spiritus",
+			"height": 326,
+			"width": 652
+		  },
+		  {
+			"url": "/images/511/spiritus",
+			"height": 418,
+			"width": 300
+		  }
+		],
+		"status": "APPROVED"
+	  }
+	],
+	"pageable": {
+	  "sort": {
+		"sorted": false,
+		"unsorted": true,
+		"empty": true
+	  },
+	  "offset": 0,
+	  "pageNumber": 0,
+	  "pageSize": 10,
+	  "paged": true,
+	  "unpaged": false
+	},
+	"totalElements": 47602,
+	"totalPages": 4761,
+	"last": false,
+	"size": 10,
+	"number": 0,
+	"sort": {
+	  "sorted": false,
+	  "unsorted": true,
+	  "empty": true
+	},
+	"numberOfElements": 10,
+	"first": true,
+	"empty": false
+  }
