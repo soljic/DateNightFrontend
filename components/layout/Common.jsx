@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export function NavItem({ text }) {
+export function NavItem({ text, link }) {
   return (
     <div className="px-3 md:mx-1 py-2 font-medium hover:bg-sp-medium hover:rounded-full">
       <Link href="/">

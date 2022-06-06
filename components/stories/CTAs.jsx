@@ -10,6 +10,25 @@ export function CreateSpiritusCTA() {
   return (
     <div className="container mx-auto">
       <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg bg-opacity-80">
+        <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
+          <h2 className="text-5xl font-extrabold text-sp-white mb-4">
+            Keep memories of your<br></br> loved ones, forever
+          </h2>
+          <CTACreateButton />
+        </div>
+      </div>
+      <div className="flex flex-col mx-auto items-center">
+        <CTADownloadLinks />
+        <CTAPartners />
+      </div>
+    </div>
+  );
+}
+
+export function CreateSpiritusCTABgImage() {
+  return (
+    <div className="container mx-auto">
+      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg bg-opacity-80">
         <div className="relative overflow-hidden text-center mx-auto">
           <Image
             src={"/images/banner.png"}
