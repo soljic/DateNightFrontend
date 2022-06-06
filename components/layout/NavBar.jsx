@@ -43,7 +43,7 @@ export function Navbar() {
         <div className="inline-flex items-center gap-3">
           <SearchIcon className="h-6 w-6 text-sp-white" />
           <Link href={session?.name ? "/account/settings" : "/auth/login"}>
-            <a className="bg-sp-medlight border border-sp-medium hover:bg-sp-medium inline-flex justify-center rounded-full py-2 px-6 font-semibold focus:outline-none">
+            <a className="bg-sp-medlight border border-sp-medium hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-full py-2 px-6 font-semibold">
               {session?.user?.name ? session.user.name : "Log in"}
             </a>
           </Link>

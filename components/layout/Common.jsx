@@ -3,7 +3,7 @@ import Link from "next/link";
 export function NavItem({ text, link, textsize }) {
   const size = textsize || "base"
   return (
-    <div className="px-3 md:mx-1 py-2 font-medium hover:bg-sp-medium hover:rounded-full">
+    <div className="px-3 md:mx-1 py-2 font-medium hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown focus:outline-none hover:rounded-full">
       <Link href={link || "/"}>
         <a className={`text-${size}`}>{text}</a>
       </Link>

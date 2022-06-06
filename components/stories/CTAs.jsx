@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export function CreateSpiritusCTA() {
   return (
-    <div className="container mx-auto">
+    <>
       <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg bg-opacity-80">
         <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
           <h2 className="text-5xl font-extrabold text-sp-white mb-4">
@@ -21,13 +21,13 @@ export function CreateSpiritusCTA() {
         <CTADownloadLinks />
         <CTAPartners />
       </div>
-    </div>
+    </>
   );
 }
 
 export function CreateSpiritusCTABgImage() {
   return (
-    <div className="container mx-auto">
+    <>
       <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg bg-opacity-80">
         <div className="relative overflow-hidden text-center mx-auto">
           <Image
@@ -50,30 +50,28 @@ export function CreateSpiritusCTABgImage() {
         <CTADownloadLinks />
         <CTAPartners />
       </div>
-    </div>
+    </>
   );
 }
 
 export function SearchSpiritusCTA() {
   return (
-    <div className="container mx-auto mt-4">
-      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg pt-4 pb-6">
-        <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
-          <Image
-            src="/images/circle_images_sm.png"
-            alt="Featured Stories Images"
-            width={170}
-            height={70}
-          />
-          <h2 className="text-4xl font-extrabold text-sp-white mb-4">
-            Find your loved ones!
-          </h2>
-          <p className="mx-auto w-2/5 text-center text-sp-white opacity-60 mb-6">
-            Over 15 000 Spiritus loved ones from many of biggest Croatian
-            graveyards and institutions.
-          </p>
-          <CTASearchButton />
-        </div>
+    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg pt-4 pb-6">
+      <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
+        <Image
+          src="/images/circle_images_sm.png"
+          alt="Featured Stories Images"
+          width={170}
+          height={70}
+        />
+        <h2 className="text-4xl font-extrabold text-sp-white mb-4">
+          Find your loved ones!
+        </h2>
+        <p className="mx-auto w-2/5 text-center text-sp-white opacity-60 mb-6">
+          Over 15 000 Spiritus loved ones from many of biggest Croatian
+          graveyards and institutions.
+        </p>
+        <CTASearchButton />
       </div>
     </div>
   );

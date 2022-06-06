@@ -43,13 +43,15 @@ export default function StoryPage({
                 first.paragraphs.map((p) => {
                   if (p.imageUrl) {
                     return (
-                      <Image
-                        src={p.imageUrl}
-                        alt={`Paragraph image ${p.id}`}
-                        width={400}
-                        height={400}
-                        layout="responsive"
-                      />
+                      <div className="object-fill rounded-lg overflow-hidden px-10">
+                        <Image
+                          src={p.imageUrl}
+                          alt={`Paragraph image ${p.id}`}
+                          width={400}
+                          height={400}
+                          layout="responsive"
+                        />
+                      </div>
                     );
                   }
                   // check if text is empty -> don't render if it is
@@ -66,7 +68,7 @@ export default function StoryPage({
               <Tribute />
               <HorizontalDivider />
               <SpiritusOverview {...spiritus} />
-              <SpiritusCarousel images={spiritus.images}/>
+              <SpiritusCarousel images={spiritus.images} />
               <MoreStories stories={stories} spiritus={spiritus} />
 
               <CTAAddMemory />

@@ -28,15 +28,16 @@ export function Tags({ tags }) {
 
 export function Tribute() {
   return (
-    <div className="container w-full mx-auto items-center px-14 py-8">
-      <div className="flex flex-col w-3/4 mx-auto gap-3">
+    <div className="container w-full mx-auto items-center px-14 py-8 mt-14">
+      <div className="flex flex-col mx-auto gap-3">
         <label htmlFor="tribute" className="hidden">
           Your message
         </label>
         <textarea
           id="tribute"
+          type="text"
           rows="1"
-          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-dark rounded-full border border-sp-lighter placeholder-sp-lighter"
+          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-dark rounded-full border border-sp-lighter placeholder-sp-lighter resize-y"
           placeholder="Write tribute"
         ></textarea>
 
@@ -168,12 +169,7 @@ export function MoreStories({ stories, spiritus }) {
         </div>
         <div className="-m-4 flex flex-wrap">
           {stories.map((s) => {
-            return (
-              <StoryHook
-                {...s}
-                spiritus={spiritus}
-              />
-            );
+            return <StoryHook {...s} spiritus={spiritus} />;
           })}
         </div>
       </div>
@@ -181,7 +177,14 @@ export function MoreStories({ stories, spiritus }) {
   );
 }
 
-export function StoryHook({ id, title, subtitle, description, date, spiritus }) {
+export function StoryHook({
+  id,
+  title,
+  subtitle,
+  description,
+  date,
+  spiritus,
+}) {
   return (
     <div className="p-4 md:w-1/2">
       <div className="flex h-full flex-col rounded-lg bg-gradient-to-r from-sp-dark-brown to-sp-brown p-8">
@@ -194,7 +197,9 @@ export function StoryHook({ id, title, subtitle, description, date, spiritus }) 
           </svg>
         </div>
         {/*  */}
-        <Link href={`/stories/spiritus/${spiritus.id}?firstname=${spiritus.name}&lastname=${spiritus.surname}&story=${id}`}>
+        <Link
+          href={`/stories/spiritus/${spiritus.id}?firstname=${spiritus.name}&lastname=${spiritus.surname}&story=${id}`}
+        >
           <a className="title-font text-xl font-bold py-1">{title}</a>
         </Link>
         <div className="flex-grow">
@@ -210,26 +215,24 @@ export function StoryHook({ id, title, subtitle, description, date, spiritus }) 
 
 export function CTAAddMemory() {
   return (
-    <div className="container">
-      <div className="flex flex-row justify-between rounded-2xl border-3 border-sp-medium overflow-hidden">
-        <div className="flex h-full flex-col py-3 pl-4">
-          <h2 className="title-font py-1 text-xl font-medium text-sp-white">
-            Have a memory of Pavao?
-          </h2>
-          <p className="text-base ">Stories, photos, suggestions...</p>
-          <p className="mt-6 inline-flex items-center font-bold text-sp-fawn">
-            Send a memory
-            <ChevronRightIcon className="w-4 h-4 text-sp-fawn" />
-          </p>
-        </div>
-        <Image
-          src={"/images/memory_cta_bg.png"}
-          alt={"Add Memories Img"}
-          width={130}
-          height={130}
-          layout="fixed"
-        />
+    <div className="flex flex-row justify-between rounded-2xl border-3 border-sp-medium overflow-hidden">
+      <div className="flex h-full flex-col py-3 pl-4">
+        <h2 className="title-font py-1 text-xl font-medium text-sp-white">
+          Have a memory of Pavao?
+        </h2>
+        <p className="text-base ">Stories, photos, suggestions...</p>
+        <p className="mt-6 inline-flex items-center font-bold text-sp-fawn">
+          Send a memory
+          <ChevronRightIcon className="w-4 h-4 text-sp-fawn" />
+        </p>
       </div>
+      <Image
+        src={"/images/memory_cta_bg.png"}
+        alt={"Add Memories Img"}
+        width={130}
+        height={130}
+        layout="fixed"
+      />
     </div>
   );
 }
