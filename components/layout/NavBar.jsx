@@ -34,9 +34,9 @@ export function Navbar() {
           </Link>
           <MobileNav />
           <nav className="inline-flex ml-3 sm:invisible md:visible invisible">
-            <NavItem text={"Stories"} />
-            <NavItem text={"Mobile app"} />
-            <NavItem text={"About"} />
+            <NavItem text={"Stories"} link={"/"} />
+            <NavItem text={"Mobile app"} link={"/mobile-app"} />
+            <NavItem text={"About"} link={"/about"} />
           </nav>
         </div>
 

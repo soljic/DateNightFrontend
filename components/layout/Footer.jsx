@@ -4,24 +4,19 @@ import { Logo, NavItem } from "./Common";
 export function Footer() {
   return (
     <div className="container mx-auto text-sp-white mt-12">
-      <div className="flex flex-col xl:w-4/5 lg:w-full mx-auto text-sp-white">
-        <Logo />
-        <div className="flex flex-row justify-between items-center -ml-3 pt-2">
-          <div className="inline-flex">
-            <NavItem text={"Stories"} />
-            <NavItem text={"Mobile app"} />
-            <NavItem text={"About"} />
-            <NavItem text={"Contact"} />
-            <NavItem text={"Privacy"} />
-          </div>
+      <div className="flex flex-row xl:w-4/5 lg:w-full mx-auto text-sp-white items-center justify-around">
+        <div className="inline-flex">
+          <NavItem text={"About"} textsize={"sm"} />
+          <NavItem text={"Stories"} textsize={"sm"} />
+          <NavItem text={"Mobile app"} textsize={"sm"} />
+          <NavItem text={"Terms of Service"} textsize={"sm"} />
+          <NavItem text={"Privacy"} textsize={"sm"} />
+          <NavItem text={"Contact"} textsize={"sm"} />
         </div>
       </div>
-      <hr className="my-2 pb-2 mx-auto xl:w-4/5 lg:w-full"></hr>
+      <hr className="my-2 pb-4 mx-auto xl:w-4/5 lg:w-full"></hr>
       <div className="container xl:w-4/5 lg:w-full mx-auto justify-between text-sp-white pb-4">
-        <div className="flex flex-row justify-between">
-          <div className="text-sm text-sp-lighter">
-            ©{new Date().getFullYear()} Spiritus Memoria. All rights reserved.
-          </div>
+        <div className="flex flex-col items-center gap-4">
           <div className="flex flex-row gap-2">
             <a
               href="https://www.facebook.com/spiritusmemoria"
@@ -60,15 +55,9 @@ export function Footer() {
               />
             </a>
           </div>
-        </div>
-        <div className="text-sm text-sp-lighter -mt-2">
-          <p>{"Proud partners with:"}</p>
-          <Image
-            src="/icons/partners.png"
-            height={50}
-            width={400}
-            alt="partners"
-          />
+          <div className="text-sm text-sp-lighter">
+            ©{new Date().getFullYear()} Spiritus Memoria. All rights reserved.
+          </div>
         </div>
       </div>
     </div>
