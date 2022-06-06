@@ -26,7 +26,7 @@ export default function StoryPage({
 }) {
   return (
     <Layout>
-      <section className="container mx-auto px-5">
+      <section className="container mx-auto px-5" key="story">
         <div className="flex flex-col items-center py-8">
           <div className="flex flex-col w-full mb-12 text-left">
             <div className="w-full mx-auto lg:w-1/2 text-sp-white">
@@ -40,10 +40,13 @@ export default function StoryPage({
                 {first.description}
               </h2>
               {first.paragraphs &&
-                first.paragraphs.map((p) => {
+                first.paragraphs.map((p, i) => {
                   if (p.imageUrl) {
                     return (
-                      <div className="object-fill rounded-lg overflow-hidden px-10">
+                      <div
+                        className="object-fill rounded-lg overflow-hidden px-10"
+                        key={`para-${i}`}
+                      >
                         <Image
                           src={p.imageUrl}
                           alt={`Paragraph image ${p.id}`}
@@ -56,7 +59,10 @@ export default function StoryPage({
                   }
                   // check if text is empty -> don't render if it is
                   return (
-                    <p className="mx-auto leading-relaxed pt-4 px-14 pb-10">
+                    <p
+                      className="mx-auto leading-relaxed pt-4 px-14 pb-10"
+                      key={`para-${i}`}
+                    >
                       {p.text}
                     </p>
                   );
@@ -68,9 +74,12 @@ export default function StoryPage({
               <Tribute />
               <HorizontalDivider />
               <SpiritusOverview {...spiritus} />
+            </div>
+            <div className="w-full mx-autotext-sp-white mt-4">
               <SpiritusCarousel images={spiritus.images} />
+            </div>
+            <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
               <MoreStories stories={stories} spiritus={spiritus} />
-
               <CTAAddMemory />
             </div>
           </div>
@@ -125,23 +134,13 @@ export async function getServerSideProps(context) {
     });
   }
 
+  let spiritus = {};
   if (firstname && lastname) {
     // force getting single spiritus using limit=1 and offset=0
     const resSpiritus = await SearchSpiritus(`${firstname} ${lastname}`, 0, 1);
     const content = resSpiritus.data?.content;
     if (content && content.length) {
-      content[0].images.forEach((img) => {
-        img.url = img.url ? ImagePath(img.url) : null;
-      });
-      return {
-        props: {
-          first,
-          stories,
-          hasMore: !resStories.data.last,
-          total: resStories.data.numberOfElements,
-          spiritus: content.length ? content[0] : {},
-        },
-      };
+      spiritus = content[0];
     }
   }
 
@@ -149,9 +148,9 @@ export async function getServerSideProps(context) {
     props: {
       first,
       stories,
+      spiritus,
       hasMore: !resStories.data.last,
       total: resStories.data.numberOfElements,
-      spiritus: {},
     },
   };
 }

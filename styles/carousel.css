@@ -48,12 +48,11 @@
 
 .slider .swiper-slide-active .slider-image-wrap {
   opacity: 1;
-  transform: rotate(-4deg);
   z-index: 4;
 }
 
 .slider-image-wrap {
-  border-radius: 1.7rem;
-  border: 15px solid rgba(227, 170, 109, 0.1);
+  border-right: 1rem  solid rgba(23, 20, 17, 0.9);
+  border-left: 1rem solid rgba(23, 20, 17, 0.9);
   z-index: 1;
 }

@@ -153,7 +153,7 @@ export function SpiritusOverview({ name, surname, birth, death, description }) {
 
 export function MoreStories({ stories, spiritus }) {
   return (
-    <section>
+    <section key={"stories-showcase"}>
       <div className="container mx-auto px-5 pt-20 pb-10">
         <div className="mb-4 flex w-full flex-row justify-between items-center">
           <h1 className="title-font text-2xl font-medium sm:text-3xl">
@@ -169,7 +169,7 @@ export function MoreStories({ stories, spiritus }) {
         </div>
         <div className="-m-4 flex flex-wrap">
           {stories.map((s) => {
-            return <StoryHook {...s} spiritus={spiritus} />;
+            return <StoryHook {...s} spiritus={spiritus} key={s.title}/>;
           })}
         </div>
       </div>

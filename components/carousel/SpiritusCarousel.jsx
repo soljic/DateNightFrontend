@@ -17,6 +17,16 @@ import "swiper/css/navigation";
 const DataSwipper = () => {
   return [
     {
+      id: 68419,
+      born: 1926,
+      deceased: 1998,
+      name: "Ronald Richards",
+      city: "Chigago",
+      country: "USA",
+      text1: "He could have left me",
+      url: "/slider/slider-1.jpeg",
+    },
+    {
       id: 98769,
       born: 1949,
       deceased: 2013,
@@ -24,7 +34,7 @@ const DataSwipper = () => {
       city: "Zagreb",
       country: "Croatia",
       text1: "How she and her husband saved me",
-      image: "/slider/slider-3.jpeg",
+      url: "/slider/slider-3.jpeg",
     },
     {
       id: 88764,
@@ -34,17 +44,7 @@ const DataSwipper = () => {
       city: "Županja",
       country: "Croatia",
       text1: "He lived his life by his own rules",
-      image: "/slider/slider-2.jpeg",
-    },
-    {
-      id: 68419,
-      born: 1926,
-      deceased: 1998,
-      name: "Ronald Richards",
-      city: "Chigago",
-      country: "USA",
-      text1: "He could have left me",
-      image: "/slider/slider-1.jpeg",
+      url: "/slider/slider-2.jpeg",
     },
   ];
 };
@@ -54,8 +54,8 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 export default function SpiritusCarousel({ images }) {
   const [index, setIndex] = useState(0);
   return (
-    images.legth && (
-      <div className="slider">
+    images.length && (
+      <div className="container slider overflow-visible ">
         <Swiper
           spaceBetween={120}
           // autoplay={{
@@ -72,7 +72,7 @@ export default function SpiritusCarousel({ images }) {
           }}
           centeredSlides={true}
         >
-          {images.map((img) => {
+          {DataSwipper().map((img) => {
             return (
               <SwiperSlide>
                 <div className="slider-image-wrap my-4">

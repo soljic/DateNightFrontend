@@ -54,17 +54,30 @@ export async function SearchSpiritus(fullName, offset, limit) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
+  let res;
   if (s.length > 1) {
-    return await axios.get(
-      encodeURI(`${API_URL}/spiritus/search?name=${s[0]}&lastname=${s[1]}&page=${o}&size=${l}&sort=id`)
+    res = await axios.get(
+      encodeURI(
+        `${API_URL}/spiritus/search?name=${s[0]}&lastname=${s[1]}&page=${o}&size=${l}&sort=id`
+      )
+    );
+  } else {
+    res = await axios.get(
+      encodeURI(
+        `${API_URL}/spiritus/search?name=${s[0]}&page=${o}&size=${l}&sort=id`
+      )
     );
   }
-  return await axios.get(
-    encodeURI(`${API_URL}/spiritus/search?name=${s[0]}&page=${o}&size=${l}&sort=id`)
-  );
+
+  res.data.content.forEach((spiritus) => {
+    spiritus.images.forEach((img) => {
+      img.url = img.url ? ImagePath(img.url) : null;
+    });
+  });
+
+  return res;
 }
 
 export async function GetStory(id) {
   return await axios.get(`${API_URL}/stories/${id}`);
 }
-
