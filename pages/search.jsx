@@ -2,51 +2,78 @@ import { Navbar } from "../components/layout/NavBar";
 import { Footer } from "../components/layout/Footer";
 
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ProxySearchSpiritus, SearchSpiritus } from "../service/http/spiritus";
 
 export default function Search() {
+  const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
-  const [notFound, setNotFound] = useState(true);
+  const [results, setResults] = useState();
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    const debounce = setTimeout(async () => {
+      if (!searchTerm) {
+        setSearching(false);
+        setNotFound(false);
+        setResults([]);
+        return;
+      }
+      setSearching(true);
+      const res = await ProxySearchSpiritus(searchTerm);
+      if (!res.data.content.length) {
+        setSearching(false);
+        setNotFound(true);
+        setResults([]);
+      } else {
+        setSearching(false);
+        setNotFound(false);
+        setResults(res.data.content);
+      }
+    }, 600);
+
+    return () => clearTimeout(debounce);
+  }, [searchTerm]);
 
   return (
     <div className="common-bg p-2 min-w-full">
       <Navbar />
       <div className="h-screen container mx-auto mt-20">
-        <SearchBox />
-        <SearchContentPlacaholder />
+        <div className="mx-auto flex lg:w-1/3 md:w-full sm:w-full items-center rounded-xl p-2 bg-sp-medium">
+          <button>
+            <span className="flex w-auto items-center justify-end px-3 py-2 text-sp-lighter">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 -scale-x-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </span>
+          </button>
+          <input
+            id="search-spiritus"
+            onChange={(e) => {
+              e.preventDefault();
+              setSearchTerm(e.target.value);
+            }}
+            className="mr-2 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-lighter caret-sp-fawn caret"
+            type="text"
+            placeholder="Search Spiritus"
+          />
+        </div>
+        {(results.length && !searching) && <SearchResults results={results} />}
+        {searching && <SearchContentPlacaholder />}
         {notFound && <NotFound />}
       </div>
       <Footer />
-    </div>
-  );
-}
-
-function SearchBox() {
-  return (
-    <div className="mx-auto flex lg:w-1/3 md:w-full sm:w-full items-center rounded-xl p-2 bg-sp-medium">
-      <button>
-        <span className="flex w-auto items-center justify-end px-3 py-2 text-sp-lighter">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 -scale-x-100"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </span>
-      </button>
-      <input
-        className="mr-2 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-lighter caret-sp-fawn caret"
-        type="text"
-        placeholder="Search Spiritus"
-      />
     </div>
   );
 }
@@ -85,11 +112,11 @@ function SearchContentPlacaholder() {
   const ph = [];
 
   for (let i = 0; i < count; i++) {
-    ph.push(<Placeholder />);
+    ph.push(<Placeholder key={`placeholder-render-${i}`} />);
   }
   return (
     <div className="container flex flex-col mx-auto lg:w-1/3 md:w-full sm:w-full rounded-xl p-2">
-      <p className="p-2 text-sp-lighter text-center">{count} results</p>
+      <p className="p-2 text-sp-lighter text-center">Searching...</p>
       <div className="flex w-full flex-col items-start">{ph}</div>
     </div>
   );
@@ -115,3 +142,72 @@ function Placeholder() {
     </div>
   );
 }
+
+function SearchResults({ results }) {
+  return (
+    <div className="container flex flex-col mx-auto lg:w-1/3 md:w-full sm:w-full rounded-xl p-2">
+      <p className="p-2 text-sp-lighter text-center">
+        {results.length} results
+      </p>
+      <div className="flex flex-col items-start">
+        {results.map((res) => {
+          return <Row key={`${res.name}-${res.surname}-${res.id}`} {...res} />;
+        })}
+      </div>
+    </div>
+  );
+}
+
+function Row({ name, surname, images, birth, death }) {
+  return (
+    <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg">
+      <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-medium"></div>
+      <div className="flex w-full flex-col justify-between py-2 px-2">
+        <p className="text-sp-white">{`${name} ${surname}`}</p>
+        <p className="text-sp-white text-opacity-40">
+          {birth ? new Date(birth).getFullYear() : "?"}
+          {death && ` — ${new Date(death).getFullYear()}`}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+const mock = [
+  {
+    id: 68419,
+    birth: 1926,
+    death: 1998,
+    name: "Ronald",
+    surname: "Richards",
+    city: "Chigago",
+    country: "USA",
+    text1: "He could have left me",
+    url: "/slider/slider-1.jpeg",
+    images: [],
+  },
+  {
+    id: 98769,
+    birth: 1949,
+    death: 2013,
+    name: "Ankica",
+    surname: "Modrić",
+    city: "Zagreb",
+    country: "Croatia",
+    text1: "How she and her husband saved me",
+    url: "/slider/slider-3.jpeg",
+    images: [],
+  },
+  {
+    id: 88764,
+    birth: 1938,
+    death: 2008,
+    name: "Andrija",
+    surname: "Čordaš",
+    city: "Županja",
+    country: "Croatia",
+    text1: "He lived his life by his own rules",
+    url: "/slider/slider-2.jpeg",
+    images: [],
+  },
+];

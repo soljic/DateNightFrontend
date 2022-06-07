@@ -8,4 +8,6 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-};
+  env: {
+    NEXT_API_URL: process.env.NEXT_API_URL,
+  },};

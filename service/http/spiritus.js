@@ -78,6 +78,12 @@ export async function SearchSpiritus(fullName, offset, limit) {
   return res;
 }
 
+// Call nextjs same origin /api/search because of CORS errors.
+// It's easier to proxy the request for now since we don't control the API.
+export async function ProxySearchSpiritus(searchTerm) {
+  return axios.get(`/api/search?q=${searchTerm}`);
+}
+
 export async function GetStory(id) {
   return await axios.get(`${API_URL}/stories/${id}`);
 }
