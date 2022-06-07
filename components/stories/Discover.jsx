@@ -45,6 +45,7 @@ export function Discover({ popular }) {
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {popular.map((s) => (
             <PopularSpiritus
+              key={`${s.name} ${s.surname}`}
               id={s.id}
               name={s.name}
               surname={s.surname}
@@ -66,9 +67,9 @@ function PopularSpiritus({ id, name, surname, description, images }) {
         {image ? (
           <Image
             src={image.url}
-            className="w-full h-full object-center object-cover lg:w-full lg:h-full"
+            className="w-full h-full"
             width={280}
-            height={320}
+            height={350}
             layout="responsive"
           />
         ) : (

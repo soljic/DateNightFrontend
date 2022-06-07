@@ -1,10 +1,33 @@
 import Link from "next/link";
-import { getSession } from "next-auth/react";
+import Router from "next/router";
+
+import { getSession, signIn } from "next-auth/react";
 
 import { Logo } from "../../components/layout/Common";
-
+import { useState } from "react";
 
 export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
+
+  const submit = async () => {
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        username: username,
+        password: password,
+      });
+      if (!res.error) {
+        return Router.push("/");
+      }
+
+      setErr("Username or password are not correct.");
+      setPassword("");
+    } catch (error) {
+      setErr("Unable to log in. Please try again later or contact support.");
+    }
+  };
   return (
     <section className="bg-sp-dark">
       <div className="container mx-auto h-screen">
@@ -23,22 +46,42 @@ export default function Login() {
                     <p className="mb-4">Login to your account</p>
                     <div className="mb-4">
                       <input
+                        value={username}
+                        onChange={(e) => {
+                          setErr("");
+                          setUsername(e.target.value);
+                        }}
                         type="text"
                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-fawn focus:outline-none"
-                        id="exampleFormControlInput1"
+                        id="username"
                         placeholder="Username"
                       />
                     </div>
                     <div className="mb-4">
                       <input
+                        value={password}
+                        onChange={(e) => {
+                          setErr("");
+                          setPassword(e.target.value);
+                        }}
                         type="password"
                         className="form-control block w-full px-3 py-1.5 text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-fawn focus:outline-none"
-                        id="exampleFormControlInput1"
+                        id="password"
                         placeholder="Password"
                       />
                     </div>
                     <div className="text-center pt-1 mb-8 pb-1">
-                      <ButtonLogin />
+                      {/* login button */}
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          submit();
+                        }}
+                        className="inline-block px-6 py-2.5 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn text-sp-dark font-semibold text-xs leading-tight uppercase rounded focus:outline-none focus:ring-0 w-full mb-3"
+                      >
+                        Log in
+                      </button>
+                      {err && <p className="text-sm text-red-600">{err}</p>}
                       <a
                         className="text-sp-lighter hover:text-sp-fawn"
                         href="#!"
@@ -116,27 +159,21 @@ export default function Login() {
   );
 }
 
-function ButtonLogin() {
-  return (
-    <button className="inline-block px-6 py-2.5 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn text-sp-dark font-semibold text-xs leading-tight uppercase rounded focus:outline-none focus:ring-0 w-full mb-3">
-      Log in
-    </button>
-  );
-}
-
 export async function getServerSideProps(context) {
-  const session = await getSession(context)
+  const session = await getSession(context);
 
   if (session) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
-    }
+    };
   }
 
   return {
-    props: { session }
-  }
+    props: {
+      session,
+    },
+  };
 }

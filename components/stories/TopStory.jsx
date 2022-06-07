@@ -18,6 +18,7 @@ export function TopStory({ id, name, surname, images }) {
               width={500}
               height={500}
               layout="responsive"
+              priority // add priority since this is the first thing loaded in the UI
             />
           ) : (
             <ImagePlaceholder />
@@ -26,9 +27,11 @@ export function TopStory({ id, name, surname, images }) {
           <div className="absolute bottom-10 left-5 w-full p-4 text-white">
             <h2 className="uppercase font-semibold">Story of the week</h2>
             <h3 className="text-4xl xl:text-4xl md:text-2xl sm:text-xl font-semibold mb-2">
-            {`${name} ${surname}`}
+              {`${name} ${surname}`}
             </h3>
-            <Link href={`/stories/spiritus/${id}?firstname=${name}&lastname=${surname}`}>
+            <Link
+              href={`/stories/spiritus/${id}?firstname=${name}&lastname=${surname}`}
+            >
               <a className="inline-flex bg-sp-white text-sp-dark border border-sp-dark rounded-full px-5 py-3 items-center">
                 Read story
                 <ArrowNarrowRightIcon className="h-5 w-5 text-sp-dark" />
