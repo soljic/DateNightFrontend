@@ -8,7 +8,7 @@ import { ProxySearchSpiritus, SearchSpiritus } from "../service/http/spiritus";
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
-  const [results, setResults] = useState();
+  const [results, setResults] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export default function Search() {
         return;
       }
       setSearching(true);
+      setNotFound(false);
       const res = await ProxySearchSpiritus(searchTerm);
       if (!res.data.content.length) {
         setSearching(false);
@@ -69,16 +70,16 @@ export default function Search() {
             placeholder="Search Spiritus"
           />
         </div>
-        {(results.length && !searching) && <SearchResults results={results} />}
+        {results.length && !searching && <SearchResults results={results} />}
         {searching && <SearchContentPlacaholder />}
-        {notFound && <NotFound />}
+        {notFound && <NotFound searchTerm={searchTerm} />}
       </div>
       <Footer />
     </div>
   );
 }
 
-function NotFound() {
+function NotFound({ searchTerm }) {
   return (
     <div className="flex flex-col mx-auto text-sp-lighter items-center mt-10">
       <svg
@@ -93,8 +94,8 @@ function NotFound() {
         />
       </svg>
       <p className="text-center lg:w-1/3 md:w-1/2 sm:w-1/2 p-2 mb-4">
-        Sorry, we found no results for “ivanka rendulic”. Would you like to
-        create new Spiritus for him/her?
+        {`Sorry, we found no results for “${searchTerm}”. Would you like to
+        create new Spiritus for him/her?`}
       </p>
       <a
         href="/create"
@@ -163,7 +164,7 @@ function Row({ name, surname, images, birth, death }) {
     <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg">
       <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-medium"></div>
       <div className="flex w-full flex-col justify-between py-2 px-2">
-        <p className="text-sp-white">{`${name} ${surname}`}</p>
+        <p className="text-sp-white break-words pr-4">{`${name} ${surname}`}</p>
         <p className="text-sp-white text-opacity-40">
           {birth ? new Date(birth).getFullYear() : "?"}
           {death && ` — ${new Date(death).getFullYear()}`}
@@ -179,7 +180,8 @@ const mock = [
     birth: 1926,
     death: 1998,
     name: "Ronald",
-    surname: "Richards",
+    surname:
+      "Richardsssssssssssssssssssssssssssssssssssss",
     city: "Chigago",
     country: "USA",
     text1: "He could have left me",
