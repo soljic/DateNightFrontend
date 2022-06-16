@@ -127,17 +127,17 @@ function Placeholder() {
   return (
     <div className="flex w-3/4 p-2">
       <div
-        data-placeholder
-        className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-medium"
+        // data-placeholder
+        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-medium"
       ></div>
       <div className="flex w-full flex-col justify-between py-2">
         <div
-          data-placeholder
-          className="rounded-lg relative h-5 w-full overflow-hidden bg-sp-medium"
+          // data-placeholder
+          className="animate-pulse rounded-lg relative h-5 w-full overflow-hidden bg-sp-medium"
         ></div>
         <div
-          data-placeholder
-          className="rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-medium"
+          // data-placeholder
+          className="animate-pulse rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-medium"
         ></div>
       </div>
     </div>

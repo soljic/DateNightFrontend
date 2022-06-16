@@ -1,42 +1,211 @@
+import { PlusCircleIcon, ChevronLeftIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 import Layout from "../../components/layout/Layout";
 
 export default function CreateSpiritusPage() {
+  const numSteps = 5;
+  const [step, setStep] = useState(1);
+
+  const nextStep = () => {
+    if (step < numSteps) {
+      setStep(step + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
+
   return (
     <Layout>
       <div className="py-5 h-screen">
-        <div className="container mx-auto lg:px-12 lg:w-4/5">
-          <Steps />
-          <p className="mx-2 font-bold text-sp-white text-2xl lg:mx-14 mt-12">
-            Enter first and last name for Spiritus.
-          </p>
-          <div className="lg:mx-12 mt-4">
-            <div className="flex flex-col md:flex-row">
-              <div className="w-full flex-1 mx-2">
-                <div className="my-2 rounded">
-                  <input
-                    placeholder="Enter First Name"
-                    className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
-                  />{" "}
-                </div>
-              </div>
-              <div className="w-full flex-1 mx-2">
-                <div className="my-2 rounded">
-                  <input
-                    placeholder="Enter Last Name"
-                    className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
-                  />{" "}
-                </div>
-              </div>
-            </div>
+        <div className="flex flex-row justify-between mx-auto lg:w-4/5">
+          <button
+            onClick={() => prevStep()}
+            className="inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl"
+          >
+            <ChevronLeftIcon className="h-6 w-6" />
+            Back
+          </button>
+          <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
+            Step {`${step}/${numSteps}`}
           </div>
+        </div>
+        <div className="container mx-auto lg:px-12 lg:w-4/5">
+          {/* <Steps /> */}
+          <div id="stepper-form">
+            {step === 1 && <Step1 />}
+            {step === 2 && <Step2 name="Ralph" />}
+            {step === 3 && <Step3 name="Ralph" />}
+            {step === 4 && <Step4 name="Ralph" />}
+            {step === 5 && <Step5 name="Ralph" />}
+          </div>
+
           <div className="flex justify-center mt-8">
-            <button className="px-4 py-3 rounded-full w-64 font-bold bg-sp-fawn text-sp-dark">
-              Next
-            </button>
+            {step !== 5 ? (
+              <button
+                onClick={() => nextStep()}
+                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                onClick={() => nextStep()}
+                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+              >
+                Create
+              </button>
+            )}
           </div>
         </div>
       </div>
     </Layout>
+  );
+}
+
+function Step1() {
+  return (
+    <div className="mt-12 mx-2 lg:mx-12">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+        <AddSpiritusIcon fill />
+      </div>
+      <p className="font-bold text-sp-white text-2xl">
+        Enter first and last name for Spiritus.
+      </p>
+      <div className="mt-4">
+        <div className="flex flex-col md:flex-row gap-2">
+          <div className="w-full flex-1">
+            <div className="my-2 rounded">
+              <input
+                placeholder="Enter First Name"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+              />
+            </div>
+          </div>
+          <div className="w-full flex-1">
+            <div className="my-2 rounded">
+              <input
+                placeholder="Enter Last Name"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Step2({ name }) {
+  return (
+    <div className="mt-12 mx-2 lg:mx-12">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+        <AddRangeIcon fill />
+      </div>
+      <p className="font-bold text-sp-white text-2xl">
+        When was <span> {name} </span> born, and when did he/she died?
+      </p>
+      <div className="mt-4">
+        <div className="flex flex-col md:flex-row gap-2">
+          <div className="w-full flex-1">
+            <div className="my-2 rounded">
+              <input
+                placeholder="Birth date"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+              />
+            </div>
+          </div>
+          <div className="w-full flex-1">
+            <div className="my-2 rounded">
+              <input
+                placeholder="Date of passing"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Image uploader
+function Step3({ name }) {
+  return (
+    <div className="mt-12 mx-2 lg:mx-12">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+        <AddImageIcon fill />
+      </div>
+      <p className="font-bold text-sp-white text-2xl">
+        Does<span> {name} </span> have any images from his/her life? If yes,
+        please add them here.
+      </p>
+      <p className="text-sp-lighter text-sm mt-2">*Optional</p>
+      <button className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3">
+        <PlusCircleIcon className="h-6 w-6" />
+        <span className="font-semibold ml-1">Add Image</span>
+      </button>
+    </div>
+  );
+}
+
+function Step4({ name }) {
+  return (
+    <div className="mt-12 mx-2 lg:mx-12">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+        <AddCommentIcon fill />
+      </div>
+      <p className="font-bold text-sp-white text-2xl">
+        Does<span> {name} </span>have any sentence which he/she always said? If
+        yes, please add it here.
+      </p>
+      <div className="mt-4">
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full flex-1">
+            <div className="my-2 rounded">
+              <textarea
+                placeholder="Enter sentence"
+                rows="3"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Step5({ name }) {
+  return (
+    <div className="mt-12 mx-2 lg:mx-12">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+        <AddLocationIcon fill />
+      </div>
+      <p className="font-bold text-sp-white text-2xl">
+        <span> {name} </span>must associate you to a one place. Please select
+        that place.
+      </p>
+      <p className="text-sp-lighter text-sm">
+        It can be place of birth, death, or the place where he/she lived the
+        longest.
+      </p>
+      <div className="mt-4">
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full flex-1">
+            <div className="my-2 rounded">
+              <input
+                placeholder="Search place..."
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
