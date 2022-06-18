@@ -6,6 +6,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 @import "./contact.css";
-@import "./radial.css";
 @import "./carousel.css";
 @import "./shimmerEffect.css";
+@import "./datepicker.css";

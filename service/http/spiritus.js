@@ -13,6 +13,15 @@ export async function GetSpiritus(id, accessToken) {
   });
 }
 
+export async function CreateSpiritusFromObj(accessToken, obj) {
+  return await axios.post(`${API_URL}/spiritus/`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    data: obj,
+  });
+}
+
 export async function GetSpiritusStories(id, offset, limit) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;

@@ -1,162 +1,72 @@
-import { useState } from "react";
-
-import DatePicker from "react-datepicker";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination, Navigation } from "swiper/core";
-
-import { CalendarIcon, SearchIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon, ChevronLeftIcon } from "@heroicons/react/solid";
-
+import { useState } from "react";
 import Layout from "../../components/layout/Layout";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-SwiperCore.use([Pagination, Navigation]);
-
-function toRequest(birth, death, name, surname, description) {
-  return {
-    name,
-    surname,
-    birth,
-    death,
-    description,
-  };
-}
-
-// TODO: sve stuff to local storage
-// TODO: add image uploader
-// TODO: add date picker
-// TODO: refactor and clean up
 export default function CreateSpiritusPage() {
-  // stepper is 0 indexed!
-  const maxStepIdx = 4;
-  const [step, setStep] = useState(0);
+  const numSteps = 5;
+  const [step, setStep] = useState(1);
 
-  // form fields
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [birth, setBirth] = useState("");
-  const [death, setDeath] = useState("");
-  const [description, setDescription] = useState("");
-  
-  // TODO: talk to BE how to send this
-  // BE expects the following:
-  // ...
-  // "location": {
-  //   "longitude": 0,
-  //   "latitude": 0,
-  //   "graveyard": 0
-  // },
-  // ...
-  const [location, setLocation] = useState("");
+  const nextStep = () => {
+    if (step < numSteps) {
+      setStep(step + 1);
+    }
+  };
 
-  const steps = [
-    <Step1
-      name={name}
-      setName={setName}
-      surname={surname}
-      setSurname={setSurname}
-    />,
-    <Step2
-      name={name}
-      birth={birth}
-      setBirth={setBirth}
-      death={death}
-      setDeath={setDeath}
-    />,
-    <Step3 name={name} />,
-    <Step4
-      name={name}
-      description={description}
-      setDescription={setDescription}
-    />,
-    <Step5 name={name} location={location} setLocation={setLocation} />,
-  ];
+  const prevStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
 
   return (
     <Layout>
-      <div className="py-5 h-screen ">
-        {/* <p className="text-sp-white">
-          {JSON.stringify({
-            birth,
-            death,
-            name,
-            surname,
-            description,
-            location,
-          })}
-        </p> */}
-        <div className="container mx-auto lg:px-12 lg:w-4/5">
-          <div className="flex flex-row justify-between">
-            <button className="swiper-prev-step inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl">
-              <ChevronLeftIcon className="h-6 w-6" />
-              Back
-            </button>
-            <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
-              Step {`${step + 1}/${maxStepIdx + 1}`}
-            </div>
+      <div className="py-5 h-screen">
+        <div className="flex flex-row justify-between mx-auto lg:w-4/5">
+          <button
+            onClick={() => prevStep()}
+            className="inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl"
+          >
+            <ChevronLeftIcon className="h-6 w-6" />
+            Back
+          </button>
+          <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
+            Step {`${step}/${numSteps}`}
           </div>
         </div>
         <div className="container mx-auto lg:px-12 lg:w-4/5">
-          <ProgressBar maxSteps={maxStepIdx + 1} step={step + 1} />
-          <form id="stepper-form" className="flex flex-1 flex-col">
-            <div className="mb-3">
-              <Swiper
-                spaceBetween={120}
-                slidesPerView={1}
-                onSlideChange={(swiper) => {
-                  setStep(swiper.realIndex);
-                }}
-                onSwiper={(swiper) => {
-                  setStep(swiper.realIndex);
-                }}
-                navigation={{
-                  prevEl: ".swiper-prev-step",
-                  nextEl: ".swiper-next-step",
-                  clickable: true,
-                }}
+          {/* <Steps /> */}
+          <div id="stepper-form">
+            {step === 1 && <Step1 />}
+            {step === 2 && <Step2 name="Ralph" />}
+            {step === 3 && <Step3 name="Ralph" />}
+            {step === 4 && <Step4 name="Ralph" />}
+            {step === 5 && <Step5 name="Ralph" />}
+          </div>
+
+          <div className="flex justify-center mt-8">
+            {step !== 5 ? (
+              <button
+                onClick={() => nextStep()}
+                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
               >
-                {steps.map((step, i) => {
-                  return (
-                    <SwiperSlide key={`slider-question-${i}`}>
-                      {step}
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </div>
-            <div className="flex justify-center mt-8">
-              {step !== maxStepIdx ? (
-                <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
-                  Next
-                </button>
-              ) : (
-                <button
-                  onClick={() =>
-                    console.log(
-                      toRequest(birth, death, name, surname, description)
-                    )
-                  }
-                  // add disabled=false so that swiper will not disable this button
-                  disabled={false}
-                  ref={null}
-                  className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
-                >
-                  Create
-                </button>
-              )}
-            </div>
-          </form>
+                Next
+              </button>
+            ) : (
+              <button
+                onClick={() => nextStep()}
+                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+              >
+                Create
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </Layout>
   );
 }
 
-function Step1({ name, setName, surname, setSurname }) {
+function Step1() {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -170,11 +80,7 @@ function Step1({ name, setName, surname, setSurname }) {
           <div className="w-full flex-1">
             <div className="my-2 rounded">
               <input
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                placeholder="Enter first name"
+                placeholder="Enter First Name"
                 className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
             </div>
@@ -182,11 +88,7 @@ function Step1({ name, setName, surname, setSurname }) {
           <div className="w-full flex-1">
             <div className="my-2 rounded">
               <input
-                value={surname}
-                onChange={(e) => {
-                  setSurname(e.target.value);
-                }}
-                placeholder="Enter last name"
+                placeholder="Enter Last Name"
                 className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
             </div>
@@ -197,8 +99,7 @@ function Step1({ name, setName, surname, setSurname }) {
   );
 }
 
-function Step2({ name, birth, setBirth, death, setDeath }) {
-  const footer = <p>Please pick a day.</p>;
+function Step2({ name }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -210,29 +111,19 @@ function Step2({ name, birth, setBirth, death, setDeath }) {
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
-            <div className="my-2 rounded flex flex-row items-center justify-center border-2 border-sp-medium">
+            <div className="my-2 rounded">
               <input
-                value={birth}
-                onChange={(e) => {
-                  setBirth(e.target.value);
-                }}
-                placeholder="Date of Birth"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white text-center"
+                placeholder="Birth date"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
-              <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
             </div>
           </div>
           <div className="w-full flex-1">
-            <div className="my-2 rounded flex flex-row items-center justify-center border-2 border-sp-medium">
+            <div className="my-2 rounded">
               <input
-                value={death}
-                onChange={(e) => {
-                  setDeath(e.target.value);
-                }}
-                placeholder="Date of Passing"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white text-center"
+                placeholder="Date of passing"
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
-              <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
             </div>
           </div>
         </div>
@@ -261,7 +152,7 @@ function Step3({ name }) {
   );
 }
 
-function Step4({ name, description, setDescription }) {
+function Step4({ name }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -276,10 +167,6 @@ function Step4({ name, description, setDescription }) {
           <div className="w-full flex-1">
             <div className="my-2 rounded">
               <textarea
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
                 placeholder="Enter sentence"
                 rows="3"
                 className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
@@ -292,14 +179,14 @@ function Step4({ name, description, setDescription }) {
   );
 }
 
-function Step5({ name, location, setLocation }) {
+function Step5({ name }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
         <AddLocationIcon fill />
       </div>
       <p className="font-bold text-sp-white text-2xl">
-        <span> {name} </span> must associate you to a one place. Please select
+        <span> {name} </span>must associate you to a one place. Please select
         that place.
       </p>
       <p className="text-sp-lighter text-sm">
@@ -309,16 +196,11 @@ function Step5({ name, location, setLocation }) {
       <div className="mt-4">
         <div className="flex flex-col md:flex-row">
           <div className="w-full flex-1">
-            <div className="my-2 rounded flex flex-row items-center border-2 border-sp-medium">
+            <div className="my-2 rounded">
               <input
-                value={location}
-                onChange={(e) => {
-                  setLocation(e.target.value);
-                }}
-                placeholder="Enter place"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white"
+                placeholder="Search place..."
+                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
-              {/* <SearchIcon className="h-6 w-6 text-sp-lighter mx-3" /> */}
             </div>
           </div>
         </div>
@@ -327,14 +209,49 @@ function Step5({ name, location, setLocation }) {
   );
 }
 
-function ProgressBar({ step, maxSteps }) {
+function Bar({ fill }) {
   return (
-    <div className="flex-auto mx-auto mt-12">
-      <div className="w-full bg-sp-lighter h-1">
-        <div
-          className="bg-sp-fawn h-1"
-          style={{ width: `${Math.floor((step * 100) / maxSteps)}%` }}
-        ></div>
+    <div
+      className={`flex-auto border-t-2 transition duration-500 ease-in-out ${
+        fill ? "border-sp-fawn" : "border-gray-300"
+      }`}
+    ></div>
+  );
+}
+
+function Steps() {
+  return (
+    <div className="lg:mx-12">
+      <div className="flex items-center">
+        <div className="flex items-center text-teal-600 relative">
+          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
+            <AddSpiritusIcon fill />
+          </div>
+        </div>
+        <Bar fill={true} />
+        <div className="flex items-center text-white relative">
+          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
+            <AddRangeIcon fill />
+          </div>
+        </div>
+        <Bar fill={false} />
+        <div className="flex items-center text-gray-500 relative">
+          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
+            <AddImageIcon />
+          </div>
+        </div>
+        <Bar fill={false} />
+        <div className="flex items-center text-gray-500 relative">
+          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12 ">
+            <AddCommentIcon />
+          </div>
+        </div>
+        <Bar fill={false} />
+        <div className="flex items-center text-gray-500 relative">
+          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
+            <AddLocationIcon />
+          </div>
+        </div>
       </div>
     </div>
   );
