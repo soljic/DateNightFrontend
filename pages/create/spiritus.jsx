@@ -1,59 +1,85 @@
 import { PlusCircleIcon, ChevronLeftIcon } from "@heroicons/react/solid";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Layout from "../../components/layout/Layout";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Pagination, Navigation } from "swiper/core";
+
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+SwiperCore.use([Pagination, Navigation]);
+
 export default function CreateSpiritusPage() {
-  const numSteps = 5;
-  const [step, setStep] = useState(1);
+  // stepper is 0 indexed!
+  const maxStepIdx = 4;
+  const [step, setStep] = useState(0);
+  const [displayName, setdisplayName] = useState("Ralph");
 
-  const nextStep = () => {
-    if (step < numSteps) {
-      setStep(step + 1);
-    }
-  };
-
-  const prevStep = () => {
-    if (step > 1) {
-      setStep(step - 1);
-    }
-  };
+  const steps = [
+    <Step1 />,
+    <Step2 name={displayName} />,
+    <Step3 name={displayName} />,
+    <Step4 name={displayName} />,
+    <Step5 name={displayName} />,
+  ];
 
   return (
     <Layout>
-      <div className="py-5 h-screen">
-        <div className="flex flex-row justify-between mx-auto lg:w-4/5">
-          <button
-            onClick={() => prevStep()}
-            className="inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl"
-          >
-            <ChevronLeftIcon className="h-6 w-6" />
-            Back
-          </button>
-          <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
-            Step {`${step}/${numSteps}`}
+      <div className="py-5 h-screen ">
+        <div className="container mx-auto lg:px-12 lg:w-4/5">
+          <div className="flex flex-row justify-between">
+            <button
+              className="swiper-prev-step inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl"
+            >
+              <ChevronLeftIcon className="h-6 w-6" />
+              Back
+            </button>
+            <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
+              Step {`${step + 1}/${maxStepIdx + 1}`}
+            </div>
           </div>
         </div>
         <div className="container mx-auto lg:px-12 lg:w-4/5">
-          {/* <Steps /> */}
-          <div id="stepper-form">
-            {step === 1 && <Step1 />}
-            {step === 2 && <Step2 name="Ralph" />}
-            {step === 3 && <Step3 name="Ralph" />}
-            {step === 4 && <Step4 name="Ralph" />}
-            {step === 5 && <Step5 name="Ralph" />}
+          <ProgressBar maxSteps={maxStepIdx+1} step={step+1}/>
+          <div id="stepper-form" className="relative">
+            <Swiper
+              spaceBetween={120}
+              slidesPerView={1}
+              onSlideChange={(swiper) => {
+                setStep(swiper.realIndex);
+              }}
+              onSwiper={(swiper) => {
+                setStep(swiper.realIndex);
+              }}
+              navigation={{
+                prevEl: '.swiper-prev-step',
+                nextEl: '.swiper-next-step',
+                clickable: true,
+              }}
+            >
+              {steps.map((step, i) => {
+                return (
+                  <SwiperSlide key={`slider-question-${i}`}>{step}</SwiperSlide>
+                );
+              })}
+            </Swiper>
           </div>
 
           <div className="flex justify-center mt-8">
-            {step !== 5 ? (
+            {step !== maxStepIdx ? (
               <button
-                onClick={() => nextStep()}
-                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+                className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
               >
                 Next
               </button>
             ) : (
               <button
-                onClick={() => nextStep()}
+                onClick={() => console.log("CREATE")}
+                // add disabled=false so that swiper will not disable this button
+                disabled={false}
+                ref={null}
                 className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
               >
                 Create
@@ -209,49 +235,11 @@ function Step5({ name }) {
   );
 }
 
-function Bar({ fill }) {
+function ProgressBar({ step, maxSteps }) {
   return (
-    <div
-      className={`flex-auto border-t-2 transition duration-500 ease-in-out ${
-        fill ? "border-sp-fawn" : "border-gray-300"
-      }`}
-    ></div>
-  );
-}
-
-function Steps() {
-  return (
-    <div className="lg:mx-12">
-      <div className="flex items-center">
-        <div className="flex items-center text-teal-600 relative">
-          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
-            <AddSpiritusIcon fill />
-          </div>
-        </div>
-        <Bar fill={true} />
-        <div className="flex items-center text-white relative">
-          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
-            <AddRangeIcon fill />
-          </div>
-        </div>
-        <Bar fill={false} />
-        <div className="flex items-center text-gray-500 relative">
-          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
-            <AddImageIcon />
-          </div>
-        </div>
-        <Bar fill={false} />
-        <div className="flex items-center text-gray-500 relative">
-          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12 ">
-            <AddCommentIcon />
-          </div>
-        </div>
-        <Bar fill={false} />
-        <div className="flex items-center text-gray-500 relative">
-          <div className="flex justify-center items-center rounded-full transition duration-500 ease-in-out h-12 w-12">
-            <AddLocationIcon />
-          </div>
-        </div>
+    <div className="flex-auto mx-auto mt-12">
+      <div className="w-full bg-sp-lighter h-1">
+        <div className="bg-sp-fawn h-1" style={{ width: `${Math.floor(step*100/maxSteps)}%` }}></div>
       </div>
     </div>
   );
