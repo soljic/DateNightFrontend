@@ -11,7 +11,7 @@ import { PlusCircleIcon } from "@heroicons/react/solid";
 
 export function Tags({ tags }) {
   return (
-    <div className="flex flex-row gap-3 px-14">
+    <div className="flex flex-row gap-3 px-2">
       {tags.map((t) => {
         return (
           <button
@@ -94,31 +94,6 @@ export function Tribute() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-export function HorizontalDivider() {
-  return (
-    <div className="relative flex w-full items-center py-5">
-      <div className="flex-grow border-t border-sp-medium"></div>
-      <div className="bg-sp-dark-brown rounded-lg p-1.5 mx-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 flex-shrink text-sp-fawn"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </div>
-      <div className="flex-grow border-t border-sp-medium"></div>
     </div>
   );
 }

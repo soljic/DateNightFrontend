@@ -4,18 +4,18 @@ import Layout from "../../../components/layout/Layout";
 import SpiritusCarousel from "../../../components/carousel/SpiritusCarousel";
 import {
   CTAAddMemory,
-  HorizontalDivider,
   MoreStories,
   SpiritusOverview,
   Tags,
   Tribute,
 } from "../../../components/stories/StoryPage";
+import { HorizontalDivider } from "../../../components/layout/Common";
+
 import {
   GetSpiritusStories,
   GetStory,
   SearchSpiritus,
 } from "../../../service/http/spiritus";
-import { ImagePath } from "../../../service/util";
 
 export default function StoryPage({
   first,
@@ -29,14 +29,14 @@ export default function StoryPage({
       <section className="container mx-auto px-5" key="story">
         <div className="flex flex-col items-center py-8">
           <div className="flex flex-col w-full mb-12 text-left">
-            <div className="w-full mx-auto lg:w-1/2 text-sp-white">
+            <div className="w-full sm:w-full lg:w-1/2  mx-auto text-sp-white">
               <h1 className="mx-auto mb-6 font-semibold text-center uppercase">
                 {first.title}
               </h1>
-              <h2 className="mx-auto mb-6 text-2xl px-12 font-semibold text-center lg:text-3xl">
+              <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
                 {first.subtitle}
               </h2>
-              <h2 className="mx-auto mb-6 text-2xl px-12 font-semibold text-center lg:text-3xl">
+              <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
                 {first.description}
               </h2>
               {first.paragraphs &&
@@ -44,7 +44,7 @@ export default function StoryPage({
                   if (p.imageUrl) {
                     return (
                       <div
-                        className="object-fill rounded-lg overflow-hidden px-10"
+                        className="object-fill rounded-lg overflow-hidden px-4"
                         key={`para-${i}`}
                       >
                         <Image
@@ -60,7 +60,7 @@ export default function StoryPage({
                   // check if text is empty -> don't render if it is
                   return (
                     <p
-                      className="mx-auto leading-relaxed pt-4 px-14 pb-10"
+                      className="mx-auto leading-relaxed pt-4 px-2 pb-10"
                       key={`para-${i}`}
                     >
                       {p.text}

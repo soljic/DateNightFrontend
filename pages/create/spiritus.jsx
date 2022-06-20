@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { useState } from "react";
 
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination, Navigation } from "swiper/core";
@@ -9,6 +10,7 @@ import { CalendarIcon, SearchIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon, ChevronLeftIcon } from "@heroicons/react/solid";
 
 import Layout from "../../components/layout/Layout";
+import { HorizontalDivider, Logo } from "../../components/layout/Common";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -41,7 +43,9 @@ export default function CreateSpiritusPage() {
   const [birth, setBirth] = useState("");
   const [death, setDeath] = useState("");
   const [description, setDescription] = useState("");
-  
+
+  const [created, setCreated] = useState(false);
+
   // TODO: talk to BE how to send this
   // BE expects the following:
   // ...
@@ -91,68 +95,126 @@ export default function CreateSpiritusPage() {
         </p> */}
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           <div className="flex flex-row justify-between">
-            <button className="swiper-prev-step inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl">
-              <ChevronLeftIcon className="h-6 w-6" />
-              Back
-            </button>
-            <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
-              Step {`${step + 1}/${maxStepIdx + 1}`}
-            </div>
+            {!created ? (
+              <button className="swiper-prev-step inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl">
+                <ChevronLeftIcon className="h-6 w-6" />
+                Back
+              </button>
+            ) : (
+              <Link href="/">
+                <a className="swiper-prev-step inline-flex p-3 py-1 text-white hover:bg-sp-white hover:text-sp-dark border rounded-3xl">
+                  {/* <ChevronLeftIcon className="h-6 w-6" /> */}
+                  Finish
+                </a>
+              </Link>
+            )}
+            {!created && (
+              <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
+                Step {`${step + 1}/${maxStepIdx + 1}`}
+              </div>
+            )}
           </div>
         </div>
         <div className="container mx-auto lg:px-12 lg:w-4/5">
-          <ProgressBar maxSteps={maxStepIdx + 1} step={step + 1} />
-          <form id="stepper-form" className="flex flex-1 flex-col">
-            <div className="mb-3">
-              <Swiper
-                spaceBetween={120}
-                slidesPerView={1}
-                onSlideChange={(swiper) => {
-                  setStep(swiper.realIndex);
-                }}
-                onSwiper={(swiper) => {
-                  setStep(swiper.realIndex);
-                }}
-                navigation={{
-                  prevEl: ".swiper-prev-step",
-                  nextEl: ".swiper-next-step",
-                  clickable: true,
-                }}
-              >
-                {steps.map((step, i) => {
-                  return (
-                    <SwiperSlide key={`slider-question-${i}`}>
-                      {step}
-                    </SwiperSlide>
-                  );
-                })}
-              </Swiper>
-            </div>
-            <div className="flex justify-center mt-8">
-              {step !== maxStepIdx ? (
-                <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
-                  Next
-                </button>
-              ) : (
-                <button
-                  onClick={() =>
-                    console.log(
-                      toRequest(birth, death, name, surname, description)
-                    )
-                  }
-                  // add disabled=false so that swiper will not disable this button
-                  disabled={false}
-                  ref={null}
-                  className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
-                >
-                  Create
-                </button>
-              )}
-            </div>
-          </form>
+          {created ? (
+            <CreateSuccess
+              name={name}
+              surname={surname}
+              birth={birth}
+              death={death}
+            />
+          ) : (
+            <>
+              <ProgressBar maxSteps={maxStepIdx + 1} step={step + 1} />
+              <form id="stepper-form" className="flex flex-1 flex-col">
+                <div className="mb-3">
+                  <Swiper
+                    spaceBetween={120}
+                    slidesPerView={1}
+                    onSlideChange={(swiper) => {
+                      setStep(swiper.realIndex);
+                    }}
+                    onSwiper={(swiper) => {
+                      setStep(swiper.realIndex);
+                    }}
+                    navigation={{
+                      prevEl: ".swiper-prev-step",
+                      nextEl: ".swiper-next-step",
+                      clickable: true,
+                    }}
+                  >
+                    {steps.map((step, i) => {
+                      return (
+                        <SwiperSlide key={`slider-question-${i}`}>
+                          {step}
+                        </SwiperSlide>
+                      );
+                    })}
+                  </Swiper>
+                </div>
+                <div className="flex justify-center mt-8">
+                  {step !== maxStepIdx ? (
+                    <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
+                      Next
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        console.log(
+                          toRequest(birth, death, name, surname, description)
+                        );
+                        setCreated(true);
+                      }}
+                      // add disabled=false so that swiper will not disable this button
+                      disabled={false}
+                      ref={null}
+                      className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+                    >
+                      Create
+                    </button>
+                  )}
+                </div>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </Layout>
+  );
+}
+
+function CreateSuccess({ name, surname, birth, death }) {
+  return (
+    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2">
+      <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
+        <Logo width={8} height={8} />
+      </div>
+      <h2 className="font-bold text-3xl text-sp-white">Pavao Vukelić</h2>
+      <p className="mt-1 text-sp-white text-center opacity-50 mb-5">
+        29 Aug 1938 — 24 Feb 1986 (60)
+      </p>
+      <HorizontalDivider />
+      <div className="flex flex-col items-center gap-1 mt-5">
+        <h2 className="font-bold text-3xl text-sp-white">Write first story</h2>
+        <p className="mt-1 text-center text-sp-white opacity-50 mb-8 w-3/4 text">
+          Pavao must have done many beautiful things. Save those memories
+          forever.
+        </p>
+      </div>
+      <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
+        Create story
+      </button>
+      <div className="flex mx-auto items-center justify-center gap-4 mt-3 text-sp-white">
+        <button className="flex flex-col items-center justify-center h-24 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg p-4">
+          <AddGuardianIcon />
+          <p className="font-semibold">Add Guardian</p>
+        </button>
+        <button className="flex flex-col items-center justify-center h-24 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg p-4">
+          <AddGraveIcon />
+          <p className="font-semibold">Resting Place</p>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -391,6 +453,44 @@ function AddImageIcon({ width, height, fill }) {
       <path
         d="M17.75 3C19.5449 3 21 4.45507 21 6.25L21 17.75C21 19.5449 19.5449 21 17.75 21L6.25 21C4.45507 21 3 19.5449 3 17.75L3 11.5019C3.47425 11.6996 3.97687 11.8428 4.50009 11.9236L4.5 17.75C4.5 17.9584 4.53643 18.1583 4.60326 18.3437L10.4258 12.643C11.2589 11.8273 12.5675 11.7885 13.4458 12.5266L13.5742 12.6431L19.3964 18.3447C19.4634 18.159 19.5 17.9588 19.5 17.75L19.5 6.25C19.5 5.2835 18.7165 4.5 17.75 4.5L11.9236 4.50009C11.8428 3.97687 11.6996 3.47425 11.5019 3L17.75 3ZM11.5588 13.644L11.4752 13.7148L5.66845 19.4011C5.8504 19.4651 6.04613 19.5 6.25 19.5L17.75 19.5C17.9535 19.5 18.1489 19.4653 18.3305 19.4014L12.5247 13.7148C12.2596 13.4553 11.8501 13.4316 11.5588 13.644ZM15.2521 6.5C16.4959 6.5 17.5042 7.50831 17.5042 8.75212C17.5042 9.99592 16.4959 11.0042 15.2521 11.0042C14.0083 11.0042 13 9.99592 13 8.75212C13 7.50831 14.0083 6.5 15.2521 6.5ZM5.5 0C8.53757 0 11 2.46243 11 5.5C11 8.53757 8.53757 11 5.5 11C2.46243 11 0 8.53757 0 5.5C0 2.46243 2.46243 0 5.5 0ZM15.2521 8C14.8367 8 14.5 8.33673 14.5 8.75212C14.5 9.1675 14.8367 9.50423 15.2521 9.50423C15.6675 9.50423 16.0042 9.1675 16.0042 8.75212C16.0042 8.33673 15.6675 8 15.2521 8ZM5.5 1.99923L5.41012 2.00729C5.20603 2.04433 5.0451 2.20527 5.00806 2.40936L5 2.49923L4.99965 4.99923L2.49765 5L2.40777 5.00806C2.20368 5.0451 2.04275 5.20603 2.00571 5.41012L1.99765 5.5L2.00571 5.58988C2.04275 5.79397 2.20368 5.9549 2.40777 5.99194L2.49765 6L5.00065 5.99923L5.00111 8.50348L5.00916 8.59336C5.04621 8.79745 5.20714 8.95839 5.41123 8.99543L5.50111 9.00348L5.59098 8.99543C5.79508 8.95839 5.95601 8.79745 5.99305 8.59336L6.00111 8.50348L6.00065 5.99923L8.50457 6L8.59444 5.99194C8.79853 5.9549 8.95947 5.79397 8.99651 5.58988L9.00457 5.5L8.99651 5.41012C8.95947 5.20603 8.79853 5.0451 8.59444 5.00806L8.50457 5L5.99965 4.99923L6 2.49923L5.99194 2.40936C5.9549 2.20527 5.79397 2.04433 5.58988 2.00729L5.5 1.99923Z"
         fill={`${fill ? "#E3AA6D" : "#F0EFED"}`}
+      />
+    </svg>
+  );
+}
+
+function AddGuardianIcon({ width, height }) {
+  const w = width ? `w-${width}` : `w-6`;
+  const h = height ? `h-${height}` : `h-6`;
+
+  return (
+    <svg
+      className={`${w} ${h}`}
+      viewBox="0 0 22 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.25 3C9.25 4.65685 7.90685 6 6.25 6C4.59315 6 3.25 4.65685 3.25 3C3.25 1.34315 4.59315 0 6.25 0C7.90685 0 9.25 1.34315 9.25 3ZM7.75 3C7.75 2.17157 7.07843 1.5 6.25 1.5C5.42157 1.5 4.75 2.17157 4.75 3C4.75 3.82843 5.42157 4.5 6.25 4.5C7.07843 4.5 7.75 3.82843 7.75 3ZM17.75 5.5C17.75 6.88071 16.6307 8 15.25 8C13.8693 8 12.75 6.88071 12.75 5.5C12.75 4.11929 13.8693 3 15.25 3C16.6307 3 17.75 4.11929 17.75 5.5ZM16.25 5.5C16.25 4.94772 15.8023 4.5 15.25 4.5C14.6977 4.5 14.25 4.94772 14.25 5.5C14.25 6.05228 14.6977 6.5 15.25 6.5C15.8023 6.5 16.25 6.05228 16.25 5.5ZM12.1465 8.75C11.82 7.59575 10.7588 6.75 9.5 6.75H3.5C1.98122 6.75 0.75 7.98122 0.75 9.5V12.5C0.75 13.6046 1.64543 14.5 2.75 14.5C2.92265 14.5 3.09019 14.4781 3.25 14.437V18C3.25 19.1046 4.14543 20 5.25 20C5.72297 20 6.1576 19.8358 6.5 19.5613C6.8424 19.8358 7.27703 20 7.75 20C8.85457 20 9.75 19.1046 9.75 18V14.437C9.90981 14.4781 10.0774 14.5 10.25 14.5C11.1819 14.5 11.965 13.8626 12.187 13H12.25V18C12.25 19.1046 13.1454 20 14.25 20C14.723 20 15.1576 19.8358 15.5 19.5613C15.8424 19.8358 16.277 20 16.75 20C17.8546 20 18.75 19.1046 18.75 18V15.187C18.9098 15.2281 19.0774 15.25 19.25 15.25C20.3546 15.25 21.25 14.3546 21.25 13.25V11.5C21.25 9.98122 20.0188 8.75 18.5 8.75H12.1465ZM9.75 12.5V10C9.75 9.58579 9.41421 9.25 9 9.25C8.58579 9.25 8.25 9.58579 8.25 10V18C8.25 18.2761 8.02614 18.5 7.75 18.5C7.47386 18.5 7.25 18.2761 7.25 18V14.5C7.25 14.0858 6.91421 13.75 6.5 13.75C6.08579 13.75 5.75 14.0858 5.75 14.5V18C5.75 18.2761 5.52614 18.5 5.25 18.5C4.97386 18.5 4.75 18.2761 4.75 18V10C4.75 9.58579 4.41421 9.25 4 9.25C3.58579 9.25 3.25 9.58579 3.25 10V12.5C3.25 12.7761 3.02614 13 2.75 13C2.47386 13 2.25 12.7761 2.25 12.5V9.5C2.25 8.80964 2.80964 8.25 3.5 8.25H9.5C10.1904 8.25 10.75 8.80964 10.75 9.5V12.5C10.75 12.7761 10.5261 13 10.25 13C9.97386 13 9.75 12.7761 9.75 12.5ZM12.25 10.25H18.5C19.1904 10.25 19.75 10.8096 19.75 11.5V13.25C19.75 13.5261 19.5261 13.75 19.25 13.75C18.9739 13.75 18.75 13.5261 18.75 13.25V12C18.75 11.5858 18.4142 11.25 18 11.25C17.5858 11.25 17.25 11.5858 17.25 12V18C17.25 18.2761 17.0261 18.5 16.75 18.5C16.4739 18.5 16.25 18.2761 16.25 18V15.5C16.25 15.0858 15.9142 14.75 15.5 14.75C15.0858 14.75 14.75 15.0858 14.75 15.5V18C14.75 18.2761 14.5261 18.5 14.25 18.5C13.9739 18.5 13.75 18.2761 13.75 18V12.25C13.75 11.8358 13.4142 11.5 13 11.5H12.25V10.25Z"
+        fill="#F0EFED"
+      />
+    </svg>
+  );
+}
+
+function AddGraveIcon({ width, height }) {
+  const w = width ? `w-${width}` : `w-6`;
+  const h = height ? `h-${height}` : `h-6`;
+
+  return (
+    <svg
+      className={`${w} ${h}`}
+      viewBox="0 0 21 19"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.2485 0C7.30997 0 5.85203 1.74337 5.45996 2.25H3.74854C3.19625 2.25 2.74854 2.69772 2.74854 3.25V16.604C1.99839 16.7757 1.38995 16.9422 0.960488 17.0688C0.562264 17.1862 0.357972 17.6137 0.499915 18.0038C0.640783 18.391 1.07 18.5948 1.46515 18.4781C2.84951 18.0692 6.13645 17.25 10.2485 17.25C14.3606 17.25 17.6476 18.0692 19.0319 18.4781C19.4271 18.5948 19.8563 18.391 19.9972 18.0038C20.1391 17.6137 19.9348 17.1862 19.5366 17.0688C19.1071 16.9422 18.4987 16.7757 17.7485 16.604V3.25C17.7485 2.69772 17.3008 2.25 16.7485 2.25H15.0371C14.645 1.74337 13.1871 0 10.2485 0ZM10.2485 1.5C12.8735 1.5 14.1245 3.41602 14.1245 3.41602L14.3472 3.75H16.2485V16.2993C14.6005 16.0013 12.5548 15.75 10.2485 15.75C7.94227 15.75 5.89661 16.0013 4.24854 16.2993V3.75H6.1499L6.37256 3.41602C6.37256 3.41602 7.62354 1.5 10.2485 1.5ZM9.49854 4.5V6.75H7.24854V8.25H9.49854V12.75H10.9985V8.25H13.2485V6.75H10.9985V4.5H9.49854Z"
+        fill="#F0EFED"
       />
     </svg>
   );
