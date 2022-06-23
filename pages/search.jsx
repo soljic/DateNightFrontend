@@ -39,8 +39,8 @@ export default function Search() {
   return (
     <div className="common-bg p-2 min-w-full">
       <Navbar />
-      <div className="h-screen container mx-auto mt-20">
-        <div className="mx-auto flex lg:w-1/3 md:w-full sm:w-full items-center rounded-xl p-2 bg-sp-medium">
+      <div className="h-screen container mx-auto mt-20 lg:w-1/3 md:w-full sm:w-full">
+        <div className="mx-auto flex items-center rounded-xl p-2 bg-sp-medium">
           <button>
             <span className="flex w-auto items-center justify-end px-3 py-2 text-sp-lighter">
               <svg
@@ -70,7 +70,7 @@ export default function Search() {
             placeholder="Search Spiritus"
           />
         </div>
-        {results.length && !searching && <SearchResults results={results} />}
+        {!!results.length && !searching && <SearchResults results={results} />}
         {searching && <SearchContentPlacaholder />}
         {notFound && <NotFound searchTerm={searchTerm} />}
       </div>
@@ -116,7 +116,7 @@ function SearchContentPlacaholder() {
     ph.push(<Placeholder key={`placeholder-render-${i}`} />);
   }
   return (
-    <div className="container flex flex-col mx-auto lg:w-1/3 md:w-full sm:w-full rounded-xl p-2">
+    <div className="container flex flex-col mx-auto rounded-xl p-2">
       <p className="p-2 text-sp-lighter text-center">Searching...</p>
       <div className="flex w-full flex-col items-start">{ph}</div>
     </div>
@@ -146,7 +146,7 @@ function Placeholder() {
 
 function SearchResults({ results }) {
   return (
-    <div className="container flex flex-col mx-auto lg:w-1/3 md:w-full sm:w-full rounded-xl p-2">
+    <div className="container flex flex-col mx-auto rounded-xl p-2">
       <p className="p-2 text-sp-lighter text-center">
         {results.length} results
       </p>
@@ -180,8 +180,7 @@ const mock = [
     birth: 1926,
     death: 1998,
     name: "Ronald",
-    surname:
-      "Richardsssssssssssssssssssssssssssssssssssss",
+    surname: "Richardsssssssssssssssssssssssssssssssssssss",
     city: "Chigago",
     country: "USA",
     text1: "He could have left me",

@@ -11,11 +11,8 @@ import {
 } from "../../../components/stories/StoryPage";
 import { HorizontalDivider } from "../../../components/layout/Common";
 
-import {
-  GetSpiritusStories,
-  GetStory,
-  SearchSpiritus,
-} from "../../../service/http/spiritus";
+import { GetSpiritusBySlug } from "../../../service/http/spiritus";
+import { GetSpiritusStoriesByID } from "../../../service/http/story";
 
 export default function StoryPage({
   first,
@@ -90,37 +87,26 @@ export default function StoryPage({
 }
 
 // fetch first 5 spiritus stories
-// NOTE:
-// Spiritus is fetched using fistname and lastname
-// -> not ideal
-// -> it would be better to fetch by ID
-//
-// This whole thing is buggy because I cannot request a spiritus by ID
-// since there are duplicates in DB it can behave unexpectedly...
 export async function getServerSideProps(context) {
-  const { id, firstname, lastname, story } = context.query;
-  const resStories = await GetSpiritusStories(id, 0, 5);
-  const content = resStories.data?.content;
+  const { slug, id, story } = context.query;
+  const resSpiritus = await GetSpiritusBySlug(slug);
+  const spiritus = resSpiritus.data;
 
-  let first;
-  let stories;
-  // NOTE: REFACTOR
-  // fetch single story, remove it from list of stories and display as first
-  if (story) {
-    const resStory = await GetStory(story);
-    first = resStory.data;
-    stories =
-      content.length > 1
-        ? content.filter((x) => {
-            // story is string, so this is comparing strings
-            return x.id != story;
-          })
-        : [];
-  } else {
-    first = content.length ? content[0] : {};
-    stories = content.length > 1 ? content.slice(1) : [];
-  }
-  // sort paras by index
+
+  const resStories = await GetSpiritusStoriesByID(id, 0, 5);
+  const content = resStories.data?.content;
+  // if (story) {
+  //   content.length > 1
+  //       ? content.filter((x) => {
+  //           // story is string, so this is comparing strings
+  //           return x.id != story;
+  //         })
+  //       : [];
+  // }
+  const first = content.length ? content[0] : {};
+  const stories = content.length > 1 ? content.slice(1) : [];
+
+  // sort paragraphs by index
   if (first.paragraphs) {
     first.paragraphs.sort((p1, p2) => {
       if (p1.index < p2.index) {
@@ -132,16 +118,6 @@ export async function getServerSideProps(context) {
       // if equal
       return 0;
     });
-  }
-
-  let spiritus = {};
-  if (firstname && lastname) {
-    // force getting single spiritus using limit=1 and offset=0
-    const resSpiritus = await SearchSpiritus(`${firstname} ${lastname}`, 0, 1);
-    const content = resSpiritus.data?.content;
-    if (content && content.length) {
-      spiritus = content[0];
-    }
   }
 
   return {

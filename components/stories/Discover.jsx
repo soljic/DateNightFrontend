@@ -45,8 +45,9 @@ export function Discover({ popular }) {
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {popular.map((s) => (
             <PopularSpiritus
-              key={`${s.name} ${s.surname}`}
+              key={s.slug}
               id={s.id}
+              slug={s.slug}
               name={s.name}
               surname={s.surname}
               description={s.description}
@@ -59,10 +60,10 @@ export function Discover({ popular }) {
   );
 }
 
-function PopularSpiritus({ id, name, surname, description, images }) {
+function PopularSpiritus({ id, slug, name, surname, description, images }) {
   const image = images.length ? images[0] : null;
   return (
-    <div key={id} className="group relative">
+    <div key={slug} className="group relative">
       <div className="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 h-80 lg:aspect-none">
         {image ? (
           <Image
@@ -80,7 +81,7 @@ function PopularSpiritus({ id, name, surname, description, images }) {
         <div>
           <h3 className="text-xl text-sp-white">
             <Link
-              href={`/stories/spiritus/${id}?firstname=${name}&lastname=${surname}`}
+              href={`/stories/spiritus/${slug}?id=${id}`}
             >
               <a>
                 <span aria-hidden="true" className="absolute inset-0" />

@@ -28,7 +28,7 @@ export function Tags({ tags }) {
 
 export function Tribute() {
   return (
-    <div className="container w-full mx-auto items-center px-14 py-8 mt-14">
+    <div className="container w-full mx-auto items-center px-14 py-8 mt-14 sm:px-2 lg:px-14 md:px-8">
       <div className="flex flex-col mx-auto gap-3">
         <label htmlFor="tribute" className="hidden">
           Your message
@@ -37,7 +37,7 @@ export function Tribute() {
           id="tribute"
           type="text"
           rows="1"
-          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-dark rounded-full border border-sp-lighter placeholder-sp-lighter resize-y"
+          className="w-full text-2xl py-3 px-8 text-bottom bg-sp-dark rounded-3xl border border-sp-lighter placeholder-sp-lighter"
           placeholder="Write tribute"
         ></textarea>
 
@@ -173,7 +173,7 @@ export function StoryHook({
         </div>
         {/*  */}
         <Link
-          href={`/stories/spiritus/${spiritus.id}?firstname=${spiritus.name}&lastname=${spiritus.surname}&story=${id}`}
+          href={`/stories/spiritus/${spiritus.slug}?id=${spiritus.id}&story=${id}`}
         >
           <a className="title-font text-xl font-bold py-1">{title}</a>
         </Link>
