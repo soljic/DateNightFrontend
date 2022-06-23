@@ -1,22 +1,13 @@
 import Link from "next/link";
 import { useState } from "react";
 
-// import DatePicker from "react-datepicker";
+import DatePicker from "react-date-picker/dist/entry.nostyle";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Pagination, Navigation } from "swiper/core";
-
-import { CalendarIcon, SearchIcon } from "@heroicons/react/outline";
-import { PlusCircleIcon, ChevronLeftIcon } from "@heroicons/react/solid";
+import { CalendarIcon, XIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 
 import Layout from "../../components/layout/Layout";
 import { HorizontalDivider, Logo } from "../../components/layout/Common";
-
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-SwiperCore.use([Pagination, Navigation]);
 
 function toRequest(birth, death, name, surname, description) {
   return {
@@ -34,13 +25,13 @@ function toRequest(birth, death, name, surname, description) {
 // TODO: refactor and clean up
 export default function CreateSpiritusPage() {
   // stepper is 0 indexed!
-  const maxStepIdx = 4;
+  const numSteps = 4;
   const [step, setStep] = useState(0);
 
   // form fields
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [birth, setBirth] = useState("");
+  const [birth, setBirth] = useState();
   const [death, setDeath] = useState("");
   const [description, setDescription] = useState("");
 
@@ -57,33 +48,60 @@ export default function CreateSpiritusPage() {
   // ...
   const [location, setLocation] = useState("");
 
-  const steps = [
-    <Step1
-      name={name}
-      setName={setName}
-      surname={surname}
-      setSurname={setSurname}
-    />,
-    <Step2
-      name={name}
-      birth={birth}
-      setBirth={setBirth}
-      death={death}
-      setDeath={setDeath}
-    />,
-    <Step3 name={name} />,
-    <Step4
-      name={name}
-      description={description}
-      setDescription={setDescription}
-    />,
-    <Step5 name={name} location={location} setLocation={setLocation} />,
-  ];
+  const nextStep = () => {
+    if (step < numSteps) {
+      setStep(step + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    }
+  };
+
+  const showCurrentStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <ChooseDates
+            name={name}
+            birth={birth}
+            setBirth={setBirth}
+            death={death}
+            setDeath={setDeath}
+          />
+        );
+      case 2:
+        return <Step3 name={name} />;
+      case 3:
+        return (
+          <Step4
+            name={name}
+            description={description}
+            setDescription={setDescription}
+          />
+        );
+      case 4:
+        return (
+          <Step5 name={name} location={location} setLocation={setLocation} />
+        );
+      default:
+        return (
+          <Step1
+            name={name}
+            setName={setName}
+            surname={surname}
+            setSurname={setSurname}
+          />
+        );
+    }
+  };
 
   return (
     <Layout>
       <div className="py-5 h-screen ">
-        {/* <p className="text-sp-white">
+        <p className="text-sp-white">
           {JSON.stringify({
             birth,
             death,
@@ -92,29 +110,7 @@ export default function CreateSpiritusPage() {
             description,
             location,
           })}
-        </p> */}
-        <div className="container mx-auto lg:px-12 lg:w-4/5">
-          <div className="flex flex-row justify-between">
-            {!created ? (
-              <button className="swiper-prev-step inline-flex pr-3 py-1 gap-1 text-white border rounded-3xl">
-                <ChevronLeftIcon className="h-6 w-6" />
-                Back
-              </button>
-            ) : (
-              <Link href="/">
-                <a className="swiper-prev-step inline-flex p-3 py-1 text-white hover:bg-sp-white hover:text-sp-dark border rounded-3xl">
-                  {/* <ChevronLeftIcon className="h-6 w-6" /> */}
-                  Finish
-                </a>
-              </Link>
-            )}
-            {!created && (
-              <div className="inline-flex px-3 py-1 bg-sp-fawn bg-opacity-5 text-sp-white rounded-3xl border border-opacity-20 border-sp-lighter">
-                Step {`${step + 1}/${maxStepIdx + 1}`}
-              </div>
-            )}
-          </div>
-        </div>
+        </p>
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           {created ? (
             <CreateSuccess
@@ -125,36 +121,33 @@ export default function CreateSpiritusPage() {
             />
           ) : (
             <>
-              <ProgressBar maxSteps={maxStepIdx + 1} step={step + 1} />
+              <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
               <form id="stepper-form" className="flex flex-1 flex-col">
-                <div className="mb-3">
-                  <Swiper
-                    spaceBetween={120}
-                    slidesPerView={1}
-                    onSlideChange={(swiper) => {
-                      setStep(swiper.realIndex);
-                    }}
-                    onSwiper={(swiper) => {
-                      setStep(swiper.realIndex);
-                    }}
-                    navigation={{
-                      prevEl: ".swiper-prev-step",
-                      nextEl: ".swiper-next-step",
-                      clickable: true,
-                    }}
-                  >
-                    {steps.map((step, i) => {
-                      return (
-                        <SwiperSlide key={`slider-question-${i}`}>
-                          {step}
-                        </SwiperSlide>
-                      );
-                    })}
-                  </Swiper>
-                </div>
-                <div className="flex justify-center mt-8">
-                  {step !== maxStepIdx ? (
-                    <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
+                <div className="mb-10">{showCurrentStep()}</div>
+
+                <div className="flex justify-center mt-8 gap-8">
+                  {step > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        prevStep();
+                      }}
+                      className="px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-dark"
+                    >
+                      Back
+                    </button>
+                  )}
+                  {step !== numSteps ? (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        nextStep();
+                      }}
+                      disabled={!name || !surname}
+                      className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark ${
+                        (name && surname) || "opacity-30"
+                      }`}
+                    >
                       Next
                     </button>
                   ) : (
@@ -165,9 +158,6 @@ export default function CreateSpiritusPage() {
                         );
                         setCreated(true);
                       }}
-                      // add disabled=false so that swiper will not disable this button
-                      disabled={false}
-                      ref={null}
                       className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
                     >
                       Create
@@ -189,16 +179,22 @@ function CreateSuccess({ name, surname, birth, death }) {
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
         <Logo width={8} height={8} />
       </div>
-      <h2 className="font-bold text-3xl text-sp-white">Pavao Vukelić</h2>
+      <h2 className="font-bold text-3xl text-sp-white">
+        {" "}
+        <span>
+          {" "}
+          {name} {surname}{" "}
+        </span>
+      </h2>
       <p className="mt-1 text-sp-white text-center opacity-50 mb-5">
-        29 Aug 1938 — 24 Feb 1986 (60)
+        <span>{birth}</span> — <span>{death}</span>
       </p>
       <HorizontalDivider />
       <div className="flex flex-col items-center gap-1 mt-5">
         <h2 className="font-bold text-3xl text-sp-white">Write first story</h2>
         <p className="mt-1 text-center text-sp-white opacity-50 mb-8 w-3/4 text">
-          Pavao must have done many beautiful things. Save those memories
-          forever.
+          <span> {name} </span> must have done many beautiful things. Save those
+          memories forever.
         </p>
       </div>
       <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
@@ -259,7 +255,7 @@ function Step1({ name, setName, surname, setSurname }) {
   );
 }
 
-function Step2({ name, birth, setBirth, death, setDeath }) {
+function ChooseDates({ name, birth, setBirth, death, setDeath }) {
   const footer = <p>Please pick a day.</p>;
   return (
     <div className="mt-12 mx-2 lg:mx-12">
@@ -272,29 +268,35 @@ function Step2({ name, birth, setBirth, death, setDeath }) {
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
-            <div className="my-2 rounded flex flex-row items-center justify-center border-2 border-sp-medium">
-              <input
+            <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
+              <DatePicker
+                onChange={setBirth}
                 value={birth}
-                onChange={(e) => {
-                  setBirth(e.target.value);
-                }}
-                placeholder="Date of Birth"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white text-center"
+                clearIcon={!birth ? null : <XIcon className="h-6 w-6" /> }
+                dayPlaceholder="Date of Birth"
+                monthPlaceholder=""
+                yearPlaceholder=""
+                showLeadingZeros
+                calendarIcon={
+                  <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
+                }
               />
-              <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
             </div>
           </div>
           <div className="w-full flex-1">
-            <div className="my-2 rounded flex flex-row items-center justify-center border-2 border-sp-medium">
-              <input
+            <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
+              <DatePicker
+                onChange={setDeath}
                 value={death}
-                onChange={(e) => {
-                  setDeath(e.target.value);
-                }}
-                placeholder="Date of Passing"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white text-center"
+                dayPlaceholder="Date of Passing"
+                monthPlaceholder=""
+                yearPlaceholder=""
+                showLeadingZeros
+                clearIcon={!death ? null : <XIcon className="h-6 w-6" /> }
+                calendarIcon={
+                  <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
+                }
               />
-              <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
             </div>
           </div>
         </div>
