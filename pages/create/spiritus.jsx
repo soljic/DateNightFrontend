@@ -34,6 +34,7 @@ export default function CreateSpiritusPage() {
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState("");
   const [description, setDescription] = useState("");
+  const [hasImages, setHasImages] = useState(false);
 
   const [created, setCreated] = useState(false);
 
@@ -73,7 +74,13 @@ export default function CreateSpiritusPage() {
           />
         );
       case 2:
-        return <Step3 name={name} />;
+        return (
+          <ImageUploader
+            name={name}
+            hasImages={hasImages}
+            setHasImages={setHasImages}
+          />
+        );
       case 3:
         return (
           <Step4
@@ -272,7 +279,7 @@ function ChooseDates({ name, birth, setBirth, death, setDeath }) {
               <DatePicker
                 onChange={setBirth}
                 value={birth}
-                clearIcon={!birth ? null : <XIcon className="h-6 w-6" /> }
+                clearIcon={!birth ? null : <XIcon className="h-6 w-6" />}
                 dayPlaceholder="Date of Birth"
                 monthPlaceholder=""
                 yearPlaceholder=""
@@ -292,7 +299,7 @@ function ChooseDates({ name, birth, setBirth, death, setDeath }) {
                 monthPlaceholder=""
                 yearPlaceholder=""
                 showLeadingZeros
-                clearIcon={!death ? null : <XIcon className="h-6 w-6" /> }
+                clearIcon={!death ? null : <XIcon className="h-6 w-6" />}
                 calendarIcon={
                   <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
                 }
@@ -306,7 +313,23 @@ function ChooseDates({ name, birth, setBirth, death, setDeath }) {
 }
 
 // Image uploader
-function Step3({ name }) {
+function ImageUploader({ name, hasImages, setHasImages }) {
+  const [files, setFiles] = useState([]);
+
+  const remove = (idx) => {
+    if (idx === 0) {
+      setFiles((prev) => prev.slice(1));
+    } else if (idx === files.length) {
+      setFiles((prev) => prev.slice(0, idx));
+    } else {
+      setFiles((prev) => prev.slice(0, idx).concat(prev.slice(idx + 1)));
+    }
+  };
+
+  const add = (file) => {
+    setFiles((prev) => [...prev, file]);
+  };
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -317,10 +340,30 @@ function Step3({ name }) {
         please add them here.
       </p>
       <p className="text-sp-lighter text-sm mt-2">*Optional</p>
-      <button className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3">
-        <PlusCircleIcon className="h-6 w-6" />
-        <span className="font-semibold ml-1">Add Image</span>
-      </button>
+      {!hasImages ? (
+        <button
+          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3"
+          onClick={(e) => {
+            e.preventDefault();
+            setHasImages(true);
+          }}
+        >
+          <PlusCircleIcon className="h-6 w-6" />
+          <span className="font-semibold ml-1">Add Image</span>
+        </button>
+      ) : (
+        <div className="grid my-3 grid-flow-row grid-cols-4 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols gap-0">
+          <AddImageButton />,
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function AddImageButton() {
+  return (
+    <div class="flex items-center justify-center selection w-24 h-24 bg-sp-medium rounded-lg text-white">
+      <PlusCircleIcon className="h-8 w-8 text-sp-white" />
     </div>
   );
 }

@@ -76,3 +76,54 @@ export function HorizontalDivider() {
     </div>
   );
 }
+
+export function Thumbnail() {
+  return (
+    <div className="relative">
+      <div className="p-3">
+        <img
+          className="w-full rounded-xl"
+          src="https://dummyimage.com/500x250"
+          alt="dummy-image"
+        />
+      </div>
+      <button className="absolute top-0 right-0 overflow-visible rounded-full bg-red-600 p-2 text-white">
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+export function AddImageButton() {
+  return (
+    <div class="flex items-center justify-center selection w-24 h-24 bg-gray-600 rounded-lg text-white">
+      <svg
+        class="w-12 h-12"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        ></path>
+      </svg>
+    </div>
+  );
+}
