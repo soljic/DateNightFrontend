@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 import { getISOLocalDate } from '@wojtekmaj/date-utils';
@@ -8,11 +9,10 @@ import { getISOLocalDate } from '@wojtekmaj/date-utils';
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 
-import Layout from "../../components/layout/Layout";
-import { HorizontalDivider, Logo } from "../../components/layout/Common";
-import { ProxyCreateSpiritus } from "../../service/http/proxy";
+import Layout from "../../../components/layout/Layout";
+import { HorizontalDivider, Logo } from "../../../components/layout/Common";
+import { ProxyCreateSpiritus } from "../../../service/http/proxy";
 
-import { useSession } from "next-auth/react";
 
 // TODO: sve stuff to local storage
 // TODO: add err handling and error toasts
@@ -243,7 +243,7 @@ function CreateSuccess({ spiritus }) {
           Save those memories forever.
         </p>
       </div>
-      <Link href={`/create/story/${spiritus.slug}`}>
+      <Link href={`/create/spiritus/${spiritus.slug}/story`}>
         <a className="text-center px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
           Create story
         </a>
