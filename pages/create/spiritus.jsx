@@ -20,8 +20,6 @@ function toRequest(birth, death, name, surname, description) {
 }
 
 // TODO: sve stuff to local storage
-// TODO: add image uploader
-// TODO: add date picker
 // TODO: refactor and clean up
 export default function CreateSpiritusPage() {
   // stepper is 0 indexed!
@@ -34,12 +32,13 @@ export default function CreateSpiritusPage() {
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState("");
   const [description, setDescription] = useState("");
-  const [hasImages, setHasImages] = useState(false);
 
   const [created, setCreated] = useState(false);
 
   // TODO: this is not sent, waiting for BE
   const [location, setLocation] = useState("");
+
+  const [images, setImages] = useState([]);
 
   const nextStep = () => {
     if (step < numSteps) {
@@ -67,11 +66,7 @@ export default function CreateSpiritusPage() {
         );
       case 2:
         return (
-          <ImageUploader
-            name={name}
-            hasImages={hasImages}
-            setHasImages={setHasImages}
-          />
+          <ImageUploader name={name} images={images} setImages={setImages} />
         );
       case 3:
         return (
@@ -305,8 +300,7 @@ function ChooseDates({ name, birth, setBirth, death, setDeath }) {
 }
 
 // Image uploader
-function ImageUploader({ name }) {
-  const [files, setFiles] = useState([]);
+function ImageUploader({ name, images, setImages }) {
   const inputFile = useRef(null);
 
   const onOpenFileDialog = (event) => {
@@ -323,11 +317,11 @@ function ImageUploader({ name }) {
 
   const onRemove = (idx) => {
     if (idx === 0) {
-      setFiles((prev) => prev.slice(1));
-    } else if (idx === files.length) {
-      setFiles((prev) => prev.slice(0, idx));
+      setImages((prev) => prev.slice(1));
+    } else if (idx === images.length) {
+      setImages((prev) => prev.slice(0, idx));
     } else {
-      setFiles((prev) => prev.slice(0, idx).concat(prev.slice(idx + 1)));
+      setImages((prev) => prev.slice(0, idx).concat(prev.slice(idx + 1)));
     }
   };
 
@@ -341,7 +335,7 @@ function ImageUploader({ name }) {
       };
     });
 
-    setFiles((prev) => prev.concat(addFiles));
+    setImages((prev) => prev.concat(addFiles));
   };
 
   return (
@@ -365,7 +359,7 @@ function ImageUploader({ name }) {
         multiple
       />
 
-      {!files.length ? (
+      {!images.length ? (
         <button
           className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3"
           onClick={onOpenFileDialog}
@@ -374,24 +368,26 @@ function ImageUploader({ name }) {
           <span className="font-semibold ml-1">Add Image</span>
         </button>
       ) : (
-        <div className="grid my-3 grid-flow-row grid-cols-4 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols gap-0">
+        <div className="flex flex-row items-start justify-start gap-4 p-4">
           <button
             onClick={onOpenFileDialog}
-            className="flex items-center justify-center selection w-24 h-24 bg-sp-medium rounded-lg text-white mt-1 focus:outline-none"
+            className="flex items-center justify-center selection w-24 h-24 mt-1 bg-sp-medium rounded-lg text-white focus:outline-none"
           >
             <PlusCircleIcon className="h-8 w-8 text-sp-white" />
           </button>
-          {files.map((f, i) => {
-            return (
-              <Thumbnail
-                title={f.file.name}
-                previewURL={f.previewURL}
-                key={i}
-                index={i}
-                onRemove={onRemove}
-              />
-            );
-          })}
+          <div className="grid grid-flow-row grid-cols-2 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 gap-y-2">
+            {images.map((f, i) => {
+              return (
+                <Thumbnail
+                  title={f.file.name}
+                  previewURL={f.previewURL}
+                  key={i}
+                  index={i}
+                  onRemove={onRemove}
+                />
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
