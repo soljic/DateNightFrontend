@@ -1,14 +1,13 @@
-import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState  } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
 
-import {
-  ArrowCircleLeftIcon,
-  ArrowCircleRightIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-} from "@heroicons/react/outline";
+// import {
+//   ArrowCircleLeftIcon,
+//   ArrowCircleRightIcon,
+//   ArrowLeftIcon,
+//   ArrowRightIcon,
+// } from "@heroicons/react/outline";
 
 import "swiper/css";
 import "swiper/css/pagination";

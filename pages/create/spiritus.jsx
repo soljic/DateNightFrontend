@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import Image from "next/image";
 
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 
@@ -26,7 +26,7 @@ function toRequest(birth, death, name, surname, description) {
 export default function CreateSpiritusPage() {
   // stepper is 0 indexed!
   const numSteps = 4;
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(2);
 
   // form fields
   const [name, setName] = useState("");
@@ -38,15 +38,7 @@ export default function CreateSpiritusPage() {
 
   const [created, setCreated] = useState(false);
 
-  // TODO: talk to BE how to send this
-  // BE expects the following:
-  // ...
-  // "location": {
-  //   "longitude": 0,
-  //   "latitude": 0,
-  //   "graveyard": 0
-  // },
-  // ...
+  // TODO: this is not sent, waiting for BE
   const [location, setLocation] = useState("");
 
   const nextStep = () => {
@@ -313,10 +305,23 @@ function ChooseDates({ name, birth, setBirth, death, setDeath }) {
 }
 
 // Image uploader
-function ImageUploader({ name, hasImages, setHasImages }) {
+function ImageUploader({ name }) {
   const [files, setFiles] = useState([]);
+  const inputFile = useRef(null);
 
-  const remove = (idx) => {
+  const onOpenFileDialog = (event) => {
+    event.preventDefault();
+    inputFile.current.click();
+  };
+
+  const onChangeFile = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const files = event.target.files;
+    onAdd(files);
+  };
+
+  const onRemove = (idx) => {
     if (idx === 0) {
       setFiles((prev) => prev.slice(1));
     } else if (idx === files.length) {
@@ -326,8 +331,17 @@ function ImageUploader({ name, hasImages, setHasImages }) {
     }
   };
 
-  const add = (file) => {
-    setFiles((prev) => [...prev, file]);
+  const onAdd = (files) => {
+    const addFiles = Array.from(files).map((f) => {
+      return {
+        file: f,
+        // NOTE: previewURL must be destroyed on unmount
+        // -> check if this is leaking memory and refactor
+        previewURL: URL.createObjectURL(f),
+      };
+    });
+
+    setFiles((prev) => prev.concat(addFiles));
   };
 
   return (
@@ -340,30 +354,65 @@ function ImageUploader({ name, hasImages, setHasImages }) {
         please add them here.
       </p>
       <p className="text-sp-lighter text-sm mt-2">*Optional</p>
-      {!hasImages ? (
+      <input
+        type="file"
+        id="file"
+        ref={inputFile}
+        className="text-white"
+        style={{ display: "none" }}
+        accept="image/*"
+        onChange={onChangeFile}
+        multiple
+      />
+
+      {!files.length ? (
         <button
           className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3"
-          onClick={(e) => {
-            e.preventDefault();
-            setHasImages(true);
-          }}
+          onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
           <span className="font-semibold ml-1">Add Image</span>
         </button>
       ) : (
         <div className="grid my-3 grid-flow-row grid-cols-4 lg:grid-cols-6 md:grid-cols-5 sm:grid-cols gap-0">
-          <AddImageButton />,
+          <button
+            onClick={onOpenFileDialog}
+            className="flex items-center justify-center selection w-24 h-24 bg-sp-medium rounded-lg text-white mt-1 focus:outline-none"
+          >
+            <PlusCircleIcon className="h-8 w-8 text-sp-white" />
+          </button>
+          {files.map((f, i) => {
+            return (
+              <Thumbnail
+                title={f.file.name}
+                previewURL={f.previewURL}
+                key={i}
+                index={i}
+                onRemove={onRemove}
+              />
+            );
+          })}
         </div>
       )}
     </div>
   );
 }
 
-export function AddImageButton() {
+export function Thumbnail({ previewURL, title, onRemove, index }) {
   return (
-    <div class="flex items-center justify-center selection w-24 h-24 bg-sp-medium rounded-lg text-white">
-      <PlusCircleIcon className="h-8 w-8 text-sp-white" />
+    <div className="relative h-24 w-24" id={index}>
+      <div className="mx-1 mt-1 rounded-lg overflow-clip">
+        <img src={previewURL} alt={title} className="h-24 w-24" />
+      </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          onRemove(index);
+        }}
+        className="absolute top-0 right-0 text-opacity-60 text-black overflow-visible rounded-full bg-red-400 p-1"
+      >
+        <XIcon className="h-3 w-3" />
+      </button>
     </div>
   );
 }
