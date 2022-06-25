@@ -1,44 +1,68 @@
-import { useState, useRef } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState, useRef, useEffect } from "react";
 
 import DatePicker from "react-date-picker/dist/entry.nostyle";
+import { getISOLocalDate } from '@wojtekmaj/date-utils';
 
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 
 import Layout from "../../components/layout/Layout";
 import { HorizontalDivider, Logo } from "../../components/layout/Common";
+import { ProxyCreateSpiritus } from "../../service/http/proxy";
 
-function toRequest(birth, death, name, surname, description) {
-  return {
-    name,
-    surname,
-    birth,
-    death,
-    description,
-  };
-}
+import { useSession } from "next-auth/react";
 
 // TODO: sve stuff to local storage
-// TODO: refactor and clean up
+// TODO: add err handling and error toasts
 export default function CreateSpiritusPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    // redirect users that are not logged in
+    // the API method requires authentication to create spiritus
+    if (status !== "authenticated" && status !== "loading") {
+      router.push("/");
+    }
+  }, [status]);
+
   // stepper is 0 indexed!
   const numSteps = 4;
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(0);
 
   // form fields
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [birth, setBirth] = useState();
-  const [death, setDeath] = useState("");
+  const [death, setDeath] = useState();
   const [description, setDescription] = useState("");
 
-  const [created, setCreated] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [spiritus, setSpiritus] = useState(false);
 
-  // TODO: this is not sent, waiting for BE
   const [location, setLocation] = useState("");
 
   const [images, setImages] = useState([]);
+
+  const createSpiritus = async () => {
+    try {
+      setPending(true);
+      const res = await ProxyCreateSpiritus({
+        name,
+        surname,
+        birth: getISOLocalDate(birth),
+        death: getISOLocalDate(death),
+        description,
+        location: {} // TODO: add location when BE is ready
+      }, session.user.accessToken);
+      setSpiritus(res.data);
+      setPending(false);
+    } catch (err) {
+      setPending(false);
+    }
+  };
 
   const nextStep = () => {
     if (step < numSteps) {
@@ -70,7 +94,7 @@ export default function CreateSpiritusPage() {
         );
       case 3:
         return (
-          <Step4
+          <Description
             name={name}
             description={description}
             setDescription={setDescription}
@@ -78,11 +102,11 @@ export default function CreateSpiritusPage() {
         );
       case 4:
         return (
-          <Step5 name={name} location={location} setLocation={setLocation} />
+          <Location name={name} location={location} setLocation={setLocation} />
         );
       default:
         return (
-          <Step1
+          <Names
             name={name}
             setName={setName}
             surname={surname}
@@ -95,7 +119,7 @@ export default function CreateSpiritusPage() {
   return (
     <Layout>
       <div className="py-5 h-screen ">
-        <p className="text-sp-white">
+        {/* <p className="text-sp-white">
           {JSON.stringify({
             birth,
             death,
@@ -104,15 +128,10 @@ export default function CreateSpiritusPage() {
             description,
             location,
           })}
-        </p>
+        </p> */}
         <div className="container mx-auto lg:px-12 lg:w-4/5">
-          {created ? (
-            <CreateSuccess
-              name={name}
-              surname={surname}
-              birth={birth}
-              death={death}
-            />
+          {spiritus ? (
+            <CreateSuccess spiritus={spiritus} />
           ) : (
             <>
               <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
@@ -126,7 +145,10 @@ export default function CreateSpiritusPage() {
                         e.preventDefault();
                         prevStep();
                       }}
-                      className="px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-dark"
+                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-dark ${
+                        pending && "hidden"
+                      }`}
+                      disabled={pending}
                     >
                       Back
                     </button>
@@ -146,15 +168,14 @@ export default function CreateSpiritusPage() {
                     </button>
                   ) : (
                     <button
-                      onClick={() => {
-                        console.log(
-                          toRequest(birth, death, name, surname, description)
-                        );
-                        setCreated(true);
+                      onClick={(e) => {
+                        e.preventDefault();
+                        createSpiritus();
                       }}
+                      disabled={pending}
                       className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
                     >
-                      Create
+                      {pending ? <CreateSpinner /> : "Create"}
                     </button>
                   )}
                 </div>
@@ -167,7 +188,35 @@ export default function CreateSpiritusPage() {
   );
 }
 
-function CreateSuccess({ name, surname, birth, death }) {
+function CreateSpinner() {
+  return (
+    <div className="inline-flex items-center">
+      <svg
+        className="animate-spin -ml-1 mr-3 h-5 w-5 text-sp-dark"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        ></circle>
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+        ></path>
+      </svg>
+      <span>Creating...</span>
+    </div>
+  );
+}
+
+function CreateSuccess({ spiritus }) {
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
@@ -177,23 +226,28 @@ function CreateSuccess({ name, surname, birth, death }) {
         {" "}
         <span>
           {" "}
-          {name} {surname}{" "}
+          {spiritus.name} {spiritus.surname} {spiritus.id}
         </span>
       </h2>
-      <p className="mt-1 text-sp-white text-center opacity-50 mb-5">
-        <span>{birth}</span> — <span>{death}</span>
-      </p>
+      {(spiritus.birth || spiritus.death) && (
+        <p className="mt-1 text-sp-white text-center opacity-50 mb-5">
+          <span>{spiritus.birth || "?"}</span> —{" "}
+          <span>{spiritus.death || "?"}</span>
+        </p>
+      )}
       <HorizontalDivider />
       <div className="flex flex-col items-center gap-1 mt-5">
         <h2 className="font-bold text-3xl text-sp-white">Write first story</h2>
         <p className="mt-1 text-center text-sp-white opacity-50 mb-8 w-3/4 text">
-          <span> {name} </span> must have done many beautiful things. Save those
-          memories forever.
+          <span> {spiritus.name} </span> must have done many beautiful things.
+          Save those memories forever.
         </p>
       </div>
-      <button className="swiper-next-step px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
-        Create story
-      </button>
+      <Link href={`/create/story/${spiritus.slug}`}>
+        <a className="text-center px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
+          Create story
+        </a>
+      </Link>
       <div className="flex mx-auto items-center justify-center gap-4 mt-3 text-sp-white">
         <button className="flex flex-col items-center justify-center h-24 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg p-4">
           <AddGuardianIcon />
@@ -208,7 +262,7 @@ function CreateSuccess({ name, surname, birth, death }) {
   );
 }
 
-function Step1({ name, setName, surname, setSurname }) {
+function Names({ name, setName, surname, setSurname }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -413,7 +467,7 @@ export function Thumbnail({ previewURL, title, onRemove, index }) {
   );
 }
 
-function Step4({ name, description, setDescription }) {
+function Description({ name, description, setDescription }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -444,7 +498,7 @@ function Step4({ name, description, setDescription }) {
   );
 }
 
-function Step5({ name, location, setLocation }) {
+function Location({ name, location, setLocation }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">

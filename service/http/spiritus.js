@@ -20,11 +20,10 @@ export async function GetSpiritusBySlug(slug) {
 }
 
 export async function CreateSpiritusFromObj(accessToken, obj) {
-  return await axios.post(`${API_URL}/wapi/spiritus`, {
+  return await axios.post(`${API_URL}/wapi/spiritus`, obj, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
-    data: obj,
   });
 }
 
@@ -103,8 +102,3 @@ export async function SearchSpiritusFullText(text, offset, limit) {
   return res;
 }
 
-// Call nextjs same origin /api/search because of CORS errors.
-// It's easier to proxy the request for now since we don't control the API.
-export async function ProxySearchSpiritus(searchTerm) {
-  return axios.get(`/api/search?q=${searchTerm}`);
-}

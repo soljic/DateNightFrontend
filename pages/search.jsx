@@ -3,7 +3,8 @@ import { Footer } from "../components/layout/Footer";
 
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useState, useEffect } from "react";
-import { ProxySearchSpiritus, SearchSpiritus } from "../service/http/spiritus";
+
+import { ProxySearchSpiritus } from "../service/http/proxy";
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
