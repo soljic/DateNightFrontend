@@ -42,3 +42,11 @@ export async function GetSpiritusStoriesByID(id, offset, limit) {
   });
   return res;
 }
+
+export async function CreateStoryFromObj(accessToken, obj) {
+  return await axios.post(`${API_URL}/stories/spiritus/id`, obj, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}

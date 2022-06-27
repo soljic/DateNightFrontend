@@ -14,3 +14,12 @@ export function ProxyCreateSpiritus(spiritusObj, accessToken) {
     },
   });
 }
+
+
+export function ProxyCreateStory(storyObj, accessToken) {
+  return axios.post("/api/story/create", storyObj, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
