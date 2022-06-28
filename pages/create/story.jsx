@@ -21,7 +21,7 @@ import {
   StoryTextEditor,
   StoryTitle,
   StoryType,
-} from "../../components/forms/createStory";
+} from "../../components/forms/CreateStory";
 import { StoryImageUploader } from "../../components/Uploaders";
 import { ProgressBar, Spinner } from "../../components/Status";
 import { StoryIcon } from "../../components/Icons";
