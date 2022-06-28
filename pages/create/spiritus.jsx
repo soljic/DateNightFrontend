@@ -266,7 +266,7 @@ function Names({ name, setName, surname, setSurname }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <AddSpiritusIcon fill />
+        <SpiritusIcon fill />
       </div>
       <p className="font-bold text-sp-white text-2xl">
         Enter first and last name for Spiritus.
@@ -308,7 +308,7 @@ function ChooseDates({ name, birth, setBirth, death, setDeath }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <AddRangeIcon fill />
+        <RangeIcon fill />
       </div>
       <p className="font-bold text-sp-white text-2xl">
         When was <span> {name} </span> born, and when did he/she died?
@@ -395,7 +395,7 @@ function ImageUploader({ name, images, setImages }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <AddImageIcon fill />
+        <ImageIcon fill />
       </div>
       <p className="font-bold text-sp-white text-2xl">
         Does<span> {name} </span> have any images from his/her life? If yes,
@@ -471,7 +471,7 @@ function Description({ name, description, setDescription }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <AddCommentIcon fill />
+        <CommentIcon fill />
       </div>
       <p className="font-bold text-sp-white text-2xl">
         Does<span> {name} </span>have any sentence which he/she always said? If
@@ -502,7 +502,7 @@ function Location({ name, location, setLocation }) {
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <AddLocationIcon fill />
+        <LocationIcon fill />
       </div>
       <p className="font-bold text-sp-white text-2xl">
         <span> {name} </span> must associate you to a one place. Please select
@@ -546,7 +546,7 @@ function ProgressBar({ step, maxSteps }) {
   );
 }
 
-function AddSpiritusIcon({ width, height, fill }) {
+function SpiritusIcon({ width, height, fill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
 
@@ -565,7 +565,7 @@ function AddSpiritusIcon({ width, height, fill }) {
   );
 }
 
-function AddRangeIcon({ width, height, fill }) {
+function RangeIcon({ width, height, fill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
   return (
@@ -583,7 +583,7 @@ function AddRangeIcon({ width, height, fill }) {
   );
 }
 
-function AddImageIcon({ width, height, fill }) {
+function ImageIcon({ width, height, fill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
 
@@ -640,7 +640,7 @@ function AddGraveIcon({ width, height }) {
   );
 }
 
-function AddCommentIcon({ width, height, fill }) {
+function CommentIcon({ width, height, fill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
 
@@ -659,7 +659,7 @@ function AddCommentIcon({ width, height, fill }) {
   );
 }
 
-function AddLocationIcon({ width, height, fill }) {
+function LocationIcon({ width, height, fill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
   return (
