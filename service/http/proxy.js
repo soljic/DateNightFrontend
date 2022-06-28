@@ -1,5 +1,6 @@
-// Methods in /service/http/proxy call same-origin (NextJS) api server
-// This is done primarily to aviod CORS issues
+// Methods in /service/http/proxy call same-origin (NextJS) api server.
+// This is done primarily to aviod CORS issues.
+// Check /pages/api for implementation details.
 
 import axios from "axios";
 
@@ -15,11 +16,14 @@ export function ProxyCreateSpiritus(spiritusObj, accessToken) {
   });
 }
 
-
 export function ProxyCreateStory(storyObj, accessToken) {
   return axios.post("/api/story/create", storyObj, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
   });
+}
+
+export function ProxyGetTags() {
+  return axios.get("/api/tags");
 }

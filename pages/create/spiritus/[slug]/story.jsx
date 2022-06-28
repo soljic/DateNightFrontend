@@ -14,48 +14,37 @@ import {
   XIcon,
   SearchIcon,
   UploadIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/outline";
 
 import Layout from "../../../../components/layout/Layout";
 
-import { ProxyCreateStory } from "../../../../service/http/proxy";
+import { ProxyCreateStory, ProxyGetTags } from "../../../../service/http/proxy";
 
 const tagList = [
   {
-    id: 31,
-    value: "Ljubav",
-    featured: false,
-    special: false,
+    value: 31,
+    label: "Ljubav",
   },
   {
-    id: 32,
-    value: "Rat",
-    featured: false,
-    special: false,
+    value: 32,
+    label: "Rat",
   },
   {
-    id: 33,
-    value: "Život",
-    featured: false,
-    special: false,
+    value: 33,
+    label: "Život",
   },
   {
-    id: 34,
-    value: "Family",
-    featured: false,
-    special: false,
+    value: 34,
+    label: "Family",
   },
   {
-    id: 35,
-    value: "Posveta",
-    featured: false,
-    special: false,
+    value: 35,
+    label: "Posveta",
   },
   {
-    id: 36,
-    value: "Hobi",
-    featured: false,
-    special: false,
+    value: 36,
+    label: "Hobi",
   },
 ];
 
@@ -91,7 +80,7 @@ export default function CreateStoryPage() {
 
   // stepper is 0 indexed!
   const numSteps = 6;
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(4);
 
   const nextStep = () => {
     if (step < numSteps) {
@@ -370,6 +359,20 @@ export function Preview({ previewURL, title, onRemove, index }) {
 }
 
 function Title({ title, setTitle, tags, setTags }) {
+  const [itemsList, setItemsList] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await ProxyGetTags();
+        if (res?.data.length) {
+          setItemsList(res.data.map());
+        }
+      } catch {}
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
@@ -394,23 +397,13 @@ function Title({ title, setTitle, tags, setTags }) {
           </div>
           <div className="w-full flex-1">
             <div className="my-2 rounded">
-              <select
-                // multiple={true}
-                value={tags}
-                onChange={(e) => {
-                  setTags(
-                    Array.from(e.target.selectedOptions, (item) => item.value)
-                  );
-                }}
-                placeholder="Select story theme"
-                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
-              >
-                {tagList.map((t) => (
-                  <option value={t.id} key={t.value}>
-                    {t.value}
-                  </option>
-                ))}
-              </select>
+              <div className="border-2 rounded border-sp-medium p-2.5">
+                <MultiSelectInput
+                  items={itemsList}
+                  selected={tags}
+                  setSelected={setTags}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -764,5 +757,104 @@ function AddStoryIcon({ width, height }) {
         </linearGradient>
       </defs>
     </svg>
+  );
+}
+
+function Dropdown({ items, addItem }) {
+  return (
+    <div
+      id="dropdown"
+      className="absolute top-10 right-0 w-full bg-sp-dark text-sp-white z-40 rounded-lg border-2 border-sp-medium max-h-select"
+    >
+      <div className="flex flex-col w-full">
+        {items.map((item, key) => {
+          return (
+            <div
+              key={key}
+              className="cursor-pointer hover:bg-sp-fawn hover:text-sp-dark rounded-lg"
+              onClick={(e) => {
+                e.preventDefault();
+                addItem(item);
+              }}
+            >
+              <div className="flex w-full items-center p-2">
+                <div className="w-full items-center flex">
+                  <div className="mx-2 leading-6">{item.value}</div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export function MultiSelectInput({ items, selected, setSelected }) {
+  // state showing if dropdown is open or closed
+  const [dropdown, setDropdown] = useState(false);
+
+  const toogleDropdown = () => {
+    setDropdown(!dropdown);
+  };
+  // adds new item to multiselect
+  const addItem = (item) => {
+    setSelected(selected.concat(item));
+    setDropdown(false);
+  };
+  // removes item from multiselect
+  const removeTag = (item) => {
+    const filtered = selected.filter((e) => e !== item);
+    setSelected(filtered);
+  };
+
+  return (
+    <div className="w-full flex flex-col items-center mx-auto">
+      <div className="w-full">
+        <div className="flex flex-col items-center relative">
+          <div className="w-full">
+            <div className="flex appearance-none outline-none text-sp-white">
+              <div className="flex flex-auto flex-wrap gap-1 items-center">
+                {!selected.length ? (
+                  <p className="text-gray-400">Choose categories</p>
+                ) : (
+                  selected.map((tag, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="flex justify-center items-center font-medium px-2 py-1 rounded-2xl border border-sp-light"
+                      >
+                        <div className="text-sm leading-none">{tag.value}</div>
+                        <XIcon
+                          className="w-4 h-4 ml-1"
+                          onClick={() => removeTag(tag)}
+                        />
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+              <div
+                className="text-gray-300 w-8 py-1 pl-2 pr-1 border-l-2 flex items-center border-sp-medium"
+                onClick={(e) => {
+                  e.preventDefault();
+                  toogleDropdown();
+                }}
+              >
+                <button className="cursor-pointer text-gray-600 outline-none focus:outline-none">
+                  <ChevronDownIcon className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+          {dropdown ? (
+            <Dropdown
+              items={items.filter((item) => !selected.includes(item))}
+              addItem={addItem}
+            ></Dropdown>
+          ) : null}
+        </div>
+      </div>
+    </div>
   );
 }
