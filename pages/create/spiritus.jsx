@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { getSession } from "next-auth/react";
 
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
@@ -19,20 +18,9 @@ import { SpiritusImageUploader } from "../../components/Uploaders";
 
 import { ProxyCreateSpiritus } from "../../service/http/proxy";
 
-// TODO: sve stuff to local storage
+// TODO: save stuff to local storage
 // TODO: add err handling and error toasts
-export default function CreateSpiritusPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    // redirect users that are not logged in
-    // the API method requires authentication to create spiritus
-    if (status !== "authenticated" && status !== "loading") {
-      router.push("/");
-    }
-  }, [status]);
-
+export default function CreateSpiritusPage({ user }) {
   // stepper is 0 indexed!
   const numSteps = 4;
   const [step, setStep] = useState(0);
@@ -63,7 +51,7 @@ export default function CreateSpiritusPage() {
           description,
           location: {}, // TODO: add location when BE is ready
         },
-        session.user.accessToken
+        user.accessToken
       );
       setSpiritus(res.data);
       setPending(false);
@@ -248,4 +236,23 @@ function Success({ spiritus }) {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      user: session.user,
+    },
+  };
 }
