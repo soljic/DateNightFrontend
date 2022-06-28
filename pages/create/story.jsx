@@ -17,42 +17,15 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/outline";
 
-import Layout from "../../../../components/layout/Layout";
+import Layout from "../../components/layout/Layout";
 
-import { ProxyCreateStory, ProxyGetTags } from "../../../../service/http/proxy";
+import { ProxyCreateStory, ProxyGetTags } from "../../service/http/proxy";
 
-const tagList = [
-  {
-    value: 31,
-    label: "Ljubav",
-  },
-  {
-    value: 32,
-    label: "Rat",
-  },
-  {
-    value: 33,
-    label: "Život",
-  },
-  {
-    value: 34,
-    label: "Family",
-  },
-  {
-    value: 35,
-    label: "Posveta",
-  },
-  {
-    value: 36,
-    label: "Hobi",
-  },
-];
-
-// TODO: tags, create story local storage, pass request to BE
+// TODO: create story local storage, pass request to BE
 export default function CreateStoryPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { slug } = router.query;
+  const { spiritus } = router.query;
 
   // form fields
   const [type, setType] = useState("");
@@ -80,7 +53,7 @@ export default function CreateStoryPage() {
 
   // stepper is 0 indexed!
   const numSteps = 6;
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(0);
 
   const nextStep = () => {
     if (step < numSteps) {
@@ -97,28 +70,21 @@ export default function CreateStoryPage() {
   const createStory = async () => {
     try {
       setPending(true);
-      // const res = await ProxyCreateStory(
-      //   {
-      //     title,
-      //     tags: [],
-      //     paragraphs: setParagrapghs(story),
-      //     description: summary,
-      //     date: getISOLocalDate(date),
-      //   },
-      //   session.user.accessToken
-      // );
-      const res = {
-        data: {
+      const res = await ProxyCreateStory(
+        {
+          spiritusId: spiritus,
           title,
-          tags: [],
+          tags: tags.map((t) => t.id),
           paragraphs: setParagrapghs(storyText),
           description: summary,
           date: getISOLocalDate(date),
         },
-      };
+        session.user.accessToken
+      );
       setStory(res.data);
       setPending(false);
     } catch (err) {
+      console.log(err)
       setPending(false);
     }
   };
@@ -162,7 +128,7 @@ export default function CreateStoryPage() {
       <div className="py-5 h-screen">
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           {story ? (
-            <CreateSuccess slug={slug} />
+            <CreateSuccess />
           ) : (
             <>
               <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
@@ -366,7 +332,7 @@ function Title({ title, setTitle, tags, setTags }) {
       try {
         const res = await ProxyGetTags();
         if (res?.data.length) {
-          setItemsList(res.data.map());
+          setItemsList(res.data);
         }
       } catch {}
     }
@@ -682,7 +648,7 @@ function CreateSpinner() {
   );
 }
 
-function CreateSuccess({ slug }) {
+function CreateSuccess() {
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 mt-24">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
@@ -699,7 +665,7 @@ function CreateSuccess({ slug }) {
           <UploadIcon className="w-6 h-6" />
           <p className="font-semibold text-center">Share</p>
         </button>
-        <Link href={`/create/spiritus/${slug}/story`}>
+        <Link href={`/create/story`}>
           <a className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg p-4">
             <OutlinePlusCircleIcon className="w-6 h-6" />
             <p className="font-semibold">New story</p>

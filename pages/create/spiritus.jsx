@@ -9,9 +9,9 @@ import { getISOLocalDate } from '@wojtekmaj/date-utils';
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 
-import Layout from "../../../components/layout/Layout";
-import { HorizontalDivider, Logo } from "../../../components/layout/Common";
-import { ProxyCreateSpiritus } from "../../../service/http/proxy";
+import Layout from "../../components/layout/Layout";
+import { HorizontalDivider, Logo } from "../../components/layout/Common";
+import { ProxyCreateSpiritus } from "../../service/http/proxy";
 
 
 // TODO: sve stuff to local storage
