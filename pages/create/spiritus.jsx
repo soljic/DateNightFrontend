@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Head from "next/head";
+
 import { useState } from "react";
 import { getSession } from "next-auth/react";
 
@@ -122,6 +124,14 @@ export default function CreateSpiritusPage({ user }) {
 
   return (
     <Layout>
+      <Head>
+        <title>Spiritus | Create Spiritus</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Create a Spiritus and keep it safe forver."
+        />
+      </Head>
       <div className="py-5 h-screen ">
         {/* <p className="text-sp-white">
           {JSON.stringify({

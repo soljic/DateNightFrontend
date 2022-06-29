@@ -199,7 +199,7 @@ function AboutIcon({ width, height }) {
 function ThemeToggler() {
   return (
     <label
-      htmlFor="-toggle"
+      htmlFor="theme-toggle"
       className="relative inline-flex cursor-pointer items-center"
     >
       <input

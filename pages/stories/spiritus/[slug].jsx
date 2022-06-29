@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Head from "next/head";
 
 import Layout from "../../../components/layout/Layout";
 import SpiritusCarousel from "../../../components/carousel/SpiritusCarousel";
@@ -23,6 +24,14 @@ export default function StoryPage({
 }) {
   return (
     <Layout>
+      <Head>
+        <title>{`Spiritus | ${spiritus.name} ${spiritus.surname} - ${first.title}`}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content={spiritus.description || `Read and follow memories about ${spiritus.name} ${spiritus.surname}.`}
+        />
+      </Head>
       <section className="container mx-auto px-5" key="story">
         <div className="flex flex-col items-center py-8">
           <div className="flex flex-col w-full mb-12 text-left">
@@ -91,7 +100,6 @@ export async function getServerSideProps(context) {
   const { slug, id, story } = context.query;
   const resSpiritus = await GetSpiritusBySlug(slug);
   const spiritus = resSpiritus.data;
-
 
   const resStories = await GetSpiritusStoriesByID(id, 0, 5);
   const content = resStories.data?.content;

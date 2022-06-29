@@ -21,7 +21,9 @@ export function TopStory({ id, name, surname, images }) {
               priority // add priority since this is the first thing loaded in the UI
             />
           ) : (
-            <ImagePlaceholder />
+            <div className="h-64">
+              <ImagePlaceholder />
+            </div>
           )}
 
           <div className="absolute bottom-10 left-5 w-full p-4 text-white">

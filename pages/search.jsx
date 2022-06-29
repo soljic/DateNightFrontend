@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
+import Head from "next/head";
+
 import { Navbar } from "../components/layout/NavBar";
 import { Footer } from "../components/layout/Footer";
 
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import { useState, useEffect } from "react";
 
 import { ProxySearchSpiritus } from "../service/http/proxy";
 
@@ -39,6 +41,11 @@ export default function Search() {
 
   return (
     <div className="common-bg p-2 min-w-full">
+      <Head>
+        <title>Spiritus | Search</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Search for your loved ones on the platform that keeps your memories forever" />
+      </Head>
       <Navbar />
       <div className="h-screen container mx-auto mt-20 lg:w-1/3 md:w-full sm:w-full">
         <div className="mx-auto flex items-center rounded-xl p-2 bg-sp-medium">

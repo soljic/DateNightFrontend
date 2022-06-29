@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 import Link from "next/link";
+import Head from "next/head";
+
 import { getSession, useSession } from "next-auth/react";
 
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
@@ -120,6 +122,14 @@ export default function CreateStoryPage({ spiritus }) {
   };
   return (
     <Layout>
+      <Head>
+        <title>Spiritus | Create Story </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Add or suggest a story for Spiritus and keep it safe forver."
+        />
+      </Head>
       <div className="py-5 h-screen">
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           {story ? (

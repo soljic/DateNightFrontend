@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import {
   CreateSpiritusCTA,
   SearchSpiritusCTA,
@@ -10,8 +12,21 @@ import { PaginatePopularSpiritus } from "../service/http/spiritus";
 export default function Home({ top, popular }) {
   return (
     <Layout>
+      <Head>
+        <title>Spiritus | Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Digital assets platform that keeps your memories forver!"
+        />
+      </Head>
       <CreateSpiritusCTA />
-      <TopStory id={top.id} name={top.name} surname={top.surname} images={top.images} />
+      <TopStory
+        id={top.id}
+        name={top.name}
+        surname={top.surname}
+        images={top.images}
+      />
       <Discover popular={popular} />
       <SearchSpiritusCTA />
     </Layout>
