@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Logo, NavItem } from "./Common";
-import { GlobeAltIcon, SearchIcon } from "@heroicons/react/outline";
+import { GlobeAltIcon, SearchIcon, SunIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, MoonIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
 
 const languages = [
@@ -51,7 +51,8 @@ export function Navbar() {
               {session?.user?.name ? session.user.name : "Log in"}
             </a>
           </Link>
-          <GlobeAltIcon className="h-6 w-6 text-sp-white" />
+          {/* <GlobeAltIcon className="h-6 w-6 text-sp-white" /> */}
+          <ThemeToggler />
         </div>
       </div>
     </div>
@@ -192,5 +193,36 @@ function AboutIcon({ width, height }) {
         fill="#E3AA6D"
       />
     </svg>
+  );
+}
+
+function ThemeToggler() {
+  return (
+    <label
+      htmlFor="-toggle"
+      className="relative inline-flex cursor-pointer items-center"
+    >
+      <input
+        type="checkbox"
+        value=""
+        id="theme-toggle"
+        className="peer sr-only"
+      />
+      <div className={`peer py-4 px-2 flex h-7 w-13
+      items-center justify-between rounded-full
+      border
+      after:absolute after:left-[5px]
+       after:h-6 after:w-6 after:rounded-full after:border
+       after:bg-white after:transition-all
+       after:content-['']
+       peer-checked:bg-white
+       peer-checked:after:translate-x-full
+       peer-checked:after:border-black
+       peer-focus:outline-none
+       peer-focus:ring-2 peer-focus:ring-sp-fawn dark:border-sp-medium dark:bg-sp-dark`}>
+        <SunIcon className="w-5 h-5 text-sp-fawn" style={{ fill: 'sp-fawn' }}/>
+        <MoonIcon className="h-5 w-5 -scale-x-100 text-gray-300" />
+      </div>
+    </label>
   );
 }
