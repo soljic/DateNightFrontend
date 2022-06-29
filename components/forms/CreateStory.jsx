@@ -136,7 +136,7 @@ export function StoryLocation({ location, setLocation }) {
                   setLocation(e.target.value);
                 }}
                 placeholder="Enter place"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black appearance-none outline-none w-full rounded text-sp-white"
               />
               <SearchIcon className="h-6 w-6 text-sp-lighter mx-3" />
             </div>
@@ -180,7 +180,7 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
                   setTitle(e.target.value);
                 }}
                 placeholder="Enter story title"
-                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
             </div>
           </div>
@@ -223,7 +223,7 @@ export function StorySummary({ summary, setSummary }) {
                 maxLength="150"
                 placeholder="Enter sentence"
                 rows="3"
-                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
               <p className="text-sp-lighter text-sm mt-2">
                 <span>{summary.length}</span>/150
@@ -246,7 +246,7 @@ export function StoryTextEditor({ storyText, setStoryText }) {
           onChange={(e) => {
             setStoryText(e.target.value);
           }}
-          className="w-full text-lg py-3 px-4 text-bottom bg-sp-dark text-sp-white rounded-md border border-sp-lighter placeholder-sp-lighter"
+          className="w-full text-lg py-3 px-4 text-bottom bg-sp-black text-sp-white rounded-md border border-sp-lighter placeholder-sp-lighter"
           placeholder="Enter story text"
           rows="10"
         ></textarea>

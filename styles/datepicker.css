@@ -21,7 +21,7 @@
 }
 
 .react-date-picker__inputGroup__input:invalid {
-  @apply bg-sp-dark;
+  @apply bg-sp-black;
 }
 
 .react-date-picker__button:enabled {
@@ -52,7 +52,7 @@
 }
 
 .react-calendar__navigation button {
-  @apply w-11 hover:bg-sp-fawn hover:text-sp-dark rounded-lg mb-1;
+  @apply w-11 hover:bg-sp-fawn hover:text-sp-black rounded-lg mb-1;
 }
 
 .react-calendar__month-view__weekdays {
@@ -73,11 +73,11 @@
 }
 
 .react-calendar__tile {
-  @apply text-sp-white text-sm py-2 hover:bg-sp-fawn rounded hover:text-sp-dark my-0.5;
+  @apply text-sp-white text-sm py-2 hover:bg-sp-fawn rounded hover:text-sp-black my-0.5;
 }
 
 .react-calendar__tile--now {
-  @apply bg-sp-fawn text-sp-dark;
+  @apply bg-sp-fawn text-sp-black;
 }
 
 .react-calendar__month-view__days {

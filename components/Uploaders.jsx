@@ -67,7 +67,7 @@ export function StoryImageUploader({ images, setImages }) {
 
       {!images.length ? (
         <button
-          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3"
+          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-black mt-3"
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
@@ -153,7 +153,7 @@ export function SpiritusImageUploader({ name, images, setImages }) {
 
       {!images.length ? (
         <button
-          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-dark mt-3"
+          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-black mt-3"
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />

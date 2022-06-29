@@ -83,7 +83,7 @@ function CTACreateButton() {
       href="/create/spiritus"
       className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-full py-3 px-7"
     >
-      <PlusCircleIcon className="h-6 w-6 text-sp-dark" />
+      <PlusCircleIcon className="h-6 w-6 text-sp-black" />
       <span className="font-semibold ml-1">Create Spiritus</span>
     </a>
   );
@@ -95,7 +95,7 @@ function CTASearchButton() {
       href="/search"
       className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-full py-3 px-7"
     >
-      <ArrowCircleRightIcon className="h-6 w-6 text-sp-dark" />
+      <ArrowCircleRightIcon className="h-6 w-6 text-sp-black" />
       <span className="font-semibold ml-1">Go to search</span>
     </a>
   );
@@ -173,7 +173,7 @@ function CTAPartners() {
           height={50}
         />
 
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-dark opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
       </div>
 
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
@@ -183,7 +183,7 @@ function CTAPartners() {
           width={92}
           height={50}
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-dark opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
       </div>
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
         <Image
@@ -192,7 +192,7 @@ function CTAPartners() {
           width={86}
           height={54}
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-dark opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
       </div>
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
         <Image
@@ -201,7 +201,7 @@ function CTAPartners() {
           width={70}
           height={50}
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-dark opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
       </div>
     </div>
   );

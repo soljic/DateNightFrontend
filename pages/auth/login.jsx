@@ -29,7 +29,7 @@ export default function Login() {
     }
   };
   return (
-    <section className="bg-sp-dark">
+    <section className="bg-sp-black">
       <div className="container mx-auto h-screen">
         <div className="flex justify-center items-center flex-wrap h-full g-6 text-sp-white">
           <div className="block border-2 border-sp-lighter rounded-lg bg-sp-fawn bg-opacity-5">
@@ -77,7 +77,7 @@ export default function Login() {
                           e.preventDefault();
                           submit();
                         }}
-                        className="inline-block px-6 py-2.5 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn text-sp-dark font-semibold text-xs leading-tight uppercase rounded focus:outline-none focus:ring-0 w-full mb-3"
+                        className="inline-block px-6 py-2.5 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn text-sp-black font-semibold text-xs leading-tight uppercase rounded focus:outline-none focus:ring-0 w-full mb-3"
                       >
                         Log in
                       </button>

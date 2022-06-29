@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html >
         <Head>
           {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -25,7 +25,7 @@ class MyDocument extends Document {
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
           />
         </Head>
-        <body className="bg-sp-dark">
+        <body className="bg-sp-white dark:bg-sp-black">
           <Main />
           <NextScript />
         </body>

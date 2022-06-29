@@ -1,11 +1,14 @@
+import { Fragment, useState } from "react";
+import { useTheme } from "next-themes";
+
 import Link from "next/link";
+
 import { Logo, NavItem } from "./Common";
-import { GlobeAltIcon, SearchIcon, SunIcon } from "@heroicons/react/outline";
+import { GlobeAltIcon, SearchIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon, MoonIcon } from "@heroicons/react/solid";
-import { Fragment } from "react";
+import { ChevronDownIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
 
 const languages = [
   {
@@ -24,7 +27,7 @@ export function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="container mx-auto bg-sp-dark py-3 mb-2 opacity-90 backdrop-blur-md sticky top-0 z-50">
+    <div className="container mx-auto bg-sp-white dark:bg-sp-black py-3 mb-2 opacity-90 backdrop-blur-md sticky top-0 z-50">
       <div className="flex flex-row xl:w-4/5 lg:w-full mx-auto justify-between text-sp-white">
         <div className="inline-flex items-center">
           <Link href="/">
@@ -110,7 +113,7 @@ export default function MobileNav() {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute z-100 mt-3 transform px-4 sm:px-0 max-w-xs">
-                <div className="overflow-hidden rounded-lg shadow-lg bg-sp-dark border-3 border-sp-medium">
+                <div className="overflow-hidden rounded-lg shadow-lg bg-sp-black border-3 border-sp-medium">
                   <div className="relative grid gap-6 p-6 grid-cols-1">
                     {solutions.map((item) => (
                       <a
@@ -196,7 +199,9 @@ function AboutIcon({ width, height }) {
   );
 }
 
-function ThemeToggler() {
+function ThemeSlider() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <label
       htmlFor="theme-toggle"
@@ -208,21 +213,45 @@ function ThemeToggler() {
         id="theme-toggle"
         className="peer sr-only"
       />
-      <div className={`peer py-4 px-2 flex h-7 w-13
+      <div
+        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        className={`peer py-4 px-2 flex flex-row-reverse h-7 w-13
       items-center justify-between rounded-full
-      border
+      border-2
       after:absolute after:left-[5px]
        after:h-6 after:w-6 after:rounded-full after:border
-       after:bg-white after:transition-all
+       after:bg-sp-lighter after:transition-all
        after:content-['']
-       peer-checked:bg-white
+       peer-checked:bg-sp-black
        peer-checked:after:translate-x-full
        peer-checked:after:border-black
        peer-focus:outline-none
-       peer-focus:ring-2 peer-focus:ring-sp-fawn dark:border-sp-medium dark:bg-sp-dark`}>
-        <SunIcon className="w-5 h-5 text-sp-fawn" style={{ fill: 'sp-fawn' }}/>
-        <MoonIcon className="h-5 w-5 -scale-x-100 text-gray-300" />
+       peer-hover:border-sp-fawn dark:border-sp-medium dark:bg-sp-white`}
+      >
+        <SunIcon className="w-5 h-5 text-sp-fawn" style={{ fill: "sp-fawn" }} />
+        <MoonIcon className="h-5 w-5 text-gray-300" />
       </div>
     </label>
+  );
+}
+
+function ThemeToggler() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <button
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="p-2 rounded-full bg-sp-white border-sp-lighter dark:border-sp-medium border dark:bg-sp-black hover:bg-gray-50 focus:outline-none dark:hover:bg-sp-lighter"
+    >
+      <span class="sr-only">
+        <span class="dark:hidden">Switch to dark theme</span>
+        <span class="hidden dark:inline">Switch to light theme</span>
+      </span>
+      {theme === "light" ? (
+        <SunIcon className="w-5 h-5 text-sp-dark-fawn" style={{ fill: "sp-fawn" }} />
+      ) : (
+        <MoonIcon className="h-5 w-5 text-gray-300 -scale-x-100" />
+      )}
+    </button>
   );
 }

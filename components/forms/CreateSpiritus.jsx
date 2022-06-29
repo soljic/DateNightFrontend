@@ -23,7 +23,7 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
                   setName(e.target.value);
                 }}
                 placeholder="Enter first name"
-                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
             </div>
           </div>
@@ -35,7 +35,7 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
                   setSurname(e.target.value);
                 }}
                 placeholder="Enter last name"
-                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
             </div>
           </div>
@@ -116,7 +116,7 @@ export function SpiritusDescription({ name, description, setDescription }) {
                 }}
                 placeholder="Enter sentence"
                 rows="3"
-                className="p-3 bg-sp-dark border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-white"
               />
             </div>
           </div>
@@ -150,7 +150,7 @@ export function SpiritusLocation({ name, location, setLocation }) {
                   setLocation(e.target.value);
                 }}
                 placeholder="Enter place"
-                className="p-3 bg-sp-dark appearance-none outline-none w-full rounded text-sp-white"
+                className="p-3 bg-sp-black appearance-none outline-none w-full rounded text-sp-white"
               />
               {/* <SearchIcon className="h-6 w-6 text-sp-lighter mx-3" /> */}
             </div>

@@ -75,14 +75,14 @@ function Dropdown({ items, addItem }) {
   return (
     <div
       id="dropdown"
-      className="absolute top-10 right-0 w-full bg-sp-dark text-sp-white z-40 rounded-lg border-2 border-sp-medium max-h-select"
+      className="absolute top-10 right-0 w-full bg-sp-black text-sp-white z-40 rounded-lg border-2 border-sp-medium max-h-select"
     >
       <div className="flex flex-col w-full">
         {items.map((item, key) => {
           return (
             <div
               key={key}
-              className="cursor-pointer hover:bg-sp-fawn hover:text-sp-dark rounded-lg"
+              className="cursor-pointer hover:bg-sp-fawn hover:text-sp-black rounded-lg"
               onClick={(e) => {
                 e.preventDefault();
                 addItem(item);

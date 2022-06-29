@@ -34,9 +34,9 @@ export function TopStory({ id, name, surname, images }) {
             <Link
               href={`/stories/spiritus/${id}?firstname=${name}&lastname=${surname}`}
             >
-              <a className="inline-flex bg-sp-white text-sp-dark border border-sp-dark rounded-full px-5 py-3 items-center">
+              <a className="inline-flex bg-sp-white text-sp-black border border-sp-dark rounded-full px-5 py-3 items-center">
                 Read story
-                <ArrowNarrowRightIcon className="h-5 w-5 text-sp-dark" />
+                <ArrowNarrowRightIcon className="h-5 w-5 text-sp-black" />
               </a>
             </Link>
           </div>

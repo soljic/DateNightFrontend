@@ -37,7 +37,7 @@ export function Tribute() {
           id="tribute"
           type="text"
           rows="1"
-          className="w-full text-2xl py-3 px-8 text-bottom bg-sp-dark rounded-3xl border border-sp-lighter placeholder-sp-lighter"
+          className="w-full text-2xl py-3 px-8 text-bottom bg-sp-black rounded-3xl border border-sp-lighter placeholder-sp-lighter"
           placeholder="Write tribute"
         ></textarea>
 
@@ -71,7 +71,7 @@ export function Tribute() {
               </clipPath>
             </defs>
           </svg>
-          <span className="text-lg font-semibold text-sp-dark ml-1">
+          <span className="text-lg font-semibold text-sp-black ml-1">
             Give Rose
           </span>
         </button>
@@ -136,7 +136,7 @@ export function MoreStories({ stories, spiritus }) {
           </h1>
           <a
             href="/create"
-            className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn rounded-full py-2 px-6 text-sp-dark"
+            className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn rounded-full py-2 px-6 text-sp-black"
           >
             <PlusCircleIcon className="h-6 w-6" />
             <span className="font-semibold ml-1">Add Story</span>

@@ -2,7 +2,7 @@ export function Spinner({ text }) {
   return (
     <div className="inline-flex items-center">
       <svg
-        className="animate-spin -ml-1 mr-3 h-5 w-5 text-sp-dark"
+        className="animate-spin -ml-1 mr-3 h-5 w-5 text-sp-black"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

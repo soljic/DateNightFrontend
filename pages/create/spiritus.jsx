@@ -159,7 +159,7 @@ export default function CreateSpiritusPage({ user }) {
                         e.preventDefault();
                         prevStep();
                       }}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-dark ${
+                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
                         pending && "hidden"
                       }`}
                       disabled={pending}
@@ -174,7 +174,7 @@ export default function CreateSpiritusPage({ user }) {
                         nextStep();
                       }}
                       disabled={!name || !surname}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark ${
+                      className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black ${
                         (name && surname) || "opacity-30"
                       }`}
                     >
@@ -187,7 +187,7 @@ export default function CreateSpiritusPage({ user }) {
                         createSpiritus();
                       }}
                       disabled={pending}
-                      className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+                      className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black"
                     >
                       {pending ? <Spinner text={"Creating..."} /> : "Create"}
                     </button>
@@ -230,7 +230,7 @@ function Success({ spiritus }) {
         </p>
       </div>
       <Link href={`/create/story?spiritus=${spiritus.id}`}>
-        <a className="text-center px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark">
+        <a className="text-center px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black">
           Create story
         </a>
       </Link>

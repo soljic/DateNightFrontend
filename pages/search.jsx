@@ -107,9 +107,9 @@ function NotFound({ searchTerm }) {
       </p>
       <a
         href="/create"
-        className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 text-sp-dark border-sp-medium border-opacity-80 rounded-full py-3 px-7"
+        className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 text-sp-black border-sp-medium border-opacity-80 rounded-full py-3 px-7"
       >
-        <PlusCircleIcon className="h-6 w-6 text-sp-dark" />
+        <PlusCircleIcon className="h-6 w-6 text-sp-black" />
         <span className="font-semibold ml-1">Create Spiritus</span>
       </a>
     </div>

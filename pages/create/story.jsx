@@ -152,7 +152,7 @@ export default function CreateStoryPage({ spiritus }) {
             {step > 0 && (
               <button
                 onClick={prevStep}
-                className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-dark ${
+                className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
                   pending && "hidden"
                 }`}
                 disabled={pending}
@@ -164,7 +164,7 @@ export default function CreateStoryPage({ spiritus }) {
               <button
                 onClick={nextStep}
                 disabled={!storyText}
-                className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark ${
+                className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black ${
                   storyText || "opacity-30"
                 }`}
               >
@@ -177,7 +177,7 @@ export default function CreateStoryPage({ spiritus }) {
                   createStory();
                 }}
                 disabled={pending}
-                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-dark"
+                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black"
               >
                 {pending ? <Spinner text="Creating..." /> : "Create"}
               </button>
