@@ -44,7 +44,7 @@ export default function Search() {
       <Head>
         <title>Spiritus | Search</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Search for your loved ones on the platform that keeps your memories forever" />
+        <meta name="description" content="Find your loved ones! Over 15 000 Spiritus loved ones from many families and notable institutions." />
       </Head>
       <Navbar />
       <div className="h-screen container mx-auto mt-20 lg:w-1/3 md:w-full sm:w-full">
