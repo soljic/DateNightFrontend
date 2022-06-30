@@ -25,7 +25,7 @@ class MyDocument extends Document {
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
           />
         </Head>
-        <body className="bg-sp-white dark:bg-sp-black">
+        <body className="bg-sp-day-50 dark:bg-sp-black">
           <Main />
           <NextScript />
         </body>

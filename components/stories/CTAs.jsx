@@ -9,9 +9,9 @@ import Image from "next/image";
 export function CreateSpiritusCTA() {
   return (
     <>
-      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg bg-opacity-80">
+      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-200 to-sp-day-100 text-sp-black dark:text-sp-white dark:from-sp-dark-brown dark:to-sp-brown rounded-lg">
         <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
-          <h2 className="text-5xl font-extrabold text-sp-white mb-4">
+          <h2 className="text-5xl md:text-4xl sm:text-3xl font-extrabold mb-4">
             Keep memories of your<br></br> loved ones, forever
           </h2>
           <CTACreateButton />
@@ -25,6 +25,7 @@ export function CreateSpiritusCTA() {
   );
 }
 
+// unused
 export function CreateSpiritusCTABgImage() {
   return (
     <>
@@ -56,7 +57,7 @@ export function CreateSpiritusCTABgImage() {
 
 export function SearchSpiritusCTA() {
   return (
-    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg pt-4 pb-6">
+    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-200 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white">
       <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
         <Image
           src="/images/circle_images_sm.png"
@@ -64,10 +65,10 @@ export function SearchSpiritusCTA() {
           width={170}
           height={70}
         />
-        <h2 className="text-4xl font-extrabold text-sp-white mb-4">
+        <h2 className="text-4xl font-extrabold mb-4">
           Find your loved ones!
         </h2>
-        <p className="mx-auto w-2/5 text-center text-sp-white opacity-60 mb-6">
+        <p className="mx-auto w-2/5 text-center opacity-60 mb-6">
           Over 15 000 Spiritus loved ones from many of biggest Croatian
           graveyards and institutions.
         </p>
@@ -81,9 +82,9 @@ function CTACreateButton() {
   return (
     <a
       href="/create/spiritus"
-      className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-full py-3 px-7"
+      className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
     >
-      <PlusCircleIcon className="h-6 w-6 text-sp-black" />
+      <PlusCircleIcon className="h-6 w-6" />
       <span className="font-semibold ml-1">Create Spiritus</span>
     </a>
   );
@@ -93,9 +94,9 @@ function CTASearchButton() {
   return (
     <a
       href="/search"
-      className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-full py-3 px-7"
+      className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
     >
-      <ArrowCircleRightIcon className="h-6 w-6 text-sp-black" />
+      <ArrowCircleRightIcon className="h-6 w-6" />
       <span className="font-semibold ml-1">Go to search</span>
     </a>
   );
@@ -106,19 +107,19 @@ function CTADownloadLinks() {
     <div className="pt-8 text-sp-lighter">
       <ul className="inline-flex align-middle mr-2">
         <li>
-          <StarIcon className="h-4 w-4 text-sp-fawn" />
+          <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />
         </li>
         <li>
-          <StarIcon className="h-4 w-4 text-sp-fawn" />
+          <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />
         </li>
         <li>
-          <StarIcon className="h-4 w-4 text-sp-fawn" />
+          <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />
         </li>
         <li>
-          <StarIcon className="h-4 w-4 text-sp-fawn" />
+          <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />
         </li>
         <li>
-          <StarIcon className="h-4 w-4 text-sp-fawn" />
+          <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />
         </li>
       </ul>
       <span className="text-xs">Rated 4.8 on</span>
@@ -173,7 +174,7 @@ function CTAPartners() {
           height={50}
         />
 
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed dark:bg-sp-black opacity-25"></div>
       </div>
 
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
@@ -183,7 +184,7 @@ function CTAPartners() {
           width={92}
           height={50}
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed dark:bg-sp-black opacity-25"></div>
       </div>
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
         <Image
@@ -192,7 +193,7 @@ function CTAPartners() {
           width={86}
           height={54}
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed dark:bg-sp-black opacity-25"></div>
       </div>
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
         <Image
@@ -201,7 +202,7 @@ function CTAPartners() {
           width={70}
           height={50}
         />
-        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed bg-sp-black opacity-25"></div>
+        <div className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed dark:bg-sp-black opacity-25"></div>
       </div>
     </div>
   );

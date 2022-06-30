@@ -1,7 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  darkMode: 'class',  
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -20,18 +20,29 @@ module.exports = {
     },
     extend: {
       colors: {
+        "sp-white": "#F0EFED",
         "sp-black": "#171411",
+
+        // darkmode colors
         "sp-medium": "#302C29",
         "sp-medlight": "#1f1b16",
         "sp-lighter": "#666461",
-        "sp-white": "#F0EFED",
 
+        // darkmode accents
         "sp-cotta": "#DB6D56",
         "sp-fawn": "#E3AA6D",
         "sp-dark-fawn": "#ED9A4C",
-
         "sp-brown": "#2B231A",
         "sp-dark-brown": "#2C2117",
+
+        // lightmode colors
+        "sp-day-50": "#F0EBE6",
+        "sp-day-100": "#DED4CA",
+        "sp-day-200": "#E3D4C5",
+        "sp-day-900": "#D67915",
+
+        // lightmode accents
+        "sp-gray-100": "#DBD4CE",
       },
 
       fontFamily: {
