@@ -11,7 +11,7 @@ import { ProxySearchSpiritus } from "../service/http/proxy";
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(mock);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function Search() {
       </Head>
       <Navbar />
       <div className="h-screen container mx-auto mt-20 lg:w-1/3 md:w-full sm:w-full">
-        <div className="mx-auto flex items-center rounded-xl p-2 bg-sp-medium">
+        <div className="mx-auto flex items-center rounded-xl p-2 border border-sp-lighter dark:bg-sp-medium dark:border-none">
           <button>
             <span className="flex w-auto items-center justify-end px-3 py-2 text-sp-lighter">
               <svg
@@ -101,15 +101,15 @@ function NotFound({ searchTerm }) {
           fill="currentColor"
         />
       </svg>
-      <p className="text-center lg:w-1/3 md:w-1/2 sm:w-1/2 p-2 mb-4">
+      <p className="text-center w-full lg:w-2/3 md:w-2/3 sm:w-2/3 p-2 mb-4">
         {`Sorry, we found no results for “${searchTerm}”. Would you like to
         create new Spiritus for him/her?`}
       </p>
       <a
         href="/create"
-        className="inline-flex bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 text-sp-black border-sp-medium border-opacity-80 rounded-full py-3 px-7"
-      >
-        <PlusCircleIcon className="h-6 w-6 text-sp-black" />
+        className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
+        >
+        <PlusCircleIcon className="h-6 w-6" />
         <span className="font-semibold ml-1">Create Spiritus</span>
       </a>
     </div>
@@ -136,16 +136,16 @@ function Placeholder() {
     <div className="flex w-3/4 p-2">
       <div
         // data-placeholder
-        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-medium"
+        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-gray-100 dark:bg-sp-medium"
       ></div>
       <div className="flex w-full flex-col justify-between py-2">
         <div
           // data-placeholder
-          className="animate-pulse rounded-lg relative h-5 w-full overflow-hidden bg-sp-medium"
+          className="animate-pulse rounded-lg relative h-5 w-full overflow-hidden bg-sp-gray-100 dark:bg-sp-medium"
         ></div>
         <div
           // data-placeholder
-          className="animate-pulse rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-medium"
+          className="animate-pulse rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-gray-100 dark:bg-sp-medium"
         ></div>
       </div>
     </div>
@@ -169,11 +169,11 @@ function SearchResults({ results }) {
 
 function Row({ name, surname, images, birth, death }) {
   return (
-    <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg">
-      <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-medium"></div>
+    <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-200 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg text-sp-medlight dark:text-sp-white">
+      <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-fawn bg-opacity-50 dark:bg-sp-medium"></div>
       <div className="flex w-full flex-col justify-between py-2 px-2">
-        <p className="text-sp-white break-words pr-4">{`${name} ${surname}`}</p>
-        <p className="text-sp-white text-opacity-40">
+        <p className="break-words pr-4">{`${name} ${surname}`}</p>
+        <p className="text-opacity-40">
           {birth ? new Date(birth).getFullYear() : "?"}
           {death && ` — ${new Date(death).getFullYear()}`}
         </p>
