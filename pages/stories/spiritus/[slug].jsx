@@ -29,13 +29,16 @@ export default function StoryPage({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content={spiritus.description || `Read and follow memories about ${spiritus.name} ${spiritus.surname}.`}
+          content={
+            spiritus.description ||
+            `Read and follow memories about ${spiritus.name} ${spiritus.surname}.`
+          }
         />
       </Head>
       <section className="container mx-auto px-5" key="story">
         <div className="flex flex-col items-center py-8">
           <div className="flex flex-col w-full mb-12 text-left">
-            <div className="w-full sm:w-full lg:w-1/2  mx-auto text-sp-white">
+            <div className="w-full sm:w-full lg:w-3/5 mx-auto text-sp-black dark:text-sp-white">
               <h1 className="mx-auto mb-6 font-semibold text-center uppercase">
                 {first.title}
               </h1>
@@ -74,8 +77,8 @@ export default function StoryPage({
                   );
                 })}
             </div>
-            <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
-              {first.tags && <Tags tags={first.tags} />}
+            <div className="w-full mx-auto lg:w-3/5 text-sp-white mt-4">
+              {first.tags?.length ? <Tags tags={first.tags} /> : <></>}
 
               <Tribute />
               <HorizontalDivider />
@@ -86,7 +89,9 @@ export default function StoryPage({
             </div>
             <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
               <MoreStories stories={stories} spiritus={spiritus} />
-              <CTAAddMemory />
+              <div className="flex-1 items-center justify-center px-4">
+                <CTAAddMemory />
+              </div>
             </div>
           </div>
         </div>

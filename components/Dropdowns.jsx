@@ -25,16 +25,16 @@ export function MultiSelectInput({ items, selected, setSelected }) {
       <div className="w-full">
         <div className="flex flex-col items-center relative">
           <div className="w-full">
-            <div className="flex appearance-none outline-none text-sp-white">
+            <div className="flex appearance-none outline-none text-sp-black dark:text-sp-white">
               <div className="flex flex-auto flex-wrap gap-1 items-center">
                 {!selected.length ? (
-                  <p className="text-gray-400">Choose categories</p>
+                  <p className="text-gray-500">Choose categories</p>
                 ) : (
                   selected.map((tag, index) => {
                     return (
                       <div
                         key={index}
-                        className="flex justify-center items-center font-medium px-2 py-1 rounded-2xl border border-sp-light"
+                        className="flex justify-center items-center font-medium px-2 py-1 rounded-2xl border border-sp-black dark:border-sp-lighter"
                       >
                         <div className="text-sm leading-none">{tag.value}</div>
                         <XIcon
@@ -75,14 +75,14 @@ function Dropdown({ items, addItem }) {
   return (
     <div
       id="dropdown"
-      className="absolute top-10 right-0 w-full bg-sp-black text-sp-white z-40 rounded-lg border-2 border-sp-medium max-h-select"
+      className="absolute top-10 right-0 w-full bg-sp-day-100 dark:bg-sp-black text-sp-black dark:text-sp-white z-40 rounded-lg border-2 border-sp-medium max-h-select"
     >
       <div className="flex flex-col w-full">
         {items.map((item, key) => {
           return (
             <div
               key={key}
-              className="cursor-pointer hover:bg-sp-fawn hover:text-sp-black rounded-lg"
+              className="cursor-pointer hover:bg-sp-day-900 hover:bg-opacity-40 dark:hover:bg-sp-fawn dark:hover:bg-opacity-100 hover:text-sp-black rounded-lg"
               onClick={(e) => {
                 e.preventDefault();
                 addItem(item);

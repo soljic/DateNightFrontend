@@ -7,7 +7,7 @@
 }
 
 .react-date-picker__inputGroup {
-  @apply w-full text-sp-white flex justify-center items-center;
+  @apply w-full text-sp-black dark:text-sp-white flex justify-center items-center;
 }
 
 .react-date-picker__inputGroup__input {
@@ -29,26 +29,26 @@
 }
 
 .react-date-picker__button svg {
-  @apply text-sp-white stroke-sp-lighter;
+  @apply text-sp-black dark:text-sp-white stroke-sp-lighter;
 }
 .react-date-picker__calendar {
   /* @apply w-80 absolute top-10 left-0 z-10; */
-  @apply absolute mt-3;
+  @apply absolute mt-3 z-10;
 }
 
 .react-date-picker__calendar--closed {
   display: none;
 }
 .react-date-picker__calendar .react-calendar {
-  @apply border-2 border-sp-medium p-1;
+  @apply border-2 dark:border-sp-medium p-1 border-sp-fawn shadow z-50;
 }
 
 .react-calendar {
-  @apply bg-sp-medlight rounded-lg;
+  @apply bg-sp-day-100 dark:bg-sp-medlight rounded-lg;
 }
 
 .react-calendar__navigation {
-  @apply flex h-14 text-sp-white border-b-2 border-sp-medium;
+  @apply flex h-14 text-sp-black dark:text-sp-white border-b-2 border-sp-medium;
 }
 
 .react-calendar__navigation button {
@@ -73,7 +73,7 @@
 }
 
 .react-calendar__tile {
-  @apply text-sp-white text-sm py-2 hover:bg-sp-fawn rounded hover:text-sp-black my-0.5;
+  @apply text-sp-black dark:text-sp-white text-sm py-2 hover:bg-sp-fawn rounded hover:text-sp-black my-0.5;
 }
 
 .react-calendar__tile--now {

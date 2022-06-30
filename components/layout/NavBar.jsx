@@ -27,8 +27,8 @@ export function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <div className="bg-sp-day-50 dark:bg-sp-black py-3 mb-2 opacity-90 backdrop-blur-lg dark:backdrop-blur-md sticky top-0 z-50">
-      <div className="flex flex-row xl:w-1/2 lg:w-full lg:px-12 md:px-6 sm:px-4 mx-auto justify-between text-sp-black dark:text-sp-white">
+    <div className="bg-sp-day-50 dark:bg-sp-black py-3 mb-2 opacity-90 backdrop-blur-lg dark:backdrop-blur-md sticky top-0 z-50 xl:w-4/5 mx-auto">
+      <div className="flex xl:w-4/5 lg:w-full lg:px-12 md:px-6 sm:px-4 mx-auto justify-between text-sp-black dark:text-sp-white">
         <div className="inline-flex items-center">
           <Link href="/">
             <a>
@@ -45,12 +45,12 @@ export function Navbar() {
 
         <div className="inline-flex items-center gap-3">
           <Link href="/search">
-            <a className="p-3 hover:bg-gradient-to-r from-sp-day-200 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
+            <a className="p-3 hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
               <SearchIcon className="h-6 w-6 tex-sp-black dark:text-sp-white" />
             </a>
           </Link>
           <Link href={session?.name ? "/account/settings" : "/auth/login"}>
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-200 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-full py-2 px-6 font-semibold">
+            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-full py-2 px-6 font-semibold">
               {session?.user?.name ? session.user.name : "Log in"}
             </a>
           </Link>
@@ -94,7 +94,7 @@ export default function MobileNav() {
             <Popover.Button
               className={`
                 ${open ? "" : "text-opacity-90"}
-                group inline-flex items-center rounded-full px-3 py-2 font-medium bg-gradient-to-r from-sp-day-200 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown`}
+                group inline-flex items-center rounded-full px-3 py-2 font-medium bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown`}
             >
               <span>Stories</span>
               <ChevronDownIcon
@@ -113,13 +113,13 @@ export default function MobileNav() {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute z-100 mt-3 transform px-4 sm:px-0 max-w-xs">
-                <div className="overflow-hidden rounded-lg shadow-lg bg-sp-day-200 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
+                <div className="overflow-hidden rounded-lg shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
                   <div className="relative grid gap-6 p-6 grid-cols-1">
                     {solutions.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
-                        className="-m-3 flex items-center rounded-lg px-2 py-4 transition duration-150 ease-in-out hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown focus:outline-none"
+                        className="-m-3 flex items-center rounded-lg px-2 py-4 transition duration-150 ease-in-out dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
                       >
                         <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
                           <item.icon aria-hidden="true" fill="#ED9A4C" />

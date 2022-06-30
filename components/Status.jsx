@@ -31,7 +31,7 @@ export function ProgressBar({ step, maxSteps }) {
     <div className="flex-auto mx-auto mt-12">
       <div className="w-full bg-sp-lighter h-1">
         <div
-          className="bg-sp-fawn h-1"
+          className="bg-sp-dark-fawn dark:bg-sp-fawn h-1"
           style={{ width: `${Math.floor((step * 100) / maxSteps)}%` }}
         ></div>
       </div>

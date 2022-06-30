@@ -48,10 +48,10 @@ export function StoryImageUploader({ images, setImages }) {
 
   return (
     <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
         <ImageIcon fill />
       </div>
-      <p className="font-bold text-sp-white text-2xl">
+      <p className="font-bold text-2xl">
         Do you have an image for this story? If yes, please add it here.
       </p>
       <p className="text-sp-lighter text-sm mt-2">*Optional</p>
@@ -132,10 +132,10 @@ export function SpiritusImageUploader({ name, images, setImages }) {
 
   return (
     <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
+      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
         <ImageIcon fill />
       </div>
-      <p className="font-bold text-sp-white text-2xl">
+      <p className="font-bold text-2xl">
         Does<span> {name} </span> have any images from his/her life? If yes,
         please add them here.
       </p>
@@ -153,7 +153,7 @@ export function SpiritusImageUploader({ name, images, setImages }) {
 
       {!images.length ? (
         <button
-          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-black mt-3"
+          className="inline-flex bg-opacity-40 dark:bg-sp-white border border-sp-lighter rounded-3xl py-2 px-6 text-sp-black mt-3"
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
@@ -163,9 +163,9 @@ export function SpiritusImageUploader({ name, images, setImages }) {
         <div className="flex flex-row items-start justify-start gap-4 p-4">
           <button
             onClick={onOpenFileDialog}
-            className="flex items-center justify-center selection w-24 h-24 mt-1 bg-sp-medium rounded-lg text-white focus:outline-none"
+            className="flex items-center justify-center selection w-24 h-24 mt-1 border border-sp-day-200 bg-sp-fawn bg-opacity-20 dark:bg-sp-medium dark:border-none rounded-lg dark:text-sp-white focus:outline-none"
           >
-            <PlusCircleIcon className="h-8 w-8 text-sp-white" />
+            <PlusCircleIcon className="h-8 w-8" />
           </button>
           <div className="grid grid-flow-row grid-cols-2 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 gap-y-2">
             {images.map((f, i) => {
@@ -189,8 +189,8 @@ export function SpiritusImageUploader({ name, images, setImages }) {
 export function Thumbnail({ previewURL, title, onRemove, index }) {
   return (
     <div className="relative h-24 w-24" id={index}>
-      <div className="mx-1 mt-1 rounded-lg overflow-clip">
-        <img src={previewURL} alt={title} className="h-24 w-24" />
+      <div className="mx-1 mt-1 rounded-lg overflow-clip border border-gray-400 dark:border-none">
+        <img src={previewURL} alt={title} className="h-24 w-24 border" />
       </div>
       <button
         onClick={(e) => {

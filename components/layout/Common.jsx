@@ -1,9 +1,11 @@
 import Link from "next/link";
 
+import { XIcon, ChevronDownIcon } from "@heroicons/react/outline";
+
 export function NavItem({ text, link, textsize }) {
   const size = textsize || "base";
   return (
-    <div className="px-3 md:mx-1 py-2 font-medium hover:bg-gradient-to-r from-sp-day-200 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
+    <div className="px-3 md:mx-1 py-2 font-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
       <Link href={link || "/"}>
         <a className={`text-${size}`}>{text}</a>
       </Link>
@@ -33,7 +35,7 @@ export function Logo({ width, height }) {
 
 export function ImagePlaceholder() {
   return (
-    <div className="flex w-full h-full mx-auto border-3 dark:border border-sp-gray-100 dark:border-sp-medium rounded-md justify-center items-center">
+    <div className="flex w-full h-full mx-auto border-3 dark:border border-sp-day-200 dark:border-sp-medium rounded-md justify-center items-center">
       <div className="mx-auto">
         <svg
           className="h-16 w-16 text-gray-500"
@@ -54,24 +56,11 @@ export function ImagePlaceholder() {
 export function HorizontalDivider() {
   return (
     <div className="relative flex w-full items-center py-5">
-      <div className="flex-grow border-t border-sp-medium"></div>
-      <div className="bg-sp-dark-brown rounded-lg p-1.5 mx-2">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 flex-shrink text-sp-fawn"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+      <div className="flex-grow border-t-3 border-sp-day-200 dark:border-sp-medium"></div>
+      <div className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2">
+        <ChevronDownIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
       </div>
-      <div className="flex-grow border-t border-sp-medium"></div>
+      <div className="flex-grow border-t-3 border-sp-day-200 dark:border-sp-medium"></div>
     </div>
   );
 }

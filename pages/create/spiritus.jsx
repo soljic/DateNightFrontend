@@ -159,7 +159,7 @@ export default function CreateSpiritusPage({ user }) {
                         e.preventDefault();
                         prevStep();
                       }}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
+                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
                         pending && "hidden"
                       }`}
                       disabled={pending}
@@ -174,7 +174,7 @@ export default function CreateSpiritusPage({ user }) {
                         nextStep();
                       }}
                       disabled={!name || !surname}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black ${
+                      className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
                         (name && surname) || "opacity-30"
                       }`}
                     >
@@ -187,7 +187,7 @@ export default function CreateSpiritusPage({ user }) {
                         createSpiritus();
                       }}
                       disabled={pending}
-                      className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black"
+                      className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
                     >
                       {pending ? <Spinner text={"Creating..."} /> : "Create"}
                     </button>
@@ -204,11 +204,11 @@ export default function CreateSpiritusPage({ user }) {
 
 function Success({ spiritus }) {
   return (
-    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2">
+    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
         <Logo width={8} height={8} />
       </div>
-      <h2 className="font-bold text-3xl text-sp-white">
+      <h2 className="font-bold text-3xl">
         {" "}
         <span>
           {" "}
@@ -216,30 +216,30 @@ function Success({ spiritus }) {
         </span>
       </h2>
       {(spiritus.birth || spiritus.death) && (
-        <p className="mt-1 text-sp-white text-center opacity-50 mb-5">
+        <p className="mt-1 text-center opacity-50 mb-5">
           <span>{spiritus.birth || "?"}</span> —{" "}
           <span>{spiritus.death || "?"}</span>
         </p>
       )}
       <HorizontalDivider />
       <div className="flex flex-col items-center gap-1 mt-5">
-        <h2 className="font-bold text-3xl text-sp-white">Write first story</h2>
-        <p className="mt-1 text-center text-sp-white opacity-50 mb-8 w-3/4 text">
+        <h2 className="font-bold text-3xl">Write first story</h2>
+        <p className="mt-1 text-center opacity-50 mb-8 w-3/4 text">
           <span> {spiritus.name} </span> must have done many beautiful things.
           Save those memories forever.
         </p>
       </div>
       <Link href={`/create/story?spiritus=${spiritus.id}`}>
-        <a className="text-center px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black">
+        <a className="bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-black">
           Create story
         </a>
       </Link>
-      <div className="flex mx-auto items-center justify-center gap-4 mt-3 text-sp-white">
-        <button className="flex flex-col items-center justify-center h-24 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg p-4">
+      <div className="flex mx-auto items-center justify-center gap-4 mt-3 text-sp-lighter dark:text-sp-white">
+        <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
           <GuardianIcon />
           <p className="font-semibold">Add Guardian</p>
         </button>
-        <button className="flex flex-col items-center justify-center h-24 hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown rounded-lg p-4">
+        <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
           <GraveIcon />
           <p className="font-semibold">Resting Place</p>
         </button>

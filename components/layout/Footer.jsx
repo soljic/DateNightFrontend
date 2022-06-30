@@ -13,7 +13,7 @@ export function Footer() {
           <NavItem text={"Contact"} textsize={"sm"} />
         </div>
       </div>
-      <div className="my-2 pb-4 mx-auto xl:w-4/5 lg:w-full border-t border-sp-gray-100 dark:border-sp-lighter"></div>
+      <div className="my-2 pb-4 mx-auto xl:w-4/5 lg:w-full border-t border-sp-day-200 dark:border-sp-lighter"></div>
       <div className="container xl:w-4/5 lg:w-full mx-auto justify-between pb-4">
         <div className="flex flex-col items-center gap-4">
           <div className="flex flex-row gap-2">

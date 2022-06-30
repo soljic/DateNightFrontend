@@ -9,7 +9,7 @@ import Image from "next/image";
 export function CreateSpiritusCTA() {
   return (
     <>
-      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-200 to-sp-day-100 text-sp-black dark:text-sp-white dark:from-sp-dark-brown dark:to-sp-brown rounded-lg">
+      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 text-sp-black dark:text-sp-white dark:from-sp-dark-brown dark:to-sp-brown rounded-lg">
         <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
           <h2 className="text-5xl md:text-4xl sm:text-3xl font-extrabold mb-4">
             Keep memories of your<br></br> loved ones, forever
@@ -57,7 +57,7 @@ export function CreateSpiritusCTABgImage() {
 
 export function SearchSpiritusCTA() {
   return (
-    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-200 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white">
+    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white">
       <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
         <Image
           src="/images/circle_images_sm.png"

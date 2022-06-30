@@ -38,11 +38,11 @@ module.exports = {
         // lightmode colors
         "sp-day-50": "#F0EBE6",
         "sp-day-100": "#DED4CA",
-        "sp-day-200": "#E3D4C5",
+        "sp-day-200": "#DBD4CE", //200
+        "sp-day-300": "#E3D4C5", // 300
         "sp-day-900": "#D67915",
-
+        
         // lightmode accents
-        "sp-gray-100": "#DBD4CE",
       },
 
       fontFamily: {

@@ -67,8 +67,19 @@ export default function CreateStoryPage({ spiritus }) {
   const createStory = async () => {
     try {
       setPending(true);
-      const res = await ProxyCreateStory(
-        {
+      // const res = await ProxyCreateStory(
+      //   {
+      //     spiritusId: spiritus.id,
+      //     title,
+      //     tags: tags.map((t) => t.id),
+      //     paragraphs: setParagrapghs(storyText),
+      //     description: summary,
+      //     date: getISOLocalDate(date),
+      //   },
+      //   session.user.accessToken
+      // );
+      const res = {
+        data: {
           spiritusId: spiritus.id,
           title,
           tags: tags.map((t) => t.id),
@@ -76,8 +87,7 @@ export default function CreateStoryPage({ spiritus }) {
           description: summary,
           date: getISOLocalDate(date),
         },
-        session.user.accessToken
-      );
+      };
       setStory(res.data);
       setPending(false);
     } catch (err) {
@@ -152,7 +162,7 @@ export default function CreateStoryPage({ spiritus }) {
             {step > 0 && (
               <button
                 onClick={prevStep}
-                className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
+                className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
                   pending && "hidden"
                 }`}
                 disabled={pending}
@@ -164,7 +174,7 @@ export default function CreateStoryPage({ spiritus }) {
               <button
                 onClick={nextStep}
                 disabled={!storyText}
-                className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black ${
+                className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
                   storyText || "opacity-30"
                 }`}
               >
@@ -177,7 +187,7 @@ export default function CreateStoryPage({ spiritus }) {
                   createStory();
                 }}
                 disabled={pending}
-                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 text-sp-black"
+                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
               >
                 {pending ? <Spinner text="Creating..." /> : "Create"}
               </button>
@@ -191,26 +201,26 @@ export default function CreateStoryPage({ spiritus }) {
 
 function Success({ id, name, surname }) {
   return (
-    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 mt-24">
+    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 mt-24 text-sp-black dark:text-sp-white">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
         <StoryIcon />
       </div>
-      <h2 className="font-bold text-3xl text-sp-white">Nice work!</h2>
+      <h2 className="font-bold text-3xl">Nice work!</h2>
       <div className="flex flex-col items-center gap-1">
-        <p className="mt-1 text-center text-sp-white opacity-50 w-3/4 text">
+        <p className="mt-1 text-center opacity-50 w-3/4 text">
           You’ve just created a Story for{" "}
           <span>
             {name} {surname}
           </span>
         </p>
       </div>
-      <div className="flex mx-auto items-center justify-center gap-4 text-sp-white mt-4">
-        <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg p-4">
+      <div className="flex mx-auto items-center justify-center gap-4 mt-4">
+        <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
           <UploadIcon className="w-6 h-6" />
           <p className="font-semibold text-center">Share</p>
         </button>
         <Link href={`/create/story?spiritus=${id}`}>
-          <a className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg p-4">
+          <a className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
             <OutlinePlusCircleIcon className="w-6 h-6" />
             <p className="font-semibold">New story</p>
           </a>

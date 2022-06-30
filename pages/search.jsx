@@ -136,16 +136,16 @@ function Placeholder() {
     <div className="flex w-3/4 p-2">
       <div
         // data-placeholder
-        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-gray-100 dark:bg-sp-medium"
+        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-day-200 dark:bg-sp-medium"
       ></div>
       <div className="flex w-full flex-col justify-between py-2">
         <div
           // data-placeholder
-          className="animate-pulse rounded-lg relative h-5 w-full overflow-hidden bg-sp-gray-100 dark:bg-sp-medium"
+          className="animate-pulse rounded-lg relative h-5 w-full overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
         ></div>
         <div
           // data-placeholder
-          className="animate-pulse rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-gray-100 dark:bg-sp-medium"
+          className="animate-pulse rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
         ></div>
       </div>
     </div>
@@ -169,7 +169,7 @@ function SearchResults({ results }) {
 
 function Row({ name, surname, images, birth, death }) {
   return (
-    <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-200 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg text-sp-medlight dark:text-sp-white">
+    <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg text-sp-medlight dark:text-sp-white">
       <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-fawn bg-opacity-50 dark:bg-sp-medium"></div>
       <div className="flex w-full flex-col justify-between py-2 px-2">
         <p className="break-words pr-4">{`${name} ${surname}`}</p>
