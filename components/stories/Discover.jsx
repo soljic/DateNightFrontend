@@ -79,7 +79,7 @@ function PopularSpiritus({ id, slug, name, surname, description, images }) {
       </div>
       <div className="mt-4 flex justify-between">
         <div>
-          <h3 className="text-xl text-sp-white">
+          <h3 className="text-xl dark:text-sp-white">
             <Link
               href={`/stories/spiritus/${slug}?id=${id}`}
             >
@@ -89,7 +89,7 @@ function PopularSpiritus({ id, slug, name, surname, description, images }) {
               </a>
             </Link>
           </h3>
-          <p className="mt-1 text-lg text-sp-white opacity-50">{`${name} ${surname}`}</p>
+          <p className="mt-1 text-lg dark:text-sp-white opacity-50">{`${name} ${surname}`}</p>
         </div>
       </div>
     </div>

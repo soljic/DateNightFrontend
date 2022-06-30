@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 import Link from "next/link";
@@ -25,7 +25,6 @@ const languages = [
 
 export function Navbar() {
   const { data: session } = useSession();
-  const { theme } = useTheme();
 
   return (
     <div className="bg-sp-day-50 dark:bg-sp-black py-3 mb-2 opacity-90 backdrop-blur-lg dark:backdrop-blur-md sticky top-0 z-50">
@@ -33,7 +32,7 @@ export function Navbar() {
         <div className="inline-flex items-center">
           <Link href="/">
             <a>
-              <Logo fill={theme === "light" ? "#DB6D56" : ""} />
+              <Logo />
             </a>
           </Link>
           <MobileNav />
@@ -123,7 +122,7 @@ export default function MobileNav() {
                         className="-m-3 flex items-center rounded-lg px-2 py-4 transition duration-150 ease-in-out hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown focus:outline-none"
                       >
                         <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
-                          <item.icon aria-hidden="true" fill="#ED9A4C"/>
+                          <item.icon aria-hidden="true" fill="#ED9A4C" />
                         </div>
                         <div className="ml-4">
                           <p className="text-sm font-semibold pb-0.5">
@@ -248,11 +247,8 @@ function ThemeToggler() {
         <span className="dark:hidden">Switch to dark theme</span>
         <span className="hidden dark:inline">Switch to light theme</span>
       </span>
-      {theme === "light" ? (
-        <SunIcon className="w-5 h-5 text-sp-cotta" />
-      ) : (
-        <MoonIcon className="h-5 w-5 text-gray-300 -scale-x-100" />
-      )}
+      <MoonIcon className="h-5 w-5 text-gray-300 -scale-x-100 hidden dark:block" />
+      <SunIcon className="w-5 h-5 text-sp-cotta dark:hidden"/>
     </button>
   );
 }
