@@ -80,7 +80,7 @@ export function SpiritusOverview({ name, surname, birth, death, description }) {
       <div className="p-4 flex flex-col justify-between leading-normal">
         <div className="mb-2">
           <div className="text-sm flex items-center mb-2">
-            <button className="px-2.5 py-1 bg-sp-lighter bg-gradient-to-r from-sp-day-300 to-sp-day-100 text-sm font-medium rounded-full">
+            <button className="px-2.5 py-1 dark:from-sp-lighter dark:to-sp-lighter bg-gradient-to-r from-sp-day-300 to-sp-day-100 text-sm font-medium rounded-full">
               🇭🇷 Croatia
             </button>
             <span className="pl-3">
@@ -137,7 +137,7 @@ export function StoryHook({
   return (
     <div className="p-4 md:w-1/2 text-sp-black dark:text-sp-white">
       <div className="flex h-full flex-col rounded-lg bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-8">
-        <div className="mr-3 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn p-1.5">
+        <div className="mr-3 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
           <StoryHookIcon />
         </div>
         {/*  */}
