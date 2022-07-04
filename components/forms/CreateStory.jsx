@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "next-i18next";
 
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 
@@ -9,10 +10,12 @@ import { CommentIcon, LocationIcon, RangeIcon, SpiritusIcon } from "../Icons";
 import { MultiSelectInput } from "../Dropdowns";
 
 export function StoryType({ setType, nextStep }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mx-2 mt-12 lg:mx-8">
       <h2 className="text-2xl font-bold text-sp-black dark:text-sp-white">
-        What type of Story do you want to create?
+        {t("create_story_type_title")}
       </h2>
       <div className="mt-4 mx-auto">
         <div className="flex flex-col gap-2 md:flex-row">
@@ -36,9 +39,9 @@ export function StoryType({ setType, nextStep }) {
               </svg>
             </div>
             <div className="flex flex-col items-start">
-              <p className="font-semibold">Public</p>
+              <p className="font-semibold">{t("public")}</p>
               <p className="text-sp-lighter text-left">
-                Everybody can read this story.
+                {t("create_story_public_text")}
               </p>
             </div>
           </button>
@@ -62,9 +65,9 @@ export function StoryType({ setType, nextStep }) {
               </svg>
             </div>
             <div className="flex flex-col items-start">
-              <p className="font-semibold">Private</p>
+              <p className="font-semibold">{t("private")}</p>
               <p className="text-sp-lighter text-left">
-                Only you can read this story.
+                {t("create_story_private_text")}
               </p>
             </div>
           </button>
@@ -75,16 +78,17 @@ export function StoryType({ setType, nextStep }) {
 }
 
 export function StoryDate({ date, setDate }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
         <RangeIcon fill />
       </div>
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        Do you know the date when the story happened? If yes, please enter it
-        here.
+        {t("create_story_date_title")}
       </p>
-      <p className="text-sp-lighter text-sm mt-2">*Optional</p>
+      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
@@ -93,7 +97,7 @@ export function StoryDate({ date, setDate }) {
                 onChange={setDate}
                 value={date}
                 clearIcon={!date ? null : <XIcon className="h-6 w-6" />}
-                dayPlaceholder="Date of the story"
+                dayPlaceholder={t("create_story_date_placeholder")}
                 monthPlaceholder=""
                 yearPlaceholder=""
                 showLeadingZeros
@@ -110,15 +114,17 @@ export function StoryDate({ date, setDate }) {
 }
 
 export function StoryLocation({ location, setLocation }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
         <LocationIcon fill />
       </div>
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        Does this story remind you of a certain place? Please select that place.
+        {t("create_story_location_title")}
       </p>
-      <p className="text-sp-lighter text-sm mt-2">*Optional</p>
+      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
 
       <div className="mt-4">
         <div className="flex flex-col md:flex-row">
@@ -129,7 +135,7 @@ export function StoryLocation({ location, setLocation }) {
                 onChange={(e) => {
                   setLocation(e.target.value);
                 }}
-                placeholder="Enter place"
+                placeholder={t("create_story_location_placeholder")}
                 className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black appearance-none outline-none w-full rounded"
               />
               <SearchIcon className="h-6 w-6 text-sp-lighter mx-3" />
@@ -142,6 +148,8 @@ export function StoryLocation({ location, setLocation }) {
 }
 
 export function StoryTitle({ title, setTitle, tags, setTags }) {
+  const { t } = useTranslation("common");
+
   const [itemsList, setItemsList] = useState([]);
 
   useEffect(() => {
@@ -162,7 +170,7 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
         <SpiritusIcon fill />
       </div>
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        Enter title of the Story.
+        {t("create_story_title_title")}
       </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
@@ -173,7 +181,7 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
-                placeholder="Enter story title"
+                placeholder={t("create_story_title_placeholder")}
                 className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded"
               />
             </div>
@@ -196,13 +204,15 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
 }
 
 export function StorySummary({ summary, setSummary }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
         <CommentIcon fill />
       </div>
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        Please summarize your story in one or two sentences.
+        {t("create_story_summary_title")}
       </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row">
@@ -215,7 +225,7 @@ export function StorySummary({ summary, setSummary }) {
                     setSummary(e.target.value);
                 }}
                 maxLength="150"
-                placeholder="Enter sentence"
+                placeholder={t("create_story_summary_placeholder")}
                 rows="3"
                 className="p-3  bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium  appearance-none outline-none w-full rounded "
               />
@@ -231,10 +241,12 @@ export function StorySummary({ summary, setSummary }) {
 }
 
 export function StoryTextEditor({ storyText, setStoryText }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mx-2 mt-12 lg:mx-8">
       <h2 className="text-2xl font-bold text-sp-black dark:text-sp-white">
-        Write new story
+        {t("create_story_text_title")}
       </h2>
       <div className="mt-4">
         <textarea
@@ -243,7 +255,7 @@ export function StoryTextEditor({ storyText, setStoryText }) {
             setStoryText(e.target.value);
           }}
           className="w-full text-lg py-3 px-4 text-bottom rounded-md border  bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-sp-medium "
-          placeholder="Enter story text"
+          placeholder={t("create_story_text_placeholder")}
           rows="10"
         ></textarea>
       </div>

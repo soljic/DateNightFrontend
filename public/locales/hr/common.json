@@ -23,6 +23,8 @@
   "meta_search_description": "Pronađite svoje najmilije međdu 15 000 Spiritusa iz raznih dijelova svijeta i važnih osoba iz mnogih institucija.",
   "meta_create_spiritus_title": "Spiritus | Novi Spiritus",
   "meta_create_spiritus_description": "Kreirajte Spiritus i pohranite ga zauvijek.",
+  "meta_create_story_title": "Spiritus | Nova Priča",
+  "meta_create_story_description": "Kreirajte priču i pohranite ju zauvijek.",
 
   "cta_create_spiritus_title": "Sačuvajte uspomene<br></br>na svoje najmilije, zauvijek",
   "cta_add_memory": "Želite li dodati uspomenu na",
@@ -55,10 +57,13 @@
   "back": "Natrag",
   "create": "Kreiraj",
   "creating": "Kreiranje...",
+  "optional": "Neobavezno",
 
   "spiritus_success_first_story": "Napišite prvu priču",
-  
   "spiritus_success_text": "vjerojatno Vas podsjeća na lijepe trenutke i draga mjesta. Sačuvajte te uspomene.",
+  "story_success_title": "Odlično!",
+  "story_success_subtitle": "kreirali ste priču za",
+  "new_story": "Nova priča",
 
   "create_story": "Kreiraj priču",
 
@@ -69,7 +74,7 @@
   "create_spiritus_names_title": "Unesite ime i prezime vašeg Spiritusa",
   "create_spiritus_firstname_placeholder": "Unesi ime",
   "create_spiritus_lastname_placeholder": "Unesi prezime",
-  
+
   "create_spiritus_dates_title1": "Kada je",
   "create_spiritus_dates_title2": "rođen/a i kada je preminuo/la?",
   "create_spiritus_birth_placeholder": "Datum rođenja",
@@ -85,6 +90,26 @@
 
   "create_spiritus_image_title1": "Imate li slike iz života Spiritusa",
   "create_spiritus_image_title2": "? Ako da, možete ih dodati",
+  "create_story_image_title": "Image li sliku vezanu uz ovu priču? Ovdje ju možete dodati.",
 
-  "optional": "Neobavezno."
+  "create_story_type_title": "Kakvu priču želite kreirati?",
+  "public": "Javnu",
+  "create_story_public_text": "Svatko može pročitati ovu priču.",
+  "private": "Privatnu",
+  "create_story_private_text": "Samo ja mogu pročitati ovu priču.",
+
+  "create_story_location_title": "Podsjeća li vas ova priča na određeno mjesto? Ako da, unesite ovdje.",
+  "create_story_location_placeholder": "Unesi mjesto",
+
+  "create_story_date_title": "Znate li datum ove priče? Ako da, unesite ovdje.",
+  "create_story_date_placeholder": "Datum priče",
+
+  "create_story_title_title": "Kako želite nazvati ovu priču?",
+  "create_story_title_placeholder": "Unesi naziv priče",
+
+  "create_story_summary_title": "Pokušajte sumirati priču u nekoliko rečenica.",
+  "create_story_summary_placeholder": "Unesi sažetak",
+
+  "create_story_text_title": "Napišite novu priču",
+  "create_story_text_placeholder": "Unesite tekst priče"
 }

@@ -55,9 +55,9 @@ export function StoryImageUploader({ images, setImages }) {
         <ImageIcon fill />
       </div>
       <p className="font-bold text-2xl">
-        Do you have an image for this story? If yes, please add it here.
+        {t("create_story_image_title")}
       </p>
-      <p className="text-sp-lighter text-sm mt-2">*Optional</p>
+      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
       <input
         type="file"
         id="file"
@@ -74,7 +74,7 @@ export function StoryImageUploader({ images, setImages }) {
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
-          <span className="font-semibold ml-1">Add Image</span>
+          <span className="font-semibold ml-1">{t("add_image")}</span>
         </button>
       ) : (
         <div className="flex flex-row items-center justify-center mt-4 mb-8">

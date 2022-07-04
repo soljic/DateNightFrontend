@@ -8,7 +8,6 @@ import { getSession, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import {
@@ -34,6 +33,7 @@ import { StoryIcon } from "../../components/Icons";
 
 // TODO: create story local storage, pass request to BE
 export default function CreateStoryPage({ spiritus }) {
+  const { t } = useTranslation("common");
   const { data: session, status } = useSession();
 
   // stepper is 0 indexed!
@@ -71,19 +71,8 @@ export default function CreateStoryPage({ spiritus }) {
   const createStory = async () => {
     try {
       setPending(true);
-      // const res = await ProxyCreateStory(
-      //   {
-      //     spiritusId: spiritus.id,
-      //     title,
-      //     tags: tags.map((t) => t.id),
-      //     paragraphs: setParagrapghs(storyText),
-      //     description: summary,
-      //     date: getISOLocalDate(date),
-      //   },
-      //   session.user.accessToken
-      // );
-      const res = {
-        data: {
+      const res = await ProxyCreateStory(
+        {
           spiritusId: spiritus.id,
           title,
           tags: tags.map((t) => t.id),
@@ -91,7 +80,8 @@ export default function CreateStoryPage({ spiritus }) {
           description: summary,
           date: getISOLocalDate(date),
         },
-      };
+        session.user.accessToken
+      );
       setStory(res.data);
       setPending(false);
     } catch (err) {
@@ -137,12 +127,9 @@ export default function CreateStoryPage({ spiritus }) {
   return (
     <Layout>
       <Head>
-        <title>Spiritus | Create Story </title>
+        <title>{t("meta_create_story_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="Add or suggest a story for Spiritus and keep it safe forver."
-        />
+        <meta name="description" content={t("meta_create_story_description")} />
       </Head>
       <div className="py-5 h-screen">
         <div className="container mx-auto lg:px-12 lg:w-4/5">
@@ -171,7 +158,7 @@ export default function CreateStoryPage({ spiritus }) {
                 }`}
                 disabled={pending}
               >
-                Back
+                {t("back")}
               </button>
             )}
             {step !== numSteps ? (
@@ -182,7 +169,7 @@ export default function CreateStoryPage({ spiritus }) {
                   storyText || "opacity-30"
                 }`}
               >
-                Next
+                {t("next")}
               </button>
             ) : (
               <button
@@ -193,7 +180,11 @@ export default function CreateStoryPage({ spiritus }) {
                 disabled={pending}
                 className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
               >
-                {pending ? <Spinner text="Creating..." /> : "Create"}
+                {pending ? (
+                  <Spinner text={t("creating")} />
+                ) : (
+                  <span>{t("create")}</span>
+                )}
               </button>
             )}
           </div>
@@ -204,15 +195,17 @@ export default function CreateStoryPage({ spiritus }) {
 }
 
 function Success({ id, name, surname }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 mt-24 text-sp-black dark:text-sp-white">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
         <StoryIcon />
       </div>
-      <h2 className="font-bold text-3xl">Nice work!</h2>
+      <h2 className="font-bold text-3xl">{t("story_success_title")}</h2>
       <div className="flex flex-col items-center gap-1">
         <p className="mt-1 text-center opacity-50 w-3/4 text">
-          You’ve just created a Story for{" "}
+          {t("story_success_subtitle")}{" "}
           <span>
             {name} {surname}
           </span>
@@ -221,12 +214,12 @@ function Success({ id, name, surname }) {
       <div className="flex mx-auto items-center justify-center gap-4 mt-4">
         <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
           <UploadIcon className="w-6 h-6" />
-          <p className="font-semibold text-center">Share</p>
+          <p className="font-semibold text-center">{t("share")}</p>
         </button>
         <Link href={`/create/story?spiritus=${id}`}>
           <a className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
             <OutlinePlusCircleIcon className="w-6 h-6" />
-            <p className="font-semibold">New story</p>
+            <p className="font-semibold">{t("new_story")}</p>
           </a>
         </Link>
       </div>
