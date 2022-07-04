@@ -38,7 +38,7 @@ export function Discover({ popular }) {
   return (
     popular && (
       <div className="container w-full xl:w-4/5 mx-auto mb-16">
-        <h2 className="text-2xl font-extrabold tracking-tight text-sp-white">
+        <h2 className="text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white">
           Discover
         </h2>
 
@@ -80,9 +80,7 @@ function PopularSpiritus({ id, slug, name, surname, description, images }) {
       <div className="mt-4 flex justify-between">
         <div>
           <h3 className="text-xl dark:text-sp-white">
-            <Link
-              href={`/stories/spiritus/${slug}?id=${id}`}
-            >
+            <Link href={`/stories/spiritus/${slug}?id=${id}`}>
               <a>
                 <span aria-hidden="true" className="absolute inset-0" />
                 {description}
