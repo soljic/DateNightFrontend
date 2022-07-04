@@ -1,0 +1,53 @@
+{
+  "about": "About",
+  "stories": "Stories",
+  "mobile": "Mobile app",
+  "tos": "Terms of Service",
+  "privacy": "Privacy",
+  "contact": "Contact",
+  "rights_reserved": "Spiritus Memoria. All rights reserved.",
+  "login": "Log in",
+
+  "m_desc_stories": "The latest beautiful stories, memorials and anniversaries.",
+  "m_desc_mobile_app": "Download the app from Google Play and App Store.",
+  "m_desc_about": "Learn more about Spiritus and our mission.",
+
+  "switch_theme_dark": "Switch to dark theme",
+  "switch_theme_light": "Switch to light theme",
+
+  "meta_home_title": "Spiritus | Home",
+  "meta_home_description": "Digital assets platform that keeps your memories forver!",
+  "meta_story_description": "Read and follow memories about",
+  "meta_spiritus_description": "Browse memories of",
+  "meta_search_title": "Spiritus | Search",
+  "meta_search_description": "Find your loved ones! Over 15 000 Spiritus loved ones from many families and notable institutions.",
+
+  "cta_create_spiritus_title": "Keep memories of your<br></br>loved ones, forever",
+  "cta_add_memory": "Have a memory of",
+  "cta_add_memory_subtitle": "Stories, photos, suggestions...",
+  "cta_add_memory_button": "Send a memory",
+  "cta_add_story_button": "Add story",
+
+  "create_spiritus": "Create Spiritus",
+  "goto_search": "Go to search",
+  "searching": "Searching...",
+  "search_results": "results",
+
+
+  "story_of_the_week": "Story of the week",
+  "read_story": "Read story",
+
+  "discover": "Discover",
+
+  "find_loved_title": "Find your loved ones!",
+  "find_loved_subtitle": "Over 15 000 Spiritus loved ones from many of biggest Croatian graveyards and institutions.",
+
+  "term_rated": "Rated",
+  "term_on": "on",
+
+  "write_tribute": "Write tribute",
+  "give_rose": "Give Rose",
+  "save": "Save",
+  "share": "Share",
+  "next": "Next"
+}

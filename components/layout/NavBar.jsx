@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { useTheme } from "next-themes";
 
 import Link from "next/link";
@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Logo, NavItem } from "./Common";
 import { GlobeAltIcon, SearchIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
 
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
@@ -25,6 +26,7 @@ const languages = [
 
 export function Navbar() {
   const { data: session } = useSession();
+  const { t } = useTranslation("common");
 
   return (
     <div className="bg-sp-day-50 dark:bg-sp-black py-3 mb-2 opacity-90 backdrop-blur-lg dark:backdrop-blur-md sticky top-0 z-50 xl:w-4/5 mx-auto">
@@ -37,9 +39,9 @@ export function Navbar() {
           </Link>
           <MobileNav />
           <nav className="inline-flex ml-3 sm:invisible md:visible invisible">
-            <NavItem text={"Stories"} link={"/"} />
-            <NavItem text={"Mobile app"} link={"/mobile-app"} />
-            <NavItem text={"About"} link={"/about"} />
+            <NavItem text={t("stories")} link={"/"} />
+            <NavItem text={t("mobile")} link={"/mobile-app"} />
+            <NavItem text={t("about")} link={"/about"} />
           </nav>
         </div>
 
@@ -51,7 +53,7 @@ export function Navbar() {
           </Link>
           <Link href={session?.name ? "/account/settings" : "/auth/login"}>
             <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-full py-2 px-6 font-semibold">
-              {session?.user?.name ? session.user.name : "Log in"}
+              {session?.user?.name ? session.user.name : t("login")}
             </a>
           </Link>
           {/* <GlobeAltIcon className="h-6 w-6 text-sp-white" /> */}
@@ -62,30 +64,35 @@ export function Navbar() {
   );
 }
 
-const solutions = [
-  {
-    name: "Stories",
-    description: "The latest beautiful stories, memorials and anniversaries.",
-    href: "/",
-    icon: StoriesIcon,
-  },
-  {
-    name: "Mobile App",
-    description: "Download the app from Google Play and App Store.",
-    href: "/mobile-app",
-    icon: MobileAppIcon,
-  },
-  {
-    name: "About",
-    description: "Learn more about Spiritus and our mission.",
-    href: "/about",
-    icon: AboutIcon,
-  },
-];
-
 // MobileNav visibility is determined using media queries
 // it is invisible on medium and larger screens and only visible on small screens.
 export default function MobileNav() {
+  const { t } = useTranslation("common");
+
+  const menuItems = [
+    {
+      name: "stories",
+      // description: "The latest beautiful stories, memorials and anniversaries.",
+      description: "m_desc_stories",
+      href: "/",
+      icon: StoriesIcon,
+    },
+    {
+      name: "mobile",
+      // description: "Download the app from Google Play and App Store.",
+      description: "m_desc_mobile_app",
+      href: "/mobile-app",
+      icon: MobileAppIcon,
+    },
+    {
+      name: "about",
+      // description: "Learn more about Spiritus and our mission.",
+      description: "m_desc_about",
+      href: "/about",
+      icon: AboutIcon,
+    },
+  ];
+
   return (
     <div className="ml-3 md:hidden sm:visible">
       <Popover>
@@ -115,7 +122,7 @@ export default function MobileNav() {
               <Popover.Panel className="absolute z-100 mt-3 transform px-4 sm:px-0 max-w-xs">
                 <div className="overflow-hidden rounded-lg shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
                   <div className="relative grid gap-6 p-6 grid-cols-1">
-                    {solutions.map((item) => (
+                    {menuItems.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -126,10 +133,10 @@ export default function MobileNav() {
                         </div>
                         <div className="ml-4">
                           <p className="text-sm font-semibold pb-0.5">
-                            {item.name}
+                            {t(item.name)}
                           </p>
                           <p className="text-sm text-opacity-75">
-                            {item.description}
+                            {t(item.description)}
                           </p>
                         </div>
                       </a>
@@ -237,6 +244,7 @@ function ThemeSlider() {
 
 function ThemeToggler() {
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslation("common");
 
   return (
     <button
@@ -244,11 +252,11 @@ function ThemeToggler() {
       className="p-2 rounded-full border-sp-lighter dark:border-sp-medium border dark:bg-sp-black hover:bg-sp-medlight focus:outline-none dark:hover:bg-sp-lighter"
     >
       <span className="sr-only">
-        <span className="dark:hidden">Switch to dark theme</span>
-        <span className="hidden dark:inline">Switch to light theme</span>
+        <span className="dark:hidden">{t("switch_theme_dark")}</span>
+        <span className="hidden dark:inline">{t("switch_theme_light")}</span>
       </span>
       <MoonIcon className="h-5 w-5 text-gray-300 -scale-x-100 hidden dark:block" />
-      <SunIcon className="w-5 h-5 text-sp-cotta dark:hidden"/>
+      <SunIcon className="w-5 h-5 text-sp-cotta dark:hidden" />
     </button>
   );
 }

@@ -1,5 +1,8 @@
 import Head from "next/head";
 
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import {
   CreateSpiritusCTA,
   SearchSpiritusCTA,
@@ -10,15 +13,14 @@ import Layout from "../components/layout/Layout";
 import { PaginatePopularSpiritus } from "../service/http/spiritus";
 
 export default function Home({ top, popular }) {
+  const { t } = useTranslation("common");
+
   return (
     <Layout>
       <Head>
-        <title>Spiritus | Home</title>
+        <title>{t("meta_home_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          name="description"
-          content="Digital assets platform that keeps your memories forver!"
-        />
+        <meta name="description" content={t("meta_home_description")} />
       </Head>
       <CreateSpiritusCTA />
       <TopStory
@@ -34,10 +36,12 @@ export default function Home({ top, popular }) {
 }
 
 // fetch top 10 popular spirituses
-export async function getServerSideProps() {
+export async function getServerSideProps({ locale }) {
   const popular = await PaginatePopularSpiritus(0, 10);
+
   return {
     props: {
+      ...(await serverSideTranslations(locale, ["common"])),
       top: popular.data.content[0],
       popular: popular.data.content.slice(1, 9),
     },

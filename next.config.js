@@ -1,4 +1,7 @@
+const { i18n } = require("./next-i18next.config");
+
 module.exports = {
+  i18n,
   reactStrictMode: true,
   images: {
     domains: ["walk.spiritusapp.com", "spiritusapp.com"],
@@ -11,4 +14,5 @@ module.exports = {
   env: {
     NEXT_API_URL: process.env.NEXT_API_URL,
   },
+  reloadOnPrerender: true,
 };

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
 
 import {
   BookmarkIcon,
@@ -28,18 +29,20 @@ export function Tags({ tags }) {
 }
 
 export function Tribute() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="container w-full mx-auto items-center px-14 py-8 mt-14 sm:px-2 lg:px-14 md:px-8 text-sp-black dark:text-sp-white">
       <div className="flex flex-col mx-auto gap-3">
         <label htmlFor="tribute" className="hidden">
-          Your message
+          {t("write_tribute")}
         </label>
         <textarea
           id="tribute"
           type="text"
           rows="1"
           className="w-full text-2xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-[48px] border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
-          placeholder="Write tribute"
+          placeholder={t("write_tribute")}
         ></textarea>
 
         <button
@@ -48,7 +51,7 @@ export function Tribute() {
         >
           <RoseIcon />
           <span className="text-lg font-semibold ml-1 text-sp-white dark:text-sp-black">
-            Give Rose
+            {t("give_rose")}
           </span>
         </button>
 
@@ -56,64 +59,40 @@ export function Tribute() {
           <div className="flex mx-auto justify-around gap-4 ">
             <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
               <BookmarkIcon className="w-6 h-6" />
-              Save
+              {t("save")}
             </button>
             <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
               <UploadIcon className="w-6 h-6" />
-              Share
+              {t("share")}
             </button>
 
             <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
               <ReplyIcon className="w-6 h-6 -scale-x-100" />
-              Next
+              {t("next")}
             </button>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export function SpiritusOverview({ name, surname, birth, death, description }) {
-  return (
-    <div className="w-full lg:max-w-full lg:flex mb-4 text-sp-black dark:text-sp-white">
-      <div className="p-4 flex flex-col justify-between leading-normal">
-        <div className="mb-2">
-          <div className="text-sm flex items-center mb-2">
-            <button className="px-2.5 py-1 dark:from-sp-lighter dark:to-sp-lighter bg-gradient-to-r from-sp-day-300 to-sp-day-100 text-sm font-medium rounded-full">
-              🇭🇷 Croatia
-            </button>
-            <span className="pl-3">
-              {birth ? new Date(birth).toLocaleDateString("hr") : "?"}
-              {death && ` — ${new Date(death).toLocaleDateString("hr")}`}
-            </span>
-          </div>
-          <h2 className="font-bold text-3xl">
-            {name} {surname}
-          </h2>
-        </div>
-        {description && (
-          <p className="text-base border-l-4 border-sp-day-900 dark:border-sp-fawn pl-2">
-            {description}
-          </p>
-        )}
       </div>
     </div>
   );
 }
 
 export function MoreStories({ stories, spiritus }) {
+  const { t } = useTranslation("common");
+
   return (
     <section key={"stories-showcase"}>
       <div className="container mx-auto px-5 pt-20 pb-10 text-sp-black dark:text-sp-white">
         <div className="mb-4 flex w-full flex-row justify-between items-center">
-          <h1 className="font-semibold text-2xl sm:text-3xl">Stories</h1>
+          <h1 className="font-semibold text-2xl sm:text-3xl">{t("stories")}</h1>
           <a
             href="/create"
             className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-6 text-sp-white dark:text-sp-black"
           >
             <PlusCircleIcon className="h-6 w-6" />
-            <span className="font-semibold ml-1">Add Story</span>
+            <span className="font-semibold ml-1">
+              {t("cta_add_story_button")}
+            </span>
           </a>
         </div>
         <div className="-m-4 flex flex-wrap">
@@ -157,16 +136,19 @@ export function StoryHook({
   );
 }
 
-export function CTAAddMemory() {
+export function CTAAddMemory({ name }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-row justify-between rounded-2xl border-3 border-sp-day-200 dark:border-sp-medium text-sp-black dark:text-sp-white overflow-hidden">
       <div className="flex h-full flex-col py-3 pl-4">
         <h2 className="title-font py-1 text-xl font-medium">
-          Have a memory of Pavao?
+          {t("cta_add_memory")}
+          <span> {name}</span>?
         </h2>
-        <p className="text-sp-lighter">Stories, photos, suggestions...</p>
+        <p className="text-sp-lighter">{t("cta_add_memory_subtitle")}</p>
         <p className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn">
-          Send a memory
+          {t("cta_add_memory_button")}
           <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
         </p>
       </div>

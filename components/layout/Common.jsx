@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { XIcon, ChevronDownIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 
 export function NavItem({ text, link, textsize }) {
   const size = textsize || "base";

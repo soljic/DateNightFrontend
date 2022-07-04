@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import { Navbar } from "../components/layout/NavBar";
 import { Footer } from "../components/layout/Footer";
 
@@ -9,6 +12,8 @@ import { PlusCircleIcon } from "@heroicons/react/solid";
 import { ProxySearchSpiritus } from "../service/http/proxy";
 
 export default function Search() {
+  const { t } = useTranslation("common");
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
@@ -42,9 +47,9 @@ export default function Search() {
   return (
     <div className="common-bg p-2 min-w-full">
       <Head>
-        <title>Spiritus | Search</title>
+        <title>{t("meta_search_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Find your loved ones! Over 15 000 Spiritus loved ones from many families and notable institutions." />
+        <meta name="description" content={t("meta_search_description")} />
       </Head>
       <Navbar />
       <div className="h-screen container mx-auto mt-20 lg:w-1/3 md:w-full sm:w-full">
@@ -75,7 +80,7 @@ export default function Search() {
             }}
             className="mr-2 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-lighter caret-sp-fawn caret"
             type="text"
-            placeholder="Search Spiritus"
+            placeholder={t("search_placeholder")}
           />
         </div>
         {!!results.length && !searching && <SearchResults results={results} />}
@@ -88,6 +93,8 @@ export default function Search() {
 }
 
 function NotFound({ searchTerm }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col mx-auto text-sp-lighter items-center mt-10">
       <svg
@@ -108,15 +115,17 @@ function NotFound({ searchTerm }) {
       <a
         href="/create"
         className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
-        >
+      >
         <PlusCircleIcon className="h-6 w-6" />
-        <span className="font-semibold ml-1">Create Spiritus</span>
+        <span className="font-semibold ml-1">{t("create_spiritus")}</span>
       </a>
     </div>
   );
 }
 
 function SearchContentPlacaholder() {
+  const { t } = useTranslation("common");
+
   const count = 5;
   const ph = [];
 
@@ -125,7 +134,7 @@ function SearchContentPlacaholder() {
   }
   return (
     <div className="container flex flex-col mx-auto rounded-xl p-2">
-      <p className="p-2 text-sp-lighter text-center">Searching...</p>
+      <p className="p-2 text-sp-lighter text-center">{t("searching")}</p>
       <div className="flex w-full flex-col items-start">{ph}</div>
     </div>
   );
@@ -153,10 +162,12 @@ function Placeholder() {
 }
 
 function SearchResults({ results }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="container flex flex-col mx-auto rounded-xl p-2">
       <p className="p-2 text-sp-lighter text-center">
-        {results.length} results
+        {results.length} <span> {t("search_results")}</span>
       </p>
       <div className="flex flex-col items-start">
         {results.map((res) => {
@@ -180,6 +191,15 @@ function Row({ name, surname, images, birth, death }) {
       </div>
     </div>
   );
+}
+
+// needed to load translations - next-18next only works serverside
+export async function getServerSideProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
 
 const mock = [

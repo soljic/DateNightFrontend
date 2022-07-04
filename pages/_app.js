@@ -1,4 +1,6 @@
 import { ThemeProvider } from "next-themes";
+import { appWithTranslation } from "next-i18next";
+
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
@@ -20,4 +22,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

@@ -1,7 +1,7 @@
 import { Navbar } from "./NavBar";
 import { Footer } from "./Footer";
 
-export default function Layout({ children }) {
+export default function Layout({ locale, children }) {
   return (
     <div className="min-h-screen">
       <Navbar />

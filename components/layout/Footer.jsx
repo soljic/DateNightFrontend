@@ -1,16 +1,19 @@
 import { NavItem } from "./Common";
+import { useTranslation } from "next-i18next";
 
 export function Footer() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="container mx-auto text-sp-medium dark:text-sp-white mt-12">
       <div className="flex flex-row xl:w-4/5 lg:w-full mx-auto items-center justify-around">
         <div className="inline-flex">
-          <NavItem text={"About"} textsize={"sm"} />
-          <NavItem text={"Stories"} textsize={"sm"} />
-          <NavItem text={"Mobile app"} textsize={"sm"} />
-          <NavItem text={"Terms of Service"} textsize={"sm"} />
-          <NavItem text={"Privacy"} textsize={"sm"} />
-          <NavItem text={"Contact"} textsize={"sm"} />
+          <NavItem text={t("about")} textsize={"sm"} />
+          <NavItem text={t("stories")} textsize={"sm"} />
+          <NavItem text={t("mobile")} textsize={"sm"} />
+          <NavItem text={t("tos")} textsize={"sm"} />
+          <NavItem text={t("privacy")} textsize={"sm"} />
+          <NavItem text={t("contact")} textsize={"sm"} />
         </div>
       </div>
       <div className="my-2 pb-4 mx-auto xl:w-4/5 lg:w-full border-t border-sp-day-200 dark:border-sp-lighter"></div>
@@ -27,7 +30,6 @@ export function Footer() {
                 width="32"
                 height="32"
                 viewBox="0 0 32 32"
-                // fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -90,7 +92,7 @@ export function Footer() {
             </a>
           </div>
           <div className="text-sm text-sp-lighter">
-            ©{new Date().getFullYear()} Spiritus Memoria. All rights reserved.
+            ©{new Date().getFullYear()} {t("rights_reserved")}
           </div>
         </div>
       </div>

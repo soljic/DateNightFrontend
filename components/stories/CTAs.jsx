@@ -1,19 +1,24 @@
 import Link from "next/link";
+import Image from "next/image";
+import { useTranslation } from "next-i18next";
+
 import {
   PlusCircleIcon,
   StarIcon,
   ArrowCircleRightIcon,
 } from "@heroicons/react/solid";
-import Image from "next/image";
 
 export function CreateSpiritusCTA() {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 text-sp-black dark:text-sp-white dark:from-sp-dark-brown dark:to-sp-brown rounded-lg">
         <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
-          <h2 className="text-5xl md:text-4xl sm:text-3xl font-extrabold mb-4">
-            Keep memories of your<br></br> loved ones, forever
-          </h2>
+          <h2
+            className="text-5xl md:text-4xl sm:text-3xl font-extrabold mb-4"
+            dangerouslySetInnerHTML={{ __html: t("cta_create_spiritus_title") }}
+          ></h2>
           <CTACreateButton />
         </div>
       </div>
@@ -56,6 +61,8 @@ export function CreateSpiritusCTABgImage() {
 }
 
 export function SearchSpiritusCTA() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white">
       <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
@@ -66,11 +73,10 @@ export function SearchSpiritusCTA() {
           height={70}
         />
         <h2 className="text-4xl font-extrabold mb-4">
-          Find your loved ones!
+          {t("find_loved_title")}
         </h2>
         <p className="mx-auto w-2/5 text-center opacity-60 mb-6">
-          Over 15 000 Spiritus loved ones from many of biggest Croatian
-          graveyards and institutions.
+          {t("find_loved_subtitle")}
         </p>
         <CTASearchButton />
       </div>
@@ -79,30 +85,36 @@ export function SearchSpiritusCTA() {
 }
 
 function CTACreateButton() {
+  const { t } = useTranslation("common");
+
   return (
     <a
       href="/create/spiritus"
       className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
     >
       <PlusCircleIcon className="h-6 w-6" />
-      <span className="font-semibold ml-1">Create Spiritus</span>
+      <span className="font-semibold ml-1">{t("create_spiritus")}</span>
     </a>
   );
 }
 
 function CTASearchButton() {
+  const { t } = useTranslation("common");
+
   return (
     <a
       href="/search"
       className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
     >
       <ArrowCircleRightIcon className="h-6 w-6" />
-      <span className="font-semibold ml-1">Go to search</span>
+      <span className="font-semibold ml-1">{t("goto_search")}</span>
     </a>
   );
 }
 
 function CTADownloadLinks() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="pt-8 text-sp-lighter">
       <ul className="inline-flex align-middle mr-2">
@@ -122,7 +134,8 @@ function CTADownloadLinks() {
           <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />
         </li>
       </ul>
-      <span className="text-xs">Rated 4.8 on</span>
+      {t("term_rated")}
+      <span className="text-xs"> 4.8 </span> {t("term_on")}
       <Link href="https://play.google.com/store/apps/details?id=app.spiritus">
         <a className="inline-flex align-middle px-2 gap-1" target="_blank">
           <svg

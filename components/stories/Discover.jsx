@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ImagePlaceholder } from "../layout/Common";
+import { useTranslation } from "next-i18next";
 
 const stories = [
   {
@@ -35,11 +36,13 @@ const stories = [
 ];
 
 export function Discover({ popular }) {
+  const { t } = useTranslation("common");
+
   return (
     popular && (
       <div className="container w-full xl:w-4/5 mx-auto mb-16">
         <h2 className="text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white">
-          Discover
+          {t("discover")}
         </h2>
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -80,7 +83,8 @@ function PopularSpiritus({ id, slug, name, surname, description, images }) {
       <div className="mt-4 flex justify-between">
         <div>
           <h3 className="text-xl dark:text-sp-white">
-            <Link href={`/stories/spiritus/${slug}?id=${id}`}>
+            {/* <Link href={`/stories/spiritus/${slug}?id=${id}`}> */}
+            <Link href={`/spiritus/${slug}`}>
               <a>
                 <span aria-hidden="true" className="absolute inset-0" />
                 {description}

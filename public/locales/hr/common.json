@@ -1,0 +1,53 @@
+{
+  "about": "O nama",
+  "stories": "Priče",
+  "mobile": "Mobilna aplikacija",
+  "tos": "Uvjeti korištenja",
+  "privacy": "Privatnos",
+  "contact": "Kontakt",
+  "rights_reserved": "Spiritus Memoria. Sva prava pridržana.",
+  "login": "Prijava",
+
+  "m_desc_stories": "Pročitajte najnovije priče, pratite godišnjice i memoare.",
+  "m_desc_mobile_app": "Skinite aplikaciju sa Play ili App Storea.",
+  "m_desc_about": "Saznajte više o Spiritusu i našoj misiji.",
+
+  "switch_theme_dark": "Primjeni tamni način rada.",
+  "switch_theme_light": "Primjeni svijetli način rada.",
+
+  "meta_home_title": "Spiritus | Početna",
+  "meta_home_description": "Platforma koja čuva vaše digitalne uspomene - zauvijek!",
+  "meta_story_description": "Read and follow memories about",
+  "meta_spiritus_description": "Pregledaj uspomene na",
+  "meta_search_title": "Spiritus | Pretraga",
+  "meta_search_description": "Pronađite svoje najmilije međdu 15 000 Spiritusa iz raznih dijelova svijeta i važnih osoba iz mnogih institucija.",
+
+  "cta_create_spiritus_title": "Sačuvajte uspomene<br></br>na svoje najmilije, zauvijek",
+  "cta_add_memory": "Želite li dodati uspomenu na",
+  "cta_add_memory_subtitle": "Priče, fotografije, prijedlozi...",
+  "cta_add_memory_button": "Pošalji uspomenu",
+  "cta_add_story_button": "Dodaj priču",
+
+  "create_spiritus": "Kreiraj Spiritus",
+  "goto_search": "Pretraži",
+  "search_placeholder": "Pretraži Spirituse",
+  "searching": "Pretražujem...",
+  "search_results": "rezultata",
+
+  "story_of_the_week": "Priča tjedna",
+  "read_story": "Pročitaj",
+
+  "discover": "Istraži",
+
+  "find_loved_title": "Pronađi svoje najmilije",
+  "find_loved_subtitle": "Među 15 000 Spiritusa sa hrvatskih grobalja i poznatih institucija",
+
+  "term_rated": "Ocijenjeno",
+  "term_on": "na",
+
+  "write_tribute": "Napiši posvetu",
+  "give_rose": "Pošalji ružu",
+  "save": "Spremi",
+  "share": "Podijeli",
+  "next": "Sljedeće"
+}

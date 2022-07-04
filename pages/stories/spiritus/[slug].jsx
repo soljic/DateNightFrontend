@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Head from "next/head";
 
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import Layout from "../../../components/layout/Layout";
-import SpiritusCarousel from "../../../components/carousel/SpiritusCarousel";
+import { HorizontalDivider } from "../../../components/layout/Common";
 import {
   CTAAddMemory,
   MoreStories,
-  SpiritusOverview,
   Tags,
   Tribute,
 } from "../../../components/stories/StoryPage";
-import { HorizontalDivider } from "../../../components/layout/Common";
+import { SpiritusOverview } from "../../../components/spiritus/Overview";
+import { SpiritusCarousel } from "../../../components/spiritus/Carousel";
 
 import { GetSpiritusBySlug } from "../../../service/http/spiritus";
 import { GetSpiritusStoriesByID } from "../../../service/http/story";
@@ -22,6 +25,8 @@ export default function StoryPage({
   hasMore,
   total,
 }) {
+  const { t } = useTranslation("common");
+
   return (
     <Layout>
       <Head>
@@ -31,7 +36,9 @@ export default function StoryPage({
           name="description"
           content={
             spiritus.description ||
-            `Read and follow memories about ${spiritus.name} ${spiritus.surname}.`
+            `${t("meta_story_description")} ${spiritus.name} ${
+              spiritus.surname
+            }.`
           }
         />
       </Head>
@@ -90,7 +97,7 @@ export default function StoryPage({
             <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
               <MoreStories stories={stories} spiritus={spiritus} />
               <div className="flex-1 items-center justify-center px-4">
-                <CTAAddMemory />
+                <CTAAddMemory name={spiritus.name} />
               </div>
             </div>
           </div>
@@ -135,6 +142,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      ...(await serverSideTranslations(context.locale, ["common"])),
       first,
       stories,
       spiritus,
