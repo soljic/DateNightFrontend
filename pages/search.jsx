@@ -11,7 +11,7 @@ import { ProxySearchSpiritus } from "../service/http/proxy";
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
-  const [results, setResults] = useState(mock);
+  const [results, setResults] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
