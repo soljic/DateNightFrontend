@@ -21,6 +21,8 @@
   "meta_spiritus_description": "Pregledaj uspomene na",
   "meta_search_title": "Spiritus | Pretraga",
   "meta_search_description": "Pronađite svoje najmilije međdu 15 000 Spiritusa iz raznih dijelova svijeta i važnih osoba iz mnogih institucija.",
+  "meta_create_spiritus_title": "Spiritus | Novi Spiritus",
+  "meta_create_spiritus_description": "Kreirajte Spiritus i pohranite ga zauvijek.",
 
   "cta_create_spiritus_title": "Sačuvajte uspomene<br></br>na svoje najmilije, zauvijek",
   "cta_add_memory": "Želite li dodati uspomenu na",
@@ -49,5 +51,40 @@
   "give_rose": "Pošalji ružu",
   "save": "Spremi",
   "share": "Podijeli",
-  "next": "Sljedeće"
+  "next": "Sljedeće",
+  "back": "Natrag",
+  "create": "Kreiraj",
+  "creating": "Kreiranje...",
+
+  "spiritus_success_first_story": "Napišite prvu priču",
+  
+  "spiritus_success_text": "vjerojatno Vas podsjeća na lijepe trenutke i draga mjesta. Sačuvajte te uspomene.",
+
+  "create_story": "Kreiraj priču",
+
+  "add_guardian": "Dodajte Čuvara",
+  "add_resting_place": "Dodajte Počivalište",
+  "add_image": "Dodajte sliku",
+
+  "create_spiritus_names_title": "Unesite ime i prezime vašeg Spiritusa",
+  "create_spiritus_firstname_placeholder": "Unesi ime",
+  "create_spiritus_lastname_placeholder": "Unesi prezime",
+  
+  "create_spiritus_dates_title1": "Kada je",
+  "create_spiritus_dates_title2": "rođen/a i kada je preminuo/la?",
+  "create_spiritus_birth_placeholder": "Datum rođenja",
+  "create_spiritus_death_placeholder": "Darum smrti",
+
+  "create_spiritus_description_title1": "Podsjeća li Vas",
+  "create_spiritus_description_title2": "na neku rečenicu koju je često koristio/la? Ako da - dodajte ju.",
+  "create_spiritus_description_placeholder": "Unesi citat",
+
+  "create_spiritus_location_title": "Vas vjerojatno podsjeća na određeno mjesto. Upišite mjesto",
+  "create_spiritus_location_subtitle": "Ovo može biti mjesto rođenja, mjesto gdje je osoba pokopana ili gdje je najdulje živjela.",
+  "create_spiritus_location_placeholder": "Unesi lokaciju",
+
+  "create_spiritus_image_title1": "Imate li slike iz života Spiritusa",
+  "create_spiritus_image_title2": "? Ako da, možete ih dodati",
+
+  "optional": "Neobavezno."
 }

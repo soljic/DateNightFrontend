@@ -1,17 +1,20 @@
 import DatePicker from "react-date-picker/dist/entry.nostyle";
 
+import { useTranslation } from "next-i18next";
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 
 import { CommentIcon, LocationIcon, RangeIcon, SpiritusIcon } from "../Icons";
 
 export function SpiritusName({ name, setName, surname, setSurname }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
         <SpiritusIcon />
       </div>
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        Enter first and last name for Spiritus.
+        {t("create_spiritus_names_title")}
       </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
@@ -22,7 +25,7 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
                 onChange={(e) => {
                   setName(e.target.value);
                 }}
-                placeholder="Enter first name"
+                placeholder={t("create_spiritus_firstname_placeholder")}
                 className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
               />
             </div>
@@ -34,7 +37,7 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
                 onChange={(e) => {
                   setSurname(e.target.value);
                 }}
-                placeholder="Enter last name"
+                placeholder={t("create_spiritus_lastname_placeholder")}
                 className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
               />
             </div>
@@ -46,14 +49,16 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
 }
 
 export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
-  const footer = <p>Please pick a day.</p>;
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
         <RangeIcon />
       </div>
       <p className="font-bold text-2xl">
-        When was <span> {name} </span> born, and when did he/she died?
+        {t("create_spiritus_dates_title1")} <span> {name} </span>{" "}
+        {t("create_spiritus_dates_title2")}
       </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
@@ -63,7 +68,7 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
                 onChange={setBirth}
                 value={birth}
                 clearIcon={!birth ? null : <XIcon className="h-6 w-6" />}
-                dayPlaceholder="Date of Birth"
+                dayPlaceholder={t("create_spiritus_birth_placeholder")}
                 monthPlaceholder=""
                 yearPlaceholder=""
                 showLeadingZeros
@@ -78,7 +83,7 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
               <DatePicker
                 onChange={setDeath}
                 value={death}
-                dayPlaceholder="Date of Passing"
+                dayPlaceholder={t("create_spiritus_death_placeholder")}
                 monthPlaceholder=""
                 yearPlaceholder=""
                 showLeadingZeros
@@ -96,14 +101,17 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
 }
 
 export function SpiritusDescription({ name, description, setDescription }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
         <CommentIcon />
       </div>
       <p className="font-bold text-2xl">
-        Does<span> {name} </span>have any sentence which he/she always said? If
-        yes, please add it here.
+        {t("create_spiritus_description_title1")}
+        <span> {name} </span>
+        {t("create_spiritus_description_title2")}
       </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row">
@@ -114,7 +122,7 @@ export function SpiritusDescription({ name, description, setDescription }) {
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}
-                placeholder="Enter sentence"
+                placeholder={t("create_spiritus_description_placeholder")}
                 rows="3"
                 className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-black dark:text-sp-white"
               />
@@ -127,18 +135,19 @@ export function SpiritusDescription({ name, description, setDescription }) {
 }
 
 export function SpiritusLocation({ name, location, setLocation }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="mt-12 mx-2 lg:mx-12">
       <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
         <LocationIcon fill />
       </div>
       <p className="font-bold text-2xl">
-        <span> {name} </span> must associate you to a one place. Please select
-        that place.
+        <span> {name} </span>
+        {t("create_spiritus_location_title")}
       </p>
       <p className="text-sp-lighter text-sm">
-        It can be place of birth, death, or the place where he/she lived the
-        longest.
+        {t("create_spiritus_location_subtitle")}
       </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row">
@@ -149,7 +158,7 @@ export function SpiritusLocation({ name, location, setLocation }) {
                 onChange={(e) => {
                   setLocation(e.target.value);
                 }}
-                placeholder="Enter place"
+                placeholder={t("create_spiritus_location_placeholder")}
                 className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black appearance-none outline-none w-full rounded text-sp-black dark:text-sp-white"
               />
               {/* <SearchIcon className="h-6 w-6 text-sp-lighter mx-3" /> */}

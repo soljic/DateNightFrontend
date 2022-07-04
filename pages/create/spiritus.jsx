@@ -4,6 +4,9 @@ import Head from "next/head";
 import { useState } from "react";
 import { getSession } from "next-auth/react";
 
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import Layout from "../../components/layout/Layout";
@@ -23,6 +26,8 @@ import { ProxyCreateSpiritus } from "../../service/http/proxy";
 // TODO: save stuff to local storage
 // TODO: add err handling and error toasts
 export default function CreateSpiritusPage({ user }) {
+  const { t } = useTranslation("common");
+
   // stepper is 0 indexed!
   const numSteps = 4;
   const [step, setStep] = useState(0);
@@ -125,11 +130,11 @@ export default function CreateSpiritusPage({ user }) {
   return (
     <Layout>
       <Head>
-        <title>Spiritus | Create Spiritus</title>
+        <title>{t("meta_create_spiritus_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="Create a Spiritus and keep it safe forver."
+          content={t("meta_create_spiritus_description")}
         />
       </Head>
       <div className="py-5 h-screen ">
@@ -164,7 +169,7 @@ export default function CreateSpiritusPage({ user }) {
                       }`}
                       disabled={pending}
                     >
-                      Back
+                      {t("back")}
                     </button>
                   )}
                   {step !== numSteps ? (
@@ -178,7 +183,7 @@ export default function CreateSpiritusPage({ user }) {
                         (name && surname) || "opacity-30"
                       }`}
                     >
-                      Next
+                      {t("next")}
                     </button>
                   ) : (
                     <button
@@ -189,7 +194,11 @@ export default function CreateSpiritusPage({ user }) {
                       disabled={pending}
                       className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
                     >
-                      {pending ? <Spinner text={"Creating..."} /> : "Create"}
+                      {pending ? (
+                        <Spinner text={t("creating")} />
+                      ) : (
+                        <span>{t("create")}</span>
+                      )}
                     </button>
                   )}
                 </div>
@@ -203,6 +212,8 @@ export default function CreateSpiritusPage({ user }) {
 }
 
 function Success({ spiritus }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
@@ -223,25 +234,26 @@ function Success({ spiritus }) {
       )}
       <HorizontalDivider />
       <div className="flex flex-col items-center gap-1 mt-5">
-        <h2 className="font-bold text-3xl">Write first story</h2>
+        <h2 className="font-bold text-3xl">
+          {t("spiritus_success_first_story")}
+        </h2>
         <p className="mt-1 text-center opacity-50 mb-8 w-3/4 text">
-          <span> {spiritus.name} </span> must have done many beautiful things.
-          Save those memories forever.
+          <span> {spiritus.name} </span> {t("spiritus_success_text")}
         </p>
       </div>
       <Link href={`/create/story?spiritus=${spiritus.id}`}>
         <a className="bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-black">
-          Create story
+          {t("create_story")}
         </a>
       </Link>
       <div className="flex mx-auto items-center justify-center gap-4 mt-3 text-sp-lighter dark:text-sp-white">
         <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
           <GuardianIcon />
-          <p className="font-semibold">Add Guardian</p>
+          <p className="font-semibold">{t("add_guardian")}</p>
         </button>
         <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
           <GraveIcon />
-          <p className="font-semibold">Resting Place</p>
+          <p className="font-semibold">{t("add_resting_place")}</p>
         </button>
       </div>
     </div>
@@ -262,6 +274,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      ...(await serverSideTranslations(context.locale, ["common"])),
       user: session.user,
     },
   };

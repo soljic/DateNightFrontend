@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useTranslation } from "next-i18next";
 
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { XIcon } from "@heroicons/react/outline";
@@ -9,6 +10,8 @@ import { ImageIcon } from "./Icons";
 // There are subtle differences between this uploader
 // and the one for spiritus, they are not interchangeable.
 export function StoryImageUploader({ images, setImages }) {
+  const { t } = useTranslation("common");
+
   const inputFile = useRef(null);
 
   const onOpenFileDialog = (event) => {
@@ -93,6 +96,8 @@ export function StoryImageUploader({ images, setImages }) {
 }
 
 export function SpiritusImageUploader({ name, images, setImages }) {
+  const { t } = useTranslation("common");
+
   const inputFile = useRef(null);
 
   const onOpenFileDialog = (event) => {
@@ -136,10 +141,11 @@ export function SpiritusImageUploader({ name, images, setImages }) {
         <ImageIcon fill />
       </div>
       <p className="font-bold text-2xl">
-        Does<span> {name} </span> have any images from his/her life? If yes,
-        please add them here.
+        {t("create_spiritus_image_title1")}
+        <span> {name} </span>
+        {t("create_spiritus_image_title2")}
       </p>
-      <p className="text-sp-lighter text-sm mt-2">*Optional</p>
+      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
       <input
         type="file"
         id="file"
@@ -157,7 +163,7 @@ export function SpiritusImageUploader({ name, images, setImages }) {
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
-          <span className="font-semibold ml-1">Add Image</span>
+          <span className="font-semibold ml-1">{t("add_image")}</span>
         </button>
       ) : (
         <div className="flex flex-row items-start justify-start gap-4 p-4">

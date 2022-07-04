@@ -5,6 +5,10 @@ import Head from "next/head";
 
 import { getSession, useSession } from "next-auth/react";
 
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import {
@@ -253,6 +257,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         spiritus: data,
+        ...(await serverSideTranslations(context.locale, ["common"])),
       },
     };
   } catch (err) {
