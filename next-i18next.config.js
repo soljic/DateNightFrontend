@@ -1,3 +1,5 @@
+const path = require('path')
+
 module.exports = {
   i18n: {
     locales: ["en", "hr"],
@@ -5,6 +7,7 @@ module.exports = {
     // a non-locale prefixed path e.g. `/hello`
     defaultLocale: "hr",
     defaultLocaleDetection: false,
+    localePath: path.resolve('./public/locales')
   },
   react: { useSuspense: false }, //this line
 };
