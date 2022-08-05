@@ -67,7 +67,7 @@ export function DiscoverSwiper ({ popular }) {
   }
 
   const hideNextBtn = () => {
-    return Math.floor(currSlide > (popular.length + 1) / 2)
+    return Math.floor(currSlide > (popular.length + 3) / 2)
   }
 
   return (
