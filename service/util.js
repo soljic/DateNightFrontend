@@ -1,7 +1,12 @@
 import { API_URL } from "./constants";
 
-export function ImagePath(subpath) {
-  return `${API_URL}${subpath}/`;
+export function ImagePath(path) {
+  // check if path is already expanded
+  // this happens sometimes with nextjs or browser caching
+  if (path && path.startsWith("http")){
+    return path
+  }
+  return `${API_URL}${path}/`;
 }
 
 // Helper method to wait for a middleware to execute before continuing

@@ -200,7 +200,14 @@ export function HomepageSwiper ({
 // NOTE:
 // itemType is used to calculate the link to the correct item
 // if itemType === "SPIRITUS_DETAILS" the link will point to SPIRITUS, ELSE will point to Story
-function HomepageTile ({ itemId, itemType, title, spiritusName, imageUrl, featured }) {
+function HomepageTile ({
+  itemId,
+  itemType,
+  title,
+  spiritusName,
+  imageUrl,
+  featured
+}) {
   return (
     <div key={itemId} className='group'>
       <div className='relative rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>

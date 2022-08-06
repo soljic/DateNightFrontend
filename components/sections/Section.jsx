@@ -23,7 +23,7 @@ export function SectionGrid ({ id, title, isLastPage, initialItems }) {
 
     try {
       const res = await ProxyGetSection(id, current + 1)
-	  setItems(prev => [...prev, ...res.data.items.content]);
+      setItems(prev => [...prev, ...res.data.items.content])
       setCurrent(current => current + 1)
       setIsLast(res.data.items.last)
       setIsFetching(false)
@@ -70,9 +70,10 @@ export function SectionGrid ({ id, title, isLastPage, initialItems }) {
                 key={item.itemId}
                 story_id={item.itemId}
                 title={item.title}
+                subtitle={item.subtitle}
                 // mapping is weird and all over the place
                 // due to BE respones being weird
-                spiritusName={item.subtitle}
+                itemType={item.itemNavigationType}
                 imageUrl={item.imageUrl}
               />
             )
@@ -89,7 +90,9 @@ export function SectionGrid ({ id, title, isLastPage, initialItems }) {
 
       {!isLast && (
         <button
-          onClick={() => {loadMore()}}
+          onClick={() => {
+            loadMore()
+          }}
           disabled={isLast}
           className='dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-4 px-8 font-semibold cursor-pointer'
         >
@@ -113,16 +116,12 @@ function PlaceHolderTile ({ story_id, text }) {
   )
 }
 
-function SectionTile ({
-  story_id,
-  title,
-  spiritusName,
-  imageUrl,
-}) {
-  return (
-    <Link href={`/stories/id/${story_id}`} key={title}>
+// Render a Link to SPIRITUS or STORY depending on itemType.
+function SectionTile ({ story_id, title, subtitle, imageUrl, itemType }) {
+  return itemType === 'SPIRITUS_DETAILS' ? (
+    <Link href={`/spiritus/id/${story_id}`} key={title}>
       <a className='group'>
-        <div className='rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
+        <div className='rounded-xl overflow-hidden group-hover:opacity-75'>
           <Image
             src={imageUrl}
             className='w-full h-full'
@@ -133,7 +132,27 @@ function SectionTile ({
         </div>
         <div className='mt-4 flex flex-col justify-between'>
           <h3 className='text-lg dark:text-sp-white'>{title}</h3>
-          <p className='mt-1 dark:text-sp-white opacity-50'>{`${spiritusName}`}</p>
+          <p className='mt-1 dark:text-sp-white dark:text-opacity-60'>
+            {subtitle}
+          </p>
+        </div>
+      </a>
+    </Link>
+  ) : (
+    <Link href={`/stories/id/${story_id}`} key={title}>
+      <a className='group'>
+        <div className='rounded-xl overflow-hidden group-hover:opacity-75'>
+          <Image
+            src={imageUrl}
+            className='w-full h-full'
+            width={200}
+            height={260}
+            layout='responsive'
+          />
+        </div>
+        <div className='mt-4 flex flex-col justify-between'>
+          <h3 className='text-lg dark:text-sp-white'>{title}</h3>
+          <p className='mt-1 dark:text-sp-white dark:text-opacity-60'>{`${subtitle}`}</p>
         </div>
       </a>
     </Link>
