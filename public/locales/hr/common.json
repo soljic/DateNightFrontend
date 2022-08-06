@@ -26,6 +26,9 @@
   "meta_create_story_title": "Spiritus | Nova Priča",
   "meta_create_story_description": "Kreirajte priču i pohranite ju zauvijek.",
 
+  "meta_section_title": "Spiritus | Pregled",
+  "meta_section_description": "Pregledajte najnovije priče, godišnjice ili popularne Spirituse.",
+
   "cta_create_spiritus_title": "Sačuvajte uspomene<br></br>na svoje najmilije, zauvijek",
   "cta_add_memory": "Želite li dodati uspomenu na",
   "cta_add_memory_subtitle": "Priče, fotografije, prijedlozi...",
@@ -116,5 +119,9 @@
   "section_discover_title": "Istraži",
   "section_featured_title": "Istaknuto",
   "section_anniversaries_title": "Godišnjice",
-  "section_categories_title": "Kategorije"
+  "section_categories_title": "Kategorije",
+
+  "action_favourite": "Označeno",
+  "action_filter": "Filteri",
+  "action_load_more": "Prikaži više"
 }

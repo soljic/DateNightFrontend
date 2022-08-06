@@ -60,6 +60,7 @@ export function HomepageSwiper ({
   section_id,
   title_translation,
   items,
+  title,
   featured
 }) {
   const { t } = useTranslation('common')
@@ -82,9 +83,11 @@ export function HomepageSwiper ({
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
             {t(title_translation)}
           </h2>
-          <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
-            <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
-          </div>
+          <Link href={`/sections/id/${section_id}?title=${title}`}>
+            <a className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
+              <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
+            </a>
+          </Link>
         </div>
         <div className='relative'>
           <div
@@ -118,7 +121,7 @@ export function HomepageSwiper ({
               return (
                 <SwiperSlide key={`slider-${i}`}>
                   {
-                    <StoryTileV2
+                    <StoryTile
                       story_id={item.itemId}
                       title={item.title}
                       // mapping is weird and all over the place
@@ -132,7 +135,7 @@ export function HomepageSwiper ({
               )
             })}
             <SwiperSlide>
-              <ExpandSectionTile />
+              <ExpandSectionTile section_id={section_id} title={title} />
             </SwiperSlide>
           </Swiper>
           <div
@@ -150,71 +153,6 @@ export function HomepageSwiper ({
         </div>
       </div>
     )
-  )
-}
-
-export function Discover ({ popular }) {
-  const { t } = useTranslation('common')
-
-  return (
-    popular && (
-      <div className='container w-full xl:w-4/5 mx-auto mb-16'>
-        <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
-          {t('discover')}
-        </h2>
-
-        <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-          {popular.map(s => (
-            <StoryTile
-              key={s.slug}
-              id={s.id}
-              slug={s.slug}
-              name={s.name}
-              surname={s.surname}
-              description={s.description}
-              images={s.images}
-            />
-          ))}
-        </div>
-      </div>
-    )
-  )
-}
-
-// Data and links about a story.
-// StoryTileV2 should be removed and this should be used instead.
-function StoryTile ({ id, slug, name, surname, description, images }) {
-  const image = images.length ? images[0] : null
-  return (
-    <div key={slug} className='group relative'>
-      <div className='w-full aspect-w-1 aspect-h-1 rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
-        {image ? (
-          <Image
-            src={image.url}
-            className='w-full h-full'
-            width={220}
-            height={248}
-            layout='responsive'
-          />
-        ) : (
-          <ImagePlaceholder />
-        )}
-      </div>
-      <div className='mt-4 flex justify-between'>
-        <div>
-          <h3 className='text-xl dark:text-sp-white'>
-            {/* <Link href={`/stories/spiritus/${slug}?id=${id}`}> */}
-            <Link href={`/spiritus/${slug}`}>
-              <a>
-                <span aria-hidden='true' className='absolute inset-0' />
-                {description}
-              </a>
-            </Link>
-          </h3>
-          <p className='mt-1 text-lg dark:text-sp-white opacity-50'>{`${name} ${surname}`}</p>
-        </div>
-      </div>
-    </div>
   )
 }
 
@@ -257,7 +195,7 @@ function StoryTile ({ id, slug, name, surname, description, images }) {
 //   "lastname": Galović",
 //   "imageUrl": "/images/522/spiritus"
 // }
-function StoryTileV2 ({ story_id, title, spiritusName, imageUrl, featured }) {
+function StoryTile ({ story_id, title, spiritusName, imageUrl, featured }) {
   return (
     <div key={story_id} className='group'>
       <div className='relative rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
@@ -270,26 +208,24 @@ function StoryTileV2 ({ story_id, title, spiritusName, imageUrl, featured }) {
           <Image
             src={imageUrl}
             className='w-full h-full'
-            width={220}
-            height={248}
+            width={200}
+            height={260}
             layout='responsive'
           />
         ) : (
           <ImagePlaceholder />
         )}
       </div>
-      <div className='mt-4 flex justify-between'>
-        <div>
-          <h3 className='text-xl dark:text-sp-white'>
-            <Link href={`/story/id/${story_id}`}>
-              <a>
-                <span aria-hidden='true' className='absolute inset-0' />
-                {title}
-              </a>
-            </Link>
-          </h3>
-          <p className='mt-1 text-lg dark:text-sp-white opacity-50'>{`${spiritusName}`}</p>
-        </div>
+      <div className='mt-4 flex flex-col justify-between'>
+        <h3 className='text-lg dark:text-sp-white'>
+          <Link href={`/story/id/${story_id}`}>
+            <a>
+              <span aria-hidden='true' className='absolute inset-0' />
+              {title}
+            </a>
+          </Link>
+        </h3>
+        <p className='mt-1 dark:text-sp-white opacity-50'>{`${spiritusName}`}</p>
       </div>
     </div>
   )
@@ -297,16 +233,19 @@ function StoryTileV2 ({ story_id, title, spiritusName, imageUrl, featured }) {
 
 // Tile that redirects users to a section page.
 // Section pages are: /featured, /anniversaries, /categories, /nearby.
-function ExpandSectionTile ({ sectionLink }) {
+// NOTE: currently we navigate to sections using IDs and title
+function ExpandSectionTile ({ section_id, title }) {
   return (
-    <div className='flex w-full h-80 mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center'>
-      <div className='mx-auto'>
-        <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2'>
-          <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
+    <Link href={`/sections/id/${section_id}?title=${title}`}>
+      <a className='flex w-full h-80 mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center'>
+        <div className='mx-auto'>
+          <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2'>
+            <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
+          </div>
+          <p className='dark:text-sp-white'>See all</p>
         </div>
-        <p className='dark:text-sp-white'>See all</p>
-      </div>
-    </div>
+      </a>
+    </Link>
   )
 }
 
@@ -417,8 +356,8 @@ function CategoryTile ({ id, title, imageUrl }) {
       </div>
       <div className='mt-2 flex justify-between'>
         <div>
-          <h3 className='text-xl dark:text-sp-white'>
-            <Link href={`/section/id/${id}`}>
+          <h3 className='text-lg dark:text-sp-white'>
+            <Link href={`/sections/id/${id}`}>
               <a>
                 <span aria-hidden='true' className='absolute inset-0' />
                 {title}

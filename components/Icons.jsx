@@ -206,3 +206,22 @@ export function CrownIcon ({ width, height }) {
     </svg>
   )
 }
+
+export function FilterIcon ({ width, height }) {
+  const w = width ? `w-${width}` : `w-6`
+  const h = height ? `h-${height}` : `h-6`
+
+  return (
+    <svg
+      className={`${w} ${h} fill-sp-black dark:fill-sp-white`}
+      viewBox='0 0 10 8'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M0 0.75C0 0.335786 0.335786 0 0.75 0L9.25 0C9.66421 0 10 0.335786 10 0.75C10 1.16421 9.66421 1.5 9.25 1.5H0.75C0.335786 1.5 0 1.16421 0 0.75ZM2 3.75C2 3.33579 2.33579 3 2.75 3H7.25C7.66421 3 8 3.33579 8 3.75C8 4.16421 7.66421 4.5 7.25 4.5H2.75C2.33579 4.5 2 4.16421 2 3.75ZM4.25 6C3.83579 6 3.5 6.33579 3.5 6.75C3.5 7.16421 3.83579 7.5 4.25 7.5H5.75C6.16421 7.5 6.5 7.16421 6.5 6.75C6.5 6.33579 6.16421 6 5.75 6H4.25Z'
+        fill='#F0EFED'
+      />
+    </svg>
+  )
+}

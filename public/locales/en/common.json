@@ -26,6 +26,9 @@
   "meta_create_story_title": "Spiritus | Create Story",
   "meta_create_story_description": "Add or suggest a story for Spiritus and keep it safe forver.",
 
+  "meta_section_title": "Spiritus | Browse Section",
+  "meta_section_description": "Browse latest featured stories, anniversaries or popular Spirituses.",
+
   "cta_create_spiritus_title": "Keep memories of your<br></br>loved ones, forever",
   "cta_add_memory": "Have a memory of",
   "cta_add_memory_subtitle": "Stories, photos, suggestions...",
@@ -116,5 +119,10 @@
   "section_discover_title": "Discover",
   "section_featured_title": "Featured",
   "section_anniversaries_title": "Anniversaries",
-  "section_categories_title": "Categories"
+  "section_categories_title": "Categories",
+
+  "action_favourite": "Favourite",
+  "action_filter": "Filter",
+  "action_load_more": "Load more"
+
 }

@@ -36,8 +36,8 @@ export async function GetParsedHomepage () {
   res.data.homeListItems.forEach(section => {
     switch (section.title) {
       case 'Discover':
-        sections.discover.section_id = section.id
-        sections.discover.section_title = section.title
+        sections.discover.id = section.id
+        sections.discover.title = section.title
 
         sections.discover.items = []
         section.items.content.forEach((item, i) => {
@@ -46,8 +46,8 @@ export async function GetParsedHomepage () {
         })
         break
       case 'Categories':
-        sections.categories.section_id = section.id
-        sections.categories.section_title = section.title
+        sections.categories.id = section.id
+        sections.categories.title = section.title
 
         sections.categories.items = []
         section.items.content.forEach(item => {
@@ -56,8 +56,8 @@ export async function GetParsedHomepage () {
         })
         break
       case 'Anniversaries':
-        sections.anniversaries.section_id = section.id
-        sections.anniversaries.section_title = section.title
+        sections.anniversaries.id = section.id
+        sections.anniversaries.title = section.title
 
         sections.anniversaries.items = []
         section.items.content.forEach(item => {
@@ -66,8 +66,8 @@ export async function GetParsedHomepage () {
         })
         break
       case 'Featured stories':
-        sections.featured.section_id = section.id
-        sections.featured.section_title = section.title
+        sections.featured.id = section.id
+        sections.featured.title = section.title
 
         sections.featured.items = []
         section.items.content.forEach(item => {
@@ -80,7 +80,7 @@ export async function GetParsedHomepage () {
         if (section.viewType === 'FEATURED' && section.items.content.length) {
           const data = section.items.content[0]
           data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null
-          sections.storyOfTheWeek.section_id = section.id
+          sections.storyOfTheWeek.id = section.id
           sections.storyOfTheWeek = data
         }
     }
