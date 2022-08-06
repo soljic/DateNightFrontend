@@ -18,6 +18,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+import { CrownIcon } from '../Icons'
 
 SwiperCore.use([Navigation, A11y])
 
@@ -55,7 +56,12 @@ const stories = [
 
 // Swiper component for the home page swipable/scrollable sections.
 // Uses React Swiper with custom navigation buttons.
-export function HomepageSwiper ({ section_id, title, items }) {
+export function HomepageSwiper ({
+  section_id,
+  title_translation,
+  items,
+  featured
+}) {
   const { t } = useTranslation('common')
   const [currSlide, setCurrSlide] = useState(0)
   const prevRef = useRef(null)
@@ -70,19 +76,14 @@ export function HomepageSwiper ({ section_id, title, items }) {
   }
 
   return (
-    stories && (
+    items && (
       <div className='container w-full xl:w-4/5 mx-auto my-10'>
         <div className='inline-flex w-full items-center justify-between pb-3'>
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
-            {t('discover')}
-            {/* TODO: replace */}
-            {t(title)}
+            {t(title_translation)}
           </h2>
           <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
-            <ChevronRightIcon
-              className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn'
-              dark
-            />
+            <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
           </div>
         </div>
         <div className='relative'>
@@ -124,6 +125,7 @@ export function HomepageSwiper ({ section_id, title, items }) {
                       // due to BE respones being weird
                       spiritusName={item.subtitle}
                       imageUrl={item.imageUrl}
+                      featured={featured}
                     />
                   }
                 </SwiperSlide>
@@ -255,10 +257,15 @@ function StoryTile ({ id, slug, name, surname, description, images }) {
 //   "lastname": Galović",
 //   "imageUrl": "/images/522/spiritus"
 // }
-function StoryTileV2 ({ story_id, title, spiritusName, imageUrl }) {
+function StoryTileV2 ({ story_id, title, spiritusName, imageUrl, featured }) {
   return (
-    <div key={story_id} className='group relative'>
-      <div className='w-full aspect-w-1 aspect-h-1 rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
+    <div key={story_id} className='group'>
+      <div className='relative rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
+        {featured && (
+          <div className='absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg'>
+            <CrownIcon width={5} height={5} />
+          </div>
+        )}
         {imageUrl ? (
           <Image
             src={imageUrl}
@@ -295,10 +302,7 @@ function ExpandSectionTile ({ sectionLink }) {
     <div className='flex w-full h-80 mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center'>
       <div className='mx-auto'>
         <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2'>
-          <ChevronRightIcon
-            className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn'
-            dark
-          />
+          <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
         </div>
         <p className='dark:text-sp-white'>See all</p>
       </div>
@@ -310,7 +314,7 @@ function ExpandSectionTile ({ sectionLink }) {
 // Uses React Swiper with custom navigation buttons.
 // Basically copy/paste from HomepageSwiper with different tiles.
 // TODO: refactor!
-export function CategoriesSwiper ({ categories }) {
+export function CategoriesSwiper ({ categories, title_translation }) {
   const { t } = useTranslation('common')
   const [currSlide, setCurrSlide] = useState(0)
   const prevRef = useRef(null)
@@ -329,13 +333,10 @@ export function CategoriesSwiper ({ categories }) {
       <div className='container w-full xl:w-4/5 mx-auto my-8'>
         <div className='inline-flex w-full items-center justify-between pb-3'>
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
-            {t('discover')}
+            {t(title_translation)}
           </h2>
           <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
-            <ChevronRightIcon
-              className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn'
-              dark
-            />
+            <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
           </div>
         </div>
         <div className='relative'>

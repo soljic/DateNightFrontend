@@ -111,5 +111,10 @@
   "create_story_summary_placeholder": "Enter short summary",
 
   "create_story_text_title": "Write new story",
-  "create_story_text_placeholder": "Enter story text"
+  "create_story_text_placeholder": "Enter story text",
+
+  "section_discover_title": "Discover",
+  "section_featured_title": "Featured",
+  "section_anniversaries_title": "Anniversaries",
+  "section_categories_title": "Categories"
 }

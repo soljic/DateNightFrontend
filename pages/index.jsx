@@ -39,11 +39,11 @@ export default function Home ({
         title={storyOfTheWeek.subtitle}
         imageUrl={storyOfTheWeek.imageUrl}
       />
-      <HomepageSwiper section_id={discover.id} title={discover.title} items={discover.items} />
+      <HomepageSwiper section_id={discover.id} title_translation={"section_discover_title"} items={discover.items} />
       <SearchSpiritusCTA />
-      <CategoriesSwiper categories={categories.items} />
-      <HomepageSwiper section_id={anniversaries.id} title={anniversaries.title} items={anniversaries.items} />
-      <HomepageSwiper section_id={featured.id} title={featured.title} items={featured.items} />
+      <CategoriesSwiper categories={categories.items} title_translation={"section_categories_title"}/>
+      <HomepageSwiper section_id={anniversaries.id} title_translation={"section_anniversaries_title"} items={anniversaries.items} />
+      <HomepageSwiper section_id={featured.id} title_translation={"section_featured_title"} items={featured.items} featured={true} />
       <SearchSpiritusCTA />
     </Layout>
   )
