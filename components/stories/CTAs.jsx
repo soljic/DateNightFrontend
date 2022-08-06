@@ -64,7 +64,7 @@ export function SearchSpiritusCTA() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white">
+    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white my-10">
       <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
         <Image
           src="/images/circle_images_sm.png"
