@@ -39,17 +39,19 @@ export default function Home ({
         title={storyOfTheWeek.subtitle}
         imageUrl={storyOfTheWeek.imageUrl}
       />
-      <HomepageSwiper section_id={discover.id} title_translation={"section_discover_title"} items={discover.items} title={discover.title}/>
+      <HomepageSwiper sectionId={discover.id} itemType={discover.itemType} titleTranslation={"section_discover_title"} items={discover.items} title={discover.title}/>
       <SearchSpiritusCTA />
-      <CategoriesSwiper categories={categories.items} title_translation={"section_categories_title"}/>
-      <HomepageSwiper section_id={anniversaries.id} title_translation={"section_anniversaries_title"} items={anniversaries.items} title={discover.title}/>
-      <HomepageSwiper section_id={featured.id} title_translation={"section_featured_title"} items={featured.items} featured={true} title={discover.title}/>
+      <CategoriesSwiper categories={categories.items} itemType={categories.itemType} titleTranslation={"section_categories_title"}/>
+      <HomepageSwiper sectionId={anniversaries.id} itemType={anniversaries.itemType} titleTranslation={"section_anniversaries_title"} items={anniversaries.items} title={anniversaries.title}/>
+      <HomepageSwiper sectionId={featured.id} itemType={featured.itemType} titleTranslation={"section_featured_title"} items={featured.items} featured={true} title={featured.title}/>
       <SearchSpiritusCTA />
     </Layout>
   )
 }
 
 // fetch parsed homepage sections
+// in the parsed output check "content_type" to figure out
+// if the item is a Spiritus or a Story and act accordinly
 export async function getServerSideProps ({ locale }) {
   const sections = await GetParsedHomepage()
 

@@ -57,9 +57,10 @@ const stories = [
 // Swiper component for the home page swipable/scrollable sections.
 // Uses React Swiper with custom navigation buttons.
 export function HomepageSwiper ({
-  section_id,
-  title_translation,
+  sectionId,
+  titleTranslation,
   items,
+  itemType,
   title,
   featured
 }) {
@@ -81,9 +82,9 @@ export function HomepageSwiper ({
       <div className='container w-full xl:w-4/5 mx-auto my-10'>
         <div className='inline-flex w-full items-center justify-between pb-3'>
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
-            {t(title_translation)}
+            {t(titleTranslation)}
           </h2>
-          <Link href={`/sections/id/${section_id}?title=${title}`}>
+          <Link href={`/sections/id/${sectionId}?title=${title}`}>
             <a className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
               <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
             </a>
@@ -121,13 +122,14 @@ export function HomepageSwiper ({
               return (
                 <SwiperSlide key={`slider-${i}`}>
                   {
-                    <StoryTile
-                      story_id={item.itemId}
+                    <HomepageTile
+                      itemId={item.itemId}
                       title={item.title}
                       // mapping is weird and all over the place
                       // due to BE respones being weird
                       spiritusName={item.subtitle}
                       imageUrl={item.imageUrl}
+                      itemType={itemType}
                       featured={featured}
                     />
                   }
@@ -135,7 +137,7 @@ export function HomepageSwiper ({
               )
             })}
             <SwiperSlide>
-              <ExpandSectionTile section_id={section_id} title={title} />
+              <ExpandSectionTile sectionId={sectionId} title={title} />
             </SwiperSlide>
           </Swiper>
           <div
@@ -195,9 +197,12 @@ export function HomepageSwiper ({
 //   "lastname": Galović",
 //   "imageUrl": "/images/522/spiritus"
 // }
-function StoryTile ({ story_id, title, spiritusName, imageUrl, featured }) {
+// NOTE:
+// itemType is used to calculate the link to the correct item
+// if itemType === "SPIRITUS_DETAILS" the link will point to SPIRITUS, ELSE will point to Story
+function HomepageTile ({ itemId, itemType, title, spiritusName, imageUrl, featured }) {
   return (
-    <div key={story_id} className='group'>
+    <div key={itemId} className='group'>
       <div className='relative rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
         {featured && (
           <div className='absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg'>
@@ -218,7 +223,7 @@ function StoryTile ({ story_id, title, spiritusName, imageUrl, featured }) {
       </div>
       <div className='mt-4 flex flex-col justify-between'>
         <h3 className='text-lg dark:text-sp-white'>
-          <Link href={`/story/id/${story_id}`}>
+          <Link href={itemType === "SPIRITUS" ?  `/spiritus/id/${itemId}` : `/stories/id/${itemId}`}>
             <a>
               <span aria-hidden='true' className='absolute inset-0' />
               {title}
@@ -234,9 +239,9 @@ function StoryTile ({ story_id, title, spiritusName, imageUrl, featured }) {
 // Tile that redirects users to a section page.
 // Section pages are: /featured, /anniversaries, /categories, /nearby.
 // NOTE: currently we navigate to sections using IDs and title
-function ExpandSectionTile ({ section_id, title }) {
+function ExpandSectionTile ({ sectionId, title }) {
   return (
-    <Link href={`/sections/id/${section_id}?title=${title}`}>
+    <Link href={`/sections/id/${sectionId}?title=${title}`}>
       <a className='flex w-full h-80 mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center'>
         <div className='mx-auto'>
           <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2'>
@@ -253,7 +258,7 @@ function ExpandSectionTile ({ section_id, title }) {
 // Uses React Swiper with custom navigation buttons.
 // Basically copy/paste from HomepageSwiper with different tiles.
 // TODO: refactor!
-export function CategoriesSwiper ({ categories, title_translation }) {
+export function CategoriesSwiper ({ categories, titleTranslation }) {
   const { t } = useTranslation('common')
   const [currSlide, setCurrSlide] = useState(0)
   const prevRef = useRef(null)
@@ -272,7 +277,7 @@ export function CategoriesSwiper ({ categories, title_translation }) {
       <div className='container w-full xl:w-4/5 mx-auto my-8'>
         <div className='inline-flex w-full items-center justify-between pb-3'>
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
-            {t(title_translation)}
+            {t(titleTranslation)}
           </h2>
           <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
             <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />

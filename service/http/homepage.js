@@ -38,6 +38,7 @@ export async function GetParsedHomepage () {
       case 'Discover':
         sections.discover.id = section.id
         sections.discover.title = section.title
+        sections.discover.itemType = "STORY"
 
         sections.discover.items = []
         section.items.content.forEach((item, i) => {
@@ -48,6 +49,7 @@ export async function GetParsedHomepage () {
       case 'Categories':
         sections.categories.id = section.id
         sections.categories.title = section.title
+        sections.categories.itemType = "STORY"
 
         sections.categories.items = []
         section.items.content.forEach(item => {
@@ -58,6 +60,7 @@ export async function GetParsedHomepage () {
       case 'Anniversaries':
         sections.anniversaries.id = section.id
         sections.anniversaries.title = section.title
+        sections.anniversaries.itemType = "SPIRITUS"
 
         sections.anniversaries.items = []
         section.items.content.forEach(item => {
@@ -68,6 +71,7 @@ export async function GetParsedHomepage () {
       case 'Featured stories':
         sections.featured.id = section.id
         sections.featured.title = section.title
+        sections.featured.itemType = "STORY"
 
         sections.featured.items = []
         section.items.content.forEach(item => {

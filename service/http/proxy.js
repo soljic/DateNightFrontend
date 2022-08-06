@@ -27,3 +27,7 @@ export function ProxyCreateStory(storyObj, accessToken) {
 export function ProxyGetTags() {
   return axios.get("/api/tags");
 }
+
+export function ProxyGetSection(id, page) {
+  return axios.get(`/api/section?id=${id}&page=${page}`)
+}

@@ -61,6 +61,7 @@
   "create": "Create",
   "creating": "Creating...",
   "optional": "Optional",
+  "loading": "Loading...",
 
   "spiritus_success_first_story": "Write first story",
   "spiritus_success_text": "must have done many beautiful things. Save those memories forever.",
@@ -124,5 +125,7 @@
   "action_favourite": "Favourite",
   "action_filter": "Filter",
   "action_load_more": "Load more"
+
+
 
 }
