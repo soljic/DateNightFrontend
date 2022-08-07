@@ -34,17 +34,16 @@ export function CreateSpiritusCTA() {
 export function CreateSpiritusCTABgImage() {
   return (
     <>
-      <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-lg bg-opacity-80">
+      <div className="container w-full xl:w-4/5 mx-auto rounded-xl">
         <div className="relative overflow-hidden text-center mx-auto">
           <Image
-            src={"/images/banner.png"}
+            src={"/images/photos_bg.png"}
             alt={"Create Spiritus Banner"}
-            className=" object-cover rounded-lg"
             width={200}
             height={100}
             layout="responsive"
           />
-          <div className="absolute top-10 lg:pt-20 md:pt-10 sm:pt-0 left-5 w-full text-white">
+          <div className="absolute top-1/3 left-5 w-full text-white">
             <h2 className="text-5xl font-extrabold text-sp-white mb-4">
               Keep memories of your<br></br> loved ones, forever
             </h2>
@@ -61,6 +60,30 @@ export function CreateSpiritusCTABgImage() {
 }
 
 export function SearchSpiritusCTA() {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className="container w-full xl:w-4/5 mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg pt-4 pb-6 text-sp-black dark:text-sp-white my-10">
+      <div className="text-center mx-auto py-16 px-4 sm:px lg:py-20 lg:px-8">
+        <Image
+          src="/images/circle_images_sm.png"
+          alt="Featured Stories Images"
+          width={170}
+          height={70}
+        />
+        <h2 className="text-4xl font-extrabold mb-4">
+          {t("find_loved_title")}
+        </h2>
+        <p className="mx-auto w-2/5 text-center opacity-60 mb-6">
+          {t("find_loved_subtitle")}
+        </p>
+        <CTASearchButton />
+      </div>
+    </div>
+  );
+}
+
+export function SearchPlacesCTA() {
   const { t } = useTranslation("common");
 
   return (
