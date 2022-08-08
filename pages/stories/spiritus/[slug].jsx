@@ -76,7 +76,7 @@ export default function StoryPage({
                   // check if text is empty -> don't render if it is
                   return (
                     <p
-                      className="mx-auto leading-relaxed pt-4 px-2 pb-10"
+                      className='mx-auto leading-relaxed pt-4 px-2 pb-6 whitespace-pre-line'
                       key={`para-${i}`}
                     >
                       {p.text}

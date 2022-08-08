@@ -81,7 +81,7 @@ export default function StoryPage ({
                   // check if text is empty -> don't render if it is
                   return (
                     <p
-                      className='mx-auto leading-relaxed pt-4 px-2 pb-10'
+                      className='mx-auto leading-relaxed pt-4 px-2 pb-6 whitespace-pre-line'
                       key={`para-${i}`}
                     >
                       {p.text}
@@ -89,7 +89,7 @@ export default function StoryPage ({
                   )
                 })}
             </div>
-            <div className='w-full mx-auto lg:w-3/5 text-sp-white mt-4'>
+            <div className='w-full mx-auto lg:w-3/5 text-sp-white'>
               {displayStory.tags?.length ? <Tags tags={displayStory.tags} /> : <></>}
 
               <Tribute />
