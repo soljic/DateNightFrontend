@@ -96,6 +96,25 @@ export function CommentIcon ({ width, height }) {
   )
 }
 
+export function UserIcon ({ width, height }) {
+  const w = width ? `w-${width}` : `w-6`
+  const h = height ? `h-${height}` : `h-6`
+
+  return (
+    <svg
+      className={`${w} ${h}`}
+      viewBox='0 0 8 10'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <path
+        d='M4 0C2.89543 0 2 0.895431 2 2C2 3.10457 2.89543 4 4 4C5.10457 4 6 3.10457 6 2C6 0.895431 5.10457 0 4 0ZM6.5 5L1.49998 5C0.671562 5 0 5.67161 0 6.5C0 7.61608 0.458971 8.51027 1.21215 9.11481C1.95342 9.70979 2.94692 10 4 10C5.05308 10 6.04658 9.70979 6.78785 9.11481C7.54103 8.51027 8 7.61608 8 6.5C8 5.67157 7.32843 5 6.5 5Z'
+        fill='#666461'
+      />
+    </svg>
+  )
+}
+
 export function LocationIcon ({ width, height }) {
   const w = width ? `w-${width}` : `w-6`
   const h = height ? `h-${height}` : `h-6`

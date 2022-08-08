@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {
   // CreateSpiritusCTA,
   CreateSpiritusCTABgImage,
+  SearchPlacesCTA,
   SearchSpiritusCTA
 } from '../components/stories/CTAs'
 import { StoryOfTheWeek } from '../components/stories/StoryOfTheWeek'
@@ -46,7 +47,7 @@ export default function Home ({
       <CategoriesSwiper categories={categories.items} itemType={categories.itemType} titleTranslation={"section_categories_title"}/>
       <HomepageSwiper sectionId={anniversaries.id} itemType={anniversaries.itemType} titleTranslation={"section_anniversaries_title"} items={anniversaries.items} title={anniversaries.title}/>
       <HomepageSwiper sectionId={featured.id} itemType={featured.itemType} titleTranslation={"section_featured_title"} items={featured.items} featured={true} title={featured.title}/>
-      <SearchSpiritusCTA />
+      <SearchPlacesCTA />
     </Layout>
   )
 }

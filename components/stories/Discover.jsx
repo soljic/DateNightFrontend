@@ -249,7 +249,7 @@ function HomepageTile ({
 function ExpandSectionTile ({ sectionId, title }) {
   return (
     <Link href={`/sections/id/${sectionId}?title=${title}`}>
-      <a className='flex w-full h-80 mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center'>
+      <a className='flex w-full h-80 sm:h-60 md:h-80 mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center'>
         <div className='mx-auto'>
           <div className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2'>
             <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />

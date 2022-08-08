@@ -41,6 +41,9 @@
   "searching": "Pretražujem...",
   "search_results": "rezultata",
 
+  "goto_search_places": "Pretraži mjesta",
+  "search_places_title": "Pretraži predivne priče u blizini",
+
   "story_of_the_week": "Priča tjedna",
   "read_story": "Pročitaj",
 
@@ -48,6 +51,8 @@
 
   "find_loved_title": "Pronađi svoje najmilije",
   "find_loved_subtitle": "Među 15 000 Spiritusa sa hrvatskih grobalja i poznatih institucija",
+
+
 
   "term_rated": "Ocijenjeno",
   "term_on": "na",
