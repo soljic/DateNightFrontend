@@ -9,7 +9,7 @@ import { ProxyGetTags } from "../../service/http/proxy";
 import { CommentIcon, LocationIcon, RangeIcon, SpiritusIcon } from "../Icons";
 import { MultiSelectInput } from "../Dropdowns";
 
-export function StoryType({ setType, nextStep }) {
+export function StoryType({ setIsPrivate, nextStep }) {
   const { t } = useTranslation("common");
 
   return (
@@ -22,7 +22,7 @@ export function StoryType({ setType, nextStep }) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setType("public");
+              setIsPrivate(false);
               nextStep();
             }}
             className="flex appearance-none items-center gap-4 rounded-xl dark:border-2 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:border-sp-medium dark:from-sp-medlight dark:to-sp-medlight p-4 text-sp-black dark:text-sp-white outline-none"
@@ -48,7 +48,7 @@ export function StoryType({ setType, nextStep }) {
           <button
             onClick={(e) => {
               e.preventDefault();
-              setType("private");
+              setIsPrivate(true);
               nextStep();
             }}
             className="flex appearance-none items-center gap-4 rounded-xl dark:border-2 bg-sp-medlight bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:border-sp-medium dark:from-sp-medlight dark:to-sp-medlight p-4 text-sp-black dark:text-sp-white outline-none"

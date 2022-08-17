@@ -1,5 +1,5 @@
 import Cors from "cors";
-import { CreateStoryFromObj } from "../../../service/http/story";
+import { CreateStoryFromObj, CreateStoryV2 } from "../../../service/http/story";
 import { runMiddleware } from "../../../service/util";
 
 // Initializing the cors middleware
@@ -8,6 +8,45 @@ const cors = Cors({
 });
 
 async function handler(req, res) {
+  // Run the middleware
+  await runMiddleware(req, res, cors);
+  const data = req.body;
+  const authorization = req.headers?.authorization;
+  try {
+    if (!authorization) {
+      throw "Unauthorized";
+    }
+
+    if (!data.title) {
+      throw "Story title is required";
+    }
+
+    if (!data.spiritusId) {
+      throw "SpiritusId is missing";
+    }
+
+    const result = await CreateStoryV2(
+      authorization.split("Bearer ")[1],
+      data.spiritusId,
+      req.body
+    );
+    res.status(201).json(result.data);
+  } catch (err) {
+    if (
+      err === "Unauthorized" ||
+      err === "Story title is required" ||
+      err === "SpiritusId is missing"
+    ) {
+      res.status(400).json({ message: err });
+      return
+    }
+
+    res.status(500).json({ message: "communication error occured" });
+  }
+}
+
+// deprecated function - uses V1 api /wapi/story
+async function handlerV1(req, res) {
   // Run the middleware
   await runMiddleware(req, res, cors);
   const data = req.body;

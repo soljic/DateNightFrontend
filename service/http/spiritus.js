@@ -19,10 +19,12 @@ export async function GetSpiritusBySlug(slug) {
   return res;
 }
 
-export async function CreateSpiritusFromObj(accessToken, obj) {
-  return await axios.post(`${API_URL}/wapi/spiritus`, obj, {
+
+export async function CreateSpiritusFromForm(accessToken, form) {
+  return await axios.post(`${API_URL}/wapi/spiritus`, form, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "multipart/form-data",
     },
   });
 }

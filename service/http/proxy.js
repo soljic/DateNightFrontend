@@ -8,18 +8,20 @@ export function ProxySearchSpiritus(searchTerm) {
   return axios.get(`/api/search?q=${searchTerm}`);
 }
 
-export function ProxyCreateSpiritus(spiritusObj, accessToken) {
-  return axios.post("/api/spiritus/create", spiritusObj, {
+export function ProxyCreateSpiritus(accessToken, spiritusFormData) {
+  return axios.post("/api/spiritus/create", spiritusFormData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "multipart/form-data",
     },
   });
 }
 
-export function ProxyCreateStory(storyObj, accessToken) {
-  return axios.post("/api/story/create", storyObj, {
+export function ProxyCreateStory(accessToken, storyFormData) {
+  return axios.post("/api/story/create", storyFormData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "multipart/form-data",
     },
   });
 }
@@ -29,5 +31,5 @@ export function ProxyGetTags() {
 }
 
 export function ProxyGetSection(id, page) {
-  return axios.get(`/api/section?id=${id}&page=${page}`)
+  return axios.get(`/api/section?id=${id}&page=${page}`);
 }

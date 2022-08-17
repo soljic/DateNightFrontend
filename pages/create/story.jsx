@@ -41,7 +41,7 @@ export default function CreateStoryPage({ spiritus }) {
   const [step, setStep] = useState(0);
 
   // form fields
-  const [type, setType] = useState("");
+  const [isPrivate, setIsPrivate] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState([]);
   const [storyText, setStoryText] = useState("");
@@ -71,17 +71,24 @@ export default function CreateStoryPage({ spiritus }) {
   const createStory = async () => {
     try {
       setPending(true);
-      const res = await ProxyCreateStory(
-        {
-          spiritusId: spiritus.id,
-          title,
-          tags: tags.map((t) => t.id),
-          paragraphs: setParagrapghs(storyText),
-          description: summary,
-          date: getISOLocalDate(date),
-        },
-        session.user.accessToken
-      );
+      const form = new FormData();
+      const body = {
+        spiritusId: spiritus.id,
+        title,
+        tags: tags.map((t) => t.id),
+        paragraphs: setParagraphs(storyText),
+        description: summary,
+        date: getISOLocalDate(date),
+        private: isPrivate,
+      };
+
+      form.append("request", body);
+
+      if (images.length) {
+        form.append("file", images[0].file);
+      }
+      const res = await ProxyCreateStory(session.user.accessToken, form);
+
       setStory(res.data);
       setPending(false);
     } catch (err) {
@@ -89,8 +96,8 @@ export default function CreateStoryPage({ spiritus }) {
     }
   };
 
-  // TODO: remove spliting into paras if we change to .md or .rtf
-  const setParagrapghs = (story) => {
+  // TODO: remove spliting into paras if we change to .md or .rtf or use <p style="whitespace: pre-line;">
+  const setParagraphs = (story) => {
     return story.split("\n\n").map((para, idx) => {
       return { index: idx, text: para.trim() };
     });
@@ -121,7 +128,7 @@ export default function CreateStoryPage({ spiritus }) {
         return <StorySummary summary={summary} setSummary={setSummary} />;
 
       default:
-        return <StoryType setType={setType} nextStep={nextStep} />;
+        return <StoryType setPrivate={setIsPrivate} nextStep={nextStep} />;
     }
   };
   return (
@@ -256,7 +263,7 @@ export async function getServerSideProps(context) {
   } catch (err) {
     console.log(err);
     // redirect to home in case of err
-    // know errs: 404 Not Found Spiritus
+    // known errs: 404 Not Found Spiritus
     return {
       redirect: {
         destination: "/",

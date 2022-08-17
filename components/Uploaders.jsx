@@ -195,8 +195,8 @@ export function SpiritusImageUploader({ name, images, setImages }) {
 export function Thumbnail({ previewURL, title, onRemove, index }) {
   return (
     <div className="relative h-24 w-24" id={index}>
-      <div className="mx-1 mt-1 rounded-lg overflow-clip border border-gray-400 dark:border-none">
-        <img src={previewURL} alt={title} className="h-24 w-24 border" />
+      <div className="mx-1 mt-1 rounded-lg overflow-clip">
+        <img src={previewURL} alt={title} className="h-24 w-24 border-gray-400 dark:border-none" />
       </div>
       <button
         onClick={(e) => {

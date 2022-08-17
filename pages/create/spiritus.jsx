@@ -23,6 +23,10 @@ import { SpiritusImageUploader } from "../../components/Uploaders";
 
 import { ProxyCreateSpiritus } from "../../service/http/proxy";
 
+
+// When creating spiritus a request is made to same-origin proxy server
+// to bypass CORS policies.
+//
 // TODO: save stuff to local storage
 // TODO: add err handling and error toasts
 export default function CreateSpiritusPage({ user }) {
@@ -44,22 +48,31 @@ export default function CreateSpiritusPage({ user }) {
 
   const [location, setLocation] = useState("");
 
+  // [{"file": <file wrapper>, "previewUrl": blob}]
   const [images, setImages] = useState([]);
 
   const createSpiritus = async () => {
     try {
       setPending(true);
-      const res = await ProxyCreateSpiritus(
-        {
-          name,
-          surname,
-          birth: getISOLocalDate(birth),
-          death: getISOLocalDate(death),
-          description,
-          location: {}, // TODO: add location when BE is ready
-        },
-        user.accessToken
-      );
+      const form = new FormData();
+      const body = {
+        name,
+        surname,
+        birth: getISOLocalDate(birth),
+        death: getISOLocalDate(death),
+        description,
+        // location: {}, // TODO: add location when BE is ready
+      };
+      form.append("request", JSON.stringify(body));
+
+      images.forEach((img) => {
+        console.log(img.file)
+        form.append("files", img.file, img.file.name);
+      });
+
+
+      const res = await ProxyCreateSpiritus(user.accessToken, form);
+      // console.log(form)
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
@@ -138,7 +151,7 @@ export default function CreateSpiritusPage({ user }) {
         />
       </Head>
       <div className="py-5 h-screen ">
-        {/* <p className="text-sp-white">
+        <p className="text-sp-black dark:text-sp-white">
           {JSON.stringify({
             birth,
             death,
@@ -147,7 +160,7 @@ export default function CreateSpiritusPage({ user }) {
             description,
             location,
           })}
-        </p> */}
+        </p>
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           {spiritus ? (
             <Success spiritus={spiritus} />
@@ -164,7 +177,7 @@ export default function CreateSpiritusPage({ user }) {
                         e.preventDefault();
                         prevStep();
                       }}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
+                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
                         pending && "hidden"
                       }`}
                       disabled={pending}
