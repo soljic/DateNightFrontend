@@ -23,7 +23,6 @@ import { SpiritusImageUploader } from "../../components/Uploaders";
 
 import { ProxyCreateSpiritus } from "../../service/http/proxy";
 
-
 // When creating spiritus a request is made to same-origin proxy server
 // to bypass CORS policies.
 //
@@ -48,6 +47,7 @@ export default function CreateSpiritusPage({ user }) {
 
   const [location, setLocation] = useState("");
 
+  // looks like this:
   // [{"file": <file wrapper>, "previewUrl": blob}]
   const [images, setImages] = useState([]);
 
@@ -61,15 +61,22 @@ export default function CreateSpiritusPage({ user }) {
         birth: getISOLocalDate(birth),
         death: getISOLocalDate(death),
         description,
-        // location: {}, // TODO: add location when BE is ready
+        location: {
+          "longitude": 15.977177,
+          "latitude": 45.813185,
+          "address": "Zagreb, Zagreb, Hrvatska",
+          "country": "Croatia",
+        },
       };
-      form.append("request", JSON.stringify(body));
 
-      images.forEach((img) => {
-        console.log(img.file)
-        form.append("files", img.file, img.file.name);
+      const blob = new Blob([JSON.stringify(body)], {
+        type: "application/json",
       });
 
+      form.append("request", blob, "");
+      images.forEach((img) => {
+        form.append("files", img.file, img.file.name);
+      });
 
       const res = await ProxyCreateSpiritus(user.accessToken, form);
       // console.log(form)
@@ -151,7 +158,7 @@ export default function CreateSpiritusPage({ user }) {
         />
       </Head>
       <div className="py-5 h-screen ">
-        <p className="text-sp-black dark:text-sp-white">
+        {/* <p className="text-sp-black dark:text-sp-white">
           {JSON.stringify({
             birth,
             death,
@@ -160,7 +167,7 @@ export default function CreateSpiritusPage({ user }) {
             description,
             location,
           })}
-        </p>
+        </p> */}
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           {spiritus ? (
             <Success spiritus={spiritus} />
