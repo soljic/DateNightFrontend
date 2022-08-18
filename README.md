@@ -1,14 +1,11 @@
 ## Getting Started
 
-First, intall all dependencies for the development server:
+First, install all dependencies for the development server:
 ```
 npm install
 ```
 
 Run dev server:
 ```
-npm install
+npm run dev
 ```
-
-If you have issues setting up tailwind try this:
-- https://tailwindcss.com/docs/guides/nextjs
