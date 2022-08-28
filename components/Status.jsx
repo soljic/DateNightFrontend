@@ -1,8 +1,8 @@
 export function Spinner({ text }) {
   return (
-    <div className="inline-flex items-center">
+    <div className="inline-flex items-center p-0.5">
       <svg
-        className="animate-spin -ml-1 mr-3 h-5 w-5 text-sp-black dark:text-sp-white"
+        className="animate-spin h-5 w-5 text-sp-black dark:text-sp-white"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

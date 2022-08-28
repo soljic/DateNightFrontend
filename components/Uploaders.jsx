@@ -40,8 +40,8 @@ export function StoryImageUploader({ images, setImages }) {
     const addFiles = Array.from(files).map((f) => {
       return {
         file: f,
-        // NOTE: previewURL must be destroyed on unmount
-        // -> check if this is leaking memory and refactor
+        // TODO: previewURL must be destroyed on unmount
+        // check if this is leaking memory and refactor
         previewURL: URL.createObjectURL(f),
       };
     });
@@ -126,8 +126,8 @@ export function SpiritusImageUploader({ name, images, setImages }) {
     const addFiles = Array.from(files).map((f) => {
       return {
         file: f,
-        // NOTE: previewURL must be destroyed on unmount
-        // -> check if this is leaking memory and refactor
+        // TODO: previewURL must be destroyed on unmount
+        // check if this is leaking memory and refactor
         previewURL: URL.createObjectURL(f),
       };
     });

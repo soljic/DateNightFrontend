@@ -1,0 +1,12 @@
+{
+	"name": "Weber",
+	"surname": "Tester",
+	"birth": "2022-08-04",
+	"death": "2022-08-31",
+	"location": {
+		"longitude": 15.977177,
+		"latitude": 45.813185,
+		"address": "Zagreb, Zagreb, Hrvatska",
+		"country": "Croatia"
+	}
+}

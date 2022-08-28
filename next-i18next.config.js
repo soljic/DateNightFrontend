@@ -6,8 +6,8 @@ module.exports = {
     // This is the default locale you want to be used when visiting
     // a non-locale prefixed path e.g. `/hello`
     defaultLocale: "hr",
-    defaultLocaleDetection: false,
+    localeDetection: false,
     localePath: path.resolve('./public/locales')
   },
-  react: { useSuspense: false }, //this line
+  // react: { useSuspense: false }, //this line
 };

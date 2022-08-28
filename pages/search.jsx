@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -178,18 +180,30 @@ function SearchResults({ results }) {
   );
 }
 
-function Row({ name, surname, images, birth, death }) {
+function Row({ name, surname, images, birth, death, slug }) {
   return (
-    <div className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg text-sp-medlight dark:text-sp-white">
-      <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-fawn bg-opacity-50 dark:bg-sp-medium"></div>
-      <div className="flex w-full flex-col justify-between py-2 px-2">
-        <p className="break-words pr-4">{`${name} ${surname}`}</p>
-        <p className="text-opacity-40">
-          {birth ? new Date(birth).getFullYear() : "?"}
-          {death && ` — ${new Date(death).getFullYear()}`}
-        </p>
-      </div>
-    </div>
+    <Link href={`/spiritus/${slug}`}>
+      <a className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg text-sp-medlight dark:text-sp-white">
+        <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
+          {images.length ? (
+            <Image
+              src={images[0].url}
+              alt={"Search result thumbnail"}
+              width={64}
+              height={64}
+              layout="fill"
+            />
+          ) : <></>}
+        </div>
+        <div className="flex w-full flex-col justify-between py-2 px-2">
+          <p className="break-words pr-4">{`${name} ${surname}`}</p>
+          <p className="text-opacity-40">
+            {birth ? new Date(birth).getFullYear() : "?"}
+            {death && ` — ${new Date(death).getFullYear()}`}
+          </p>
+        </div>
+      </a>
+    </Link>
   );
 }
 

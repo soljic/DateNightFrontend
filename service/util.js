@@ -6,7 +6,7 @@ export function ImagePath(path) {
   if (path && path.startsWith("http")){
     return path
   }
-  return `${API_URL}${path}/`;
+  return `${API_URL}${path}`;
 }
 
 // Helper method to wait for a middleware to execute before continuing

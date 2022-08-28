@@ -4,33 +4,27 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../../../components/layout/Layout";
-import { HorizontalDivider } from "../../../components/layout/Common";
+import Layout from "../components/layout/Layout";
+import { HorizontalDivider } from "../components/layout/Common";
 import {
   CTAAddMemory,
   MoreStories,
   Tags,
   Tribute,
-} from "../../../components/stories/StoryPage";
-import { SpiritusOverview } from "../../../components/spiritus/Overview";
-import { SpiritusCarousel } from "../../../components/spiritus/Carousel";
+} from "../components/stories/StoryPage";
+import { SpiritusOverview } from "../components/spiritus/Overview";
+import { SpiritusCarousel } from "../components/spiritus/Carousel";
 
-import { GetSpiritusBySlug } from "../../../service/http/spiritus";
-import { GetSpiritusStoriesByID } from "../../../service/http/story";
+import { GetSpiritusById } from "../service/http/spiritus";
+import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
 
-export default function StoryPage({
-  first,
-  stories,
-  spiritus,
-  hasMore,
-  total,
-}) {
+export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
   const { t } = useTranslation("common");
 
   return (
     <Layout>
       <Head>
-        <title>{`Spiritus | ${spiritus.name} ${spiritus.surname} - ${first.title}`}</title>
+        <title>{`Spiritus | ${spiritus.name} ${spiritus.surname} - ${displayStory.title}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
@@ -47,36 +41,31 @@ export default function StoryPage({
           <div className="flex flex-col w-full mb-12 text-left">
             <div className="w-full sm:w-full lg:w-3/5 mx-auto text-sp-black dark:text-sp-white">
               <h1 className="mx-auto mb-6 font-semibold text-center uppercase">
-                {first.title}
+                {displayStory.title}
               </h1>
               <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
-                {first.subtitle}
+                {displayStory.subtitle}
               </h2>
               <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
-                {first.description}
+                {displayStory.description}
               </h2>
-              {first.paragraphs &&
-                first.paragraphs.map((p, i) => {
-                  if (p.imageUrl) {
-                    return (
-                      <div
-                        className="object-fill rounded-lg overflow-hidden px-4"
-                        key={`para-${i}`}
-                      >
-                        <Image
-                          src={p.imageUrl}
-                          alt={`Paragraph image ${p.id}`}
-                          width={400}
-                          height={400}
-                          layout="responsive"
-                        />
-                      </div>
-                    );
-                  }
+              {displayStory.images.length && (
+                <div className="object-fill mx-auto rounded-lg overflow-hidden px-4">
+                  <Image
+                    src={displayStory.images[0].url}
+                    alt={`Paragraph image ${displayStory.images[0].id}`}
+                    width={400}
+                    height={400}
+                    layout="responsive"
+                  />
+                </div>
+              )}
+              {displayStory.paragraphs &&
+                displayStory.paragraphs.map((p, i) => {
                   // check if text is empty -> don't render if it is
                   return (
                     <p
-                      className='mx-auto leading-relaxed pt-4 px-2 pb-6 whitespace-pre-line'
+                      className="mx-auto leading-relaxed pt-4 px-2 pb-6 whitespace-pre-line text-justify"
                       key={`para-${i}`}
                     >
                       {p.text}
@@ -84,8 +73,12 @@ export default function StoryPage({
                   );
                 })}
             </div>
-            <div className="w-full mx-auto lg:w-3/5 text-sp-white mt-4">
-              {first.tags?.length ? <Tags tags={first.tags} /> : <></>}
+            <div className="w-full mx-auto lg:w-3/5 text-sp-white">
+              {displayStory.tags?.length ? (
+                <Tags tags={displayStory.tags} />
+              ) : (
+                <></>
+              )}
 
               <Tribute />
               <HorizontalDivider />
@@ -107,28 +100,21 @@ export default function StoryPage({
   );
 }
 
-// fetch first 5 spiritus stories
+// fetch first 5 spiritus stories, remove the story alredy being shown
 export async function getServerSideProps(context) {
-  const { slug, id, story } = context.query;
-  const resSpiritus = await GetSpiritusBySlug(slug);
-  const spiritus = resSpiritus.data;
+  const { id } = context.query;
+  const resStory = await GetStoryById(id);
+  const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
+  const resAllStories = await GetSpiritusStoriesBySlug(
+    resSpiritus.data.slug,
+    0,
+    5
+  );
 
-  const resStories = await GetSpiritusStoriesByID(id, 0, 5);
-  const content = resStories.data?.content;
-  // if (story) {
-  //   content.length > 1
-  //       ? content.filter((x) => {
-  //           // story is string, so this is comparing strings
-  //           return x.id != story;
-  //         })
-  //       : [];
-  // }
-  const first = content.length ? content[0] : {};
-  const stories = content.length > 1 ? content.slice(1) : [];
-
-  // sort paragraphs by index
-  if (first.paragraphs) {
-    first.paragraphs.sort((p1, p2) => {
+  let content = resAllStories.data?.content ? resAllStories.data?.content : [];
+  // sort story paragraphs by index
+  if (resStory.paragraphs) {
+    resStory.paragraphs.sort((p1, p2) => {
       if (p1.index < p2.index) {
         return -1;
       }
@@ -140,14 +126,19 @@ export async function getServerSideProps(context) {
     });
   }
 
+  // remove story already being displayed
+  content = content.filter((x) => {
+    return x.id != id;
+  });
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ["common"])),
-      first,
-      stories,
-      spiritus,
-      hasMore: !resStories.data.last,
-      total: resStories.data.numberOfElements,
+      displayStory: resStory.data,
+      stories: content,
+      spiritus: resSpiritus.data,
+      hasMore: !resAllStories.data.last,
+      total: resAllStories.data.numberOfElements,
     },
   };
 }

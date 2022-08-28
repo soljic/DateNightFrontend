@@ -28,6 +28,7 @@ export function SectionGrid ({ id, title, isLastPage, initialItems }) {
       setIsLast(res.data.items.last)
       setIsFetching(false)
     } catch (err) {
+      // TODO: handle this
       console.log(err.message)
     }
   }
@@ -68,7 +69,7 @@ export function SectionGrid ({ id, title, isLastPage, initialItems }) {
             return (
               <SectionTile
                 key={item.itemId}
-                story_id={item.itemId}
+                itemId={item.itemId}
                 title={item.title}
                 subtitle={item.subtitle}
                 // mapping is weird and all over the place
@@ -117,9 +118,9 @@ function PlaceHolderTile ({ story_id, text }) {
 }
 
 // Render a Link to SPIRITUS or STORY depending on itemType.
-function SectionTile ({ story_id, title, subtitle, imageUrl, itemType }) {
+function SectionTile ({ itemId, title, subtitle, imageUrl, itemType }) {
   return itemType === 'SPIRITUS_DETAILS' ? (
-    <Link href={`/spiritus/id/${story_id}`} key={title}>
+    <Link href={`/spiritus/${itemId}`} key={title}>
       <a className='group'>
         <div className='rounded-xl overflow-hidden group-hover:opacity-75'>
           <Image
@@ -139,7 +140,7 @@ function SectionTile ({ story_id, title, subtitle, imageUrl, itemType }) {
       </a>
     </Link>
   ) : (
-    <Link href={`/stories/id/${story_id}`} key={title}>
+    <Link href={`/stories/${itemId}`} key={title}>
       <a className='group'>
         <div className='rounded-xl overflow-hidden group-hover:opacity-75'>
           <Image

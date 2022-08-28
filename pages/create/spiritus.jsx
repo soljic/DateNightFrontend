@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
 
 import { useState } from "react";
 import { getSession } from "next-auth/react";
@@ -45,7 +46,7 @@ export default function CreateSpiritusPage({ user }) {
   const [pending, setPending] = useState(false);
   const [spiritus, setSpiritus] = useState(false);
 
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(null);
 
   // looks like this:
   // [{"file": <file wrapper>, "previewUrl": blob}]
@@ -54,35 +55,36 @@ export default function CreateSpiritusPage({ user }) {
   const createSpiritus = async () => {
     try {
       setPending(true);
-      const form = new FormData();
       const body = {
         name,
         surname,
-        birth: getISOLocalDate(birth),
-        death: getISOLocalDate(death),
+        birth: birth ? getISOLocalDate(birth) : null,
+        death: birth ? getISOLocalDate(death) : null,
         description,
-        location: {
-          "longitude": 15.977177,
-          "latitude": 45.813185,
-          "address": "Zagreb, Zagreb, Hrvatska",
-          "country": "Croatia",
-        },
+        location,
+        // NOTE: location example
+        // location: {
+        //   longitude: 15.977177,
+        //   latitude: 45.813185,
+        //   address: "Zagreb, Zagreb, Hrvatska",
+        //   country: "Croatia",
+        // },
       };
-
+      const form = new FormData();
       const blob = new Blob([JSON.stringify(body)], {
         type: "application/json",
       });
 
-      form.append("request", blob, "");
+      form.append("request", blob);
       images.forEach((img) => {
         form.append("files", img.file, img.file.name);
       });
 
       const res = await ProxyCreateSpiritus(user.accessToken, form);
-      // console.log(form)
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
+      console.log("GREŠKA", err)
       setPending(false);
     }
   };
@@ -231,9 +233,9 @@ export default function CreateSpiritusPage({ user }) {
   );
 }
 
+// TODO: remove hardcoded spiritus URL
 function Success({ spiritus }) {
   const { t } = useTranslation("common");
-
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
@@ -243,7 +245,7 @@ function Success({ spiritus }) {
         {" "}
         <span>
           {" "}
-          {spiritus.name} {spiritus.surname} {spiritus.id}
+          {spiritus.name} {spiritus.surname}
         </span>
       </h2>
       {(spiritus.birth || spiritus.death) && (
@@ -251,6 +253,16 @@ function Success({ spiritus }) {
           <span>{spiritus.birth || "?"}</span> —{" "}
           <span>{spiritus.death || "?"}</span>
         </p>
+      )}
+      {spiritus.image?.url && (
+        <div className="object-fill rounded-lg overflow-hidden px-4">
+          <Image
+            src={`https://walk.spiritusapp.com${spiritus.image.url}`}
+            alt="Spiritus image"
+            width={270}
+            height={300}
+          />
+        </div>
       )}
       <HorizontalDivider />
       <div className="flex flex-col items-center gap-1 mt-5">

@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { PencilIcon } from "@heroicons/react/outline";
 
 import Layout from "../../components/layout/Layout";
 import { CTAAddMemory, MoreStories } from "../../components/stories/StoryPage";
@@ -10,6 +11,20 @@ import { SpiritusCarousel } from "../../components/spiritus/Carousel";
 
 import { GetSpiritusBySlug } from "../../service/http/spiritus";
 import { GetSpiritusStoriesBySlug } from "../../service/http/story";
+
+function EditBtn({ spiritusId }) {
+  return (
+    <div className="flex justify-end">
+      <a
+        href={`/edit/spiritus/${spiritusId}`}
+        className="inline-flex items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-6 text-sp-white dark:text-sp-black"
+      >
+        <PencilIcon className="w-5 h-5" />
+        <span className="font-semibold ml-2">Edit</span>
+      </a>
+    </div>
+  );
+}
 
 export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
   const { t } = useTranslation("common");
@@ -32,6 +47,7 @@ export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
       <section className="container mx-auto px-5" key="story">
         <div className="flex flex-col items-center py-8">
           <div className="flex flex-col w-full mb-12 text-left">
+            <EditBtn spiritusId={spiritus.id} />
             <div className="w-full mx-auto lg:w-3/5 text-sp-white mt-4">
               <SpiritusOverview {...spiritus} />
             </div>

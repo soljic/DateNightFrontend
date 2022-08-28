@@ -22,38 +22,6 @@ import { CrownIcon } from '../Icons'
 
 SwiperCore.use([Navigation, A11y])
 
-const stories = [
-  {
-    id: 1,
-    images: [],
-    // images: [{url: "/images/top-story.png"}],
-    description: 'Ruka koja život znači',
-    name: 'Pavao',
-    surname: 'Vukelić'
-  },
-  {
-    id: 2,
-    images: [{ url: '/images/spiritus-1.png' }],
-    description: 'Grad, to ste vi!',
-    name: 'Devon',
-    surname: 'Lane'
-  },
-  {
-    id: 3,
-    images: [{ url: '/images/spiritus-2.png' }],
-    description: 'Ruka koja život znači',
-    name: 'Pavao',
-    surname: 'Vukelić'
-  },
-  {
-    id: 4,
-    images: [{ url: '/images/spiritus-3.png' }],
-    description: 'Grad, to ste vi!',
-    name: 'Devon',
-    surname: 'Lane'
-  }
-]
-
 // Swiper component for the home page swipable/scrollable sections.
 // Uses React Swiper with custom navigation buttons.
 export function HomepageSwiper ({
@@ -84,7 +52,7 @@ export function HomepageSwiper ({
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
             {t(titleTranslation)}
           </h2>
-          <Link href={`/sections/id/${sectionId}?title=${title}`}>
+          <Link href={`/section/id/${sectionId}?title=${title}`}>
             <a className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
               <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
             </a>
@@ -158,46 +126,6 @@ export function HomepageSwiper ({
   )
 }
 
-// Uses props that are currently returned by the http.GetParsedHomepage
-// The current homepage responses are not well suited for web use.
-//  - it forces us to use story and spiritus ID instead of slugs
-//  - if forces having 2 different pages for the same thing
-//  - the story link should always be: /story/<story_slug> (ie /story/ankica-pavlovic-srdarevic)
-//  - instead this forces us to use /story/<story_id> (ie /story/123123)
-//
-// The content we currently receive from BE:
-// Generated link: /stories/id/<story_id>
-// Link template : /stories/id/<story_id>
-// {
-//   "id": 50427,  // --> this is the spiritusID
-//   "title": " Fran Galović kao „Hrvatski đak“",
-//   "subtitle": "Fran Galović",
-//   "placeholderText": "Nejasna teorija ostaje",
-//   "actionButtonText": null,
-//   "negativeActionButtonText": null,
-//   "parentId": 50427,
-//   "parentNavigationType": "SPIRITUS_DETAILS",
-//   "itemId": 39,   // --> this is the story ID
-//   "itemNavigationType": "STORY_DETAILS",
-//   "itemPayload": null,
-//   "imageUrl": "/images/522/spiritus",
-//   "flags": []
-// }
-//
-// What we need instead:
-// Generated link: /stories/nemanja-vidovic-fx146013m
-// Link template : /stories/<story_slug>
-// Expected response:
-// {
-//   "story_id": 39,
-//   "story_slug": "fran-galovic-kao-hrvatski-dak",
-//   "spiritus_id": 50427,
-//   "title": " Fran Galović kao „Hrvatski đak“",
-//   "firstname": "Fran"
-//   "lastname": Galović",
-//   "imageUrl": "/images/522/spiritus"
-// }
-// NOTE:
 // itemType is used to calculate the link to the correct item
 // if itemType === "SPIRITUS_DETAILS" the link will point to SPIRITUS, ELSE will point to Story
 function HomepageTile ({
@@ -230,7 +158,7 @@ function HomepageTile ({
       </div>
       <div className='mt-4 flex flex-col justify-between'>
         <h3 className='text-lg dark:text-sp-white'>
-          <Link href={itemType === "SPIRITUS" ?  `/spiritus/id/${itemId}` : `/stories/id/${itemId}`}>
+          <Link href={itemType === "SPIRITUS" ?  `/spiritus/${itemId}` : `/stories/${itemId}`}>
             <a>
               <span aria-hidden='true' className='absolute inset-0' />
               {title}
@@ -265,7 +193,7 @@ function ExpandSectionTile ({ sectionId, title }) {
 // Uses React Swiper with custom navigation buttons.
 // Basically copy/paste from HomepageSwiper with different tiles.
 // TODO: refactor!
-export function CategoriesSwiper ({ categories, titleTranslation }) {
+export function CategoriesSwiper ({ sectionId, categories, titleTranslation }) {
   const { t } = useTranslation('common')
   const [currSlide, setCurrSlide] = useState(0)
   const prevRef = useRef(null)
@@ -323,8 +251,9 @@ export function CategoriesSwiper ({ categories, titleTranslation }) {
                 <SwiperSlide key={`slider-${i}`}>
                   {
                     <CategoryTile
+                      sectionId={sectionId}
+                      categoryId={c.id}
                       title={c.title}
-                      id={c.id}
                       imageUrl={c.imageUrl}
                     />
                   }
@@ -350,7 +279,7 @@ export function CategoriesSwiper ({ categories, titleTranslation }) {
   )
 }
 
-function CategoryTile ({ id, title, imageUrl }) {
+function CategoryTile ({ sectionId, categoryId, title, imageUrl }) {
   return (
     <div key={title} className='group relative'>
       <div className='w-full aspect-w-1 aspect-h-1 rounded-xl overflow-hidden group-hover:opacity-75'>
@@ -369,7 +298,7 @@ function CategoryTile ({ id, title, imageUrl }) {
       <div className='mt-2 flex justify-between'>
         <div>
           <h3 className='text-lg dark:text-sp-white'>
-            <Link href={`/sections/id/${id}`}>
+            <Link href={`/category/${sectionId}/item/${categoryId}?title=${title}`}>
               <a>
                 <span aria-hidden='true' className='absolute inset-0' />
                 {title}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import Link from "next/link";
 import Head from "next/head";
+import Router from "next/router";
 
 import { getSession, useSession } from "next-auth/react";
 
@@ -9,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import {
   PlusCircleIcon as OutlinePlusCircleIcon,
@@ -21,7 +22,6 @@ import { ProxyCreateStory } from "../../service/http/proxy";
 import Layout from "../../components/layout/Layout";
 import {
   StoryDate,
-  StoryLocation,
   StorySummary,
   StoryTextEditor,
   StoryTitle,
@@ -37,7 +37,7 @@ export default function CreateStoryPage({ spiritus }) {
   const { data: session, status } = useSession();
 
   // stepper is 0 indexed!
-  const numSteps = 6;
+  const numSteps = 5;
   const [step, setStep] = useState(0);
 
   // form fields
@@ -46,12 +46,13 @@ export default function CreateStoryPage({ spiritus }) {
   const [tags, setTags] = useState([]);
   const [storyText, setStoryText] = useState("");
   const [date, setDate] = useState();
-  const [location, setLocation] = useState("");
 
+  // check /component/Uploaders::StoryImageUploader
+  // for more context
   const [images, setImages] = useState([]);
   const [summary, setSummary] = useState("");
 
-  const [story, setStory] = useState();
+  const [story, setStory] = useState(false);
 
   // true if view is waiting for BE response
   const [pending, setPending] = useState(false);
@@ -78,11 +79,14 @@ export default function CreateStoryPage({ spiritus }) {
         tags: tags.map((t) => t.id),
         paragraphs: setParagraphs(storyText),
         description: summary,
-        date: getISOLocalDate(date),
+        date: date ? getISOLocalDate(date) : null,
         private: isPrivate,
       };
-
-      form.append("request", body);
+      console.log("KREIRAJ", body);
+      const blob = new Blob([JSON.stringify(body)], {
+        type: "application/json",
+      });
+      form.append("request", blob);
 
       if (images.length) {
         form.append("file", images[0].file);
@@ -92,11 +96,13 @@ export default function CreateStoryPage({ spiritus }) {
       setStory(res.data);
       setPending(false);
     } catch (err) {
+      console.log("GREŠKA", err);
       setPending(false);
     }
   };
 
-  // TODO: remove spliting into paras if we change to .md or .rtf or use <p style="whitespace: pre-line;">
+  // TODO: remove spliting into paras if we change
+  // to .md or .rtf or use <p style="whitespace: pre-line;">
   const setParagraphs = (story) => {
     return story.split("\n\n").map((para, idx) => {
       return { index: idx, text: para.trim() };
@@ -112,8 +118,6 @@ export default function CreateStoryPage({ spiritus }) {
       case 2:
         return <StoryDate date={date} setDate={setDate} />;
       case 3:
-        return <StoryLocation location={location} setLocation={setLocation} />;
-      case 4:
         return (
           <StoryTitle
             title={title}
@@ -122,13 +126,13 @@ export default function CreateStoryPage({ spiritus }) {
             setTags={setTags}
           />
         );
-      case 5:
+      case 4:
         return <StoryImageUploader images={images} setImages={setImages} />;
-      case 6:
+      case 5:
         return <StorySummary summary={summary} setSummary={setSummary} />;
 
       default:
-        return <StoryType setPrivate={setIsPrivate} nextStep={nextStep} />;
+        return <StoryType setIsPrivate={setIsPrivate} nextStep={nextStep} />;
     }
   };
   return (
@@ -142,7 +146,7 @@ export default function CreateStoryPage({ spiritus }) {
         <div className="container mx-auto lg:px-12 lg:w-4/5">
           {story ? (
             <Success
-              id={spiritus.id}
+              storyId={story.id}
               name={spiritus.name}
               surname={spiritus.surname}
             />
@@ -201,7 +205,7 @@ export default function CreateStoryPage({ spiritus }) {
   );
 }
 
-function Success({ id, name, surname }) {
+function Success({ storyId, name, surname }) {
   const { t } = useTranslation("common");
 
   return (
@@ -219,16 +223,20 @@ function Success({ id, name, surname }) {
         </p>
       </div>
       <div className="flex mx-auto items-center justify-center gap-4 mt-4">
-        <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
-          <UploadIcon className="w-6 h-6" />
-          <p className="font-semibold text-center">{t("share")}</p>
+        {/* <CopyToClipboard text={`https://spiritus-client.vercel.app/stories/id/${id}`}> */}
+        <CopyToClipboard text={`http://localhost:3000/stories/id/${storyId}`}>
+          <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
+            <UploadIcon className="w-6 h-6" />
+            <p className="font-semibold text-center">{t("share")}</p>
+          </button>
+        </CopyToClipboard>
+        <button
+          className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4"
+          onClick={() => Router.reload()}
+        >
+          <OutlinePlusCircleIcon className="w-6 h-6" />
+          <p className="font-semibold">{t("new_story")}</p>
         </button>
-        <Link href={`/create/story?spiritus=${id}`}>
-          <a className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
-            <OutlinePlusCircleIcon className="w-6 h-6" />
-            <p className="font-semibold">{t("new_story")}</p>
-          </a>
-        </Link>
       </div>
     </div>
   );
@@ -261,7 +269,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
-    console.log(err);
+    console.log("error creating story\n", err);
     // redirect to home in case of err
     // known errs: 404 Not Found Spiritus
     return {

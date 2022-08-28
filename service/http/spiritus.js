@@ -19,16 +19,6 @@ export async function GetSpiritusBySlug(slug) {
   return res;
 }
 
-
-export async function CreateSpiritusFromForm(accessToken, form) {
-  return await axios.post(`${API_URL}/wapi/spiritus`, form, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "multipart/form-data",
-    },
-  });
-}
-
 export async function CreateSpiritusImage(accessToken, id, file) {
   return await axios.post(`${API_URL}/wapi/spiritus/${id}/image`, {
     headers: {
@@ -65,13 +55,13 @@ export async function SearchSpiritusNames(fullName, offset, limit) {
   if (s.length > 1) {
     res = await axios.get(
       encodeURI(
-        `${API_URL}/wapi/spiritus/search?name=${s[0]}&lastname=${s[1]}&page=${o}&size=${l}&sort=id`
+        `${API_URL}/wapi/spiritus/search?name=${s[0]}&lastname=${s[1]}&page=${o}&size=${l}`
       )
     );
   } else {
     res = await axios.get(
       encodeURI(
-        `${API_URL}/wapi/spiritus/search?name=${s[0]}&page=${o}&size=${l}&sort=id`
+        `${API_URL}/wapi/spiritus/search?name=${s[0]}&page=${o}&size=${l}`
       )
     );
   }
@@ -91,7 +81,7 @@ export async function SearchSpiritusFullText(text, offset, limit) {
 
   const res = await axios.get(
     encodeURI(
-      `${API_URL}/wapi/spiritus/search/full?value=${text}&page=${o}&size=${l}&sort=id`
+      `${API_URL}/wapi/spiritus/search/full?value=${text}&page=${o}&size=${l}`
     )
   );
 
