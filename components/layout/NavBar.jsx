@@ -56,7 +56,7 @@ export function Navbar() {
               {session?.user?.name ? session.user.name : t("login")}
             </a>
           </Link>
-          <GlobeAltIcon className="h-6 w-6 text-sp-white" />
+          {/* <GlobeAltIcon className="h-6 w-6 text-sp-white" /> */}
           <ThemeToggler />
         </div>
       </div>
