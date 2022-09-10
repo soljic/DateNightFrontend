@@ -126,7 +126,7 @@ function SearchContentPlacaholder() {
 
 function Placeholder() {
   return (
-    <div className="flex w-3/4 py-2">
+    <div className="flex w-3/4 p-2">
       <div
         // data-placeholder
         className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
@@ -165,7 +165,7 @@ function SearchResults({ results }) {
 function Row({ name, surname, images, birth, death, slug }) {
   return (
     <Link href={`/spiritus/${slug}`}>
-      <a className="flex w-full py-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 text-sp-medlight dark:text-sp-white">
+      <a className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 text-sp-medlight dark:text-sp-white">
         <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
           {images.length ? (
             <Image
