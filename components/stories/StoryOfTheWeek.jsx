@@ -10,7 +10,7 @@ export function StoryOfTheWeek({ itemId, title, imageUrl }) {
   return (
     <div key={itemId} className="rounded-sp-14 my-10">
       <div className="relative w-full overflow-hidden rounded-sp-14">
-        <div class="absolute bg-gradient-to-b from-transparent to-sp-black opacity-80 w-full h-full z-10" />
+        <div className="absolute bg-gradient-to-b from-transparent to-sp-black opacity-80 w-full h-full z-10" />
         {imageUrl ? (
           <Image
             src={imageUrl}
