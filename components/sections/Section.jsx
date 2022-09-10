@@ -34,9 +34,9 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
   };
 
   return (
-    <div className="container w-full xl:w-3/5 mx-auto flex flex-col items-center mt-16 mb:8 lg:mb-24 lg:mt-12">
+    <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
       <div className="flex flex-col items-center mb-32">
-        <h1 className="text-5xl font-extrabold tracking-tight text-sp-black dark:text-sp-white">
+        <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
           {title}
         </h1>
 
@@ -72,8 +72,6 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
                 itemId={item.itemId}
                 title={item.title}
                 subtitle={item.subtitle}
-                // mapping is weird and all over the place
-                // due to BE respones being weird
                 itemType={item.itemNavigationType}
                 imageUrl={item.imageUrl}
               />
@@ -131,9 +129,9 @@ function SectionTile({ itemId, title, subtitle, imageUrl, itemType }) {
             layout="responsive"
           />
         </div>
-        <div className="mt-2 flex flex-col justify-between">
+        <div className="mt-3 flex flex-col justify-between">
           <h3 className="text-lg dark:text-sp-white">{title}</h3>
-          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+          <p className="dark:text-sp-white dark:text-opacity-60">
             {subtitle}
           </p>
         </div>
