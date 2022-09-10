@@ -43,18 +43,21 @@ export function SearchSpiritusCTA() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-auto bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 pt-4 pb-6 text-sp-black dark:text-sp-white my-10">
-      <div className="text-center mx-auto py-14 px-4 lg:px-8">
+    <div className="flex flex-col items-center bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 text-sp-black dark:text-sp-white py-14">
+      <div className="w-1/5 mb-4">
         <Image
-          src="/images/circle_images_sm.png"
+          src="/images/find_loved_ones.png"
           alt="Featured Stories Images"
-          width={170}
-          height={70}
+          width={100}
+          height={45}
+          layout="responsive"
         />
+      </div>
+      <div className="text-center">
         <h2 className="text-2xl font-extrabold mb-1">
           {t("find_loved_title")}
         </h2>
-        <p className="mx-auto w-1/2 xl:2/5 text-center opacity-60 mb-5 text-sm">
+        <p className="mx-auto w-3/4 xl:2/5 text-center opacity-60 mb-5 text-sm">
           {t("find_loved_subtitle")}
         </p>
         <CTASearchButton />
@@ -85,7 +88,7 @@ export function SearchPlacesCTA() {
         </h2>
         <div className="flex flex-wrap w-3/4 lg:w-3/5 justify-center gap-2 items-center mx-auto pt-3 pb-4">
           {places.map((p) => {
-            return <PlacePill name={p.name} key={p.name}/>;
+            return <PlacePill name={p.name} key={p.name} />;
           })}
         </div>
         <CTASearchPlacesButton />
