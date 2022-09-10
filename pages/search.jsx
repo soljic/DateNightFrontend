@@ -6,12 +6,11 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { Navbar } from "../components/layout/NavBar";
-import { Footer } from "../components/layout/Footer";
-
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import { SearchIcon } from "@heroicons/react/outline";
 
 import { ProxySearchSpiritus } from "../service/http/proxy";
+import LayoutNoFooter from "../components/layout/LayoutNoFooter";
 
 export default function Search() {
   const { t } = useTranslation("common");
@@ -47,50 +46,33 @@ export default function Search() {
   }, [searchTerm]);
 
   return (
-    <div className="common-bg p-2 min-w-full">
+    <LayoutNoFooter>
       <Head>
         <title>{t("meta_search_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_search_description")} />
       </Head>
-      <Navbar />
-      <div className="h-screen container mx-auto mt-20 lg:w-1/3 md:w-full sm:w-full">
-        <div className="mx-auto flex items-center rounded-xl p-2 border border-sp-lighter dark:bg-sp-medium dark:border-none">
-          <button>
-            <span className="flex w-auto items-center justify-end px-3 py-2 text-sp-lighter">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 -scale-x-100"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </span>
+      <div className="h-screen mx-auto mt-20 w-full lg:w-1/2 md:w-2/3 sm:w-full">
+        <div className="flex items-center rounded-sp-14 p-2 border border-sp-lighter dark:bg-sp-medium dark:border-none">
+          <button className="text-sp-lighter p-2.5">
+           <SearchIcon className="w-6 h-6"/>
           </button>
           <input
             id="search-spiritus"
             onChange={(e) => {
-              e.preventDefault();
               setSearchTerm(e.target.value);
             }}
-            className="mr-2 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-lighter caret-sp-fawn caret"
+            className="mr-2 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-black dark:text-sp-white caret-sp-fawn caret"
             type="text"
             placeholder={t("search_placeholder")}
+            autoFocus
           />
         </div>
         {!!results.length && !searching && <SearchResults results={results} />}
         {searching && <SearchContentPlacaholder />}
         {notFound && <NotFound searchTerm={searchTerm} />}
       </div>
-      <Footer />
-    </div>
+    </LayoutNoFooter>
   );
 }
 
@@ -98,7 +80,7 @@ function NotFound({ searchTerm }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex flex-col mx-auto text-sp-lighter items-center mt-10">
+    <div className="flex flex-col text-sp-lighter items-center justify-center mt-12">
       <svg
         className="w-10 h-10"
         viewBox="0 0 32 32"
@@ -110,12 +92,12 @@ function NotFound({ searchTerm }) {
           fill="currentColor"
         />
       </svg>
-      <p className="text-center w-full lg:w-2/3 md:w-2/3 sm:w-2/3 p-2 mb-4">
+      <p className="text-center w-full lg:w-2/3 p-2 mb-4">
         {`Sorry, we found no results for “${searchTerm}”. Would you like to
         create new Spiritus for him/her?`}
       </p>
       <a
-        href="/create"
+        href="/create/spiritus"
         className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
       >
         <PlusCircleIcon className="h-6 w-6" />
@@ -135,7 +117,7 @@ function SearchContentPlacaholder() {
     ph.push(<Placeholder key={`placeholder-render-${i}`} />);
   }
   return (
-    <div className="container flex flex-col mx-auto rounded-xl p-2">
+    <div className="container flex flex-col rounded-sp-14">
       <p className="p-2 text-sp-lighter text-center">{t("searching")}</p>
       <div className="flex w-full flex-col items-start">{ph}</div>
     </div>
@@ -144,19 +126,19 @@ function SearchContentPlacaholder() {
 
 function Placeholder() {
   return (
-    <div className="flex w-3/4 p-2">
+    <div className="flex w-3/4 py-2">
       <div
         // data-placeholder
-        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-day-200 dark:bg-sp-medium"
+        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
       ></div>
       <div className="flex w-full flex-col justify-between py-2">
         <div
           // data-placeholder
-          className="animate-pulse rounded-lg relative h-5 w-full overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
+          className="animate-pulse rounded-sp-14 relative h-5 w-full overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
         ></div>
         <div
           // data-placeholder
-          className="animate-pulse rounded-lg relative h-5 w-3/4 overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
+          className="animate-pulse rounded-sp-14 relative h-5 w-3/4 overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
         ></div>
       </div>
     </div>
@@ -167,7 +149,7 @@ function SearchResults({ results }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="container flex flex-col mx-auto rounded-xl p-2">
+    <div className="flex flex-col rounded-sp-14 py-2">
       <p className="p-2 text-sp-lighter text-center">
         {results.length} <span> {t("search_results")}</span>
       </p>
@@ -183,8 +165,8 @@ function SearchResults({ results }) {
 function Row({ name, surname, images, birth, death, slug }) {
   return (
     <Link href={`/spiritus/${slug}`}>
-      <a className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg text-sp-medlight dark:text-sp-white">
-        <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-lg bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
+      <a className="flex w-full py-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 text-sp-medlight dark:text-sp-white">
+        <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
           {images.length ? (
             <Image
               src={images[0].url}
@@ -193,7 +175,9 @@ function Row({ name, surname, images, birth, death, slug }) {
               height={64}
               layout="fill"
             />
-          ) : <></>}
+          ) : (
+            <></>
+          )}
         </div>
         <div className="flex w-full flex-col justify-between py-2 px-2">
           <p className="break-words pr-4">{`${name} ${surname}`}</p>
