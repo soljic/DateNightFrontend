@@ -20,9 +20,9 @@ SwiperCore.use([Pagination, Navigation, Autoplay])
 
 export function SpiritusCarousel ({ images }) {
   const [index, setIndex] = useState(0)
-
+  console.log("IMAGES", images)
   return (
-    images.length && (
+    !!images.length && (
       <div className='container slider overflow-visible bg-none '>
         <Swiper
           effect={'cards'}
@@ -32,7 +32,7 @@ export function SpiritusCarousel ({ images }) {
             delay: 10000,
             disableOnInteraction: true
           }}
-          slidesPerView='3'
+          slidesPerView={3}
           loop={false}
           onSlideChange={swiper => {
             setIndex(swiper.realIndex)
