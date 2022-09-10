@@ -36,7 +36,10 @@ module.exports = {
       },
       letterSpacing: {
         "tracking-sp-tighten": "-0.01em",
-      },      
+      },
+      height: {
+        "92": "372px",
+      },
       colors: {
         "sp-white": "#F0EFED",
         "sp-black": "#171411",

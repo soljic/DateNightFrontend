@@ -27,7 +27,7 @@ export function SearchSpiritusCTA() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex flex-col items-center bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 text-sp-black dark:text-sp-white py-14">
+    <div className="flex flex-col items-center bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 text-sp-black dark:text-sp-white py-14 mb-10">
       <div className="w-1/5 mb-4">
         <Image
           src="/images/find_loved_ones.png"
