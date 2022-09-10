@@ -73,7 +73,7 @@ export async function getServerSideProps(context) {
   const resSpiritus = await GetSpiritusBySlug(slug);
   const spiritus = resSpiritus.data;
 
-  const resStories = await GetSpiritusStoriesBySlug(slug, 0, 10);
+  const resStories = await GetSpiritusStoriesBySlug(slug, 0, 20);
   const stories = resStories.data?.content;
 
   return {

@@ -134,7 +134,7 @@ export async function getServerSideProps(context) {
   const resAllStories = await GetSpiritusStoriesBySlug(
     resSpiritus.data.slug,
     0,
-    5
+    20
   );
 
   let content = resAllStories.data?.content ? resAllStories.data?.content : [];

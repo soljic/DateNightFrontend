@@ -18,7 +18,7 @@ export function SpiritusOverview({ name, surname, birth, death, description }) {
         </div>
         {description && (
           <p className="text-base border-l-4 border-sp-day-900 dark:border-sp-fawn pl-2">
-            {description}
+            {`"${description}"`}
           </p>
         )}
       </div>
