@@ -37,7 +37,7 @@ export function SpiritusCarousel({ images }) {
             setIndex(swiper.realIndex)
           }}
           centeredSlides={true}
-          autoHeight={true}
+          // autoHeight={true}
         >
           {images.map((img, i) => {
             return (
