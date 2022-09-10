@@ -83,7 +83,7 @@ export function SearchPlacesCTA() {
         <h2 className="text-xl sm:text-lg md:text-2xl lg:text-3xl font-extrabold">
           {t("search_places_title")}
         </h2>
-        <div className="flex flex-wrap w-3/4 lg:w-3/5 justify-center gap-2 items-center mx-auto pt-2 pb-4">
+        <div className="flex flex-wrap w-3/4 lg:w-3/5 justify-center gap-2 items-center mx-auto pt-3 pb-4">
           {places.map((p) => {
             return <PlacePill name={p.name} key={p.name}/>;
           })}
