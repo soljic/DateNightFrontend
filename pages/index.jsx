@@ -14,7 +14,7 @@ import { StoryOfTheWeek } from "../components/stories/StoryOfTheWeek";
 import {
   CategoriesSwiper,
   HomepageSwiper,
-} from "../components/stories/Discover";
+} from "../components/stories/Swipers";
 import Layout from "../components/layout/Layout";
 import { GetParsedHomepage } from "../service/http/homepage";
 
