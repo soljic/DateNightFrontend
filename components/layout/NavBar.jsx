@@ -52,7 +52,7 @@ export function Navbar() {
             </a>
           </Link>
           <Link href={session?.name ? "/account/settings" : "/auth/login"}>
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-full py-2 px-6 font-semibold">
+            <a className="border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-sp-40 py-2 px-5 font-semibold">
               {session?.user?.name ? session.user.name : t("login")}
             </a>
           </Link>
