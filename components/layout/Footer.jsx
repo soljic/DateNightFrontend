@@ -5,7 +5,7 @@ export function Footer() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="container mx-auto text-sp-medium dark:text-sp-white mt-32">
+    <div className="mx-auto text-sp-medium dark:text-sp-white mt-32">
       <div className="flex flex-row mx-auto items-center justify-around">
         <div className="inline-flex">
           <NavItem text={t("about")} textsize={"sm"} />
@@ -16,7 +16,7 @@ export function Footer() {
           <NavItem text={t("contact")} textsize={"sm"} />
         </div>
       </div>
-      <div className="my-2 pb-4 mx-auto xl:w-4/5 lg:w-full border-t border-sp-day-200 dark:border-sp-lighter"></div>
+      <div className="my-2 pb-4 mx-auto border-t border-sp-day-200 dark:border-sp-lighter"></div>
       <div className="container xl:w-4/5 lg:w-full mx-auto justify-between pb-4">
         <div className="flex flex-col items-center gap-4">
           <div className="flex flex-row gap-2">

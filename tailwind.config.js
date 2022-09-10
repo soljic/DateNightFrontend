@@ -11,9 +11,8 @@ module.exports = {
       'xs': '340px',
       'sm': '576px',
       'md': '759px',
-      'lg': '1024px',
-      'xl': '1440px'
-      // '2xl': '1536px'
+      'lg': '1280px',
+      'xl': '1536px',
     },
     borderWidth: {
       DEFAULT: "1px",
@@ -27,6 +26,14 @@ module.exports = {
       8: "8px",
     },
     extend: {
+      fontSize: {
+        "cta": ['44px', '50px'],
+      },
+      borderRadius: {
+        "sp-10": "14px",
+        "sp-14": "14px",
+        "sp-40": "40px"
+      },
       colors: {
         "sp-white": "#F0EFED",
         "sp-black": "#171411",
