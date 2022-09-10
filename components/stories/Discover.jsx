@@ -47,7 +47,7 @@ export function HomepageSwiper ({
 
   return (
     items && (
-      <div className='my-10'>
+      <div className='mb-10'>
         <div className='inline-flex w-full items-start justify-between pb-5'>
           <h2 className='text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white'>
             {t(titleTranslation)}
@@ -82,7 +82,7 @@ export function HomepageSwiper ({
             onSlideChange={swiper => {
               setCurrSlide(swiper.realIndex)
             }}
-            spaceBetween={50}
+            spaceBetween={30}
             slidesPerView={3}
           >
             {items.map((item, i) => {
@@ -135,7 +135,7 @@ function HomepageTile ({
 }) {
   return (
     <div key={itemId} className='group'>
-      <div className='relative rounded-sp-14 overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
+      <div className='relative group-hover:opacity-75'>
         {featured && (
           <div className='absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg'>
             <CrownIcon width={5} height={5} />
@@ -144,19 +144,19 @@ function HomepageTile ({
         {imageUrl ? (
           <Image
             src={imageUrl}
-            className='w-full h-full'
-            width={200}
-            height={260}
+            className='object-cover rounded-sp-14'
+            width={220}
+            height={248}
             layout='responsive'
           />
         ) : (
           <ImagePlaceholder />
         )}
       </div>
-      <div className='mt-4 flex flex-col justify-between'>
+      <div className='flex flex-col justify-between mt-3'>
         <h3 className='text-lg dark:text-sp-white'>
           <Link href={itemType === "SPIRITUS" ?  `/spiritus/${itemId}` : `/stories/${itemId}`}>
-            <a>
+            <a className="antialiased">
               <span aria-hidden='true' className='absolute inset-0' />
               {title}
             </a>

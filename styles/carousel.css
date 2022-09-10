@@ -1,8 +1,8 @@
 .slider {
-  height: 580px;
+  height: 335px;
 }
 
-.slider .slider-image-wrap {
+/* .slider .slider-image-wrap {
   opacity: 0;
   transition: all 1s ease;
   position: relative;
@@ -11,22 +11,22 @@
 }
 
 .slider .swiper-slide {
-  width: 400px;
-  height: 600px;
+  width: 220px;
+  height: 303px;
 }
 
 .slider .swiper-slide img {
-  width: 410px;
-  height: 510px;
+  width: 220px;
+  height: 248px;
 }
 
 .slider-arrow-right {
   position: relative;
-}
+} */
 
-.slider .swiper-slide-active{
+/* .slider .swiper-slide-active{
   z-index: 4;
   border: solid 10px #171411;
   border-radius: 28px;
-}
+} */
 
