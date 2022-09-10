@@ -10,32 +10,16 @@ import {
 } from "@heroicons/react/solid";
 import { LocationIcon } from "../Icons";
 
-// unused
-export function CreateSpiritusCTABgImage() {
+export function CreateSpiritusCTA() {
   return (
-    <>
-      <div className="rounded-sp-14">
-        <div className="relative overflow-hidden text-center mx-auto">
-          <Image
-            src={"/images/photos_bg.png"}
-            alt={"Create Spiritus Banner"}
-            width={200}
-            height={100}
-            layout="responsive"
-          />
-          <div className="absolute top-1/4 lg:top-1/3 w-full mx-auto text-sp-black dark:text-sp-white">
-            <h2 className="container sm:w-3/5 md:w-3/4 lg:w-3/5 mx-auto text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight font-bold mb-4">
-              Keep memories of your loved ones, forever
-            </h2>
-            <CTACreateButton />
-          </div>
-        </div>
+    <div className="rounded-sp-14 bg-center bg-[url('/images/photos_bg.png')] w-full h-full py-24">
+      <div className="flex flex-col items-center">
+        <h2 className="text-center sm:w-3/5 md:w-3/4 lg:w-3/5 text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight text-sp-black dark:text-sp-white font-bold mb-4">
+          Keep memories of your loved ones, forever
+        </h2>
+        <CTACreateButton />
       </div>
-      <div className="flex flex-col mx-auto items-center pt-10">
-        <CTADownloadLinks />
-        <CTAPartners />
-      </div>
-    </>
+    </div>
   );
 }
 
@@ -158,7 +142,7 @@ function CTASearchButton() {
   );
 }
 
-function CTADownloadLinks() {
+export function CTADownloadLinks() {
   const { t } = useTranslation("common");
 
   return (
@@ -222,9 +206,9 @@ function CTADownloadLinks() {
   );
 }
 
-function CTAPartners() {
+export function CTAPartners() {
   return (
-    <div className="mt-4 flex gap-4 items-center">
+    <div className="mt-4 flex gap-6 items-center">
       <div className="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
         <Image
           src="/partners/frc.png"
