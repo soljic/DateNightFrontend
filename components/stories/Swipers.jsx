@@ -84,6 +84,15 @@ export function HomepageSwiper({
             }}
             spaceBetween={30}
             slidesPerView={3}
+            breakpoints={{
+              340: {
+                slidesPerView: 2,
+              },
+              759: {
+                slidesPerView: 3,
+              }
+
+            }}
           >
             {items.map((item, i) => {
               return (
