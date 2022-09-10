@@ -34,6 +34,9 @@ module.exports = {
         "sp-14": "14px",
         "sp-40": "40px"
       },
+      letterSpacing: {
+        "tracking-sp-tighten": "-0.01em",
+      },      
       colors: {
         "sp-white": "#F0EFED",
         "sp-black": "#171411",
