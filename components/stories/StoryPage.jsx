@@ -120,7 +120,7 @@ export function StoryHook({ slug, title, subtitle, description, date }) {
         >
           <a className="text-lg py-1">{title}</a>
         </Link>
-        <p className="tracking-tracking-sp-tighten">
+        <p className="tracking-sp-tighten text-sm">
           {subtitle || description}
         </p>
       </div>
