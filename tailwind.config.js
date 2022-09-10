@@ -7,6 +7,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'xs': '340px',
+      'sm': '576px',
+      'md': '759px',
+      'lg': '1024px',
+      'xl': '1440px'
+      // '2xl': '1536px'
+    },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",
