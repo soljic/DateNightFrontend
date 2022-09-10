@@ -60,7 +60,7 @@ export function HomepageSwiper({
         </div>
         <div className="relative">
           <div
-            className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 h-3/4 flex items-center ${
+            className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 h-5/6 flex items-center ${
               hidePrevBtn() ? "hidden" : ""
             }`}
           >
@@ -106,7 +106,7 @@ export function HomepageSwiper({
             </SwiperSlide>
           </Swiper>
           <div
-            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-3/4 flex items-center ${
+            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-5/6 flex items-center ${
               hideNextBtn() ? "hidden" : ""
             }`}
           >
