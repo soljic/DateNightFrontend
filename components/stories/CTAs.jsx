@@ -24,7 +24,7 @@ export function CreateSpiritusCTABgImage() {
             layout="responsive"
           />
           <div className="absolute top-1/4 lg:top-1/3 w-full mx-auto text-sp-black dark:text-sp-white">
-            <h2 className="container sm:w-3/5 md:w-3/4 mx-auto text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight font-bold mb-4">
+            <h2 className="container sm:w-3/5 md:w-3/4 lg:w-3/5 mx-auto text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight font-bold mb-4">
               Keep memories of your loved ones, forever
             </h2>
             <CTACreateButton />
