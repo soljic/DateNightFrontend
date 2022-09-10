@@ -47,7 +47,7 @@ export function HomepageSwiper ({
 
   return (
     items && (
-      <div className='container w-full xl:w-4/5 mx-auto my-10'>
+      <div className='my-10'>
         <div className='inline-flex w-full items-center justify-between pb-3'>
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
             {t(titleTranslation)}
@@ -209,7 +209,7 @@ export function CategoriesSwiper ({ sectionId, categories, titleTranslation }) {
 
   return (
     categories && (
-      <div className='container w-full xl:w-4/5 mx-auto my-8'>
+      <div className='my-8'>
         <div className='inline-flex w-full items-center justify-between pb-3'>
           <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
             {t(titleTranslation)}

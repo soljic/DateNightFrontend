@@ -11,8 +11,8 @@ export function StoryOfTheWeek ({ itemId, title, imageUrl }) {
   const { t } = useTranslation('common')
 
   return (
-    <div key={itemId} className='container mx-auto mt-12'>
-      <div className='container w-full xl:w-4/5 mx-auto rounded-lg py-12'>
+    <div key={itemId} className='mt-12'>
+      <div className='rounded-lg py-12'>
         <div className='relative overflow-hidden'>
           {imageUrl ? (
             <Image
