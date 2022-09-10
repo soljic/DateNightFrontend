@@ -48,13 +48,13 @@ export function HomepageSwiper ({
   return (
     items && (
       <div className='my-10'>
-        <div className='inline-flex w-full items-center justify-between pb-3'>
-          <h2 className='text-2xl font-extrabold tracking-tight text-sp-black dark:text-sp-white'>
+        <div className='inline-flex w-full items-start justify-between pb-5'>
+          <h2 className='text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white'>
             {t(titleTranslation)}
           </h2>
           <Link href={`/section/id/${sectionId}?title=${title}`}>
-            <a className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2'>
-              <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn' />
+            <a className='bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1'>
+              <ChevronRightIcon className='h-5 w-5 text-sp-day-900 dark:text-sp-fawn opacity-40' />
             </a>
           </Link>
         </div>
@@ -72,7 +72,6 @@ export function HomepageSwiper ({
             </button>
           </div>
           <Swiper
-            //
             onInit={swiper => {
               swiper.params.navigation.prevEl = prevRef.current
               swiper.params.navigation.nextEl = nextRef.current
@@ -93,8 +92,6 @@ export function HomepageSwiper ({
                     <HomepageTile
                       itemId={item.itemId}
                       title={item.title}
-                      // mapping is weird and all over the place
-                      // due to BE respones being weird
                       spiritusName={item.subtitle}
                       imageUrl={item.imageUrl}
                       itemType={itemType}
@@ -138,7 +135,7 @@ function HomepageTile ({
 }) {
   return (
     <div key={itemId} className='group'>
-      <div className='relative rounded-xl overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
+      <div className='relative rounded-sp-14 overflow-hidden group-hover:opacity-75 lg:h-80 h-80'>
         {featured && (
           <div className='absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg'>
             <CrownIcon width={5} height={5} />
