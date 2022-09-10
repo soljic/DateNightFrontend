@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { PencilIcon, DotsHorizontalIcon } from "@heroicons/react/outline";
+import { PencilIcon } from "@heroicons/react/outline";
 
 import Layout from "../../components/layout/Layout";
 import { CTAAddMemory, MoreStories } from "../../components/stories/StoryPage";
@@ -47,7 +47,7 @@ export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
       <EditBtn spiritusId={spiritus.id} />
       <section className="flex flex-col items-center justify-center w-full">
         <SpiritusOverview {...spiritus} />
-        {/* <SpiritusCarousel images={spiritus.images} /> */}
+        <SpiritusCarousel images={spiritus.images} />
         <MoreStories stories={stories} spiritus={spiritus} />
         <CTAAddMemory name={spiritus.name} />
       </section>
