@@ -8,7 +8,7 @@ import {
   ArrowCircleRightIcon,
   ChevronRightIcon,
 } from "@heroicons/react/solid";
-import { LocationIcon, UserIcon } from "../Icons";
+import { LocationIcon } from "../Icons";
 
 // unused
 export function CreateSpiritusCTABgImage() {
@@ -31,7 +31,7 @@ export function CreateSpiritusCTABgImage() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col mx-auto items-center">
+      <div className="flex flex-col mx-auto items-center pt-10">
         <CTADownloadLinks />
         <CTAPartners />
       </div>
@@ -162,7 +162,7 @@ function CTADownloadLinks() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="pt-8 text-sp-lighter">
+    <div className="text-sp-lighter">
       <ul className="inline-flex align-middle mr-2">
         <li>
           <StarIcon className="h-4 w-4 text-sp-dark-fawn dark:text-sp-fawn" />

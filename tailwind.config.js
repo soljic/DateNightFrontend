@@ -30,7 +30,7 @@ module.exports = {
         "cta": ['44px', '50px'],
       },
       borderRadius: {
-        "sp-10": "14px",
+        "sp-10": "10px",
         "sp-14": "14px",
         "sp-40": "40px"
       },
