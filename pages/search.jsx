@@ -180,7 +180,7 @@ function Row({ name, surname, images, birth, death, slug }) {
           )}
         </div>
         <div className="flex w-full flex-col justify-between py-2 px-2">
-          <p className="break-words pr-4">{`${name} ${surname}`}</p>
+          <p className="break-words pr-4 capitalize">{`${name} ${surname}`.toLowerCase()}</p>
           <p className="text-opacity-40">
             {birth ? new Date(birth).getFullYear() : "?"}
             {death && ` — ${new Date(death).getFullYear()}`}
