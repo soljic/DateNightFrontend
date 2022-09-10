@@ -10,7 +10,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
-import Layout from "../../components/layout/Layout";
+import LayoutNoFooter from "../../components/layout/LayoutNoFooter";
 import { HorizontalDivider, Logo } from "../../components/layout/Common";
 import { GraveIcon, GuardianIcon } from "../../components/Icons";
 import { ProgressBar, Spinner } from "../../components/Status";
@@ -150,7 +150,7 @@ export default function CreateSpiritusPage({ user }) {
   };
 
   return (
-    <Layout>
+    <LayoutNoFooter>
       <Head>
         <title>{t("meta_create_spiritus_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -159,7 +159,7 @@ export default function CreateSpiritusPage({ user }) {
           content={t("meta_create_spiritus_description")}
         />
       </Head>
-      <div className="py-5 h-screen ">
+      <div className="py-5 h-screen">
         {/* <p className="text-sp-black dark:text-sp-white">
           {JSON.stringify({
             birth,
@@ -170,7 +170,7 @@ export default function CreateSpiritusPage({ user }) {
             location,
           })}
         </p> */}
-        <div className="container mx-auto lg:px-12 lg:w-4/5">
+        <div className="container">
           {spiritus ? (
             <Success spiritus={spiritus} />
           ) : (
@@ -229,7 +229,7 @@ export default function CreateSpiritusPage({ user }) {
           )}
         </div>
       </div>
-    </Layout>
+    </LayoutNoFooter>
   );
 }
 
@@ -257,6 +257,7 @@ function Success({ spiritus }) {
       {spiritus.image?.url && (
         <div className="object-fill rounded-lg overflow-hidden px-4">
           <Image
+            // TODO: remove
             src={`https://walk.spiritusapp.com${spiritus.image.url}`}
             alt="Spiritus image"
             width={270}
