@@ -19,7 +19,7 @@ export function Tags({ tags }) {
           <Link href={`/sections/id/${t.id}`}>
             <a
               key={t.id}
-              className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm"
+              className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base"
             >
               {t.value}
             </a>
@@ -34,7 +34,7 @@ export function Tribute() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="container w-full mx-auto items-center py-8 mt-14 text-sp-black dark:text-sp-white">
+    <div className="w-full mt-6 mb-4 text-sp-black dark:text-sp-white">
       <div className="flex flex-col justify-center gap-3">
         <label htmlFor="tribute" className="hidden">
           {t("write_tribute")}
@@ -43,7 +43,7 @@ export function Tribute() {
           id="tribute"
           type="text"
           rows="1"
-          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
+          className="w-full text-xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
           placeholder={t("write_tribute")}
         ></textarea>
 
@@ -58,17 +58,17 @@ export function Tribute() {
         </button>
 
         <div className="w-full mx-auto items-center pt-4 text-sp ">
-          <div className="flex mx-auto justify-between space-x-3">
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
+          <div className="flex mx-auto justify-between space-x-3 lg:space-x-4">
+            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <BookmarkIcon className="w-6 h-6" />
               {t("save")}
             </button>
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
+            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <UploadIcon className="w-6 h-6" />
               {t("share")}
             </button>
 
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
+            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <ReplyIcon className="w-6 h-6 -scale-x-100" />
               {t("next")}
             </button>
@@ -113,9 +113,8 @@ export function StoryHook({ slug, title, subtitle, description, date }) {
         <div className="inline-flex h-8 w-8 items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
           <StoryHookIcon />
         </div>
-        {/*  */}
+
         <Link
-          // href={`/stories/spiritus/${spiritus.slug}?id=${spiritus.id}&story=${id}`}
           href={`/stories/${slug}`}
         >
           <a className="text-lg py-1">{title}</a>
@@ -131,7 +130,7 @@ export function StoryHook({ slug, title, subtitle, description, date }) {
   );
 }
 
-export function CTAAddMemory({ name }) {
+export function CTAAddMemory({ spiritusId,name }) {
   const { t } = useTranslation("common");
 
   return (
@@ -142,10 +141,10 @@ export function CTAAddMemory({ name }) {
           <span> {name}</span>?
         </h2>
         <p className="text-sp-lighter">{t("cta_add_memory_subtitle")}</p>
-        <p className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn">
+        <a href={`/create/story?spiritus=${spiritusId}`} className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn">
           {t("cta_add_memory_button")}
           <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
-        </p>
+        </a>
       </div>
       <Image
         src={"/images/memory_cta_bg.png"}

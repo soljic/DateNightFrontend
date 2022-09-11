@@ -36,19 +36,6 @@ function EditBtn({ storyId }) {
   );
 }
 
-// {displayStory.images.length && (
-//   <div className="object-cover overflow-hidden">
-//   <Image
-//     src={displayStory.images[0].url}
-//     alt={`Paragraph image ${displayStory.images[0].id}`}
-//     width={720}
-//     height={800}
-//     layout="responsive"
-//     className="rounded-sp-14"
-//   />
-//   </div>
-// )}
-
 export default function StoryPage({
   displayStory,
   stories,
@@ -57,6 +44,7 @@ export default function StoryPage({
   total,
 }) {
   const { t } = useTranslation("common");
+
   return (
     <Layout>
       <Head>
@@ -74,11 +62,11 @@ export default function StoryPage({
       </Head>
       <EditBtn storyId={displayStory.id} />
       <section
-        className="flex flex-col w-full justify-center items-center mt-8"
+        className="flex flex-col justify-center items-center mt-8"
         key="story"
       >
-        <div className="w-full flex flex-col items-center mx-auto mb-12 text-left">
-          <div className="flex flex-col justify-center w-3/4 text-sp-black dark:text-sp-white">
+        <div className="w-full flex flex-col items-center text-left">
+          <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
             <h1 className="mb-5 text-center uppercase">{displayStory.title}</h1>
             {!!displayStory.subtitle && (
               <h2 className="mb-6 text-cta px-4 font-bold text-center">
@@ -90,12 +78,27 @@ export default function StoryPage({
             </h2>
           </div>
 
+          <div className="w-full rounded-sp-14">
+            {displayStory.images.length ? (
+              <Image
+                src={displayStory.images[0].url}
+                alt={`Paragraph image ${displayStory.images[0].id}`}
+                width={displayStory.images[0].width}
+                height={displayStory.images[0].height}
+                layout="responsive"
+                className="rounded-sp-14"
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+
           {displayStory.paragraphs.length ? (
-            <div className="w-3/5">
+            <div className="w-3/5 lg:w-4/5 my-10">
               {displayStory.paragraphs.map((p, i) => {
                 return (
                   <p
-                    className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words"
+                    className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg"
                     key={`para-${i}`}
                   >
                     {p.text}
@@ -108,7 +111,7 @@ export default function StoryPage({
           )}
         </div>
 
-        <div className="w-3/5 mx-auto text-sp-white">
+        <div className="w-3/5 lg:w-4/5 mx-auto text-sp-white mt-5 lg:text-lg">
           {displayStory.tags?.length ? (
             <Tags tags={displayStory.tags} />
           ) : (
@@ -118,13 +121,13 @@ export default function StoryPage({
           <Tribute />
           <HorizontalDivider />
         </div>
-        <div className="w-full lg:w-4/5 flex flex-col justify-center items-center text-sp-white mt-4">
+        <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
           <SpiritusOverview {...spiritus} />
           <SpiritusCarousel images={spiritus.images} />
           <div className="text-sp-white mt-4">
             <MoreStories stories={stories} spiritus={spiritus} />
             <div className="flex-1 items-center justify-center">
-              <CTAAddMemory name={spiritus.name} />
+              <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
             </div>
           </div>
         </div>
