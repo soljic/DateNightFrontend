@@ -37,7 +37,7 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
         />
       </Head>
       <section
-        className="flex flex-col justify-center items-center mt-8 subpixel-antialiased"
+        className="flex flex-col justify-center items-center mt-16 subpixel-antialiased"
         key="story"
       >
         <div className="w-full flex flex-col items-center text-left">
