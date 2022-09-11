@@ -45,11 +45,16 @@ export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
         />
       </Head>
       <EditBtn spiritusId={spiritus.id} />
-      <section className="flex flex-col items-center justify-center w-full">
+
+      <section className="mx-auto w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
         <SpiritusOverview {...spiritus} />
         <SpiritusCarousel images={spiritus.images} />
-        <MoreStories stories={stories} spiritus={spiritus} />
-        <CTAAddMemory name={spiritus.name} />
+        <div className="text-sp-white mt-4">
+          <MoreStories stories={stories} spiritus={spiritus} />
+          <div className="flex-1 items-center justify-center">
+            <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
+          </div>
+        </div>
       </section>
     </Layout>
   );

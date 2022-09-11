@@ -62,7 +62,7 @@ export default function StoryPage({
       </Head>
       <EditBtn storyId={displayStory.id} />
       <section
-        className="flex flex-col justify-center items-center mt-8"
+        className="mx-auto flex flex-col justify-center items-center mt-8"
         key="story"
       >
         <div className="w-full flex flex-col items-center text-left subpixel-antialiased">
