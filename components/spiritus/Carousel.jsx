@@ -23,7 +23,7 @@ export function SpiritusCarousel({ images }) {
 
   return (
     !!images.length && (
-      <div className="container w-full mt-16 mb-48 slider">
+      <div className="sw-spiritus w-full mt-16 mb-14 overflow-hidden">
         <Swiper
           effect={'cards'}
           grabCursor={true}
@@ -31,24 +31,25 @@ export function SpiritusCarousel({ images }) {
           onSlideChange={(swiper) => {
             setIndex(swiper.realIndex);
           }}
-          slidesPerView={3}
-          loop={false}
+          slidesPerView={2}
           onSwiper={swiper => {
             setIndex(swiper.realIndex)
           }}
           centeredSlides={true}
-          // autoHeight={true}
+          loop={true}
+          autoplay={{
+            delay: 10000,
+            disableOnInteraction: false
+        }}
         >
           {images.map((img, i) => {
             return (
               <SwiperSlide key={`slider-image-${i}`}>
-                <div className="rounded-sp-14">
+                <div className="w-full h-full">
                   <Image
                     src={img.url}
                     alt={"spiritus-image"}
-                    layout="responsive"
-                    width={395}
-                    height={500}
+                    layout="fill"
                     className="object-cover rounded-sp-14"
                   />
                 </div>
