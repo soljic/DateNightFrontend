@@ -13,7 +13,7 @@ import { RoseIcon, StoryHookIcon } from "../../components/Icons";
 
 export function Tags({ tags }) {
   return (
-    <div className="flex flex-row gap-3 px-2">
+    <div className="flex flex-row gap-3">
       {tags.map((t) => {
         return (
           <Link href={`/sections/id/${t.id}`}>
@@ -34,8 +34,8 @@ export function Tribute() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="container w-full mx-auto items-center px-14 py-8 mt-14 sm:px-2 lg:px-14 md:px-8 text-sp-black dark:text-sp-white">
-      <div className="flex flex-col mx-auto gap-3">
+    <div className="container w-full mx-auto items-center py-8 mt-14 text-sp-black dark:text-sp-white">
+      <div className="flex flex-col justify-center gap-3">
         <label htmlFor="tribute" className="hidden">
           {t("write_tribute")}
         </label>
@@ -43,13 +43,13 @@ export function Tribute() {
           id="tribute"
           type="text"
           rows="1"
-          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-[48px] border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
+          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
           placeholder={t("write_tribute")}
         ></textarea>
 
         <button
           rows="1"
-          className="flex justify-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-[48px] py-4 px-7"
+          className="flex justify-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-sp-40 py-4 px-7"
         >
           <RoseIcon />
           <span className="text-lg font-semibold ml-1 text-sp-white dark:text-sp-black">
@@ -57,8 +57,8 @@ export function Tribute() {
           </span>
         </button>
 
-        <div className="container w-full mx-auto items-center px-14 py-4 text-sp ">
-          <div className="flex mx-auto justify-around gap-4 ">
+        <div className="w-full mx-auto items-center pt-4 text-sp ">
+          <div className="flex mx-auto justify-between space-x-3">
             <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
               <BookmarkIcon className="w-6 h-6" />
               {t("save")}
@@ -96,7 +96,7 @@ export function MoreStories({ stories, spiritus }) {
             </span>
           </a>
         </div>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-6 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-6">
           {stories.map((s) => {
             return <StoryHook {...s} key={s.title} />;
           })}

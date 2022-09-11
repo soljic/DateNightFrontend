@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
 
-
 import Layout from "../../components/layout/Layout";
 import { HorizontalDivider } from "../../components/layout/Common";
 import {
@@ -25,17 +24,30 @@ import {
 
 function EditBtn({ storyId }) {
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end mt-8">
       <a
         href={`/edit/story/${storyId}`}
-        className="inline-flex items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-6 text-sp-white dark:text-sp-black"
+        className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium py-2 px-6 text-sp-white dark:text-sp-black"
       >
-        <PencilIcon className="w-5 h-5"/>
-        <span className="font-semibold ml-2">Edit</span>
+        <PencilIcon className="w-5 h-5 text-sp-lighter" />
+        <span className="text-sp-lighter ml-2">Edit</span>
       </a>
     </div>
   );
 }
+
+// {displayStory.images.length && (
+//   <div className="object-cover overflow-hidden">
+//   <Image
+//     src={displayStory.images[0].url}
+//     alt={`Paragraph image ${displayStory.images[0].id}`}
+//     width={720}
+//     height={800}
+//     layout="responsive"
+//     className="rounded-sp-14"
+//   />
+//   </div>
+// )}
 
 export default function StoryPage({
   displayStory,
@@ -60,64 +72,59 @@ export default function StoryPage({
           }
         />
       </Head>
-      <section className="container mx-auto px-5" key="story">
-        <div className="flex flex-col items-center py-8">
-          <div className="flex flex-col w-full mb-12 text-left">
-            <div className="w-full sm:w-full lg:w-3/5 mx-auto text-sp-black dark:text-sp-white">
-              <EditBtn storyId={displayStory.id} />
-
-              <h1 className="mx-auto mb-6 font-semibold text-center uppercase">
-                {displayStory.title}
-              </h1>
-              <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
+      <EditBtn storyId={displayStory.id} />
+      <section
+        className="flex flex-col w-full justify-center items-center mt-8"
+        key="story"
+      >
+        <div className="w-full flex flex-col items-center mx-auto mb-12 text-left">
+          <div className="flex flex-col justify-center w-3/4 text-sp-black dark:text-sp-white">
+            <h1 className="mb-5 text-center uppercase">{displayStory.title}</h1>
+            {!!displayStory.subtitle && (
+              <h2 className="mb-6 text-cta px-4 font-bold text-center">
                 {displayStory.subtitle}
               </h2>
-              <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
-                {displayStory.description}
-              </h2>
-              {displayStory.images.length && (
-                <div className="object-fill mx-auto rounded-lg overflow-hidden px-4">
-                  <Image
-                    src={displayStory.images[0].url}
-                    alt={`Paragraph image ${displayStory.images[0].id}`}
-                    width={400}
-                    height={400}
-                    layout="responsive"
-                  />
-                </div>
-              )}
-              {displayStory.paragraphs &&
-                displayStory.paragraphs.map((p, i) => {
-                  // check if text is empty -> don't render if it is
-                  return (
-                    <p
-                      className="mx-auto leading-relaxed pt-4 px-2 pb-6 whitespace-pre-line text-justify"
-                      key={`para-${i}`}
-                    >
-                      {p.text}
-                    </p>
-                  );
-                })}
-            </div>
-            <div className="w-full mx-auto lg:w-3/5 text-sp-white">
-              {displayStory.tags?.length ? (
-                <Tags tags={displayStory.tags} />
-              ) : (
-                <></>
-              )}
+            )}
+            <h2 className="mx-auto mb-10 text-cta px-4 font-bold text-center sm:text-xl md:text-cta">
+              {displayStory.description}
+            </h2>
+          </div>
 
-              <Tribute />
-              <HorizontalDivider />
-              <SpiritusOverview {...spiritus} />
+          {displayStory.paragraphs.length ? (
+            <div className="w-3/5">
+              {displayStory.paragraphs.map((p, i) => {
+                return (
+                  <p
+                    className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words"
+                    key={`para-${i}`}
+                  >
+                    {p.text}
+                  </p>
+                );
+              })}
             </div>
-            <div className="w-full mx-autotext-sp-white mt-4">
-              <SpiritusCarousel images={spiritus.images} />
-            </div>
-            <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
-              <MoreStories stories={stories} spiritus={spiritus} />
-              <div className="flex-1 items-center justify-center px-4">
-                <CTAAddMemory name={spiritus.name} />
-              </div>
+          ) : (
+            <></>
+          )}
+        </div>
+
+        <div className="w-3/5 mx-auto text-sp-white">
+          {displayStory.tags?.length ? (
+            <Tags tags={displayStory.tags} />
+          ) : (
+            <></>
+          )}
+
+          <Tribute />
+          <HorizontalDivider />
+        </div>
+        <div className="w-full lg:w-4/5 flex flex-col justify-center items-center text-sp-white mt-4">
+          <SpiritusOverview {...spiritus} />
+          <SpiritusCarousel images={spiritus.images} />
+          <div className="text-sp-white mt-4">
+            <MoreStories stories={stories} spiritus={spiritus} />
+            <div className="flex-1 items-center justify-center">
+              <CTAAddMemory name={spiritus.name} />
             </div>
           </div>
         </div>
