@@ -65,7 +65,7 @@ export default function StoryPage({
         className="flex flex-col justify-center items-center mt-8"
         key="story"
       >
-        <div className="w-full flex flex-col items-center text-left">
+        <div className="w-full flex flex-col items-center text-left subpixel-antialiased">
           <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
             <h1 className="mb-5 text-center uppercase">{displayStory.title}</h1>
             {!!displayStory.subtitle && (
@@ -73,7 +73,7 @@ export default function StoryPage({
                 {displayStory.subtitle}
               </h2>
             )}
-            <h2 className="mx-auto mb-10 text-cta px-4 font-bold text-center sm:text-xl md:text-cta">
+            <h2 className="mb-10 text-cta px-4 font-bold text-center sm:text-xl md:text-cta">
               {displayStory.description}
             </h2>
           </div>
