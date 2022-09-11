@@ -13,6 +13,7 @@ module.exports = {
       'md': '759px',
       'lg': '1280px',
       'xl': '1536px',
+      '2xl': '2100px',
     },
     borderWidth: {
       DEFAULT: "1px",
