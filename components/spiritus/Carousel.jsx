@@ -53,7 +53,7 @@ export function SpiritusCarousel({ images }) {
             setIndex(swiper.realIndex);
           }}
           centeredSlides={true}
-          loop={true}
+          loop={images.length > 2 ? true : false}
           autoplay={{
             delay: 10000,
             disableOnInteraction: false,
