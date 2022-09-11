@@ -17,10 +17,10 @@ export function SpiritusOverview({
             {birth ? new Date(birth).toLocaleDateString("hr") : "?"}
             {death && ` — ${new Date(death).toLocaleDateString("hr")}`}
           </span>
+          <h2 className="font-bold text-xl md:text-cta pb-4">
+            {name} {surname}
+          </h2>
         </div>
-        <h2 className="font-bold text-xl md:text-cta pb-4">
-          {name} {surname}
-        </h2>
         {!!description && (
           <p className="border-l-4 pl-2 border-sp-day-900 dark:border-sp-fawn">
             {`"${description}"`}
