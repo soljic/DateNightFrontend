@@ -1,32 +1,12 @@
 .slider {
+  height: 335px;
+}
+
+.sw-spiritus {
   height: 580px;
 }
 
-.slider .slider-image-wrap {
-  opacity: 0;
-  transition: all 1s ease;
-  position: relative;
-  overflow: visible;
-  width: max-content;
+.sw-spiritus .swiper-slide {
+  width: 680px;
+  height: 500px;
 }
-
-.slider .swiper-slide {
-  width: 400px;
-  height: 600px;
-}
-
-.slider .swiper-slide img {
-  width: 410px;
-  height: 510px;
-}
-
-.slider-arrow-right {
-  position: relative;
-}
-
-.slider .swiper-slide-active{
-  z-index: 4;
-  border: solid 10px #171411;
-  border-radius: 28px;
-}
-

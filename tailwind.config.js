@@ -7,6 +7,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'xs': '340px',
+      'sm': '576px',
+      'md': '759px',
+      'lg': '1280px',
+      'xl': '1536px',
+      '2xl': '2100px',
+    },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",
@@ -19,6 +27,20 @@ module.exports = {
       8: "8px",
     },
     extend: {
+      fontSize: {
+        "cta": ['44px', '50px'],
+      },
+      borderRadius: {
+        "sp-10": "10px",
+        "sp-14": "14px",
+        "sp-40": "40px"
+      },
+      letterSpacing: {
+        "tracking-sp-tighten": "-0.01em",
+      },
+      height: {
+        "92": "372px",
+      },
       colors: {
         "sp-white": "#F0EFED",
         "sp-black": "#171411",

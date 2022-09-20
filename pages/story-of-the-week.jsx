@@ -36,62 +36,73 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
           }
         />
       </Head>
-      <section className="container mx-auto px-5" key="story">
-        <div className="flex flex-col items-center py-8">
-          <div className="flex flex-col w-full mb-12 text-left">
-            <div className="w-full sm:w-full lg:w-3/5 mx-auto text-sp-black dark:text-sp-white">
-              <h1 className="mx-auto mb-6 font-semibold text-center uppercase">
-                {displayStory.title}
-              </h1>
-              <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
+      <section
+        className="flex flex-col justify-center items-center mt-16 subpixel-antialiased"
+        key="story"
+      >
+        <div className="w-full flex flex-col items-center text-left">
+          <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
+            <h1 className="mb-5 text-center uppercase">{displayStory.title}</h1>
+            {!!displayStory.subtitle && (
+              <h2 className="mb-6 text-cta px-4 font-bold text-center">
                 {displayStory.subtitle}
               </h2>
-              <h2 className="mx-auto mb-6 text-2xl px-4 font-semibold text-center lg:text-3xl">
-                {displayStory.description}
-              </h2>
-              {displayStory.images.length && (
-                <div className="object-fill mx-auto rounded-lg overflow-hidden px-4">
-                  <Image
-                    src={displayStory.images[0].url}
-                    alt={`Paragraph image ${displayStory.images[0].id}`}
-                    width={400}
-                    height={400}
-                    layout="responsive"
-                  />
-                </div>
-              )}
-              {displayStory.paragraphs &&
-                displayStory.paragraphs.map((p, i) => {
-                  // check if text is empty -> don't render if it is
-                  return (
-                    <p
-                      className="mx-auto leading-relaxed pt-4 px-2 pb-6 whitespace-pre-line text-justify"
-                      key={`para-${i}`}
-                    >
-                      {p.text}
-                    </p>
-                  );
-                })}
-            </div>
-            <div className="w-full mx-auto lg:w-3/5 text-sp-white">
-              {displayStory.tags?.length ? (
-                <Tags tags={displayStory.tags} />
-              ) : (
-                <></>
-              )}
+            )}
+            <h2 className="mb-10 text-cta px-4 font-bold text-center sm:text-xl md:text-cta">
+              {displayStory.description}
+            </h2>
+          </div>
 
-              <Tribute />
-              <HorizontalDivider />
-              <SpiritusOverview {...spiritus} />
+          <div className="w-full rounded-sp-14">
+            {displayStory.images.length ? (
+              <Image
+                src={displayStory.images[0].url}
+                alt={`Paragraph image ${displayStory.images[0].id}`}
+                width={displayStory.images[0].width}
+                height={displayStory.images[0].height}
+                layout="responsive"
+                className="rounded-sp-14"
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+
+          {displayStory.paragraphs.length ? (
+            <div className="w-3/5 lg:w-4/5 my-10">
+              {displayStory.paragraphs.map((p, i) => {
+                return (
+                  <p
+                    className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg"
+                    key={`para-${i}`}
+                  >
+                    {p.text}
+                  </p>
+                );
+              })}
             </div>
-            <div className="w-full mx-autotext-sp-white mt-4">
-              <SpiritusCarousel images={spiritus.images} />
-            </div>
-            <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
-              <MoreStories stories={stories} spiritus={spiritus} />
-              <div className="flex-1 items-center justify-center px-4">
-                <CTAAddMemory name={spiritus.name} />
-              </div>
+          ) : (
+            <></>
+          )}
+        </div>
+
+        <div className="w-3/5 lg:w-4/5 mx-auto text-sp-white mt-5 lg:text-lg">
+          {displayStory.tags?.length ? (
+            <Tags tags={displayStory.tags} />
+          ) : (
+            <></>
+          )}
+
+          <Tribute />
+          <HorizontalDivider />
+        </div>
+        <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
+          <SpiritusOverview {...spiritus} />
+          <SpiritusCarousel images={spiritus.images} />
+          <div className="text-sp-white mt-4">
+            <MoreStories stories={stories} spiritus={spiritus} />
+            <div className="flex-1 items-center justify-center">
+              <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
             </div>
           </div>
         </div>

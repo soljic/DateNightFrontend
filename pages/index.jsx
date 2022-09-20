@@ -4,8 +4,9 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import {
-  // CreateSpiritusCTA,
-  CreateSpiritusCTABgImage,
+  CreateSpiritusCTA,
+  CTADownloadLinks,
+  CTAPartners,
   SearchPlacesCTA,
   SearchSpiritusCTA,
 } from "../components/stories/CTAs";
@@ -13,7 +14,7 @@ import { StoryOfTheWeek } from "../components/stories/StoryOfTheWeek";
 import {
   CategoriesSwiper,
   HomepageSwiper,
-} from "../components/stories/Discover";
+} from "../components/stories/Swipers";
 import Layout from "../components/layout/Layout";
 import { GetParsedHomepage } from "../service/http/homepage";
 
@@ -33,11 +34,12 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_home_description")} />
       </Head>
-      {/* <CreateSpiritusCTA /> */}
-      <CreateSpiritusCTABgImage />
+      <CreateSpiritusCTA />
+      <div className="flex flex-col mx-auto items-center pt-10">
+        <CTADownloadLinks />
+        <CTAPartners />
+      </div>
       <StoryOfTheWeek
-        // mapping is weird...
-        // itemId == storyId
         itemId={storyOfTheWeek.itemId}
         title={storyOfTheWeek.subtitle}
         imageUrl={storyOfTheWeek.imageUrl}

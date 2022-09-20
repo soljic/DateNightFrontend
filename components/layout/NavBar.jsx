@@ -29,8 +29,8 @@ export function Navbar() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="bg-sp-day-50 dark:bg-sp-black py-3 mb-2 opacity-90 backdrop-blur-lg dark:backdrop-blur-md sticky top-0 z-50 xl:w-4/5 mx-auto">
-      <div className="flex xl:w-4/5 lg:w-full lg:px-12 md:px-6 sm:px-4 mx-auto justify-between text-sp-black dark:text-sp-white">
+    <div className="bg-sp-day-50 dark:bg-sp-black h-20">
+      <div className="flex justify-between py-4 text-sp-black dark:text-sp-white">
         <div className="inline-flex items-center">
           <Link href="/">
             <a>
@@ -52,7 +52,7 @@ export function Navbar() {
             </a>
           </Link>
           <Link href={session?.name ? "/account/settings" : "/auth/login"}>
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-full py-2 px-6 font-semibold">
+            <a className="border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-sp-40 py-2 px-5 font-semibold">
               {session?.user?.name ? session.user.name : t("login")}
             </a>
           </Link>

@@ -13,13 +13,13 @@ import { RoseIcon, StoryHookIcon } from "../../components/Icons";
 
 export function Tags({ tags }) {
   return (
-    <div className="flex flex-row gap-3 px-2">
+    <div className="flex flex-row gap-3">
       {tags.map((t) => {
         return (
           <Link href={`/sections/id/${t.id}`}>
             <a
               key={t.id}
-              className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm"
+              className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base"
             >
               {t.value}
             </a>
@@ -34,8 +34,8 @@ export function Tribute() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="container w-full mx-auto items-center px-14 py-8 mt-14 sm:px-2 lg:px-14 md:px-8 text-sp-black dark:text-sp-white">
-      <div className="flex flex-col mx-auto gap-3">
+    <div className="w-full mt-6 mb-4 text-sp-black dark:text-sp-white">
+      <div className="flex flex-col justify-center gap-3">
         <label htmlFor="tribute" className="hidden">
           {t("write_tribute")}
         </label>
@@ -43,13 +43,13 @@ export function Tribute() {
           id="tribute"
           type="text"
           rows="1"
-          className="w-full text-2xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-[48px] border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
+          className="w-full text-xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
           placeholder={t("write_tribute")}
         ></textarea>
 
         <button
           rows="1"
-          className="flex justify-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-[48px] py-4 px-7"
+          className="flex justify-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-sp-40 py-4 px-7"
         >
           <RoseIcon />
           <span className="text-lg font-semibold ml-1 text-sp-white dark:text-sp-black">
@@ -57,18 +57,18 @@ export function Tribute() {
           </span>
         </button>
 
-        <div className="container w-full mx-auto items-center px-14 py-4 text-sp ">
-          <div className="flex mx-auto justify-around gap-4 ">
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
+        <div className="w-full mx-auto items-center pt-4 text-sp ">
+          <div className="flex mx-auto justify-between space-x-3 lg:space-x-4">
+            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <BookmarkIcon className="w-6 h-6" />
               {t("save")}
             </button>
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
+            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <UploadIcon className="w-6 h-6" />
               {t("share")}
             </button>
 
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
+            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <ReplyIcon className="w-6 h-6 -scale-x-100" />
               {t("next")}
             </button>
@@ -83,12 +83,12 @@ export function MoreStories({ stories, spiritus }) {
   const { t } = useTranslation("common");
   return (
     <section key={"stories-showcase"}>
-      <div className="container mx-auto px-5 pt-20 pb-10 text-sp-black dark:text-sp-white">
-        <div className="mb-4 flex w-full flex-row justify-between items-center">
-          <h1 className="font-semibold text-2xl sm:text-3xl">{t("stories")}</h1>
+      <div className=" my-10 text-sp-black dark:text-sp-white">
+        <div className="flex w-full justify-between mb-5 items-center">
+          <h1 className="font-semibold text-2xl">{t("stories")}</h1>
           <a
             href={`/create/story?spiritus=${spiritus.id}`}
-            className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-6 text-sp-white dark:text-sp-black"
+            className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-3 text-sp-white dark:text-sp-black"
           >
             <PlusCircleIcon className="h-6 w-6" />
             <span className="font-semibold ml-1">
@@ -96,7 +96,7 @@ export function MoreStories({ stories, spiritus }) {
             </span>
           </a>
         </div>
-        <div className="-m-4 flex flex-wrap">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-6">
           {stories.map((s) => {
             return <StoryHook {...s} key={s.title} />;
           })}
@@ -106,52 +106,45 @@ export function MoreStories({ stories, spiritus }) {
   );
 }
 
-export function StoryHook({
-  slug,
-  title,
-  subtitle,
-  description,
-  date,
-}) {
+export function StoryHook({ slug, title, subtitle, description, date }) {
   return (
-    <div className="p-4 md:w-1/2 text-sp-black dark:text-sp-white">
-      <div className="flex h-full flex-col rounded-lg bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-8">
-        <div className="mr-3 inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
+    <div className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-6 text-sp-black dark:text-sp-white">
+      <div className="flex flex-col">
+        <div className="inline-flex h-8 w-8 items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
           <StoryHookIcon />
         </div>
-        {/*  */}
+
         <Link
-          // href={`/stories/spiritus/${spiritus.slug}?id=${spiritus.id}&story=${id}`}
           href={`/stories/${slug}`}
-          >
-          <a className="title-font text-xl font-bold py-1">{title}</a>
+        >
+          <a className="text-lg py-1">{title}</a>
         </Link>
-        <div className="flex-grow">
-          <p className="text-base leading-relaxed">{subtitle || description}</p>
-          <p className="mt-3 inline-flex items-center text-sp-lighter text-sm">
-            {date || ""}
-          </p>
-        </div>
+        <p className="tracking-sp-tighten text-sm">
+          {subtitle || description}
+        </p>
+      </div>
+      <div className="flex flex-col items-start">
+        <p className="text-sp-lighter text-sm">{date || ""}</p>
       </div>
     </div>
   );
 }
 
-export function CTAAddMemory({ name }) {
+export function CTAAddMemory({ spiritusId,name }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex flex-row justify-between rounded-2xl border-3 border-sp-day-200 dark:border-sp-medium text-sp-black dark:text-sp-white overflow-hidden">
+    <div className="w-full flex flex-row justify-between overflow-clip rounded-sp-14 border-3 border-sp-day-200 dark:border-sp-medium text-sp-black dark:text-sp-white">
       <div className="flex h-full flex-col py-3 pl-4">
         <h2 className="title-font py-1 text-xl font-medium">
           {t("cta_add_memory")}
           <span> {name}</span>?
         </h2>
         <p className="text-sp-lighter">{t("cta_add_memory_subtitle")}</p>
-        <p className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn">
+        <a href={`/create/story?spiritus=${spiritusId}`} className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn">
           {t("cta_add_memory_button")}
           <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
-        </p>
+        </a>
       </div>
       <Image
         src={"/images/memory_cta_bg.png"}

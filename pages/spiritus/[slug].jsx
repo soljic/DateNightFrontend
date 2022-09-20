@@ -14,13 +14,13 @@ import { GetSpiritusStoriesBySlug } from "../../service/http/story";
 
 function EditBtn({ spiritusId }) {
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end mt-4">
       <a
         href={`/edit/spiritus/${spiritusId}`}
-        className="inline-flex items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-6 text-sp-white dark:text-sp-black"
+        className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium py-2 px-6 text-sp-white dark:text-sp-black"
       >
-        <PencilIcon className="w-5 h-5" />
-        <span className="font-semibold ml-2">Edit</span>
+        <PencilIcon className="w-5 h-5 text-sp-lighter" />
+        <span className="text-sp-lighter ml-2">Edit</span>
       </a>
     </div>
   );
@@ -44,22 +44,15 @@ export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
           }
         />
       </Head>
-      <section className="container mx-auto px-5" key="story">
-        <div className="flex flex-col items-center py-8">
-          <div className="flex flex-col w-full mb-12 text-left">
-            <EditBtn spiritusId={spiritus.id} />
-            <div className="w-full mx-auto lg:w-3/5 text-sp-white mt-4">
-              <SpiritusOverview {...spiritus} />
-            </div>
-            <div className="w-full mx-autotext-sp-white mt-4">
-              <SpiritusCarousel images={spiritus.images} />
-            </div>
-            <div className="w-full mx-auto lg:w-1/2 text-sp-white mt-4">
-              <MoreStories stories={stories} spiritus={spiritus} />
-              <div className="flex-1 items-center justify-center px-4">
-                <CTAAddMemory name={spiritus.name} />
-              </div>
-            </div>
+      <EditBtn spiritusId={spiritus.id} />
+
+      <section className="mx-auto w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
+        <SpiritusOverview {...spiritus} />
+        <SpiritusCarousel images={spiritus.images} />
+        <div className="text-sp-white mt-4">
+          <MoreStories stories={stories} spiritus={spiritus} />
+          <div className="flex-1 items-center justify-center">
+            <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
           </div>
         </div>
       </section>

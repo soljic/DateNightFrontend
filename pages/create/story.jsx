@@ -19,7 +19,7 @@ import {
 import { GetSpiritusById } from "../../service/http/spiritus";
 import { ProxyCreateStory } from "../../service/http/proxy";
 
-import Layout from "../../components/layout/Layout";
+import LayoutNoFooter from "../../components/layout/LayoutNoFooter";
 import {
   StoryDate,
   StorySummary,
@@ -136,14 +136,14 @@ export default function CreateStoryPage({ spiritus }) {
     }
   };
   return (
-    <Layout>
+    <LayoutNoFooter>
       <Head>
         <title>{t("meta_create_story_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_create_story_description")} />
       </Head>
       <div className="py-5 h-screen">
-        <div className="container mx-auto lg:px-12 lg:w-4/5">
+        <div className="container">
           {story ? (
             <Success
               storyId={story.id}
@@ -201,7 +201,7 @@ export default function CreateStoryPage({ spiritus }) {
           </div>
         )}
       </div>
-    </Layout>
+    </LayoutNoFooter>
   );
 }
 

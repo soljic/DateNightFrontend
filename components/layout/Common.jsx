@@ -1,15 +1,14 @@
-import Link from "next/link";
-
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
 export function NavItem({ text, link, textsize }) {
   const size = textsize || "base";
   return (
-    <div className="px-3 md:mx-1 py-2 font-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
-      <Link href={link || "/"}>
-        <a className={`text-${size}`}>{text}</a>
-      </Link>
-    </div>
+    <a
+      href={link || "/"}
+      className={`text-${size} px-3 md:mx-1 py-2 font-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full`}
+    >
+      {text}
+    </a>
   );
 }
 
