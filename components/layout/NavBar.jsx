@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { MenuIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
 
 const languages = [
   {
@@ -38,14 +38,14 @@ export function Navbar() {
             </a>
           </Link>
           <MobileNav />
-          <nav className="inline-flex ml-3 sm:invisible md:visible invisible">
+          <nav className="hidden ml-3 md:inline-flex">
             <NavItem text={t("stories")} link={"/"} />
             <NavItem text={t("mobile")} link={"/mobile-app"} />
             <NavItem text={t("about")} link={"/about"} />
           </nav>
         </div>
 
-        <div className="inline-flex items-center gap-3">
+        <div className="inline-flex items-center gap-1 sm:gap-3">
           <Link href="/search">
             <a className="p-3 hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
               <SearchIcon className="h-6 w-6 tex-sp-black dark:text-sp-white" />
@@ -101,12 +101,11 @@ export default function MobileNav() {
             <Popover.Button
               className={`
                 ${open ? "" : "text-opacity-90"}
-                group inline-flex items-center rounded-full px-3 py-2 font-medium bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown`}
+                group inline-flex items-center rounded-full px-2 py-2 font-medium bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown`}
             >
-              <span>Stories</span>
-              <ChevronDownIcon
+              <MenuIcon
                 className={`${open ? "" : "text-opacity-70"}
-                  h-5 w-5 text-sp-cotta dark:text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
+                  h-6 w-6 text-sp-cotta dark:text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
                 aria-hidden="true"
               />
             </Popover.Button>
