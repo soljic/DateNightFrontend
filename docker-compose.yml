@@ -12,6 +12,6 @@ services:
     environment:
       - NEXT_NODE_ENV=production
       - NEXTAUTH_URL=http://localhost:3000
-      - NEXT_API_URL=https://walk.spiritusapp.com
+      - NEXT_API_URL=${NEXT_API_URL}
       - NEXT_JWT_SECRET=${NEXT_JWT_SECRET}
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
