@@ -1,5 +1,5 @@
 {
-  "name": "spiritus-client",
+  "name": "spiritus-web",
   "private": true,
   "scripts": {
     "dev": "next dev",
