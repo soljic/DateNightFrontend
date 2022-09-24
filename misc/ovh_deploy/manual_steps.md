@@ -1,6 +1,11 @@
 # MANUAL STEPS TO CONFIGURE OVH INSTANCE
 Below are manual steps that need to be followed to setup a new production instance. You will need to update the OVH instance and Github secrets.
 
+## Prepare OVH instance
+1. Buy an instance on OVH using their console (add ssh key etc; follow their instructions).
+2. Default user for OVH will be `ubuntu`. You can only access the machine via ssh. Password login is disabled.
+3. Some tools like `git` might be missing - install them on your own if that's the case.
+
 ## Add deploy key to OVH instance
 The deploy key should allow READ access to the instance machine. It will be used to pull changes from the master branch before every build and deploy cycle.
 
