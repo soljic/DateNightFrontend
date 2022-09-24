@@ -62,3 +62,5 @@ Teardown the app:
 ```bash
 docker compose -f ./docker-compose.local.yml down
 ```
+
+This will remove all associated containers and volumes.
