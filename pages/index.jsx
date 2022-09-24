@@ -78,20 +78,24 @@ export default function Home({
   );
 }
 
-// fetch parsed homepage sections
-// in the parsed output check "content_type" to figure out
-// if the item is a Spiritus or a Story and act accordinly
-export async function getServerSideProps({ locale }) {
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
+export async function getStaticProps(context) {
+  console.log("PROPS", context);
   const sections = await GetParsedHomepage();
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common"])),
       storyOfTheWeek: sections.storyOfTheWeek,
       featured: sections.featured,
       discover: sections.discover,
       categories: sections.categories,
       anniversaries: sections.anniversaries,
     },
+    // in seconds
+    revalidate: 60 * 10,
   };
 }
+
