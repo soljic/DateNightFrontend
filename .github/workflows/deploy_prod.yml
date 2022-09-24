@@ -12,7 +12,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.PROD_KEY }}
           script: |
             whoami
