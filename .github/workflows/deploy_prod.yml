@@ -1,0 +1,22 @@
+name: Deploy Production
+
+# production deploymnet is manual
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PROD_KEY }}
+          script: |
+            whoami
+            echo "sve radi - zasad"
+            [ -d webapp ] && echo "Repo already cloned -- skipping" || git clone git@github.com:Spiritus-Memoria-Organization/webapp.git
+            cd webapp
+            ls -alh

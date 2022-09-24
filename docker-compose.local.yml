@@ -11,7 +11,7 @@ services:
       - "8080:3000"
     environment:
       - NEXT_NODE_ENV=development
+      - NEXTAUTH_URL=http://localhost:3000
       - NEXT_API_URL=https://walk.spiritusapp.com
       - NEXT_JWT_SECRET=muchsecrets
       - NEXTAUTH_SECRET=justanotherverysecretvalue
-      - NEXTAUTH_URL=http://localhost:3000
