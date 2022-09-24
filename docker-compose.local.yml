@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:3000"
+      - "3000:3000"
     environment:
       - NEXT_NODE_ENV=development
       - NEXTAUTH_URL=http://localhost:3000
