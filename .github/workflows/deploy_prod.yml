@@ -8,7 +8,7 @@ jobs:
   remote-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build Production
+      - name: Build container on remote host
         uses: appleboy/ssh-action@master
         env:
           NEXT_JWT_SECRET: ${{ secrets.NEXT_JWT_SECRET }}
@@ -22,17 +22,18 @@ jobs:
           script: |
             [ -d webapp ] && echo "Repo already cloned -- skipping" || git clone git@github.com:Spiritus-Memoria-Organization/webapp.git
             cd webapp
-            echo "Pulling latest changes..."
+            echo "## Pulling latest changes..."
             git pull --ff-only
-            echo "Target API URL: $NEXT_API_URL"
-            echo "Build new container"
+            echo "## Target API URL: $NEXT_API_URL"
+            echo "## Building new container"
             docker compose build
-            echo "BUILD DONE"
+            echo "## BUILD DONE ##"
+
   deploy:
     runs-on: ubuntu-latest
     needs: remote-build
     steps:
-      - name: Deploy to Production
+      - name: Deploy Production
         uses: appleboy/ssh-action@master
         env:
           NEXT_JWT_SECRET: ${{ secrets.NEXT_JWT_SECRET }}
@@ -44,13 +45,7 @@ jobs:
           key: ${{ secrets.PROD_KEY }}
           envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET
           script: |
-            whoami
-            echo "sve radi - zasad"
-            [ -d webapp ] && echo "Repo already cloned -- skipping" || git clone git@github.com:Spiritus-Memoria-Organization/webapp.git
             cd webapp
-            echo "Pulling latest changes..."
-            git pull --ff-only
-            echo "Target API URL: $NEXT_API_URL"
-            echo "Build and start new container"
+            echo "## Building and starting container"
             docker compose up --build spiritus-web -d
-            echo "DEPLOY DONE"
+            echo "## DEPLOY DONE ##"
