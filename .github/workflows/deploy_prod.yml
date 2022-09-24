@@ -24,10 +24,7 @@ jobs:
             cd webapp
             echo "## Pulling latest changes..."
             git pull --ff-only
-            echo "## Target API URL: $NEXT_API_URL"
-            echo "## Target NEXT_JWT_SECRET: ${#NEXT_JWT_SECRET}"
-            echo "## Target NEXTAUTH_SECRET: ${#NEXTAUTH_SECRET}"
-            echo "## Building new container"
+            echo "## Building new containers"
             NEXT_API_URL=$NEXT_API_URL NEXT_JWT_SECRET=$NEXT_JWT_SECRET NEXTAUTH_SECRET=$NEXTAUTH_SECRET docker compose build
             echo "## BUILD DONE ##"
 
@@ -48,6 +45,6 @@ jobs:
           envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET
           script: |
             cd webapp
-            echo "## Building and starting container"
+            echo "## Building and starting containers"
             NEXT_API_URL=$NEXT_API_URL NEXT_JWT_SECRET=$NEXT_JWT_SECRET NEXTAUTH_SECRET=$NEXTAUTH_SECRET docker compose up --build spiritus-web -d
             echo "## DEPLOY DONE ##"
