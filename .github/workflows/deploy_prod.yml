@@ -19,4 +19,5 @@ jobs:
             echo "sve radi - zasad"
             [ -d webapp ] && echo "Repo already cloned -- skipping" || git clone git@github.com:Spiritus-Memoria-Organization/webapp.git
             cd webapp
-            ls -alh
+            echo "Pulling latest changes..."
+            git pull --ff-only
