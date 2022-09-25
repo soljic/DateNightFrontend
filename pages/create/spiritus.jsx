@@ -23,6 +23,7 @@ import {
 import { SpiritusImageUploader } from "../../components/Uploaders";
 
 import { ProxyCreateSpiritus } from "../../service/http/proxy";
+import { ImagePath } from "../../service/util";
 
 // When creating spiritus a request is made to same-origin proxy server
 // to bypass CORS policies.
@@ -84,7 +85,7 @@ export default function CreateSpiritusPage({ user }) {
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
-      console.log("GREŠKA", err)
+      console.log("GREŠKA", err);
       setPending(false);
     }
   };
@@ -233,7 +234,6 @@ export default function CreateSpiritusPage({ user }) {
   );
 }
 
-// TODO: remove hardcoded spiritus URL
 function Success({ spiritus }) {
   const { t } = useTranslation("common");
   return (
@@ -254,11 +254,10 @@ function Success({ spiritus }) {
           <span>{spiritus.death || "?"}</span>
         </p>
       )}
-      {spiritus.image?.url && (
+      {!!spiritus.image?.url && (
         <div className="object-fill rounded-lg overflow-hidden px-4">
           <Image
-            // TODO: remove
-            src={`https://walk.spiritusapp.com${spiritus.image.url}`}
+            src={ImagePath(spiritus.image.url)}
             alt="Spiritus image"
             width={270}
             height={300}
