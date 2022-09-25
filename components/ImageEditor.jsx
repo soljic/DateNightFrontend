@@ -58,7 +58,7 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
   };
 
   return (
-    <div className="mt-12 mx-2">
+    <div>
       <p className="font-bold text-2xl">Slike</p>
       <input
         type="file"
