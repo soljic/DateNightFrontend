@@ -7,36 +7,30 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mt-12 mx-22">
-      <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
+    <div>
+      <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
         Ime i prezime
-      </p>
-      <div className="mt-4">
-        <div className="flex flex-col md:flex-row gap-2">
-          <div className="w-full flex-1">
-            <div className="my-2 rounded">
-              <input
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                placeholder={t("create_spiritus_firstname_placeholder")}
-                className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
-              />
-            </div>
-          </div>
-          <div className="w-full flex-1">
-            <div className="my-2 rounded">
-              <input
-                value={surname}
-                onChange={(e) => {
-                  setSurname(e.target.value);
-                }}
-                placeholder={t("create_spiritus_lastname_placeholder")}
-                className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
-              />
-            </div>
-          </div>
+      </h2>
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="w-full flex-1">
+          <input
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+            placeholder={t("create_spiritus_firstname_placeholder")}
+            className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
+          />
+        </div>
+        <div className="w-full flex-1">
+          <input
+            value={surname}
+            onChange={(e) => {
+              setSurname(e.target.value);
+            }}
+            placeholder={t("create_spiritus_lastname_placeholder")}
+            className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
+          />
         </div>
       </div>
     </div>
@@ -46,23 +40,21 @@ export function SpiritusDescription({ name, description, setDescription }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mt-12 mx-2">
-      <p className="font-bold text-2xl">Citat ili opis spiritusa</p>
-      <div className="mt-4">
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full flex-1">
-            <div className="my-2 rounded">
-              <textarea
-                value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
-                placeholder={t("create_spiritus_description_placeholder")}
-                rows="3"
-                className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-black dark:text-sp-white"
-              />
-            </div>
-          </div>
+    <div>
+      <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
+        Citat ili opis spiritusa
+      </h2>
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full flex-1">
+          <textarea
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value);
+            }}
+            placeholder={t("create_spiritus_description_placeholder")}
+            rows="3"
+            className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded text-sp-black dark:text-sp-white"
+          />
         </div>
       </div>
     </div>
@@ -77,7 +69,9 @@ export function SpiritusLocation({ location, setLocation }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
 
-  const [inputLocation, setInputLocation] = useState(() => location?.address ? location.address : "");
+  const [inputLocation, setInputLocation] = useState(() =>
+    location?.address ? location.address : ""
+  );
   const [visible, setVisible] = useState(false);
 
   const getSuggestions = async (term, search, sessionToken) => {
@@ -157,31 +151,29 @@ export function SpiritusLocation({ location, setLocation }) {
   }, [searchTerm]);
 
   return (
-    <div className="mt-12 mx-2">
-      <p className="font-bold text-2xl">
+    <div>
+      <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
         Lokacija
-      </p>
-      <div className="mt-4">
-        <div className="w-full">
-          <input
-            id="search-place"
-            onChange={(e) => {
-              e.preventDefault();
-              setInputLocation(e.target.value);
-              setSearchTerm(e.target.value);
-            }}
-            value={inputLocation}
-            className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
-            type="text"
-            placeholder={"Pretraži lokacije"}
+      </h2>
+      <div className="w-full">
+        <input
+          id="search-place"
+          onChange={(e) => {
+            e.preventDefault();
+            setInputLocation(e.target.value);
+            setSearchTerm(e.target.value);
+          }}
+          value={inputLocation}
+          className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none w-full rounded dark:text-sp-white"
+          type="text"
+          placeholder={"Pretraži lokacije"}
+        />
+        {!!results.length && visible && (
+          <Suggestions
+            results={results}
+            setLocation={getFeatureAndSetLocation}
           />
-          {!!results.length && visible && (
-            <Suggestions
-              results={results}
-              setLocation={getFeatureAndSetLocation}
-            />
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

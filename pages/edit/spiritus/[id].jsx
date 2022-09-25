@@ -13,7 +13,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
-import Layout from "../../../components/layout/Layout";
+import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Spinner } from "../../../components/Status";
 
 import {
@@ -157,86 +157,87 @@ export default function EditSpiritusPage({ spiritus }) {
   };
 
   return (
-    <Layout>
+    <LayoutNoFooter>
       <Head>
         <title>Spiritus | Editor</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={"Story Editor"} />
       </Head>
 
-      <div className="py-5 min-h-screen">
-        <div className="container mx-auto lg:px-12 lg:w-4/5 pb-32">
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={() => {
-                update();
-              }}
-              disabled={pending}
-              className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
-            >
-              {pending ? (
-                <Spinner text={""} />
-              ) : (
-                <CheckIcon className="w-6 h-6 text-green-800" />
-              )}
-            </button>
-            <button
-              onClick={() => {
-                deleteSpiritus();
-              }}
-              disabled={pendingDelete}
-              className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
-            >
-              {pendingDelete ? (
-                <Spinner text={""} />
-              ) : (
-                <TrashIcon className="w-6 h-6 text-red-800" />
-              )}
-            </button>
-          </div>
-          <form id="editor-form" className="flex flex-1 flex-col mb-10">
-            <SpiritusName
-              name={name}
-              setName={setName}
-              surname={surname}
-              setSurname={setSurname}
-            />
-            <SpiritusDates
-              birth={birth}
-              setBirth={setBirth}
-              death={death}
-              setDeath={setDeath}
-            />
+      <div className="py-5 min-h-screen mx-auto mb-64">
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={() => {
+              update();
+            }}
+            disabled={pending}
+            className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
+          >
+            {pending ? (
+              <Spinner text={""} />
+            ) : (
+              <CheckIcon className="w-6 h-6 text-green-800" />
+            )}
+          </button>
+          <button
+            onClick={() => {
+              deleteSpiritus();
+            }}
+            disabled={pendingDelete}
+            className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
+          >
+            {pendingDelete ? (
+              <Spinner text={""} />
+            ) : (
+              <TrashIcon className="w-6 h-6 text-red-800" />
+            )}
+          </button>
+        </div>
+        <form
+          id="editor-form"
+          className="flex flex-1 flex-col mb-10 mx-4 lg:mx-20 space-y-10 sm:space-y-10 md:space-y-8 lg:space-y-12"
+        >
+          <SpiritusName
+            name={name}
+            setName={setName}
+            surname={surname}
+            setSurname={setSurname}
+          />
+          <SpiritusDates
+            birth={birth}
+            setBirth={setBirth}
+            death={death}
+            setDeath={setDeath}
+          />
 
-            <SpiritusDescription
-              description={description}
-              setDescription={setDescription}
-            />
-            <SpiritusLocation location={location} setLocation={setLocation} />
-            <ImageEditor
-              images={images}
-              setImages={setImages}
-              setDeletedImages={setDeletedImages}
-            />
-          </form>
-          <div className="mt-24">
-            <button
-              onClick={() => {
-                update();
-              }}
-              disabled={pending}
-              className="inline-flex items-center justify-center w-52 py-4 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full text-sp-white dark:text-sp-black"
-            >
-              {pending ? (
-                <Spinner text={"Saving..."} />
-              ) : (
-                <span className="font-semibold tracking-wider">Save</span>
-              )}
-            </button>
-          </div>
+          <SpiritusDescription
+            description={description}
+            setDescription={setDescription}
+          />
+          <SpiritusLocation location={location} setLocation={setLocation} />
+          <ImageEditor
+            images={images}
+            setImages={setImages}
+            setDeletedImages={setDeletedImages}
+          />
+        </form>
+        <div className="mt-16 lg:mx-20">
+          <button
+            onClick={() => {
+              update();
+            }}
+            disabled={pending}
+            className="inline-flex items-center justify-center w-full sm:w-52 py-4 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full text-sp-white dark:text-sp-black"
+          >
+            {pending ? (
+              <Spinner text={"Saving..."} />
+            ) : (
+              <span className="font-semibold tracking-wider">Save</span>
+            )}
+          </button>
         </div>
       </div>
-    </Layout>
+    </LayoutNoFooter>
   );
 }
 
@@ -247,39 +248,37 @@ function SpiritusDates({ birth, setBirth, death, setDeath }) {
 
   // I guess Suspense reduces the
   return (
-    <div className="mt-12 mx-2">
+    <div>
       <p className="font-bold text-2xl">Važni datumi</p>
-      <div className="mt-4">
-        <div className="flex flex-col md:flex-row gap-2">
-          <div className="w-full flex-1">
-            <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
-              <DatePicker
-                onChange={setBirth}
-                value={birth}
-                clearIcon={!birth ? null : <XIcon className="h-6 w-6" />}
-                dayPlaceholder={"Datum rođenja"}
-                monthPlaceholder=""
-                yearPlaceholder=""
-                calendarIcon={
-                  <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
-                }
-              />
-            </div>
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="w-full flex-1">
+          <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
+            <DatePicker
+              onChange={setBirth}
+              value={birth}
+              clearIcon={!birth ? null : <XIcon className="h-6 w-6" />}
+              dayPlaceholder={"Datum rođenja"}
+              monthPlaceholder=""
+              yearPlaceholder=""
+              calendarIcon={
+                <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
+              }
+            />
           </div>
-          <div className="w-full flex-1">
-            <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
-              <DatePicker
-                onChange={setDeath}
-                value={death}
-                dayPlaceholder={"Datum smrti"}
-                monthPlaceholder=""
-                yearPlaceholder=""
-                clearIcon={!death ? null : <XIcon className="h-6 w-6" />}
-                calendarIcon={
-                  <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
-                }
-              />
-            </div>
+        </div>
+        <div className="w-full flex-1">
+          <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
+            <DatePicker
+              onChange={setDeath}
+              value={death}
+              dayPlaceholder={"Datum smrti"}
+              monthPlaceholder=""
+              yearPlaceholder=""
+              clearIcon={!death ? null : <XIcon className="h-6 w-6" />}
+              calendarIcon={
+                <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
+              }
+            />
           </div>
         </div>
       </div>
