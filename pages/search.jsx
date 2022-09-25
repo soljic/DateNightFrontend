@@ -9,17 +9,31 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { SearchIcon, XIcon, ClockIcon } from "@heroicons/react/outline";
 
-import { ProxySearchSpiritus } from "../service/http/proxy";
 import LayoutNoFooter from "../components/layout/LayoutNoFooter";
 import { Spinner } from "../components/Status";
+
+import {
+  FILTER_SPIRITUS,
+  FILTER_PLACE,
+  FILTER_STORY,
+} from "../service/constants";
+import { GlobalSearch, FulltextSpiritusSearch } from "../service/http/search";
 
 export default function Search() {
   const { t } = useTranslation("common");
 
+  const [searchFilter, setSearchFilter] = useState(FILTER_SPIRITUS);
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
   const [notFound, setNotFound] = useState(false);
+
+  const clear = () => {
+    setResults([]);
+    setSearching(false);
+    setNotFound(false);
+    setSearchTerm("");
+  };
 
   useEffect(() => {
     const debounce = setTimeout(async () => {
@@ -31,7 +45,14 @@ export default function Search() {
       }
       setSearching(true);
       setNotFound(false);
-      const res = await ProxySearchSpiritus(searchTerm);
+
+      let res;
+      if (searchFilter === FILTER_SPIRITUS) {
+        res = await FulltextSpiritusSearch(searchTerm);
+      } else {
+        res = await GlobalSearch(searchFilter, searchTerm);
+      }
+
       if (!res.data.content.length) {
         setSearching(false);
         setNotFound(true);
@@ -79,17 +100,73 @@ export default function Search() {
               autoFocus
             />
             {!!searchTerm && (
-              <button onClick={() => setSearchTerm("")} className="mr-3">
+              <button onClick={() => clear()} className="mr-3">
                 <XIcon className="w-5 h-5 text-sp-white" />
               </button>
             )}
           </div>
         </div>
-        {!!results.length && !searching && <SearchResults results={results} />}
+        <Filter
+          filter={searchFilter}
+          setFilter={setSearchFilter}
+          clear={clear}
+        />
+        {searchFilter !== FILTER_SPIRITUS && !!results.length && !searching && (
+          <GlobalSearchResults results={results} />
+        )}
+        {searchFilter === FILTER_SPIRITUS && !!results.length && !searching && (
+          <SearchResults results={results} />
+        )}
         {searching && <SearchContentPlacaholder />}
         {notFound && <NotFound searchTerm={searchTerm} />}
       </div>
     </LayoutNoFooter>
+  );
+}
+
+function Filter({ filter, setFilter, clear }) {
+  return (
+    <div className="flex justify-between w-3/4 mx-auto mt-6">
+      <button
+        onClick={() => {
+          clear();
+          setFilter(FILTER_SPIRITUS);
+        }}
+        className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
+          filter === FILTER_SPIRITUS
+            ? "border-b-3 text-sp-fawn border-sp-fawn"
+            : ""
+        }`}
+      >
+        Spiritus
+      </button>
+      <button
+        onClick={() => {
+          clear();
+          setFilter(FILTER_PLACE);
+        }}
+        className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
+          filter === FILTER_PLACE
+            ? "border-b-3 text-sp-fawn border-sp-fawn"
+            : ""
+        }`}
+      >
+        Place
+      </button>
+      <button
+        onClick={() => {
+          clear();
+          setFilter(FILTER_STORY);
+        }}
+        className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
+          filter === FILTER_STORY
+            ? "border-b-3 text-sp-fawn border-sp-fawn"
+            : ""
+        }`}
+      >
+        Story
+      </button>
+    </div>
   );
 }
 
@@ -111,7 +188,7 @@ function NotFound({ searchTerm }) {
       </svg>
       <p className="text-center w-full lg:w-2/3 p-2 mb-4">
         {`Sorry, we found no results for “${searchTerm}”. Would you like to
-        create new Spiritus for him/her?`}
+        create new Spiritus for them?`}
       </p>
       <a
         href="/create/spiritus"
@@ -134,7 +211,7 @@ function SearchContentPlacaholder() {
     ph.push(<Placeholder key={`placeholder-render-${i}`} />);
   }
   return (
-    <div className="container flex flex-col rounded-sp-14">
+    <div className="flex flex-col rounded-sp-14 py-2">
       <p className="p-2 text-sp-lighter text-center">{t("searching")}</p>
       <div className="flex w-full flex-col items-start">{ph}</div>
     </div>
@@ -148,7 +225,7 @@ function Placeholder() {
         // data-placeholder
         className="animate-pulse relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
       ></div>
-      <div className="flex w-full flex-col justify-between py-2">
+      <div className="flex w-full flex-col justify-center gap-2">
         <div
           // data-placeholder
           className="animate-pulse rounded-sp-14 relative h-5 w-full overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
@@ -162,6 +239,7 @@ function Placeholder() {
   );
 }
 
+// Unused, was used for fulltext spiritus search
 function SearchResults({ results }) {
   const { t } = useTranslation("common");
 
@@ -179,6 +257,7 @@ function SearchResults({ results }) {
   );
 }
 
+// Unused, was used for fulltext spiritus search
 function Row({ name, surname, images, birth, death, slug }) {
   return (
     <Link href={`/spiritus/${slug}`}>
@@ -206,6 +285,63 @@ function Row({ name, surname, images, birth, death, slug }) {
             {birth ? new Date(birth).getFullYear() : "?"}
             {death && ` — ${new Date(death).getFullYear()}`}
           </p>
+        </div>
+      </a>
+    </Link>
+  );
+}
+
+// Global search returns in the following format:
+// {
+//    id: 68239
+//    navigationType: "SPIRITUS_DETAILS" || "STORY DETAILS"
+//    parentId: null
+//    parentNavigationType: null
+//    payload: ""
+//    subtitle: "?—1980"
+//    title: "ANKICA KONRAD"
+// }
+function GlobalSearchResults({ results }) {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className="flex flex-col rounded-sp-14 py-2">
+      <p className="p-2 text-sp-lighter text-center">
+        {results.length} <span> {t("search_results")}</span>
+      </p>
+      <div className="flex flex-col items-start">
+        {results.map((res) => {
+          return <GlobalSearchRow key={res.id} {...res} />;
+        })}
+      </div>
+    </div>
+  );
+}
+
+function GlobalSearchRow({ id, title, subtitle, navigationType }) {
+  const getURL = (navType) => {
+    switch (navType) {
+      case "PLACE_DETAILS":
+        return `/place/id/${id}`;
+      case "STORY_DETAILS":
+        return `/story/id/${id}`;
+      default:
+        return `/spiritus/id/${id}`;
+    }
+  };
+  return (
+    <Link href={getURL(navigationType)}>
+      <a className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 text-sp-medlight dark:text-sp-white">
+        <div className="flex items-center justify-center h-20 w-20">
+          <ClockIcon className="w-7 h-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
+        </div>
+        <div className="flex w-full flex-col justify-center py-2 px-2 text-lg tracking-sp-tighten">
+          <p className="break-words pr-4 capitalize">{title.toLowerCase()}</p>
+          {!!subtitle && (
+            <p className="text-opacity-60 dark:text-opacity-60 text-sp-black dark:text-sp-white tracking-sp-tighten">
+              {subtitle}
+            </p>
+          )}
         </div>
       </a>
     </Link>

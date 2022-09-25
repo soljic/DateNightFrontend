@@ -36,7 +36,7 @@ module.exports = {
         "sp-40": "40px"
       },
       letterSpacing: {
-        "tracking-sp-tighten": "-0.01em",
+        "sp-tighten": "-0.01em",
       },
       height: {
         "92": "372px",

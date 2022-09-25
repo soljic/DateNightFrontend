@@ -66,6 +66,16 @@ module.exports = {
         source: "/api/spiritus/:spiritusId/image/delete/:imageId",
         destination: `${process.env.NEXT_API_URL}/v2/spiritus/:spiritusId/image/:imageId`,
       },
+      // proxy pass GLOBAL SEARCH -> search spiritus, story, place depending on query
+      {
+        source: "/api/search/:query*",
+        destination: `${process.env.NEXT_API_URL}/wapi/search`,
+      },
+      // proxy pass SPIRITUS FULL TEXT SEARCH
+      {
+        source: "/api/spiritus-search/:query*",
+        destination: `${process.env.NEXT_API_URL}/wapi/spiritus/search/full`,
+      },
     ];
   },
 };
