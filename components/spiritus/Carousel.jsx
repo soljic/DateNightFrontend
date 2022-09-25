@@ -35,6 +35,14 @@ export function SpiritusCarousel({ images }) {
             <ArrowLeftIcon className="w-5 h-5 text-black" />
           </button>
         </div>
+        <div className="swiper-next-step absolute inset-y-0 right-16 z-10 h-5/6 flex items-center">
+          <button
+            ref={nextRef}
+            className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+          >
+            <ArrowRightIcon className="w-5 h-5 text-black" />
+          </button>
+        </div>
         <Swiper
           onInit={(swiper) => {
             swiper.params.navigation.prevEl = prevRef.current;
@@ -56,7 +64,7 @@ export function SpiritusCarousel({ images }) {
           loop={images.length > 2 ? true : false}
           autoplay={{
             delay: 10000,
-            disableOnInteraction: false,
+            disableOnInteraction: true,
           }}
         >
           {images.map((img, i) => {
@@ -74,14 +82,6 @@ export function SpiritusCarousel({ images }) {
             );
           })}
         </Swiper>
-        <div className="swiper-next-step absolute inset-y-0 right-16 z-10 h-5/6 flex items-center">
-          <button
-            ref={nextRef}
-            className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
-          >
-            <ArrowRightIcon className="w-5 h-5 text-black" />
-          </button>
-        </div>
       </div>
     )
   );

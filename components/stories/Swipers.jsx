@@ -71,6 +71,18 @@ export function HomepageSwiper({
               <ArrowLeftIcon className="w-5 h-5 text-black" />
             </button>
           </div>
+          <div
+            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-5/6 flex items-center ${
+              hideNextBtn() ? "hidden" : ""
+            }`}
+          >
+            <button
+              ref={nextRef}
+              className="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+            >
+              <ArrowRightIcon className="w-5 h-5 text-black" />
+            </button>
+          </div>
           <Swiper
             onInit={(swiper) => {
               swiper.params.navigation.prevEl = prevRef.current;
@@ -90,8 +102,7 @@ export function HomepageSwiper({
               },
               759: {
                 slidesPerView: 3,
-              }
-
+              },
             }}
           >
             {items.map((item, i) => {
@@ -114,18 +125,6 @@ export function HomepageSwiper({
               <ExpandSectionTile sectionId={sectionId} title={title} />
             </SwiperSlide>
           </Swiper>
-          <div
-            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-5/6 flex items-center ${
-              hideNextBtn() ? "hidden" : ""
-            }`}
-          >
-            <button
-              ref={nextRef}
-              className="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
-            >
-              <ArrowRightIcon className="w-5 h-5 text-black" />
-            </button>
-          </div>
         </div>
       </div>
     )
@@ -188,7 +187,7 @@ function HomepageTile({
 // NOTE: currently we navigate to sections using IDs and title
 function ExpandSectionTile({ sectionId, title }) {
   return (
-    <Link href={`/sections/id/${sectionId}?title=${title}`}>
+    <Link href={`/section/id/${sectionId}?title=${title}`}>
       <a className="flex flex-col h-64 lg:h-92 items-center justify-center border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-sp-14">
         <div className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2">
           <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
@@ -241,6 +240,18 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
               <ArrowLeftIcon className="w-5 h-5 text-black" />
             </button>
           </div>
+          <div
+            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-4/5 flex items-center ${
+              hideNextBtn() ? "hidden" : ""
+            }`}
+          >
+            <button
+              ref={nextRef}
+              className="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+            >
+              <ArrowRightIcon className="w-5 h-5 text-black" />
+            </button>
+          </div>
           <Swiper
             //
             onInit={(swiper) => {
@@ -271,18 +282,6 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
               );
             })}
           </Swiper>
-          <div
-            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-4/5 flex items-center ${
-              hideNextBtn() ? "hidden" : ""
-            }`}
-          >
-            <button
-              ref={nextRef}
-              className="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
-            >
-              <ArrowRightIcon className="w-5 h-5 text-black" />
-            </button>
-          </div>
         </div>
       </div>
     )
