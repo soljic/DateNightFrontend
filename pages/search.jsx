@@ -191,50 +191,10 @@ function Row({ name, surname, images, birth, death, slug }) {
   );
 }
 
-// needed to load translations - next-18next only works serverside
-export async function getServerSideProps({ locale }) {
+export async function getStaticProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common"])),
     },
   };
 }
-
-const mock = [
-  {
-    id: 68419,
-    birth: 1926,
-    death: 1998,
-    name: "Ronald",
-    surname: "Richardsssssssssssssssssssssssssssssssssssss",
-    city: "Chigago",
-    country: "USA",
-    text1: "He could have left me",
-    url: "/slider/slider-1.jpeg",
-    images: [],
-  },
-  {
-    id: 98769,
-    birth: 1949,
-    death: 2013,
-    name: "Ankica",
-    surname: "Modrić",
-    city: "Zagreb",
-    country: "Croatia",
-    text1: "How she and her husband saved me",
-    url: "/slider/slider-3.jpeg",
-    images: [],
-  },
-  {
-    id: 88764,
-    birth: 1938,
-    death: 2008,
-    name: "Andrija",
-    surname: "Čordaš",
-    city: "Županja",
-    country: "Croatia",
-    text1: "He lived his life by his own rules",
-    url: "/slider/slider-2.jpeg",
-    images: [],
-  },
-];
