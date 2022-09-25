@@ -101,7 +101,7 @@ export default function Search() {
             />
             {!!searchTerm && (
               <button onClick={() => clear()} className="mr-3">
-                <XIcon className="w-5 h-5 text-sp-white" />
+                <XIcon className="w-5 h-5 text-sp-lighter dark:text-sp-white" />
               </button>
             )}
           </div>
@@ -134,7 +134,7 @@ function Filter({ filter, setFilter, clear }) {
         }}
         className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
           filter === FILTER_SPIRITUS
-            ? "border-b-3 text-sp-fawn border-sp-fawn"
+            ? "border-b-3 text-sp-cotta border-sp-cotta dark:text-sp-fawn dark:border-sp-fawn"
             : ""
         }`}
       >
@@ -147,7 +147,7 @@ function Filter({ filter, setFilter, clear }) {
         }}
         className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
           filter === FILTER_PLACE
-            ? "border-b-3 text-sp-fawn border-sp-fawn"
+            ? "border-b-3 text-sp-cotta border-sp-cotta dark:text-sp-fawn dark:border-sp-fawn"
             : ""
         }`}
       >
@@ -160,7 +160,7 @@ function Filter({ filter, setFilter, clear }) {
         }}
         className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
           filter === FILTER_STORY
-            ? "border-b-3 text-sp-fawn border-sp-fawn"
+            ? "border-b-3 text-sp-cotta border-sp-cotta dark:text-sp-fawn dark:border-sp-fawn"
             : ""
         }`}
       >
