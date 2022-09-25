@@ -7,10 +7,11 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import { SearchIcon } from "@heroicons/react/outline";
+import { SearchIcon, XIcon, ClockIcon } from "@heroicons/react/outline";
 
 import { ProxySearchSpiritus } from "../service/http/proxy";
 import LayoutNoFooter from "../components/layout/LayoutNoFooter";
+import { Spinner } from "../components/Status";
 
 export default function Search() {
   const { t } = useTranslation("common");
@@ -23,9 +24,9 @@ export default function Search() {
   useEffect(() => {
     const debounce = setTimeout(async () => {
       if (!searchTerm) {
+        setResults([]);
         setSearching(false);
         setNotFound(false);
-        setResults([]);
         return;
       }
       setSearching(true);
@@ -53,20 +54,36 @@ export default function Search() {
         <meta name="description" content={t("meta_search_description")} />
       </Head>
       <div className="h-screen mx-auto mt-20 w-full lg:w-1/2 md:w-2/3 sm:w-full">
-        <div className="flex items-center rounded-sp-14 p-2 border border-sp-lighter dark:bg-sp-medium dark:border-none">
-          <button className="text-sp-lighter p-2.5">
-           <SearchIcon className="w-6 h-6"/>
-          </button>
-          <input
-            id="search-spiritus"
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-            className="mr-2 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-black dark:text-sp-white caret-sp-fawn caret"
-            type="text"
-            placeholder={t("search_placeholder")}
-            autoFocus
-          />
+        <div
+          className={`flex gap-x-2 items-center rounded-sp-14 py-2 border border-sp-lighter ${
+            results.length && !searching ? "bg-none" : "dark:bg-sp-medium"
+          } dark:border-sp-medium`}
+        >
+          <div className="ml-3">
+            {searching ? (
+              <Spinner />
+            ) : (
+              <SearchIcon className="w-6 h-6 text-sp-lighter" />
+            )}
+          </div>
+          <div className="inline-flex w-full">
+            <input
+              id="search-term"
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+              value={searchTerm}
+              className="mr-2 p-1.5 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-black dark:text-sp-white caret-sp-fawn"
+              type="text"
+              placeholder={t("search_placeholder")}
+              autoFocus
+            />
+            {!!searchTerm && (
+              <button onClick={() => setSearchTerm("")} className="mr-3">
+                <XIcon className="w-5 h-5 text-sp-white" />
+              </button>
+            )}
+          </div>
         </div>
         {!!results.length && !searching && <SearchResults results={results} />}
         {searching && <SearchContentPlacaholder />}
@@ -129,7 +146,7 @@ function Placeholder() {
     <div className="flex w-3/4 p-2">
       <div
         // data-placeholder
-        className="animate-pulse relative mr-2 h-16 w-16 overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
+        className="animate-pulse relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
       ></div>
       <div className="flex w-full flex-col justify-between py-2">
         <div
@@ -166,22 +183,26 @@ function Row({ name, surname, images, birth, death, slug }) {
   return (
     <Link href={`/spiritus/${slug}`}>
       <a className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 text-sp-medlight dark:text-sp-white">
-        <div className="relative mr-2 h-16 w-16 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
-          {images.length ? (
+        {images.length ? (
+          <div className="relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
             <Image
               src={images[0].url}
               alt={"Search result thumbnail"}
-              width={64}
-              height={64}
+              width={80}
+              height={80}
               layout="fill"
             />
-          ) : (
-            <></>
-          )}
-        </div>
-        <div className="flex w-full flex-col justify-between py-2 px-2">
-          <p className="break-words pr-4 capitalize">{`${name} ${surname}`.toLowerCase()}</p>
-          <p className="text-opacity-40">
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-20 w-20">
+            <ClockIcon className="w-7 h-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
+          </div>
+        )}
+        <div className="flex w-full flex-col justify-center py-2 px-2 text-lg tracking-sp-tighten">
+          <p className="break-words pr-4 capitalize">
+            {`${name} ${surname}`.toLowerCase()}
+          </p>
+          <p className="text-opacity-60 dark:text-opacity-60 text-sp-black dark:text-sp-white tracking-sp-tighten">
             {birth ? new Date(birth).getFullYear() : "?"}
             {death && ` — ${new Date(death).getFullYear()}`}
           </p>
