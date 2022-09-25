@@ -118,7 +118,7 @@ export default function Search() {
           <SearchResults results={results} />
         )}
         {searching && <SearchContentPlacaholder />}
-        {notFound && <NotFound searchTerm={searchTerm} />}
+        {notFound && <NotFound searchTerm={searchTerm} filter={searchFilter} />}
       </div>
     </LayoutNoFooter>
   );
@@ -170,7 +170,7 @@ function Filter({ filter, setFilter, clear }) {
   );
 }
 
-function NotFound({ searchTerm }) {
+function NotFound({ searchTerm, filter }) {
   const { t } = useTranslation("common");
 
   return (
@@ -187,16 +187,18 @@ function NotFound({ searchTerm }) {
         />
       </svg>
       <p className="text-center w-full lg:w-2/3 p-2 mb-4">
-        {`Sorry, we found no results for “${searchTerm}”. Would you like to
-        create new Spiritus for them?`}
+        {t("search_not_found_part_1")} <span>“{searchTerm}”.</span>{" "}
+        {filter === FILTER_SPIRITUS ? t("search_not_found_part_2") : ""}
       </p>
-      <a
-        href="/create/spiritus"
-        className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
-      >
-        <PlusCircleIcon className="h-6 w-6" />
-        <span className="font-semibold ml-1">{t("create_spiritus")}</span>
-      </a>
+      {filter === FILTER_SPIRITUS && (
+        <a
+          href="/create/spiritus"
+          className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
+        >
+          <PlusCircleIcon className="h-6 w-6" />
+          <span className="font-semibold ml-1">{t("create_spiritus")}</span>
+        </a>
+      )}
     </div>
   );
 }
