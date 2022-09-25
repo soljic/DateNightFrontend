@@ -40,7 +40,6 @@ export default function Home({
         <CTAPartners />
       </div>
       <StoryOfTheWeek
-        itemId={storyOfTheWeek.itemId}
         title={storyOfTheWeek.subtitle}
         imageUrl={storyOfTheWeek.imageUrl}
       />
@@ -94,7 +93,7 @@ export async function getStaticProps(context) {
       anniversaries: sections.anniversaries,
     },
     // in seconds
-    revalidate: 60 * 10,
+    revalidate: 60 * 10, // 10min
   };
 }
 

@@ -17,6 +17,7 @@ import { SpiritusCarousel } from "../components/spiritus/Carousel";
 
 import { GetSpiritusById } from "../service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
+import { GetParsedHomepage } from "../service/http/homepage";
 
 export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
   const { t } = useTranslation("common");
@@ -38,7 +39,7 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
       </Head>
       <section
         className="flex flex-col justify-center items-center mt-16 subpixel-antialiased"
-        key="story"
+        key={"story-of-the-week"}
       >
         <div className="w-full flex flex-col items-center text-left">
           <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
@@ -54,7 +55,7 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
           </div>
 
           <div className="w-full rounded-sp-14">
-            {displayStory.images.length ? (
+            {!!displayStory.images.length ? (
               <Image
                 src={displayStory.images[0].url}
                 alt={`Paragraph image ${displayStory.images[0].id}`}
@@ -111,21 +112,21 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
   );
 }
 
-// fetch first 5 spiritus stories, remove the story alredy being shown
-export async function getServerSideProps(context) {
-  const { id } = context.query;
-  const resStory = await GetStoryById(id);
-  const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
-  const resAllStories = await GetSpiritusStoriesBySlug(
-    resSpiritus.data.slug,
+export async function getStaticProps(context) {
+  // fetch homepage to get story of the week ID
+  const {storyOfTheWeek} = await GetParsedHomepage();
+  const {data: story} = await GetStoryById(storyOfTheWeek.itemId);
+  const {data: spiritus} = await GetSpiritusById(story.spiritus.id);
+  const {data: allStories} = await GetSpiritusStoriesBySlug(
+    spiritus.slug,
     0,
-    5
+    20
   );
 
-  let content = resAllStories.data?.content ? resAllStories.data?.content : [];
+  let content = allStories?.content ? allStories?.content : [];
   // sort story paragraphs by index
-  if (resStory.paragraphs) {
-    resStory.paragraphs.sort((p1, p2) => {
+  if (story.paragraphs) {
+    story.paragraphs.sort((p1, p2) => {
       if (p1.index < p2.index) {
         return -1;
       }
@@ -139,17 +140,19 @@ export async function getServerSideProps(context) {
 
   // remove story already being displayed
   content = content.filter((x) => {
-    return x.id != id;
+    return x.id != story.id;
   });
 
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ["common"])),
-      displayStory: resStory.data,
+      displayStory: story,
       stories: content,
-      spiritus: resSpiritus.data,
-      hasMore: !resAllStories.data.last,
-      total: resAllStories.data.numberOfElements,
+      spiritus: spiritus,
+      hasMore: !allStories.last,
+      total: allStories.numberOfElements,
     },
+    // in seconds
+    revalidate: 60 * 60 * 6, // 6hrs
   };
 }

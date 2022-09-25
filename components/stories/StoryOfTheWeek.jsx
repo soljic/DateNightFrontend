@@ -3,12 +3,12 @@ import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { ImagePlaceholder } from "../layout/Common";
 
-export function StoryOfTheWeek({ itemId, title, imageUrl }) {
+export function StoryOfTheWeek({ title, imageUrl }) {
   const { t } = useTranslation("common");
 
   // bg image with overlay is done in a messy way
   return (
-    <div key={itemId} className="rounded-sp-14 my-10">
+    <div key="sow" className="rounded-sp-14 my-10">
       <div className="relative w-full overflow-hidden rounded-sp-14">
         <div className="absolute bg-gradient-to-b from-transparent to-sp-black opacity-80 w-full h-full z-10" />
         {imageUrl ? (
@@ -35,7 +35,7 @@ export function StoryOfTheWeek({ itemId, title, imageUrl }) {
           <h3 className="text-4xl xl:text-4xl md:text-2xl sm:text-xl tracking-tight font-semibold mb-4 antialiased">
             {`${title}`}
           </h3>
-          <Link href={`/story-of-the-week?id=${itemId}`}>
+          <Link href={`/story-of-the-week`}>
             <a className="inline-flex bg-sp-white text-sp-black rounded-sp-40 px-4 py-2 items-center antialiased">
               {t("read_story")}
             </a>
