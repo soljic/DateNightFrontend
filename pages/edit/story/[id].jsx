@@ -13,7 +13,7 @@ import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import { GetStoryById } from "../../../service/http/story";
 
-import Layout from "../../../components/layout/Layout";
+import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Spinner } from "../../../components/Status";
 import {
   StoryDate,
@@ -44,9 +44,7 @@ export default function EditStoryPage({ story }) {
   const [title, setTitle] = useState(story.title);
   const [tags, setTags] = useState(story.tags);
   const [storyText, setStoryText] = useState(story.storyText);
-  const [date, setDate] =useState(
-    story.date ? new Date(story.date) : null
-  );
+  const [date, setDate] = useState(story.date ? new Date(story.date) : null);
   const [summary, setSummary] = useState(story.description);
 
   const [images, setImages] = useState(() => {
@@ -120,7 +118,7 @@ export default function EditStoryPage({ story }) {
       setPending(false);
 
       // refresh page
-      router.reload(window.location.pathname)
+      router.reload(window.location.pathname);
     } catch (err) {
       console.log("ERROR UPDATING", err);
       setPending(false);
@@ -141,100 +139,99 @@ export default function EditStoryPage({ story }) {
   };
 
   return (
-    <Layout>
+    <LayoutNoFooter>
       <Head>
         <title>Spiritus | Editor</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={"Story Editor"} />
       </Head>
 
-      <div className="py-5 min-h-screen">
-        <div className="container mx-auto lg:px-12 lg:w-4/5 pb-32">
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={() => {
-                updateStory();
-              }}
-              disabled={pending}
-              className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
-            >
-              {pending ? (
-                <Spinner text={""} />
-              ) : (
-                <CheckIcon className="w-6 h-6 text-green-800" />
-              )}
-            </button>
-            <button
-              onClick={() => {
-                deleteStory();
-              }}
-              disabled={pendingDelete}
-              className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
-            >
-              {pendingDelete ? (
-                <Spinner text={""} />
-              ) : (
-                <TrashIcon className="w-6 h-6 text-red-800" />
-              )}
-            </button>
-          </div>
-          <form id="editor-form" className="flex flex-1 flex-col mb-10">
-            <StoryTitle
-              title={title}
-              setTitle={setTitle}
-              tags={tags}
-              setTags={setTags}
-            />
-            <StoryDate date={date} setDate={setDate} />
-            <StorySummary summary={summary} setSummary={setSummary} />
-            <StoryTextEditor
-              storyText={storyText}
-              setStoryText={setStoryText}
-            />
-            <ImageEditor
-              images={images}
-              setImages={setImages}
-              setDeletedImages={setDeletedImages}
-            />
-            <div className="mx-2 mt-12">
-              <p className="font-bold text-sp-black dark:text-sp-white text-2xl pb-4">
-                Vidljivost
-              </p>
-              <div className="flex items-center">
-                <input
-                  id="private-checkbox"
-                  type="checkbox"
-                  checked={isPrivate}
-                  onChange={() => setIsPrivate((prev) => !prev)}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                />
-                <label
-                  htmlFor="private-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-400 dark:text-gray-500"
-                >
-                  {t("create_story_private_text")}
-                </label>
-              </div>
+      <div className="py-5 min-h-screen mx-auto mb-64">
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={() => {
+              updateStory();
+            }}
+            disabled={pending}
+            className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
+          >
+            {pending ? (
+              <Spinner text={""} />
+            ) : (
+              <CheckIcon className="w-6 h-6 text-green-800" />
+            )}
+          </button>
+          <button
+            onClick={() => {
+              deleteStory();
+            }}
+            disabled={pendingDelete}
+            className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
+          >
+            {pendingDelete ? (
+              <Spinner text={""} />
+            ) : (
+              <TrashIcon className="w-6 h-6 text-red-800" />
+            )}
+          </button>
+        </div>
+        <form
+          id="editor-form"
+          className="flex flex-1 flex-col mb-10 mx-4 lg:mx-20 space-y-10 sm:space-y-10 md:space-y-8 lg:space-y-12"
+        >
+          <StoryTitle
+            title={title}
+            setTitle={setTitle}
+            tags={tags}
+            setTags={setTags}
+          />
+          <StoryDate date={date} setDate={setDate} />
+          <StorySummary summary={summary} setSummary={setSummary} />
+          <StoryTextEditor storyText={storyText} setStoryText={setStoryText} />
+          <ImageEditor
+            images={images}
+            setImages={setImages}
+            setDeletedImages={setDeletedImages}
+          />
+          <div>
+            <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl pb-3">
+              Vidljivost
+            </h2>
+            <div className="flex items-center">
+              <input
+                id="private-checkbox"
+                type="checkbox"
+                checked={isPrivate}
+                onChange={() => setIsPrivate((prev) => !prev)}
+                className="w-5 h-5 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label
+                htmlFor="private-checkbox"
+                className="ml-2 text-sm font-medium text-gray-400 dark:text-gray-500"
+              >
+                {t("create_story_private_text")}
+              </label>
             </div>
-          </form>
-          <div className="mt-24">
-            <button
-              onClick={() => {
-                updateStory();
-              }}
-              disabled={pending}
-              className="inline-flex items-center justify-center w-52 py-4 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full text-sp-white dark:text-sp-black"
-            >
-              {pending ? (
-                <Spinner text={"Saving..."} />
-              ) : (
-                <span className="font-semibold tracking-wider">Save</span>
-              )}
-            </button>
           </div>
+        </form>
+
+        <div className="mt-16 lg:mx-20">
+          <button
+            onClick={() => {
+              updateStory();
+            }}
+            disabled={pending}
+            className="inline-flex items-center justify-center w-full md:w-52 py-4 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-sp-40 text-sp-white dark:text-sp-black"
+          >
+            {pending ? (
+              <Spinner text={"Saving..."} />
+            ) : (
+              <span className="font-semibold tracking-wider">Save</span>
+            )}
+          </button>
         </div>
       </div>
-    </Layout>
+    </LayoutNoFooter>
   );
 }
 

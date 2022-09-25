@@ -40,7 +40,6 @@ export default function Home({
         <CTAPartners />
       </div>
       <StoryOfTheWeek
-        itemId={storyOfTheWeek.itemId}
         title={storyOfTheWeek.subtitle}
         imageUrl={storyOfTheWeek.imageUrl}
       />
@@ -82,7 +81,6 @@ export default function Home({
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
-  console.log("PROPS", context);
   const sections = await GetParsedHomepage();
 
   return {
@@ -95,7 +93,7 @@ export async function getStaticProps(context) {
       anniversaries: sections.anniversaries,
     },
     // in seconds
-    revalidate: 60 * 10,
+    revalidate: 60 * 10, // 10min
   };
 }
 

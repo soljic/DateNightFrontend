@@ -16,9 +16,8 @@ export function Tags({ tags }) {
     <div className="flex flex-row gap-3">
       {tags.map((t) => {
         return (
-          <Link href={`/sections/id/${t.id}`}>
+          <Link href={`/sections/id/${t.id}`} key={`tag-${t.id}`}>
             <a
-              key={t.id}
               className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base"
             >
               {t.value}

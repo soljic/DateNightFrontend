@@ -37,9 +37,11 @@
 
   "create_spiritus": "Create Spiritus",
   "goto_search": "Go to search",
-  "search_placeholder": "Search Spiritus",
+  "search_placeholder": "Search",
   "searching": "Searching...",
   "search_results": "results",
+  "search_not_found_part_1": "Sorry, we found no results for",
+  "search_not_found_part_2": "Would you like to create new Spiritus for them?",
 
   "goto_search_places": "Search Places",
   "search_places_title": "Many beautiful Stories nearby.",
@@ -54,6 +56,9 @@
 
   "term_rated": "Rated",
   "term_on": "on",
+
+  "term_places": "Mjesto",
+  "term_story": "Priča",
 
   "write_tribute": "Write tribute",
   "give_rose": "Give Rose",

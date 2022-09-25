@@ -58,7 +58,7 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
   };
 
   return (
-    <div className="mt-12 mx-2">
+    <div>
       <p className="font-bold text-2xl">Slike</p>
       <input
         type="file"
@@ -83,11 +83,11 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
         <div className="flex flex-row items-start justify-start gap-4 py-2">
           <button
             onClick={onOpenFileDialog}
-            className="flex items-center justify-center selection w-32 h-32 mt-1 border border-sp-day-200 bg-sp-fawn bg-opacity-20 dark:bg-sp-medium dark:border-none rounded-lg dark:text-sp-white focus:outline-none"
+            className="flex items-center justify-center selection h-40 w-36 mt-1 border border-sp-day-200 bg-sp-fawn bg-opacity-20 dark:bg-sp-medium dark:border-none rounded-lg dark:text-sp-white focus:outline-none"
           >
             <PlusCircleIcon className="h-8 w-8" />
           </button>
-          <div className="grid grid-flow-row grid-cols-2 md:grid-cols-4 sm:grid-cols-2 gap-4">
+          <div className="grid grid-flow-row grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-8">
             {images.map((f, i) => {
               return (
                 <Thumbnail
@@ -106,12 +106,12 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
 }
 function Thumbnail({ imageUrl, onRemove, index }) {
   return (
-    <div className="relative h-32 w-32" id={index}>
-      <div className="mx-1 mt-1 rounded-lg overflow-clip">
+    <div className="relative h-40 w-36" id={index}>
+      <div className="mx-2 mt-1 rounded-lg overflow-clip">
         <img
           src={imageUrl}
           alt={`story-image-${index}`}
-          className="h-32 w-32 border-gray-400 dark:border-none"
+          className="h-40 w-36 border-gray-400 dark:border-none object-cover"
         />
       </div>
       <button

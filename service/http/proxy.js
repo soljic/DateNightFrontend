@@ -1,11 +1,21 @@
 // Methods in /service/http/proxy are proxied by nextjs to BE api server.
 // This is done primarily to aviod CORS issues since the BE server is slightly misconfigured.
-// The BE server development is focused on mobile apps.
+// Check next.config.js::rewrites() for more info.
 
 import axios from "axios";
 
-export function ProxySearchSpiritus(searchTerm) {
-  return axios.get(`/api/search?q=${searchTerm}`);
+// Global text search - places, spiritus, story and cemetery
+export async function ProxyGlobalSearch(searchType, value, offset, limit) {
+  return await axios.get(
+    encodeURI(
+      `/api/search?value=${value}&search_type=${searchType}&page=${offset}&size=${limit}`
+    )
+  );
+}
+
+// Spiritus full text search
+export function ProxySearchSpiritus(value, offset, limit) {
+  return axios.get(`/api/spiritus-search?value=${value}&page=${offset}&size=${limit}`);
 }
 
 // The request is proxied to BE - check next.config.js::rewrites()
@@ -66,7 +76,6 @@ export async function ProxyAddStoryImage(accessToken, storyId, imageFormData) {
   });
 }
 
-
 // The request is proxied to BE - check next.config.js::rewrites()
 export async function ProxyEditSpiritus(accessToken, spiritusData) {
   return await axios.put(`/api/spiritus/edit`, spiritusData, {
@@ -89,17 +98,28 @@ export async function ProxyDeleteSpiritus(accessToken, spiritusId) {
 
 // Deletes a Spiritus image.
 // The request is proxied to BE - check next.config.js::rewrites()
-export async function ProxyDeleteSpiritusImage(accessToken, spiritusId, imageId) {
-  return await axios.delete(`/api/spiritus/${spiritusId}/image/delete/${imageId}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+export async function ProxyDeleteSpiritusImage(
+  accessToken,
+  spiritusId,
+  imageId
+) {
+  return await axios.delete(
+    `/api/spiritus/${spiritusId}/image/delete/${imageId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 }
 
 // Adds a Spiritus image.
 // The request is proxied to BE - check next.config.js::rewrites()
-export async function ProxyAddSpiritusImage(accessToken, spiritusId, imageFormData) {
+export async function ProxyAddSpiritusImage(
+  accessToken,
+  spiritusId,
+  imageFormData
+) {
   return await axios.post(`/api/spiritus/${spiritusId}/image`, imageFormData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -115,5 +135,3 @@ export function ProxyGetTags() {
 export function ProxyGetSection(id, page) {
   return axios.get(`/api/section?id=${id}&page=${page}`);
 }
-
-
