@@ -94,7 +94,7 @@ export default function MobileNav() {
   ];
 
   return (
-    <div className="ml-3 md:hidden sm:visible">
+    <div className="ml-3 md:hidden sm:visible z-10">
       <Popover>
         {({ open }) => (
           <>
@@ -105,7 +105,7 @@ export default function MobileNav() {
             >
               <MenuIcon
                 className={`${open ? "" : "text-opacity-70"}
-                  h-6 w-6 text-sp-cotta dark:text-orange-300 transition duration-150 ease-in-out group-hover:text-opacity-80`}
+                  h-6 w-6 text-sp-cotta dark:text-sp-white transition duration-150 ease-in-out group-hover:text-opacity-80`}
                 aria-hidden="true"
               />
             </Popover.Button>
@@ -119,13 +119,13 @@ export default function MobileNav() {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className="absolute z-100 mt-3 transform px-4 sm:px-0 max-w-xs">
-                <div className="overflow-hidden rounded-lg shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
+                <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
                   <div className="relative grid gap-6 p-6 grid-cols-1">
                     {menuItems.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
-                        className="-m-3 flex items-center rounded-lg px-2 py-4 transition duration-150 ease-in-out dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                        className="-m-3 flex items-center rounded-sp-14 px-2 py-4 transition duration-150 ease-in-out dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
                       >
                         <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
                           <item.icon aria-hidden="true" fill="#ED9A4C" />
