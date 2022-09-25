@@ -2,6 +2,38 @@
 
 This repository contains source code, Github workflows and docker files required to run the application both locally and in various environments.
 
+# Deploy production
+Follow these steps to deploy app to production.
+
+Production deploy is done via Github Action. You must manually trigger the workflow. Instructions are below.
+
+### Navigate to Github Actions
+![Step 1](misc/docs/step_1.png "Navigating to Actions")
+
+### Choose Deploy Production Workflow from Workflows menu
+Click on the workflow to see previous jobs.
+CLicking the workflow will show you the trigger button.
+
+![Step 2](misc/docs/step_2.png)
+
+### Manually trigger workflow
+Click on the big green button. This will initiate the deploy.
+![Step 3](misc/docs/step_3.png)
+
+### Check job progress
+Click on the latest job entry (the one on the top). If you cannot see it, wait a couple of seconds.
+
+![Step 4](misc/docs/step_4.png)
+
+### Check job progress
+When the job succeeds you will have all steps marked with green.
+![Step 5](misc/docs/step_5.png)
+
+### Job done
+You should see all green.
+If you don't you can check directly on the machine (via ssh) or ask somebody who deployed the app earlier.
+![Step 6](misc/docs/step_6.png)
+
 ## Local development
 First, intall all dependencies for the development server:
 ```bash
