@@ -82,7 +82,6 @@ export default function Home({
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
-  console.log("PROPS", context);
   const sections = await GetParsedHomepage();
 
   return {
