@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 
 import { Logo, NavItem } from "./Common";
-import { GlobeAltIcon, SearchIcon } from "@heroicons/react/outline";
+import { DotsHorizontalIcon, SearchIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -56,8 +56,8 @@ export function Navbar() {
               {session?.user?.name ? session.user.name : t("login")}
             </a>
           </Link>
-          {/* <GlobeAltIcon className="h-6 w-6 text-sp-white" /> */}
-          <ThemeToggler />
+
+          <MoreOptions />
         </div>
       </div>
     </div>
@@ -118,7 +118,7 @@ export default function MobileNav() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute z-100 mt-3 transform px-4 sm:px-0 max-w-xs">
+              <Popover.Panel className="absolute z-100 mt-3 transform px-4 sm:px-0 max-w-md">
                 <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
                   <div className="relative grid gap-6 p-6 grid-cols-1">
                     {menuItems.map((item) => (
@@ -205,42 +205,6 @@ function AboutIcon({ width, height, fill }) {
   );
 }
 
-function ThemeSlider() {
-  const { theme, setTheme } = useTheme();
-
-  return (
-    <label
-      htmlFor="theme-toggle"
-      className="relative inline-flex cursor-pointer items-center"
-    >
-      <input
-        type="checkbox"
-        value=""
-        id="theme-toggle"
-        className="peer sr-only"
-      />
-      <div
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className={`peer py-4 px-2 flex flex-row-reverse h-7 w-13
-      items-center justify-between rounded-full
-      border-2
-      after:absolute after:left-[5px]
-       after:h-6 after:w-6 after:rounded-full after:border
-       after:bg-sp-lighter after:transition-all
-       after:content-['']
-       peer-checked:bg-sp-black
-       peer-checked:after:translate-x-full
-       peer-checked:after:border-black
-       peer-focus:outline-none
-       peer-hover:border-sp-fawn dark:border-sp-medium dark:bg-sp-white`}
-      >
-        <SunIcon className="w-5 h-5 text-sp-fawn" style={{ fill: "sp-fawn" }} />
-        <MoonIcon className="h-5 w-5 text-gray-300" />
-      </div>
-    </label>
-  );
-}
-
 function ThemeToggler() {
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation("common");
@@ -256,6 +220,20 @@ function ThemeToggler() {
       </span>
       <MoonIcon className="h-5 w-5 text-gray-300 -scale-x-100 hidden dark:block" />
       <SunIcon className="w-5 h-5 text-sp-cotta dark:hidden" />
+    </button>
+  );
+}
+
+function MoreOptions() {
+  const { theme, setTheme } = useTheme();
+  const { t } = useTranslation("common");
+
+  return (
+    <button
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-sp-40 p-2 font-semibold"
+    >
+      <DotsHorizontalIcon className="h-6 w-6 text-sp-black dark:text-sp-white" />
     </button>
   );
 }
