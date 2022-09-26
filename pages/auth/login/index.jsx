@@ -1,149 +1,105 @@
 import Link from "next/link";
 import Router from "next/router";
 
-import { getSession, signIn } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
-import { useState } from "react";
 import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 
 export default function LoginComponent({ setIsValid }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [err, setErr] = useState("");
-  const submit = async () => {
-    try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        username: username,
-        password: password,
-      });
-      if (!res.error) {
-        await Router.push("/");
-      }
-
-      setErr("Username or password are not correct.");
-      setPassword("");
-    } catch (error) {
-      setErr("Unable to log in. Please try again later or contact support.");
-    }
-  };
-
   return (
     <LayoutNoNav>
-      <section className="flex justify-center items-center text-sp-white">
-        <div className="">
-          <div className="flex flex-col items-center gap-8">
-            <ShieldIcon width={12} height={12} />
-            <h4 className="text-5xl font-bold mt-1 mb-12 pb-1">
-              Log in as Guardian
-            </h4>
-          </div>
-          <form>
-            <div className="mb-4">
-              <input
-                value={username}
-                onChange={(e) => {
-                  setErr("");
-                  setUsername(e.target.value);
-                }}
-                type="text"
-                className="form-control block w-full px-3 py-1.5 text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-fawn focus:outline-none"
-                id="username"
-                placeholder="Username"
-              />
-            </div>
-            <div className="mb-4">
-              <input
-                value={password}
-                onChange={(e) => {
-                  setErr("");
-                  setPassword(e.target.value);
-                }}
-                type="password"
-                className="form-control block w-full px-3 py-1.5 text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-fawn focus:outline-none"
-                id="password"
-                placeholder="Password"
-              />
-            </div>
-            <div className="text-center pt-1 mb-8 pb-1">
-              {/* login button */}
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  submit();
-                }}
-                className="inline-block px-6 py-2.5 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn text-sp-black font-semibold text-xs leading-tight uppercase rounded focus:outline-none focus:ring-0 w-full mb-3"
-              >
-                Log in
-              </button>
-              {err && <p className="text-sm text-red-600">{err}</p>}
-              <a className="text-sp-lighter hover:text-sp-fawn" href="#!">
-                Forgot password?
-              </a>
-            </div>
-            <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-              <p className="text-center font-semibold mx-4 mb-0">OR</p>
-            </div>
+      <section className="flex flex-col justify-center items-center text-sp-white">
+        {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
-            <a
-              className="px-7 py-3 border border-sp-white hover:border-sp-fawn font-medium text-sm uppercase rounded focus:outline-none focus:ring-0 w-full flex justify-center items-center mb-3"
-              href="#!"
-              role="button"
-            >
+        <div className="flex flex-col justify-center items-center gap-8">
+          <ShieldIcon width={12} height={12} />
+          <h4 className="text-3xl text-center font-bold mb-10">
+            Log in as Guardian
+          </h4>
+        </div>
+        <div className="flex flex-col w-full justify-center items-center text-center gap-3">
+          <button className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-lg font-semibold text-sp-black">
+            <div className="w-1/3 p-2">
               <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 320 512"
-                className="w-3.5 h-3.5 mr-2"
               >
                 <path
-                  fill="currentColor"
-                  d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M9.12651 7.21782V10.7822C9.12651 10.7822 12.6329 10.7775 14.0606 10.7775C13.2875 13.0882 12.0853 14.3465 9.12651 14.3465C6.1322 14.3465 3.79518 11.9528 3.79518 9C3.79518 6.0472 6.1322 3.65347 9.12651 3.65347C10.7096 3.65347 11.7321 4.20221 12.67 4.96703C13.4207 4.22671 13.358 4.12119 15.2679 2.34249C13.6466 0.88716 11.4916 0 9.12651 0C4.08606 0 0 4.02942 0 9C0 13.9705 4.08606 18 9.12651 18C16.6606 18 18.5021 11.5307 17.8916 7.21782H9.12651Z"
+                  fill="#171411"
                 />
               </svg>
-              Continue with Facebook
-            </a>
-            <a
-              className="px-7 py-3 border border-sp-white hover:border-sp-fawn font-medium text-sm uppercase rounded focus:outline-none focus:ring-0 w-full flex justify-center items-center mb-3"
-              href="#!"
-              role="button"
-            >
-              <svg
-                width="19"
-                height="20"
-                viewBox="0 0 19 20"
-                className="w-3.5 h-3.5 mr-2"
-              >
-                <path
-                  d="M18.9892 10.1871C18.9892 9.36767 18.9246 8.76973 18.7847 8.14966H9.68848V11.848H15.0277C14.9201 12.767 14.3388 14.1512 13.047 15.0812L13.0289 15.205L15.905 17.4969L16.1042 17.5173C17.9342 15.7789 18.9892 13.221 18.9892 10.1871Z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M9.68813 19.9314C12.3039 19.9314 14.4999 19.0455 16.1039 17.5174L13.0467 15.0813C12.2286 15.6682 11.1306 16.0779 9.68813 16.0779C7.12612 16.0779 4.95165 14.3395 4.17651 11.9366L4.06289 11.9465L1.07231 14.3273L1.0332 14.4391C2.62638 17.6946 5.89889 19.9314 9.68813 19.9314Z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M4.17667 11.9366C3.97215 11.3165 3.85378 10.6521 3.85378 9.96562C3.85378 9.27905 3.97215 8.6147 4.16591 7.99463L4.1605 7.86257L1.13246 5.44363L1.03339 5.49211C0.37677 6.84302 0 8.36005 0 9.96562C0 11.5712 0.37677 13.0881 1.03339 14.4391L4.17667 11.9366Z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M9.68807 3.85336C11.5073 3.85336 12.7344 4.66168 13.4342 5.33718L16.1684 2.59107C14.4892 0.985496 12.3039 0 9.68807 0C5.89885 0 2.62637 2.23672 1.0332 5.49214L4.16573 7.99466C4.95162 5.59183 7.12608 3.85336 9.68807 3.85336Z"
-                  fill="#EB4335"
-                />
-              </svg>
-              Continue with Google
-            </a>
-            <div className="flex items-center justify-between pb-6">
-              <p className="mb-0 mr-2">Don't have an account?</p>
-              <Link href="/auth/register">
-                <a className="inline-block px-6 py-2 border border-sp-white hover:border-sp-fawn font-medium text-xs leading-tight uppercase rounded focus:outline-none focus:ring-0">
-                  Register
-                </a>
-              </Link>
             </div>
-          </form>
+            Login with Google
+          </button>
+          <button className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-lg font-semibold text-sp-black">
+            <div className="w-1/3 p-2">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 9.05493C18 4.08468 13.9703 0.0549316 9 0.0549316C4.02975 0.0549316 0 4.08468 0 9.05493C0 13.5474 3.291 17.2704 7.59375 17.9454V11.6567H5.3085V9.05418H7.59375V7.07268C7.59375 4.81743 8.93775 3.57093 10.9935 3.57093C11.9775 3.57093 13.008 3.74718 13.008 3.74718V5.96193H11.8725C10.7542 5.96193 10.4055 6.65568 10.4055 7.36743V9.05493H12.9015L12.5025 11.6574H10.4055V17.9462C14.709 17.2704 18 13.5467 18 9.05493Z"
+                  fill="#171411"
+                />
+              </svg>
+            </div>
+            Login with Facebook
+          </button>
+
+          <a href="/auth/login/email" className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-5 text-lg font-semibold text-sp-white">
+            <div className="w-1/3 p-2">
+              <svg
+                width="16"
+                height="13"
+                viewBox="0 0 16 13"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.0001 3.373V10.5C16.0001 11.8807 14.8808 13 13.5001 13H2.50008C1.11937 13 0 11.8807 0 10.5V3.373L7.74657 7.93097C7.90304 8.02301 8.09711 8.02301 8.25359 7.93097L16.0001 3.373ZM13.5001 0C14.7871 0 15.847 0.972604 15.9849 2.22293L8.00008 6.91991L0.0152595 2.22293C0.153116 0.972604 1.21302 0 2.50008 0H13.5001Z"
+                  fill="#F0EFED"
+                />
+              </svg>
+            </div>
+            Login with Email
+          </a>
+        </div>
+        <div className="flex flex-col justify-center items-center mt-24 text-lg gap-3">
+          <p>Don't have an account yet?</p>
+          <a className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 text-lg font-semibold text-sp-white">
+            Become a Guardian
+          </a>
         </div>
       </section>
     </LayoutNoNav>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
 }

@@ -125,7 +125,7 @@ export default function LoginComponent() {
             {/* login button */}
             <button
               type="submit"
-              className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-black"
+              className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-sp-black text-lg"
             >
               {submitting ? <Spinner text="Logging in..."/> : "Log in"}
             </button>
