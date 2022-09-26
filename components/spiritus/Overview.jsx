@@ -7,7 +7,7 @@ export function SpiritusOverview({
   description,
 }) {
   return (
-    <div className="w-3/4 flex flex-col justify-between items-center py-4 mb-4">
+    <div className="w-full md:w-3/4 flex flex-col justify-between items-center py-4 mb-4">
       <div className="flex flex-col tracking-sp-tighten text-sp-black dark:text-sp-white">
         <div className="flex flex-col items-center">
           <button className="px-2.5 py-1 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sm font-medium rounded-full">
@@ -17,7 +17,7 @@ export function SpiritusOverview({
             {birth ? new Date(birth).toLocaleDateString("hr") : "?"}
             {death && ` — ${new Date(death).toLocaleDateString("hr")}`}
           </span>
-          <h2 className="font-bold text-xl md:text-cta pb-4">
+          <h2 className="font-bold text-cta pb-4">
             {name} {surname}
           </h2>
         </div>

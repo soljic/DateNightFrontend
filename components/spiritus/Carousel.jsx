@@ -27,7 +27,7 @@ export function SpiritusCarousel({ images }) {
   return (
     !!images.length && (
       <div className="sw-spiritus relative w-full mt-16 mb-14 overflow-hidden">
-        <div className="swiper-prev-step absolute inset-y-0 left-16 z-10 h-5/6 flex items-center">
+        <div className="swiper-prev-step absolute inset-y-0 left-4 md:left-16 z-10 h-5/6 flex items-center">
           <button
             ref={prevRef}
             className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
@@ -35,7 +35,7 @@ export function SpiritusCarousel({ images }) {
             <ArrowLeftIcon className="w-5 h-5 text-black" />
           </button>
         </div>
-        <div className="swiper-next-step absolute inset-y-0 right-16 z-10 h-5/6 flex items-center">
+        <div className="swiper-next-step absolute inset-y-0 right-4 md:right-16 z-10 h-5/6 flex items-center">
           <button
             ref={nextRef}
             className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
