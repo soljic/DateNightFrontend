@@ -9,14 +9,13 @@ import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 import { Spinner } from "../../../components/Status";
 
-
 function isEmailValid(email) {
   return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
   );
 }
 
-export default function LoginComponent() {
+export default function EmailLogin() {
   const {
     register,
     handleSubmit,
@@ -48,18 +47,21 @@ export default function LoginComponent() {
 
   const onSubmit = async (data) => {
     try {
+      setSubmitting(true);
       const res = await signIn("credentials", {
         redirect: false,
         username: data.email,
         password: data.password,
       });
 
+      setSubmitting(false);
       if (!res.error) {
         await Router.push("/");
       }
 
       handleErr(res.error);
     } catch (error) {
+      setSubmitting(false);v
       setErr("Unable to log in. Please try again later or contact support.");
     }
   };
@@ -127,7 +129,7 @@ export default function LoginComponent() {
               type="submit"
               className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-sp-black text-lg"
             >
-              {submitting ? <Spinner text="Logging in..."/> : "Log in"}
+              {submitting ? <Spinner text="Logging in..." /> : "Log in"}
             </button>
             {err && <p className="text-sm text-red-600">{err}</p>}
             <a className="text-sp-lighter hover:text-sp-fawn mt-7" href="#!">

@@ -1,6 +1,3 @@
-import Link from "next/link";
-import Router from "next/router";
-
 import { getSession } from "next-auth/react";
 
 import { ShieldIcon } from "../../../components/Icons";
@@ -15,7 +12,7 @@ export default function LoginComponent({ setIsValid }) {
         <div className="flex flex-col justify-center items-center gap-8">
           <ShieldIcon width={12} height={12} />
           <h4 className="text-3xl text-center font-bold mb-10">
-            Log in as Guardian
+            Become a Guardian
           </h4>
         </div>
         <div className="flex flex-col w-full justify-center items-center text-center gap-3">
@@ -56,7 +53,7 @@ export default function LoginComponent({ setIsValid }) {
             <p className="w-4/6">Continue with Facebook</p>
           </button>
 
-          <a href="/auth/login/email" className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-5 text-lg font-semibold text-sp-white">
+          <a href="/auth/register/email" className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-5 text-lg font-semibold text-sp-white">
             <div className="w-1/5 p-2">
               <svg
                 width="16"
@@ -71,13 +68,13 @@ export default function LoginComponent({ setIsValid }) {
                 />
               </svg>
             </div>
-            <p className="w-4/6">Login with Email</p>
+            <p className="w-4/6">Continue with Email</p>
           </a>
         </div>
         <div className="flex flex-col justify-center items-center mt-24 text-lg gap-3">
-          <p>Don't have an account yet?</p>
-          <a href="/auth/register" className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 text-lg font-semibold text-sp-white">
-            Become a Guardian
+          <p>Already have an account yet?</p>
+          <a href="/auth/login" className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 text-lg font-semibold text-sp-white">
+            Log in as guardian
           </a>
         </div>
       </section>
