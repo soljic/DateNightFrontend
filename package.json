@@ -25,6 +25,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-date-picker": "^8.4.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.36.1",
     "sharp": "^0.30.7",
     "swiper": "^8.1.6"
   },
