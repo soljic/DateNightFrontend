@@ -34,7 +34,7 @@ export function Logo({ width, height }) {
 
 export function ImagePlaceholder() {
   return (
-    <div className="flex w-full h-full mx-auto border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center">
+    <div className="flex w-full h-full mx-auto border-2 dark:border-2 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center">
       <div className="mx-auto">
         <svg
           className="h-16 w-16 text-sp-fawn text-opacity-20"

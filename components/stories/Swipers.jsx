@@ -36,14 +36,8 @@ export function HomepageSwiper({
   const [currSlide, setCurrSlide] = useState(0);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-
-  const hidePrevBtn = () => {
-    return currSlide === 0;
-  };
-
-  const hideNextBtn = () => {
-    return Math.floor(currSlide > (items.length + 3) / 2);
-  };
+  const [hidePrevBtn, setHidePrevBtn] = useState(true);
+  const [hideNextBtn, setHideNextBtn] = useState(false);
 
   return (
     items && (
@@ -61,7 +55,7 @@ export function HomepageSwiper({
         <div className="relative">
           <div
             className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 h-5/6 flex items-center ${
-              hidePrevBtn() ? "hidden" : ""
+              hidePrevBtn ? "hidden" : ""
             }`}
           >
             <button
@@ -73,7 +67,7 @@ export function HomepageSwiper({
           </div>
           <div
             className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-5/6 flex items-center ${
-              hideNextBtn() ? "hidden" : ""
+              hideNextBtn ? "hidden" : ""
             }`}
           >
             <button
@@ -93,9 +87,12 @@ export function HomepageSwiper({
             // set current page index so nav arrows can be rendered properly
             onSlideChange={(swiper) => {
               setCurrSlide(swiper.realIndex);
+              setHideNextBtn(swiper.isEnd);
+              setHidePrevBtn(swiper.isBeginning);
             }}
             spaceBetween={30}
             slidesPerView={3}
+            slidesPerGroup={2}
             breakpoints={{
               340: {
                 slidesPerView: 2,
@@ -188,7 +185,7 @@ function HomepageTile({
 function ExpandSectionTile({ sectionId, title }) {
   return (
     <Link href={`/section/id/${sectionId}?title=${title}`}>
-      <a className="flex flex-col h-64 lg:h-92 items-center justify-center border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-sp-14">
+      <a className="flex flex-col h-72 lg:h-92 items-center justify-center border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-sp-14">
         <div className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2">
           <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
         </div>
@@ -205,16 +202,10 @@ function ExpandSectionTile({ sectionId, title }) {
 export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
   const { t } = useTranslation("common");
   const [currSlide, setCurrSlide] = useState(0);
+  const [hidePrevBtn, setHidePrevBtn] = useState(true);
+  const [hideNextBtn, setHideNextBtn] = useState(false);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
-
-  const hidePrevBtn = () => {
-    return currSlide === 0;
-  };
-
-  const hideNextBtn = () => {
-    return Math.floor(currSlide > (categories.length + 3) / 2);
-  };
 
   return (
     categories && (
@@ -230,7 +221,7 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
         <div className="relative">
           <div
             className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 h-4/5 flex items-center ${
-              hidePrevBtn() ? "hidden" : ""
+              hidePrevBtn ? "hidden" : ""
             }`}
           >
             <button
@@ -242,7 +233,7 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
           </div>
           <div
             className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-4/5 flex items-center ${
-              hideNextBtn() ? "hidden" : ""
+              hideNextBtn ? "hidden" : ""
             }`}
           >
             <button
@@ -263,9 +254,12 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
             // set current page index so nav arrows can be rendered properly
             onSlideChange={(swiper) => {
               setCurrSlide(swiper.realIndex);
+              setHideNextBtn(swiper.isEnd);
+              setHidePrevBtn(swiper.isBeginning);
             }}
             spaceBetween={30}
             slidesPerView={3}
+            slidesPerGroup={2}
           >
             {categories.map((c, i) => {
               return (
