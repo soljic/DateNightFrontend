@@ -1,5 +1,6 @@
 <!-- [START BADGES] -->
 [![Build](https://github.com/Spiritus-Memoria-Organization/webapp/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Spiritus-Memoria-Organization/webapp/actions/workflows/build.yml)
+[![Deploy Production](https://github.com/Spiritus-Memoria-Organization/webapp/actions/workflows/deploy_prod.yml/badge.svg?branch=master)](https://github.com/Spiritus-Memoria-Organization/webapp/actions/workflows/deploy_prod.yml)
 <!-- [END BADGES] -->
 # Spiritus Webapp
 
