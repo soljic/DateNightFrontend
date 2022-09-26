@@ -86,38 +86,3 @@ export function SpiritusCarousel({ images }) {
     )
   );
 }
-
-const mock = () => {
-  return [
-    {
-      id: 68419,
-      born: 1926,
-      deceased: 1998,
-      name: "Ronald Richards",
-      city: "Chigago",
-      country: "USA",
-      text1: "He could have left me",
-      url: "/slider/slider-1.jpeg",
-    },
-    {
-      id: 98769,
-      born: 1949,
-      deceased: 2013,
-      name: "Ankica Modrić",
-      city: "Zagreb",
-      country: "Croatia",
-      text1: "How she and her husband saved me",
-      url: "/slider/slider-3.jpeg",
-    },
-    {
-      id: 88764,
-      born: 1938,
-      deceased: 2008,
-      name: "Andrija Čordaš",
-      city: "Županja",
-      country: "Croatia",
-      text1: "He lived his life by his own rules",
-      url: "/slider/slider-2.jpeg",
-    },
-  ];
-};
