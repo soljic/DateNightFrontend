@@ -1,3 +1,6 @@
+<!-- [START BADGES] -->
+[![Build](https://github.com/Spiritus-Memoria-Organization/webapp/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Spiritus-Memoria-Organization/webapp/actions/workflows/build.yml)
+<!-- [END BADGES] -->
 # Spiritus Webapp
 
 This repository contains source code, Github workflows and docker files required to run the application both locally and in various environments.
