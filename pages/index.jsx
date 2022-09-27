@@ -37,7 +37,7 @@ export default function Home({
       <CreateSpiritusCTA />
       <div className="flex flex-col mx-auto items-center pt-10">
         <CTADownloadLinks />
-        <CTAPartners />
+        {/* <CTAPartners /> */}
       </div>
       <StoryOfTheWeek
         title={storyOfTheWeek.subtitle}
