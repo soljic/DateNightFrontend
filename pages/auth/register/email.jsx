@@ -82,7 +82,7 @@ export default function EmailRegister() {
         </div>
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label for="firstName">First name</label>
+            <label htmlFor="firstName">First name</label>
             <input
               {...register("firstName", {
                 required: true,
@@ -100,7 +100,7 @@ export default function EmailRegister() {
             )}
           </div>
           <div className="mb-4">
-            <label for="lastName">Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
               {...register("lastName", {
                 required: true,
@@ -118,7 +118,7 @@ export default function EmailRegister() {
             )}
           </div>
           <div className="mb-4">
-            <label for="email">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input
               {...register("email", {
                 required: true,
@@ -136,7 +136,7 @@ export default function EmailRegister() {
             )}
           </div>
           <div className="mb-4">
-            <label for="phone">Phone number</label>
+            <label htmlFor="phone">Phone number</label>
             <input
               {...register("phone", {
                 required: true,
@@ -148,7 +148,7 @@ export default function EmailRegister() {
             />
           </div>
           <div className="relative">
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               {...register("password", {
                 required: true,
@@ -186,7 +186,7 @@ export default function EmailRegister() {
             {/* login button */}
             <button
               type="submit"
-              className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-sp-black text-lg"
+              className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-sp-black text-lg"
             >
               {submitting ? (
                 <Spinner text="Creating..." />

@@ -19,7 +19,7 @@ export default function LoginComponent({ setIsValid }) {
           </h4>
         </div>
         <div className="flex flex-col w-full justify-center items-center text-center gap-3">
-          <button className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-lg font-semibold text-sp-black">
+          <button className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
             <div className="w-1/5 p-2">
               <svg
                 width="18"
@@ -38,7 +38,7 @@ export default function LoginComponent({ setIsValid }) {
             </div>
             <p className="w-4/6">Continue with Google</p>
           </button>
-          <button className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-lg font-semibold text-sp-black">
+          <button className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
             <div className="w-1/5 p-2">
               <svg
                 width="18"
@@ -56,7 +56,7 @@ export default function LoginComponent({ setIsValid }) {
             <p className="w-4/6">Continue with Facebook</p>
           </button>
 
-          <a href="/auth/login/email" className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-5 text-lg font-semibold text-sp-white">
+          <a href="/auth/login/email" className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-4 text-lg font-semibold text-sp-white">
             <div className="w-1/5 p-2">
               <svg
                 width="16"
