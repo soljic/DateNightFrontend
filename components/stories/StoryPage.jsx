@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { RoseIcon, StoryHookIcon } from "../../components/Icons";
+import { useState } from "react";
 
 export function Tags({ tags }) {
   return (
@@ -17,9 +18,7 @@ export function Tags({ tags }) {
       {tags.map((t) => {
         return (
           <Link href={`/section/id/${t.id}`} key={`tag-${t.id}`}>
-            <a
-              className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base"
-            >
+            <a className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base">
               {t.value}
             </a>
           </Link>
@@ -30,6 +29,7 @@ export function Tags({ tags }) {
 }
 
 export function Tribute() {
+  const [text, setText] = useState("");
   const { t } = useTranslation("common");
 
   return (
@@ -41,33 +41,39 @@ export function Tribute() {
         <textarea
           id="tribute"
           type="text"
-          rows="1"
-          className="w-full text-xl py-4 px-8 text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className="w-full h-16 text-xl py-3.5 px-8 font-medium align-text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter transition-all duration-500 focus:h-36"
           placeholder={t("write_tribute")}
         ></textarea>
 
         <button
           rows="1"
-          className="flex justify-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-sp-40 py-4 px-7"
+          className="flex justify-center w-full bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-sp-40 py-4 px-7"
         >
           <RoseIcon />
           <span className="text-lg font-semibold ml-1 text-sp-white dark:text-sp-black">
             {t("give_rose")}
           </span>
+          {!!text && (
+            <span className={`text-lg font-semibold ml-1 text-sp-white dark:text-sp-black`}>
+              {t("with_tribute")}
+            </span>
+          )}
         </button>
 
-        <div className="w-full mx-auto items-center pt-4 text-sp ">
+        <div className="w-full mx-auto items-center pt-4">
           <div className="flex mx-auto justify-between space-x-3 lg:space-x-4">
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
+            <button className="flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <BookmarkIcon className="w-6 h-6" />
               {t("save")}
             </button>
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
+            <button className="flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <UploadIcon className="w-6 h-6" />
               {t("share")}
             </button>
 
-            <button className="flex flex-col w-1/3 items-center hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
+            <button className="flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
               <ReplyIcon className="w-6 h-6 -scale-x-100" />
               {t("next")}
             </button>
@@ -108,19 +114,15 @@ export function MoreStories({ stories, spiritus }) {
 export function StoryHook({ slug, title, subtitle, description, date }) {
   return (
     <div className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-6 text-sp-black dark:text-sp-white">
-      <div className="flex flex-col">
+      <div className="flex flex-col tracking-sp-tighten">
         <div className="inline-flex h-8 w-8 items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
           <StoryHookIcon />
         </div>
 
-        <Link
-          href={`/stories/${slug}`}
-        >
-          <a className="text-lg py-1">{title}</a>
+        <Link href={`/stories/${slug}`}>
+          <a className="text-lg py-1 font-medium">{title}</a>
         </Link>
-        <p className="tracking-sp-tighten text-sm">
-          {subtitle || description}
-        </p>
+        <p className="text-sm">{subtitle || description}</p>
       </div>
       <div className="flex flex-col items-start">
         <p className="text-sp-lighter text-sm">{date || ""}</p>
@@ -129,7 +131,7 @@ export function StoryHook({ slug, title, subtitle, description, date }) {
   );
 }
 
-export function CTAAddMemory({ spiritusId,name }) {
+export function CTAAddMemory({ spiritusId, name }) {
   const { t } = useTranslation("common");
 
   return (
@@ -140,7 +142,10 @@ export function CTAAddMemory({ spiritusId,name }) {
           <span> {name}</span>?
         </h2>
         <p className="text-sp-lighter">{t("cta_add_memory_subtitle")}</p>
-        <a href={`/create/story?spiritus=${spiritusId}`} className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn">
+        <a
+          href={`/create/story?spiritus=${spiritusId}`}
+          className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn"
+        >
           {t("cta_add_memory_button")}
           <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
         </a>
