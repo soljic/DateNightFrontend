@@ -15,7 +15,9 @@ export async function ProxyGlobalSearch(searchType, value, offset, limit) {
 
 // Spiritus full text search
 export function ProxySearchSpiritus(value, offset, limit) {
-  return axios.get(`/api/spiritus-search?value=${value}&page=${offset}&size=${limit}`);
+  return axios.get(
+    `/api/spiritus-search?value=${value}&page=${offset}&size=${limit}`
+  );
 }
 
 // The request is proxied to BE - check next.config.js::rewrites()
@@ -134,4 +136,19 @@ export function ProxyGetTags() {
 
 export function ProxyGetSection(id, page) {
   return axios.get(`/api/section?id=${id}&page=${page}`);
+}
+
+export async function ProxyLogout(token) {
+  if (!token) {
+    return true;
+  }
+
+  console.log("### TOKEN", token);
+
+  const res = await axios.put(`/api/authentication/logout`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res;
 }

@@ -1,7 +1,7 @@
 const { i18n } = require("./next-i18next.config");
 
 module.exports = {
-  output: 'standalone',
+  output: "standalone",
   i18n,
   reactStrictMode: true,
   images: {
@@ -75,6 +75,12 @@ module.exports = {
       {
         source: "/api/spiritus-search/:query*",
         destination: `${process.env.NEXT_API_URL}/wapi/spiritus/search/full`,
+      },
+
+      // proxy pass AUTHENTICATION LOGOUT
+      {
+        source: "/api/authentication/logout",
+        destination: `${process.env.NEXT_API_URL}/authentication/logout`,
       },
     ];
   },
