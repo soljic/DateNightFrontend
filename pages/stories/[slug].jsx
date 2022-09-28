@@ -110,7 +110,7 @@ export default function StoryPage({
             <></>
           )}
         </div>
-        <div className="w-full md:w-3/5 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
+        <div className="w-full md:w-3/5 lg:w-4/5 mx-auto text-sp-white lg:text-lg -mt-5">
           {displayStory.tags?.length ? (
             <Tags tags={displayStory.tags} />
           ) : (
