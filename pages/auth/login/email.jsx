@@ -54,14 +54,14 @@ export default function EmailLogin() {
         password: data.password,
       });
 
-      setSubmitting(false);
       if (!res.error) {
-        await Router.push("/");
+        setSubmitting(false);
+        Router.push("/");
       }
 
       handleErr(res.error);
     } catch (error) {
-      setSubmitting(false);v
+      setSubmitting(false);
       setErr("Unable to log in. Please try again later or contact support.");
     }
   };

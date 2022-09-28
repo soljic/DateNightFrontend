@@ -2,11 +2,13 @@ import axios from "axios";
 import { API_URL } from "../constants";
 
 export async function LoginCredentials(username, password) {
-  return await axios
-    .post(`${API_URL}/authentication/login?grant_type=credentials`, {
+  return await axios.post(
+    `${API_URL}/authentication/login?grant_type=credentials`,
+    {
       username,
       password,
-    })
+    }
+  );
 }
 
 export async function Register(name, lastName, email, password) {
@@ -27,7 +29,3 @@ export async function RefreshToken(refreshToken) {
   return res;
 }
 
-export async function Logout() {
-  const res = await axios.post(`${API_URL}/authentication/logout`);
-  return res;
-}
