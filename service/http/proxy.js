@@ -143,8 +143,6 @@ export async function ProxyLogout(token) {
     return true;
   }
 
-  console.log("### TOKEN", token);
-
   const res = await axios.put(`/api/authentication/logout`, {
     headers: {
       Authorization: `Bearer ${token}`,

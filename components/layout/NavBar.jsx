@@ -43,8 +43,7 @@ export function Navbar() {
           </Link>
           {session?.user.name ? (
             <ProfileMenu
-              displayText={session?.user?.name ? session.user.name : t("login")}
-              token={session.user.accessToken}
+              // token={session.user.accessToken}
               profileName={"TESTER"}
             />
           ) : (
@@ -200,24 +199,5 @@ function AboutIcon({ width, height, fill }) {
         fill={fill || "#E3AA6D"}
       />
     </svg>
-  );
-}
-
-function ThemeToggler() {
-  const { theme, setTheme } = useTheme();
-  const { t } = useTranslation("common");
-
-  return (
-    <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="p-2 rounded-full border-sp-lighter dark:border-sp-medium border dark:bg-sp-black hover:bg-sp-medlight focus:outline-none dark:hover:bg-sp-lighter"
-    >
-      <span className="sr-only">
-        <span className="dark:hidden">{t("switch_theme_dark")}</span>
-        <span className="hidden dark:inline">{t("switch_theme_light")}</span>
-      </span>
-      <MoonIcon className="h-5 w-5 text-gray-300 -scale-x-100 hidden dark:block" />
-      <SunIcon className="w-5 h-5 text-sp-cotta dark:hidden" />
-    </button>
   );
 }

@@ -1,13 +1,13 @@
 // custom icon designed by Spiritus team //
 ///////////////////////////////////////////
 
-export function GuardianIcon({ width, height }) {
+export function GuardianIcon({ width, height, alterFill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
 
   return (
     <svg
-      className={`${w} ${h} dark:fill-sp-white fill-sp-lighter`}
+      className={`${w} ${h} dark:fill-sp-white ${alterFill ? "fill-sp-dark-fawn" : "fill-sp-lighter"}`}
       viewBox="0 0 22 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
