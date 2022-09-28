@@ -284,6 +284,43 @@ function AccesibilityMenu() {
                               <ChevronLeftIcon className="w-5 h-5 text-sp-lighter" />
                             ) : (
                               <div>
+                                <GlobeIcon />
+                              </div>
+                            )}
+                            <div className="flex justify-between w-full">
+                              <div className="ml-4">
+                                <p className="text-sm font-semibold capitalize">
+                                  Language
+                                </p>
+                              </div>
+                            </div>
+                            {!open && (
+                              <ChevronRightIcon className="w-6 h-6 text-sp-lighter" />
+                            )}
+                          </Disclosure.Button>
+                          <Disclosure.Panel className="grid grid-cols-2 items-center">
+                            <Link href="/" locale="en">
+                              <a className="flex justify-center text-sm font-semibold items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                                EN
+                              </a>
+                            </Link>
+                            <Link href="/" locale="hr">
+                              <a className="flex justify-center text-sm font-semibold items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                                HR
+                              </a>
+                            </Link>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                    <Disclosure>
+                      {({ open }) => (
+                        <>
+                          <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                            {open ? (
+                              <ChevronLeftIcon className="w-5 h-5 text-sp-lighter" />
+                            ) : (
+                              <div>
                                 <DevicesIcon />
                               </div>
                             )}
@@ -324,9 +361,7 @@ function AccesibilityMenu() {
                               <SunIcon className="w-5 h-5 text-sp-cotta" />
                               <div className="flex justify-between w-full">
                                 <div className="ml-4">
-                                  <p className="text-sm font-semibold">
-                                    Light
-                                  </p>
+                                  <p className="text-sm font-semibold">Light</p>
                                 </div>
                                 {theme === "light" ? (
                                   <CheckSelectedIcon w={4} h={4} />
@@ -343,9 +378,7 @@ function AccesibilityMenu() {
                               <MoonIcon className="h-5 w-5 text-sp-fawn -scale-x-100" />
                               <div className="flex justify-between w-full">
                                 <div className="ml-4">
-                                  <p className="text-sm font-semibold">
-                                    Dark
-                                  </p>
+                                  <p className="text-sm font-semibold">Dark</p>
                                 </div>
                                 {theme === "dark" ? (
                                   <CheckSelectedIcon w={4} h={4} />
