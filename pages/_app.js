@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       <ThemeProvider
         attribute="class"
         defaultTheme="light"
-        enableSystem={false}
+        enableSystem={true}
       >
         <Component {...pageProps} />{" "}
       </ThemeProvider>
