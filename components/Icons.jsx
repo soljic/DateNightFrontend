@@ -339,8 +339,8 @@ export function CheckSelectedIcon({ width, height }) {
           y2="7.99999"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#ED9A4C" />
-          <stop offset="1" stop-color="#E3AA6D" />
+          <stop stopColor="#ED9A4C" />
+          <stop offset="1" stopColor="#E3AA6D" />
         </linearGradient>
       </defs>
     </svg>

@@ -158,8 +158,8 @@ function HomepageTile({
           <ImagePlaceholder />
         )}
       </div>
-      <div className="flex flex-col justify-between mt-3">
-        <h3 className="text-lg dark:text-sp-white">
+      <div className="flex flex-col justify-between mt-3 antialiased font-medium tracking-sp-tighten leading-4">
+        <h3 className="text-lg dark:text-sp-white leading-snug">
           <Link
             href={
               itemType === "SPIRITUS"
@@ -167,13 +167,13 @@ function HomepageTile({
                 : `/stories/${itemId}`
             }
           >
-            <a className="antialiased">
+            <a>
               <span aria-hidden="true" className="absolute inset-0" />
               {title}
             </a>
           </Link>
         </h3>
-        <p className="mt-1 dark:text-sp-white opacity-50">{`${spiritusName}`}</p>
+        <p className="text-sm mt-1 dark:text-sp-white opacity-50">{`${spiritusName}`}</p>
       </div>
     </div>
   );
@@ -298,12 +298,12 @@ function CategoryTile({ sectionId, categoryId, title, imageUrl }) {
           <ImagePlaceholder />
         )}
       </div>
-      <div className="mt-2 flex justify-between">
+      <div className="mt-2 flex justify-between antialiased tracking-sp-tighten font-medium">
         <h3 className="text-lg dark:text-sp-white">
           <Link
             href={`/category/${sectionId}/item/${categoryId}?title=${title}`}
           >
-            <a className="antialiased">
+            <a>
               <span aria-hidden="true" className="absolute inset-0" />
               {title}
             </a>
