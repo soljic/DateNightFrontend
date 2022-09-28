@@ -1,5 +1,7 @@
 import { Fragment } from "react";
+import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
+
 
 import Link from "next/link";
 
@@ -13,10 +15,12 @@ import { GuardianIcon } from "../Icons";
 
 export function ProfileMenu({ token, profileName }) {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
   const logoutUser = async () => {
     // await ProxyLogout(token);
-    signOut();
+    await signOut({redirect: false});
+    router.push("/")
   };
 
   return (
