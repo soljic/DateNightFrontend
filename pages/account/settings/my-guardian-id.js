@@ -8,7 +8,7 @@ import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Sidebar } from "../../../components/settings/Sidebar";
 import { GuardianID } from "../../../components/settings/Guardian";
 
-export default function GuardianID() {
+export default function GuardianIDPage() {
   const { t } = useTranslation("common");
 
   return (
