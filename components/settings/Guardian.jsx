@@ -1,4 +1,6 @@
-export function GuardianID() {
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
+export function GuardianID({ guardianID }) {
   return (
     <div className="flex flex-col items-center gap-y-2.5 pt-1">
       <div className="mb-4">
@@ -36,14 +38,13 @@ export function GuardianID() {
         Spiritus. Send them your own Guardian ID.
       </p>
       <p className="text-sm text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60 tracking-sp-tighten text-center subpixel-antialiased mb-5">
-        {" "}
-        My code is 8e6929...3c9001
+        My code is {guardianID.split("-")[0]}***
       </p>
-      <button
-        className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-fawn dark:border-sp-dark-brown dark:border-opacity-90 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
-      >
-        <span className="font-semibold ml-1">Copy my ID</span>
-      </button>
+      <CopyToClipboard text={guardianID}>
+        <button className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-fawn dark:border-sp-dark-brown dark:border-opacity-90 rounded-full py-3 px-7 text-sp-white dark:text-sp-black">
+          <span className="font-semibold">Copy my ID</span>
+        </button>
+      </CopyToClipboard>
     </div>
   );
 }

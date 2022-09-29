@@ -82,6 +82,13 @@ export default function Home({
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
   const sections = await GetParsedHomepage();
+  // const sections = {
+  //   storyOfTheWeek: {},
+  //   featured: {},
+  //   discover: {},
+  //   categories: {},
+  //   anniversaries: {},
+  // };
 
   return {
     props: {
@@ -96,4 +103,3 @@ export async function getStaticProps(context) {
     revalidate: 60 * 10, // 10min
   };
 }
-

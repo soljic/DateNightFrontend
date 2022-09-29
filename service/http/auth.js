@@ -1,5 +1,6 @@
 import axios from "axios";
-import { API_URL } from "../constants";
+import { ImagePath } from "../util";
+import { API_URL, defaultLimit, defaultOffset } from "../constants";
 
 export async function LoginCredentials(username, password) {
   return await axios.post(
@@ -29,3 +30,62 @@ export async function RefreshToken(refreshToken) {
   return res;
 }
 
+export async function GetProfile(accessToken) {
+  return await axios.get(`${API_URL}/v2/user/account`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+export async function ProfileSpiritus(accessToken, offset, limit) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  const res = await axios.get(
+    `${API_URL}/v2/user/account/spiritus?page=${0}&size=${l}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  res.data.content.forEach((elem) => {
+    if (elem.image?.url) {
+      elem.image.url = ImagePath(elem.image.url);
+    }
+  });
+  return res;
+}
+
+// on self-origin
+export async function ProxyProfile(accessToken) {
+  return await axios.get(`/api/authentication/user/profile`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+// on-self-origin
+export async function ProxyProfileSpiritus(accessToken, offset, limit) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  const res = await axios.get(
+    `/api/authentication/user/spiritus?page=${o}&size=${l}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  res.data.content.forEach((elem) => {
+    if (elem.image?.url) {
+      elem.image.url = ImagePath(elem.image.url);
+    }
+  });
+  return res;
+}

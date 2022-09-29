@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 import { BookmarkIcon } from "@heroicons/react/outline";
 import {
   SettingsGuardianIcon,
@@ -12,11 +14,18 @@ import {
 } from "../SettingsIcons";
 
 export function Sidebar({ selectedIndex }) {
-  selectedIndex = 4;
+  const router = useRouter();
+
+  const logoutUser = async () => {
+    // await ProxyLogout(token);
+    await signOut({redirect: false});
+    router.push("/")
+  };
+
   const menuItems = [
     {
       name: "My Spiritus",
-      href: "/",
+      href: "/account/settings/my-spiritus",
       icon: <SettingsSpiritusIcon width={5} height={5} />,
     },
     {
@@ -38,7 +47,7 @@ export function Sidebar({ selectedIndex }) {
     },
     {
       name: "My Guardian ID",
-      href: "/",
+      href: "/account/settings/my-guardian-id",
       icon: <SettingsGuardianIcon width={5} height={5} />,
     },
     {
@@ -59,7 +68,7 @@ export function Sidebar({ selectedIndex }) {
   ];
 
   return (
-    <aside className="flex flex-col justify-evenly gap-y-1">
+    <aside className="flex flex-col justify-evenly gap-y-1 mr-2 sticky top-0">
       <div className="text-sm leading-4 mb-5">
         <p className="font-medium">John Doe</p>
         <p className="opacity-60">john@doe.email.com</p>
@@ -82,7 +91,7 @@ export function Sidebar({ selectedIndex }) {
       <button
         href="/contact"
         onClick={() => logoutUser()}
-        className="flex w-52 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+        className="flex w-full justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
       >
         <div>
           <SettingsSignOutIcon />

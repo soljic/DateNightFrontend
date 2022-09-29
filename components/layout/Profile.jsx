@@ -51,7 +51,7 @@ export function ProfileMenu({ token, profileName }) {
               <Popover.Panel className="absolute -translate-x-1/2 z-100 mt-2">
                 <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
                   <div className="flex flex-col justify-evenly gap-y-1 p-3">
-                    <Link href="/">
+                    <Link href="/account/settings/my-spiritus">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3  dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsSpiritusIcon width={5} height={5} />
                         <div className="ml-4">
@@ -83,7 +83,7 @@ export function ProfileMenu({ token, profileName }) {
                         </div>
                       </a>
                     </Link>
-                    <Link href="/">
+                    <Link href="/account/settings/my-guardian-id">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsGuardianIcon width={5} height={5} alterFill />
                         <div className="ml-4">

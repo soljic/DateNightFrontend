@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -55,11 +57,11 @@ export default function EmailLogin() {
       });
 
       if (!res.error) {
-        setSubmitting(false);
-        Router.push("/");
+        return Router.push("/");
       }
 
       handleErr(res.error);
+      setSubmitting(false);
     } catch (error) {
       setSubmitting(false);
       setErr("Unable to log in. Please try again later or contact support.");
@@ -68,6 +70,11 @@ export default function EmailLogin() {
 
   return (
     <LayoutNoNav>
+      <Head>
+        <title>Spiritus | Login - Email</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Spiritus Email Login" />
+      </Head>
       <section className="flex flex-col justify-center items-center text-sp-white">
         {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
@@ -131,7 +138,6 @@ export default function EmailLogin() {
             >
               {submitting ? <Spinner text="Logging in..." /> : "Log in"}
             </button>
-            {err && <p className="text-sm text-red-600">{err}</p>}
             <a className="text-sp-lighter hover:text-sp-fawn mt-7" href="#!">
               Forgot password?
             </a>

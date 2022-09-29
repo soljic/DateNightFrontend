@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { LoginCredentials } from "../../../service/http/auth";
+import { GetProfile, LoginCredentials } from "../../../service/http/auth";
 import jwt_decode from "jwt-decode";
 
 export default NextAuth({
@@ -29,8 +29,13 @@ export default NextAuth({
         );
         // If no error and we have user data, return it
         if (res?.data) {
-          res.data.user = credentials.username;
-          return res.data;
+          const profile = await GetProfile(res.data.access_token);
+
+          if (!profile?.data) {
+            return null;
+          }
+
+          return {...res.data, ...profile.data };
         }
         // Return null if user data could not be retrieved
         return null;
@@ -45,6 +50,8 @@ export default NextAuth({
           ...token,
           accessToken: user.access_token,
           refreshToken: user.refresh_token,
+          // add user unique code
+          code: user.code,
         };
       }
 
@@ -54,9 +61,7 @@ export default NextAuth({
     async session({ session, token }) {
       const data = jwt_decode(token.accessToken);
       session.user.accessToken = token.accessToken;
-      session.user.email = data.email;
-      session.user.name = data.given_name;
-
+      session.user.code = token.code
       return session;
     },
   },

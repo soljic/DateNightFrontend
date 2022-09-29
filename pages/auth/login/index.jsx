@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Head from "next/head";
+
 import Router from "next/router";
 
 import { getSession } from "next-auth/react";
@@ -9,6 +11,11 @@ import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 export default function LoginComponent({ setIsValid }) {
   return (
     <LayoutNoNav>
+      <Head>
+        <title>Spiritus | Login </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Spiritus - Login" />
+      </Head>
       <section className="flex flex-col justify-center items-center text-sp-white">
         {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 

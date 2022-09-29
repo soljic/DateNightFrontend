@@ -39,10 +39,10 @@ export function Navbar() {
               <SearchIcon className="h-5 w-5 tex-sp-black dark:text-sp-white" />
             </a>
           </Link>
-          {true ? (
+          {session?.user.name ? (
             <ProfileMenu
               // token={session.user.accessToken}
-              profileName={"John"}
+              profileName={session?.user.name}
             />
           ) : (
             <Link href={session?.name ? "/account/settings" : "/auth/login"}>

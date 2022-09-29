@@ -6,26 +6,26 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Sidebar } from "../../../components/settings/Sidebar";
-import { GuardianID } from "../../../components/settings/Guardian";
+import { ProfileSpiritus } from "../../../service/http/auth";
+import { MySpiritusGrid } from "../../../components/settings/Spiritus";
 
-export default function GuardianIDPage() {
-  const { data: session, status } = useSession();
+export default function SpiritusPage({ spiritus, isLastPage }) {
   const { t } = useTranslation("common");
 
   return (
     <LayoutNoFooter>
       <Head>
-        <title>Settings | My Guardian ID</title>
+        <title>Spiritus | Settings | My Spiritus Collection</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Get your unique guardian ID" />
+        <meta name="description" content="Spiritus - Settings - My Spiritus Collection" />
       </Head>
-      <section className="pt-5">
+      <section className="pt-5 overflow-y-auto">
         <div className="w-full grid grid-cols-3">
           <div className="col-span-1">
-            <Sidebar selectedIndex={4}/>
+            <Sidebar selectedIndex={0}/>
           </div>
-          <div className="col-span-2 flex justify-center ">
-            <GuardianID guardianID={session?.user.code || ""} />
+          <div className="col-span-2 flex justify-center">
+            <MySpiritusGrid spiritus={spiritus} isLastPage={isLastPage}/>
           </div>
         </div>
       </section>
@@ -45,9 +45,13 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const res = await ProfileSpiritus(session.user.accessToken)
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ["common"])),
+      spiritus: res.data.content,
+      isLastPage: res.data.last,
     },
   };
 }
