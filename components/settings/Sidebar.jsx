@@ -12,7 +12,7 @@ import {
 } from "../SettingsIcons";
 
 export function Sidebar({ selectedIndex }) {
-  selectedIndex = 0;
+  selectedIndex = 4;
   const menuItems = [
     {
       name: "My Spiritus",
@@ -59,7 +59,7 @@ export function Sidebar({ selectedIndex }) {
   ];
 
   return (
-    <aside className="flex flex-col justify-evenly pt-5 gap-y-1">
+    <aside className="flex flex-col justify-evenly gap-y-1">
       <div className="text-sm leading-4 mb-5">
         <p className="font-medium">John Doe</p>
         <p className="opacity-60">john@doe.email.com</p>
