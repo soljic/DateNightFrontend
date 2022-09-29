@@ -82,6 +82,15 @@ module.exports = {
         source: "/api/authentication/logout",
         destination: `${process.env.NEXT_API_URL}/authentication/logout`,
       },
+      // proxy pass USER PROFILE
+      {
+        source: "/api/authentication/user/profile",
+        destination: `${process.env.NEXT_API_URL}/v2/user/account`,
+      },
+      {
+        source: "/api/authentication/user/spiritus",
+        destination: `${process.env.NEXT_API_URL}/v2/user/account/spiritus`,
+      },
     ];
   },
 };

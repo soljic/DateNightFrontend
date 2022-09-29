@@ -1,13 +1,11 @@
-import { useState, useEffect, Fragment } from "react";
+import { Fragment } from "react";
 
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
-import { useTheme } from "next-themes";
-import { Disclosure } from "@headlessui/react";
 import { Popover, Transition } from "@headlessui/react";
-import { MenuIcon, MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { MenuIcon } from "@heroicons/react/solid";
 import { SearchIcon } from "@heroicons/react/outline";
 
 import { Logo, NavItem } from "./Common";
@@ -38,13 +36,13 @@ export function Navbar() {
         <div className="inline-flex items-center gap-1 sm:gap-3">
           <Link href="/search">
             <a className="p-3 hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
-              <SearchIcon className="h-6 w-6 tex-sp-black dark:text-sp-white" />
+              <SearchIcon className="h-5 w-5 tex-sp-black dark:text-sp-white" />
             </a>
           </Link>
           {session?.user.name ? (
             <ProfileMenu
               // token={session.user.accessToken}
-              profileName={"TESTER"}
+              profileName={session?.user.name}
             />
           ) : (
             <Link href={session?.name ? "/account/settings" : "/auth/login"}>
