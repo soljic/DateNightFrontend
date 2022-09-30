@@ -35,7 +35,7 @@ export function AccesibilityMenu() {
   }
 
   return (
-    <Popover>
+    <Popover className="z-30">
       {({ open }) => (
         <>
           <Popover.Button
@@ -65,7 +65,7 @@ export function AccesibilityMenu() {
                       <>
                         <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                           {open ? (
-                            <ChevronLeftIcon className="w-5 h-5 text-sp-lighter" />
+                            <ChevronLeftIcon className="w-6 h-6 text-sp-lighter" />
                           ) : (
                             <div>
                               <SettingsGlobeIcon />
@@ -102,11 +102,9 @@ export function AccesibilityMenu() {
                       <>
                         <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                           {open ? (
-                            <ChevronLeftIcon className="w-5 h-5 text-sp-lighter" />
+                            <ChevronLeftIcon className="w-6 h-6 text-sp-lighter" />
                           ) : (
-                            <div>
-                              <SettingsDevicesIcon />
-                            </div>
+                            <SettingsDevicesIcon />
                           )}
                           <div className="flex justify-between w-full">
                             <div className="ml-4">
@@ -129,7 +127,7 @@ export function AccesibilityMenu() {
                                 <p className="text-sm font-medium">System</p>
                               </div>
                               {theme === "system" ? (
-                                <SettingsCheckSelectedIcon w={4} h={4} />
+                                <SettingsCheckSelectedIcon />
                               ) : (
                                 <SettingsCheckUnselectedIcon w={4} h={4} />
                               )}
@@ -146,7 +144,7 @@ export function AccesibilityMenu() {
                                 <p className="text-sm font-medium">Light</p>
                               </div>
                               {theme === "light" ? (
-                                <SettingsCheckSelectedIcon w={4} h={4} />
+                                <SettingsCheckSelectedIcon />
                               ) : (
                                 <SettingsCheckUnselectedIcon w={4} h={4} />
                               )}
@@ -163,7 +161,7 @@ export function AccesibilityMenu() {
                                 <p className="text-sm font-medium">Dark</p>
                               </div>
                               {theme === "dark" ? (
-                                <SettingsCheckSelectedIcon w={4} h={4} />
+                                <SettingsCheckSelectedIcon />
                               ) : (
                                 <SettingsCheckUnselectedIcon w={4} h={4} />
                               )}
@@ -173,19 +171,20 @@ export function AccesibilityMenu() {
                       </>
                     )}
                   </Disclosure>
-                  <a
-                    href="/contact"
-                    className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
-                  >
-                    <div>
-                      <SettingsQuestionIcon />
-                    </div>
-                    <div className="flex justify-between w-full">
-                      <div className="ml-4">
-                        <p className="text-sm font-medium">Contact Us</p>
+                  <Link href="mailto:hello@spiritus.app?subject=Contact Form - Spiritus.app">
+                    <a
+                      className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                    >
+                      <div>
+                        <SettingsQuestionIcon />
                       </div>
-                    </div>
-                  </a>
+                      <div className="flex justify-between w-full">
+                        <div className="ml-4">
+                          <p className="text-sm font-medium">Contact Us</p>
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
                 </div>
               </div>
             </Popover.Panel>

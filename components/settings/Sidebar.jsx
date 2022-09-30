@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
+
+import { signOut, useSession } from "next-auth/react";
 import { BookmarkIcon } from "@heroicons/react/outline";
 import {
   SettingsGuardianIcon,
@@ -15,6 +16,7 @@ import {
 
 export function Sidebar({ selectedIndex }) {
   const router = useRouter();
+  const { data: session } = useSession();
 
   const logoutUser = async () => {
     // await ProxyLogout(token);
@@ -57,21 +59,21 @@ export function Sidebar({ selectedIndex }) {
     },
     {
       name: "Theme",
-      href: "/",
+      href: "/account/settings/theme",
       icon: <SettingsDevicesIcon width={5} height={5} />,
     },
     {
       name: "Contact Us",
-      href: "/",
+      href: `mailto:hello@spiritus.app?subject=${`${session?.user?.name || ""} ${session?.user?.surname || "" } - Contact`}`,
       icon: <SettingsQuestionIcon width={5} height={5} />,
     },
   ];
 
   return (
-    <aside className="flex flex-col justify-evenly gap-y-1 mr-2 sticky top-0">
+    <aside className="flex flex-col justify-evenly gap-y-1 mr-2">
       <div className="text-sm leading-4 mb-5">
-        <p className="font-medium">John Doe</p>
-        <p className="opacity-60">john@doe.email.com</p>
+        <p className="font-medium">{`${session?.user?.name || ""} ${session?.user?.surname || "" }`}</p>
+        <p className="opacity-60">{session?.user?.email || ""}</p>
       </div>
       {menuItems.map((item, index) => (
         <Link href={item.href} key={item.name}>

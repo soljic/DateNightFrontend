@@ -35,7 +35,7 @@ export default NextAuth({
             return null;
           }
 
-          return {...res.data, ...profile.data };
+          return { ...res.data, ...profile.data };
         }
         // Return null if user data could not be retrieved
         return null;
@@ -44,13 +44,17 @@ export default NextAuth({
   ],
   secret: process.env.JWT_SECRET,
   callbacks: {
+    // this workflow is stupid
+    // it seems that JWT needs to be combined with user
+    // data so user data can be stored on first jwt() call (on login)
     async jwt({ token, user, account }) {
       if (account && user) {
         return {
           ...token,
           accessToken: user.access_token,
           refreshToken: user.refresh_token,
-          // add user unique code
+          // add user surname and code
+          surname: user.surname,
           code: user.code,
         };
       }
@@ -61,7 +65,8 @@ export default NextAuth({
     async session({ session, token }) {
       const data = jwt_decode(token.accessToken);
       session.user.accessToken = token.accessToken;
-      session.user.code = token.code
+      session.user.code = token.code;
+      session.user.surname = token.surname;
       return session;
     },
   },

@@ -1,13 +1,30 @@
-import Link from "next/link";
 import Image from "next/image";
 
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
 import { useSession } from "next-auth/react";
+import { PencilIcon } from "@heroicons/react/outline";
 
 import { Spinner } from "../../components/Status";
 
 import { ProxyProfileSpiritus } from "../../service/http/auth";
+
+import { Fragment } from "react";
+
+import Link from "next/link";
+
+import { Popover, Transition } from "@headlessui/react";
+
+import { BookmarkIcon, TrashIcon } from "@heroicons/react/outline";
+import {
+  SettingsGuardianIcon,
+  SettingsSpiritusIcon,
+  SettingsAccountIcon,
+  SettingsEditSpiritusIcon,
+  SettingsCreateStoryIcon,
+  SettingsEditStoryIcon,
+} from "../SettingsIcons";
+// import { ProxyLogout } from "../../service/http/proxy";
 
 export function MySpiritusGrid({ spiritus, isLastPage }) {
   const { t } = useTranslation("common");
@@ -43,26 +60,17 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
         My Spiritus
       </h1>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 md:grid-cols-2 mb-12">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-1 md:grid-cols-2 mb-12 place-items-center">
         {items.map((item) => {
-          if (item.image) {
-            return (
+          return (
+            <div className="h-full w-full" key={item.id}>
               <Tile
-                key={item.id}
                 id={item.id}
                 title={item.title}
                 subtitle={item.subtitle}
-                imageUrl={item.image.url}
+                image={item.image}
               />
-            );
-          }
-          return (
-            <PlaceHolderTile
-              id={item.id}
-              title={item.title}
-              subtitle={item.subtitle}
-              itemType={item.itemNavigationType}
-            />
+            </div>
           );
         })}
       </div>
@@ -88,52 +96,126 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
   );
 }
 
-function PlaceHolderTile({ id, title, subtitle }) {
+function Tile({ id, title, subtitle, image }) {
   return (
-    <Link href={`/edit/spiritus/${id}`} key={title}>
-      <a className="group w-full h-full">
-        <div className="flex min-h-[248px] min-w-[192px] border-2 dark:border-2 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-sp-14 justify-center items-center">
-          <div className="mx-auto grow-1">
-            <svg
-              className="h-16 w-16 text-sp-fawn text-opacity-20"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.1988 7.1998C11.1988 7.47378 11.1713 7.74132 11.1188 7.9998H15.9988C16.8825 7.9998 17.5988 8.71615 17.5988 9.5998V12.7998H15.9988C14.2315 12.7998 12.7988 14.2325 12.7988 15.9998V17.5998H9.59883C8.71517 17.5998 7.99883 16.8835 7.99883 15.9998V11.1198C7.74034 11.1723 7.4728 11.1998 7.19883 11.1998C6.92486 11.1998 6.65732 11.1723 6.39883 11.1198V15.9998C6.39883 17.7671 7.83152 19.1998 9.59883 19.1998H12.7988V22.3998C12.7988 24.1671 14.2315 25.5998 15.9988 25.5998H20.8788C20.8264 25.3413 20.7988 25.0738 20.7988 24.7998C20.7988 24.5258 20.8264 24.2583 20.8788 23.9998H15.9988C15.1152 23.9998 14.3988 23.2835 14.3988 22.3998V19.1998H15.9988C17.7661 19.1998 19.1988 17.7671 19.1988 15.9998V14.3998H22.3988C23.2825 14.3998 23.9988 15.1161 23.9988 15.9998V20.8798C24.2573 20.8274 24.5249 20.7998 24.7988 20.7998C25.0728 20.7998 25.3403 20.8274 25.5988 20.8798V15.9998C25.5988 14.2325 24.1661 12.7998 22.3988 12.7998H19.1988V9.5998C19.1988 7.83249 17.7661 6.3998 15.9988 6.3998H11.1188C11.1713 6.65829 11.1988 6.92583 11.1988 7.1998ZM17.5988 14.3998V15.9998C17.5988 16.8835 16.8825 17.5998 15.9988 17.5998H14.3988V15.9998C14.3988 15.1161 15.1152 14.3998 15.9988 14.3998H17.5988ZM9.59883 7.1998C9.59883 8.52529 8.52431 9.5998 7.19883 9.5998C5.87334 9.5998 4.79883 8.52529 4.79883 7.1998C4.79883 5.87432 5.87334 4.7998 7.19883 4.7998C8.52431 4.7998 9.59883 5.87432 9.59883 7.1998ZM27.1988 24.7998C27.1988 26.1253 26.1243 27.1998 24.7988 27.1998C23.4733 27.1998 22.3988 26.1253 22.3988 24.7998C22.3988 23.4743 23.4733 22.3998 24.7988 22.3998C26.1243 22.3998 27.1988 23.4743 27.1988 24.7998ZM27.1988 7.1998C27.1988 8.52529 26.1243 9.5998 24.7988 9.5998C23.4733 9.5998 22.3988 8.52529 22.3988 7.1998C22.3988 5.87432 23.4733 4.7998 24.7988 4.7998C26.1243 4.7998 27.1988 5.87432 27.1988 7.1998ZM9.59883 24.7998C9.59883 26.1253 8.52431 27.1998 7.19883 27.1998C5.87334 27.1998 4.79883 26.1253 4.79883 24.7998C4.79883 23.4743 5.87334 22.3998 7.19883 22.3998C8.52431 22.3998 9.59883 23.4743 9.59883 24.7998Z"
-                fill="currentColor"
+    <div className="flex flex-col">
+      <Link href={`/spiritus/id/${id}`}>
+        <a>
+          {image?.url ? (
+            <div className="w-full h-full">
+              <Image
+                src={image.url}
+                className="rounded-sp-14"
+                width={192}
+                height={248}
+                layout="responsive"
+                objectFit="fill"
               />
-            </svg>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center border rounded-sp-14 border-sp-medium min-h-[20vh] object-fill">
+              <svg
+                className="h-16 w-16 text-sp-medium"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.1988 7.1998C11.1988 7.47378 11.1713 7.74132 11.1188 7.9998H15.9988C16.8825 7.9998 17.5988 8.71615 17.5988 9.5998V12.7998H15.9988C14.2315 12.7998 12.7988 14.2325 12.7988 15.9998V17.5998H9.59883C8.71517 17.5998 7.99883 16.8835 7.99883 15.9998V11.1198C7.74034 11.1723 7.4728 11.1998 7.19883 11.1998C6.92486 11.1998 6.65732 11.1723 6.39883 11.1198V15.9998C6.39883 17.7671 7.83152 19.1998 9.59883 19.1998H12.7988V22.3998C12.7988 24.1671 14.2315 25.5998 15.9988 25.5998H20.8788C20.8264 25.3413 20.7988 25.0738 20.7988 24.7998C20.7988 24.5258 20.8264 24.2583 20.8788 23.9998H15.9988C15.1152 23.9998 14.3988 23.2835 14.3988 22.3998V19.1998H15.9988C17.7661 19.1998 19.1988 17.7671 19.1988 15.9998V14.3998H22.3988C23.2825 14.3998 23.9988 15.1161 23.9988 15.9998V20.8798C24.2573 20.8274 24.5249 20.7998 24.7988 20.7998C25.0728 20.7998 25.3403 20.8274 25.5988 20.8798V15.9998C25.5988 14.2325 24.1661 12.7998 22.3988 12.7998H19.1988V9.5998C19.1988 7.83249 17.7661 6.3998 15.9988 6.3998H11.1188C11.1713 6.65829 11.1988 6.92583 11.1988 7.1998ZM17.5988 14.3998V15.9998C17.5988 16.8835 16.8825 17.5998 15.9988 17.5998H14.3988V15.9998C14.3988 15.1161 15.1152 14.3998 15.9988 14.3998H17.5988ZM9.59883 7.1998C9.59883 8.52529 8.52431 9.5998 7.19883 9.5998C5.87334 9.5998 4.79883 8.52529 4.79883 7.1998C4.79883 5.87432 5.87334 4.7998 7.19883 4.7998C8.52431 4.7998 9.59883 5.87432 9.59883 7.1998ZM27.1988 24.7998C27.1988 26.1253 26.1243 27.1998 24.7988 27.1998C23.4733 27.1998 22.3988 26.1253 22.3988 24.7998C22.3988 23.4743 23.4733 22.3998 24.7988 22.3998C26.1243 22.3998 27.1988 23.4743 27.1988 24.7998ZM27.1988 7.1998C27.1988 8.52529 26.1243 9.5998 24.7988 9.5998C23.4733 9.5998 22.3988 8.52529 22.3988 7.1998C22.3988 5.87432 23.4733 4.7998 24.7988 4.7998C26.1243 4.7998 27.1988 5.87432 27.1988 7.1998ZM9.59883 24.7998C9.59883 26.1253 8.52431 27.1998 7.19883 27.1998C5.87334 27.1998 4.79883 26.1253 4.79883 24.7998C4.79883 23.4743 5.87334 22.3998 7.19883 22.3998C8.52431 22.3998 9.59883 23.4743 9.59883 24.7998Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          )}
+
+          <div className="mt-3">
+            <h3 className="text-lg dark:text-sp-white">{title}</h3>
+            <p className="text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60">
+              {subtitle}
+            </p>
           </div>
-        </div>
-        <div className="mt-3 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">{title}</h3>
-          <p className="dark:text-sp-white dark:text-opacity-60">{subtitle}</p>
-        </div>
-      </a>
-    </Link>
+        </a>
+      </Link>
+
+      <EditBtn id={id} />
+    </div>
   );
 }
 
-function Tile({ id, title, subtitle, imageUrl }) {
+function EditBtn({ id }) {
+  const menuItems = [
+    {
+      name: "Edit Spiritus info",
+      href: `/edit/spiritus/${id}`,
+      icon: <SettingsEditSpiritusIcon width={5} height={5} />,
+    },
+    {
+      name: "Create new Story",
+      href: `/create/story?spiritus=${id}`,
+      icon: <SettingsCreateStoryIcon width={5} height={5} />,
+    },
+    // {
+    //   name: "Edit Guardians",
+    //   href: "/",
+    //   icon: <SettingsGuardianIcon width={5} height={5} />,
+    // },
+    // {
+    //   name: "Edit a Story",
+    //   href: "/",
+    //   icon: <SettingsEditStoryIcon width={5} height={5} />,
+    // },
+  ];
+
   return (
-    <Link href={`/edit/spiritus/${id}`} key={title}>
-      <a className="group w-full h-full">
-        <div className="group-hover:opacity-75">
-          <Image
-            src={imageUrl}
-            className="object-cover rounded-sp-14"
-            width={220}
-            height={248}
-            layout="responsive"
-          />
-        </div>
-        <div className="mt-3 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">{title}</h3>
-          <p className="dark:text-sp-white dark:text-opacity-60">{subtitle}</p>
-        </div>
-      </a>
-    </Link>
+    <Popover className="z-10">
+      {({ open }) => (
+        <>
+          <Popover.Button className="flex justify-center items-center mt-5 border border-sp-medium py-1.5 px-3 rounded-sp-40 w-full">
+            <PencilIcon className="w-5 h-5 text-sp-white dark:text-sp-white" />
+            <span className="text-sp-white dark:text-sp-white ml-2">Edit</span>
+          </Popover.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-200"
+            enterFrom="opacity-0 translate-y-1"
+            enterTo="opacity-100 translate-y-0"
+            leave="transition ease-in duration-150"
+            leaveFrom="opacity-100 translate-y-0"
+            leaveTo="opacity-0 translate-y-1"
+          >
+            <Popover.Panel className="absolute z-100 mt-2 max-w-md">
+              <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
+                <div className="flex flex-col justify-evenly gap-y-1 p-3">
+                  {menuItems.map((item) => {
+                    return (
+                      <Link href={item.href} key={item.name}>
+                        <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3  dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                          {item.icon}
+                          <div className="ml-4">
+                            <p className="text-sm font-medium">{item.name}</p>
+                          </div>
+                        </a>
+                      </Link>
+                    );
+                  })}
+
+                  <button
+                    onClick={() => logoutUser()}
+                    className="flex w-52 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                  >
+                    <TrashIcon className="w-6 h-6 text-sp-cotta" />
+                    <div className="flex justify-between w-full ml-3">
+                      <p className="text-sm text-sp-cotta font-semibold">
+                        Delete...
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </Popover.Panel>
+          </Transition>
+        </>
+      )}
+    </Popover>
   );
 }

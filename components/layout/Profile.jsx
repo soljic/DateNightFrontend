@@ -28,7 +28,7 @@ export function ProfileMenu({ token, profileName }) {
   };
 
   return (
-    <div className="z-10">
+    <div className="z-30">
       <Popover>
         {({ open }) => (
           <>
@@ -94,7 +94,6 @@ export function ProfileMenu({ token, profileName }) {
                       </a>
                     </Link>
                     <button
-                      href="/contact"
                       onClick={() => logoutUser()}
                       className="flex w-52 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
                     >

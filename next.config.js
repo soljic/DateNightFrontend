@@ -48,7 +48,7 @@ module.exports = {
       // proxy pass SPIRITUS DELETE
       {
         source: "/api/spiritus/delete/:spiritusId",
-        destination: `${process.env.NEXT_API_URL}/spiritus/self/{id}`,
+        destination: `${process.env.NEXT_API_URL}/spiritus/self/:spiritusId`,
       },
       // proxy pass SPIRITUS EDIT
       {

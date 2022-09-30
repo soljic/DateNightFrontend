@@ -7,6 +7,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Sidebar } from "../../../components/settings/Sidebar";
 import { GuardianID } from "../../../components/settings/Guardian";
+import { MobileSidebar } from "../../../components/settings/MobileSidebar";
+
 
 export default function GuardianIDPage() {
   const { data: session, status } = useSession();
@@ -19,12 +21,15 @@ export default function GuardianIDPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Get your unique guardian ID" />
       </Head>
-      <section className="pt-5">
-        <div className="w-full grid grid-cols-3">
-          <div className="col-span-1">
-            <Sidebar selectedIndex={4}/>
+      <section className="pt-5 overflow-y-auto">
+        <div className="w-full grid grid-cols-1 md:grid-cols-3">
+          <div className="col-span-1 hidden sm:hidden md:block">
+            <Sidebar selectedIndex={4} />
           </div>
-          <div className="col-span-2 flex justify-center ">
+          <div className="md:col-span-1 md:hidden">
+            <MobileSidebar selectedIndex={4} />
+          </div>
+          <div className="md:col-span-2 flex justify-start">
             <GuardianID guardianID={session?.user.code || ""} />
           </div>
         </div>
