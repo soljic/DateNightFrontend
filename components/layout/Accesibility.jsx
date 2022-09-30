@@ -129,7 +129,7 @@ export function AccesibilityMenu() {
                                 <p className="text-sm font-medium">System</p>
                               </div>
                               {theme === "system" ? (
-                                <SettingsheckSelectedIcon w={4} h={4} />
+                                <SettingsCheckSelectedIcon w={4} h={4} />
                               ) : (
                                 <SettingsCheckUnselectedIcon w={4} h={4} />
                               )}
