@@ -11,11 +11,13 @@ import {
 import { LocationIcon } from "../Icons";
 
 export function CreateSpiritusCTA() {
+  const { t } = useTranslation("common");
+
   return (
     <div className="rounded-sp-14 bg-center bg-[url('/images/photos_bg.png')] w-full h-full py-24">
       <div className="flex flex-col items-center">
         <h2 className="text-center sm:w-3/5 md:w-3/4 lg:w-3/5 text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight text-sp-black dark:text-sp-white font-bold mb-4">
-          Keep memories of your loved ones, forever
+          {t("cta_create_spiritus_title")}
         </h2>
         <CTACreateButton />
       </div>
