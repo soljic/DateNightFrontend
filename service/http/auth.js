@@ -4,7 +4,7 @@ import { API_URL, defaultLimit, defaultOffset } from "../constants";
 
 export async function LoginCredentials(username, password) {
   return await axios.post(
-    `${API_URL}/authentication/login?grant_type=credentials`,
+    `${API_URL}/v2/authentication/login?grant_type=credentials`,
     {
       username,
       password,
@@ -13,7 +13,7 @@ export async function LoginCredentials(username, password) {
 }
 
 export async function Register(name, lastName, email, password) {
-  const res = await axios.post(`${API_URL}/authentication/register`, {
+  const res = await axios.post(`${API_URL}/v2/authentication/register`, {
     name,
     lastName,
     email,

@@ -29,6 +29,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       setIsLoading(false);
     } catch (err) {
       // TODO: handle this
+      setIsLoading(false);
       console.log(err.message);
     }
   };
@@ -88,15 +89,21 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       </div>
 
       {!isLast && (
-        <button
-          onClick={() => {
-            loadMore();
-          }}
-          disabled={isLast}
-          className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
-        >
-          {isLoading ? <Spinner text={t("loading")} /> : t("action_load_more")}
-        </button>
+        <div className="flex justify-center mt-16">
+          <button
+            onClick={() => {
+              loadMore();
+            }}
+            disabled={isLast}
+            className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+          >
+            {isLoading ? (
+              <Spinner text={t("loading")} />
+            ) : (
+              t("action_load_more")
+            )}
+          </button>
+        </div>
       )}
     </div>
   );
@@ -130,9 +137,13 @@ function SectionTile({ itemId, title, subtitle, imageUrl, itemType }) {
           />
         </div>
         <div className="mt-3 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">{title}</h3>
+          <h3 className="text-lg dark:text-sp-white">
+            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+          </h3>
           <p className="dark:text-sp-white dark:text-opacity-60">
-            {subtitle}
+            {subtitle.length > 64
+              ? `${subtitle.substring(0, 64)} ...`
+              : subtitle}
           </p>
         </div>
       </a>

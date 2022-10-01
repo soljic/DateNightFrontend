@@ -12,6 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import { GetStoryById } from "../../../service/http/story";
+import { GetSpiritusById } from "../../../service/http/spiritus";
 
 import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Spinner } from "../../../components/Status";
@@ -249,8 +250,25 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const res = await GetStoryById(id);
-    const initText = res.data.paragraphs
+    const { data: story } = await GetStoryById(id);
+    const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
+
+    if (!spiritus || !spiritus?.users) {
+      throw "missing spiritus data";
+    }
+
+    let isOwner = false;
+    for (const su of spiritus.users) {
+      if (su.email === session.user.email && su.code === session.user.code) {
+        isOwner = true;
+      }
+    }
+
+    if (!isOwner) {
+      throw "edit not permitted";
+    }
+
+    const initText = story.paragraphs
       .sort((p1, p2) => {
         if (p1.index < p2.index) {
           return -1;
@@ -264,7 +282,7 @@ export async function getServerSideProps(context) {
       .reduce((prev, cur) => prev + `${cur.text}\n\n`, "");
     return {
       props: {
-        story: { ...res.data, storyText: initText },
+        story: { ...story, storyText: initText },
         ...(await serverSideTranslations(context.locale, ["common"])),
       },
     };

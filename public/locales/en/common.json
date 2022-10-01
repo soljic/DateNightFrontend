@@ -57,12 +57,13 @@
   "term_rated": "Rated",
   "term_on": "on",
 
-  "term_places": "Mjesto",
-  "term_story": "Priča",
+  "term_places": "Place",
+  "term_story": "Story",
+  "term_thanks": "Thank you!",
 
   "write_tribute": "Write Tribute",
   "give_rose": "Send Rose",
-  "with_tribute": "with Tribute",
+  "with_tribute": "with tribute",
   "save": "Save",
   "share": "Share",
   "next": "Next",

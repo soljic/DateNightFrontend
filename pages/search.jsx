@@ -269,8 +269,6 @@ function Row({ name, surname, images, birth, death, slug }) {
             <Image
               src={images[0].url}
               alt={"Search result thumbnail"}
-              width={80}
-              height={80}
               layout="fill"
             />
           </div>
@@ -320,15 +318,15 @@ function GlobalSearchResults({ results }) {
   );
 }
 
-function GlobalSearchRow({ id, title, subtitle, navigationType }) {
+function GlobalSearchRow({ id, slug, title, subtitle,  navigationType }) {
   const getURL = (navType) => {
     switch (navType) {
       case "PLACE_DETAILS":
-        return `/place/id/${id}`;
+        return `/spiritus/place/${id}?location=${title}`;
       case "STORY_DETAILS":
-        return `/story/id/${id}`;
+        return `/story/${slug}`;
       default:
-        return `/spiritus/id/${id}`;
+        return `/spiritus/${slug}`;
     }
   };
   return (

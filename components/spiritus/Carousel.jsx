@@ -26,7 +26,7 @@ export function SpiritusCarousel({ images }) {
 
   return (
     !!images.length && (
-      <div className="sw-spiritus relative w-full mt-16 mb-14 overflow-hidden">
+      <div className="sw-spiritus relative w-full mt-16 overflow-hidden">
         <div className="swiper-prev-step absolute inset-y-0 left-4 md:left-16 z-10 h-5/6 flex items-center">
           <button
             ref={prevRef}

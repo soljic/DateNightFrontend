@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Head from "next/head";
 
 import Router from "next/router";
@@ -138,9 +139,11 @@ export default function EmailLogin() {
             >
               {submitting ? <Spinner text="Logging in..." /> : "Log in"}
             </button>
-            <a className="text-sp-lighter hover:text-sp-fawn mt-7" href="#!">
-              Forgot password?
-            </a>
+            <Link href="/auth/login/password-reset">
+              <a className="text-sp-lighter hover:text-sp-fawn mt-7">
+                Forgot password?
+              </a>
+            </Link>
           </div>
         </form>
       </section>

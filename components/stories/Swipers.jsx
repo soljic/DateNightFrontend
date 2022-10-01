@@ -109,7 +109,7 @@ export function HomepageSwiper({
                     <HomepageTile
                       itemId={item.itemId}
                       title={item.title}
-                      spiritusName={item.subtitle}
+                      subtitle={item.subtitle}
                       imageUrl={item.imageUrl}
                       itemType={itemType}
                       featured={featured}
@@ -134,48 +134,41 @@ function HomepageTile({
   itemId,
   itemType,
   title,
-  spiritusName,
+  subtitle,
   imageUrl,
   featured,
 }) {
   return (
-    <div key={itemId} className="group">
-      <div className="relative group-hover:opacity-75">
-        {featured && (
-          <div className="absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg">
-            <CrownIcon width={5} height={5} />
-          </div>
-        )}
-        {imageUrl ? (
-          <Image
-            src={imageUrl}
-            className="object-cover rounded-sp-14"
-            width={220}
-            height={248}
-            layout="responsive"
-          />
-        ) : (
-          <ImagePlaceholder />
-        )}
-      </div>
-      <div className="flex flex-col justify-between mt-3 antialiased font-medium tracking-sp-tighten leading-4">
-        <h3 className="text-lg dark:text-sp-white leading-snug">
-          <Link
-            href={
-              itemType === "SPIRITUS"
-                ? `/spiritus/${itemId}`
-                : `/stories/${itemId}`
-            }
-          >
-            <a>
-              <span aria-hidden="true" className="absolute inset-0" />
-              {title}
-            </a>
-          </Link>
-        </h3>
-        <p className="text-sm mt-1 dark:text-sp-white opacity-50">{`${spiritusName}`}</p>
-      </div>
-    </div>
+    <Link
+      href={
+        itemType === "SPIRITUS" ? `/spiritus/${itemId}` : `/stories/${itemId}`
+      }
+    >
+      <a key={itemId} className="group">
+        <div className="relative group-hover:opacity-75">
+          {featured && (
+            <div className="absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg">
+              <CrownIcon width={5} height={5} />
+            </div>
+          )}
+          {imageUrl ? (
+            <Image
+              src={imageUrl}
+              className="object-cover rounded-sp-14"
+              width={220}
+              height={248}
+              layout="responsive"
+            />
+          ) : (
+            <ImagePlaceholder />
+          )}
+        </div>
+        <div className="flex flex-col justify-between mt-3 antialiased font-medium tracking-sp-tighten leading-4">
+          <h3 className="text-lg dark:text-sp-white leading-snug">{title.length > 64 ? `${title.substring(0, 64)} ...` : title}</h3>
+          <p className="text-sm mt-1 dark:text-sp-white opacity-50">{subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}</p>
+        </div>
+      </a>
+    </Link>
   );
 }
 

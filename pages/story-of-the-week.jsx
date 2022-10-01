@@ -94,7 +94,7 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
           )}
         </div>
         <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white mt-8 lg:text-lg">
-          <Tribute />
+          <Tribute id={spiritus.id} />
           <HorizontalDivider />
         </div>
         <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
@@ -114,14 +114,10 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
 
 export async function getStaticProps(context) {
   // fetch homepage to get story of the week ID
-  const {storyOfTheWeek} = await GetParsedHomepage();
-  const {data: story} = await GetStoryById(storyOfTheWeek.itemId);
-  const {data: spiritus} = await GetSpiritusById(story.spiritus.id);
-  const {data: allStories} = await GetSpiritusStoriesBySlug(
-    spiritus.slug,
-    0,
-    20
-  );
+  const { storyOfTheWeek } = await GetParsedHomepage();
+  const { data: story } = await GetStoryById(storyOfTheWeek.itemId);
+  const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
+  const { data: allStories } = await GetSpiritusStoriesBySlug(spiritus.slug);
 
   let content = allStories?.content ? allStories?.content : [];
   // sort story paragraphs by index

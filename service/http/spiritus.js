@@ -94,3 +94,40 @@ export async function SearchSpiritusFullText(text, offset, limit) {
   return res;
 }
 
+export async function GetSpiritusByPlaceId(placeId, offset, limit) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  const res = await axios.get(
+    encodeURI(
+      `${API_URL}/wapi/spiritus/place/${placeId}?page=${o}&size=${l}`
+    )
+  );
+
+  res.data.content.forEach((spiritus) => {
+    spiritus.images.forEach((img) => {
+      img.url = img.url ? ImagePath(img.url) : null;
+    });
+  });
+
+  return res;
+}
+
+export async function ProxyGetSpiritusByPlaceId(placeId, offset, limit) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  const res = await axios.get(
+    encodeURI(
+      `/api/spiritus/place/${placeId}?page=${o}&size=${l}`
+    )
+  );
+
+  res.data.content.forEach((spiritus) => {
+    spiritus.images.forEach((img) => {
+      img.url = img.url ? ImagePath(img.url) : null;
+    });
+  });
+
+  return res;
+}

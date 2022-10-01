@@ -18,6 +18,11 @@ module.exports = {
   // reloadOnPrerender: true,
   async rewrites() {
     return [
+      // Get stories for spiritus -- using slug
+      {
+        source: "/api/stories/spiritus/:query*",
+        destination: `${process.env.NEXT_API_URL}/wapi/stories/spiritus/:query*`,
+      },
       {
         source: "/api/spiritus/create",
         destination: `${process.env.NEXT_API_URL}/wapi/spiritus`,
@@ -91,6 +96,37 @@ module.exports = {
         source: "/api/authentication/user/spiritus",
         destination: `${process.env.NEXT_API_URL}/v2/user/account/spiritus`,
       },
+
+      // SAVE API
+      {
+        source: "/api/save/story/:id",
+        destination: `${process.env.NEXT_API_URL}/wapi/story/save/:id`,
+      },
+      {
+        source: "/api/unsave/story/:id",
+        destination: `${process.env.NEXT_API_URL}/wapi/story/unsave/:id`,
+      },
+      {
+        source: "/api/save/spiritus/:id",
+        destination: `${process.env.NEXT_API_URL}/wapi/spiritus/:id/save`,
+      },
+      {
+        source: "/api/unsave/spiritus/:id",
+        destination: `${process.env.NEXT_API_URL}/wapi/spiritus/:id/unsave`,
+      },
+
+      // Places
+      {
+        source: "/api/spiritus/place/:query*",
+        destination: `${process.env.NEXT_API_URL}/wapi/spiritus/place/:query*`,
+      },
+
+      // Rose
+      {
+        source: "/api/spiritus/rose/:id",
+        destination: `${process.env.NEXT_API_URL}/wapi/rose/spiritus/:id`,
+      },
+     
     ];
   },
 };

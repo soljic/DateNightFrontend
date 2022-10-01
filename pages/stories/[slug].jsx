@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Head from "next/head";
 
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
@@ -10,6 +11,7 @@ import { HorizontalDivider } from "../../components/layout/Common";
 import {
   CTAAddMemory,
   MoreStories,
+  PageActions,
   Tags,
   Tribute,
 } from "../../components/stories/StoryPage";
@@ -40,10 +42,32 @@ export default function StoryPage({
   displayStory,
   stories,
   spiritus,
-  hasMore,
-  total,
+  isLastPage,
 }) {
   const { t } = useTranslation("common");
+
+  const { data: session, status } = useSession();
+
+  const sessionUserIsOwner = () => {
+    if (!spiritus || !spiritus?.users || !spiritus?.users.length) {
+      return false;
+    }
+    for (const su of spiritus.users) {
+      if (su.email == session?.user.email && su.code == session?.user.code) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const getNextStorySlug = () => {
+    for (const s of stories) {
+      if (s.id < displayStory.id) {
+        return s.slug;
+      }
+    }
+    return "";
+  };
 
   return (
     <Layout>
@@ -60,7 +84,11 @@ export default function StoryPage({
           }
         />
       </Head>
-      <EditBtn storyId={displayStory.id} />
+      {status === "authenticated" && sessionUserIsOwner() ? (
+        <EditBtn storyId={displayStory.id} />
+      ) : (
+        ""
+      )}
       <section
         className="mx-auto flex flex-col justify-center items-center mt-8"
         key="story"
@@ -117,15 +145,27 @@ export default function StoryPage({
             <></>
           )}
         </div>
-        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white mt-8 lg:text-lg">
-          <Tribute />
+        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white mt-14 mb-4 lg:text-lg">
+          <Tribute id={spiritus.id} />
+          <PageActions
+            shareLink={displayStory.shortLink}
+            id={displayStory.id}
+            type={"STORY"}
+            nextStorySlug={getNextStorySlug()}
+            saved={displayStory.flags.includes("SAVED")}
+          />
           <HorizontalDivider />
         </div>
         <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
           <SpiritusOverview {...spiritus} />
           <SpiritusCarousel images={spiritus.images} />
           <div className="text-sp-white mt-4">
-            <MoreStories stories={stories} spiritus={spiritus} />
+            <MoreStories
+              stories={stories}
+              spiritus={spiritus}
+              userIsOwner={sessionUserIsOwner()}
+              isLastPage={isLastPage}
+            />
             <div className="flex-1 items-center justify-center">
               <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
             </div>
@@ -141,11 +181,7 @@ export async function getServerSideProps(context) {
   const { slug } = context.query;
   const resStory = await GetStoryBySlug(slug);
   const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
-  const resAllStories = await GetSpiritusStoriesBySlug(
-    resSpiritus.data.slug,
-    0,
-    20
-  );
+  const resAllStories = await GetSpiritusStoriesBySlug(resSpiritus.data.slug);
 
   let content = resAllStories.data?.content ? resAllStories.data?.content : [];
   // sort story paragraphs by index
@@ -173,8 +209,7 @@ export async function getServerSideProps(context) {
       displayStory: resStory.data,
       stories: content,
       spiritus: resSpiritus.data,
-      hasMore: !resAllStories.data.last,
-      total: resAllStories.data.numberOfElements,
+      isLastPage: resAllStories.data.last,
     },
   };
 }

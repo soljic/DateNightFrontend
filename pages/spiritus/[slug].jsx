@@ -1,11 +1,17 @@
 import Head from "next/head";
 
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
 
 import Layout from "../../components/layout/Layout";
-import { CTAAddMemory, MoreStories } from "../../components/stories/StoryPage";
+import {
+  CTAAddMemory,
+  MoreStories,
+  PageActions,
+  Tribute,
+} from "../../components/stories/StoryPage";
 import { SpiritusOverview } from "../../components/spiritus/Overview";
 import { SpiritusCarousel } from "../../components/spiritus/Carousel";
 
@@ -26,8 +32,21 @@ function EditBtn({ spiritusId }) {
   );
 }
 
-export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
+export default function SpiritusPage({ spiritus, stories, isLastPage }) {
   const { t } = useTranslation("common");
+  const { data: session, status } = useSession();
+
+  const sessionUserIsOwner = () => {
+    if (!spiritus || !spiritus?.users || !spiritus?.users.length) {
+      return false;
+    }
+    for (const su of spiritus.users) {
+      if (su.email == session?.user.email && su.code == session?.user.code) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   return (
     <Layout>
@@ -44,13 +63,32 @@ export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
           }
         />
       </Head>
-      <EditBtn spiritusId={spiritus.id} />
+      {status === "authenticated" && sessionUserIsOwner() ? (
+        <EditBtn storyId={displayStory.id} />
+      ) : (
+        ""
+      )}
 
       <section className="mx-auto w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
         <SpiritusOverview {...spiritus} />
         <SpiritusCarousel images={spiritus.images} />
+
+        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
+          <Tribute id={spiritus.id}/>
+          <PageActions
+            shareLink={spiritus.shortLink}
+            id={spiritus.id}
+            type={"SPIRITUS"}
+            saved={spiritus.flags.includes("SAVED")}
+          />
+        </div>
         <div className="text-sp-white mt-4">
-          <MoreStories stories={stories} spiritus={spiritus} />
+          <MoreStories
+            stories={stories}
+            spiritus={spiritus}
+            userIsOwner={sessionUserIsOwner()}
+            isLastPage={isLastPage}
+          />
           <div className="flex-1 items-center justify-center">
             <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
           </div>
@@ -63,19 +101,17 @@ export default function SpiritusPage({ spiritus, stories, hasMore, total }) {
 // fetch first 5 spiritus stories
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const resSpiritus = await GetSpiritusBySlug(slug);
-  const spiritus = resSpiritus.data;
+  const { data: spiritus } = await GetSpiritusBySlug(slug);
 
-  const resStories = await GetSpiritusStoriesBySlug(slug, 0, 20);
-  const stories = resStories.data?.content;
+  const { data: resStories } = await GetSpiritusStoriesBySlug(slug);
+  const stories = resStories?.content;
 
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ["common"])),
       stories,
       spiritus,
-      hasMore: !resStories.data.last,
-      total: resStories.data.numberOfElements,
+      isLastPage: resStories.last,
     },
   };
 }

@@ -300,13 +300,30 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const res = await GetSpiritusById(id);
-    return {
-      props: {
-        spiritus: { ...res.data },
-        ...(await serverSideTranslations(context.locale, ["common"])),
-      },
-    };
+    const { data: spiritus } = await GetSpiritusById(id);
+
+    if (!spiritus || !spiritus?.users) {
+      throw "missing spiritus data";
+    }
+
+    for (const su of spiritus.users) {
+      if (su.email === session.user.email && su.code === session.user.code) {
+        return {
+          props: {
+            spiritus,
+            ...(await serverSideTranslations(context.locale, ["common"])),
+          },
+        };
+      }
+
+      // user does not have access - redirect to previous page
+      return {
+        redirect: {
+          destination: context.req.headers.referer || "/",
+          permanent: false,
+        },
+      };
+    }
   } catch (err) {
     console.log("error fetching spiritus\n", err);
     // redirect to home in case of err
