@@ -6,8 +6,8 @@ import { useTranslation } from "next-i18next";
 
 import { Dialog, Transition } from "@headlessui/react";
 import Lottie from "lottie-react";
-import { useLottie } from "lottie-react";
 
+import giveRose from "../giveRose.json";
 import confetti from "../confetti.json";
 
 import {
@@ -55,22 +55,19 @@ export function Tribute({ id }) {
   const { t } = useTranslation("common");
   const { data: session } = useSession();
 
-  const { View } = useLottie({
-    animationData: confetti,
-    loop: false,
-  });
-
   const sendRose = async () => {
     let name = `${session?.user?.name || ""} ${
       session?.user?.surname || ""
     }`.trim();
-    name = name.length ? name : "Anonymous";
+    name = name.length ? name : "";
 
     try {
       await ProxySendRose(session.user.accessToken, id, name, text);
       setSent(true);
       setIsOpen(true);
     } catch (err) {
+      setSent(false);
+      setIsOpen(false);
       console.log(err);
     }
   };
@@ -96,15 +93,7 @@ export function Tribute({ id }) {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex items-center justify-center min-h-full p-4 text-center">
-              <div className="absolute w-full h-full sm:w-1/3 mx-auto top-40">
-                <Lottie
-                  animationData={confetti}
-                  loop={false}
-                  width={200}
-                  height={200}
-                />
-              </div>
+            <div className="flex items-center justify-center min-w-full min-h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-1000"
@@ -114,14 +103,16 @@ export function Tribute({ id }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-[350px] h-[520px] overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-sp-14">
-                  <Image
-                    src="/images/rose.jpg"
-                    width={240}
-                    height={375}
-                    layout="responsive"
-                    className="p-5"
-                  />
+                <Dialog.Panel
+                  onClick={closeModal}
+                  className="absolute w-2/3 h-2/3 overflow-hidden text-left align-middle transition-all transform"
+                >
+                  <div className="absolute mx-auto">
+                    <Lottie animationData={confetti} loop={false} />
+                  </div>
+                  <div className="relative mx-auto">
+                    <Lottie animationData={giveRose} loop={false} />
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
