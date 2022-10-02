@@ -34,15 +34,28 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
     }
   };
 
+  const translateTitle = (title) => {
+    switch (title) {
+      case "Discover":
+        return t("section_discover_title");
+      case "Anniversaries":
+        return t("section_featured_title");
+      case "Featured stories":
+        return t("section_anniversaries_title");
+      default:
+        return title;
+    }
+  };
+
   return (
     <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
       <div className="flex flex-col items-center mb-32">
         <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-          {title}
+          {translateTitle(title)}
         </h1>
 
         <p className="text-sp-lighter dark:text-sp-lighter mt-2">
-          The best stories that we think are on Spiritus.
+          {t("section_generic_subtitle")}
         </p>
 
         <div className="inline-flex mt-6 items-center gap-3">
@@ -89,7 +102,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       </div>
 
       {!isLast && (
-        <div className="flex justify-center mt-16">
+        <div className="flex justify-center mt-16 w-full">
           <button
             onClick={() => {
               loadMore();
@@ -161,8 +174,15 @@ function SectionTile({ itemId, title, subtitle, imageUrl, itemType }) {
           />
         </div>
         <div className="mt-2 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">{title}</h3>
-          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">{`${subtitle}`}</p>
+          <h3 className="text-lg dark:text-sp-white">
+            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+          </h3>
+          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+            {" "}
+            {subtitle.length > 64
+              ? `${subtitle.substring(0, 64)} ...`
+              : subtitle}
+          </p>
         </div>
       </a>
     </Link>

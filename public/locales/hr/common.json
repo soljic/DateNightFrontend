@@ -57,7 +57,7 @@
   "term_rated": "Ocijenjeno",
   "term_on": "na",
 
-  "term_places": "Mjesto",
+  "term_place": "Mjesto",
   "term_story": "Priča",
   "term_thanks": "Hvala!",
 
@@ -131,6 +131,7 @@
   "section_featured_title": "Istaknuto",
   "section_anniversaries_title": "Godišnjice",
   "section_categories_title": "Kategorije",
+  "section_generic_subtitle": "Istraži najbolje priče na Spiritusu",
 
   "action_favourite": "Označeno",
   "action_filter": "Filteri",

@@ -19,10 +19,12 @@ import {
 } from "../service/constants";
 import { GlobalSearch, FulltextSpiritusSearch } from "../service/http/search";
 
-export default function Search() {
+export default function Search({ defaultFilter }) {
   const { t } = useTranslation("common");
 
-  const [searchFilter, setSearchFilter] = useState(FILTER_SPIRITUS);
+  const [searchFilter, setSearchFilter] = useState(
+    defaultFilter || FILTER_SPIRITUS
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
@@ -125,6 +127,8 @@ export default function Search() {
 }
 
 function Filter({ filter, setFilter, clear }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex justify-between w-3/4 mx-auto mt-6">
       <button
@@ -151,7 +155,7 @@ function Filter({ filter, setFilter, clear }) {
             : ""
         }`}
       >
-        Place
+        {t("term_place")}
       </button>
       <button
         onClick={() => {
@@ -164,7 +168,7 @@ function Filter({ filter, setFilter, clear }) {
             : ""
         }`}
       >
-        Story
+        {t("term_story")}
       </button>
     </div>
   );
@@ -318,7 +322,7 @@ function GlobalSearchResults({ results }) {
   );
 }
 
-function GlobalSearchRow({ id, slug, title, subtitle,  navigationType }) {
+function GlobalSearchRow({ id, slug, title, subtitle, navigationType }) {
   const getURL = (navType) => {
     switch (navType) {
       case "PLACE_DETAILS":
@@ -348,9 +352,27 @@ function GlobalSearchRow({ id, slug, title, subtitle,  navigationType }) {
   );
 }
 
-export async function getStaticProps(context) {
+// defaultFilter can be selected using ?query=place|spiritus|story
+// if none is provided spiritus search is assumed
+export async function getServerSideProps(context) {
+  let defaultFilter = "";
+  const { query } = context;
+  if (query?.query) {
+    switch (query?.query.toUpperCase()) {
+      case FILTER_STORY:
+        defaultFilter = FILTER_STORY;
+        break
+      case FILTER_PLACE:
+        defaultFilter = FILTER_PLACE;
+        break
+      default:
+        defaultFilter = FILTER_SPIRITUS;
+    }
+  }
+
   return {
     props: {
+      defaultFilter,
       ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };

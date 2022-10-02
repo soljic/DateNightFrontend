@@ -106,13 +106,12 @@ function CTASearchPlacesButton() {
   const { t } = useTranslation("common");
 
   return (
-    <a
-      href="/search"
-      className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black"
-    >
-      <ArrowCircleRightIcon className="h-6 w-6" />
-      <span className="font-semibold ml-1">{t("goto_search_places")}</span>
-    </a>
+    <Link href="/search?query=place">
+      <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black">
+        <ArrowCircleRightIcon className="h-6 w-6" />
+        <span className="font-semibold ml-1">{t("goto_search_places")}</span>
+      </a>
+    </Link>
   );
 }
 
@@ -134,13 +133,12 @@ function CTASearchButton() {
   const { t } = useTranslation("common");
 
   return (
-    <a
-      href="/search"
-      className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black"
-    >
-      <ArrowCircleRightIcon className="h-6 w-6" />
-      <span className="font-semibold ml-1">{t("goto_search")}</span>
-    </a>
+    <Link href="/search">
+      <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black">
+        <ArrowCircleRightIcon className="h-6 w-6" />
+        <span className="font-semibold ml-1">{t("goto_search")}</span>
+      </a>
+    </Link>
   );
 }
 
