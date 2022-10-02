@@ -57,7 +57,7 @@ export async function getServerSideProps (context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ['common'])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       id: res.data.id,
       title: title,
       totalPages: res.data.items.totalPages,

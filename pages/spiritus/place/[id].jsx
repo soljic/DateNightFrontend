@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
   const { data: res } = await GetSpiritusByPlaceId(id);
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       id: id,
       title: location,
       totalPages: res.totalPages,

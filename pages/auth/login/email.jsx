@@ -4,6 +4,8 @@ import Head from "next/head";
 import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getSession, signIn } from "next-auth/react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
@@ -19,6 +21,8 @@ function isEmailValid(email) {
 }
 
 export default function EmailLogin() {
+  const { t } = useTranslation("auth");
+
   const {
     register,
     handleSubmit,
@@ -82,17 +86,17 @@ export default function EmailLogin() {
         <div className="flex flex-col justify-center items-center gap-8">
           <ShieldIcon width={12} height={12} />
           <h4 className="text-3xl text-center font-bold mb-10">
-            Log in as Guardian
+            {t("login_title")}
           </h4>
         </div>
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label htmlFor="email">Email address</label>
+          <div className="mb-4" key="email">
+            <label htmlFor="email">{t("email_address")}</label>
             <input
               {...register("email", {
                 required: true,
                 validate: (v) =>
-                  isEmailValid(v) || "A valid email address is required",
+                  isEmailValid(v) || t("email_address_err"),
               })}
               type="text"
               className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
@@ -104,8 +108,8 @@ export default function EmailLogin() {
               </p>
             )}
           </div>
-          <div className="relative">
-            <label htmlFor="password">Password</label>
+          <div className="relative" key="password">
+            <label htmlFor="password"> {t("password")}</label>
             <input
               {...register("password", {
                 required: true,
@@ -131,17 +135,18 @@ export default function EmailLogin() {
           </div>
           {err && <p className="text-sm text-red-600 py-2 px-1">{err}</p>}
 
-          <div className="flex flex-col justify-center items-center text-center mt-5">
+          <div className="flex flex-col justify-center items-center text-center mt-5" key="submit">
             {/* login button */}
             <button
               type="submit"
+              disabled={submitting}
               className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-sp-black text-lg"
             >
-              {submitting ? <Spinner text="Logging in..." /> : "Log in"}
+              {submitting ? <Spinner text="" /> : "Log in"}
             </button>
             <Link href="/auth/login/password-reset">
               <a className="text-sp-lighter hover:text-sp-fawn mt-7">
-                Forgot password?
+                {t("forgot_password")}
               </a>
             </Link>
           </div>
@@ -165,7 +170,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      session,
+      ...(await serverSideTranslations(context.locale, ["auth"])),
     },
   };
 }

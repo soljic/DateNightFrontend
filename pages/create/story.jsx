@@ -265,7 +265,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         spiritus: data,
-        ...(await serverSideTranslations(context.locale, ["common"])),
+        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       },
     };
   } catch (err) {

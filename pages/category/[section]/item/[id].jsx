@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
   const res = await GetSectionItem(section, id);
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       id: res.data.id,
       title: title,
       totalPages: res.data.items.totalPages,

@@ -31,7 +31,7 @@ import {
 // import { ProxyLogout } from "../../service/http/proxy";
 
 export function MySpiritusGrid({ spiritus, isLastPage }) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "settings"]);
   const { data: session, status } = useSession();
 
   const [current, setCurrent] = useState(0);
@@ -82,7 +82,7 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
       />
 
       <h1 className="text-2xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-        My Spiritus
+        {t("settings:spiritus")}
       </h1>
 
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-1 md:grid-cols-2 mb-12 place-items-center">
@@ -123,6 +123,8 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
 }
 
 function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
+  const { t } = useTranslation(["common", "settings"]);
+
   let [submitting, setSubmitting] = useState(false);
   const [err, setErr] = useState("");
 
@@ -137,8 +139,8 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
   const onClose = () => {
     setErr("");
     reset();
-    closeModal()
-  }
+    closeModal();
+  };
 
   // call DELETE on BE and remove from rendered items
   const onSubmit = async (data) => {
@@ -149,7 +151,7 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
       setSubmitting(false);
       closeModal();
     } catch (error) {
-      setErr("Unable to delete. Try again later.");
+      setErr(t("settings:delete_err"));
       setSubmitting(false);
       console.log("ERR DELETING", error);
     }
@@ -206,24 +208,25 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
                         />
                       </svg>
                       <h1 className="text-3xl font-bold mt-8 mb-2.5">
-                        Delete Spiritus?
+                        {t("settings:delete_modal_title")}
                       </h1>
                       <p className="text-center font-medium">
-                        You must be certain that you want to delete this
-                        Spiritus. This action cannot be undone upon completion.
+                        {t("settings:delete_modal_subtitle")}
                       </p>
                     </div>
                     <form
                       className="flex flex-col gap-2"
                       onSubmit={handleSubmit(onSubmit)}
                     >
-                      <label htmlFor="confirm">Type DELETE to confirm</label>
+                      <label htmlFor="confirm">
+                        {t("settings:delete_modal_confirm")}
+                      </label>
                       <input
                         {...register("confirm", {
                           required: true,
                           validate: (v) =>
                             v.toLowerCase() === "delete" ||
-                            "Text must match 'DELETE'",
+                            t("settings:delete_modal_confirm_err"),
                         })}
                         type="text"
                         className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
@@ -254,7 +257,7 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
                             onClick={onClose}
                             className="border border-sp-lighter rounded-sp-40 py-2 px-3 text-sm dark:text-sp-white"
                           >
-                            No, keep Spiritus
+                            {t("settings:delete_modal_cancel")}
                           </button>
                         </div>
                       </div>
@@ -320,19 +323,21 @@ function Tile({ id, title, subtitle, image, openModal }) {
 }
 
 function EditBtn({ id, openModal }) {
+  const { t } = useTranslation(["common", "settings"]);
+
   const menuItems = [
     {
-      name: "Edit Spiritus info",
+      name: t("settings:edit_spiritus"),
       href: `/edit/spiritus/${id}`,
       icon: <SettingsEditSpiritusIcon width={5} height={5} />,
     },
     {
-      name: "Create new Story",
+      name: t("settings:new_story"),
       href: `/create/story?spiritus=${id}`,
       icon: <SettingsCreateStoryIcon width={5} height={5} />,
     },
     // {
-    //   name: "Edit Guardians",
+    //   name: t("settings:edit_guardians"),
     //   href: "/",
     //   icon: <SettingsGuardianIcon width={5} height={5} />,
     // },
@@ -349,7 +354,9 @@ function EditBtn({ id, openModal }) {
         <>
           <Popover.Button className="flex justify-center items-center mt-5 border border-sp-medium py-1.5 px-3 rounded-sp-40 w-full">
             <PencilIcon className="w-5 h-5 text-sp-black dark:text-sp-white" />
-            <span className="text-sp-black dark:text-sp-white ml-2">Edit</span>
+            <span className="text-sp-black dark:text-sp-white ml-2">
+              {t("settings:edit")}
+            </span>
           </Popover.Button>
           <Transition
             as={Fragment}
@@ -383,7 +390,7 @@ function EditBtn({ id, openModal }) {
                     <TrashIcon className="w-6 h-6 text-sp-cotta" />
                     <div className="flex justify-between w-full ml-3">
                       <p className="text-sm text-sp-cotta font-semibold">
-                        Delete...
+                        {t("settings:delete")}
                       </p>
                     </div>
                   </button>

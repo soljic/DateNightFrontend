@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 
-
 import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
@@ -10,21 +9,23 @@ import { useTranslation } from "next-i18next";
 import { Popover, Transition } from "@headlessui/react";
 
 import { BookmarkIcon } from "@heroicons/react/outline";
-import { SettingsGuardianIcon,
+import {
+  SettingsGuardianIcon,
   SettingsSignOutIcon,
   SettingsSpiritusIcon,
   SettingsSuggestionsIcon,
-  SettingsAccountIcon } from "../SettingsIcons";
+  SettingsAccountIcon,
+} from "../SettingsIcons";
 // import { ProxyLogout } from "../../service/http/proxy";
 
 export function ProfileMenu({ token, profileName }) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("settings");
   const router = useRouter();
 
   const logoutUser = async () => {
     // await ProxyLogout(token);
-    await signOut({redirect: false});
-    router.push("/")
+    await signOut({ redirect: false });
+    router.push("/");
   };
 
   return (
@@ -55,7 +56,7 @@ export function ProfileMenu({ token, profileName }) {
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3  dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsSpiritusIcon width={5} height={5} />
                         <div className="ml-4">
-                          <p className="text-sm font-medium">My Spiritus</p>
+                          <p className="text-sm font-medium">{t("spiritus")}</p>
                         </div>
                       </a>
                     </Link>
@@ -63,7 +64,7 @@ export function ProfileMenu({ token, profileName }) {
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsAccountIcon width={5} height={5} />
                         <div className="ml-4">
-                          <p className="text-sm font-medium">My Account</p>
+                          <p className="text-sm font-medium">{t("account")}</p>
                         </div>
                       </a>
                     </Link>
@@ -71,7 +72,7 @@ export function ProfileMenu({ token, profileName }) {
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <BookmarkIcon className="w-5 h-5 text-sp-fawn dark:text-sp-white" />
                         <div className="ml-4">
-                          <p className="text-sm font-medium">Saved</p>
+                          <p className="text-sm font-medium">{t("saved")}</p>
                         </div>
                       </a>
                     </Link>
@@ -79,7 +80,9 @@ export function ProfileMenu({ token, profileName }) {
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsSuggestionsIcon width={5} height={5} />
                         <div className="ml-4">
-                          <p className="text-sm font-medium">Suggestions</p>
+                          <p className="text-sm font-medium">
+                            {t("suggestions")}
+                          </p>
                         </div>
                       </a>
                     </Link>
@@ -87,9 +90,7 @@ export function ProfileMenu({ token, profileName }) {
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsGuardianIcon width={5} height={5} alterFill />
                         <div className="ml-4">
-                          <p className="text-sm font-medium">
-                            My Guardian ID
-                          </p>
+                          <p className="text-sm font-medium">{t("guardian_id")}</p>
                         </div>
                       </a>
                     </Link>
@@ -102,7 +103,7 @@ export function ProfileMenu({ token, profileName }) {
                       </div>
                       <div className="flex justify-between w-full ml-3">
                         <p className="text-sm text-sp-cotta font-semibold">
-                          Sign Out
+                          {t("sign_out")}
                         </p>
                       </div>
                     </button>

@@ -141,7 +141,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       displayStory: story,
       stories: content,
       spiritus: spiritus,

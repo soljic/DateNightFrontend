@@ -10,16 +10,18 @@ import { ProfileSpiritus } from "../../../service/http/auth";
 import { MySpiritusGrid } from "../../../components/settings/Spiritus";
 import { MobileSidebar } from "../../../components/settings/MobileSidebar";
 
-
 export default function SpiritusPage({ spiritus, isLastPage }) {
   const { t } = useTranslation("common");
 
   return (
     <LayoutNoFooter>
       <Head>
-        <title>Spiritus | Settings | My Spiritus Collection</title>
+        <title>{`Spiritus | ${t("settings")} | ${t("spiritus")}`}</title>{" "}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Spiritus - Settings - My Spiritus Collection" />
+        <meta
+          name="description"
+          content="Spiritus - Settings - My Spiritus Collection"
+        />
       </Head>
       <section className="pt-5 overflow-y-auto">
         <div className="w-full grid grid-cols-1 md:grid-cols-3">
@@ -30,7 +32,7 @@ export default function SpiritusPage({ spiritus, isLastPage }) {
             <MobileSidebar selectedIndex={0} />
           </div>
           <div className="col-span-1 md:col-span-2 flex justify-center md:justify-start">
-            <MySpiritusGrid spiritus={spiritus} isLastPage={isLastPage}/>
+            <MySpiritusGrid spiritus={spiritus} isLastPage={isLastPage} />
           </div>
         </div>
       </section>
@@ -50,11 +52,11 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const res = await ProfileSpiritus(session.user.accessToken)
+  const res = await ProfileSpiritus(session.user.accessToken);
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       spiritus: res.data.content,
       isLastPage: res.data.last,
     },

@@ -1,0 +1,43 @@
+{
+  "settings": "Settings",
+
+  "spiritus": "My Spiritus",
+  "account": "My Account",
+
+  "guardian_id": "My Guardian ID",
+  "guardian_id_text": "You can ask another person to add you as another Guardian for their Spiritus. Send them your own Guardian ID.",
+  "guardian_id_code": "My code is",
+  "guardian_id_copy_code": "Copy my ID",
+
+  "suggestions": "Suggestions",
+  "saved": "Saved",
+  "language": "Language",
+  "theme": "Theme",
+  "contact": "Contact us",
+
+  "edit_spiritus": "Edit Spiritus info",
+  "edit_guardians": "Edit Guardians",
+  "new_story": "Create new Story",
+  "edit_stories": "Edit Stories",
+
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+
+  "edit": "Edit",
+
+  "delete": "Delete...",
+  "delete_err": "Unable to delete. Try again later.",
+  "delete_modal_title": "Delete Spiritus?",
+  "delete_modal_subtitle": "You must be certain that you want to delete this Spiritus. This action cannot be undone upon completion.",
+  "delete_modal_confirm": "Type DELETE to confirm",
+
+  "delete_modal_confirm_err": "Text must match 'DELETE'",
+  "delete_modal_cancel": "No, keep Spiritus",
+
+  "404_title": "This page does not exist.",
+  "404_subtitle": "The page you are looking for could not be found.",
+  "404_subtitle_2": "Try these pages:",
+
+  "sign_out": "Sign Out"
+}

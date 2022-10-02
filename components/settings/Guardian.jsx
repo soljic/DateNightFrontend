@@ -1,6 +1,10 @@
+import { useTranslation } from "next-i18next";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+
 export function GuardianID({ guardianID }) {
+  const { t } = useTranslation(["settings"]);
+
   return (
     <div className="flex flex-col items-center gap-y-2.5 pt-1">
       <div className="mb-4">
@@ -31,18 +35,17 @@ export function GuardianID({ guardianID }) {
         </svg>
       </div>
       <h2 className="font-bold text-3xl tracking-sp-tighten subpixel-antialiased">
-        My Guardian ID
+        {t("guardian_id")}
       </h2>
       <p className="w-4/5 text-lg tracking-sp-tighten text-center subpixel-antialiased">
-        You can ask another person to add you as another Guardian for their
-        Spiritus. Send them your own Guardian ID.
+        {t("guardian_id_text")}
       </p>
       <p className="text-sm text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60 tracking-sp-tighten text-center subpixel-antialiased mb-5">
-        My code is {guardianID.split("-")[0]}***
+        {t("guardian_id_code")} {guardianID.split("-")[0]}***
       </p>
       <CopyToClipboard text={guardianID}>
         <button className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-fawn dark:border-sp-dark-brown dark:border-opacity-90 rounded-full py-3 px-7 text-sp-white dark:text-sp-black">
-          <span className="font-semibold">Copy my ID</span>
+          <span className="font-semibold">{t("guardian_id_copy_code")}</span>
         </button>
       </CopyToClipboard>
     </div>

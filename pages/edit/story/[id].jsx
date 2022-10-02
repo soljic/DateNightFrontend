@@ -283,7 +283,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         story: { ...story, storyText: initText },
-        ...(await serverSideTranslations(context.locale, ["common"])),
+        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
       },
     };
   } catch (err) {

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -11,10 +12,12 @@ import {
 } from "../components/layout/Icons";
 
 export default function Custom404() {
+  const { t } = useTranslation("settings");
+
   return (
     <LayoutNoNav>
       <Head>
-        <title>Spiritus | Oooopsie...</title>
+        <title>Spiritus | Oooops...</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
@@ -41,23 +44,23 @@ export default function Custom404() {
           <h3 className="text-sp-fawn text-sm font-bold">404 ERROR</h3>
 
           <h1 className="text-2xl text-center font-bold">
-            This page does not exist.
+            {t("settings:404_title")}
           </h1>
 
           <h2 className="text-sm font-medium text-sp-lighter">
-            The page you are looking for could not be found.
+            {t("settings:404_subtitle")}
           </h2>
         </div>
         <p className="text-sm font-medium text-sp-lighter mt-16">
-          Try these pages:
+          {t("settings:404_subtitle_2")}
         </p>
-        <MobileNav />
+        <Nav />
       </section>
     </LayoutNoNav>
   );
 }
 
-function MobileNav() {
+function Nav() {
   const { t } = useTranslation("common");
 
   const menuItems = [
@@ -89,19 +92,23 @@ function MobileNav() {
       <div className="text-sp-black dark:text-sp-white">
         <div className="relative grid gap-6 p-6 grid-cols-1">
           {menuItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="flex items-center rounded-sp-14 px-2 py-4 ease-in-out hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
-                {item.icon}
-              </div>
-              <div className="ml-4">
-                <p className="text-lg font-semibold pb-0.5 text-sp-white">{t(item.name)}</p>
-                <p className="text-sm text-sp-lighter">{t(item.description)}</p>
-              </div>
-            </a>
+            <Link href={item.href} key={item.name}>
+              <a
+                className="flex items-center rounded-sp-14 px-2 py-4 ease-in-out hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
+                  {item.icon}
+                </div>
+                <div className="ml-4">
+                  <p className="text-lg font-semibold pb-0.5 text-sp-white">
+                    {t(item.name)}
+                  </p>
+                  <p className="text-sm text-sp-lighter">
+                    {t(item.description)}
+                  </p>
+                </div>
+              </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -115,7 +122,7 @@ function MobileNav() {
 export async function getStaticProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };
 }

@@ -9,15 +9,14 @@ import { Sidebar } from "../../../components/settings/Sidebar";
 import { GuardianID } from "../../../components/settings/Guardian";
 import { MobileSidebar } from "../../../components/settings/MobileSidebar";
 
-
 export default function GuardianIDPage() {
-  const { data: session, status } = useSession();
-  const { t } = useTranslation("common");
+  const { data: session } = useSession();
+  const { t } = useTranslation(["settings"]);
 
   return (
     <LayoutNoFooter>
       <Head>
-        <title>Settings | My Guardian ID</title>
+        <title>{`Spiritus | ${t("settings")} | ${t("guardian_id")}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Get your unique guardian ID" />
       </Head>
@@ -52,7 +51,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };
 }

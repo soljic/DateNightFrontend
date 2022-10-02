@@ -15,7 +15,7 @@ import { StoriesIcon, MobileAppIcon, AboutIcon } from "./Icons";
 
 export function Navbar() {
   const { data: session } = useSession();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["common", "settings"]);
 
   return (
     <div className="bg-sp-day-50 dark:bg-sp-black h-20">
@@ -90,7 +90,7 @@ export function MobileNav() {
   ];
 
   return (
-    <div className="ml-3 md:hidden sm:visible z-10">
+    <div className="ml-3 md:hidden sm:visible z-30">
       <Popover>
         {({ open }) => (
           <>

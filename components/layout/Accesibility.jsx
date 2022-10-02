@@ -23,7 +23,7 @@ import {
 export function AccesibilityMenu() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("settings");
 
   // wait for component to mount to avoid hydration errs
   useEffect(() => {
@@ -74,7 +74,7 @@ export function AccesibilityMenu() {
                           <div className="flex justify-between w-full">
                             <div className="ml-4">
                               <p className="text-sm font-medium capitalize">
-                                Language
+                                {t("settings:language")}
                               </p>
                             </div>
                           </div>
@@ -108,7 +108,7 @@ export function AccesibilityMenu() {
                           )}
                           <div className="flex justify-between w-full">
                             <div className="ml-4">
-                              <p className="text-sm font-medium capitalize">{`Theme (${theme})`}</p>
+                              <p className="text-sm font-medium capitalize">{`${t("theme")} (${t(theme)})`}</p>
                             </div>
                           </div>
                           {!open && (
@@ -124,7 +124,7 @@ export function AccesibilityMenu() {
                             <SettingsDevicesIcon width={5} height={5} />
                             <div className="flex justify-between w-full">
                               <div className="ml-4">
-                                <p className="text-sm font-medium">System</p>
+                                <p className="text-sm font-medium">{t("system")}</p>
                               </div>
                               {theme === "system" ? (
                                 <SettingsCheckSelectedIcon />
@@ -141,7 +141,7 @@ export function AccesibilityMenu() {
                             <SunIcon className="w-5 h-5 text-sp-cotta" />
                             <div className="flex justify-between w-full">
                               <div className="ml-4">
-                                <p className="text-sm font-medium">Light</p>
+                                <p className="text-sm font-medium">{t("light")}</p>
                               </div>
                               {theme === "light" ? (
                                 <SettingsCheckSelectedIcon />
@@ -158,7 +158,7 @@ export function AccesibilityMenu() {
                             <MoonIcon className="h-5 w-5 text-sp-fawn -scale-x-100" />
                             <div className="flex justify-between w-full">
                               <div className="ml-4">
-                                <p className="text-sm font-medium">Dark</p>
+                                <p className="text-sm font-medium">{t("dark")}</p>
                               </div>
                               {theme === "dark" ? (
                                 <SettingsCheckSelectedIcon />
@@ -180,7 +180,7 @@ export function AccesibilityMenu() {
                       </div>
                       <div className="flex justify-between w-full">
                         <div className="ml-4">
-                          <p className="text-sm font-medium">Contact Us</p>
+                          <p className="text-sm font-medium">{t("contact")}</p>
                         </div>
                       </div>
                     </a>

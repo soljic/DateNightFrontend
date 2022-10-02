@@ -12,7 +12,7 @@ import {
 } from "../SettingsIcons";
 
 export function Theme() {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("settings");
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -24,7 +24,7 @@ export function Theme() {
   return (
     <div className="mx-4 mb-80 w-full">
       <h1 className="text-2xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-        Theme
+        {t("theme")}
       </h1>
       {mounted && (
         <div className="flex flex-col justify-evenly gap-0.5 py-3">
@@ -36,7 +36,7 @@ export function Theme() {
             <SettingsDevicesIcon width={5} height={5} />
             <div className="flex justify-between w-full">
               <div className="ml-4">
-                <p className="text-sm font-medium">System</p>
+                <p className="text-sm font-medium">{t("system")}</p>
               </div>
               {theme === "system" ? (
                 <SettingsCheckSelectedIcon w={4} h={4} />
@@ -53,7 +53,7 @@ export function Theme() {
             <SunIcon className="w-5 h-5 text-sp-cotta" />
             <div className="flex justify-between w-full">
               <div className="ml-4">
-                <p className="text-sm font-medium">Light</p>
+                <p className="text-sm font-medium">{t("light")}</p>
               </div>
               {theme === "light" ? (
                 <SettingsCheckSelectedIcon w={4} h={4} />
@@ -70,7 +70,7 @@ export function Theme() {
             <MoonIcon className="h-5 w-5 text-sp-fawn -scale-x-100" />
             <div className="flex justify-between w-full">
               <div className="ml-4">
-                <p className="text-sm font-medium">Dark</p>
+                <p className="text-sm font-medium">{t("dark")}</p>
               </div>
               {theme === "dark" ? (
                 <SettingsCheckSelectedIcon w={4} h={4} />

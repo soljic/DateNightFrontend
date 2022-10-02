@@ -96,6 +96,16 @@ module.exports = {
         source: "/api/authentication/user/spiritus",
         destination: `${process.env.NEXT_API_URL}/v2/user/account/spiritus`,
       },
+      // REGISTER
+      {
+        source: "/api/authentication/email-register",
+        destination: `${process.env.NEXT_API_URL}/v2/authentication/register`,
+      },
+      // PASSWORD RESET
+      {
+        source: "/api/authentication/reset-password/:query*",
+        destination: `${process.env.NEXT_API_URL}/v2/authentication/password/email/:query*`
+      },
 
       // SAVE API
       {
@@ -126,7 +136,6 @@ module.exports = {
         source: "/api/spiritus/rose/:id",
         destination: `${process.env.NEXT_API_URL}/wapi/rose/spiritus/:id`,
       },
-     
     ];
   },
 };

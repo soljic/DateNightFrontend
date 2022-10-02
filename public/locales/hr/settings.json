@@ -1,0 +1,42 @@
+{
+  "settings": "Postavke",
+
+  "spiritus": "Moj Spiritus",
+  "account": "Moj Račun",
+
+  "guardian_id": "Moj ID Čuvara",
+  "guardian_id_text": "Drugi korisnici mogu vas dodati kao Čuvara njihovih Spiritusa. Pošaljite im svoj ID Čuvara.",
+  "guardian_id_code": "Moj kod je",
+  "guardian_id_copy_code": "Kopiraj moj ID",
+
+  "suggestions": "Prijedlozi",
+  "saved": "Spremljeno",
+  "language": "Jezik",
+  "theme": "Tema",
+  "contact": "Kontaktiraj nas",
+
+  "edit_spiritus": "Uredi Spiritus",
+  "edit_guardians": "Uredi listu Čuvara",
+  "new_story": "Dodaj priču",
+  "edit_stories": "Uredi priče",
+
+  "system": "Uređaj",
+  "light": "Svijetla",
+  "dark": "Tamna",
+
+  "edit": "Uredi",
+  "delete": "Izbriši...",
+  "delete_err": "Greška pri brisanju. Pokušaj kasnije.",
+  "delete_modal_title": "Izbriši Spiritus?",
+  "delete_modal_subtitle": "Akcija se ne može poništiti. Ako nastavite i izbrišete spiritus, nestat će zauvijek.",
+  "delete_modal_confirm": "Upiši DELETE za potvrdu",
+
+  "delete_modal_confirm_err": "Potrebno je upisati 'DELETE'",
+  "delete_modal_cancel": "Ne, zadrži Spiritus",
+
+  "404_title": "Tražena stranica ne postoji.",
+  "404_subtitle": "Stranica na koju ste došli nije pronađena",
+  "404_subtitle_2": "Posjetite ove stranice:",
+
+  "sign_out": "Odjavi se"
+}

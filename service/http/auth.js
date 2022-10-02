@@ -12,13 +12,18 @@ export async function LoginCredentials(username, password) {
   );
 }
 
-export async function Register(name, lastName, email, password) {
-  const res = await axios.post(`${API_URL}/v2/authentication/register`, {
+export async function ProxyRegister(name, lastName, email, password) {
+  const res = await axios.post("/api/authentication/email-register", {
     name,
     lastName,
     email,
     password,
   });
+  return res;
+}
+
+export async function ProxySendPasswordResetEmail(email) {
+  const res = await axios.post(`/api/authentication/reset-password?email=${email}`)
   return res;
 }
 

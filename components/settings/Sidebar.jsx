@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+
 
 import { signOut, useSession } from "next-auth/react";
 import { BookmarkIcon } from "@heroicons/react/outline";
@@ -15,6 +17,8 @@ import {
 } from "../SettingsIcons";
 
 export function Sidebar({ selectedIndex }) {
+  const { t } = useTranslation(["settings"]);
+
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -26,44 +30,44 @@ export function Sidebar({ selectedIndex }) {
 
   const menuItems = [
     {
-      name: "My Spiritus",
+      name: t("spiritus"),
       href: "/account/settings/my-spiritus",
       icon: <SettingsSpiritusIcon width={5} height={5} />,
     },
     {
-      name: "My Account",
+      name: t("account"),
       href: "/",
       icon: <SettingsAccountIcon width={5} height={5} />,
     },
     {
-      name: "Saved",
+      name: t("saved"),
       href: "/",
       icon: (
         <BookmarkIcon className="w-5 h-5 text-sp-fawn dark:text-sp-white" />
       ),
     },
     {
-      name: "Suggestions",
+      name: t("suggestions"),
       href: "/",
       icon: <SettingsSuggestionsIcon width={5} height={5} />,
     },
     {
-      name: "My Guardian ID",
+      name: t("guardian_id"),
       href: "/account/settings/my-guardian-id",
       icon: <SettingsGuardianIcon width={5} height={5} />,
     },
     {
-      name: "Language",
+      name: t("language"),
       href: "/",
       icon: <SettingsGlobeIcon width={5} height={5} />,
     },
     {
-      name: "Theme",
+      name: t("theme"),
       href: "/account/settings/theme",
       icon: <SettingsDevicesIcon width={5} height={5} />,
     },
     {
-      name: "Contact Us",
+      name: t("contact"),
       href: `mailto:hello@spiritus.app?subject=${`${session?.user?.name || ""} ${session?.user?.surname || "" } - Contact`}`,
       icon: <SettingsQuestionIcon width={5} height={5} />,
     },
@@ -99,7 +103,7 @@ export function Sidebar({ selectedIndex }) {
           <SettingsSignOutIcon />
         </div>
         <div className="flex justify-between w-full ml-3">
-          <p className="text-sm text-sp-cotta font-semibold">Sign Out</p>
+          <p className="text-sm text-sp-cotta font-semibold">{t("sign_out")}</p>
         </div>
       </button>
     </aside>

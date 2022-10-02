@@ -7,7 +7,6 @@ export default function EmailRegister() {
   return (
     <LayoutNoNav>
       <section className="flex flex-col justify-center items-center text-sp-white subpixel-antialiased">
-        {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
         <div className="flex flex-col justify-center items-center gap-4 mb-10">
           <ShieldIcon width={12} height={12} />

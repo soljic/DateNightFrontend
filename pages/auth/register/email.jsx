@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Head from "next/head";
+
 import Router from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -9,6 +12,10 @@ import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 import { Spinner } from "../../../components/Status";
 
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { ProxyRegister } from "../../../service/http/auth";
+
 function isEmailValid(email) {
   return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
     email
@@ -16,12 +23,13 @@ function isEmailValid(email) {
 }
 
 export default function EmailRegister() {
+  const { t } = useTranslation("auth");
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-    getValues,
   } = useForm({ mode: "onChange" });
 
   const [submitting, setSubmitting] = useState(false);
@@ -37,57 +45,80 @@ export default function EmailRegister() {
       errString.includes("status code 400") ||
       errString.includes("status code 401")
     ) {
-      setErr("Email or password are not correct.");
+      setErr(t("register_invalid_credentials"));
     } else {
-      setErr(
-        "Unable to log in at this time. Please try again later or contact support."
-      );
+      setErr(t("register_err"));
     }
   };
 
+  // TODO: improve register flow
   const onSubmit = async (data) => {
     try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        username: data.email,
-        password: data.password,
-      });
+      setSubmitting(true);
+      const register = await ProxyRegister(
+        data.firstName,
+        data.lastName,
+        data.email,
+        data.password
+      );
 
-      if (!res.error) {
-        await Router.push("/");
+      if (register.status === 200) {
+        const res = await signIn("credentials", {
+          redirect: false,
+          username: data.email,
+          password: data.password,
+        });
+        if (!res.error) {
+          return Router.push("/");
+        }
       }
 
+      setSubmitting(false);
       handleErr(res.error);
+      throw "Error registering account.";
     } catch (error) {
-      setErr("Unable to log in. Please try again later or contact support.");
+      setErr(t("register_err"));
     }
   };
 
   return (
     <LayoutNoNav>
+      <Head>
+        <title>{`Spiritus | ${t("register")} - Email`}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Spiritus - Register - Email" />
+      </Head>
       <section className="flex flex-col justify-center items-center text-sp-white subpixel-antialiased">
-        {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
+        <pre>{JSON.stringify(watch(), null, 2)}</pre>
 
         <div className="flex flex-col justify-center items-center gap-4 mb-10">
           <ShieldIcon width={12} height={12} />
           <h4 className="text-3xl text-center font-bold mt-5">
-            Log in as Guardian
+            {t("register_title")}
           </h4>
           <p className="text-center">
-            By continuing, you agree to the{" "}
-            <a className="underline underline-offset-4">Terms of Service</a>
-            <span> and acknowledge our </span>
-            <a className="underline underline-offset-4">Privacy Policy</a>.
+            {t("register_disclaimer_1")}{" "}
+            <Link href="/privacy-policy" key="terms">
+              <a className="underline underline-offset-4">
+                {t("register_disclaimer_terms")}
+              </a>
+            </Link>
+            <span> {t("register_disclaimer_2")} </span>
+            <Link href="/privacy-policy" key="priv">
+              <a className="underline underline-offset-4">
+                {t("register_disclaimer_privacy")}
+              </a>
+            </Link>
+            .
           </p>
         </div>
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <label htmlFor="firstName">First name</label>
+          <div className="mb-4" key="name">
+            <label htmlFor="firstName">{t("first_name")}</label>
             <input
               {...register("firstName", {
                 required: true,
-                validate: (v) =>
-                  !!v && v.length > 2 || "First name is required",
+                validate: (v) => (!!v && v.length > 2) || t("first_name_err"),
               })}
               type="text"
               className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
@@ -99,13 +130,12 @@ export default function EmailRegister() {
               </p>
             )}
           </div>
-          <div className="mb-4">
-            <label htmlFor="lastName">Last Name</label>
+          <div className="mb-4" key="lastname">
+            <label htmlFor="lastName">{t("last_name")}</label>
             <input
               {...register("lastName", {
                 required: true,
-                validate: (v) =>
-                  !!v && v.length > 2 || "Last name is required",
+                validate: (v) => (!!v && v.length > 2) || t("last_name_err"),
               })}
               type="text"
               className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
@@ -117,13 +147,12 @@ export default function EmailRegister() {
               </p>
             )}
           </div>
-          <div className="mb-4">
-            <label htmlFor="email">Email address</label>
+          <div className="mb-4" key="email">
+            <label htmlFor="email">{t("email_address")}</label>
             <input
               {...register("email", {
                 required: true,
-                validate: (v) =>
-                  isEmailValid(v) || "A valid email address is required",
+                validate: (v) => isEmailValid(v) || t("email_address_err"),
               })}
               type="text"
               className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
@@ -135,26 +164,22 @@ export default function EmailRegister() {
               </p>
             )}
           </div>
-          <div className="mb-4">
-            <label htmlFor="phone">Phone number</label>
+          <div className="mb-4" key="phone">
+            <label htmlFor="phone">{t("phone")}</label>
             <input
-              {...register("phone", {
-                required: true,
-              })}
+              {...register("phone")}
               placeholder="+385"
               type="text"
               className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter placeholder-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
               id="phone"
             />
           </div>
-          <div className="relative">
-            <label htmlFor="password">Password</label>
+          <div className="relative" key="pass">
+            <label htmlFor="password">{t("password")}</label>
             <input
               {...register("password", {
                 required: true,
-                validate: (v) =>
-                  (!!v && v.length > 8) ||
-                  "Password must be at least 8 characters long",
+                validate: (v) => (!!v && v.length > 8) || t("password_len_err"),
               })}
               type={showPass ? "text" : "password"}
               className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
@@ -182,17 +207,17 @@ export default function EmailRegister() {
           </div>
           {err && <p className="text-sm text-red-600 py-2 px-1">{err}</p>}
 
-          <div className="flex flex-col justify-center items-center text-center mt-10">
+          <div
+            className="flex flex-col justify-center items-center text-center mt-10"
+            key="submit"
+          >
             {/* login button */}
             <button
               type="submit"
+              disabled={submitting}
               className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-sp-black text-lg"
             >
-              {submitting ? (
-                <Spinner text="Creating..." />
-              ) : (
-                "Create an account"
-              )}
+              {submitting ? <Spinner text="" /> : t("register_create_account")}
             </button>
           </div>
         </form>
@@ -215,7 +240,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      session,
+      ...(await serverSideTranslations(context.locale, ["auth"])),
     },
   };
 }

@@ -10,12 +10,12 @@ import { Theme } from "../../../components/settings/Theme";
 import { MobileSidebar } from "../../../components/settings/MobileSidebar";
 
 export default function ThemePage() {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("settings");
 
   return (
     <LayoutNoFooter>
       <Head>
-        <title>Spiritus | Settings | Theme</title>
+        <title>{`Spiritus | ${t("settings")} | ${t("theme")}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Spiritus - Settings - Theme" />
       </Head>
@@ -50,7 +50,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
+      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };
 }
