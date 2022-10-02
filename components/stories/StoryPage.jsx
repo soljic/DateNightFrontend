@@ -51,19 +51,20 @@ export function Tribute({ id }) {
   const [sent, setSent] = useState(false);
   const [text, setText] = useState("");
   let [isOpen, setIsOpen] = useState(false);
-
+  console.log("### ID ###", id);
   const { t } = useTranslation("common");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const sendRose = async () => {
-    let name = `${session?.user?.name || ""} ${
-      session?.user?.surname || ""
-    }`.trim();
-    name = name.length ? name : "";
+    // let name = `${session?.user?.name || ""} ${
+    //   session?.user?.surname || ""
+    // }`.trim();
+    // name = name.length ? name : "";
+    const name = "";
 
     try {
-      await ProxySendRose(session.user.accessToken, id, name, text);
-      setSent(true);
+      // await ProxySendRose(id, name, text);
+      // setSent(true);
       setIsOpen(true);
     } catch (err) {
       setSent(false);
@@ -89,11 +90,11 @@ export function Tribute({ id }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-80" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex items-center justify-center min-w-full min-h-full p-4 text-center">
+          <div className="fixed inset-0 overflow-y-auto z-10">
+            <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-1000"
@@ -105,13 +106,15 @@ export function Tribute({ id }) {
               >
                 <Dialog.Panel
                   onClick={closeModal}
-                  className="absolute w-2/3 h-2/3 overflow-hidden text-left align-middle transition-all transform"
+                  className="absolute overflow-hidden content-center transition-all transform"
                 >
-                  <div className="absolute mx-auto">
-                    <Lottie animationData={confetti} loop={false} />
-                  </div>
-                  <div className="relative mx-auto">
-                    <Lottie animationData={giveRose} loop={false} />
+                  <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
+                    <div className="relative mx-auto w-3/4 h-3/4 md:w-1/2 md:h-1/2">
+                      <Lottie animationData={confetti} loop={false} />
+                    </div>
+                    <div className="absolute mx-auto w-full h-full md:w-1/2 md:h-1/2">
+                      <Lottie animationData={giveRose} loop={false} />
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -153,17 +156,21 @@ export function Tribute({ id }) {
       ) : (
         <div className="w-full text-sp-black dark:text-sp-white">
           <div className="flex flex-col justify-center gap-3">
-            <label htmlFor="tribute" className="hidden">
-              {t("write_tribute")}
-            </label>
-            <textarea
-              id="tribute"
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="w-full h-16 text-xl py-3.5 px-8 font-medium align-text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter transition-all duration-500 focus:h-36"
-              placeholder={t("write_tribute")}
-            ></textarea>
+            {status === "authenticated" && (
+              <>
+                <label htmlFor="tribute" className="hidden">
+                  {t("write_tribute")}
+                </label>
+                <textarea
+                  id="tribute"
+                  type="text"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  className="w-full h-16 text-xl py-3.5 px-8 font-medium align-text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter transition-all duration-500 focus:h-36"
+                  placeholder={t("write_tribute")}
+                ></textarea>
+              </>
+            )}
             <button
               disabled={sent}
               onClick={() => {
