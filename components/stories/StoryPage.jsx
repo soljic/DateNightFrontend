@@ -51,7 +51,6 @@ export function Tribute({ id }) {
   const [sent, setSent] = useState(false);
   const [text, setText] = useState("");
   let [isOpen, setIsOpen] = useState(false);
-  console.log("### ID ###", id);
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
 
