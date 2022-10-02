@@ -7,7 +7,7 @@ module.exports = {
     // a non-locale prefixed path e.g. `/hello`
     defaultLocale: "hr",
     localeDetection: false,
-    localePath: path.resolve('./public/locales')
+    // localePath: path.resolve('./public/locales')
   },
   // react: { useSuspense: false }, //this line
 };
