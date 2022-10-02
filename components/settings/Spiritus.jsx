@@ -18,7 +18,7 @@ import Link from "next/link";
 
 import { Dialog, Popover, Transition } from "@headlessui/react";
 
-import { XIcon, BookmarkIcon, TrashIcon } from "@heroicons/react/outline";
+import { XIcon, TrashIcon } from "@heroicons/react/outline";
 
 import {
   SettingsGuardianIcon,
@@ -182,12 +182,12 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel className="flex justify-center h-1/2 items-center transition-all transform">
-                <div className="w-1/2 border-sp-lighter border rounded-sp-14 bg-sp-day-100 dark:bg-sp-black">
+                <div className="w-full md:w-1/2 border-sp-lighter border rounded-sp-14 bg-sp-day-100 dark:bg-sp-black">
                   <div className="flex flex-col justify-center gap-y-10 px-4">
                     <div className="flex justify-end mt-8">
                       <button
                         onClick={onClose}
-                        className="p-1 rounded-full mx-5 border border-sp-lighter"
+                        className="p-1 rounded-full mx-1 border border-sp-lighter"
                       >
                         <XIcon className="h-6 w-6 text-sp-lighter" />
                       </button>

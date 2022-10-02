@@ -62,8 +62,8 @@ export function Tribute({ id }) {
     const name = "";
 
     try {
-      // await ProxySendRose(id, name, text);
-      // setSent(true);
+      await ProxySendRose(id, name, text);
+      setSent(true);
       setIsOpen(true);
     } catch (err) {
       setSent(false);

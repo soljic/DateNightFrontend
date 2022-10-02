@@ -29,7 +29,7 @@ export default function SpiritusPage({ spiritus, isLastPage }) {
           <div className="md:col-span-1 md:hidden">
             <MobileSidebar selectedIndex={0} />
           </div>
-          <div className="md:col-span-2 flex justify-start">
+          <div className="col-span-1 md:col-span-2 flex justify-center md:justify-start">
             <MySpiritusGrid spiritus={spiritus} isLastPage={isLastPage}/>
           </div>
         </div>
