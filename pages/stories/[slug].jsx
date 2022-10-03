@@ -179,37 +179,49 @@ export default function StoryPage({
 // fetch first 5 spiritus stories, remove the story alredy being shown
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const resStory = await GetStoryBySlug(slug);
-  const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
-  const resAllStories = await GetSpiritusStoriesBySlug(resSpiritus.data.slug);
 
-  let content = resAllStories.data?.content ? resAllStories.data?.content : [];
-  // sort story paragraphs by index
-  if (resStory.paragraphs) {
-    resStory.paragraphs.sort((p1, p2) => {
-      if (p1.index < p2.index) {
-        return -1;
-      }
-      if (p1.index > p2.index) {
-        return 1;
-      }
-      // if equal
-      return 0;
+  try {
+    const resStory = await GetStoryBySlug(slug);
+    const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
+    const resAllStories = await GetSpiritusStoriesBySlug(resSpiritus.data.slug);
+
+    let content = resAllStories.data?.content
+      ? resAllStories.data?.content
+      : [];
+    // sort story paragraphs by index
+    if (resStory.paragraphs) {
+      resStory.paragraphs.sort((p1, p2) => {
+        if (p1.index < p2.index) {
+          return -1;
+        }
+        if (p1.index > p2.index) {
+          return 1;
+        }
+        // if equal
+        return 0;
+      });
+    }
+
+    // remove story already being displayed
+    content = content.filter((x) => {
+      return x.slug != slug;
     });
+
+    return {
+      props: {
+        ...(await serverSideTranslations(context.locale, ["common"])),
+        displayStory: resStory.data,
+        stories: content,
+        spiritus: resSpiritus.data,
+        isLastPage: resAllStories.data.last,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
   }
-
-  // remove story already being displayed
-  content = content.filter((x) => {
-    return x.slug != slug;
-  });
-
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
-      displayStory: resStory.data,
-      stories: content,
-      spiritus: resSpiritus.data,
-      isLastPage: resAllStories.data.last,
-    },
-  };
 }

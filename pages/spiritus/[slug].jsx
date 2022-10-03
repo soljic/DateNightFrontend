@@ -74,7 +74,7 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
         <SpiritusCarousel images={spiritus.images} />
 
         <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
-          <Tribute id={spiritus.id}/>
+          <Tribute id={spiritus.id} />
           <PageActions
             shareLink={spiritus.shortLink}
             id={spiritus.id}
@@ -98,20 +98,29 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
   );
 }
 
-// fetch first 5 spiritus stories
+
+// Fetch spiritus and story data.
+// Redirects to 404 in case of any errors.
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const { data: spiritus } = await GetSpiritusBySlug(slug);
-
-  const { data: resStories } = await GetSpiritusStoriesBySlug(slug);
-  const stories = resStories?.content;
-
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
-      stories,
-      spiritus,
-      isLastPage: resStories.last,
-    },
-  };
+  try {
+    const { data: spiritus } = await GetSpiritusBySlug(slug);
+    const { data: resStories } = await GetSpiritusStoriesBySlug(slug);
+    const stories = resStories?.content;
+    return {
+      props: {
+        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        stories,
+        spiritus,
+        isLastPage: resStories.last,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 }

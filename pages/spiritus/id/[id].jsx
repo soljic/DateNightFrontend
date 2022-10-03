@@ -63,24 +63,34 @@ export default function SpiritusIDPage({ spiritus, stories, hasMore, total }) {
   );
 }
 
+// Fetch spiritus and story data.
+// Redirects to 404 in case of any errors.
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const { data: spiritus } = await GetSpiritusById(id);
 
-  const { data: spiritusStories } = await GetSpiritusStoriesBySlug(
-    spiritus.slug,
-    0,
-    20
-  );
-  const stories = spiritusStories.content;
-
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
-      stories,
-      spiritus,
-      hasMore: !spiritusStories.last,
-      total: spiritusStories.numberOfElements,
-    },
-  };
+  try {
+    const { data: spiritus } = await GetSpiritusById(id);
+    const { data: spiritusStories } = await GetSpiritusStoriesBySlug(
+      spiritus.slug,
+      0,
+      20
+    );
+    const stories = spiritusStories.content;
+    return {
+      props: {
+        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        stories,
+        spiritus,
+        hasMore: !spiritusStories.last,
+        total: spiritusStories.numberOfElements,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 }

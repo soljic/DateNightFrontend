@@ -34,18 +34,31 @@ export default function PlacesPage({
   );
 }
 
+// Fetch spiritus and story data.
+// Redirects to 404 in case of any errors.
 export async function getServerSideProps(context) {
   const { id, location } = context.query;
-
-  const { data: res } = await GetSpiritusByPlaceId(id);
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
-      id: id,
-      title: location,
-      totalPages: res.totalPages,
-      isLastPage: res.last,
-      initialItems: res.content,
-    },
-  };
+  try {
+    const { data: res } = await GetSpiritusByPlaceId(id);
+    return {
+      props: {
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+        ])),
+        id: id,
+        title: location,
+        totalPages: res.totalPages,
+        isLastPage: res.last,
+        initialItems: res.content,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 }
