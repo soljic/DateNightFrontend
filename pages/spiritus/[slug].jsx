@@ -64,7 +64,7 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
         />
       </Head>
       {status === "authenticated" && sessionUserIsOwner() ? (
-        <EditBtn storyId={displayStory.id} />
+        <EditBtn spiritusId={spiritus.id} />
       ) : (
         ""
       )}
