@@ -89,17 +89,23 @@ export function StoryDate({ date, setDate }) {
         {t("create_story_date_title")}
       </p>
       <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
-      <div className="mt-4">
+      <div className="mt-6">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
+            <label
+              htmlFor="birth"
+              className="dark:text-sp-white dark:text-opacity-75"
+            >
+              {t("create_story_date_placeholder")}
+            </label>
             <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
               <DatePicker
                 onChange={setDate}
                 value={date}
                 clearIcon={!date ? null : <XIcon className="h-6 w-6" />}
-                dayPlaceholder={t("create_story_date_placeholder")}
-                monthPlaceholder=""
-                yearPlaceholder=""
+                dayPlaceholder="dd"
+                monthPlaceholder="mm"
+                yearPlaceholder="yyyy"
                 showLeadingZeros
                 calendarIcon={
                   <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />

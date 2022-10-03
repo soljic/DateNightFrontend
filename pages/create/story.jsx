@@ -143,7 +143,7 @@ export default function CreateStoryPage({ spiritus }) {
         <meta name="description" content={t("meta_create_story_description")} />
       </Head>
       <div className="py-5 h-screen">
-        <div className="container">
+        <div>
           {story ? (
             <Success
               storyId={story.id}
@@ -160,11 +160,11 @@ export default function CreateStoryPage({ spiritus }) {
           )}
         </div>
         {step > 0 && !story && (
-          <div className="flex justify-center gap-8">
+          <div className="flex flex-col-reverse md:flex-row justify-center mt-8 gap-2 md:gap-6">
             {step > 0 && (
               <button
                 onClick={prevStep}
-                className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
+                className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
                   pending && "hidden"
                 }`}
                 disabled={pending}
@@ -176,7 +176,7 @@ export default function CreateStoryPage({ spiritus }) {
               <button
                 onClick={nextStep}
                 disabled={!storyText}
-                className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
+                className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
                   storyText || "opacity-30"
                 }`}
               >
@@ -189,7 +189,7 @@ export default function CreateStoryPage({ spiritus }) {
                   createStory();
                 }}
                 disabled={pending}
-                className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
+                className="px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
               >
                 {pending ? (
                   <Spinner text={t("creating")} />
@@ -265,7 +265,10 @@ export async function getServerSideProps(context) {
     return {
       props: {
         spiritus: data,
-        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+        ])),
       },
     };
   } catch (err) {

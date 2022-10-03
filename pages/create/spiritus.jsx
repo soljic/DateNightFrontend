@@ -171,7 +171,7 @@ export default function CreateSpiritusPage({ user }) {
             location,
           })}
         </p> */}
-        <div className="container">
+        <div>
           {spiritus ? (
             <Success spiritus={spiritus} />
           ) : (
@@ -180,14 +180,14 @@ export default function CreateSpiritusPage({ user }) {
               <form id="stepper-form" className="flex flex-1 flex-col">
                 <div className="mb-10">{showCurrentStep()}</div>
 
-                <div className="flex justify-center mt-8 gap-8">
+                <div className="flex flex-col-reverse md:flex-row justify-center mt-8 gap-2 md:gap-6">
                   {step > 0 && (
                     <button
                       onClick={(e) => {
                         e.preventDefault();
                         prevStep();
                       }}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
+                      className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
                         pending && "hidden"
                       }`}
                       disabled={pending}
@@ -202,7 +202,7 @@ export default function CreateSpiritusPage({ user }) {
                         nextStep();
                       }}
                       disabled={!name || !surname}
-                      className={`px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
+                      className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
                         (name && surname) || "opacity-30"
                       }`}
                     >
@@ -215,7 +215,7 @@ export default function CreateSpiritusPage({ user }) {
                         createSpiritus();
                       }}
                       disabled={pending}
-                      className="px-4 py-3 rounded-full w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
+                      className="px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
                     >
                       {pending ? (
                         <Spinner text={t("creating")} />

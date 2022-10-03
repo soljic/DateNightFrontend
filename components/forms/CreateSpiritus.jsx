@@ -62,17 +62,21 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
         {t("create_spiritus_dates_title1")} <span> {name} </span>{" "}
         {t("create_spiritus_dates_title2")}
       </p>
-      <div className="mt-4">
+      <div className="mt-6">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
+            <label htmlFor="birth" className="dark:text-sp-white dark:text-opacity-75">
+              {t("create_spiritus_birth_placeholder")}
+            </label>
             <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
               <DatePicker
+                id="birth"
                 onChange={setBirth}
                 value={birth}
                 clearIcon={!birth ? null : <XIcon className="h-6 w-6" />}
-                dayPlaceholder={t("create_spiritus_birth_placeholder")}
-                monthPlaceholder=""
-                yearPlaceholder=""
+                dayPlaceholder="dd"
+                monthPlaceholder="mm"
+                yearPlaceholder="yyyy"
                 showLeadingZeros
                 calendarIcon={
                   <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
@@ -81,13 +85,17 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
             </div>
           </div>
           <div className="w-full flex-1">
-            <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
+            <label htmlFor="death" className="dark:text-sp-white dark:text-opacity-75">
+              {t("create_spiritus_death_placeholder")}
+            </label>
+            <div className="my-2 rounded flex flex-col items-center border-2 border-sp-medium py-2.5">
               <DatePicker
+                id="death"
                 onChange={setDeath}
                 value={death}
-                dayPlaceholder={t("create_spiritus_death_placeholder")}
-                monthPlaceholder=""
-                yearPlaceholder=""
+                dayPlaceholder="dd"
+                monthPlaceholder="mm"
+                yearPlaceholder="yyyy"
                 showLeadingZeros
                 clearIcon={!death ? null : <XIcon className="h-6 w-6" />}
                 calendarIcon={
