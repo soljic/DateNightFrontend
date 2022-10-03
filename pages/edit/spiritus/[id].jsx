@@ -270,6 +270,7 @@ function SpiritusDates({ birth, setBirth, death, setDeath }) {
               dayPlaceholder="dd"
               monthPlaceholder="mm"
               yearPlaceholder="yyyy"
+              showLeadingZeros
               calendarIcon={
                 <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
               }
