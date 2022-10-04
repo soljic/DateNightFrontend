@@ -73,7 +73,7 @@ export default function Hero() {
         </div>
       </div>
       <div className="flex justify-center items-center max-w-full max-h-fit text-neutral-800">
-        <Image src={hero} />
+        <Image src={hero} alt="Representative spiritus" priority/>
       </div>
     </section>
   );
