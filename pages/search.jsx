@@ -328,7 +328,7 @@ function GlobalSearchRow({ id, slug, title, subtitle, navigationType }) {
       case "PLACE_DETAILS":
         return `/spiritus/place/${id}?location=${title}`;
       case "STORY_DETAILS":
-        return `/story/${slug}`;
+        return `/stories/${slug}`;
       default:
         return `/spiritus/${slug}`;
     }

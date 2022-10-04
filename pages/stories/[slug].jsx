@@ -209,14 +209,14 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        ...(await serverSideTranslations(context.locale, ["common"])),
+        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
         displayStory: resStory.data,
         stories: content,
         spiritus: resSpiritus.data,
         isLastPage: resAllStories.data.last,
       },
     };
-  } catch {
+  } catch (err) {
     return {
       redirect: {
         destination: "/404",
