@@ -50,7 +50,7 @@ export default function Hero() {
                 </span>
               </div>
             </button>
-            <Link href="/contact-us">
+            <Link href="mailto:hello@spiritus.app?subject=Hello!">
               <a className="w-full md:w-1/2 flex justify-center items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3.5 px-5 font-semibold text-sp-black gap-1">
                 <svg
                   width="24"

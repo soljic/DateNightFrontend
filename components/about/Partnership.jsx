@@ -13,7 +13,7 @@ export default function Partnership() {
         <p className="w-full lg:w-3/4 mt-2.5 text-xl font-bold tracking-wide leading-5 dark:text-sp-white">
           Take the first step to preserve memories of your community.
         </p>
-        <Link href="/contact-us">
+        <Link href="mailto:hello@spiritus.app?subject=Hello! Partnership Contact Form">
           <a className="w-full md:w-2/3 lg:w-1/2 2xl:w-1/2 mt-3 flex justify-center items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3.5 px-5 font-semibold text-sp-black gap-1">
             <svg
               width="24"
