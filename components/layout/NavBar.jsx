@@ -37,7 +37,7 @@ export function Navbar() {
         <div className="inline-flex items-center gap-1 sm:gap-3">
           <Link href="/search">
             <a className="p-3 hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full">
-              <SearchIcon className="h-5 w-5 tex-sp-black dark:text-sp-white" />
+              <SearchIcon className="h-5 w-5 text-sp-black dark:text-sp-white" />
             </a>
           </Link>
           {session?.user.name ? (

@@ -63,7 +63,7 @@ export function AccesibilityMenu() {
                   <Disclosure>
                     {({ open }) => (
                       <>
-                        <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                        <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                           {open ? (
                             <ChevronLeftIcon className="w-6 h-6 text-sp-lighter" />
                           ) : (

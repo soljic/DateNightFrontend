@@ -49,6 +49,7 @@ module.exports = {
         "sp-medium": "#302C29",
         "sp-medlight": "#1f1b16",
         "sp-lighter": "#666461",
+        "sp-dark-gradient-mid": "#352719",
 
         // darkmode accents
         "sp-cotta": "#DB6D56",
@@ -64,7 +65,9 @@ module.exports = {
         "sp-day-300": "#E3D4C5", // 300
         "sp-day-900": "#D67915",
         
-        // lightmode accents
+        // lightmode gradient
+        "day-gradient-start": "#EDE1D5",
+        "day-gradient-stop": "#E8DED5"
       },
 
       fontFamily: {
