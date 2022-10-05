@@ -10,9 +10,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
+import { LinkIcon, UploadIcon } from "@heroicons/react/outline";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import LayoutNoFooter from "../../components/layout/LayoutNoFooter";
 import { HorizontalDivider, Logo } from "../../components/layout/Common";
-import { GraveIcon, GuardianIcon } from "../../components/Icons";
 import { ProgressBar, Spinner } from "../../components/Status";
 import {
   SpiritusDates,
@@ -45,7 +47,13 @@ export default function CreateSpiritusPage({ user }) {
   const [description, setDescription] = useState("");
 
   const [pending, setPending] = useState(false);
-  const [spiritus, setSpiritus] = useState(false);
+  const [spiritus, setSpiritus] = useState(
+  //   {
+  //   id: 1,
+  //   name: "Tester",
+  //   surname: "Surname",
+  // }
+  );
 
   const [location, setLocation] = useState(null);
 
@@ -236,6 +244,7 @@ export default function CreateSpiritusPage({ user }) {
 
 function Success({ spiritus }) {
   const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white">
       <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
@@ -274,19 +283,31 @@ function Success({ spiritus }) {
         </p>
       </div>
       <Link href={`/create/story?spiritus=${spiritus.id}`}>
-        <a className="bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-black">
+        <a className="bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-black font-medium">
           {t("create_story")}
         </a>
       </Link>
-      <div className="flex mx-auto items-center justify-center gap-4 mt-3 text-sp-lighter dark:text-sp-white">
-        <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
-          <GuardianIcon />
-          <p className="font-semibold">{t("add_guardian")}</p>
-        </button>
-        <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-lg p-4">
-          <GraveIcon />
-          <p className="font-semibold">{t("add_resting_place")}</p>
-        </button>
+      <div className="flex mx-auto items-center justify-center gap-4 mt-8 text-sp-lighter dark:text-sp-white">
+        <Link
+          href={
+            spiritus?.slug
+              ? `/spiritus/${spiritus.slug}`
+              : `/spiritus/id/${spiritus.id}`
+          }
+        >
+          <a className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 p-4 gap-2">
+            <LinkIcon className="w-6 h-6" />
+            <p className="font-semibold">
+              {t("spiritus_success_link")} Spiritus
+            </p>
+          </a>
+        </Link>
+        <CopyToClipboard text={spiritus.shortLink}>
+          <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 p-4 gap-2">
+            <UploadIcon className="w-6 h-6" />
+            <p className="font-semibold">{t("share")} Spiritus</p>
+          </button>
+        </CopyToClipboard>
       </div>
     </div>
   );

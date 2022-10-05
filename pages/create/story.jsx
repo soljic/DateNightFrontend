@@ -205,7 +205,7 @@ export default function CreateStoryPage({ spiritus }) {
   );
 }
 
-function Success({ storyId, name, surname }) {
+function Success({ storyId, name, surname, shortLink }) {
   const { t } = useTranslation("common");
 
   return (
@@ -223,8 +223,7 @@ function Success({ storyId, name, surname }) {
         </p>
       </div>
       <div className="flex mx-auto items-center justify-center gap-4 mt-4">
-        {/* <CopyToClipboard text={`https://spiritus-client.vercel.app/stories/id/${id}`}> */}
-        <CopyToClipboard text={`http://localhost:3000/stories/id/${storyId}`}>
+        <CopyToClipboard text={shortLink || "#"}>
           <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
             <UploadIcon className="w-6 h-6" />
             <p className="font-semibold text-center">{t("share")}</p>
