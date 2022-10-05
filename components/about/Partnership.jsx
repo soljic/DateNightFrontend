@@ -34,7 +34,7 @@ export default function Partnership() {
         </Link>
       </div>
       <div className="w-full md:w-1/2 lg:pr-20">
-        <p className="text-[13px] tracking-sp-tighter leading-4 opacity-70 dark:text-sp-white">
+        <p className="text-sm tracking-sp-tighter leading-4 opacity-70 dark:text-sp-white">
           {t("partnerships_text")}
         </p>
       </div>
