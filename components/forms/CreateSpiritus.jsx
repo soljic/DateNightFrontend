@@ -65,7 +65,10 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
       <div className="mt-6">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
-            <label htmlFor="birth" className="dark:text-sp-white dark:text-opacity-75">
+            <label
+              htmlFor="birth"
+              className="dark:text-sp-white dark:text-opacity-75"
+            >
               {t("create_spiritus_birth_placeholder")}
             </label>
             <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
@@ -85,7 +88,10 @@ export function SpiritusDates({ name, birth, setBirth, death, setDeath }) {
             </div>
           </div>
           <div className="w-full flex-1">
-            <label htmlFor="death" className="dark:text-sp-white dark:text-opacity-75">
+            <label
+              htmlFor="death"
+              className="dark:text-sp-white dark:text-opacity-75"
+            >
               {t("create_spiritus_death_placeholder")}
             </label>
             <div className="my-2 rounded flex flex-col items-center border-2 border-sp-medium py-2.5">
@@ -204,7 +210,8 @@ export function SpiritusLocation({ name, location, setLocation }) {
     const s = new MapboxSearch({
       accessToken:
         "pk.eyJ1Ijoic2VhcmNoLW1hY2hpbmUtdXNlci0xIiwiYSI6ImNrNnJ6bDdzdzA5cnAza3F4aTVwcWxqdWEifQ.RFF7CVFKrUsZVrJsFzhRvQ",
-      language: "hr", // maybe change to use defaults ("en")
+      language: "en",
+      types: ["place", "city", "neighborhood"],
     });
     setSearch(s);
   }, []);
