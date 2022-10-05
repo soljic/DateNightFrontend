@@ -1,6 +1,8 @@
 import Head from "next/head";
 
 import { useTranslation } from "next-i18next";
+import { useSession } from "next-auth/react";
+
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
 
@@ -29,8 +31,21 @@ function EditBtn({ spiritusId }) {
   );
 }
 
-export default function SpiritusIDPage({ spiritus, stories, hasMore, total }) {
+export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
   const { t } = useTranslation("common");
+  const { data: session, status } = useSession();
+
+  const sessionUserIsOwner = () => {
+    if (!spiritus || !spiritus?.users || !spiritus?.users.length) {
+      return false;
+    }
+    for (const su of spiritus.users) {
+      if (su.email == session?.user.email && su.code == session?.user.code) {
+        return true;
+      }
+    }
+    return false;
+  };
 
   return (
     <Layout>
@@ -47,13 +62,22 @@ export default function SpiritusIDPage({ spiritus, stories, hasMore, total }) {
           }
         />
       </Head>
-      <EditBtn spiritusId={spiritus.id} />
+      {status === "authenticated" && sessionUserIsOwner() ? (
+        <EditBtn spiritusId={spiritus.id} />
+      ) : (
+        ""
+      )}
 
       <section className="mx-auto w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
         <SpiritusOverview {...spiritus} />
         <SpiritusCarousel images={spiritus.images} />
         <div className="text-sp-white mt-4">
-          <MoreStories stories={stories} spiritus={spiritus} />
+          <MoreStories
+            stories={stories}
+            spiritus={spiritus}
+            userIsOwner={sessionUserIsOwner()}
+            isLastPage={isLastPage}
+          />
           <div className="flex-1 items-center justify-center">
             <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
           </div>
@@ -78,11 +102,13 @@ export async function getServerSideProps(context) {
     const stories = spiritusStories.content;
     return {
       props: {
-        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+        ])),
         stories,
         spiritus,
-        hasMore: !spiritusStories.last,
-        total: spiritusStories.numberOfElements,
+        isLastPage: spiritusStories.last,
       },
     };
   } catch {
