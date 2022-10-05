@@ -10,8 +10,18 @@ export async function GetStoryById(id) {
   return res;
 }
 
-export async function GetStoryBySlug(slug) {
-  const res = await axios.get(`${API_URL}/wapi/stories/${slug}`);
+export async function GetStoryBySlug(slug, accessToken) {
+  let res;
+  if (accessToken) {
+    res = await axios.get(`${API_URL}/wapi/stories/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } else {
+    res = await axios.get(`${API_URL}/wapi/stories/${slug}`);
+  }
+
   res.data.images.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
@@ -36,7 +46,11 @@ export async function GetSpiritusStoriesBySlug(spiritus_slug, offset, limit) {
 }
 
 // Get stories for spiritus through proxy
-export async function ProxyGetSpiritusStoriesBySlug(spiritus_slug, offset, limit) {
+export async function ProxyGetSpiritusStoriesBySlug(
+  spiritus_slug,
+  offset,
+  limit
+) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 

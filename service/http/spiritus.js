@@ -2,16 +2,34 @@ import axios from "axios";
 import { ImagePath } from "../util";
 import { API_URL, defaultLimit, defaultOffset } from "../constants";
 
-export async function GetSpiritusById(id) {
-  const res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}`);
+export async function GetSpiritusById(id, accessToken) {
+  let res;
+  if (accessToken) {
+    res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } else {
+    res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}`);
+  }
   res.data.images.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
   return res;
 }
 
-export async function GetSpiritusBySlug(slug) {
-  const res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`);
+export async function GetSpiritusBySlug(slug, accessToken) {
+  let res;
+  if (accessToken) {
+    res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } else {
+    res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`);
+  }
   res.data.images.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
@@ -99,9 +117,7 @@ export async function GetSpiritusByPlaceId(placeId, offset, limit) {
   const l = limit ? limit : defaultLimit;
 
   const res = await axios.get(
-    encodeURI(
-      `${API_URL}/wapi/spiritus/place/${placeId}?page=${o}&size=${l}`
-    )
+    encodeURI(`${API_URL}/wapi/spiritus/place/${placeId}?page=${o}&size=${l}`)
   );
 
   res.data.content.forEach((spiritus) => {
@@ -118,9 +134,7 @@ export async function ProxyGetSpiritusByPlaceId(placeId, offset, limit) {
   const l = limit ? limit : defaultLimit;
 
   const res = await axios.get(
-    encodeURI(
-      `/api/spiritus/place/${placeId}?page=${o}&size=${l}`
-    )
+    encodeURI(`/api/spiritus/place/${placeId}?page=${o}&size=${l}`)
   );
 
   res.data.content.forEach((spiritus) => {

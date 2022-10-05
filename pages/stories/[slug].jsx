@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Head from "next/head";
 
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
+
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
@@ -177,11 +178,18 @@ export default function StoryPage({
 }
 
 // fetch first 5 spiritus stories, remove the story alredy being shown
+// if user is logged in, fetch story using accessToken so flags are fetched
 export async function getServerSideProps(context) {
   const { slug } = context.query;
+  const session = await getSession(context);
 
   try {
-    const resStory = await GetStoryBySlug(slug);
+    let resStory;
+    if (session && session?.user?.accessToken) {
+      resStory = await GetStoryBySlug(slug, session.user.accessToken);
+    } else {
+      resStory = await GetStoryBySlug(slug);
+    }
     const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
     const resAllStories = await GetSpiritusStoriesBySlug(resSpiritus.data.slug);
 
@@ -209,7 +217,10 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+        ])),
         displayStory: resStory.data,
         stories: content,
         spiritus: resSpiritus.data,

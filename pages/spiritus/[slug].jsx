@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
@@ -98,18 +98,29 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
   );
 }
 
-
 // Fetch spiritus and story data.
 // Redirects to 404 in case of any errors.
 export async function getServerSideProps(context) {
   const { slug } = context.query;
+  const session = await getSession(context);
+
   try {
-    const { data: spiritus } = await GetSpiritusBySlug(slug);
+    let spiritus;
+    if (session && session?.user?.accessToken) {
+      const res = await GetSpiritusBySlug(slug, session?.user?.accessToken);
+      spiritus = res.data;
+    } else {
+      const res = await GetSpiritusBySlug(slug);
+      spiritus = res.data;
+    }
     const { data: resStories } = await GetSpiritusStoriesBySlug(slug);
     const stories = resStories?.content;
     return {
       props: {
-        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+        ])),
         stories,
         spiritus,
         isLastPage: resStories.last,
