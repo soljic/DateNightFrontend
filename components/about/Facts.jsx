@@ -23,11 +23,11 @@ export default function Facts() {
   ];
 
   return (
-    <section className="mt-14 flex justify-evenly py-8 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 text-sp-black dark:text-sp-white">
+    <section className="mt-14 flex flex-col sm:flex-row justify-evenly py-8 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 text-sp-black dark:text-sp-white">
       {elements.map((elem, index) => {
         return (
           <div
-            className="flex flex-col justify-center items-center gap-1.5"
+            className="flex flex-col justify-center items-center gap-1.5 py-5 sm:p-0"
             key={`fact-${index}`}
           >
             <div className="flex items-center gap-1">

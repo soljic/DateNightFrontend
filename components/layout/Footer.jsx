@@ -7,10 +7,10 @@ export function Footer() {
   return (
     <div className="text-sp-medium dark:text-sp-white mt-44">
       <div className="flex flex-col justify-start md:flex-row md:justify-center">
-        <NavItem text={t("about")} textsize={"sm"} />
+        <NavItem text={t("about")} textsize={"sm"} link={"/about"}/>
         <NavItem text={t("stories")} textsize={"sm"} />
         <NavItem text={t("mobile")} link="/mobile-app" textsize={"sm"} />
-        <NavItem text={t("tos")} textsize={"sm"} />
+        <NavItem text={t("tos")} textsize={"sm"} link="/privacy-policy"/>
         <NavItem text={t("privacy")} link="/privacy-policy" textsize={"sm"} />
         <NavItem
           text={t("contact")}
