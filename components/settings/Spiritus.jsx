@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { useTranslation } from "next-i18next";
@@ -124,17 +124,26 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
 
 function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
   const { t } = useTranslation(["common", "settings"]);
+  const { data: session, status } = useSession();
 
   let [submitting, setSubmitting] = useState(false);
   const [err, setErr] = useState("");
 
-  const { data: session, status } = useSession();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+
+  // helpers to clear input field after async ops complete
+  const [isSafeToReset, setIsSafeToReset] = useState(false);
+
+  useEffect(() => {
+    if (!isSafeToReset) return;
+    console.log("### WILL RESE $$$")
+    reset();
+  }, [isSafeToReset]);
 
   const onClose = () => {
     setErr("");
@@ -149,6 +158,7 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
       await ProxyDeleteSpiritus(session.user.accessToken, deleteId);
       setItems((prev) => prev.filter((item) => item.id !== deleteId));
       setSubmitting(false);
+      setIsSafeToReset(true);
       closeModal();
     } catch (error) {
       setErr(t("settings:delete_err"));
