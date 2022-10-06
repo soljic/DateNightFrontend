@@ -346,9 +346,11 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
           )}
         </div>
         <div className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-6">
-          {items.map((s) => {
-            return <StoryHook {...s} key={s.title} />;
-          })}
+          {items &&
+            items.length &&
+            items.map((s) => {
+              return <StoryHook {...s} key={s.title} />;
+            })}
         </div>
         {!isLast && (
           <div className="flex justify-center items-center mt-8">

@@ -221,6 +221,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
         ])),
+        key: `${context.locale}-${slug}`,
         displayStory: resStory.data,
         stories: content,
         spiritus: resSpiritus.data,
