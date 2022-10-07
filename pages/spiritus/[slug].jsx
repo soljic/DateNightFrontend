@@ -74,11 +74,12 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
         <SpiritusCarousel images={spiritus.images} />
 
         <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
-          <Tribute id={spiritus.id} />
+          {!sessionUserIsOwner() && <Tribute id={spiritus.id} />}
           <PageActions
             shareLink={spiritus.shortLink}
             id={spiritus.id}
             type={"SPIRITUS"}
+            userIsOwner={sessionUserIsOwner()}
             saved={spiritus.flags.includes("SAVED")}
           />
         </div>

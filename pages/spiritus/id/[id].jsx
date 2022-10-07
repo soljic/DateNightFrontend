@@ -10,6 +10,7 @@ import Layout from "../../../components/layout/Layout";
 import {
   CTAAddMemory,
   MoreStories,
+  PageActions,
 } from "../../../components/stories/StoryPage";
 import { SpiritusOverview } from "../../../components/spiritus/Overview";
 import { SpiritusCarousel } from "../../../components/spiritus/Carousel";
@@ -71,6 +72,16 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
       <section className="mx-auto w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
         <SpiritusOverview {...spiritus} />
         <SpiritusCarousel images={spiritus.images} />
+        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
+          {!sessionUserIsOwner() && <Tribute id={spiritus.id} />}
+          <PageActions
+            shareLink={spiritus.shortLink}
+            id={spiritus.id}
+            type={"SPIRITUS"}
+            userIsOwner={sessionUserIsOwner()}
+            saved={spiritus.flags.includes("SAVED")}
+          />
+        </div>
         <div className="text-sp-white mt-4">
           <MoreStories
             stories={stories}
