@@ -55,14 +55,8 @@ export function Tribute({ id }) {
   const { data: session, status } = useSession();
 
   const sendRose = async () => {
-    // let name = `${session?.user?.name || ""} ${
-    //   session?.user?.surname || ""
-    // }`.trim();
-    // name = name.length ? name : "";
-    const name = "";
-
     try {
-      await ProxySendRose(id, name, text);
+      await ProxySendRose(id, text);
       setSent(true);
       setIsOpen(true);
     } catch (err) {
