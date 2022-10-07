@@ -89,7 +89,7 @@ export function Tribute({ id }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-80" />
+            <div className="fixed inset-0 bg-black bg-opacity-70 z-10" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto z-10">
