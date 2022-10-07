@@ -76,7 +76,7 @@ export default function ForgotPassword() {
         </section>
       ) : (
         <section className="flex flex-col justify-center items-center text-sp-white">
-          <pre>{JSON.stringify(watch(), null, 2)}</pre>
+          {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
           <div className="flex flex-col justify-center items-center gap-3 pb-8">
             <ShieldIcon width={12} height={12} />
