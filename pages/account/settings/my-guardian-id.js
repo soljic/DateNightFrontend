@@ -23,10 +23,10 @@ export default function GuardianIDPage() {
       <section className="pt-5 overflow-y-auto">
         <div className="w-full grid grid-cols-1 md:grid-cols-3">
           <div className="col-span-1 hidden sm:hidden md:block">
-            <Sidebar selectedIndex={4} />
+            <Sidebar selectedIndex={1} />
           </div>
           <div className="md:col-span-1 md:hidden">
-            <MobileSidebar selectedIndex={4} />
+            <MobileSidebar selectedIndex={1} />
           </div>
           <div className="md:col-span-2 flex justify-start">
             <GuardianID guardianID={session?.user.code || ""} />
@@ -51,6 +51,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      key: `${context.locale}-settings-guardian-id`,
       ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };

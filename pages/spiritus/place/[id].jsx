@@ -42,6 +42,7 @@ export async function getServerSideProps(context) {
     const { data: res } = await GetSpiritusByPlaceId(id);
     return {
       props: {
+        key: `${context.locale}-spiritus-place-${id}`,
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",

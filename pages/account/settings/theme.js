@@ -22,10 +22,10 @@ export default function ThemePage() {
       <section className="pt-5 overflow-y-auto">
         <div className="w-full grid grid-cols-1 md:grid-cols-3">
           <div className="col-span-1 hidden sm:hidden md:block">
-            <Sidebar selectedIndex={6} />
+            <Sidebar selectedIndex={2} />
           </div>
           <div className="md:col-span-1 md:hidden">
-            <MobileSidebar selectedIndex={6} />
+            <MobileSidebar selectedIndex={2} />
           </div>
           <div className="md:col-span-2 flex justify-start">
             <Theme />
@@ -50,6 +50,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      key: `${context.locale}-settings-theme`,
       ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };

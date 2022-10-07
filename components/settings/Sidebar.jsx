@@ -34,33 +34,33 @@ export function Sidebar({ selectedIndex }) {
       href: "/account/settings/my-spiritus",
       icon: <SettingsSpiritusIcon width={5} height={5} />,
     },
-    {
-      name: t("account"),
-      href: "/",
-      icon: <SettingsAccountIcon width={5} height={5} />,
-    },
-    {
-      name: t("saved"),
-      href: "/",
-      icon: (
-        <BookmarkIcon className="w-5 h-5 text-sp-fawn dark:text-sp-white" />
-      ),
-    },
-    {
-      name: t("suggestions"),
-      href: "/",
-      icon: <SettingsSuggestionsIcon width={5} height={5} />,
-    },
+    // {
+    //   name: t("account"),
+    //   href: "/",
+    //   icon: <SettingsAccountIcon width={5} height={5} />,
+    // },
+    // {
+    //   name: t("saved"),
+    //   href: "/",
+    //   icon: (
+    //     <BookmarkIcon className="w-5 h-5 text-sp-fawn dark:text-sp-white" />
+    //   ),
+    // },
+    // {
+    //   name: t("suggestions"),
+    //   href: "/",
+    //   icon: <SettingsSuggestionsIcon width={5} height={5} />,
+    // },
     {
       name: t("guardian_id"),
       href: "/account/settings/my-guardian-id",
       icon: <SettingsGuardianIcon width={5} height={5} />,
     },
-    {
-      name: t("language"),
-      href: "/",
-      icon: <SettingsGlobeIcon width={5} height={5} />,
-    },
+    // {
+    //   name: t("language"),
+    //   href: "/",
+    //   icon: <SettingsGlobeIcon width={5} height={5} />,
+    // },
     {
       name: t("theme"),
       href: "/account/settings/theme",

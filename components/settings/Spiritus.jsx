@@ -141,7 +141,6 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
 
   useEffect(() => {
     if (!isSafeToReset) return;
-    console.log("### WILL RESE $$$")
     reset();
   }, [isSafeToReset]);
 

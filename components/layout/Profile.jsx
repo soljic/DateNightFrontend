@@ -60,15 +60,15 @@ export function ProfileMenu({ token, profileName }) {
                         </div>
                       </a>
                     </Link>
-                    <Link href="/">
+                    {/* <Link href="/">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsAccountIcon width={5} height={5} />
                         <div className="ml-4">
                           <p className="text-sm font-medium">{t("account")}</p>
                         </div>
                       </a>
-                    </Link>
-                    <Link href="/">
+                    </Link> */}
+                    {/* <Link href="/">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <BookmarkIcon className="w-5 h-5 text-sp-fawn dark:text-sp-white" />
                         <div className="ml-4">
@@ -85,7 +85,7 @@ export function ProfileMenu({ token, profileName }) {
                           </p>
                         </div>
                       </a>
-                    </Link>
+                    </Link> */}
                     <Link href="/account/settings/my-guardian-id">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsGuardianIcon width={5} height={5} alterFill />

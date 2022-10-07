@@ -117,6 +117,7 @@ export async function getServerSideProps(context) {
     const stories = resStories?.content;
     return {
       props: {
+        key: `${context.locale}-spiritus-${slug}`,
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",

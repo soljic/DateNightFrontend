@@ -102,6 +102,7 @@ export async function getServerSideProps(context) {
     const stories = spiritusStories.content;
     return {
       props: {
+        key: `${context.locale}-spiritus-id-${id}`,
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",
