@@ -147,11 +147,12 @@ export default function StoryPage({
           )}
         </div>
         <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white mt-14 mb-4 lg:text-lg">
-          <Tribute id={spiritus.id} />
+          {!sessionUserIsOwner() && <Tribute id={spiritus.id} />}
           <PageActions
             shareLink={displayStory.shortLink}
             id={displayStory.id}
             type={"STORY"}
+            userIsOwner={sessionUserIsOwner()}
             nextStorySlug={getNextStorySlug()}
             saved={displayStory.flags.includes("SAVED")}
           />

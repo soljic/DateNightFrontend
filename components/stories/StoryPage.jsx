@@ -192,7 +192,14 @@ export function Tribute({ id }) {
   );
 }
 
-export function PageActions({ type, id, saved, shareLink, nextStorySlug }) {
+export function PageActions({
+  type,
+  id,
+  saved,
+  shareLink,
+  nextStorySlug,
+  userIsOwner,
+}) {
   const [isSaved, setIsSaved] = useState(saved);
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
@@ -246,20 +253,22 @@ export function PageActions({ type, id, saved, shareLink, nextStorySlug }) {
   return (
     <div className="w-full mx-auto items-center mt-4">
       <div className="flex mx-auto justify-evenly space-x-3 lg:space-x-4 text-sp-lighter dark:text-sp-white">
-        <button
-          onClick={() => toggleSave()}
-          className={`${
-            status !== "authenticated" ? "opacity-30" : ""
-          } flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4`}
-          disabled={status !== "authenticated"}
-        >
-          <BookmarkIcon
-            className={`w-6 h-6 ${
-              isSaved ? "text-sp-fawn fill-sp-fawn dark:text-opacity-0" : ""
-            }`}
-          />
-          {t("save")}
-        </button>
+        {!userIsOwner && (
+          <button
+            onClick={() => toggleSave()}
+            className={`${
+              status !== "authenticated" ? "opacity-30" : ""
+            } flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4`}
+            disabled={status !== "authenticated"}
+          >
+            <BookmarkIcon
+              className={`w-6 h-6 ${
+                isSaved ? "text-sp-fawn fill-sp-fawn dark:text-opacity-0" : ""
+              }`}
+            />
+            {t("save")}
+          </button>
+        )}
         <CopyToClipboard
           text={shareLink || ""}
           className="flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4"
@@ -340,8 +349,8 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
           )}
         </div>
         <div className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-6">
-          {items &&
-            items.length &&
+          {!!items &&
+            !!items.length &&
             items.map((s) => {
               return <StoryHook {...s} key={s.title} />;
             })}
