@@ -104,7 +104,8 @@ export function SpiritusCarousel({ images }) {
                       src={img.url}
                       alt={"spiritus-image"}
                       layout="fill"
-                      className="object-cover rounded-sp-14"
+                      objectFit="cover"
+                      className="rounded-sp-14"
                     />
                   </div>
                 </SwiperSlide>
