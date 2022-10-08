@@ -54,14 +54,13 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
             </h2>
           </div>
 
-          <div className="w-full rounded-sp-14">
+          <div className="relative w-full h-[66vh] max-h-screen">
             {!!displayStory.images.length ? (
               <Image
                 src={displayStory.images[0].url}
                 alt={`Paragraph image ${displayStory.images[0].id}`}
-                width={displayStory.images[0].width}
-                height={displayStory.images[0].height}
-                layout="responsive"
+                layout="fill"
+                objectFit="fill"
                 className="rounded-sp-14"
               />
             ) : (

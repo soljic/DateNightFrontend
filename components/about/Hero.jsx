@@ -84,7 +84,7 @@ function VideoModal({ showModal, setShowModal }) {
     <>
       {showModal ? (
         <>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <div className="opacity-60 fixed inset-0 z-40 bg-black"></div>
           <div className="justify-center items-center flex fixed inset-0 z-50 outline-none focus:outline-none w-full h-screen">
             <div className="flex justify-center items-center w-full h-full px-4">
               {/*content*/}
