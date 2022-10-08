@@ -102,7 +102,7 @@ export default function StoryPage({
                 {displayStory.subtitle}
               </h2>
             )}
-            <h2 className="mb-10 text-cta px-4 font-bold text-center sm:text-xl md:text-cta">
+            <h2 className="mb-10 text-2xl md:text-cta px-4 font-bold text-center">
               {displayStory.description}
             </h2>
           </div>

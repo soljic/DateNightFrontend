@@ -1,4 +1,4 @@
-import { useState, useRef, Fragment } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
@@ -15,11 +15,22 @@ import "swiper/css/effect-cards";
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 export function SpiritusCarousel({ images }) {
+  const [mounted, setMounted] = useState(false);
+
   const [index, setIndex] = useState(0);
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
   let [isOpen, setIsOpen] = useState(false);
+
+  // wait for component to mount to avoid hydration errs
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   function closeModal() {
     setIsOpen(false);
@@ -38,7 +49,6 @@ export function SpiritusCarousel({ images }) {
           images={images}
         />
         <div className="sw-spiritus relative w-full mt-16 overflow-hidden">
-
           <div className="swiper-prev-step absolute inset-y-1/2 left-0 sm:left-4 z-10">
             <button
               ref={prevRef}
@@ -75,7 +85,7 @@ export function SpiritusCarousel({ images }) {
             }}
             centeredSlides={true}
             breakpoints={{
-              340: {
+              300: {
                 slidesPerView: 1,
               },
               576: {
