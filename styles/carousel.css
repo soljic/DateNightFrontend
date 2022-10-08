@@ -10,3 +10,34 @@
   width: 680px;
   height: 500px;
 }
+
+.sw-gallery-spiritus {
+  height: 80vh;
+  width: 80vw;
+}
+
+.sw-gallery-spiritus .swiper-slide {
+  height: 80vh;
+  width: 80vw;
+}
+
+.sw-gallery-spiritus .swiper-button-next {
+  color: #F0EFED;
+  opacity: 85%;
+}
+
+.sw-gallery-spiritus .swiper-button-prev {
+  color: #F0EFED;
+  opacity: 85%;
+}
+
+.sw-gallery-spiritus .swiper-pagination-bullet {
+  background-color: #666461;
+  opacity: 75%;
+}
+
+
+.sw-gallery-spiritus .swiper-pagination-bullet-active {
+  background-color: #F0EFED;
+}
+
