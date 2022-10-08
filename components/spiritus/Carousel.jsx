@@ -48,7 +48,7 @@ export function SpiritusCarousel({ images }) {
           closeModal={closeModal}
           images={images}
         />
-        <div className="sw-spiritus relative w-full mt-16 overflow-hidden">
+        <div className="sw-spiritus relative w-full my-16 overflow-hidden">
           <div className="swiper-prev-step absolute inset-y-1/2 left-0 sm:left-4 z-10">
             <button
               ref={prevRef}

@@ -59,8 +59,9 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
               <Image
                 src={displayStory.images[0].url}
                 alt={`Paragraph image ${displayStory.images[0].id}`}
-                layout="fill"
-                objectFit="fill"
+                width={displayStory.images[0].width}
+                height={displayStory.images[0].height}
+                layout="responsive"
                 className="rounded-sp-14"
               />
             ) : (

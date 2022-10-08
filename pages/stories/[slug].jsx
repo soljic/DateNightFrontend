@@ -107,13 +107,14 @@ export default function StoryPage({
             </h2>
           </div>
 
-          <div className="relative w-full h-[66vh] max-h-screen">
+          <div className="w-full rounded-sp-14">
             {!!displayStory.images.length ? (
               <Image
                 src={displayStory.images[0].url}
                 alt={`Paragraph image ${displayStory.images[0].id}`}
-                layout="fill"
-                objectFit="fill"
+                width={displayStory.images[0].width}
+                height={displayStory.images[0].height}
+                layout="responsive"
                 className="rounded-sp-14"
               />
             ) : (
