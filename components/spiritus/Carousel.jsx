@@ -38,7 +38,8 @@ export function SpiritusCarousel({ images }) {
           images={images}
         />
         <div className="sw-spiritus relative w-full mt-16 overflow-hidden">
-          <div className="swiper-prev-step absolute inset-y-0 left-4 md:left-16 z-10 h-5/6 flex items-center">
+
+          <div className="swiper-prev-step absolute inset-y-1/2 left-0 sm:left-4 z-10">
             <button
               ref={prevRef}
               className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
@@ -46,7 +47,7 @@ export function SpiritusCarousel({ images }) {
               <ArrowLeftIcon className="w-5 h-5 text-black" />
             </button>
           </div>
-          <div className="swiper-next-step absolute inset-y-0 right-4 md:right-16 z-10 h-5/6 flex items-center">
+          <div className="swiper-next-step absolute inset-y-1/2 right-0 sm:right-4 z-10 ">
             <button
               ref={nextRef}
               className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
@@ -68,15 +69,22 @@ export function SpiritusCarousel({ images }) {
               setIndex(swiper.realIndex);
             }}
             slidesPerView={2}
+            loop={images.length > 2 ? true : false}
             onSwiper={(swiper) => {
               setIndex(swiper.realIndex);
             }}
             centeredSlides={true}
-            loop={images.length > 2 ? true : false}
-            // autoplay={{
-            //   delay: 10000,
-            //   disableOnInteraction: true,
-            // }}
+            breakpoints={{
+              340: {
+                slidesPerView: 1,
+              },
+              576: {
+                slidesPerView: 1.5,
+              },
+              719: {
+                slidesPerView: 2,
+              },
+            }}
           >
             {images.map((img, i) => {
               return (
