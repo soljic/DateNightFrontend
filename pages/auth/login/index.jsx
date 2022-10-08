@@ -26,7 +26,9 @@ export default function LoginComponent() {
           </h4>
         </div>
         <div className="flex flex-col w-full justify-center items-center text-center gap-3">
-          <button className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
+          <a
+          href="https://walk.spiritusapp.com/v2/authentication/social/login?type=google"
+          className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
             <div className="w-1/5 p-2">
               <svg
                 width="18"
@@ -44,7 +46,7 @@ export default function LoginComponent() {
               </svg>
             </div>
             <p className="w-4/6">{t("login_google")}</p>
-          </button>
+          </a>
           <button className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
             <div className="w-1/5 p-2">
               <svg
