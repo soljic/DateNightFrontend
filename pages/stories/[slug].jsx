@@ -26,6 +26,8 @@ import {
 } from "../../service/http/story";
 
 function EditBtn({ storyId }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex justify-end mt-8">
       <a
@@ -33,7 +35,7 @@ function EditBtn({ storyId }) {
         className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium py-2 px-6 text-sp-white dark:text-sp-black"
       >
         <PencilIcon className="w-5 h-5 text-sp-lighter" />
-        <span className="text-sp-lighter ml-2">Edit</span>
+        <span className="text-sp-lighter ml-2">{t("edit_button_text")}</span>
       </a>
     </div>
   );

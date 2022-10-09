@@ -142,7 +142,7 @@ export default function EditStoryPage({ story }) {
   return (
     <LayoutNoFooter>
       <Head>
-        <title>Spiritus | Editor</title>
+        <title>{t("edit_story_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={"Story Editor"} />
       </Head>
@@ -196,7 +196,7 @@ export default function EditStoryPage({ story }) {
           />
           <div>
             <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl pb-3">
-              Vidljivost
+              {t("edit_story_visibility")}
             </h2>
             <div className="flex items-center">
               <input
@@ -227,7 +227,7 @@ export default function EditStoryPage({ story }) {
             {pending ? (
               <Spinner text={"Saving..."} />
             ) : (
-              <span className="font-semibold tracking-wider">Save</span>
+              <span className="font-semibold tracking-wider">{t("save")}</span>
             )}
           </button>
         </div>
@@ -283,7 +283,10 @@ export async function getServerSideProps(context) {
     return {
       props: {
         story: { ...story, storyText: initText },
-        ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+        ])),
       },
     };
   } catch (err) {

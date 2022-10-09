@@ -136,5 +136,13 @@
 
   "action_favourite": "Označeno",
   "action_filter": "Filteri",
-  "action_load_more": "Prikaži više"
+  "action_load_more": "Prikaži više",
+
+  "edit_button_text": "Uredi",
+  "edit_story_meta_title": "Spiritus | Uredi priču",
+  "edit_story_date": "Datum priče",
+  "edit_story_title": "Naslov",
+  "edit_story_summary": "Sažetak",
+  "edit_story_text": "Sadržaj priče",
+  "edit_story_visibility": "Vidljivost priče"
 }

@@ -7,6 +7,8 @@ import { MultiSelectInput } from "../Dropdowns";
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 
 export function StoryDate({ date, setDate }) {
+  const { t } = useTranslation("common");
+
   const DatePicker = dynamic(() =>
     import("react-date-picker/dist/entry.nostyle").then((dp) => dp)
   );
@@ -14,7 +16,7 @@ export function StoryDate({ date, setDate }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        Datum
+        {t("create_story_date_placeholder")}
       </h2>
       <div className="flex flex-col md:flex-row gap-2">
         <div className="w-full flex-1">
@@ -57,7 +59,7 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
-        Naslov
+        {t("edit_story_title")}
       </h2>
       <div className="flex flex-col md:flex-row gap-2">
         <div className="w-full flex-1">
@@ -90,7 +92,7 @@ export function StorySummary({ summary, setSummary }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
-        Sažetak
+        {t("edit_story_summary")}
       </h2>
       <div className="flex flex-col md:flex-row">
         <div className="w-full flex-1">
@@ -119,7 +121,7 @@ export function StoryTextEditor({ storyText, setStoryText }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
-        Tekst Priče
+        {t("edit_story_text")}
       </h2>
       <textarea
         value={storyText}

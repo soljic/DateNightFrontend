@@ -136,8 +136,14 @@
 
   "action_favourite": "Favourite",
   "action_filter": "Filter",
-  "action_load_more": "Load more"
+  "action_load_more": "Load more",
 
-
+  "edit_button_text": "Edit",
+  "edit_story_meta_title": "Spiritus | Edit Story",
+  "edit_story_date": "Story date",
+  "edit_story_title": "Title",
+  "edit_story_summary": "Summary",
+  "edit_story_text": "Content",
+  "edit_story_visibility": "Visibility"
 
 }

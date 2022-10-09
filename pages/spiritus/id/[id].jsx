@@ -19,6 +19,8 @@ import { GetSpiritusById } from "../../../service/http/spiritus";
 import { GetSpiritusStoriesBySlug } from "../../../service/http/story";
 
 function EditBtn({ spiritusId }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex justify-end mt-4">
       <a
@@ -26,7 +28,7 @@ function EditBtn({ spiritusId }) {
         className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium py-2 px-6 text-sp-white dark:text-sp-black"
       >
         <PencilIcon className="w-5 h-5 text-sp-lighter" />
-        <span className="text-sp-lighter ml-2">Edit</span>
+        <span className="text-sp-lighter ml-2">{t("edit_button_text")}</span>
       </a>
     </div>
   );
@@ -73,7 +75,6 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
         <SpiritusOverview {...spiritus} />
         <SpiritusCarousel images={spiritus.images} />
         <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
-          {!sessionUserIsOwner() && <Tribute id={spiritus.id} />}
           <PageActions
             shareLink={spiritus.shortLink}
             id={spiritus.id}
