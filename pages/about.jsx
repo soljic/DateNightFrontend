@@ -10,6 +10,7 @@ import Facts from "../components/about/Facts";
 import Team from "../components/about/Team";
 import Features from "../components/about/Features";
 import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
+import FAQSection from "../components/about/FAQ";
 
 export default function About() {
   const { t } = useTranslation("about");
@@ -26,6 +27,7 @@ export default function About() {
       <Partnership />
       <Facts />
       <Team />
+      <FAQSection/>
       <BecomeGuardianCTA />
     </Layout>
   );
@@ -39,6 +41,7 @@ export async function getStaticProps(context) {
         "common",
         "settings",
         "about",
+        "faq",
       ])),
     },
   };

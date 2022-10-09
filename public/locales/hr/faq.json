@@ -1,0 +1,44 @@
+{
+
+	"faq_1_question": "Što je Spiritus?",
+	"faq_1_answer": "Spiritus je naziv za digitalnu uspomenu koja sadrži ime, prezime, datume, životne priče, slike i ostala raznolika sjećanja na pokojnu osobu.",
+
+	"faq_2_question": "Što je Čuvar uspomene?",
+	"faq_2_answer": "Čuvar uspomene je svaki registrirani korisnik unutar Spiritus aplikacije. To je najčešće član uže obitelji Spiritusa ili bliski prijatelj. Ipak, pravi ste Čuvar uspomene tek kada imate Spiritus kojeg čuvate.\n\nSpiritus možete čuvati tako da preuzmete postojeći Spiritus koji nema Čuvara uspomene ili tako da kreirate Spiritus koji trenutno nije na našoj aplikaciji. Čuvar uspomene pomoću digitalnog certifikata može dokazati posjedovanje uspomene koja je vječno sačuvana.",
+	
+	"faq_3_question": "Može li jedan Spiritus imati više Čuvara uspomena?",
+	"faq_3_answer": "Može. Jedan Spiritus može imati do 5 Čuvara uspomena.",
+
+	"faq_4_question": "Što Spiritus čini posebnim?",
+	"faq_4_answer": "Jedino kroz Spiritus možete vječno pohraniti podatke svoje voljene osobe.\n\nSvaki vječno spremljeni memorijal predstavljen je kroz jedan jedinstveni NFT token. Njega posjeduju samo njegovi Čuvari uspomena.",
+
+	"faq_5_question": "Kako postižemo vječnost?",
+	"faq_5_answer": "Spiritus koristi kombinaciju IPFS i blockchain tehnologije. Kroz IPFS tehnologiju čuvamo originalne podatke na više lokacija, a blockchain koristimo za kreiranje digitalnog dokaza o vlasništvu nad spremljenim podatcima. Kroz tu je kombinaciju gotovo nemoguće obrisati podatke koje čuvamo.",
+
+	"faq_6_question": "Jesu li spremljeni podatci stalno dostupni?",
+	"faq_6_answer": "Da. Pomoću naše aplikacije podatke možete uvijek dohvatiti, no možete ih i direktno skinuti s IPFS-a.",
+
+	"faq_7_question": "Mogu li koristiti Spiritus aplikaciju bez blockchaina?",
+	"faq_7_answer": "Da. Možete normalno koristiti gotovo sve funkcionalnosti Spiritusa bez potrebe korištenja blockchaina. Ipak, kako biste sačuvali uspomene na svoje voljene, savjetujemo Vam da ipak stvorite vječne zapise o njima.",
+
+	"faq_8_question": "Koju blockchain mrežu koristite?",
+	"faq_8_answer": "Spiritus trenutno koristi Avalanche blockchain mrežu.",
+
+	"faq_9_question": "Što se dogodi nakon što izvršim kupnju?",
+	"faq_9_answer": "1) Potrebno je pričekati do dva radna dana kako bismo provjerili ispunjava li priča sve naše uvjete za čuvanje priče.\n\n2) Isprva, spremamo podatke pohranjene priče i Spiritusa na naš IPFS sustav, a potom spremamo adrese na Avalanche blockchain.\n\n3) Nakon toga kreiramo NFT certifikat sa svim podatcima spremljenog Spiritusa. Osim pohrane, za svaku uspomenu kreiramo jedinstvenu grafiku.\n\n4) Na e-mail korisnika šaljemo NFT certifikat sa svim podatcima o tome gdje je i kako pohranjen Spiritus.\n\n5) U slučaju da korisnik tako želi, kreirani digitalni novčanik prebacujemo na željenu web3 adresu.",
+
+	"faq_10_question": "Mogu li se podatci na Spiritusu obrisati?",
+	"faq_10_answer": "Svaki korisnik koji kreira svoj Spiritus, i time postaje njegov Čuvar, može isti obrisati. Spiritus koji je pomoću “Vječnog tokena” postao vječan, ne može se obrisati.",
+
+	"faq_11_question": "Što je “Vječni token”?",
+	"faq_11_answer": "“Vječni token” je sredstvo kojim Čuvar Uspomena može vječno pohraniti životnu priču i informacije određenog Spiritusa.\n\nSvaki Čuvar uspomene može imati mnogo „Vječnih tokena” i koristiti ih kako bi zauvijek pohranio više životnih priča mnogobrojnih Spiritusa koje čuva.",
+
+	"faq_12_question": "Može li neprimjeren sadržaj biti sačuvan vječno?",
+	"faq_12_answer": "Ne može. Svaka životna priča i Spiritus za koje je podnesen zahtjev za vječno pohranjivanje prolaze kroz našu internu provjeru. Njome osiguravamo da svaki sadržaj bude primjeren i dostojanstven. Izuzetno nam je važno da možemo biti ponosni na sav sadržaj koji je vječno pohranjen.",
+
+	"faq_13_question": "Što sprječava druge korisnike da objavljuju pogrdan sadržaj?",
+	"faq_13_answer": "Ako ste vi Čuvar uspomene, onda jedino vi možete objavljivati sadržaj za svoj Spiritus. Svi ostali korisnici sadržaj mogu samo predlagati.\n\nSvaki predloženi sadržaj isprva se dostavlja Čuvaru uspomena na pregled i potvrdu, a tek nakon potvrde on može biti vidljiv drugim korisnicima aplikacije.",
+
+	"faq_14_question": "Nisam siguran u svoje spisateljske sposobnosti. Kako mogu dobiti pomoć pri pisanju priča?",
+	"faq_14_answer": "Ako niste sigurni kako napisati najljepšu priču koja će biti sačuvana u vječnosti, ne brinite. Mi smo tu da pomognemo! U promotivnom razdoblju, uz pohranjivanje priče, Spiritus tim pomoći će Vam i u pisanju priče, besplatno."
+}

@@ -17,10 +17,7 @@ export default function Hero() {
         <VideoModal showModal={showModal} setShowModal={setShowModal} />
         <div className="flex flex-col justify-center items-center mt-4 w-full sm:w-full md:w-3/4 lg:w-2/3">
           <h1 className="font-bold text-cta tracking-tight dark:text-sp-white text-center mb-3">
-            {t("hero_title")}{" "}
-            <span className="underline decoration-sp-fawn underline-offset-8">
-              {t("hero_title_keyword")}
-            </span>
+            {t("hero_title")}
           </h1>
           <p className="dark:text-sp-white text-lg font-medium text-center tracking-sp-tighten leading-6 mb-3 mt-2">
             {t("hero_subtitle")}

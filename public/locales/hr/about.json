@@ -2,8 +2,7 @@
 	"meta_about_title": "Spiritus | O nama",
 	"meta_about_description": "Nauči više o Spiritusu, našoj viziji, misiji i predivnim ljudima koji se brinu da se uspomene na tvoje voljene sačuvaju - vječno.",
 
-	"hero_title": "Sačuvaj uspomene na svoje voljene,",
-	"hero_title_keyword": "vječno",
+	"hero_title": "Svatko ima Priču koju vrijedi sačuvati.",
 	"hero_subtitle": "Spiritus je platforma za stvaranje i čuvanje digitalnih uspomena kroz životne priče.",
 	"hero_intro_video": "Video o nama",
 	"hero_contact": "Javi nam se",
@@ -16,26 +15,26 @@
 	"feature_1_subtitle": "Sjećanja na Vaše najmilije mogu biti pohranjena prelijepo, sigurno i brzo, uz najnapredniju dostupnu tehnologiju.",
 	"feature_1_list_1": "3000+ Čuvara Uspomena",
 	"feature_1_list_2": "150+ izvrsnih 5.0★ recenzija",
-	"feature_1_list_3": "Stvaranje vječnosti pomoću Blockchain tehnologije",
+	"feature_1_list_3": "Stvaranje vječnosti pomoću modernih tehnologija.",
 
 	"feature_2_title": "Najbolje životne priče nisu u knjigama.",
 	"feature_2_subtitle": "Otkrij sve neobične priče neznanih junaka iz svog okruženja. Čitaj o tome kako su se zaljubljivali, nadilazili životne nedaće i učinili svoje živote vrijednim pamćenja.",
-	"feature_2_list_1": "Podsjeti se godišnjica smrti svojih najmilijih",
-	"feature_2_list_2": "Pronađi zanimljive priče u više od 10 tema, od ljubavi do rata i obiteljskih anegdota",
-	"feature_2_list_3": "Upoznaj njihove živote kroz fotografije",
+	"feature_2_list_1": "Podsjeti se godišnjica smrti svojih najmilijih.",
+	"feature_2_list_2": "Pronađi zanimljive priče u više od 10 tema, od ljubavi do rata i obiteljskih anegdota.",
+	"feature_2_list_3": "Upoznaj njihove živote kroz fotografije.",
 
-	"feature_3_title": "Svako mjesno groblje je muzej neispričanih priča.",
-	"feature_3_subtitle": "Ime i prezime skriva svoju priču. Prošetajte našom Alejom Sjećanja i otkrij predivne priče koje se skrivaju iza kamena...",
-	"feature_3_list_1": "na više od 10 mjesnih groblja",
-	"feature_3_list_2": "Pretraži priče lokalnih junaka",
-	"feature_3_list_3": "Otkrij povijest mjesta kroz životne priče",
+	"feature_3_title": "Mjesna groblja su muzeji neispričanih priča.",
+	"feature_3_subtitle": "Svako ime i prezime skriva svoju priču. Prošetajte našom Alejom Sjećanja i otkrijte predivne priče koje se skrivaju iza kamena.",
+	"feature_3_list_1": "Dostupno na više od 10 mjesnih groblja.",
+	"feature_3_list_2": "Pretraži priče lokalnih junaka.",
+	"feature_3_list_3": "Otkrij povijest mjesta kroz životne priče.",
 
 	"become_guardian_title": "Postani Čuvar Uspomene i sačuvaj životne priče.",
 	"become_guardian_subtitle": "Besplatno preuzmi za iOS i Android.",
 
 	"partnerships_title": "Prilika za suradnju",
 	"partnerships_subtitle": "Očuvajte uspomene svoje zajednice kroz Spiritus.",
-	"partnerships_text": "Nijedna životna priča ne treba biti zaboravljena. Zajedno sa gradovima, sveučilištima i mnogim ustanovama želimo sačuvati bogatu povijest i njihova sjećanja.",
+	"partnerships_text": "Temelj svake zajednice su uspomene. Kroz suradnju s gradovima, sveučilištima i mnogim drugim ustanovama želimo sačuvati bogatu povijest. Javite nam se. Nijedna životna priča ne treba biti zaboravljena!",
 
 	"facts_1": "Spašenih uspomena",
 	"facts_1_number": "16,000",
@@ -46,6 +45,10 @@
 
 	"team_title": "Ljudi Spiritusa",
 	"team_subtitle": "Upoznajte naš dream team.",
-	"team_text": "Izazov je napraviti odličan proizvod ako niste okruženi znatiželjnim pojedincima. Okupljamo nagrađivane stručnjake iz mnogih područja."
+	"team_text": "Izazov je napraviti odličan proizvod ako niste okruženi znatiželjnim pojedincima. Okupljamo nagrađivane stručnjake iz mnogih područja.",
 
+	"faq_title": "Trebate pomoć?",
+	"faq_subtitle": "Često postavljena pitanja",
+	"faq_cta_text": "Javite nam se",
+	"faq_text": "ako imate dodatnih upita."
 }

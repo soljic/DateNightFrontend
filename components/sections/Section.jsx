@@ -78,7 +78,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       </div>
 
       <div className="grid grid-cols-1 gap-y-10 gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:gap-x-10 mb-14">
-        {items.map((item) => {
+        {!!items && items.map((item) => {
           if (item.imageUrl) {
             return (
               <SectionTile

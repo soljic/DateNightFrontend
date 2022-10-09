@@ -1,0 +1,44 @@
+{
+
+	"faq_1_question": "What is a Spiritus?",
+	"faq_1_answer": "Spiritus is a name for a digital memorial that contains names, anniversaries, life stories, photographs and other valuable memories of a deceased loved one.",
+
+	"faq_2_question": "What is a Memory Guardian?",
+	"faq_2_answer": "Memory Guardian is every user that created an account in the Spiritus app. Most often, Guardian is a family member of a loved one or a close friend. Only by guarding a Spiritus, you become a true Memory Guardian.\n\nYou can guard a Spiritus by claiming an empty Spiritus or by creating a Spiritus that is currently not in our app. Memory Guardians can obtain a digital proof of ownership for a Spiritus memorial",
+	
+	"faq_3_question": "Can one Spiritus have multiple Memory Guardians?",
+	"faq_3_answer": "Yes. It can have up to 5 Memory Guardians.",
+
+	"faq_4_question": "What makes Spiritus unique?",
+	"faq_4_answer": "Only through Spiritus you can eternally save the data of your loved ones.\n\nEvery saved memorial is presented through original and irreplaceable NFT token. The NFT token is owned by the Memory Guardians of the memorial.",
+	
+	"faq_5_question": "How do we achieve eternity?",
+	"faq_5_answer": "Spiritus uses a combination of IPFS and blockchain technology. With IPFS tech we are saving the original data on multiple locations. With blockchain, we are creating a digital certificate of ownership. With this combination, it is impossible to delete the data we save.",
+
+	"faq_6_question": "Is the data I saved always available?",
+	"faq_6_answer": "Yes. With our app we can reach the data for you, but you can also download it directly through IPFS.",
+
+	"faq_7_question": "Can I use the Spiritus app without the blockchain?",
+	"faq_7_answer": "Yes. You can normally use most of Spiritus features without the need of using blockchain. But if you want to truly save the memories of your loved ones, we advise you to eternalize them.",
+
+	"faq_8_question": "Which blockchain are you using?",
+	"faq_8_answer": "Spiritus currently uses the Avalanche blockchain network.",
+
+	"faq_9_question": "What happens after I make a purchase?",
+	"faq_9_answer": "1) Confirmation of the story takes two working days. This process ensures that the story meets our requirements for it to be eternally saved.\n\n2) After the story is approved, we save your stories and Spirituses on our IPFS and their addresses on Avalanche.\n\n3) Then we are creating a NFT certificate with all the data of the saved Spiritus. We are, also, creating an unique graphic for the NFT.\n\n4) When the process is carried out, the NFT certificate will be sent via email to the Memory Guardian.\n\n5) If the user wants to receive the digitally created wallet, they just needs to contact us and we will send it to his web3 address.",
+
+	"faq_10_question": "Can I delete a Spiritus?",
+	"faq_10_answer": "Every Memory Guardian can delete the data of his Spiritus. He can not delete the data which was permanently saved through an Eternity token.",
+
+	"faq_11_question": "What is the “Eternity token”?",
+	"faq_11_answer": "“Eternity token” is an in-app ticket by which Memory Guardians can permanently save the life story and other information of a particular Spiritus.\n\nEvery Memory Guardian can have multiple “Eternity tokens” and use them to save life stories of Spirituses they guard.",
+
+	"faq_12_question": "Can harmful content be saved eternally?",
+	"faq_12_answer": "No. Each and every Story or Spiritus first needs to get our approval to be eternally saved. We insist that every life story must be appropriate and written in good faith. We value our stories and it is important to us to be proud of every saved life story.",
+
+	"faq_13_question": "Can other users post harmful content?",
+	"faq_13_answer": "If you are a Memory Guardian, you are the only person that can post content on your Spiritus. All other users are only able to suggest content for you to review. For the suggested content to become publicly visible, it first needs to be approved by the Memory Guardian.\n\nIn case a Memory Guardian posts something harmful, other users have the right and are encouraged to report that content. Spiritus ensures that the report is thoroughly examined and acted upon.",
+
+	"faq_14_question": "I am not so confident in my writing skills. Can you help?",
+	"faq_14_answer": "Absolutely! If you are worried that your story is not as you want it to be, help is on the way! We have a team of dedicated writers who will make the story as beautiful as possible. Currently, the help is free."
+}
