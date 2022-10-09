@@ -1,10 +1,26 @@
 import { API_URL } from "./constants";
 
+export function localFormatDate(ds, lang) {
+  const dt = new Date(ds);
+  const res = lang
+    ? dt.toLocaleDateString(lang, {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : dt.toLocaleDateString("en", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
+  return res.replaceAll(".", "");
+}
+
 export function ImagePath(path) {
   // check if path is already expanded
   // this happens sometimes with nextjs or browser caching
-  if (path && path.startsWith("http")){
-    return path
+  if (path && path.startsWith("http")) {
+    return path;
   }
   return `${API_URL}${path}`;
 }

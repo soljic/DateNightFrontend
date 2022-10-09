@@ -22,6 +22,7 @@ export function SpiritusCarousel({ images }) {
   const nextRef = useRef(null);
 
   let [isOpen, setIsOpen] = useState(false);
+  const [fullScreenIndex, setFullScreenIndex] = useState(0);
 
   // wait for component to mount to avoid hydration errs
   useEffect(() => {
@@ -36,7 +37,8 @@ export function SpiritusCarousel({ images }) {
     setIsOpen(false);
   }
 
-  function openModal() {
+  function openModal(index) {
+    setFullScreenIndex(index);
     setIsOpen(true);
   }
 
@@ -47,6 +49,7 @@ export function SpiritusCarousel({ images }) {
           isOpen={isOpen}
           closeModal={closeModal}
           images={images}
+          fullScreenIndex={fullScreenIndex}
         />
         <div className="sw-spiritus relative w-full my-16 overflow-hidden">
           <div className="swiper-prev-step absolute inset-y-1/2 left-0 sm:left-4 z-10">
@@ -99,7 +102,7 @@ export function SpiritusCarousel({ images }) {
             {images.map((img, i) => {
               return (
                 <SwiperSlide key={`slider-image-${i}`}>
-                  <div onClick={openModal} className="w-full h-full">
+                  <div onClick={() => openModal(i)} className="w-full h-full">
                     <Image
                       src={img.url}
                       alt={"spiritus-image"}
@@ -119,10 +122,6 @@ export function SpiritusCarousel({ images }) {
 }
 
 function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const [index, setIndex] = useState(fullScreenIndex);
-
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-100" onClose={closeModal}>
@@ -135,10 +134,10 @@ function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-10" />
+          <div className="fixed inset-0 bg-black bg-opacity-90 z-40" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto z-10">
+        <div className="fixed inset-0 overflow-y-auto z-40">
           <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -155,9 +154,10 @@ function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
               >
                 <div className="sw-gallery-spiritus relative h-[66vh] overflow-hidden">
                   <Swiper
+                    initialSlide={fullScreenIndex}
                     slidesPerView={1}
                     spaceBetween={30}
-                    loop={true}
+                    loop={images.length > 1 ? true : false}
                     navigation={true}
                     modules={[EffectFade, Navigation, Pagination]}
                     pagination={{

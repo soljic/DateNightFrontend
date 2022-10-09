@@ -35,13 +35,13 @@ export function AccesibilityMenu() {
   }
 
   return (
-    <Popover className="z-30">
+    <Popover className="z-20">
       {({ open }) => (
         <>
           <Popover.Button
             className={`
 				${open ? "" : "text-opacity-90"}
-				items-center rounded-full px-2 py-2 font-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
+				z-10 items-center rounded-full px-2 py-2 font-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
           >
             <DotsHorizontalIcon
               className="h-6 w-6 text-sp-black dark:text-sp-white"

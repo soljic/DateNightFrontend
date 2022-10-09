@@ -1,4 +1,12 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { countryCodeEmoji } from "country-code-emoji";
+import countries from "i18n-iso-countries";
+countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+countries.registerLocale(require("i18n-iso-countries/langs/hr.json"));
+
+import { localFormatDate } from "../../service/util";
 
 export function SpiritusOverview({
   id,
@@ -10,22 +18,36 @@ export function SpiritusOverview({
   description,
   location,
 }) {
+  const router = useRouter();
+
+  let countryFlag = "";
+  let code = countries.getAlpha2Code(location.country, "en");
+  if (!code) {
+    // fallback to croatian
+    code = countries.getAlpha2Code(location.country, "hr");
+  }
+  countryFlag = code ? countryCodeEmoji(code) : "";
+
+  const dates = `${
+    birth ? localFormatDate(birth, router.locale) : "\uE132"
+  } — ${death ? localFormatDate(death, router.locale) : "\uE132"}`;
+
   return (
     <div className="w-full md:w-3/4 flex flex-col justify-between items-center py-4 mb-4">
       <div className="flex flex-col tracking-sp-tighten text-sp-black dark:text-sp-white">
         <Link href={`/spiritus/${slug}`}>
           <a className="flex flex-col items-center">
             {location && location?.address ? (
-              <button className="px-5 py-1 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sm font-medium rounded-full">
-                {location.address}<br></br>{location.country}
+              <button className="px-5 py-1 items-center bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown rounded-full">
+                <span className="text-lg">{countryFlag}</span>{" "}
+                <span className="ml-2 text-sm font-semibold">
+                  {location.address}
+                </span>
               </button>
             ) : (
               <></>
             )}
-            <span className="pt-3.5 pb-2.5">
-              {birth ? new Date(birth).toLocaleDateString("hr") : "?"}
-              {death && ` — ${new Date(death).toLocaleDateString("hr")}`}
-            </span>
+            <p className="py-4">{dates}</p>
             <h2 className="font-bold text-cta pb-4">
               {name} {surname}
             </h2>

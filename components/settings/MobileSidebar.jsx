@@ -88,7 +88,7 @@ export function MobileSidebar({ selectedIndex }) {
         <p className="opacity-60">{session?.user?.email || ""}</p>
       </div>
 
-      <div className="z-20 mb-10">
+      <div className="z-10 mb-10">
         <Popover>
           {({ open }) => (
             <>

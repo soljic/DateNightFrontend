@@ -1,7 +1,9 @@
+import { useState } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-import { useState } from "react";
 import { useTranslation } from "next-i18next";
 
 import { ArrowLeftIcon, StarIcon } from "@heroicons/react/outline";
@@ -10,6 +12,8 @@ import { Spinner } from "../Status";
 import { ImagePlaceholder } from "../layout/Common";
 
 import { ProxyGetSpiritusByPlaceId } from "../../service/http/spiritus";
+
+import { localFormatDate } from "../../service/util";
 
 export function PlacesGrid({ id, title, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
@@ -69,28 +73,31 @@ export function PlacesGrid({ id, title, isLastPage, initialItems }) {
 
       {!isLast && (
         <div className="flex justify-center mt-16">
-        <button
-          onClick={() => {
-            loadMore();
-          }}
-          disabled={isLast}
-          className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+          <button
+            onClick={() => {
+              loadMore();
+            }}
+            disabled={isLast}
+            className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
           >
-          {isLoading ? <Spinner text={t("loading")} /> : t("action_load_more")}
-        </button>
-          </div>
+            {isLoading ? (
+              <Spinner text={t("loading")} />
+            ) : (
+              t("action_load_more")
+            )}
+          </button>
+        </div>
       )}
     </div>
   );
 }
 
 function SpiritusTile({ slug, name, surname, birth, death, images }) {
-  const { t } = useTranslation("common");
-
+  const router = useRouter();
 
   const fullName = `${name} ${surname}`;
-  const date = `${birth ? localFormatDate(birth, t.lang) : "\uE132"} — ${
-    death ? localFormatDate(death, t.lang) : "\uE132"
+  const dates = `${birth ? localFormatDate(birth, router.locale) : "\uE132"} — ${
+    death ? localFormatDate(death, router.locale) : "\uE132"
   }`;
 
   return (
@@ -115,7 +122,6 @@ function SpiritusTile({ slug, name, surname, birth, death, images }) {
         ) : (
           <div className="h-5/6">
             <ImagePlaceholder />
-
           </div>
         )}
         {/* </div> */}
@@ -124,26 +130,10 @@ function SpiritusTile({ slug, name, surname, birth, death, images }) {
             {fullName > 64 ? `${fullName.substring(0, 64)} ...` : fullName}
           </h3>
           <p className="text-sm mt-1 dark:text-sp-white opacity-50 capitalize">
-            {date}
+            {dates}
           </p>
         </div>
       </a>
     </Link>
   );
-}
-
-function localFormatDate(ds, lang) {
-  // let lang = i
-  // if (navigator.languages != undefined) lang = navigator.languages[0];
-  // else {
-  //   lang = navigator.language;
-  // }
-  const dt = new Date(ds);
-  return dt
-    .toLocaleDateString("hr", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    })
-    .replaceAll(".", "");
 }
