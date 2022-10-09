@@ -21,6 +21,11 @@ export default function MobileAppCTA() {
         <title>{t("common:meta_home_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("common:meta_home_description")} />
+        <meta property="og:title" content={t("common:meta_home_title")}/>
+        <meta property="og:description" content={t("common:meta_home_description")} />
+        <meta property="og:image" content="https://demo.spiritus.app/images/share/banner_mobile.jpg"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
       </Head>
 
       <div className="flex flex-col justify-center items-center bg-gradient-to-b from-sp-day-50 to-sp-day-300 text-sp-black dark:text-sp-white dark:from-sp-black dark:to-sp-brown rounded-lg">

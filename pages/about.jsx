@@ -21,6 +21,11 @@ export default function About() {
         <title>{t("meta_about_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_about_description")} />
+        <meta property="og:title" content={t("meta_about_title")}/>
+        <meta property="og:description" content={t("meta_about_description")} />
+        <meta property="og:image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
       </Head>
       <Hero />
       <Features />
