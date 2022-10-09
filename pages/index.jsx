@@ -33,6 +33,14 @@ export default function Home({
         <title>{t("meta_home_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_home_description")} />
+        <meta property="og:site_name" content="Spiritus" />
+        <meta property="og:title" content="Spiritus Stories"/>
+        <meta property="og:url" content="https://demo.spiritus.app/en/"/>
+        <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forver! Read the latest beautiful stories, memorials and anniversaries." />
+        <meta property="og:image" itemprop="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image:secure_url" itemprop="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image:width" content="1200"/>
+        <meta property="og:image:height" content="630"/>
       </Head>
       <CreateSpiritusCTA />
       <div className="flex flex-col mx-auto items-center pt-10">
