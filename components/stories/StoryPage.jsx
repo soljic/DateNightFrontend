@@ -17,7 +17,7 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import { RoseIcon, StoryHookIcon } from "../../components/Icons";
+import { LockIcon, RoseIcon, StoryHookIcon } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -334,7 +334,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
 
   return (
     <section key={"stories-showcase"}>
-      <div className=" my-10 text-sp-black dark:text-sp-white">
+      <div className="w-full my-10 text-sp-black dark:text-sp-white">
         <div className="flex w-full justify-between mb-5 items-center">
           <h1 className="font-semibold text-2xl">{t("stories")}</h1>
           {userIsOwner && (
@@ -348,12 +348,17 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
             </Link>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-8 md:grid-cols-3 md:gap-x-6 md:gap-y-6">
-          {!!items &&
-            !!items.length &&
-            items.map((s) => {
-              return <StoryHook {...s} key={s.title} />;
-            })}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4">
+          {!!items?.length &&
+            items
+              .filter((s) => {
+                if (userIsOwner) {
+                  return true;
+                } else {
+                  return s.flags.includes("PUBLIC");
+                }
+              })
+              .map((s) => <StoryHook {...s} key={s.title} />)}
         </div>
         {!isLast && (
           <div className="flex justify-center items-center mt-8">
@@ -377,28 +382,40 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
   );
 }
 
-export function StoryHook({ slug, title, subtitle, description, date }) {
-  let titleStr = title.length < 29 ? title : `${title.substring(0, 26)}...`
+export function StoryHook({ slug, title, subtitle, description, date, flags }) {
+  let titleStr = title.length < 29 ? title : `${title.substring(0, 26)}...`;
 
   let descPara = "";
   if (subtitle && subtitle.length) {
-    descPara = subtitle.length < 64 ? subtitle : `${subtitle.substring(0, 64)}...`
+    descPara =
+      subtitle.length < 64 ? subtitle : `${subtitle.substring(0, 64)}...`;
   } else {
-    descPara = description.length < 64 ? description : `${description.substring(0, 64)}...`
-
+    descPara =
+      description.length < 64
+        ? description
+        : `${description.substring(0, 64)}...`;
   }
 
   return (
-    <div className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-6 text-sp-black dark:text-sp-white">
+    <div className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-4 text-sp-black dark:text-sp-white">
       <div className="flex flex-col tracking-sp-tighten">
-        <div className="inline-flex h-8 w-8 items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
-          <StoryHookIcon />
+        <div className="flex justify-between items-center">
+          <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
+            <StoryHookIcon />
+          </div>
+          {flags.includes("PRIVATE") && (
+            <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
+              <LockIcon />
+            </div>
+          )}
         </div>
 
         <Link href={`/stories/${slug}`}>
-          <a className="text-lg py-2 font-medium tracking-sp-tighten leading-5">{titleStr}</a>
+          <a className="text-lg py-2 font-medium tracking-sp-tighten leading-5">
+            {titleStr}
+          </a>
         </Link>
-        <p className="text-sm tracking-sp-tighten leading-5">{ descPara }</p>
+        <p className="text-sm tracking-sp-tighten leading-5">{descPara}</p>
       </div>
       <div className="flex flex-col items-start">
         <p className="text-sp-lighter text-sm">{date || ""}</p>

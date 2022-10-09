@@ -85,7 +85,7 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
             saved={spiritus.flags.includes("SAVED")}
           />
         </div>
-        <div className="text-sp-white mt-4">
+        <div className="w-full text-sp-white mt-4">
           <MoreStories
             stories={stories}
             spiritus={spiritus}
