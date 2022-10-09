@@ -144,7 +144,7 @@ export default function EditStoryPage({ story }) {
       <Head>
         <title>{t("edit_story_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={"Story Editor"} />
+        <meta name="description" content={t("edit_story_meta_desc")} />
       </Head>
 
       <div className="py-5 min-h-screen mx-auto mb-64">
