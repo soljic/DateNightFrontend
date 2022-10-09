@@ -16,7 +16,7 @@ export default function SpiritusPage({ spiritus, isLastPage }) {
   return (
     <LayoutNoFooter>
       <Head>
-        <title>{`Spiritus | ${t("settings")} | ${t("spiritus")}`}</title>{" "}
+        <title>{`Spiritus | ${t("settings")} | ${t("spiritus")}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"

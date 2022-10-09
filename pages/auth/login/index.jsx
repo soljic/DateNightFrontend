@@ -14,7 +14,7 @@ export default function LoginComponent() {
   return (
     <LayoutNoNav>
       <Head>
-        <title>Spiritus | Login </title>
+        <title>Spiritus | Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Spiritus - Login" />
       </Head>

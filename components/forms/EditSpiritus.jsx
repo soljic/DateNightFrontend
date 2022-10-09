@@ -9,7 +9,7 @@ export function SpiritusName({ name, setName, surname, setSurname }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
-        Ime i prezime
+        {t("edit_spiritus_title")}
       </h2>
       <div className="flex flex-col md:flex-row gap-2">
         <div className="w-full flex-1">
@@ -42,7 +42,7 @@ export function SpiritusDescription({ name, description, setDescription }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
-        Citat ili opis spiritusa
+        {t("edit_spiritus_quote")}
       </h2>
       <div className="flex flex-col md:flex-row">
         <div className="w-full flex-1">
@@ -154,7 +154,7 @@ export function SpiritusLocation({ location, setLocation }) {
   return (
     <div>
       <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
-        Lokacija
+        {t("edit_spiritus_location")}
       </h2>
       <div className="w-full">
         <input

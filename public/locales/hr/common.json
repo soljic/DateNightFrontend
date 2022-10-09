@@ -145,5 +145,12 @@
   "edit_story_title": "Naslov",
   "edit_story_summary": "Sažetak",
   "edit_story_text": "Sadržaj priče",
-  "edit_story_visibility": "Vidljivost priče"
+  "edit_story_visibility": "Vidljivost priče",
+
+  "edit_spiritus_meta_title": "Spiritus | Uredi sadržaj Spiritusa",
+  "edit_spiritus_meta_desc": "Uredi sadržaj Spiritusa",
+  "edit_spiritus_date": "Datum priče",
+  "edit_spiritus_title": "Ime i prezime",
+  "edit_spiritus_quote": "Citat ili opis",
+  "edit_spiritus_location": "Lokacija"
 }

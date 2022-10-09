@@ -145,6 +145,12 @@
   "edit_story_title": "Title",
   "edit_story_summary": "Summary",
   "edit_story_text": "Content",
-  "edit_story_visibility": "Visibility"
+  "edit_story_visibility": "Visibility",
 
+  "edit_spiritus_meta_title": "Spiritus | Edit Spiritus Content",
+  "edit_spiritus_meta_desc": "Edit Spiritus content",
+  "edit_spiritus_date": "Dates",
+  "edit_spiritus_title": "First and Last name",
+  "edit_spiritus_quote": "Quote or Description",
+  "edit_spiritus_location": "Location"
 }

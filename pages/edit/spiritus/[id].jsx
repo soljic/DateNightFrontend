@@ -37,6 +37,7 @@ import {
 
 export default function EditSpiritusPage({ spiritus }) {
   const { t } = useTranslation("common");
+
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -159,9 +160,9 @@ export default function EditSpiritusPage({ spiritus }) {
   return (
     <LayoutNoFooter>
       <Head>
-        <title>Spiritus | Editor</title>
+        <title>{t("edit_spiritus_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={"Story Editor"} />
+        <meta name="description" content={t("edit_spiritus_meta_desc")} />
       </Head>
 
       <div className="py-5 min-h-screen mx-auto mb-64">
@@ -232,7 +233,7 @@ export default function EditSpiritusPage({ spiritus }) {
             {pending ? (
               <Spinner text={"Saving..."} />
             ) : (
-              <span className="font-semibold tracking-wider">Save</span>
+              <span className="font-semibold tracking-wider">{t("save")}</span>
             )}
           </button>
         </div>
@@ -252,8 +253,8 @@ function SpiritusDates({ birth, setBirth, death, setDeath }) {
   // I guess Suspense reduces the
   return (
     <div>
-      <p className="font-bold text-2xl">Važni datumi</p>
-      <div className="flex flex-col md:flex-row gap-2 mt-6">
+      <p className="font-bold text-2xl">{t("edit_spiritus_date")}</p>
+      <div className="flex flex-col md:flex-row gap-2 mt-3">
         <div className="w-full flex-1">
           <label
             htmlFor="birth"
