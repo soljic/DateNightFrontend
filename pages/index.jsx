@@ -6,7 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import {
   CreateSpiritusCTA,
   CTADownloadLinks,
-  CTAPartners,
+  // CTAPartners,
   SearchPlacesCTA,
   SearchSpiritusCTA,
 } from "../components/stories/CTAs";
@@ -37,8 +37,8 @@ export default function Home({
         <meta property="og:title" content="Spiritus Stories"/>
         <meta property="og:url" content="https://demo.spiritus.app/en/"/>
         <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries." />
-        <meta property="og:image" itemprop="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
-        <meta property="og:image:secure_url" itemprop="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image" itemProp="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image:secure_url" itemProp="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
       </Head>

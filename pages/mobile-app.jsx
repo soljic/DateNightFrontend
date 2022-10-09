@@ -25,8 +25,8 @@ export default function MobileAppCTA() {
         <meta property="og:title" content="Spiritus - Download Our App"/>
         <meta property="og:url" content="https://demo.spiritus.app/mobile-app"/>
         <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Download our App and create beautiful memorials of your loved ones."/>
-        <meta property="og:image" itemprop="image" content="https://demo.spiritus.app/images/share/banner_mobile.jpg"/>
-        <meta property="og:image:secure_url" itemprop="image" content="https://demo.spiritus.app/images/share/banner_mobile.jpg"/>
+        <meta property="og:image" itemProp="image" content="https://demo.spiritus.app/images/share/banner_mobile.jpg"/>
+        <meta property="og:image:secure_url" itemProp="image" content="https://demo.spiritus.app/images/share/banner_mobile.jpg"/>
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
       </Head>
@@ -48,7 +48,7 @@ export default function MobileAppCTA() {
             </p>
 
             <div className="my-3">
-              <Image src={qrCode} />
+              <Image src={qrCode} className="rounded-sp-10"/>
             </div>
 
             <p className="opacity-75 mb-1.5">{t("go_directly_to the_store")}</p>
