@@ -348,7 +348,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
             </Link>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4">
           {!!items?.length &&
             items
               .filter((s) => {

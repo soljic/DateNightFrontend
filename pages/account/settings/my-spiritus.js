@@ -11,7 +11,7 @@ import { MySpiritusGrid } from "../../../components/settings/Spiritus";
 import { MobileSidebar } from "../../../components/settings/MobileSidebar";
 
 export default function SpiritusPage({ spiritus, isLastPage }) {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("settings");
 
   return (
     <LayoutNoFooter>
