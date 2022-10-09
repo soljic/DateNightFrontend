@@ -72,6 +72,14 @@ export default function StoryPage({
     return "";
   };
 
+  const calculateImageLayout = (width, height) => {
+    if (width > height) {
+      return "w-full md:w-2/3";
+    } else {
+      return "w-full md:w-1/2";
+    }
+  };
+
   return (
     <Layout>
       <Head>
@@ -109,8 +117,13 @@ export default function StoryPage({
             </h2>
           </div>
 
-          <div className="w-full rounded-sp-14">
-            {!!displayStory.images.length ? (
+          {!!displayStory.images.length ? (
+            <div
+              className={`${calculateImageLayout(
+                displayStory.images[0].width,
+                displayStory.images[0].height
+              )} max-h-screen rounded-sp-14`}
+            >
               <Image
                 src={displayStory.images[0].url}
                 alt={`Paragraph image ${displayStory.images[0].id}`}
@@ -119,10 +132,10 @@ export default function StoryPage({
                 layout="responsive"
                 className="rounded-sp-14"
               />
-            ) : (
-              <></>
-            )}
-          </div>
+            </div>
+          ) : (
+            <></>
+          )}
 
           {displayStory.paragraphs.length ? (
             <div className="w-full md:w-3/4 lg:w-4/5 mt-10 mb-3">
