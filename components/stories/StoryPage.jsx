@@ -378,6 +378,16 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
 }
 
 export function StoryHook({ slug, title, subtitle, description, date }) {
+  let titleStr = title.length < 29 ? title : `${title.substring(0, 26)}...`
+
+  let descPara = "";
+  if (subtitle && subtitle.length) {
+    descPara = subtitle.length < 64 ? subtitle : `${subtitle.substring(0, 64)}...`
+  } else {
+    descPara = description.length < 64 ? description : `${description.substring(0, 64)}...`
+
+  }
+
   return (
     <div className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-6 text-sp-black dark:text-sp-white">
       <div className="flex flex-col tracking-sp-tighten">
@@ -386,9 +396,9 @@ export function StoryHook({ slug, title, subtitle, description, date }) {
         </div>
 
         <Link href={`/stories/${slug}`}>
-          <a className="text-lg py-1 font-medium">{title}</a>
+          <a className="text-lg py-2 font-medium tracking-sp-tighten leading-5">{titleStr}</a>
         </Link>
-        <p className="text-sm">{subtitle || description}</p>
+        <p className="text-sm tracking-sp-tighten leading-5">{ descPara }</p>
       </div>
       <div className="flex flex-col items-start">
         <p className="text-sp-lighter text-sm">{date || ""}</p>
