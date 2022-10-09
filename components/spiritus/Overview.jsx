@@ -47,8 +47,8 @@ export function SpiritusOverview({
             ) : (
               <></>
             )}
-            <p className="py-4">{dates}</p>
-            <h2 className="font-bold text-cta pb-4">
+            <p className="py-4 capitalize">{dates}</p>
+            <h2 className="font-bold text-left md:text-center text-cta pb-4">
               {name} {surname}
             </h2>
           </a>
