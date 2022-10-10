@@ -38,7 +38,7 @@ jobs:
         env:
           NEXT_JWT_SECRET: ${{ secrets.NEXT_JWT_SECRET }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXT_API_URL: https://walk.spiritusapp.com
+          NEXT_API_URL: https://app.spiritusapp.com
         with:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
