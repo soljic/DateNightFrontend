@@ -21,12 +21,14 @@ export function SpiritusOverview({
   const router = useRouter();
 
   let countryFlag = "";
-  let code = countries.getAlpha2Code(location.country, "en");
-  if (!code) {
-    // fallback to croatian
-    code = countries.getAlpha2Code(location.country, "hr");
+  if (location && location?.country) {
+    let code = countries.getAlpha2Code(location.country, "en");
+    if (!code) {
+      // fallback to croatian
+      code = countries.getAlpha2Code(location.country, "hr");
+    }
+    countryFlag = code ? countryCodeEmoji(code) : "";
   }
-  countryFlag = code ? countryCodeEmoji(code) : "";
 
   const dates = `${
     birth ? localFormatDate(birth, router.locale) : "\uE132"
