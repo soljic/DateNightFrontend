@@ -46,6 +46,7 @@ export async function getServerSideProps(context) {
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",
+          "auth",
         ])),
         id: id,
         title: location,

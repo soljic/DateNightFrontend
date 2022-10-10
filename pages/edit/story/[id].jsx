@@ -286,6 +286,7 @@ export async function getServerSideProps(context) {
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",
+          "auth",
         ])),
       },
     };

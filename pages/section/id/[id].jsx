@@ -1,11 +1,11 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import { useTranslation } from 'next-i18next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from '../../../components/layout/Layout'
-import { SectionGrid } from '../../../components/sections/Section'
-import { GetSection } from '../../../service/http/sections'
+import Layout from "../../../components/layout/Layout";
+import { SectionGrid } from "../../../components/sections/Section";
+import { GetSection } from "../../../service/http/sections";
 
 // TODO: in this part I need some description tags too
 // I only have:
@@ -20,21 +20,21 @@ import { GetSection } from '../../../service/http/sections'
 //  // title
 //  // subtitle
 // }
-export default function Section ({
+export default function Section({
   id,
   title,
   totalPages,
   isLastPage,
-  initialItems
+  initialItems,
 }) {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation("common");
 
   return (
     <Layout>
       <Head>
-        <title>{t('meta_section_title')}</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta name='description' content={t('meta_section_description')} />
+        <title>{t("meta_section_title")}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={t("meta_section_description")} />
       </Head>
       <SectionGrid
         id={id}
@@ -44,13 +44,13 @@ export default function Section ({
         initialItems={initialItems}
       />
     </Layout>
-  )
+  );
 }
 
-export async function getServerSideProps (context) {
-  const { id, title } = context.query
+export async function getServerSideProps(context) {
+  const { id, title } = context.query;
 
-  const res = await GetSection(id)
+  const res = await GetSection(id);
   // const res = {
   //   data: content
   // }
@@ -58,12 +58,16 @@ export async function getServerSideProps (context) {
   return {
     props: {
       key: `${context.locale}-section-id-${id}`,
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "auth",
+      ])),
       id: res.data.id,
       title: title,
       totalPages: res.data.items.totalPages,
       isLastPage: res.data.items.last,
-      initialItems: res.data.items.content
-    }
-  }
+      initialItems: res.data.items.content,
+    },
+  };
 }

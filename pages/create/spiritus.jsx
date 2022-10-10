@@ -47,13 +47,13 @@ export default function CreateSpiritusPage({ user }) {
   const [description, setDescription] = useState("");
 
   const [pending, setPending] = useState(false);
-  const [spiritus, setSpiritus] = useState(
-  //   {
-  //   id: 1,
-  //   name: "Tester",
-  //   surname: "Surname",
-  // }
-  );
+  const [spiritus, setSpiritus] =
+    useState();
+    //   {
+    //   id: 1,
+    //   name: "Tester",
+    //   surname: "Surname",
+    // }
 
   const [location, setLocation] = useState(null);
 
@@ -327,7 +327,11 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "auth",
+      ])),
       user: session.user,
     },
   };

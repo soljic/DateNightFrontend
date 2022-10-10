@@ -184,7 +184,11 @@ export default function StoryPage({
               isLastPage={isLastPage}
             />
             <div className="flex-1 items-center justify-center">
-              <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
+              <CTAAddMemory
+                sessionStatus={status}
+                spiritusId={spiritus.id}
+                name={spiritus.name}
+              />
             </div>
           </div>
         </div>
@@ -236,6 +240,7 @@ export async function getServerSideProps(context) {
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",
+          "auth",
         ])),
         key: `${context.locale}-${slug}`,
         displayStory: resStory.data,

@@ -91,7 +91,7 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
             isLastPage={isLastPage}
           />
           <div className="flex-1 items-center justify-center">
-            <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
+            <CTAAddMemory sessionStatus={status} spiritusId={spiritus.id} name={spiritus.name} />
           </div>
         </div>
       </section>
@@ -118,6 +118,7 @@ export async function getServerSideProps(context) {
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",
+          "auth",
         ])),
         stories,
         spiritus,

@@ -4,6 +4,7 @@ import { useState, Fragment } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Dialog, Transition } from "@headlessui/react";
 import Lottie from "lottie-react";
 
@@ -19,8 +20,8 @@ import {
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { LockIcon, RoseIcon, StoryHookIcon } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
+import { LoginModal } from "../../components/auth/Login";
 
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import {
   ProxySaveStory,
   ProxyUnSaveStory,
@@ -424,24 +425,46 @@ export function StoryHook({ slug, title, subtitle, description, date, flags }) {
   );
 }
 
-export function CTAAddMemory({ spiritusId, name }) {
+export function CTAAddMemory({ sessionStatus, spiritusId, name }) {
   const { t } = useTranslation("common");
+
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="w-full flex flex-row justify-between overflow-clip rounded-sp-14 border-3 border-sp-day-200 dark:border-sp-medium text-sp-black dark:text-sp-white">
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+
       <div className="flex h-full flex-col py-3 pl-4">
         <h2 className="title-font py-1 text-xl font-medium">
           {t("cta_add_memory")}
           <span> {name}</span>?
         </h2>
         <p className="text-sp-lighter">{t("cta_add_memory_subtitle")}</p>
-        <a
-          href={`/create/story?spiritus=${spiritusId}`}
-          className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn"
-        >
-          {t("cta_add_memory_button")}
-          <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
-        </a>
+        {sessionStatus === "authenticated" ? (
+          <a
+            href={`/create/story?spiritus=${spiritusId}`}
+            className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn"
+          >
+            {t("cta_add_memory_button")}
+            <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
+          </a>
+        ) : (
+          <button
+            onClick={openModal}
+            className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn"
+          >
+            {t("cta_add_memory_button")}
+            <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
+          </button>
+        )}
       </div>
       <Image
         src={"/images/memory_cta_bg.png"}
