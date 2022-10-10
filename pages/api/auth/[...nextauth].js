@@ -1,6 +1,10 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { GetProfile, LoginCredentials } from "../../../service/http/auth";
+import {
+  GetProfile,
+  LoginCode,
+  LoginCredentials,
+} from "../../../service/http/auth";
 import jwt_decode from "jwt-decode";
 
 export default NextAuth({
@@ -15,18 +19,31 @@ export default NextAuth({
       credentials: {
         username: { label: "Username", type: "text", placeholder: "Username" },
         password: { label: "Password", type: "password" },
+        code: { label: "Code", type: "text" },
       },
       async authorize(credentials, req) {
-        // You need to provide your own logic here that takes the credentials
-        // submitted and returns either a object representing a user or value
-        // that is false/null if the credentials are invalid.
-        // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-        // You can also use the `req` object to obtain additional parameters
-        // (i.e., the request IP address)
-        const res = await LoginCredentials(
-          credentials.username,
-          credentials.password
-        );
+        // NOTE:
+        // This became technical debt the moment it was written due
+        // to how user registration and authentication works on BE
+        // with regards to 3rd party auth providers.
+        //
+        // In case credentials.code is submitted, we are ALWAYS treating the code
+        // as if it is coming from a social login provider.
+        // We trusting the code is valid and are faking an "normal" Credentials login call in this function.
+        //
+        // If credentials.username and credentials.password are provided we continue to login user
+        // using the Credentials provider as it was intended.
+        //
+        // If you manage to refactor this, keep the "normal" Credentials login (username/password) and remove code login.
+        let res;
+        if (credentials.code) {
+          res = await LoginCode(credentials.code);
+        } else {
+          res = await LoginCredentials(
+            credentials.username,
+            credentials.password
+          );
+        }
         // If no error and we have user data, return it
         if (res?.data) {
           const profile = await GetProfile(res.data.access_token);

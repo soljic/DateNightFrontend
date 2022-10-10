@@ -12,6 +12,13 @@ export async function LoginCredentials(username, password) {
   );
 }
 
+export async function LoginCode(code) {
+  return await axios.post(
+    `${API_URL}/v2/authentication/login?grant_type=authorization_code`,
+    { code }
+  );
+}
+
 export async function ProxyRegister(name, lastName, email, password) {
   const res = await axios.post("/api/authentication/email-register", {
     name,
@@ -23,7 +30,9 @@ export async function ProxyRegister(name, lastName, email, password) {
 }
 
 export async function ProxySendPasswordResetEmail(email) {
-  const res = await axios.post(`/api/authentication/reset-password?email=${email}`)
+  const res = await axios.post(
+    `/api/authentication/reset-password?email=${email}`
+  );
   return res;
 }
 
