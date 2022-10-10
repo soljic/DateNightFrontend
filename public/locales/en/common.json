@@ -8,6 +8,7 @@
   "rights_reserved": "Spiritus Memoria. All rights reserved.",
   "login": "Log in",
 
+  "meta_title_mobile_app": "Spiritus | Download the app",
   "m_desc_stories": "The latest beautiful stories, memorials and anniversaries.",
   "m_desc_mobile_app": "Download the app from Google Play and App Store.",
   "m_desc_about": "Learn more about Spiritus and our mission.",
@@ -77,7 +78,7 @@
   "spiritus_success_text": "must have done many beautiful things. Save those memories forever.",
   "spiritus_success_link": "View",
   "story_success_title": "Nice work!",
-  "story_success_subtitle": "ou’ve just created a Story for",
+  "story_success_subtitle": "you've just created a Story for",
   "new_story": "New story",
 
   "create_story": "Create story",

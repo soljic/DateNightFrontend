@@ -18,9 +18,9 @@ export default function MobileAppCTA() {
   return (
     <Layout>
       <Head>
-        <title>{t("common:meta_home_title")}</title>
+        <title>{t("common:meta_title_mobile_app")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={t("common:meta_home_description")} />
+        <meta name="description" content={t("common:m_desc_mobile_app")} />
         <meta property="og:site_name" content="Spiritus" />
         <meta property="og:title" content="Spiritus - Download Our App"/>
         <meta property="og:url" content="https://demo.spiritus.app/mobile-app"/>
@@ -83,7 +83,7 @@ export default function MobileAppCTA() {
 export async function getStaticProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "mobile", "settings"])),
+      ...(await serverSideTranslations(context.locale, ["common", "mobile", "settings", "auth"])),
     },
   };
 }

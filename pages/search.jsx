@@ -361,10 +361,10 @@ export async function getServerSideProps(context) {
     switch (query?.query.toUpperCase()) {
       case FILTER_STORY:
         defaultFilter = FILTER_STORY;
-        break
+        break;
       case FILTER_PLACE:
         defaultFilter = FILTER_PLACE;
-        break
+        break;
       default:
         defaultFilter = FILTER_SPIRITUS;
     }
@@ -373,7 +373,11 @@ export async function getServerSideProps(context) {
   return {
     props: {
       defaultFilter,
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "auth",
+      ])),
     },
   };
 }

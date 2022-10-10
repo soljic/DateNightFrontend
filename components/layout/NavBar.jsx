@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Fragment } from "react";
 
 import Link from "next/link";
@@ -12,13 +13,25 @@ import { Logo, NavItem } from "./Common";
 import { AccesibilityMenu } from "./Accesibility";
 import { ProfileMenu } from "./Profile";
 import { StoriesIcon, MobileAppIcon, AboutIcon } from "./Icons";
+import { LoginModal } from "../auth/Login";
 
 export function Navbar() {
   const { data: session } = useSession();
-  const { t } = useTranslation(["common", "settings"]);
+  const { t } = useTranslation(["common", "settings", "about"]);
+
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="bg-sp-day-50 dark:bg-sp-black h-20">
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
       <div className="flex justify-between py-4 text-sp-black dark:text-sp-white">
         <div className="inline-flex items-center">
           <Link href="/">
@@ -46,11 +59,16 @@ export function Navbar() {
               profileName={session?.user.name}
             />
           ) : (
-            <Link href={session?.name ? "/account/settings" : "/auth/login"}>
+            // <Link href={session?.name ? "/account/settings" : "/auth/login"}>
+            //   <a className="border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-sp-40 py-2 px-5 font-semibold">
+            //     {session?.user?.name ? session.user.name : t("login")}
+            //   </a>
+            // </Link>
+            <button onClick={openModal}>
               <a className="border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-sp-40 py-2 px-5 font-semibold">
                 {session?.user?.name ? session.user.name : t("login")}
               </a>
-            </Link>
+            </button>
           )}
 
           <AccesibilityMenu />
@@ -146,5 +164,3 @@ export function MobileNav() {
     </div>
   );
 }
-
-
