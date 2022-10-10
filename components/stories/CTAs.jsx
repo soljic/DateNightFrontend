@@ -39,11 +39,11 @@ export function SearchSpiritusCTA() {
           layout="responsive"
         />
       </div>
-      <div className="text-center">
+      <div className="flex flex-col justify-center items-center">
         <h2 className="text-2xl font-extrabold mb-1">
           {t("find_loved_title")}
         </h2>
-        <p className="mx-auto w-3/4 xl:2/5 text-center opacity-60 mb-5 text-sm">
+        <p className="w-5/6 md:w-1/2 xl:2/5 text-center opacity-60 mb-5 text-sm">
           {t("find_loved_subtitle")}
         </p>
         <CTASearchButton />
