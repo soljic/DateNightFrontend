@@ -14,7 +14,7 @@ import { Spinner } from "../../../components/Status";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { ProxyRegister } from "../../../service/http/auth";
+import { Register } from "../../../service/http/auth";
 
 function isEmailValid(email) {
   return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -51,11 +51,10 @@ export default function EmailRegister() {
     }
   };
 
-  // TODO: improve register flow
   const onSubmit = async (data) => {
     try {
       setSubmitting(true);
-      const register = await ProxyRegister(
+      const register = await Register(
         data.firstName,
         data.lastName,
         data.email,

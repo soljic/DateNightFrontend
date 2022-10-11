@@ -11,7 +11,7 @@ import { ArrowLeftIcon, StarIcon } from "@heroicons/react/outline";
 import { Spinner } from "../Status";
 import { ImagePlaceholder } from "../layout/Common";
 
-import { ProxyGetSpiritusByPlaceId } from "../../service/http/spiritus";
+import { GetSpiritusByPlaceId } from "../../service/http/spiritus";
 
 import { localFormatDate } from "../../service/util";
 
@@ -26,7 +26,7 @@ export function PlacesGrid({ id, title, isLastPage, initialItems }) {
     setIsLoading(true);
 
     try {
-      const res = await ProxyGetSpiritusByPlaceId(id, current + 1);
+      const res = await GetSpiritusByPlaceId(id, current + 1);
       setItems((prev) => [...prev, ...res.data.content]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.last);

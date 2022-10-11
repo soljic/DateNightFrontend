@@ -27,7 +27,6 @@ export function MobileSidebar({ selectedIndex }) {
   const { data: session } = useSession();
 
   const logoutUser = async () => {
-    // await ProxyLogout(token);
     await signOut({ redirect: false });
     router.push("/");
   };

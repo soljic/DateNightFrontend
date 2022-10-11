@@ -1,8 +1,9 @@
+import axios from "axios";
 import { ImagePath } from "../util";
+import { API_URL } from "../constants";
 import { defaultLimit, defaultOffset, validateFilter } from "../constants";
-import { ProxyGlobalSearch, ProxySearchSpiritus } from "./proxy";
 
-// Supports SPIRITUS, PLACES and STORY. The API response does not contain images.
+// Supports SPIRITUS, PLACES and STORY.
 export async function GlobalSearch(searchType, value, offset, limit) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
@@ -11,17 +12,23 @@ export async function GlobalSearch(searchType, value, offset, limit) {
     throw `Invalid filter ${searchType}`;
   }
 
-  const res = await ProxyGlobalSearch(searchType, value, o, l);
-  return res;
+  return await axios.get(
+    encodeURI(
+      `${API_URL}/wapi/search?value=${value}&search_type=${searchType}&page=${o}&size=${l}`
+    )
+  );
 }
 
 // Performs full text spiritus search -> can match name, lastname etc.
-// Unline GlobalSearch (ProxyGlobalSearch) this returns Spiritus image URLs.
+// This might get better results when running fulltext search for spiritus names.
 export async function FulltextSpiritusSearch(searchTerm, offset, limit) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
-  const res = await ProxySearchSpiritus(searchTerm, o, l);
+  const res = await axios.get(
+    `${API_URL}/wapi/spiritus/search/full?value=${searchTerm}&page=${o}&size=${l}`
+  );
+
   res.data.content.forEach((spiritus) => {
     spiritus.images.forEach((img) => {
       img.url = img.url ? ImagePath(img.url) : null;

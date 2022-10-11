@@ -9,7 +9,7 @@ import { ArrowLeftIcon, StarIcon } from "@heroicons/react/outline";
 import { FilterIcon, StoryHookIcon } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 
-import { ProxyGetSection } from "../../service/http/proxy";
+import { GetSection } from "../../service/http/sections";
 
 export function SectionGrid({ id, title, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
@@ -22,7 +22,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
     setIsLoading(true);
 
     try {
-      const res = await ProxyGetSection(id, current + 1);
+      const res = await GetSection(id, current + 1);
       setItems((prev) => [...prev, ...res.data.items.content]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.items.last);
@@ -78,27 +78,28 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       </div>
 
       <div className="grid grid-cols-1 gap-y-10 gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:gap-x-10 mb-14">
-        {!!items && items.map((item) => {
-          if (item.imageUrl) {
+        {!!items &&
+          items.map((item) => {
+            if (item.imageUrl) {
+              return (
+                <SectionTile
+                  key={item.itemId}
+                  itemId={item.itemId}
+                  title={item.title}
+                  subtitle={item.subtitle}
+                  itemType={item.itemNavigationType}
+                  imageUrl={item.imageUrl}
+                />
+              );
+            }
             return (
-              <SectionTile
+              <PlaceHolderTile
                 key={item.itemId}
-                itemId={item.itemId}
-                title={item.title}
-                subtitle={item.subtitle}
-                itemType={item.itemNavigationType}
-                imageUrl={item.imageUrl}
+                story_id={item.itemId}
+                text={item.placeholderText}
               />
             );
-          }
-          return (
-            <PlaceHolderTile
-              key={item.itemId}
-              story_id={item.itemId}
-              text={item.placeholderText}
-            />
-          );
-        })}
+          })}
       </div>
 
       {!isLast && (

@@ -45,28 +45,6 @@ export async function GetSpiritusStoriesBySlug(spiritus_slug, offset, limit) {
   return res;
 }
 
-// Get stories for spiritus through proxy
-export async function ProxyGetSpiritusStoriesBySlug(
-  spiritus_slug,
-  offset,
-  limit
-) {
-  const o = offset ? offset : defaultOffset;
-  const l = limit ? limit : defaultLimit;
-
-  const res = await axios.get(
-    `/api/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`
-  );
-
-  // expand image paths to full paths
-  res.data.content.forEach((story) => {
-    story.images.forEach((img) => {
-      img.url = img.url ? ImagePath(img.url) : null;
-    });
-  });
-  return res;
-}
-
 export async function GetSpiritusStoriesByID(id, offset, limit) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;

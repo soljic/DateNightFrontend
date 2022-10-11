@@ -17,11 +17,11 @@ import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
 import { Spinner } from "../../../components/Status";
 
 import {
-  ProxyAddSpiritusImage,
-  ProxyDeleteSpiritus,
-  ProxyDeleteSpiritusImage,
-  ProxyEditSpiritus,
-} from "../../../service/http/proxy";
+  AddSpiritusImage,
+  DeleteSpiritus,
+  DeleteSpiritusImage,
+  EditSpiritus,
+} from "../../../service/http/spiritus_crud";
 import {
   ImageEditor,
   IMG_ACTION_ADD,
@@ -94,7 +94,7 @@ export default function EditSpiritusPage({ spiritus }) {
         },
       };
 
-      await ProxyEditSpiritus(session.user.accessToken, body);
+      await EditSpiritus(session.user.accessToken, body);
       await saveImages();
       setPending(false);
 
@@ -110,7 +110,7 @@ export default function EditSpiritusPage({ spiritus }) {
   const deleteSpiritus = async () => {
     try {
       setPendingDelete(true);
-      await ProxyDeleteSpiritus(session.user.accessToken, spiritus.id);
+      await DeleteSpiritus(session.user.accessToken, spiritus.id);
       setPendingDelete(false);
 
       // Redirect to homepage
@@ -132,11 +132,7 @@ export default function EditSpiritusPage({ spiritus }) {
         }
       }
       if (doAdd) {
-        await ProxyAddSpiritusImage(
-          session.user.accessToken,
-          spiritus.id,
-          form
-        );
+        await AddSpiritusImage(session.user.accessToken, spiritus.id, form);
       }
     } catch (err) {
       console.log("ERROR ADDING IMAGES", err);
@@ -145,7 +141,7 @@ export default function EditSpiritusPage({ spiritus }) {
     try {
       for (const img of deletedImages) {
         if (img.action === IMG_ACTION_REMOVE && img.id) {
-          await ProxyDeleteSpiritusImage(
+          await DeleteSpiritusImage(
             session.user.accessToken,
             spiritus.id,
             img.id
@@ -244,7 +240,6 @@ export default function EditSpiritusPage({ spiritus }) {
 
 function SpiritusDates({ birth, setBirth, death, setDeath }) {
   const { t } = useTranslation("common");
-
 
   const DatePicker = dynamic(() =>
     import("react-date-picker/dist/entry.nostyle").then((dp) => dp)

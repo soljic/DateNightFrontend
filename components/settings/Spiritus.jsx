@@ -9,8 +9,8 @@ import { PencilIcon } from "@heroicons/react/outline";
 
 import { Spinner } from "../../components/Status";
 
-import { ProxyProfileSpiritus } from "../../service/http/auth";
-import { ProxyDeleteSpiritus } from "../../service/http/proxy";
+import { ProfileSpiritus } from "../../service/http/auth";
+import { DeleteSpiritus } from "../../service/http/spiritus_crud";
 
 import { Fragment } from "react";
 
@@ -28,7 +28,6 @@ import {
   SettingsCreateStoryIcon,
   SettingsEditStoryIcon,
 } from "../SettingsIcons";
-// import { ProxyLogout } from "../../service/http/proxy";
 
 export function MySpiritusGrid({ spiritus, isLastPage }) {
   const { t } = useTranslation(["common", "settings"]);
@@ -57,10 +56,7 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
     setIsLoading(true);
 
     try {
-      const res = await ProxyProfileSpiritus(
-        session.user.accessToken,
-        current + 1
-      );
+      const res = await ProfileSpiritus(session.user.accessToken, current + 1);
       setItems((prev) => [...prev, ...res.data.content]);
       setCurrent((prev) => prev + 1);
       setIsLast(res.data.last);
@@ -85,7 +81,7 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
         {t("settings:spiritus")}
       </h1>
 
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-1 md:grid-cols-2 mb-12 place-items-center">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-1 md:grid-cols-2 mb-12 mt-2 place-items-center">
         {items.map((item) => {
           return (
             <div className="h-full w-full" key={item.id}>
@@ -154,7 +150,7 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
   const onSubmit = async (data) => {
     try {
       setSubmitting(true);
-      await ProxyDeleteSpiritus(session.user.accessToken, deleteId);
+      await DeleteSpiritus(session.user.accessToken, deleteId);
       setItems((prev) => prev.filter((item) => item.id !== deleteId));
       setSubmitting(false);
       setIsSafeToReset(true);

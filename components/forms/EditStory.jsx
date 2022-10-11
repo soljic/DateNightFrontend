@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useTranslation } from "next-i18next";
 
-import { ProxyGetTags } from "../../service/http/proxy";
+import { GetTags } from "../../service/http/spiritus";
 import { MultiSelectInput } from "../Dropdowns";
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 
@@ -47,7 +47,7 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await ProxyGetTags();
+        const res = await GetTags();
         if (res?.data.length) {
           setItemsList(res.data);
         }

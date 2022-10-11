@@ -11,7 +11,7 @@ import { getSession } from "next-auth/react";
 import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 import { Spinner } from "../../../components/Status";
-import { ProxySendPasswordResetEmail } from "../../../service/http/auth";
+import { SendPasswordResetEmail } from "../../../service/http/auth";
 
 function isEmailValid(email) {
   return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -36,7 +36,7 @@ export default function ForgotPassword() {
   const onSubmit = async (data) => {
     try {
       setSubmitting(true);
-      await ProxySendPasswordResetEmail(data.email);
+      await SendPasswordResetEmail(data.email);
       setSubmitting(false);
       setSent(true);
     } catch (error) {

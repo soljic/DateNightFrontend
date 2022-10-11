@@ -23,13 +23,13 @@ import { Spinner } from "../../components/Status";
 import { LoginModal } from "../../components/auth/Login";
 
 import {
-  ProxySaveStory,
-  ProxyUnSaveStory,
-  ProxySaveSpiritus,
-  ProxyUnSaveSpiritus,
+  SaveStory,
+  UnSaveStory,
+  SaveSpiritus,
+  UnSaveSpiritus,
 } from "../../service/http/save";
-import { ProxyGetSpiritusStoriesBySlug } from "../../service/http/story";
-import { ProxySendRose } from "../../service/http/rose";
+import { GetSpiritusStoriesBySlug } from "../../service/http/story";
+import { SendRose } from "../../service/http/rose";
 
 export function Tags({ tags }) {
   return (
@@ -57,7 +57,7 @@ export function Tribute({ id }) {
 
   const sendRose = async () => {
     try {
-      await ProxySendRose(id, text);
+      await SendRose(id, text);
       setSent(true);
       setIsOpen(true);
     } catch (err) {
@@ -206,22 +206,22 @@ export function PageActions({
   const { data: session, status } = useSession();
 
   const saveStory = async () => {
-    const res = await ProxySaveStory(session.user.accessToken, id);
+    const res = await SaveStory(session.user.accessToken, id);
     setIsSaved(true);
   };
 
   const unSaveStory = async () => {
-    const res = await ProxyUnSaveStory(session.user.accessToken, id);
+    const res = await UnSaveStory(session.user.accessToken, id);
     setIsSaved(false);
   };
 
   const saveSpiritus = async () => {
-    const res = await ProxySaveSpiritus(session.user.accessToken, id);
+    const res = await SaveSpiritus(session.user.accessToken, id);
     setIsSaved(true);
   };
 
   const unSaveSpiritus = async () => {
-    const res = await ProxyUnSaveSpiritus(session.user.accessToken, id);
+    const res = await UnSaveSpiritus(session.user.accessToken, id);
     setIsSaved(false);
   };
 
@@ -318,7 +318,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
     setIsLoading(true);
 
     try {
-      const res = await ProxyGetSpiritusStoriesBySlug(
+      const res = await GetSpiritusStoriesBySlug(
         spiritus.slug,
         current + 1
       );

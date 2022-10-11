@@ -24,12 +24,9 @@ import {
 } from "../../components/forms/CreateSpiritus";
 import { SpiritusImageUploader } from "../../components/Uploaders";
 
-import { ProxyCreateSpiritus } from "../../service/http/proxy";
+import { CreateSpiritus } from "../../service/http/spiritus_crud";
 import { ImagePath } from "../../service/util";
 
-// When creating spiritus a request is made to same-origin proxy server
-// to bypass CORS policies.
-//
 // TODO: save stuff to local storage
 // TODO: add err handling and error toasts
 export default function CreateSpiritusPage({ user }) {
@@ -89,7 +86,7 @@ export default function CreateSpiritusPage({ user }) {
         form.append("files", img.file, img.file.name);
       });
 
-      const res = await ProxyCreateSpiritus(user.accessToken, form);
+      const res = await CreateSpiritus(user.accessToken, form);
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {

@@ -16,14 +16,12 @@ import {
   SettingsSuggestionsIcon,
   SettingsAccountIcon,
 } from "../SettingsIcons";
-// import { ProxyLogout } from "../../service/http/proxy";
 
 export function ProfileMenu({ token, profileName }) {
   const { t } = useTranslation("settings");
   const router = useRouter();
 
   const logoutUser = async () => {
-    // await ProxyLogout(token);
     await signOut({ redirect: false });
     router.push("/");
   };

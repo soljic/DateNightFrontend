@@ -19,21 +19,31 @@ export async function LoginCode(code) {
   );
 }
 
-export async function ProxyRegister(name, lastName, email, password) {
-  const res = await axios.post("/api/authentication/email-register", {
+export async function Logout(token) {
+  if (!token) {
+    return true;
+  }
+
+  return await axios.put(`${API_URL}/v2/authentication/logout`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export async function Register(name, lastName, email, password) {
+  return await axios.post(`${API_URL}/v2/authentication/register`, {
     name,
     lastName,
     email,
     password,
   });
-  return res;
 }
 
-export async function ProxySendPasswordResetEmail(email) {
-  const res = await axios.post(
-    `/api/authentication/reset-password?email=${email}`
+export async function SendPasswordResetEmail(email) {
+  return await axios.post(
+    `${API_URL}/v2/authentication/password/email?email=${email}`
   );
-  return res;
 }
 
 export async function RefreshToken(refreshToken) {
@@ -58,37 +68,6 @@ export async function ProfileSpiritus(accessToken, offset, limit) {
 
   const res = await axios.get(
     `${API_URL}/v2/user/account/spiritus?page=${0}&size=${l}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
-
-  res.data.content.forEach((elem) => {
-    if (elem.image?.url) {
-      elem.image.url = ImagePath(elem.image.url);
-    }
-  });
-  return res;
-}
-
-// on self-origin
-export async function ProxyProfile(accessToken) {
-  return await axios.get(`/api/authentication/user/profile`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-}
-
-// on-self-origin
-export async function ProxyProfileSpiritus(accessToken, offset, limit) {
-  const o = offset ? offset : defaultOffset;
-  const l = limit ? limit : defaultLimit;
-
-  const res = await axios.get(
-    `/api/authentication/user/spiritus?page=${o}&size=${l}`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,

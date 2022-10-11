@@ -17,7 +17,7 @@ import {
 } from "@heroicons/react/outline";
 
 import { GetSpiritusById } from "../../service/http/spiritus";
-import { ProxyCreateStory } from "../../service/http/proxy";
+import { CreateStory } from "../../service/http/story_crud";
 
 import LayoutNoFooter from "../../components/layout/LayoutNoFooter";
 import {
@@ -91,7 +91,7 @@ export default function CreateStoryPage({ spiritus }) {
       if (images.length) {
         form.append("file", images[0].file);
       }
-      const res = await ProxyCreateStory(session.user.accessToken, form);
+      const res = await CreateStory(session.user.accessToken, form);
 
       setStory(res.data);
       setPending(false);

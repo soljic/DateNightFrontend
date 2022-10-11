@@ -5,7 +5,7 @@ import DatePicker from "react-date-picker/dist/entry.nostyle";
 
 import { CalendarIcon, XIcon, SearchIcon } from "@heroicons/react/outline";
 
-import { ProxyGetTags } from "../../service/http/proxy";
+import { GetTags } from "../../service/http/spiritus";
 import { CommentIcon, LocationIcon, RangeIcon, SpiritusIcon } from "../Icons";
 import { MultiSelectInput } from "../Dropdowns";
 
@@ -161,7 +161,7 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await ProxyGetTags();
+        const res = await GetTags();
         if (res?.data.length) {
           setItemsList(res.data);
         }

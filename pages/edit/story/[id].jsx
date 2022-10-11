@@ -22,12 +22,13 @@ import {
   StoryTextEditor,
   StoryTitle,
 } from "../../../components/forms/EditStory";
+
 import {
-  ProxyAddStoryImage,
-  ProxyDeleteStory,
-  ProxyDeleteStoryImage,
-  ProxyEditStory,
-} from "../../../service/http/proxy";
+  AddStoryImage,
+  DeleteStory,
+  DeleteStoryImage,
+  EditStory,
+} from "../../../service/http/story_crud";
 import {
   ImageEditor,
   IMG_ACTION_ADD,
@@ -67,7 +68,7 @@ export default function EditStoryPage({ story }) {
       if (addImage.length) {
         const form = new FormData();
         form.append("file", addImage[0].file, addImage[0].file.name);
-        await ProxyAddStoryImage(session.user.accessToken, story.id, form);
+        await AddStoryImage(session.user.accessToken, story.id, form);
       }
     } catch (err) {
       console.log("ERROR ADDING IMAGE", err);
@@ -76,7 +77,7 @@ export default function EditStoryPage({ story }) {
     try {
       for (const img of deletedImages) {
         if (img.action === IMG_ACTION_REMOVE && img.id) {
-          await ProxyDeleteStoryImage(session.user.accessToken, img.id);
+          await DeleteStoryImage(session.user.accessToken, img.id);
         }
       }
     } catch (err) {
@@ -114,7 +115,7 @@ export default function EditStoryPage({ story }) {
         tags: tags.map((t) => t.id),
         private: isPrivate,
       };
-      await ProxyEditStory(session.user.accessToken, story.id, body);
+      await EditStory(session.user.accessToken, story.id, body);
       await saveImages();
       setPending(false);
 
@@ -130,7 +131,7 @@ export default function EditStoryPage({ story }) {
   const deleteStory = async () => {
     try {
       setPendingDelete(true);
-      await ProxyDeleteStory(session.user.accessToken, story.id);
+      await DeleteStory(session.user.accessToken, story.id);
       setPendingDelete(false);
       router.push(`/spiritus/${story.spiritus.slug}`);
     } catch (err) {

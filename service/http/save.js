@@ -1,33 +1,50 @@
 import axios from "axios";
+import { API_URL } from "../constants";
 
-export async function ProxySaveSpiritus(accessToken, id) {
-  return await axios.put(`/api/save/spiritus/${id}`, {}, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+export async function SaveSpiritus(accessToken, id) {
+  return await axios.put(
+    `${API_URL}/wapi/spiritus/${id}/save`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 }
 
-export async function ProxyUnSaveSpiritus(accessToken, id) {
-  return await axios.put(`/api/unsave/spiritus/${id}`, {}, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+export async function UnSaveSpiritus(accessToken, id) {
+  return await axios.put(
+    `${API_URL}/wapi/spiritus/${id}/unsave`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 }
 
-export async function ProxySaveStory(accessToken, id) {
-  return await axios.put(`/api/save/story/${id}`, {}, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+export async function SaveStory(accessToken, id) {
+  return await axios.put(
+    `${API_URL}/wapi/story/save/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 }
 
-export async function ProxyUnSaveStory(accessToken, id) {
-  return await axios.put(`/api/unsave/story/${id}`, {},  {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+export async function UnSaveStory(accessToken, id) {
+  return await axios.put(
+    `${API_URL}/wapi/story/unsave/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 }
