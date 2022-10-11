@@ -23,11 +23,11 @@ export default function About() {
         <meta name="description" content={t("meta_about_description")} />
         <meta property="og:site_name" content="Spiritus" />
         <meta property="og:title" content="Spiritus - About Us"/>
-        <meta property="og:url" content="https://demo.spiritus.app/en/about"/>
+        <meta property="og:url" content="https://spiritus.app/en/about"/>
         <meta property="og:type" content="website" />
         <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Find out more about our Mission, Vision, potential partnerships and out unique team of experts." />
-        <meta property="og:image" itemProp="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
-        <meta property="og:image:secure_url" itemProp="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image" itemProp="image" content="https://spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image:secure_url" itemProp="image" content="https://spiritus.app/images/share/banner.jpg"/>
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
       </Head>

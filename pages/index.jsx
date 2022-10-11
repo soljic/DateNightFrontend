@@ -35,10 +35,10 @@ export default function Home({
         <meta name="description" content={t("meta_home_description")} />
         <meta property="og:site_name" content="Spiritus" />
         <meta property="og:title" content="Spiritus Stories"/>
-        <meta property="og:url" content="https://demo.spiritus.app/en/"/>
+        <meta property="og:url" content="https://spiritus.app/en/"/>
         <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries." />
-        <meta property="og:image" itemProp="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
-        <meta property="og:image:secure_url" itemProp="image" content="https://demo.spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image" itemProp="image" content="https://spiritus.app/images/share/banner.jpg"/>
+        <meta property="og:image:secure_url" itemProp="image" content="https://spiritus.app/images/share/banner.jpg"/>
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
       </Head>
