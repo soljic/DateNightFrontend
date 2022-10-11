@@ -1,5 +1,6 @@
 import Head from "next/head";
-
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -16,6 +17,8 @@ import {
   HomepageSwiper,
 } from "../components/stories/Swipers";
 import Layout from "../components/layout/Layout";
+import { LoginModal } from "../components/auth/Login";
+
 import { GetParsedHomepage } from "../service/http/homepage";
 
 export default function Home({
@@ -27,6 +30,18 @@ export default function Home({
 }) {
   const { t } = useTranslation("common");
 
+  const { data: session, status } = useSession();
+
+  let [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <Layout>
       <Head>
@@ -34,15 +49,27 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_home_description")} />
         <meta property="og:site_name" content="Spiritus" />
-        <meta property="og:title" content="Spiritus Stories"/>
-        <meta property="og:url" content="https://spiritus.app/en/"/>
-        <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries." />
-        <meta property="og:image" itemProp="image" content="https://spiritus.app/images/share/banner.jpg"/>
-        <meta property="og:image:secure_url" itemProp="image" content="https://spiritus.app/images/share/banner.jpg"/>
-        <meta property="og:image:width" content="1200"/>
-        <meta property="og:image:height" content="630"/>
+        <meta property="og:title" content="Spiritus Stories" />
+        <meta property="og:url" content="https://spiritus.app/en/" />
+        <meta
+          property="og:description"
+          content="Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries."
+        />
+        <meta
+          property="og:image"
+          itemProp="image"
+          content="https://spiritus.app/images/share/banner.jpg"
+        />
+        <meta
+          property="og:image:secure_url"
+          itemProp="image"
+          content="https://spiritus.app/images/share/banner.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
-      <CreateSpiritusCTA />
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+      <CreateSpiritusCTA sessionStatus={status} openModal={openModal} />
       <div className="flex flex-col mx-auto items-center pt-10">
         <CTADownloadLinks />
         {/* <CTAPartners /> */}
@@ -100,7 +127,11 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "settings", "auth"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "auth",
+      ])),
       storyOfTheWeek: sections.storyOfTheWeek,
       featured: sections.featured,
       discover: sections.discover,

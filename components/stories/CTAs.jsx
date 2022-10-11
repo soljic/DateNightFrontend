@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/solid";
 import { LocationIcon } from "../Icons";
 
-export function CreateSpiritusCTA() {
+export function CreateSpiritusCTA({ sessionStatus, openModal }) {
   const { t } = useTranslation("common");
 
   return (
@@ -19,7 +19,19 @@ export function CreateSpiritusCTA() {
         <h2 className="text-center sm:w-3/5 md:w-3/4 lg:w-3/5 text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight text-sp-black dark:text-sp-white font-bold mb-4">
           {t("cta_create_spiritus_title")}
         </h2>
-        <CTACreateButton />
+        {sessionStatus === "authenticated" ? (
+          <CTACreateButton />
+        ) : (
+          <button
+            onClick={openModal}
+            className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black"
+          >
+            <ArrowCircleRightIcon className="h-6 w-6" />
+            <span className="font-semibold ml-1">
+              {t("goto_search_places")}
+            </span>
+          </button>
+        )}
       </div>
     </div>
   );
