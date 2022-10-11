@@ -147,6 +147,7 @@ export default function CreateStoryPage({ spiritus }) {
           {story ? (
             <Success
               storyId={story.id}
+              slug={story.slug}
               name={spiritus.name}
               surname={spiritus.surname}
             />
@@ -205,7 +206,7 @@ export default function CreateStoryPage({ spiritus }) {
   );
 }
 
-function Success({ storyId, name, surname, shortLink }) {
+function Success({ storyId, slug, name, surname, shortLink }) {
   const { t } = useTranslation("common");
 
   return (
@@ -223,8 +224,9 @@ function Success({ storyId, name, surname, shortLink }) {
         </p>
       </div>
       <div className="flex mx-auto items-center justify-center gap-4 mt-4">
-        <CopyToClipboard text={shortLink || "#"}>
-          <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
+        {/* <CopyToClipboard text={shortLink || "#"}> */}
+        <CopyToClipboard text={`https://spiritus.app/story/${slug}`}>
+        <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
             <UploadIcon className="w-6 h-6" />
             <p className="font-semibold text-center">{t("share")}</p>
           </button>

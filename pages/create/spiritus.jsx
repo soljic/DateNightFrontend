@@ -8,6 +8,7 @@ import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import { useRouter } from "next/router";
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import { LinkIcon, UploadIcon } from "@heroicons/react/outline";
@@ -25,12 +26,13 @@ import {
 import { SpiritusImageUploader } from "../../components/Uploaders";
 
 import { CreateSpiritus } from "../../service/http/spiritus_crud";
-import { ImagePath } from "../../service/util";
+import { ImagePath, localFormatDate } from "../../service/util";
 
 // TODO: save stuff to local storage
 // TODO: add err handling and error toasts
 export default function CreateSpiritusPage({ user }) {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
   // stepper is 0 indexed!
   const numSteps = 4;
@@ -44,13 +46,12 @@ export default function CreateSpiritusPage({ user }) {
   const [description, setDescription] = useState("");
 
   const [pending, setPending] = useState(false);
-  const [spiritus, setSpiritus] =
-    useState();
-    //   {
-    //   id: 1,
-    //   name: "Tester",
-    //   surname: "Surname",
-    // }
+  const [spiritus, setSpiritus] = useState();
+  //   {
+  //   id: 1,
+  //   name: "Tester",
+  //   surname: "Surname",
+  // }
 
   const [location, setLocation] = useState(null);
 
@@ -178,7 +179,7 @@ export default function CreateSpiritusPage({ user }) {
         </p> */}
         <div>
           {spiritus ? (
-            <Success spiritus={spiritus} />
+            <Success spiritus={spiritus} locale={router.locale} />
           ) : (
             <>
               <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
@@ -239,8 +240,11 @@ export default function CreateSpiritusPage({ user }) {
   );
 }
 
-function Success({ spiritus }) {
+function Success({ spiritus, locale }) {
   const { t } = useTranslation("common");
+  const dates = `${
+    spiritus.birth ? localFormatDate(spiritus.birth, locale) : "\uE132"
+  } — ${spiritus.death ? localFormatDate(spiritus.death, locale) : "\uE132"}`;
 
   return (
     <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white">
@@ -254,19 +258,16 @@ function Success({ spiritus }) {
           {spiritus.name} {spiritus.surname}
         </span>
       </h2>
-      {(spiritus.birth || spiritus.death) && (
-        <p className="mt-1 text-center opacity-50 mb-5">
-          <span>{spiritus.birth || "?"}</span> —{" "}
-          <span>{spiritus.death || "?"}</span>
-        </p>
-      )}
-      {!!spiritus.image?.url && (
-        <div className="object-fill rounded-lg overflow-hidden px-4">
+      <p className="mt-1 text-center opacity-50 mb-5 capitalize">{dates}</p>
+
+      {!!spiritus?.images.length && (
+        <div className="rounded-sp-14 overflow-hidden px-4">
           <Image
-            src={ImagePath(spiritus.image.url)}
+            src={ImagePath(spiritus.images[0].url)}
             alt="Spiritus image"
             width={270}
             height={300}
+            className="rounded-sp-14"
           />
         </div>
       )}
@@ -299,7 +300,10 @@ function Success({ spiritus }) {
             </p>
           </a>
         </Link>
-        <CopyToClipboard text={spiritus.shortLink}>
+        {/* <CopyToClipboard text={spiritus.shortLink}> */}
+        <CopyToClipboard
+          text={`https://spiritus.app/spiritus/${spiritus.slug}`}
+        >
           <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 p-4 gap-2">
             <UploadIcon className="w-6 h-6" />
             <p className="font-semibold">{t("share")} Spiritus</p>
