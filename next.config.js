@@ -23,14 +23,14 @@ module.exports = {
         source: "/api/stories/spiritus/:query*",
         destination: `${process.env.NEXT_API_URL}/wapi/stories/spiritus/:query*`,
       },
-      {
-        source: "/api/spiritus/create",
-        destination: `${process.env.NEXT_API_URL}/wapi/spiritus`,
-      },
-      {
-        source: "/api/story/create",
-        destination: `${process.env.NEXT_API_URL}/wapi/story`,
-      },
+      // {
+      //   source: "/api/spiritus/create",
+      //   destination: `${process.env.NEXT_API_URL}/wapi/spiritus`,
+      // },
+      // {
+      //   source: "/api/story/create",
+      //   destination: `${process.env.NEXT_API_URL}/wapi/story`,
+      // },
       {
         source: "/api/story/edit/:id",
         destination: `${process.env.NEXT_API_URL}/v2/story/:id`,
@@ -51,26 +51,26 @@ module.exports = {
       },
 
       // proxy pass SPIRITUS DELETE
-      {
-        source: "/api/spiritus/delete/:spiritusId",
-        destination: `${process.env.NEXT_API_URL}/spiritus/self/:spiritusId`,
-      },
+      // {
+      //   source: "/api/spiritus/delete/:spiritusId",
+      //   destination: `${process.env.NEXT_API_URL}/spiritus/self/:spiritusId`,
+      // },
       // proxy pass SPIRITUS EDIT
-      {
-        source: "/api/spiritus/edit",
-        destination: `${process.env.NEXT_API_URL}/v2/spiritus`,
-      },
+      // {
+      //   source: "/api/spiritus/edit",
+      //   destination: `${process.env.NEXT_API_URL}/v2/spiritus`,
+      // },
 
       // proxy pass SPIRITUS IMAGE add to BE
-      {
-        source: "/api/spiritus/:id/image",
-        destination: `${process.env.NEXT_API_URL}/v2/spiritus/:id/image`,
-      },
+      // {
+      //   source: "/api/spiritus/:id/image",
+      //   destination: `${process.env.NEXT_API_URL}/v2/spiritus/:id/image`,
+      // },
       // proxy pass SPIRITUS IMAGE delete to BE
-      {
-        source: "/api/spiritus/:spiritusId/image/delete/:imageId",
-        destination: `${process.env.NEXT_API_URL}/v2/spiritus/:spiritusId/image/:imageId`,
-      },
+      // {
+      //   source: "/api/spiritus/:spiritusId/image/delete/:imageId",
+      //   destination: `${process.env.NEXT_API_URL}/v2/spiritus/:spiritusId/image/:imageId`,
+      // },
       // proxy pass GLOBAL SEARCH -> search spiritus, story, place depending on query
       {
         source: "/api/search/:query*",
