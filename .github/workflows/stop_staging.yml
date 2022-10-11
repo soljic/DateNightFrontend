@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  stop-production:
+  stop-staging:
     runs-on: ubuntu-latest
     steps:
       - name: Stop all containers on staging host
