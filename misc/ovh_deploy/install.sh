@@ -7,7 +7,7 @@
 ## install docker engine by manually adding the repository
 ## Reference: https://docs.docker.com/engine/install/ubuntu/#install-from-a-package
 sudo apt-get update
-sudo apt install ca-certificates curl gnupg lsb-release -y
+sudo apt install apache2-utils ca-certificates curl gnupg lsb-release -y
 sudo mkdir -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo \
@@ -44,4 +44,5 @@ sudo certbot --nginx -d demo.spiritus.app
 # sudo certbot --nginx -d spiritus.app
 
 # re-evaluate nginx configs & reload
-sudo nginx -t && nginx -s reload
+sudo nginx -t
+sudo nginx -s reload

@@ -13,6 +13,9 @@ The deploy key should allow READ access to the instance machine. It will be used
 2. follow this tutorial
 * https://docs.github.com/en/developers/overview/managing-deploy-keys#deploy-keys
 
+## Before adding certs on host machine you need to add DNS record pointing to that machine
+* needs to be an A record pointing to host machine IP addr
+* basically, you need to add a subdomain
 
 ## Add Github secrets; authorize pubkey on instance
 Watch this for reference:
@@ -37,3 +40,13 @@ You need to have these secrets set up:
 * `PROD_HOST`
 * `PROD_KEY`
 * `PROD_USERNAME`
+
+## Adding passwords (basic auth for nginx)
+```bash
+sudo apt-get install apache2-utils
+sudo htpasswd -c /etc/nginx/.htpasswd <username>
+sudo nginx -t
+sudo nginx -s reload
+```
+
+Do this for non prod envs to set basic auth for server.
