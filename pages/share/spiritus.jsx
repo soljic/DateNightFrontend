@@ -61,6 +61,13 @@ export async function getServerSideProps(context) {
         },
       };
     }
+
+    return {
+      props: {
+        ...(await serverSideTranslations(context.locale, ["common"])),
+        slug: slug,
+      },
+    };
   } catch {
     return {
       redirect: {
@@ -69,11 +76,4 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, ["common"])),
-      slug: slug,
-    },
-  };
 }
