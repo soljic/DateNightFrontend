@@ -13,6 +13,7 @@ jobs:
           NEXT_JWT_SECRET: ${{ secrets.STAGING_NEXT_JWT_SECRET }}
           NEXTAUTH_SECRET: ${{ secrets.STAGING_NEXTAUTH_SECRET }}
           NEXT_API_URL: https://walk.spiritusapp.com
+          NEXT_PUBLIC_GTAG_ID: G-2SXNVG0CD9
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USERNAME }}
@@ -24,7 +25,7 @@ jobs:
             echo "## Pulling latest changes..."
             git pull --ff-only
             echo "## Building new containers"
-            echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET" > .env
+            echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET\nNEXT_PUBLIC_GTAG_ID=$NEXT_PUBLIC_GTAG_ID" > .env
             docker compose build
             echo "## BUILD DONE ##"
 
@@ -38,6 +39,7 @@ jobs:
           NEXT_JWT_SECRET: ${{ secrets.STAGING_NEXT_JWT_SECRET }}
           NEXTAUTH_SECRET: ${{ secrets.STAGING_NEXTAUTH_SECRET }}
           NEXT_API_URL: https://walk.spiritusapp.com
+          NEXT_PUBLIC_GTAG_ID: G-2SXNVG0CD9
         with:
           host: ${{ secrets.STAGING_HOST }}
           username: ${{ secrets.STAGING_USERNAME }}
@@ -46,6 +48,6 @@ jobs:
           script: |
             cd webapp
             echo "## Building and starting containers"
-            echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET" > .env
+            echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET\nNEXT_PUBLIC_GTAG_ID=$NEXT_PUBLIC_GTAG_ID" > .env
             docker compose up --build spiritus-web -d
             echo "## DEPLOY DONE ##"

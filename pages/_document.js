@@ -25,23 +25,26 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
           />
-
-          <Script
-            strategy="beforeInteractive"
-            src="https://www.googletagmanager.com/gtag/js?id=G-2SXNVG0CD9"
-          />
-          <Script
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
+          {process.env.NEXT_PUBLIC_GTAG_ID && (
+            <Script
+              strategy="beforeInteractive"
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTAG_ID}`}
+            />
+          )}
+          {process.env.NEXT_PUBLIC_GTAG_ID && (
+            <Script
+              strategy="beforeInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                 
-                  gtag('config', 'G-2SXNVG0CD9');
+                  gtag('config', '${process.env.NEXT_PUBLIC_GTAG_ID}');
                   `,
-            }}
-          />
+              }}
+            />
+          )}
         </Head>
         <body className="bg-sp-day-50 dark:bg-sp-black">
           <Main />
