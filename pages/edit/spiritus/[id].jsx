@@ -33,6 +33,7 @@ import {
   SpiritusDescription,
   SpiritusName,
   SpiritusLocation,
+  DeleteSpiritusModal,
 } from "../../../components/forms/EditSpiritus";
 
 export default function EditSpiritusPage({ spiritus }) {
@@ -67,6 +68,20 @@ export default function EditSpiritusPage({ spiritus }) {
   // true if view is waiting for BE response
   const [pending, setPending] = useState(false);
   const [pendingDelete, setPendingDelete] = useState(false);
+
+  // delete modal
+  let [isOpen, setIsOpen] = useState(false);
+  const [deleteId, setDeleteID] = useState();
+
+  // call from child to set deleteId and open modal
+  function openModal(deleteId) {
+    setDeleteID(deleteId);
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   // update spiritus FLOW:
   // 1. update spiritus content
@@ -103,21 +118,6 @@ export default function EditSpiritusPage({ spiritus }) {
     } catch (err) {
       setPending(false);
       console.log("ERROR UPDATING SPIRITUS", err);
-    }
-  };
-
-  // delete and redirect to homepage
-  const deleteSpiritus = async () => {
-    try {
-      setPendingDelete(true);
-      await DeleteSpiritus(session.user.accessToken, spiritus.id);
-      setPendingDelete(false);
-
-      // Redirect to homepage
-      router.push(`/`);
-    } catch (err) {
-      setPendingDelete(false);
-      console.log("ERROR DELETING SPIRITUS", err);
     }
   };
 
@@ -160,7 +160,11 @@ export default function EditSpiritusPage({ spiritus }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("edit_spiritus_meta_desc")} />
       </Head>
-
+      <DeleteSpiritusModal
+        deleteId={spiritus.id}
+        isOpen={isOpen}
+        closeModal={closeModal}
+      />
       <div className="py-5 min-h-screen mx-auto mb-64">
         <div className="flex justify-end gap-2">
           <button
@@ -177,9 +181,7 @@ export default function EditSpiritusPage({ spiritus }) {
             )}
           </button>
           <button
-            onClick={() => {
-              deleteSpiritus();
-            }}
+            onClick={openModal}
             disabled={pendingDelete}
             className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
           >
