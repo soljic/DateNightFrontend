@@ -121,7 +121,7 @@ function Accordion({ title, text }) {
     <div
       className={`w-full md:w-2/3 cursor-pointer rounded-sp-10 ${
         open
-          ? "bg-gradient-to-r day-gradient-start day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown"
+          ? "bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown"
           : ""
       }`}
     >
