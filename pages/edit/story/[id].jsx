@@ -21,6 +21,7 @@ import {
   StorySummary,
   StoryTextEditor,
   StoryTitle,
+  DeleteStorysModal,
 } from "../../../components/forms/EditStory";
 
 import {
@@ -89,6 +90,17 @@ export default function EditStoryPage({ story }) {
   const [pending, setPending] = useState(false);
   const [pendingDelete, setPendingDelete] = useState(false);
 
+  // modal delete window controls
+  let [isOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   const setParagraphs = (story) => {
     return story
       .trim()
@@ -128,17 +140,17 @@ export default function EditStoryPage({ story }) {
   };
 
   // delete and redirect to spiritus page
-  const deleteStory = async () => {
-    try {
-      setPendingDelete(true);
-      await DeleteStory(session.user.accessToken, story.id);
-      setPendingDelete(false);
-      router.push(`/spiritus/${story.spiritus.slug}`);
-    } catch (err) {
-      console.log("ERROR DELETING", err);
-      setPendingDelete(false);
-    }
-  };
+  // const deleteStory = async () => {
+  //   try {
+  //     setPendingDelete(true);
+  //     await DeleteStory(session.user.accessToken, story.id);
+  //     setPendingDelete(false);
+  //     router.push(`/spiritus/${story.spiritus.slug}`);
+  //   } catch (err) {
+  //     console.log("ERROR DELETING", err);
+  //     setPendingDelete(false);
+  //   }
+  // };
 
   return (
     <LayoutNoFooter>
@@ -147,7 +159,12 @@ export default function EditStoryPage({ story }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("edit_story_meta_desc")} />
       </Head>
-
+      <DeleteStorysModal
+        deleteId={story.id}
+        spiritusSlug={story.spiritus.slug}
+        isOpen={isOpen}
+        closeModal={closeModal}
+      />
       <div className="py-5 min-h-screen mx-auto mb-64">
         <div className="flex justify-end gap-2">
           <button
@@ -164,9 +181,7 @@ export default function EditStoryPage({ story }) {
             )}
           </button>
           <button
-            onClick={() => {
-              deleteStory();
-            }}
+            onClick={openModal}
             disabled={pendingDelete}
             className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
           >

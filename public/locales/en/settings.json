@@ -35,6 +35,10 @@
   "delete_modal_confirm_err": "Text must match 'DELETE'",
   "delete_modal_cancel": "No, keep Spiritus",
 
+  "delete_story_modal_title": "Delete Story?",
+  "delete_story_modal_subtitle": "This action cannot be undone.",
+  "delete_story_modal_cancel": "Ne, keep Story",
+
   "404_title": "This page does not exist.",
   "404_subtitle": "The page you are looking for could not be found.",
   "404_subtitle_2": "Try these pages:",

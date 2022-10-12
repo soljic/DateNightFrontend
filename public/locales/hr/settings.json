@@ -34,6 +34,11 @@
   "delete_modal_confirm_err": "Potrebno je upisati 'DELETE'",
   "delete_modal_cancel": "Ne, zadrži Spiritus",
 
+  "delete_story_modal_title": "Izbriši Priču?",
+  "delete_story_modal_subtitle": "Akcija se ne može poništiti.",
+  "delete_story_modal_cancel": "Ne, zadrži Priču",
+
+
   "404_title": "Tražena stranica ne postoji.",
   "404_subtitle": "Stranica na koju ste došli nije pronađena",
   "404_subtitle_2": "Posjetite ove stranice:",

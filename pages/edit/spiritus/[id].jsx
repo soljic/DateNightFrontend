@@ -74,8 +74,7 @@ export default function EditSpiritusPage({ spiritus }) {
   const [deleteId, setDeleteID] = useState();
 
   // call from child to set deleteId and open modal
-  function openModal(deleteId) {
-    setDeleteID(deleteId);
+  function openModal() {
     setIsOpen(true);
   }
 
