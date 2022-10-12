@@ -153,5 +153,9 @@
   "edit_spiritus_date": "Dates",
   "edit_spiritus_title": "First and Last name",
   "edit_spiritus_quote": "Quote or Description",
-  "edit_spiritus_location": "Location"
+  "edit_spiritus_location": "Location",
+
+  "redirect_title": "Redirecting...", 
+  "redirect_proceed_message": "Click here if you are not immediately redicted",
+  "redirect_button": "Proceed"
 }

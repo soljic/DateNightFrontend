@@ -153,5 +153,9 @@
   "edit_spiritus_date": "Datum priče",
   "edit_spiritus_title": "Ime i prezime",
   "edit_spiritus_quote": "Citat ili opis",
-  "edit_spiritus_location": "Lokacija"
+  "edit_spiritus_location": "Lokacija",
+
+  "redirect_title": "Preusmjeravanje...", 
+  "redirect_proceed_message": "Kliknite ovdje ukoliko se stranica nije učitala",
+  "redirect_button": "Nastavi"
 }
