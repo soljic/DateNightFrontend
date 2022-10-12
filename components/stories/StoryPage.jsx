@@ -318,10 +318,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
     setIsLoading(true);
 
     try {
-      const res = await GetSpiritusStoriesBySlug(
-        spiritus.slug,
-        current + 1
-      );
+      const res = await GetSpiritusStoriesBySlug(spiritus.slug, current + 1);
       setItems((prev) => [...prev, ...res.data.content]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.last);
@@ -398,30 +395,30 @@ export function StoryHook({ slug, title, subtitle, description, date, flags }) {
   }
 
   return (
-    <div className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-4 text-sp-black dark:text-sp-white">
-      <div className="flex flex-col tracking-sp-tighten">
-        <div className="flex justify-between items-center">
-          <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
-            <StoryHookIcon />
-          </div>
-          {flags.includes("PRIVATE") && (
+    <Link href={`/stories/${slug}`}>
+      <a className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-4 text-sp-black dark:text-sp-white">
+        <div className="flex flex-col tracking-sp-tighten">
+          <div className="flex justify-between items-center">
             <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
-              <LockIcon />
+              <StoryHookIcon />
             </div>
-          )}
-        </div>
+            {flags.includes("PRIVATE") && (
+              <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
+                <LockIcon />
+              </div>
+            )}
+          </div>
 
-        <Link href={`/stories/${slug}`}>
-          <a className="text-lg py-2 font-medium tracking-sp-tighten leading-5">
+          <h3 className="text-lg py-2 font-medium tracking-sp-tighten leading-5">
             {titleStr}
-          </a>
-        </Link>
-        <p className="text-sm tracking-sp-tighten leading-5">{descPara}</p>
-      </div>
-      <div className="flex flex-col items-start">
-        <p className="text-sp-lighter text-sm">{date || ""}</p>
-      </div>
-    </div>
+          </h3>
+          <p className="text-sm tracking-sp-tighten leading-5">{descPara}</p>
+        </div>
+        <div className="flex flex-col items-start">
+          <p className="text-sp-lighter text-sm">{date || ""}</p>
+        </div>
+      </a>
+    </Link>
   );
 }
 
