@@ -127,7 +127,7 @@ function Accordion({ title, text }) {
     >
       <button
         onClick={toggleOpen}
-        className="w-full py-2.5 lg:py-5 px-4 flex justify-between items-center rounded-sp-10 dark:text-sp-white  hover:bg-gradient-to-r hover:day-gradient-start hover:day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+        className="w-full py-2.5 lg:py-5 px-4 flex justify-between items-center rounded-sp-10 dark:text-sp-white  hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
       >
         <div className="font-medium text-lg lg:text-xl tracking-sp-tighten leading-[22px] text-left">
           {title}
