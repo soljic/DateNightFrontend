@@ -10,7 +10,7 @@ export function Footer() {
         <NavItem text={t("about")} textsize={"sm"} link={"/about"}/>
         <NavItem text={t("stories")} textsize={"sm"} />
         <NavItem text={t("mobile")} link="/mobile-app" textsize={"sm"} />
-        <NavItem text={t("tos")} textsize={"sm"} link="/privacy-policy"/>
+        <NavItem text={t("tos")} textsize={"sm"} link="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf" />
         <NavItem text={t("privacy")} link="/privacy-policy" textsize={"sm"} />
         <NavItem
           text={t("contact")}
