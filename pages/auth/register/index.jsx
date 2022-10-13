@@ -9,6 +9,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 
+import { API_URL } from "../../../service/constants";
+
 export default function LoginComponent() {
   const { t } = useTranslation("auth");
 
@@ -27,7 +29,10 @@ export default function LoginComponent() {
           </h4>
         </div>
         <div className="flex flex-col w-full justify-center items-center text-center gap-3">
-          <button className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
+          <a
+            href={`${API_URL}/v2/authentication/social/login`}
+            className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+          >
             <div className="w-1/5 p-2">
               <svg
                 width="18"
@@ -45,8 +50,11 @@ export default function LoginComponent() {
               </svg>
             </div>
             <p className="w-4/6">{t("login_google")}</p>
-          </button>
-          <button className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
+          </a>
+          <a
+            href={`${API_URL}/v2/authentication/social/login?type=facebook`}
+            className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+          >
             <div className="w-1/5 p-2">
               <svg
                 width="18"
@@ -62,7 +70,7 @@ export default function LoginComponent() {
               </svg>
             </div>
             <p className="w-4/6">{t("login_facebook")}</p>
-          </button>
+          </a>
           <Link href="/auth/register/email">
             <a className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-4 text-lg font-semibold text-sp-white">
               <div className="w-1/5 p-2">

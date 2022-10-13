@@ -7,6 +7,8 @@ import { useTranslation } from "next-i18next";
 
 import { ShieldIcon } from "../Icons";
 
+import { API_URL } from "../../service/constants";
+
 export function LoginModal({ isOpen, closeModal }) {
   const { t } = useTranslation("auth");
 
@@ -63,7 +65,7 @@ function LoginForm() {
       </div>
       <div className="flex flex-col w-full justify-center items-center text-center gap-3">
         <a
-          href="https://walk.spiritusapp.com/v2/authentication/social/login"
+          href={`${API_URL}/v2/authentication/social/login`}
           className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
         >
           <div className="w-1/5 p-2">
@@ -84,23 +86,26 @@ function LoginForm() {
           </div>
           <p className="w-4/6">{t("login_google")}</p>
         </a>
-        {/* <button className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black">
-		  <div className="w-1/5 p-2">
-			<svg
-			  width="18"
-			  height="18"
-			  viewBox="0 0 18 18"
-			  fill="none"
-			  xmlns="http://www.w3.org/2000/svg"
-			>
-			  <path
-				d="M18 9.05493C18 4.08468 13.9703 0.0549316 9 0.0549316C4.02975 0.0549316 0 4.08468 0 9.05493C0 13.5474 3.291 17.2704 7.59375 17.9454V11.6567H5.3085V9.05418H7.59375V7.07268C7.59375 4.81743 8.93775 3.57093 10.9935 3.57093C11.9775 3.57093 13.008 3.74718 13.008 3.74718V5.96193H11.8725C10.7542 5.96193 10.4055 6.65568 10.4055 7.36743V9.05493H12.9015L12.5025 11.6574H10.4055V17.9462C14.709 17.2704 18 13.5467 18 9.05493Z"
-				fill="#171411"
-			  />
-			</svg>
-		  </div>
-		  <p className="w-4/6">{t("login_facebook")}</p>
-		</button> */}
+        <a
+          href={`${API_URL}/v2/authentication/social/login?type=facebook`}
+          className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+        >
+          <div className="w-1/5 p-2">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 9.05493C18 4.08468 13.9703 0.0549316 9 0.0549316C4.02975 0.0549316 0 4.08468 0 9.05493C0 13.5474 3.291 17.2704 7.59375 17.9454V11.6567H5.3085V9.05418H7.59375V7.07268C7.59375 4.81743 8.93775 3.57093 10.9935 3.57093C11.9775 3.57093 13.008 3.74718 13.008 3.74718V5.96193H11.8725C10.7542 5.96193 10.4055 6.65568 10.4055 7.36743V9.05493H12.9015L12.5025 11.6574H10.4055V17.9462C14.709 17.2704 18 13.5467 18 9.05493Z"
+                fill="#171411"
+              />
+            </svg>
+          </div>
+          <p className="w-4/6">{t("login_facebook")}</p>
+        </a>
         <Link href="/auth/login/email">
           <a className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-4 text-lg font-semibold text-sp-white">
             <div className="w-1/5 p-2">
