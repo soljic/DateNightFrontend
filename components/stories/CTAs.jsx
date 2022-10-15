@@ -66,11 +66,11 @@ export function SearchSpiritusCTA() {
 export function SearchPlacesCTA() {
   const { t } = useTranslation("common");
   const places = [
-    { name: "Karlovac", count: 1200 },
-    { name: "Split", count: 900 },
-    { name: "Varaždin", count: 123 },
-    { name: "Požega", count: 15 },
-    { name: "Koprivnica", count: 223 },
+    { name: "Zagreb", url: "/spiritus/place/74389?location=Zagreb" },
+    { name: "Split", url: "/spiritus/place/74371?location=Split" },
+    { name: "Varaždin", url: "/spiritus/place/74392?location=Varaždin" },
+    { name: "Rijeka", url: "/spiritus/place/74382?location=Rijeka" },
+    { name: "Dubrovnik", url: "/spiritus/place/74387?location=Dubrovnik" },
   ];
 
   return (
@@ -84,7 +84,7 @@ export function SearchPlacesCTA() {
         </h2>
         <div className="flex flex-wrap w-3/4 lg:w-3/5 justify-center gap-2 items-center mx-auto pt-3 pb-4">
           {places.map((p) => {
-            return <PlacePill name={p.name} key={p.name} />;
+            return <PlacePill name={p.name} key={p.name} url={p.url} />;
           })}
         </div>
         <CTASearchPlacesButton />
@@ -93,22 +93,16 @@ export function SearchPlacesCTA() {
   );
 }
 
-export function PlacePill({ name }) {
+export function PlacePill({ name, url }) {
   return (
-    <a
-      href="/"
-      className="bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown focus:outline-none inline-flex items-center font-semibold text-sm rounded-sp-40 py-2 px-3"
-    >
-      <div className="inline-flex items-center ml-2">
-        {name}
-        {/* <div className="flex flex-1 items-center text-sp-lighter">
-
-<UserIcon width={3} height={3}/>
-<span className="pl-0.5">{count>1000 ? `${count / 1000}k` : count}</span>
-</div> */}
-        <ChevronRightIcon className="w-4 h-4 text-sp-fawn" />
-      </div>
-    </a>
+    <Link href={url}>
+      <a className="bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown focus:outline-none inline-flex items-center font-semibold text-sm rounded-sp-40 py-2 px-3">
+        <div className="inline-flex items-center ml-2">
+          {name}
+          <ChevronRightIcon className="w-4 h-4 text-sp-fawn" />
+        </div>
+      </a>
+    </Link>
   );
 }
 

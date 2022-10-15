@@ -46,10 +46,10 @@ export function PlacesGrid({ id, title, isLastPage, initialItems }) {
         </h1>
 
         <p className="text-sp-lighter dark:text-sp-lighter mt-2">
-          Spiritus at or near this location
+          {t('places_subtitle')}
         </p>
 
-        <div className="inline-flex mt-6 items-center gap-3">
+        {/* <div className="inline-flex mt-6 items-center gap-3">
           <Link href="/">
             <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 font-semibold">
               <ArrowLeftIcon className="w-4 h-4" /> {t("stories")}
@@ -62,7 +62,7 @@ export function PlacesGrid({ id, title, isLastPage, initialItems }) {
             <StarIcon className="w-4 h-4 text-sp-black dark:text-sp-white" />{" "}
             {t("action_favourite")}
           </button>
-        </div>
+        </div> */}
       </div>
 
       <div className="grid grid-cols-1 gap-y-14 gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:gap-x-10 mb-14">
