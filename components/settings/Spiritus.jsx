@@ -77,7 +77,7 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
         closeModal={closeModal}
       />
 
-      <div className="flex flex-col sm:flex-row justify-between items-center">
+      <div className="flex flex-col xs:flex-row justify-between items-center gap-y-2 pb-2">
         <h1 className="text-2xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
           {t("settings:spiritus")}
         </h1>
@@ -418,10 +418,10 @@ export function CreateButton() {
   return (
     <a
       href="/create/spiritus"
-      className="inline-flex items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-2 px-3 text-sp-white dark:text-sp-black"
+      className="inline-flex w-full xs:w-32  justify-center items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-2 px-3 text-sp-white dark:text-sp-black"
     >
       <PlusCircleIcon className="h-5 w-5" />
-      <span className="font-semibold ml-1">{t("create_spiritus")}</span>
+      <span className="font-semibold ml-1">{t("create")}</span>
     </a>
   );
 }
