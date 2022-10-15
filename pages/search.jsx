@@ -53,9 +53,8 @@ export default function Search({ defaultFilter }) {
         res = await FulltextSpiritusSearch(searchTerm);
       } else {
         res = await GlobalSearch(searchFilter, searchTerm);
-        console.log("#", res.data?.content)
       }
-      console.log("### DONE SEARCH ###")
+
       setSearching(false);
       if (!res.data.content.length) {
         setNotFound(true);
