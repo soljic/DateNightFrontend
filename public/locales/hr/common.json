@@ -159,6 +159,8 @@
   "redirect_proceed_message": "Kliknite ovdje ukoliko se stranica nije učitala",
   "redirect_button": "Nastavi",
 
-  "places_subtitle": "Spiritusi u okolici tražene lokacije"
+  "places_subtitle": "Spiritusi u okolici tražene lokacije",
+
+  "no_stories": "Nema priča za prikazati."
 
 }

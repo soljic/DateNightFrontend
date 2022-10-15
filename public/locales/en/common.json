@@ -159,5 +159,8 @@
   "redirect_proceed_message": "Click here if you are not immediately redicted",
   "redirect_button": "Proceed",
 
-  "places_subtitle": "Spiritus at or near this location"
+  "places_subtitle": "Spiritus at or near this location",
+
+  "no_stories": "No stories to show."
+
 }

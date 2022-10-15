@@ -176,7 +176,7 @@ export default function StoryPage({
         <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
           <SpiritusOverview {...spiritus} />
           <SpiritusCarousel images={spiritus.images} />
-          <div className="text-sp-white mt-4">
+          <div className="w-full text-sp-white mt-4">
             <MoreStories
               stories={stories}
               spiritus={spiritus}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -312,7 +312,12 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(stories);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setFilteredItems(filterItems(items));
+  }, [items]);
 
   const loadMore = async () => {
     setIsLoading(true);
@@ -330,10 +335,22 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
     }
   };
 
+  function filterItems(unfiltered) {
+    return unfiltered
+      .filter((s) => {
+        if (userIsOwner) {
+          return true;
+        } else {
+          return s.flags.includes("PUBLIC");
+        }
+      })
+      .map((s) => <StoryHook {...s} key={s.title} />);
+  }
+
   return (
     <section key={"stories-showcase"}>
       <div className="w-full my-10 text-sp-black dark:text-sp-white">
-        <div className="flex w-full justify-between mb-5 items-center">
+        <div className="flex w-full justify-between mb-2 items-center">
           <h1 className="font-semibold text-2xl">{t("stories")}</h1>
           {userIsOwner && (
             <Link href={`/create/story?spiritus=${spiritus.id}`}>
@@ -346,18 +363,15 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
             </Link>
           )}
         </div>
-        <div className="grid grid-cols-1 xs:grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4">
-          {!!items?.length &&
-            items
-              .filter((s) => {
-                if (userIsOwner) {
-                  return true;
-                } else {
-                  return s.flags.includes("PUBLIC");
-                }
-              })
-              .map((s) => <StoryHook {...s} key={s.title} />)}
-        </div>
+        {filteredItems && filteredItems.length ? (
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4 mt-3">
+            {filteredItems}
+          </div>
+        ) : (
+          <p className="text-sp-lighter dark:text-sp-lighter">
+            {t("no_stories")}
+          </p>
+        )}
         {!isLast && (
           <div className="flex justify-center items-center mt-8">
             <button

@@ -29,10 +29,10 @@ export function FeaturedStory({ title, subtitle, imageUrl }) {
 
         <div className="absolute bottom-5 left-5 w-full p-4 text-white z-20">
           <h2 className="uppercase font-semibold tracking-sp-tighten antialiased">
-            {subtitle}
+            {title}
           </h2>
           <h3 className="text-4xl xl:text-4xl md:text-2xl sm:text-xl tracking-tight font-semibold mb-2 antialiased">
-            {title}
+            {subtitle}
           </h3>
           <Link href={`/featured-story`}>
             <a className="inline-flex bg-sp-white text-sp-black rounded-sp-40 px-4 py-2 items-center antialiased">
