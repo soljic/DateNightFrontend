@@ -125,7 +125,6 @@ export async function getStaticProps(context) {
   //   categories: {},
   //   anniversaries: {},
   // };
-  console.log(sections)
 
   return {
     props: {
