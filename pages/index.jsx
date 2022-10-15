@@ -11,7 +11,7 @@ import {
   SearchPlacesCTA,
   SearchSpiritusCTA,
 } from "../components/stories/CTAs";
-import { StoryOfTheWeek } from "../components/stories/StoryOfTheWeek";
+import { FeaturedStory } from "../components/stories/FeaturedStory";
 import {
   CategoriesSwiper,
   HomepageSwiper,
@@ -22,7 +22,7 @@ import { LoginModal } from "../components/auth/Login";
 import { GetParsedHomepage } from "../service/http/homepage";
 
 export default function Home({
-  storyOfTheWeek,
+  featuredStory,
   featured,
   discover,
   categories,
@@ -74,9 +74,10 @@ export default function Home({
         <CTADownloadLinks />
         {/* <CTAPartners /> */}
       </div>
-      <StoryOfTheWeek
-        title={storyOfTheWeek.subtitle}
-        imageUrl={storyOfTheWeek.imageUrl}
+      <FeaturedStory
+        title={featuredStory.title}
+        subtitle={featuredStory.subtitle}
+        imageUrl={featuredStory.imageUrl}
       />
       <HomepageSwiper
         sectionId={discover.id}
@@ -118,12 +119,13 @@ export default function Home({
 export async function getStaticProps(context) {
   const sections = await GetParsedHomepage();
   // const sections = {
-  //   storyOfTheWeek: {},
+  //   featuredStory: {},
   //   featured: {},
   //   discover: {},
   //   categories: {},
   //   anniversaries: {},
   // };
+  console.log(sections)
 
   return {
     props: {
@@ -132,7 +134,8 @@ export async function getStaticProps(context) {
         "settings",
         "auth",
       ])),
-      storyOfTheWeek: sections.storyOfTheWeek,
+      key: `${context.locale}-stories-index-page`,
+      featuredStory: sections.featuredStory,
       featured: sections.featured,
       discover: sections.discover,
       categories: sections.categories,

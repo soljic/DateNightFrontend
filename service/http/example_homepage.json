@@ -1,0 +1,935 @@
+{
+	"homeListItems": [
+		{
+			"id": 1,
+			"viewType": "FEATURED",
+			"title": null,
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"FEATURED_SECTION"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 1,
+						"title": "Priča dana",
+						"subtitle": "Nikola Tesla",
+						"placeholderText": "Frogs business of a young inventor",
+						"actionButtonText": "Pročitajte",
+						"negativeActionButtonText": null,
+						"parentId": "66046",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "193",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89561/spiritus",
+						"flags": []
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 1,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 1,
+				"totalPages": 1,
+				"last": true,
+				"size": 1,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 1,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 4,
+			"viewType": "LARGE",
+			"title": "Godišnjice",
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"SHOW_ALL",
+				"ANNIVERSARIES_SECTION"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 89011,
+						"title": "Katica Čebulc",
+						"subtitle": "16 May 1937 — 16 Oct 2017",
+						"placeholderText": "Najbolja nona na svijetu, ujedno i jako draga i dobra",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "katica-cebulc-d03b7fe9",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89013/spiritus",
+						"flags": []
+					},
+					{
+						"id": 66037,
+						"title": "Toše Proeski",
+						"subtitle": "25 Jan 1981 — 16 Oct 2007",
+						"placeholderText": "Ne želim da mi skidate kapu, samo želim da se ponosite mnome.",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "tose-proeski-4538109d",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89106/spiritus",
+						"flags": []
+					},
+					{
+						"id": 74437,
+						"title": "Jakov Gotovac",
+						"subtitle": "11 Oct 1895 — 16 Oct 1982",
+						"placeholderText": "Slavni skladatelj besmrtne opere \"Ero s onoga svijeta\".",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "jakov-gotovac-f7894edb",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89226/spiritus",
+						"flags": []
+					},
+					{
+						"id": 74436,
+						"title": "Bruno Bušić",
+						"subtitle": "06 Oct 1939 — 16 Oct 1978",
+						"placeholderText": "– Nema ni jedne države da je nastala bez krvavih gaća. – ",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "bruno-busic-355236fc",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89217/spiritus",
+						"flags": []
+					},
+					{
+						"id": 74432,
+						"title": "Blago Zadro",
+						"subtitle": "31 Mar 1944 — 16 Oct 1991",
+						"placeholderText": "– Sine, pancirku ne nose moji vojnici pa neću ni ja! – ",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "blago-zadro-1664c0fe",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89213/spiritus",
+						"flags": []
+					},
+					{
+						"id": 9789,
+						"title": "Toše Proeski",
+						"subtitle": "25 Jan 1981 — 16 Oct 2007",
+						"placeholderText": "Makedonski slavuj koji je prerano otišao",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "tose-proeski-f76b3186",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/9791/spiritus",
+						"flags": []
+					},
+					{
+						"id": 17552,
+						"title": "IVAN VINAJ",
+						"subtitle": "24 Dec 1933 — 17 Oct 2002",
+						"placeholderText": "Posvećeno mom dragom tati koji je otišao prerano a bio je ne samo dobar otac nego i dobar prosvjetni radnik..dobar čovjek..",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "ivan-vinaj-52af7c43",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/17554/spiritus",
+						"flags": []
+					},
+					{
+						"id": 58437,
+						"title": "Domenico Pergolis",
+						"subtitle": "29 Oct 1829 — 18 Oct 1901",
+						"placeholderText": "No one has ever become poor by giving.",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "domenico-pergolis-c7be57b9",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89035/spiritus",
+						"flags": []
+					},
+					{
+						"id": 13219,
+						"title": "Štefanija Rosenberg",
+						"subtitle": "13 Jan 1925 — 18 Oct 2020",
+						"placeholderText": "Dama Bjelovara… Dama Zagreba… Kraljica Baka",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "stefanija-rosenberg-77ce7cd3",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/13221/spiritus",
+						"flags": []
+					},
+					{
+						"id": 8,
+						"title": "Ivan Blažević",
+						"subtitle": "11 May 1959 — 19 Oct 2017",
+						"placeholderText": "You were allowed only to laugh in his presence",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "ivan-blazevic-466c2e4d",
+						"itemNavigationType": "SPIRITUS_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/20/spiritus",
+						"flags": []
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 10,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 84,
+				"totalPages": 9,
+				"last": false,
+				"size": 10,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 10,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 12,
+			"viewType": "BANNER",
+			"title": null,
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"BANNERS_SECTION"
+			],
+			"listPayload": null,
+			"version": null,
+			"items": {
+				"content": [
+					{
+						"id": 8,
+						"title": "Obljetnica je blizu!",
+						"subtitle": "Pavao, 1926 — 20 Feb 1968",
+						"placeholderText": null,
+						"actionButtonText": "Uključite obavijesti",
+						"negativeActionButtonText": null,
+						"parentId": "null",
+						"parentNavigationType": null,
+						"itemId": "null",
+						"itemNavigationType": "ENABLE_NOTIFICATIONS",
+						"itemPayload": null,
+						"imageUrl": "/images/10699/spiritus",
+						"flags": []
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 1,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 1,
+				"totalPages": 1,
+				"last": true,
+				"size": 1,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 1,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 2,
+			"viewType": "LARGE",
+			"title": "Istraži priče",
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"DISCOVERY_SECTION",
+				"SHOW_ALL"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 74486,
+						"title": "O talentu",
+						"subtitle": "Aleksandar  Bogdanović",
+						"placeholderText": "O prerano izgubljenom glumačkom i teniskom talentu...",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "aleksandar--bogdanovic-ac216a02",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "o-talentu-07a1645f",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89414/spiritus",
+						"flags": []
+					},
+					{
+						"id": 11494,
+						"title": "Život nema reprizu",
+						"subtitle": "Ivan Frkić",
+						"placeholderText": "Tata",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "ivan-frkic-682069f4",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "zivot-nema-reprizu-4f099d6f",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/11717/spiritus",
+						"flags": []
+					},
+					{
+						"id": 9891,
+						"title": "Predložite priču",
+						"subtitle": "Oliver Dragojević",
+						"placeholderText": "Imate li uspomenu o Oliveru Dragojeviću koju biste htjeli podijeliti?",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "oliver-dragojevic-00bb2584",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "predlozite-pricu-6fef9011",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/9893/spiritus",
+						"flags": []
+					},
+					{
+						"id": 10539,
+						"title": "Predložite priču",
+						"subtitle": "Dražen Petrović",
+						"placeholderText": "Imate li uspomenu o Draženu Petroviću koju biste htjeli podijeliti?",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "drazen-petrovic-fd919a66",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "predlozite-pricu-871edf4c",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/10541/spiritus",
+						"flags": []
+					},
+					{
+						"id": 11926,
+						"title": "Stanje u molitveniku...",
+						"subtitle": "Danica Rako",
+						"placeholderText": "\"Stanje u molitveniku\"",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "danica-rako-63b23aba",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "stanje-u-molitveniku-73f2e6ff",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/11928/spiritus",
+						"flags": []
+					},
+					{
+						"id": 16991,
+						"title": "najbolji cimer - nana rajka",
+						"subtitle": "Rajka  Šešelja",
+						"placeholderText": "...",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "rajka--seselja-bd2eded5",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "najbolji-cimer-nana-rajka-f78653fb",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/17115/spiritus",
+						"flags": []
+					},
+					{
+						"id": 66046,
+						"title": "The Effects of Trauma",
+						"subtitle": "Nikola Tesla",
+						"placeholderText": "– The recollection of his attainments made every effort of mine seem dull in comparison. –",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "nikola-tesla-e8c4fc00",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "the-effects-of-trauma-7f96cdf4",
+						"itemNavigationType": "STORY_DETAILS",
+							"itemPayload": null,
+							"imageUrl": "/images/89561/spiritus",
+							"flags": []
+						},
+						{
+							"id": 74472,
+						"title": "Sijeda glava s malih ekrana",
+						"subtitle": "Milan Sijerković",
+						"placeholderText": "– Sijeda glava znak je krajnjih dana, kao snijeg da je došla zima. –",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "milan-sijerkovic-15c7a328",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "sijeda-glava-s-malih-ekrana-280d2606",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89366/spiritus",
+						"flags": []
+					},
+					{
+						"id": 89043,
+						"title": "Legendaran gol",
+						"subtitle": "Ivan Hitrec",
+						"placeholderText": "O najvećem uspjehu osnivača Dinama i urbanoj legendi hrvatskog nogometa.",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "ivan-hitrec-88ee9923",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "legendaran-gol-30252c6a",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89435/spiritus",
+						"flags": []
+					},
+					{
+						"id": 9851,
+						"title": "Predložite priču",
+						"subtitle": "Ivica Račan",
+						"placeholderText": "Imate li uspomenu o Ivici Račanu koju biste htjeli podijeliti?",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "ivica-racan-a87936fb",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "predlozite-pricu-1ea26692",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/9853/spiritus",
+						"flags": []
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 10,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 227,
+				"totalPages": 23,
+				"last": false,
+				"size": 10,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 10,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 3,
+			"viewType": "MEDIUM",
+			"title": "Teme",
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"CATEGOIRES_SECTION"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 33,
+						"title": "Biografija",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "33",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/574/tag",
+						"flags": null
+					},
+					{
+						"id": 8,
+						"title": "Znameniti",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "8",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/565/tag",
+						"flags": null
+					},
+					{
+						"id": 31,
+						"title": "Ljubav",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "31",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/566/tag",
+						"flags": null
+					},
+					{
+						"id": 39,
+						"title": "Anegdote",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "39",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/564/tag",
+						"flags": null
+					},
+					{
+						"id": 34,
+						"title": "Obitelj",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "34",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/567/tag",
+						"flags": null
+					},
+					{
+						"id": 40,
+						"title": "Motivacija",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "40",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/568/tag",
+						"flags": null
+					},
+					{
+						"id": 41,
+						"title": "Sport",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "41",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/569/tag",
+						"flags": null
+					},
+					{
+						"id": 42,
+						"title": "Umjetnost",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "42",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/570/tag",
+						"flags": null
+					},
+					{
+						"id": 32,
+						"title": "Rat",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "32",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/571/tag",
+						"flags": null
+					},
+					{
+						"id": 36,
+						"title": "Hobi",
+						"subtitle": null,
+						"placeholderText": null,
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": null,
+						"parentNavigationType": null,
+						"itemId": "36",
+						"itemNavigationType": "STORIES_LIST_CATEGORY",
+						"itemPayload": null,
+						"imageUrl": "/images/573/tag",
+						"flags": null
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 10,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 11,
+				"totalPages": 2,
+				"last": false,
+				"size": 10,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 10,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 10,
+			"viewType": "BANNER",
+			"title": null,
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"BANNERS_SECTION"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 6,
+						"title": "Prijavite se ili izradite račun!",
+						"subtitle": "Sačuvaj uspomene o voljenima.",
+						"placeholderText": null,
+						"actionButtonText": "Izradi račun",
+						"negativeActionButtonText": "Login",
+						"parentId": "null",
+						"parentNavigationType": null,
+						"itemId": "null",
+						"itemNavigationType": "REGISTER_ACCOUNT",
+						"itemPayload": null,
+						"imageUrl": null,
+						"flags": []
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 1,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 1,
+				"totalPages": 1,
+				"last": true,
+				"size": 1,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 1,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 6,
+			"viewType": "LARGE",
+			"title": "Istaknute priče",
+			"state": null,
+			"subtitle": "Istraži najljepše i najzanimljivije priče.",
+			"flags": [
+				"SHOW_ALL",
+				"FEATURED_STORIES"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 99,
+						"title": "The Book Thief",
+						"subtitle": "Mirko Kovač",
+						"placeholderText": "Why did the famous writer steal books as a kid?",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "mirko-kovac-573f08b0",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "the-book-thief-3aa70fab",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89038/spiritus",
+						"flags": [
+							"PUBLIC",
+							"FEATURED"
+						]
+					},
+					{
+						"id": 121,
+						"title": "A Small Town Boy's Ambition",
+						"subtitle": "Dino Škrapić",
+						"placeholderText": "Dino's incredible ambition to this day inspires Rovinj's youth.",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "dino-skrapic-f1edf128",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "a-small-town-boy-s-ambition-9e8275eb",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89033/spiritus",
+						"flags": [
+							"FEATURED",
+							"PRIVATE"
+						]
+					},
+					{
+						"id": 169,
+						"title": "Beren and Lúthien",
+						"subtitle": "John Ronald Reuel Tolkien",
+						"placeholderText": "– May you each be a light for one another when all other lights go out. –",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "john-ronald reuel-tolkien-8c6af4aa",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "beren-and-luthien-2800fedf",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89092/spiritus",
+						"flags": [
+							"FEATURED",
+							"PRIVATE"
+						]
+					},
+					{
+						"id": 202,
+						"title": "Meeting „Mrs. President\"",
+						"subtitle": "Stan Lee",
+						"placeholderText": "Unforgetable encounter between the First Lady and clumsy Stan. ",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "stan-lee-0010755f",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "meeting-mrs-president-5d7696b3",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89072/spiritus",
+						"flags": [
+							"FEATURED",
+							"PRIVATE"
+						]
+					},
+					{
+						"id": 224,
+						"title": "The Enigma",
+						"subtitle": "Alan Turing",
+						"placeholderText": "How did Turing decipher Nazi's secret code?",
+						"actionButtonText": null,
+						"negativeActionButtonText": null,
+						"parentId": "alan-turing-f61f9e37",
+						"parentNavigationType": "SPIRITUS_DETAILS",
+						"itemId": "the-enigma-1651d485",
+						"itemNavigationType": "STORY_DETAILS",
+						"itemPayload": null,
+						"imageUrl": "/images/89054/spiritus",
+						"flags": [
+							"FEATURED",
+							"PRIVATE"
+						]
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 10,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 5,
+				"totalPages": 1,
+				"last": true,
+				"size": 10,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 5,
+				"first": true,
+				"empty": false
+			}
+		},
+		{
+			"id": 11,
+			"viewType": "ENABLE_LOCATION_BANNER",
+			"title": null,
+			"state": null,
+			"subtitle": null,
+			"flags": [
+				"BANNERS_SECTION"
+			],
+			"listPayload": null,
+			"version": "v1",
+			"items": {
+				"content": [
+					{
+						"id": 7,
+						"title": null,
+						"subtitle": "Uključite geolokaciju za prikaz Aleje sjećanja i groblja u Vašoj blizini.",
+						"placeholderText": "Turn on location for Memory Walks and graveyards in your area.",
+						"actionButtonText": "Uključite lokaciju",
+						"negativeActionButtonText": "Ne sada",
+						"parentId": "null",
+						"parentNavigationType": null,
+						"itemId": "null",
+						"itemNavigationType": "ENABLE_LOCATION",
+						"itemPayload": null,
+						"imageUrl": null,
+						"flags": []
+					}
+				],
+				"pageable": {
+					"sort": {
+						"sorted": false,
+						"unsorted": true,
+						"empty": true
+					},
+					"offset": 0,
+					"pageNumber": 0,
+					"pageSize": 1,
+					"paged": true,
+					"unpaged": false
+				},
+				"totalElements": 1,
+				"totalPages": 1,
+				"last": true,
+				"size": 1,
+				"number": 0,
+				"sort": {
+					"sorted": false,
+					"unsorted": true,
+					"empty": true
+				},
+				"numberOfElements": 1,
+				"first": true,
+				"empty": false
+			}
+		}
+	]
+}

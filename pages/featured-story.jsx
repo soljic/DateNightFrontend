@@ -19,7 +19,7 @@ import { GetSpiritusById } from "../service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
 import { GetParsedHomepage } from "../service/http/homepage";
 
-export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
+export default function FeaturedStory({ displayStory, stories, spiritus }) {
   const { t } = useTranslation("common");
 
   const calculateImageLayout = (width, height) => {
@@ -47,7 +47,7 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
       </Head>
       <section
         className="flex flex-col justify-center items-center mt-16 subpixel-antialiased"
-        key={"story-of-the-week"}
+        key={"featured-story"}
       >
         <div className="w-full flex flex-col items-center text-left">
           <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
@@ -127,8 +127,8 @@ export default function StoryOfTheWeek({ displayStory, stories, spiritus }) {
 
 export async function getStaticProps(context) {
   // fetch homepage to get story of the week ID
-  const { storyOfTheWeek } = await GetParsedHomepage();
-  const { data: story } = await GetStoryById(storyOfTheWeek.itemId);
+  const { featuredStory } = await GetParsedHomepage();
+  const { data: story } = await GetStoryById(featuredStory.itemId);
   const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
   const { data: allStories } = await GetSpiritusStoriesBySlug(spiritus.slug);
 

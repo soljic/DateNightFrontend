@@ -12,7 +12,7 @@ export async function GetHomepage() {
 export async function GetParsedHomepage() {
   const res = await GetHomepage();
   const sections = {
-    storyOfTheWeek: {},
+    featuredStory: {},
 
     featured: {},
     discover: {},
@@ -30,62 +30,58 @@ export async function GetParsedHomepage() {
 
   // does in-place replacements on imageUrl string while iterating
   res.data.homeListItems.forEach((section) => {
-    switch (section.title) {
-      case "Discover":
-        sections.discover.id = section.id;
-        sections.discover.title = section.title;
-        sections.discover.itemType = "STORY";
+    if (section.flags.includes("DISCOVERY_SECTION")) {
+      sections.discover.id = section.id;
+      sections.discover.title = section.title;
+      sections.discover.itemType = "STORY";
 
-        sections.discover.items = [];
-        section.items.content.forEach((item, i) => {
-          item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
-          sections.discover.items.push(item);
-        });
-        break;
-      case "Categories":
-        sections.categories.id = section.id;
-        sections.categories.title = section.title;
-        sections.categories.itemType = "STORY";
+      sections.discover.items = [];
+      section.items.content.forEach((item, i) => {
+        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        sections.discover.items.push(item);
+      });
+    } else if (section.flags.includes("CATEGOIRES_SECTION")) {
+      sections.categories.id = section.id;
+      sections.categories.title = section.title;
+      sections.categories.itemType = "STORY";
 
-        sections.categories.items = [];
-        section.items.content.forEach((item) => {
-          item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
-          sections.categories.items.push(item);
-        });
-        break;
-      case "Anniversaries":
-        sections.anniversaries.id = section.id;
-        sections.anniversaries.title = section.title;
-        sections.anniversaries.itemType = "SPIRITUS";
+      sections.categories.items = [];
+      section.items.content.forEach((item) => {
+        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        sections.categories.items.push(item);
+      });
+    } else if (section.flags.includes("ANNIVERSARIES_SECTION")) {
+      sections.anniversaries.id = section.id;
+      sections.anniversaries.title = section.title;
+      sections.anniversaries.itemType = "SPIRITUS";
 
-        sections.anniversaries.items = [];
-        section.items.content.forEach((item) => {
-          item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
-          sections.anniversaries.items.push(item);
-        });
-        break;
-      case "Featured stories":
-        sections.featured.id = section.id;
-        sections.featured.title = section.title;
-        sections.featured.itemType = "STORY";
+      sections.anniversaries.items = [];
+      section.items.content.forEach((item) => {
+        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        sections.anniversaries.items.push(item);
+      });
+    } else if (section.flags.includes("FEATURED_STORIES")) {
+      sections.featured.id = section.id;
+      sections.featured.title = section.title;
+      sections.featured.itemType = "STORY";
 
-        sections.featured.items = [];
-        section.items.content.forEach((item) => {
-          item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
-          sections.featured.items.push(item);
-        });
-        break;
-      default:
-        // this is the featured story
-        if (section.viewType === "FEATURED" && section.items.content.length) {
-          const data = section.items.content[0];
-          data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
-          sections.storyOfTheWeek.id = section.id;
-          sections.storyOfTheWeek = data;
-        }
+      sections.featured.items = [];
+      section.items.content.forEach((item) => {
+        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        sections.featured.items.push(item);
+      });
+    } else if (section.flags.includes("FEATURED_SECTION")) {
+      // this is the featured story
+      if (section.viewType === "FEATURED" && section.items.content.length) {
+        const data = section.items.content[0];
+        data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
+        sections.featuredStory.id = section.id;
+        sections.featuredStory.title = data.title;
+        sections.featuredStory.subtitle = data.subtitle;
+        sections.featuredStory = data;
+      }
     }
   });
 
   return sections;
 }
-
