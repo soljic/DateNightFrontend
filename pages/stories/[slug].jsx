@@ -41,6 +41,75 @@ function EditBtn({ storyId }) {
   );
 }
 
+function SetStoryOG(spiritus, story) {
+  let tags = [
+    <meta property="og:site_name" content="Spiritus" key="site-name" />,
+    <meta
+      property="og:title"
+      content={
+        `${spiritus.name} ${spiritus.surname} — ${story.title}` ||
+        "Spiritus Stories"
+      }
+      key="title"
+    />,
+    <meta
+      property="og:url"
+      content={`https://spiritus.app/en/stories/${story.slug}`}
+      key="url"
+    />,
+    <meta
+      property="og:description"
+      content={
+        story.description.length
+          ? story.description
+          : "Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries."
+      }
+      key="desc"
+    />,
+  ];
+  if (story.images.length) {
+    const useImage = story.images[0];
+    tags = tags.concat([
+      <meta
+        property="og:image"
+        itemProp="image"
+        content={useImage.url}
+        key="image"
+      />,
+      <meta
+        property="og:image:secure_url"
+        itemProp="image"
+        content={useImage.url}
+        key="secure-image"
+      />,
+      <meta property="og:image:width" content={useImage.width} key="image-w" />,
+      <meta
+        property="og:image:height"
+        content={useImage.height}
+        key="image-h"
+      />,
+    ]);
+  } else {
+    tags = tags.concat([
+      <meta
+        property="og:image"
+        itemProp="image"
+        content="https://spiritus.app/images/share/banner.jpg"
+        key="image"
+      />,
+      <meta
+        property="og:image:secure_url"
+        itemProp="image"
+        content="https://spiritus.app/images/share/banner.jpg"
+        key="secure-image"
+      />,
+      <meta property="og:image:width" content="1200" key="image-w" />,
+      <meta property="og:image:height" content="630" key="image-h" />,
+    ]);
+  }
+  return tags;
+}
+
 export default function StoryPage({
   displayStory,
   stories,
@@ -94,6 +163,7 @@ export default function StoryPage({
             }.`
           }
         />
+        {SetStoryOG(spiritus, displayStory)}
       </Head>
       {status === "authenticated" && sessionUserIsOwner() ? (
         <EditBtn storyId={displayStory.id} />
