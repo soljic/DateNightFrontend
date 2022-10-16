@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
@@ -8,6 +9,7 @@ import { useTranslation } from "next-i18next";
 import { ShieldIcon } from "../Icons";
 
 import { API_URL } from "../../service/constants";
+import Auth0Logo from "../../public/images/logo/auth0.svg";
 
 export function LoginModal({ isOpen, closeModal }) {
   const { t } = useTranslation("auth");
@@ -28,7 +30,7 @@ export function LoginModal({ isOpen, closeModal }) {
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto z-40">
-          <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
+          <div className="flex items-center justify-center min-w-full min-h-full p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-1000"
@@ -40,7 +42,7 @@ export function LoginModal({ isOpen, closeModal }) {
             >
               <Dialog.Panel
                 onClick={closeModal}
-                className="w-full px-5 md:w-1/2 md:px-0 lg:w-1/3 xl:w-1/5 h-2/3 md:h-1/2 absolute overflow-hidden content-center transition-all transform"
+                className="w-full px-5 md:w-1/2 md:px-0 lg:w-1/3 xl:w-1/5 content-center transition-all transform"
               >
                 <LoginForm />
               </Dialog.Panel>
@@ -59,14 +61,14 @@ function LoginForm() {
     <section className="flex flex-col justify-center items-center text-sp-white border border-sp-lighter rounded-sp-14 p-8 bg-sp-black">
       <div className="flex flex-col justify-center items-center gap-8">
         <ShieldIcon width={12} height={12} />
-        <h4 className="text-3xl text-center font-bold mb-10">
+        <h4 className="text-2xl text-center font-bold mb-6">
           {t("login_title")}
         </h4>
       </div>
       <div className="flex flex-col w-full justify-center items-center text-center gap-3">
         <a
           href={`${API_URL}/v2/authentication/social/login`}
-          className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+          className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-2.5 text-lg font-semibold text-sp-black"
         >
           <div className="w-1/5 p-2">
             <svg
@@ -88,7 +90,7 @@ function LoginForm() {
         </a>
         <a
           href={`${API_URL}/v2/authentication/social/login?type=facebook`}
-          className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+          className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-2.5 text-lg font-semibold text-sp-black"
         >
           <div className="w-1/5 p-2">
             <svg
@@ -107,7 +109,7 @@ function LoginForm() {
           <p className="w-4/6">{t("login_facebook")}</p>
         </a>
         <Link href="/auth/login/email">
-          <a className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-4 text-lg font-semibold text-sp-white">
+          <a className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-2.5 text-lg font-semibold text-sp-white">
             <div className="w-1/5 p-2">
               <svg
                 width="16"
@@ -126,10 +128,13 @@ function LoginForm() {
           </a>
         </Link>
       </div>
-      <div className="flex flex-col justify-center items-center mt-24 text-lg gap-3">
+      <div className="flex justify-center items-center w-44 mt-4 overflow-hidden">
+        <Image src={Auth0Logo} alt="Supported by Auth0" />
+      </div>
+      <div className="flex flex-col justify-center items-center mt-16 gap-1">
         <p>{t("register_cta")}</p>
         <Link href="/auth/register">
-          <a className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 text-lg font-semibold text-sp-white">
+          <a className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 font-semibold text-sp-white">
             {t("become_guardian_cta")}
           </a>
         </Link>

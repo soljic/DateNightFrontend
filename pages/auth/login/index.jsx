@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
+
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
@@ -9,6 +11,7 @@ import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 
 import { API_URL } from "../../../service/constants";
+import Auth0Logo from "../../../public/images/logo/auth0.svg";
 
 export default function LoginComponent() {
   const { t } = useTranslation("auth");
@@ -90,6 +93,9 @@ export default function LoginComponent() {
               <p className="w-4/6">{t("login_email")}</p>
             </a>
           </Link>
+        </div>
+        <div className="flex justify-center items-center w-44  mt-4 overflow-hidden">
+          <Image src={Auth0Logo} alt="Supported by Auth0" />
         </div>
         <div className="flex flex-col justify-center items-center mt-24 text-lg gap-3">
           <p>{t("register_cta")}</p>
