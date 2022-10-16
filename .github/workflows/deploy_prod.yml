@@ -19,7 +19,7 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.PROD_KEY }}
-          envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET
+          envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET,NEXT_PUBLIC_GTAG_ID
           script: |
             [ -d webapp ] && echo "Repo already cloned -- skipping" || git clone git@github.com:Spiritus-Memoria-Organization/webapp.git
             cd webapp
@@ -45,7 +45,7 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: ${{ secrets.PROD_USERNAME }}
           key: ${{ secrets.PROD_KEY }}
-          envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET
+          envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET,NEXT_PUBLIC_GTAG_ID
           script: |
             cd webapp
             echo "## Building and starting containers"
