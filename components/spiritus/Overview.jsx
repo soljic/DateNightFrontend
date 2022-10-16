@@ -19,6 +19,13 @@ export function SpiritusOverview({
   location,
 }) {
   const router = useRouter();
+  // MK changed their country name recently....
+  const madeconia = [
+    "Macedonia",
+    "Makedonija",
+    "Sjeverna Makedonija",
+    "North Madeconia",
+  ];
 
   let countryFlag = "";
   if (location && location?.country) {
@@ -28,6 +35,9 @@ export function SpiritusOverview({
       code = countries.getAlpha2Code(location.country, "hr");
     }
     countryFlag = code ? countryCodeEmoji(code) : "";
+    if (!countryFlag && madeconia.includes(location.country)) {
+      countryFlag = "🇲🇰";
+    }
   }
 
   const dates = `${
