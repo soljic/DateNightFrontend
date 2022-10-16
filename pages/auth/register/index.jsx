@@ -26,11 +26,29 @@ export default function LoginComponent() {
       <section className="flex flex-col justify-center items-center text-sp-white">
         <div className="flex flex-col justify-center items-center gap-8">
           <ShieldIcon width={12} height={12} />
-          <h4 className="text-3xl text-center font-bold mb-10">
+          <h1 className="text-3xl text-center font-bold mb-10">
             {t("register_title")}
-          </h4>
+          </h1>
         </div>
         <div className="flex flex-col w-full justify-center items-center text-center gap-3">
+          <p className="text-center text-xs">
+            {t("register_disclaimer_1")}{" "}
+            <Link
+              href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
+              key="terms"
+            >
+              <a className="underline underline-offset-4">
+                {t("register_disclaimer_terms")}
+              </a>
+            </Link>
+            <span> {t("register_disclaimer_2")} </span>
+            <Link href="/privacy-policy" key="priv">
+              <a className="underline underline-offset-4">
+                {t("register_disclaimer_privacy")}
+              </a>
+            </Link>
+            .
+          </p>
           <a
             href={`${API_URL}/v2/authentication/social/login`}
             className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
