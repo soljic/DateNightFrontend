@@ -312,19 +312,21 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(stories);
-  const [filteredItems, setFilteredItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    setFilteredItems(filterItems(items));
-  }, [items]);
 
   const loadMore = async () => {
     setIsLoading(true);
 
     try {
       const res = await GetSpiritusStoriesBySlug(spiritus.slug, current + 1);
-      setItems((prev) => [...prev, ...res.data.content]);
+      const newItems = res.data.content.filter((s) => {
+        if (userIsOwner) {
+          return true;
+        } else {
+          return s.flags.includes("PUBLIC");
+        }
+      });
+      setItems((prev) => [...prev, ...newItems]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.last);
       setIsLoading(false);
@@ -334,18 +336,6 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
       console.log(err);
     }
   };
-
-  function filterItems(unfiltered) {
-    return unfiltered
-      .filter((s) => {
-        if (userIsOwner) {
-          return true;
-        } else {
-          return s.flags.includes("PUBLIC");
-        }
-      })
-      .map((s) => <StoryHook {...s} key={s.title} />);
-  }
 
   return (
     <section key={"stories-showcase"}>
@@ -363,9 +353,11 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
             </Link>
           )}
         </div>
-        {filteredItems && filteredItems.length ? (
+        {items && items.length ? (
           <div className="grid grid-cols-1 xs:grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4 mt-3">
-            {filteredItems}
+            {items.map((s) => (
+              <StoryHook {...s} key={s.title} />
+            ))}
           </div>
         ) : (
           <p className="text-sp-lighter dark:text-sp-lighter">

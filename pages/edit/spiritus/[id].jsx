@@ -335,15 +335,15 @@ export async function getServerSideProps(context) {
           },
         };
       }
-
-      // user does not have access - redirect to previous page
-      return {
-        redirect: {
-          destination: context.req.headers.referer || "/",
-          permanent: false,
-        },
-      };
     }
+
+    // user does not have access - redirect to previous page
+    return {
+      redirect: {
+        destination: context.req.headers.referer || "/",
+        permanent: false,
+      },
+    };
   } catch (err) {
     console.log("error fetching spiritus\n", err);
     // redirect to home in case of err

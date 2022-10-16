@@ -209,21 +209,37 @@ export default function StoryPage({
   );
 }
 
+// TODO: remove when there's isGuardian flag is added to spiritus
+function filterStories(items, isOwner) {
+  if (isOwner) {
+    return items;
+  }
+
+  return items.filter((s) => s.flags.includes("PUBLIC"));
+}
+
 // fetch first 5 spiritus stories, remove the story alredy being shown
 // if user is logged in, fetch story using accessToken so flags are fetched
 export async function getServerSideProps(context) {
   const { slug } = context.query;
+  // there some funny logic to figure out if user is spiritus owner
+  let userCode = "";
   const session = await getSession(context);
 
   try {
     let resStory;
     if (session && session?.user?.accessToken) {
+      userCode = session.user.code;
       resStory = await GetStoryBySlug(slug, session.user.accessToken);
     } else {
       resStory = await GetStoryBySlug(slug);
     }
     const resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
     const resAllStories = await GetSpiritusStoriesBySlug(resSpiritus.data.slug);
+
+    const isOwner = resSpiritus?.data?.users
+      .map((u) => u.code)
+      .includes(userCode);
 
     let content = resAllStories.data?.content
       ? resAllStories.data?.content
@@ -256,7 +272,7 @@ export async function getServerSideProps(context) {
         ])),
         key: `${context.locale}-${slug}`,
         displayStory: resStory.data,
-        stories: content,
+        stories: filterStories(content, isOwner),
         spiritus: resSpiritus.data,
         isLastPage: resAllStories.data.last,
       },

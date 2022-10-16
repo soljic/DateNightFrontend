@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Head from "next/head";
 
+import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -125,14 +126,36 @@ export default function FeaturedStory({ displayStory, stories, spiritus }) {
   );
 }
 
+// TODO: remove when there's isGuardian flag is added to spiritus
+function filterStories(items, isOwner) {
+  if (isOwner) {
+    return items;
+  }
+
+  return items.filter((s) => s.flags.includes("PUBLIC"));
+}
+
 export async function getStaticProps(context) {
-  // fetch homepage to get story of the week ID
+  // there some funny logic to figure out if user is spiritus owner
+  let userCode = "";
+  let isOwner = false;
+  const session = await getSession(context);
+
+  // fetch homepage to get featured story
   const { featuredStory } = await GetParsedHomepage();
   const { data: story } = await GetStoryById(featuredStory.itemId);
   const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
   const { data: allStories } = await GetSpiritusStoriesBySlug(spiritus.slug);
 
   let content = allStories?.content ? allStories?.content : [];
+  if (session && session?.user?.accessToken) {
+    userCode = session.user.code;
+    isOwner = spiritus?.data?.users
+    .map((u) => u.code)
+    .includes(userCode);
+
+  }
+
   // sort story paragraphs by index
   if (story.paragraphs) {
     story.paragraphs.sort((p1, p2) => {
@@ -160,7 +183,7 @@ export async function getStaticProps(context) {
         "auth",
       ])),
       displayStory: story,
-      stories: content,
+      stories: filterStories(content, isOwner),
       spiritus: spiritus,
       hasMore: !allStories.last,
       total: allStories.numberOfElements,
