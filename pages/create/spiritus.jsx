@@ -220,8 +220,10 @@ export default function CreateSpiritusPage({ user }) {
                         e.preventDefault();
                         createSpiritus();
                       }}
-                      disabled={pending}
-                      className="px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
+                      disabled={pending || !location?.address}
+                      className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
+                        pending || !location?.address ? "opacity-30" : ""
+                      }`}
                     >
                       {pending ? (
                         <Spinner text={t("creating")} />
@@ -302,7 +304,7 @@ function Success({ spiritus, locale }) {
         </Link>
         {/* <CopyToClipboard text={spiritus.shortLink}> */}
         <CopyToClipboard
-          text={`https://spiritus.app/spiritus/${spiritus.slug}`}
+          text={spiritus.shortLink}
         >
           <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 p-4 gap-2">
             <UploadIcon className="w-6 h-6" />

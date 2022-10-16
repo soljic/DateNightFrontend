@@ -153,12 +153,12 @@ export function SpiritusDescription({ name, description, setDescription }) {
 export function SpiritusLocation({ name, location, setLocation }) {
   const { t } = useTranslation("common");
 
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const [session, setSession] = useState();
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
 
-  const [inputLocation, setInputLocation] = useState([]);
+  const [inputLocation, setInputLocation] = useState("");
   const [visible, setVisible] = useState(false);
 
   const getSuggestions = async (term, search, sessionToken) => {
@@ -204,7 +204,12 @@ export function SpiritusLocation({ name, location, setLocation }) {
     }
   };
 
+  // set location if already provided
+  // useEffect(() => {
+  // }, []);
+  
   useEffect(() => {
+    setInputLocation(location?.address ? location.address : "");
     const t = new SessionToken();
     setSession(t);
     const s = new MapboxSearch({
@@ -276,7 +281,7 @@ export function SpiritusLocation({ name, location, setLocation }) {
   );
 }
 
-function Suggestions({ results, setLocation, setInputLocation }) {
+function Suggestions({ results, setLocation }) {
   return (
     <div className="flex flex-col mx-auto border-2 rounded-xl border-sp-lighter dark:border-sp-medium">
       <div className="flex flex-col items-start">
