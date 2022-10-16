@@ -178,6 +178,9 @@ export function StoryTitle({ title, setTitle, tags, setTags }) {
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
         {t("create_story_title_title")}
       </p>
+      <p className="text-sp-lighter text-sm">
+        {t("create_story_title_subtitle")}
+      </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row gap-2">
           <div className="w-full flex-1">
@@ -220,6 +223,9 @@ export function StorySummary({ summary, setSummary }) {
       <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
         {t("create_story_summary_title")}
       </p>
+      <p className="text-sp-lighter text-sm">
+        {t("create_story_summary_subtitle")}
+      </p>
       <div className="mt-4">
         <div className="flex flex-col md:flex-row">
           <div className="w-full flex-1">
@@ -254,6 +260,9 @@ export function StoryTextEditor({ storyText, setStoryText }) {
       <h2 className="text-2xl font-bold text-sp-black dark:text-sp-white">
         {t("create_story_text_title")}
       </h2>
+      <p className="text-sp-lighter text-sm">
+        {t("create_story_text_subtitle")}
+      </p>
       <div className="mt-4">
         <textarea
           value={storyText}

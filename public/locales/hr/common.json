@@ -121,12 +121,16 @@
   "create_story_date_placeholder": "Datum priče",
 
   "create_story_title_title": "Kako želite nazvati ovu priču?",
+  "create_story_title_subtitle": "*Obavezno",
   "create_story_title_placeholder": "Unesi naziv priče",
+  "create_story_tags_placeholder": "Odabir kategorije",
 
   "create_story_summary_title": "Pokušajte sumirati priču u nekoliko rečenica.",
+  "create_story_summary_subtitle": "*Obavezno",
   "create_story_summary_placeholder": "Unesi sažetak",
 
   "create_story_text_title": "Napišite novu priču",
+  "create_story_text_subtitle": "*Obavezno",
   "create_story_text_placeholder": "Unesite tekst priče",
 
   "section_discover_title": "Istraži",

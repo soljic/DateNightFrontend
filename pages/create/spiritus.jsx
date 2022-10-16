@@ -91,7 +91,7 @@ export default function CreateSpiritusPage({ user }) {
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
-      console.log("GREŠKA", err);
+      // console.log("GREŠKA", err);
       setPending(false);
     }
   };

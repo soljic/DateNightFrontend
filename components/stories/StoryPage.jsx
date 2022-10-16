@@ -63,7 +63,7 @@ export function Tribute({ id }) {
     } catch (err) {
       setSent(false);
       setIsOpen(false);
-      console.log(err);
+      // console.log(err);
     }
   };
 

@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 import { XIcon, ChevronDownIcon } from "@heroicons/react/outline";
 
 export function MultiSelectInput({ items, selected, setSelected }) {
+  const { t } = useTranslation("common");
   // state showing if dropdown is open or closed
   const [dropdown, setDropdown] = useState(false);
 
@@ -28,7 +30,7 @@ export function MultiSelectInput({ items, selected, setSelected }) {
             <div className="flex appearance-none outline-none text-sp-black dark:text-sp-white">
               <div className="flex flex-auto flex-wrap gap-1 items-center">
                 {!selected.length ? (
-                  <p className="text-gray-500">Choose categories</p>
+                  <p className="text-gray-500">{t("create_story_tags_placeholder")}</p>
                 ) : (
                   selected.map((tag, index) => {
                     return (

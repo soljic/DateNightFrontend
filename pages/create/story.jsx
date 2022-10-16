@@ -82,7 +82,7 @@ export default function CreateStoryPage({ spiritus }) {
         date: date ? getISOLocalDate(date) : null,
         private: isPrivate,
       };
-      console.log("KREIRAJ", body);
+      // console.log("KREIRAJ", body);
       const blob = new Blob([JSON.stringify(body)], {
         type: "application/json",
       });
@@ -96,9 +96,17 @@ export default function CreateStoryPage({ spiritus }) {
       setStory(res.data);
       setPending(false);
     } catch (err) {
-      console.log("GREŠKA", err);
+      // console.log("GREŠKA", err);
       setPending(false);
     }
+  };
+
+  const isNextDisabled = () => {
+    return !storyText || (step === 3 && !title);
+  };
+
+  const isCreateDisabled = () => {
+    return pending || !storyText || !title || !summary;
   };
 
   // TODO: remove spliting into paras if we change
@@ -150,6 +158,7 @@ export default function CreateStoryPage({ spiritus }) {
               slug={story.slug}
               name={spiritus.name}
               surname={spiritus.surname}
+              shortLink={story.shortLink}
             />
           ) : (
             <>
@@ -165,7 +174,7 @@ export default function CreateStoryPage({ spiritus }) {
             {step > 0 && (
               <button
                 onClick={prevStep}
-                className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white hover:text-sp-black ${
+                className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
                   pending && "hidden"
                 }`}
                 disabled={pending}
@@ -176,9 +185,9 @@ export default function CreateStoryPage({ spiritus }) {
             {step !== numSteps ? (
               <button
                 onClick={nextStep}
-                disabled={!storyText}
+                disabled={isNextDisabled()}
                 className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
-                  storyText || "opacity-30"
+                  isNextDisabled() ? "opacity-30" : ""
                 }`}
               >
                 {t("next")}
@@ -189,8 +198,10 @@ export default function CreateStoryPage({ spiritus }) {
                   e.preventDefault();
                   createStory();
                 }}
-                disabled={pending}
-                className="px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black"
+                disabled={isCreateDisabled()}
+                className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
+                  isCreateDisabled() ? "opacity-30" : ""
+                }`}
               >
                 {pending ? (
                   <Spinner text={t("creating")} />
@@ -224,9 +235,8 @@ function Success({ storyId, slug, name, surname, shortLink }) {
         </p>
       </div>
       <div className="flex mx-auto items-center justify-center gap-4 mt-4">
-        {/* <CopyToClipboard text={shortLink || "#"}> */}
-        <CopyToClipboard text={`https://spiritus.app/story/${slug}`}>
-        <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
+        <CopyToClipboard text={shortLink || `https://spiritus.app/story/${slug}`}>
+          <button className="flex flex-col items-center justify-center h-20 w-36 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown rounded-lg p-4">
             <UploadIcon className="w-6 h-6" />
             <p className="font-semibold text-center">{t("share")}</p>
           </button>

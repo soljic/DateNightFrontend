@@ -121,12 +121,16 @@
   "create_story_date_placeholder": "Date of the story",
 
   "create_story_title_title": "Enter title of the Story.",
+  "create_story_title_subtitle": "*Required",
   "create_story_title_placeholder": "Enter story title",
+  "create_story_tags_placeholder": "Choose categories",
 
   "create_story_summary_title": "Please summarize your story in one or two sentences.",
+  "create_story_summary_subtitle": "*Required",
   "create_story_summary_placeholder": "Enter short summary",
 
   "create_story_text_title": "Write new story",
+  "create_story_text_subtitle": "*Required",
   "create_story_text_placeholder": "Enter story text",
 
   "section_discover_title": "Discover",

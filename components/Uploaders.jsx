@@ -57,7 +57,7 @@ export function StoryImageUploader({ images, setImages }) {
       <p className="font-bold text-2xl">
         {t("create_story_image_title")}
       </p>
-      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
+      <p className="text-sp-lighter text-sm">*{t("optional")}</p>
       <input
         type="file"
         id="file"
@@ -145,7 +145,7 @@ export function SpiritusImageUploader({ name, images, setImages }) {
         <span> {name} </span>
         {t("create_spiritus_image_title2")}
       </p>
-      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
+      <p className="text-sp-lighter text-sm">*{t("optional")}</p>
       <input
         type="file"
         id="file"
