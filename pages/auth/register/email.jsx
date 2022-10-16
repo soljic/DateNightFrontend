@@ -76,6 +76,7 @@ export default function EmailRegister() {
       handleErr(res.error);
       throw "Error registering account.";
     } catch (error) {
+      setSubmitting(false);
       setErr(t("register_err"));
     }
   };
@@ -97,7 +98,7 @@ export default function EmailRegister() {
           </h4>
           <p className="text-center">
             {t("register_disclaimer_1")}{" "}
-            <Link href="/privacy-policy" key="terms">
+            <Link href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf" key="terms">
               <a className="underline underline-offset-4">
                 {t("register_disclaimer_terms")}
               </a>
