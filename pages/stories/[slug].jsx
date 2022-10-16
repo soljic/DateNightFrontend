@@ -140,6 +140,18 @@ export default function StoryPage({
           {displayStory.paragraphs.length ? (
             <div className="w-full md:w-3/4 lg:w-4/5 mt-10 mb-3">
               {displayStory.paragraphs.map((p, i) => {
+                // if andrija cordas, center all text because this is a poem/song
+                if (displayStory.slug === "story-of-andrija-cordas-f7067426") {
+                  return (
+                    <p
+                      className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg text-center"
+                      key={`para-${i}`}
+                    >
+                      {p.text}
+                    </p>
+                  );
+                }
+
                 return (
                   <p
                     className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg"
