@@ -12,11 +12,17 @@ export async function GlobalSearch(searchType, value, offset, limit) {
     throw `Invalid filter ${searchType}`;
   }
 
-  return await axios.get(
+  const res = await axios.get(
     encodeURI(
       `${API_URL}/wapi/search?value=${value}&search_type=${searchType}&page=${o}&size=${l}`
     )
   );
+
+  res.data.content.forEach((item) => {
+    item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+  });
+
+  return res;
 }
 
 // Performs full text spiritus search -> can match name, lastname etc.

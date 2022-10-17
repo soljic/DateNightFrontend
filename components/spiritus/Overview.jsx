@@ -60,8 +60,8 @@ export function SpiritusOverview({
               <></>
             )}
             <p className="py-4 capitalize">{dates}</p>
-            <h2 className="font-bold text-left md:text-center text-cta pb-4">
-              {name} {surname}
+            <h2 className="font-bold text-left md:text-center text-cta pb-4 capitalize">
+              {`${name} ${surname}`.toLowerCase()}
             </h2>
           </a>
         </Link>
