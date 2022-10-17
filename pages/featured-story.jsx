@@ -128,19 +128,7 @@ export default function FeaturedStory({ displayStory, stories, spiritus }) {
   );
 }
 
-// TODO: remove when there's isGuardian flag is added to spiritus
-function filterStories(items, isOwner) {
-  if (isOwner) {
-    return items;
-  }
-
-  return items.filter((s) => s.flags.includes("PUBLIC"));
-}
-
 export async function getStaticProps(context) {
-  // there some funny logic to figure out if user is spiritus owner
-  let userCode = "";
-  let isOwner = false;
   const session = await getSession(context);
 
   // fetch homepage to get featured story
@@ -150,10 +138,6 @@ export async function getStaticProps(context) {
   const { data: allStories } = await GetSpiritusStoriesBySlug(spiritus.slug);
 
   let content = allStories?.content ? allStories?.content : [];
-  if (session && session?.user?.accessToken) {
-    userCode = session.user.code;
-    isOwner = spiritus?.data?.users.map((u) => u.code).includes(userCode);
-  }
 
   // sort story paragraphs by index
   if (story.paragraphs) {
@@ -183,7 +167,7 @@ export async function getStaticProps(context) {
         "about",
       ])),
       displayStory: story,
-      stories: filterStories(content, isOwner),
+      stories: content.filter((s) => s.flags.includes("PUBLIC")),
       spiritus: spiritus,
       hasMore: !allStories.last,
       total: allStories.numberOfElements,
