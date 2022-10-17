@@ -34,6 +34,101 @@ function EditBtn({ spiritusId }) {
   );
 }
 
+function SetSpiritusOG(spiritus) {
+  let tags = [
+    <meta
+      property="og:type"
+      content="website"
+      key={`spiritus-${spiritus.id}-ws`}
+    />,
+    <meta
+      property="og:site_name"
+      content="Spiritus"
+      key={`spiritus-${spiritus.id}-site-name`}
+    />,
+    <meta
+      property="og:title"
+      content={
+        spiritus
+          ? `Spiritus | ${spiritus.name} ${spiritus.surname}`
+          : "Spiritus"
+      }
+      key={`spiritus-${spiritus.id}-title`}
+    />,
+    <meta
+      property="og:url"
+      content={`https://spiritus.app/en/spiritus/${spiritus.slug}`}
+      key={`spiritus-${spiritus.id}-url`}
+    />,
+    <meta
+      property="og:description"
+      content={
+        spiritus.description.length
+          ? spiritus.description
+          : "Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries."
+      }
+      key={`spiritus-${spiritus.id}-desc`}
+    />,
+  ];
+  if (spiritus.images.length) {
+    const useImage = spiritus.images[0];
+    tags = tags.concat([
+      <meta
+        property="og:image"
+        itemProp="image"
+        content={useImage.url}
+        key={`spiritus-${spiritus.id}-image`}
+      />,
+      <meta
+        property="og:image:url"
+        itemProp="image"
+        content={useImage.url}
+        key={`spiritus-${spiritus.id}-image-url`}
+      />,
+      // <meta
+      //   property="og:image:secure_url"
+      //   itemProp="image"
+      //   content={useImage.url}
+      //   key={`spiritus-${spiritus.id}-image-secure`}
+      // />,
+      <meta
+        property="og:image:width"
+        content={useImage.width}
+        key={`spiritus-${spiritus.id}-image-w`}
+      />,
+      <meta
+        property="og:image:height"
+        content={useImage.height}
+        key={`spiritus-${spiritus.id}-image-h`}
+      />,
+    ]);
+  } else {
+    tags = tags.concat([
+      <meta
+        property="og:image"
+        itemProp="image"
+        content="https://spiritus.app/images/share/banner.jpg"
+        key="image"
+      />,
+      <meta
+        property="og:image:url"
+        itemProp="image"
+        content="https://spiritus.app/images/share/banner.jpg"
+        key="image"
+      />,
+      // <meta
+      //   property="og:image:secure_url"
+      //   itemProp="image"
+      //   content="https://spiritus.app/images/share/banner.jpg"
+      //   key="image"
+      // />,
+      <meta property="og:image:width" content="1200" key="image-w" />,
+      <meta property="og:image:height" content="630" key="image-h" />,
+    ]);
+  }
+  return tags;
+}
+
 export default function SpiritusPage({ spiritus, stories, isLastPage }) {
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
@@ -64,6 +159,7 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
             }.`
           }
         />
+        {SetSpiritusOG(spiritus)}
       </Head>
       {status === "authenticated" && sessionUserIsOwner() ? (
         <EditBtn spiritusId={spiritus.id} />
