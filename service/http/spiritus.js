@@ -52,7 +52,7 @@ export async function PaginatePopularSpiritus(offset, limit) {
 }
 
 export async function GetTags() {
-  return await axios.get(`${API_URL}/tags`);
+  return await axios.get(`${API_URL}/wapi/tag`);
 }
 
 export async function SearchSpiritusNames(fullName, offset, limit) {
