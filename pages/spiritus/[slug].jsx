@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 
 import { useSession, getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
@@ -133,17 +134,9 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
 
-  const sessionUserIsOwner = () => {
-    if (!spiritus || !spiritus?.users || !spiritus?.users.length) {
-      return false;
-    }
-    for (const su of spiritus.users) {
-      if (su.email == session?.user.email && su.code == session?.user.code) {
-        return true;
-      }
-    }
-    return false;
-  };
+  const [isGuardian, setIsGuardian] = useState(
+    spiritus.flags.includes("GUARDIAN")
+  );
 
   return (
     <Layout>
@@ -161,7 +154,7 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
         />
         {SetSpiritusOG(spiritus)}
       </Head>
-      {status === "authenticated" && sessionUserIsOwner() ? (
+      {status === "authenticated" && isGuardian ? (
         <EditBtn spiritusId={spiritus.id} />
       ) : (
         ""
@@ -172,12 +165,12 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
         <SpiritusCarousel images={spiritus.images} />
 
         <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
-          {!sessionUserIsOwner() && <Tribute id={spiritus.id} />}
+          {!isGuardian && <Tribute id={spiritus.id} />}
           <PageActions
             shareLink={spiritus.shortLink}
             id={spiritus.id}
             type={"SPIRITUS"}
-            userIsOwner={sessionUserIsOwner()}
+            isGuardian={isGuardian}
             saved={spiritus.flags.includes("SAVED")}
           />
         </div>
@@ -185,7 +178,7 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
           <MoreStories
             stories={stories}
             spiritus={spiritus}
-            userIsOwner={sessionUserIsOwner()}
+            isGuardian={isGuardian}
             isLastPage={isLastPage}
           />
           <div className="flex-1 items-center justify-center">

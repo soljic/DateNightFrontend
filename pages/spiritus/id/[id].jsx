@@ -1,7 +1,8 @@
 import Head from "next/head";
+import { useState } from "react";
 
 import { useTranslation } from "next-i18next";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
@@ -38,17 +39,9 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
 
-  const sessionUserIsOwner = () => {
-    if (!spiritus || !spiritus?.users || !spiritus?.users.length) {
-      return false;
-    }
-    for (const su of spiritus.users) {
-      if (su.email == session?.user.email && su.code == session?.user.code) {
-        return true;
-      }
-    }
-    return false;
-  };
+  const [isGuardian, setIsGuardian] = useState(
+    spiritus.flags.includes("GUARDIAN")
+  );
 
   return (
     <Layout>
@@ -65,7 +58,7 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
           }
         />
       </Head>
-      {status === "authenticated" && sessionUserIsOwner() ? (
+      {status === "authenticated" && isGuardian ? (
         <EditBtn spiritusId={spiritus.id} />
       ) : (
         ""
@@ -79,7 +72,7 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
             shareLink={spiritus.shortLink}
             id={spiritus.id}
             type={"SPIRITUS"}
-            userIsOwner={sessionUserIsOwner()}
+            isGuardian={isGuardian}
             saved={spiritus.flags.includes("SAVED")}
           />
         </div>
@@ -87,11 +80,15 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
           <MoreStories
             stories={stories}
             spiritus={spiritus}
-            userIsOwner={sessionUserIsOwner()}
+            isGuardian={isGuardian}
             isLastPage={isLastPage}
           />
           <div className="flex-1 items-center justify-center">
-            <CTAAddMemory sessionStatus={status} spiritusId={spiritus.id} name={spiritus.name} />
+            <CTAAddMemory
+              sessionStatus={status}
+              spiritusId={spiritus.id}
+              name={spiritus.name}
+            />
           </div>
         </div>
       </section>
@@ -99,19 +96,37 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
   );
 }
 
+function filterStories(items, isOwner) {
+  if (isOwner) {
+    return items;
+  }
+
+  return items.filter((s) => s.flags.includes("PUBLIC"));
+}
+
 // Fetch spiritus and story data.
 // Redirects to 404 in case of any errors.
 export async function getServerSideProps(context) {
   const { id } = context.query;
+  const session = await getSession(context);
+  let isGuardian = false;
 
   try {
-    const { data: spiritus } = await GetSpiritusById(id);
+    let spiritus;
+    if (session && session?.user?.accessToken) {
+      const res = await GetSpiritusById(id, session?.user?.accessToken);
+      spiritus = res.data;
+      isGuardian = spiritus.flags.includes("GUARDIAN");
+    } else {
+      const res = await GetSpiritusById(id);
+      spiritus = res.data;
+    }
     const { data: spiritusStories } = await GetSpiritusStoriesBySlug(
       spiritus.slug,
       0,
       20
     );
-    const stories = spiritusStories.content;
+    const stories = filterStories(spiritusStories.content, isGuardian);
     return {
       props: {
         key: `${context.locale}-spiritus-id-${id}`,
