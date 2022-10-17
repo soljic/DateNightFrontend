@@ -31,6 +31,7 @@ export function HomepageSwiper({
   itemType,
   title,
   featured,
+  subtitle,
 }) {
   const { t } = useTranslation("common");
   const [currSlide, setCurrSlide] = useState(0);
@@ -43,9 +44,16 @@ export function HomepageSwiper({
     items && (
       <div className="mb-10">
         <div className="inline-flex w-full items-start justify-between pb-5">
-          <h2 className="text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white">
-            {t(titleTranslation)}
-          </h2>
+          <div className="flex flex-col">
+            <h2 className="text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white">
+              {t(titleTranslation)}
+            </h2>
+            {!!subtitle &&
+            <h3 className="mt-1 leading-4 tracking-sp-tighten font-medium dark:text-sp-white opacity-50">
+              {t(subtitle)}
+            </h3>
+            }
+          </div>
           <Link href={`/section/id/${sectionId}?title=${title}`}>
             <a className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1">
               <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn opacity-40" />
@@ -164,8 +172,14 @@ function HomepageTile({
           )}
         </div>
         <div className="flex flex-col justify-between mt-3 antialiased font-medium tracking-sp-tighten leading-4">
-          <h3 className="text-lg dark:text-sp-white leading-snug">{title.length > 64 ? `${title.substring(0, 64)} ...` : title}</h3>
-          <p className="text-sm mt-1 dark:text-sp-white opacity-50">{subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}</p>
+          <h3 className="text-lg dark:text-sp-white leading-snug">
+            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+          </h3>
+          <p className="text-sm mt-1 dark:text-sp-white opacity-50">
+            {subtitle.length > 64
+              ? `${subtitle.substring(0, 64)} ...`
+              : subtitle}
+          </p>
         </div>
       </a>
     </Link>

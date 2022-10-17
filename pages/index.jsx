@@ -114,6 +114,7 @@ export default function Home({
         items={featured.items}
         featured={true}
         title={featured.title}
+        subtitle={"section_featured_subtitle"}
       />
       <SearchPlacesCTA />
     </Layout>
