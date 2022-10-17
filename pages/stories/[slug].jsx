@@ -77,6 +77,18 @@ function SetStoryOG(spiritus, story) {
         content={useImage.url}
         key="image"
       />,
+      <meta
+        property="og:image:url"
+        itemProp="image"
+        content={useImage.url}
+        key="image"
+      />,
+      <meta
+        property="og:image:secure_url"
+        itemProp="image"
+        content={useImage.url}
+        key="image"
+      />,
       <meta property="og:image:width" content={useImage.width} key="image-w" />,
       <meta
         property="og:image:height"
@@ -88,6 +100,18 @@ function SetStoryOG(spiritus, story) {
     tags = tags.concat([
       <meta
         property="og:image"
+        itemProp="image"
+        content="https://spiritus.app/images/share/banner.jpg"
+        key="image"
+      />,
+      <meta
+        property="og:image:url"
+        itemProp="image"
+        content="https://spiritus.app/images/share/banner.jpg"
+        key="image"
+      />,
+      <meta
+        property="og:image:secure_url"
         itemProp="image"
         content="https://spiritus.app/images/share/banner.jpg"
         key="image"
