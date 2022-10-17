@@ -43,6 +43,7 @@ function EditBtn({ storyId }) {
 
 function SetStoryOG(spiritus, story) {
   let tags = [
+    <meta property="og:type" content="website" />,
     <meta property="og:site_name" content="Spiritus" key="site-name" />,
     <meta
       property="og:title"
