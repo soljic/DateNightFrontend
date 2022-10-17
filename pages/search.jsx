@@ -17,7 +17,7 @@ import {
   FILTER_PLACE,
   FILTER_STORY,
 } from "../service/constants";
-import { GlobalSearch, FulltextSpiritusSearch } from "../service/http/search";
+import { GlobalSearch } from "../service/http/search";
 
 export default function Search({ defaultFilter }) {
   const { t } = useTranslation("common");
