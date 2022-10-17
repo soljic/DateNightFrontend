@@ -28,7 +28,7 @@ export default function MobileAppCTA() {
         <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Download our App and create beautiful memorials of your loved ones."/>
         <meta property="og:image" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/>
         <meta property="og:image:url" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/>
-        <meta property="og:image:secure_url" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/>
+        {/* <meta property="og:image:secure_url" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/> */}
         <meta property="og:image:width" content="1200"/>
         <meta property="og:image:height" content="630"/>
       </Head>

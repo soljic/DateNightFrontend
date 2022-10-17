@@ -66,11 +66,11 @@ export default function Home({
           itemProp="image"
           content="https://spiritus.app/images/share/banner.jpg"
         />
-        <meta
+        {/* <meta
           property="og:image:secure_url"
           itemProp="image"
           content="https://spiritus.app/images/share/banner.jpg"
-        />
+        /> */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
