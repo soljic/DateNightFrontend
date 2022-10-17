@@ -199,7 +199,7 @@ export function PageActions({
   saved,
   shareLink,
   nextStorySlug,
-  userIsOwner,
+  isGuardian,
 }) {
   const [isSaved, setIsSaved] = useState(saved);
   const { t } = useTranslation("common");
@@ -254,7 +254,7 @@ export function PageActions({
   return (
     <div className="w-full mx-auto items-center mt-4">
       <div className="flex mx-auto justify-evenly space-x-3 lg:space-x-4 text-sp-lighter dark:text-sp-white">
-        {!userIsOwner && (
+        {!isGuardian && (
           <button
             onClick={() => toggleSave()}
             className={`${
@@ -307,7 +307,7 @@ export function PageActions({
   );
 }
 
-export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
+export function MoreStories({ stories, spiritus, isGuardian, isLastPage }) {
   const { t } = useTranslation("common");
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
@@ -320,7 +320,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
     try {
       const res = await GetSpiritusStoriesBySlug(spiritus.slug, current + 1);
       const newItems = res.data.content.filter((s) => {
-        if (userIsOwner) {
+        if (isGuardian) {
           return true;
         } else {
           return s.flags.includes("PUBLIC");
@@ -342,7 +342,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
       <div className="w-full my-10 text-sp-black dark:text-sp-white">
         <div className="flex w-full justify-between mb-2 items-center">
           <h1 className="font-semibold text-2xl">{t("more_stories_text")}</h1>
-          {userIsOwner && (
+          {isGuardian && (
             <Link href={`/create/story?spiritus=${spiritus.id}`}>
               <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-3 text-sp-white dark:text-sp-black">
                 <PlusCircleIcon className="h-6 w-6" />
