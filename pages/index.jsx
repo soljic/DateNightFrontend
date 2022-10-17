@@ -86,11 +86,11 @@ export default function Home({
         imageUrl={featuredStory.imageUrl}
       />
       <HomepageSwiper
-        sectionId={discover.id}
-        itemType={discover.itemType}
-        titleTranslation={"section_discover_title"}
-        items={discover.items}
-        title={discover.title}
+        sectionId={anniversaries.id}
+        itemType={anniversaries.itemType}
+        titleTranslation={"section_anniversaries_title"}
+        items={anniversaries.items}
+        title={anniversaries.title}
       />
       <SearchSpiritusCTA />
       <CategoriesSwiper
@@ -100,12 +100,13 @@ export default function Home({
         titleTranslation={"section_categories_title"}
       />
       <HomepageSwiper
-        sectionId={anniversaries.id}
-        itemType={anniversaries.itemType}
-        titleTranslation={"section_anniversaries_title"}
-        items={anniversaries.items}
-        title={anniversaries.title}
+        sectionId={discover.id}
+        itemType={discover.itemType}
+        titleTranslation={"section_discover_title"}
+        items={discover.items}
+        title={discover.title}
       />
+
       <HomepageSwiper
         sectionId={featured.id}
         itemType={featured.itemType}

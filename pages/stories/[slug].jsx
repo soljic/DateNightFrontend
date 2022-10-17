@@ -18,6 +18,7 @@ import {
 } from "../../components/stories/StoryPage";
 import { SpiritusOverview } from "../../components/spiritus/Overview";
 import { SpiritusCarousel } from "../../components/spiritus/Carousel";
+import BecomeGuardianCTA from "../../components/about/BecomeGuardianComponent";
 
 import { GetSpiritusById } from "../../service/http/spiritus";
 import {
@@ -300,6 +301,7 @@ export default function StoryPage({
           </div>
         </div>
       </section>
+      <BecomeGuardianCTA />
     </Layout>
   );
 }
@@ -364,6 +366,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "about",
         ])),
         key: `${context.locale}-${slug}`,
         displayStory: resStory.data,

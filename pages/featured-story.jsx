@@ -15,6 +15,7 @@ import {
 } from "../components/stories/StoryPage";
 import { SpiritusOverview } from "../components/spiritus/Overview";
 import { SpiritusCarousel } from "../components/spiritus/Carousel";
+import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
 
 import { GetSpiritusById } from "../service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
@@ -122,6 +123,7 @@ export default function FeaturedStory({ displayStory, stories, spiritus }) {
           </div>
         </div>
       </section>
+      <BecomeGuardianCTA />
     </Layout>
   );
 }
@@ -150,10 +152,7 @@ export async function getStaticProps(context) {
   let content = allStories?.content ? allStories?.content : [];
   if (session && session?.user?.accessToken) {
     userCode = session.user.code;
-    isOwner = spiritus?.data?.users
-    .map((u) => u.code)
-    .includes(userCode);
-
+    isOwner = spiritus?.data?.users.map((u) => u.code).includes(userCode);
   }
 
   // sort story paragraphs by index
@@ -181,6 +180,7 @@ export async function getStaticProps(context) {
         "common",
         "settings",
         "auth",
+        "about",
       ])),
       displayStory: story,
       stories: filterStories(content, isOwner),
