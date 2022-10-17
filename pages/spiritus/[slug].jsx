@@ -201,7 +201,6 @@ export default function SpiritusPage({ spiritus, stories, isLastPage }) {
   );
 }
 
-// TODO: remove when there's isGuardian flag is added to spiritus
 function filterStories(items, isOwner) {
   if (isOwner) {
     return items;
@@ -214,24 +213,22 @@ function filterStories(items, isOwner) {
 // Redirects to 404 in case of any errors.
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  // there some funny logic to figure out if user is spiritus owner
-  let userCode = "";
   const session = await getSession(context);
+  let isGuardian = false;
 
   try {
     let spiritus;
     if (session && session?.user?.accessToken) {
-      userCode = session.user.code;
       const res = await GetSpiritusBySlug(slug, session?.user?.accessToken);
       spiritus = res.data;
+      isGuardian = spiritus.flags.includes("GUARDIAN");
     } else {
       const res = await GetSpiritusBySlug(slug);
       spiritus = res.data;
     }
-    const isOwner = spiritus.users.map((u) => u.code).includes(userCode);
 
     const { data: resStories } = await GetSpiritusStoriesBySlug(slug);
-    const stories = filterStories(resStories?.content || [], isOwner);
+    const stories = filterStories(resStories?.content || [], isGuardian);
 
     return {
       props: {
