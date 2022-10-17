@@ -5,8 +5,8 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import {
-  CreateSpiritusCTA,
   CTADownloadLinks,
+  GetSpiritusCTA,
   // CTAPartners,
   SearchPlacesCTA,
   SearchSpiritusCTA,
@@ -75,7 +75,7 @@ export default function Home({
         <meta property="og:image:height" content="630" />
       </Head>
       <LoginModal isOpen={isOpen} closeModal={closeModal} />
-      <CreateSpiritusCTA sessionStatus={status} openModal={openModal} />
+      <GetSpiritusCTA />
       <div className="flex flex-col mx-auto items-center pt-10">
         <CTADownloadLinks />
         {/* <CTAPartners /> */}

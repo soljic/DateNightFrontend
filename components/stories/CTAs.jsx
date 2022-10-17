@@ -8,7 +8,27 @@ import {
   ArrowCircleRightIcon,
   ChevronRightIcon,
 } from "@heroicons/react/solid";
-import { LocationIcon } from "../Icons";
+import { LocationIcon, ArrowRightIcon } from "../Icons";
+
+export function GetSpiritusCTA() {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className="rounded-sp-14 bg-cover bg-center bg-[url('/images/photos_bg.png')] w-full h-full py-24">
+      <div className="flex flex-col items-center">
+        <h2 className="text-center sm:w-3/5 md:w-3/4 lg:w-3/5 text-2xl sm:text-3xl md:text-cta lg:text-5xl -tracking-tight text-sp-black dark:text-sp-white font-bold mb-4">
+          {t("cta_create_spiritus_title")}
+        </h2>
+        <Link href="/mobile-app">
+          <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black">
+            <ArrowRightIcon />
+            <span className="font-semibold ml-1">{t("cta_get_spiritus_button")}</span>
+          </a>
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export function CreateSpiritusCTA({ sessionStatus, openModal }) {
   const { t } = useTranslation("common");

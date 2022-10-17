@@ -17,8 +17,10 @@ import {
   SettingsAccountIcon,
 } from "../SettingsIcons";
 
+import { PlusCircleIcon } from "@heroicons/react/solid";
+
 export function ProfileMenu({ token, profileName }) {
-  const { t } = useTranslation("settings");
+  const { t } = useTranslation(["settings", "common"]);
   const router = useRouter();
 
   const logoutUser = async () => {
@@ -50,6 +52,16 @@ export function ProfileMenu({ token, profileName }) {
               <Popover.Panel className="absolute -translate-x-1/2 z-100 mt-2">
                 <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
                   <div className="flex flex-col justify-evenly gap-y-1 p-3">
+                    <Link href="/create/spiritus">
+                      <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                        <PlusCircleIcon className="h-5 w-5 dark:fill-sp-white fill-sp-dark-fawn" />
+                        <div className="ml-4">
+                          <p className="text-sm font-medium">
+                            {t("common:create_spiritus")}
+                          </p>
+                        </div>
+                      </a>
+                    </Link>
                     <Link href="/account/settings/my-spiritus">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3  dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsSpiritusIcon width={5} height={5} />
@@ -88,7 +100,9 @@ export function ProfileMenu({ token, profileName }) {
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
                         <SettingsGuardianIcon width={5} height={5} alterFill />
                         <div className="ml-4">
-                          <p className="text-sm font-medium">{t("guardian_id")}</p>
+                          <p className="text-sm font-medium">
+                            {t("guardian_id")}
+                          </p>
                         </div>
                       </a>
                     </Link>
