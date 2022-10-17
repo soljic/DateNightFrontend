@@ -341,7 +341,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
     <section key={"stories-showcase"}>
       <div className="w-full my-10 text-sp-black dark:text-sp-white">
         <div className="flex w-full justify-between mb-2 items-center">
-          <h1 className="font-semibold text-2xl">{t("stories")}</h1>
+          <h1 className="font-semibold text-2xl">{t("more_stories_text")}</h1>
           {userIsOwner && (
             <Link href={`/create/story?spiritus=${spiritus.id}`}>
               <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-3 text-sp-white dark:text-sp-black">
@@ -361,7 +361,7 @@ export function MoreStories({ stories, spiritus, userIsOwner, isLastPage }) {
           </div>
         ) : (
           <p className="text-sp-lighter dark:text-sp-lighter">
-            {t("no_stories")}
+            {t("more_stories_no_stories")}
           </p>
         )}
         {!isLast && (
