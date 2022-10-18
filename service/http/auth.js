@@ -67,7 +67,7 @@ export async function ProfileSpiritus(accessToken, offset, limit) {
   const l = limit ? limit : defaultLimit;
 
   const res = await axios.get(
-    `${API_URL}/v2/user/account/spiritus?page=${0}&size=${l}`,
+    `${API_URL}/v2/user/account/spiritus?page=${o}&size=${l}`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
