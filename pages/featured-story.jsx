@@ -173,6 +173,6 @@ export async function getStaticProps(context) {
       total: allStories.numberOfElements,
     },
     // in seconds
-    revalidate: 60 * 60 * 6, // 6hrs
+    revalidate: 60 * 10, // 10min
   };
 }
