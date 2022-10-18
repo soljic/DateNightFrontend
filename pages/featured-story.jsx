@@ -21,7 +21,7 @@ import { GetSpiritusById } from "../service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
 import { GetParsedHomepage } from "../service/http/homepage";
 
-export default function FeaturedStory({ displayStory, stories, spiritus }) {
+export default function FeaturedStory({ displayStory, stories, spiritus, isLastPage }) {
   const { t } = useTranslation("common");
 
   const calculateImageLayout = (width, height) => {
@@ -116,7 +116,7 @@ export default function FeaturedStory({ displayStory, stories, spiritus }) {
           <SpiritusOverview {...spiritus} />
           <SpiritusCarousel images={spiritus.images} />
           <div className="w-full text-sp-white mt-4">
-            <MoreStories stories={stories} spiritus={spiritus} />
+            <MoreStories stories={stories} spiritus={spiritus} isLastPage={isLastPage} />
             <div className="flex-1 items-center justify-center">
               <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
             </div>
@@ -169,7 +169,7 @@ export async function getStaticProps(context) {
       displayStory: story,
       stories: content.filter((s) => s.flags.includes("PUBLIC")),
       spiritus: spiritus,
-      hasMore: !allStories.last,
+      isLastPage: allStories.last,
       total: allStories.numberOfElements,
     },
     // in seconds
