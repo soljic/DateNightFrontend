@@ -139,7 +139,7 @@
   "section_featured_title": "Istaknuto",
   "section_featured_subtitle": "Istraži najljepše i najzanimljivije priče.",
   "section_anniversaries_title": "Godišnjice",
-  "section_categories_title": "Kategorije",
+  "section_categories_title": "Teme",
   "section_generic_subtitle": "Istraži najbolje priče na Spiritusu",
 
   "action_favourite": "Označeno",
@@ -171,5 +171,14 @@
   "more_stories_text": "Pogledajte Priče",
   "more_stories_no_stories": "Nema priča za prikazati.",
 
-  "category_famous_title": "Poznate osobe"
+  "category_biography_title": "Biografija",
+  "category_famous_title": "Znameniti",
+  "category_love_title": "Ljubav",
+  "category_anecdotes_title": "Anegdote",
+  "category_family_title": "Obitelj",
+  "category_motivational_title": "Motivacija",
+  "category_sports_title": "Sport",
+  "category_art_title": "Umjetnost",
+  "category_war_title": "Rat",
+  "category_hobby_title": "Hobi"
 }

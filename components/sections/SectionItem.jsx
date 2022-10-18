@@ -8,8 +8,13 @@ import { StoryHookIcon } from "../Icons";
 import { Spinner } from "../Status";
 import { GetSectionItem } from "../../service/http/sections";
 
-
-export function SectionItemGrid({ section, id, title, isLastPage, initialItems }) {
+export function SectionItemGrid({
+  section,
+  id,
+  title,
+  isLastPage,
+  initialItems,
+}) {
   const { t } = useTranslation("common");
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
@@ -32,14 +37,26 @@ export function SectionItemGrid({ section, id, title, isLastPage, initialItems }
 
   const translateTitle = (title) => {
     switch (title) {
-      case "Discover":
-        return t("section_discover_title");
-      case "Anniversaries":
-        return t("section_anniversaries_title");
-      case "Featured stories":
-        return t("section_featured_title");
+      case "Biography":
+        return t("category_biography_title");
       case "Famous":
         return t("category_famous_title");
+      case "Love":
+        return t("category_love_title");
+      case "Anecdotes":
+        return t("category_anecdotes_title");
+      case "Family":
+        return t("category_family_title");
+      case "Motivational":
+        return t("category_motivational_title");
+      case "Sports":
+        return t("category_sports_title");
+      case "Art":
+        return t("category_art_title");
+      case "War":
+        return t("category_war_title");
+      case "Hobby":
+        return t("category_hobby_title");
       default:
         return title;
     }

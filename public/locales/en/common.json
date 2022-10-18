@@ -172,5 +172,14 @@
   "more_stories_text": "See other Stories",
   "more_stories_no_stories": "No stories to show.",
 
-  "category_famous_title": "Famous"
+  "category_biography_title": "Biography",
+  "category_famous_title": "Famous",
+  "category_love_title": "Love",
+  "category_anecdotes_title": "Anecdotes",
+  "category_family_title": "Family",
+  "category_motivational_title": "Motivational",
+  "category_sports_title": "Sports",
+  "category_art_title": "Art",
+  "category_war_title": "War",
+  "category_hobby_title": "Hobby"
 }
