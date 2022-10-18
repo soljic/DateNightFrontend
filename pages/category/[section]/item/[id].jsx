@@ -4,10 +4,11 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import Layout from "../../../../components/layout/Layout";
-import { SectionGrid } from "../../../../components/sections/Section";
 import { GetSectionItem } from "../../../../service/http/sections";
+import { SectionItemGrid } from "../../../../components/sections/SectionItem";
 
 export default function Category({
+  section,
   id,
   title,
   totalPages,
@@ -23,7 +24,8 @@ export default function Category({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_section_description")} />
       </Head>
-      <SectionGrid
+      <SectionItemGrid
+        section={section}
         id={id}
         title={title}
         totalPages={totalPages}
@@ -46,7 +48,8 @@ export async function getServerSideProps(context) {
         "settings",
         "auth",
       ])),
-      id: res.data.id,
+      section: section,
+      id: id,
       title: title,
       totalPages: res.data.items.totalPages,
       isLastPage: res.data.items.last,
