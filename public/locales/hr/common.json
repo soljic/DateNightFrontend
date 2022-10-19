@@ -9,6 +9,7 @@
   "login": "Prijava",
 
   "meta_title_mobile_app": "Spiritus | Skinite aplikaciju",
+  "meta_desc_mobile_app": "Preuzmite naše Android i iOS aplikaciju za najbolje Spiritus iskustvo.",
   "m_desc_stories": "Pročitajte najnovije priče, pratite godišnjice i memoare.",
   "m_desc_mobile_app": "Skinite aplikaciju sa Play ili App Storea.",
   "m_desc_about": "Saznajte više o Spiritusu i našoj misiji.",
@@ -16,12 +17,12 @@
   "switch_theme_dark": "Primjeni tamni način rada.",
   "switch_theme_light": "Primjeni svijetli način rada.",
 
-  "meta_home_title": "Spiritus | Početna",
-  "meta_home_description": "Platforma koja čuva vaše digitalne uspomene - zauvijek!",
+  "meta_home_title": "Spiritus | Sačuvaj uspomenu na svoje voljene, vječno",
+  "meta_home_description": "Pročitaj priče poznatih i nepoznatih ljudi i inspiriraj se njihovim životima.",
   "meta_story_description": "Read and follow memories about",
   "meta_spiritus_description": "Pregledaj uspomene na",
   "meta_search_title": "Spiritus | Pretraga",
-  "meta_search_description": "Pronađite svoje najmilije međdu 15 000 Spiritusa iz raznih dijelova svijeta i važnih osoba iz mnogih institucija.",
+  "meta_search_description": "Pretraži uspomene ljudi, mjesta i priče koji su ostavile trag u tvom životu.",
   "meta_create_spiritus_title": "Spiritus | Novi Spiritus",
   "meta_create_spiritus_description": "Kreirajte Spiritus i pohranite ga zauvijek.",
   "meta_create_story_title": "Spiritus | Nova Priča",

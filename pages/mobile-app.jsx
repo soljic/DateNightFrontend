@@ -20,7 +20,7 @@ export default function MobileAppCTA() {
       <Head>
         <title>{t("common:meta_title_mobile_app")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={t("common:m_desc_mobile_app")} />
+        <meta name="description" content={t("common:meta_desc_mobile_app")} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Spiritus" />
         <meta property="og:title" content="Spiritus - Download Our App"/>

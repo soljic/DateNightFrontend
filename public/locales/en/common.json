@@ -9,6 +9,7 @@
   "login": "Log in",
 
   "meta_title_mobile_app": "Spiritus | Download the app",
+  "meta_desc_mobile_app": "Download our Android and iOS apps so you can unlock the full experiece of Spiritus.",
   "m_desc_stories": "The latest beautiful stories, memorials and anniversaries.",
   "m_desc_mobile_app": "Download the app from Google Play and App Store.",
   "m_desc_about": "Learn more about Spiritus and our mission.",
@@ -16,12 +17,12 @@
   "switch_theme_dark": "Switch to dark theme",
   "switch_theme_light": "Switch to light theme",
 
-  "meta_home_title": "Spiritus | Home",
-  "meta_home_description": "Digital assets platform that keeps your memories forever!",
+  "meta_home_title": "Spiritus | Save memories of your loved ones, forever!",
+  "meta_home_description": "Discover stories from ordinary and extraordinary people and get inspired.",
   "meta_story_description": "Read and follow memories about",
   "meta_spiritus_description": "Browse memories of",
   "meta_search_title": "Spiritus | Search",
-  "meta_search_description": "Find your loved ones! Over 15 000 Spiritus loved ones from many families and notable institutions.",
+  "meta_search_description": "Search for people, places and stories that left a trace in your life. ",
   "meta_create_spiritus_title": "Spiritus | Create Spiritus",
   "meta_create_spiritus_description": "Create Spiritus and keep it safe forever.",
   "meta_create_story_title": "Spiritus | Create Story",
