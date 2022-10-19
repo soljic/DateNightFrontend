@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { StoryHookIcon } from "../Icons";
 import { Spinner } from "../Status";
 import { GetSectionItem } from "../../service/http/sections";
+import { translateCategoryTitle } from "../../utils/translations";
 
 export function SectionItemGrid({
   section,
@@ -35,38 +36,11 @@ export function SectionItemGrid({
     }
   };
 
-  const translateTitle = (title) => {
-    switch (title) {
-      case "Biography":
-        return t("category_biography_title");
-      case "Famous":
-        return t("category_famous_title");
-      case "Love":
-        return t("category_love_title");
-      case "Anecdotes":
-        return t("category_anecdotes_title");
-      case "Family":
-        return t("category_family_title");
-      case "Motivational":
-        return t("category_motivational_title");
-      case "Sports":
-        return t("category_sports_title");
-      case "Art":
-        return t("category_art_title");
-      case "War":
-        return t("category_war_title");
-      case "Hobby":
-        return t("category_hobby_title");
-      default:
-        return title;
-    }
-  };
-
   return (
     <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
       <div className="flex flex-col items-center mb-16">
         <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-          {translateTitle(title)}
+          {t(translateCategoryTitle(title))}
         </h1>
 
         {title === "Featured stories" && (

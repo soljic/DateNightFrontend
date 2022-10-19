@@ -10,6 +10,7 @@ import { FilterIcon, StoryHookIcon } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 
 import { GetSection } from "../../service/http/sections";
+import { translateSectionTitle } from "../../utils/translations";
 
 export function SectionGrid({ id, title, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
@@ -34,24 +35,11 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
     }
   };
 
-  const translateTitle = (title) => {
-    switch (title) {
-      case "Discover":
-        return t("section_discover_title");
-      case "Anniversaries":
-        return t("section_anniversaries_title");
-      case "Featured stories":
-        return t("section_featured_title");
-      default:
-        return title;
-    }
-  };
-
   return (
     <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
       <div className="flex flex-col items-center mb-16">
         <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-          {translateTitle(title)}
+          {t(translateSectionTitle(title))}
         </h1>
 
         {title === "Featured stories" && (

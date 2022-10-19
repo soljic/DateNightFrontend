@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { CrownIcon } from "../Icons";
+import { translateCategoryTitle } from "../../utils/translations";
 
 SwiperCore.use([Navigation, A11y]);
 
@@ -214,33 +215,6 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
-  const translateTitle = (title) => {
-    switch (title) {
-      case "Biography":
-        return t("category_biography_title");
-      case "Famous":
-        return t("category_famous_title");
-      case "Love":
-        return t("category_love_title");
-      case "Anecdotes":
-        return t("category_anecdotes_title");
-      case "Family":
-        return t("category_family_title");
-      case "Motivational":
-        return t("category_motivational_title");
-      case "Sports":
-        return t("category_sports_title");
-      case "Art":
-        return t("category_art_title");
-      case "War":
-        return t("category_war_title");
-      case "Hobby":
-        return t("category_hobby_title");
-      default:
-        return title;
-    }
-  };
-
   return (
     categories && (
       <div className="mb-10">
@@ -302,7 +276,7 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
                     <CategoryTile
                       sectionId={sectionId}
                       categoryId={c.id}
-                      title={translateTitle(c.title)}
+                      title={t(translateCategoryTitle(c.title))}
                       imageUrl={c.imageUrl}
                     />
                   }

@@ -30,15 +30,19 @@ import {
 } from "../../service/http/save";
 import { GetSpiritusStoriesBySlug } from "../../service/http/story";
 import { SendRose } from "../../service/http/rose";
+import { translateCategoryTitle } from "../../utils/translations";
 
 export function Tags({ tags }) {
+  const { t } = useTranslation("common");
+
   return (
     <div className="flex flex-row gap-3">
-      {tags.map((t) => {
+      {tags.map((tag) => {
         return (
-          <Link href={`/section/id/${t.id}`} key={`tag-${t.id}`}>
+          // NOTE: id of category section is hardcoded...
+          <Link href={`/category/3/item/${tag.id}?title=${tag.value}`} key={`tag-${tag.id}`}>
             <a className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base">
-              {t.value}
+              {t(translateCategoryTitle(tag.value))}
             </a>
           </Link>
         );
