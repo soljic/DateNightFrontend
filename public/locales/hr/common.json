@@ -181,5 +181,9 @@
   "category_sports_title": "Sport",
   "category_art_title": "Umjetnost",
   "category_war_title": "Rat",
-  "category_hobby_title": "Hobi"
+  "category_hobby_title": "Hobi",
+
+  "message_error": "Greška!",
+  "message_success": "Izvršeno!",
+  "message_save_success": "Promjene spremljene."
 }

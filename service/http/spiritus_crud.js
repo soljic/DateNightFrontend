@@ -10,11 +10,14 @@ export async function CreateSpiritus(accessToken, spiritusFormData) {
   });
 }
 
-export async function EditSpiritus(accessToken, spiritusData) {
+export async function EditSpiritus(accessToken, spiritusData, locale) {
+  const loc = locale || "en"
+
   return await axios.put(`${API_URL}/v2/spiritus`, spiritusData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-type": "application/json",
+      "Accept-Language": locale,
     },
   });
 }

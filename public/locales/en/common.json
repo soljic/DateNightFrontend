@@ -182,5 +182,9 @@
   "category_sports_title": "Sports",
   "category_art_title": "Art",
   "category_war_title": "War",
-  "category_hobby_title": "Hobby"
+  "category_hobby_title": "Hobby",
+
+  "message_error": "Error!",
+  "message_success": "Success!",
+  "message_save_success": "Changes saved."
 }

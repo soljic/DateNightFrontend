@@ -14,11 +14,10 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
-import { Spinner } from "../../../components/Status";
+import { Alert, Spinner } from "../../../components/Status";
 
 import {
   AddSpiritusImage,
-  DeleteSpiritus,
   DeleteSpiritusImage,
   EditSpiritus,
 } from "../../../service/http/spiritus_crud";
@@ -69,9 +68,18 @@ export default function EditSpiritusPage({ spiritus }) {
   const [pending, setPending] = useState(false);
   const [pendingDelete, setPendingDelete] = useState(false);
 
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [toastOpen, setToastOpen] = useState(true);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const clearToast = () => {
+    setToastOpen(false);
+    setToastMessage("");
+    setIsSuccess(false);
+  };
+
   // delete modal
-  let [isOpen, setIsOpen] = useState(false);
-  const [deleteId, setDeleteID] = useState();
+  const [isOpen, setIsOpen] = useState(false);
 
   // call from child to set deleteId and open modal
   function openModal() {
@@ -108,15 +116,21 @@ export default function EditSpiritusPage({ spiritus }) {
         },
       };
 
-      await EditSpiritus(session.user.accessToken, body);
+      await EditSpiritus(session.user.accessToken, body, router.locale);
       await saveImages();
       setPending(false);
+      setIsSuccess(true);
+      setToastMessage(t("message_save_success"));
+      setToastOpen(true);
 
       // refresh page
-      router.reload(window.location.pathname);
+      // router.reload(window.location.pathname);
     } catch (err) {
+      console.log("### ERR ###", err);
       setPending(false);
-      console.log("ERROR UPDATING SPIRITUS", err);
+      setIsSuccess(false);
+      setToastMessage(t("message_error"));
+      setToastOpen(true);
     }
   };
 
@@ -164,6 +178,17 @@ export default function EditSpiritusPage({ spiritus }) {
         isOpen={isOpen}
         closeModal={closeModal}
       />
+      {toastOpen && (
+        <div className="z-50 sticky top-4 max-w-md">
+          <div className="absolute">
+            <Alert
+              isSuccess={isSuccess}
+              message={toastMessage}
+              onClick={clearToast}
+            />
+          </div>
+        </div>
+      )}
       <div className="py-5 min-h-screen mx-auto mb-64">
         <div className="flex justify-end gap-2">
           <button
