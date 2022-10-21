@@ -69,7 +69,7 @@ export default function EditSpiritusPage({ spiritus }) {
   const [pendingDelete, setPendingDelete] = useState(false);
 
   const [isSuccess, setIsSuccess] = useState(false);
-  const [toastOpen, setToastOpen] = useState(true);
+  const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
   const clearToast = () => {
@@ -126,7 +126,6 @@ export default function EditSpiritusPage({ spiritus }) {
       // refresh page
       // router.reload(window.location.pathname);
     } catch (err) {
-      console.log("### ERR ###", err);
       setPending(false);
       setIsSuccess(false);
       setToastMessage(t("message_error"));
