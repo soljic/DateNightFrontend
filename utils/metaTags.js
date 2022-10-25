@@ -22,7 +22,7 @@ export function SetStoryOG(spiritus, story) {
     <meta
       property="og:description"
       content={
-        story.description.length
+        story.description && story.description.length
           ? story.description
           : "Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries."
       }
@@ -121,7 +121,7 @@ export function SetSpiritusOG(spiritus) {
     <meta
       property="og:description"
       content={
-        spiritus.description.length
+        spiritus.description && spiritus.description.length
           ? spiritus.description
           : "Spiritus is the first digital assets platform that keeps your memories - forever! Read the latest beautiful stories, memorials and anniversaries."
       }
