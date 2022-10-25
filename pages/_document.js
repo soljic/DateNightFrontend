@@ -25,6 +25,12 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
           />
+          {process.env.NEXT_FACEBOOK_DOMAIN_ID && (
+            <meta
+              name="facebook-domain-verification"
+              content={`${process.env.NEXT_FACEBOOK_DOMAIN_ID}`}
+            />
+          )}
           {process.env.NEXT_PUBLIC_GTAG_ID && (
             <Script
               strategy="beforeInteractive"
