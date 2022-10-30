@@ -27,6 +27,7 @@ export function CTAMemWalk() {
               height={180}
               layout="responsive"
               className="rounded-sp-14"
+              priority
             />
           </div>
           <div className="sp-image-shadow blur-[2px]">
@@ -37,6 +38,7 @@ export function CTAMemWalk() {
               height={135}
               layout="responsive"
               className="rounded-sp-14"
+              priority
             />
           </div>
         </div>
@@ -92,9 +94,7 @@ export function MemWalkModal({ isOpen, closeModal }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel
-                className="w-full md:w-3/4 xl:w-1/2 content-center transition-all transform"
-              >
+              <Dialog.Panel className="w-full md:w-3/4 xl:w-1/2 content-center transition-all transform">
                 <div className="h-full flex flex-col items-end">
                   <button
                     onClick={closeModal}
@@ -122,7 +122,7 @@ function MemWalkBanner() {
     <>
       <section className="hidden md:flex flex-col justify-center items-center sp-banner-shadow text-sp-white border-4 border-sp-lighter rounded-sp-14 bg-sp-black overflow-hidden">
         <div className="flex flex-grow overflow-hidden">
-          <Image src={DesktopBanner} alt="Download Spiritus Mobile" />
+          <Image src={DesktopBanner} alt="Download Spiritus Mobile" priority />
         </div>
         <div className="absolute z-40">
           <div className="flex flex-col items-center">
@@ -145,7 +145,7 @@ function MemWalkBanner() {
       </section>
       <section className="md:hidden h-[70vh] flex flex-col justify-center items-center sp-banner-shadow text-sp-white border-4 border-sp-lighter rounded-sp-14 bg-sp-black overflow-hidden">
         <div className="flex justify-center items-center overflow-hidden">
-          <Image src={MobileBanner} alt="Download Spiritus Mobile" />
+          <Image src={MobileBanner} alt="Download Spiritus Mobile" priority />
         </div>
         <div className="absolute z-40 w-4/5 items-center">
           <div className="flex flex-col items-center">
