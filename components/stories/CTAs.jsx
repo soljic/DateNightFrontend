@@ -22,7 +22,9 @@ export function GetSpiritusCTA() {
         <Link href="/mobile-app">
           <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black">
             <ArrowRightIcon />
-            <span className="font-semibold ml-1">{t("cta_get_spiritus_button")}</span>
+            <span className="font-semibold ml-1">
+              {t("cta_get_spiritus_button")}
+            </span>
           </a>
         </Link>
       </div>

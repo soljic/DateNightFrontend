@@ -1,13 +1,11 @@
 import Head from "next/head";
-import { useState } from "react";
-import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import {
   CTADownloadLinks,
   GetSpiritusCTA,
-  // CTAPartners,
   SearchPlacesCTA,
   SearchSpiritusCTA,
 } from "../components/stories/CTAs";
@@ -17,9 +15,9 @@ import {
   HomepageSwiper,
 } from "../components/stories/Swipers";
 import Layout from "../components/layout/Layout";
-import { LoginModal } from "../components/auth/Login";
 
 import { GetParsedHomepage } from "../service/http/homepage";
+import { MemWalkModal, CTAMemWalk } from "../components/banners/MemWalk";
 
 export default function Home({
   featuredStory,
@@ -30,17 +28,50 @@ export default function Home({
 }) {
   const { t } = useTranslation("common");
 
-  const { data: session, status } = useSession();
-
-  let [isOpen, setIsOpen] = useState(false);
+  let [modalOpen, setModalOpen] = useState(false);
 
   function closeModal() {
-    setIsOpen(false);
+    setModalOpen(false);
   }
 
-  function openModal() {
-    setIsOpen(true);
+  function maybeOpenModal() {
+    const date = new Date();
+
+    const start = new Date("2022-11-01");
+    const end = new Date("2022-11-02");
+
+    // show modal only in selected range
+    if (!(date > start && date < end)) {
+      return;
+    }
+
+    const ms = localStorage.getItem("modal_status");
+    if (!ms) {
+      localStorage.setItem("modal_status", JSON.stringify({ dt: new Date() }));
+      setModalOpen(true);
+      return;
+    }
+
+    const dt = JSON.parse(ms)?.dt;
+    if (dt) {
+      const diff = Math.abs(new Date() - new Date(dt));
+      // if diff > 11hrs, rounded down
+      if (Math.floor(diff / 1000 / 3600) > 8) {
+        localStorage.setItem(
+          "modal_status",
+          JSON.stringify({ dt: new Date() })
+        );
+        setModalOpen(true);
+      }
+    }
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      maybeOpenModal();
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Layout>
@@ -66,19 +97,14 @@ export default function Home({
           itemProp="image"
           content="https://spiritus.app/images/share/banner.jpg"
         />
-        {/* <meta
-          property="og:image:secure_url"
-          itemProp="image"
-          content="https://spiritus.app/images/share/banner.jpg"
-        /> */}
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+      <MemWalkModal isOpen={modalOpen} closeModal={closeModal} />
+      <CTAMemWalk />
       <GetSpiritusCTA />
       <div className="flex flex-col mx-auto items-center pt-10">
         <CTADownloadLinks />
-        {/* <CTAPartners /> */}
       </div>
       <FeaturedStory
         title={featuredStory.title}
@@ -127,11 +153,11 @@ export default function Home({
 export async function getStaticProps(context) {
   const sections = await GetParsedHomepage();
   // const sections = {
-  //   featuredStory: {},
-  //   featured: {},
-  //   discover: {},
-  //   categories: {},
-  //   anniversaries: {},
+  // featuredStory: {},
+  // featured: {},
+  // discover: {},
+  // categories: {},
+  // anniversaries: {},
   // };
 
   return {
@@ -140,6 +166,7 @@ export async function getStaticProps(context) {
         "common",
         "settings",
         "auth",
+        "banners",
       ])),
       key: `${context.locale}-stories-index-page`,
       featuredStory: sections.featuredStory,
