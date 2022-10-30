@@ -29,20 +29,24 @@ export default function Search({ defaultFilter }) {
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
   const [notFound, setNotFound] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const [isLast, setIsLast] = useState(true);
+  const [total, setTotal] = useState(0);
 
   const clear = () => {
     setResults([]);
     setSearching(false);
     setNotFound(false);
     setSearchTerm("");
+    setCurrent(0);
+    setIsLast(true);
+    setTotal(0);
   };
 
   useEffect(() => {
     const debounce = setTimeout(async () => {
       if (!searchTerm) {
-        setResults([]);
-        setSearching(false);
-        setNotFound(false);
+        clear()
         return;
       }
       setSearching(true);
@@ -50,17 +54,36 @@ export default function Search({ defaultFilter }) {
 
       const res = await GlobalSearch(searchFilter, searchTerm);
       setSearching(false);
+      setIsLast(res.data.last);
       if (!res.data.content.length) {
         setNotFound(true);
         setResults([]);
       } else {
         setNotFound(false);
         setResults(res.data.content);
+        setTotal(res.data.totalElements);
       }
-    }, 600);
+    }, 400);
 
     return () => clearTimeout(debounce);
   }, [searchTerm]);
+
+  const loadMore = async () => {
+    try {
+      setSearching(true);
+      setNotFound(false);
+
+      const res = await GlobalSearch(searchFilter, searchTerm, current + 1);
+      setSearching(false);
+      setIsLast(res.data.last);
+      if (res.data.content.length) {
+        setCurrent((prev) => prev + 1);
+        setResults([...results, ...res.data.content]);
+      }
+    } catch (err) {
+      setSearching(false);
+    }
+  };
 
   return (
     <LayoutNoFooter>
@@ -69,7 +92,7 @@ export default function Search({ defaultFilter }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_search_description")} />
       </Head>
-      <div className="h-screen mx-auto mt-20 w-full lg:w-1/2 md:w-2/3 sm:w-full">
+      <div className="min-h-screen mx-auto my-20 w-full lg:w-1/2 md:w-2/3 sm:w-full">
         <div
           className={`flex gap-x-2 items-center rounded-sp-14 py-2 border border-sp-lighter ${
             results.length && !searching ? "bg-none" : "dark:bg-sp-medium"
@@ -107,10 +130,30 @@ export default function Search({ defaultFilter }) {
           clear={clear}
         />
         {!!results.length && !searching && (
-          <GlobalSearchResults results={results} />
+          <GlobalSearchResults
+            results={results}
+            total={total}
+          />
         )}
         {searching && <SearchContentPlacaholder />}
         {notFound && <NotFound searchTerm={searchTerm} filter={searchFilter} />}
+        {!isLast && (
+          <div className="flex justify-center">
+            <button
+              onClick={() => {
+                loadMore();
+              }}
+              disabled={isLast}
+              className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+            >
+              {searching ? (
+                <Spinner text={t("loading")} />
+              ) : (
+                t("action_load_more")
+              )}
+            </button>
+          </div>
+        )}
       </div>
     </LayoutNoFooter>
   );
@@ -245,13 +288,13 @@ function Placeholder() {
 //    subtitle: "?—1980"
 //    title: "ANKICA KONRAD"
 // }
-function GlobalSearchResults({ results }) {
+function GlobalSearchResults({ results, total }) {
   const { t } = useTranslation("common");
 
   return (
     <div className="flex flex-col rounded-sp-14 py-2">
       <p className="p-2 text-sp-lighter text-center">
-        {results.length} <span> {t("search_results")}</span>
+        {results.length}/{total} <span> {t("search_results")}</span>
       </p>
       <div className="flex flex-col items-start">
         {results.map((res) => {
