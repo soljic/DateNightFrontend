@@ -18,6 +18,7 @@ import Layout from "../components/layout/Layout";
 
 import { GetParsedHomepage } from "../service/http/homepage";
 import { MemWalkModal, CTAMemWalk } from "../components/banners/MemWalk";
+import { gtagPageView } from "../utils/gtag";
 
 export default function Home({
   featuredStory,
@@ -37,7 +38,7 @@ export default function Home({
   function maybeOpenModal() {
     const date = new Date();
 
-    const start = new Date("2022-11-01");
+    const start = new Date("2022-10-30");
     const end = new Date("2022-11-02");
 
     // show modal only in selected range
@@ -48,6 +49,10 @@ export default function Home({
     const ms = localStorage.getItem("modal_status");
     if (!ms) {
       localStorage.setItem("modal_status", JSON.stringify({ dt: new Date() }));
+      gtagPageView({
+        title: "MemWalk Banner",
+        location: "/",
+      });
       setModalOpen(true);
       return;
     }
@@ -61,6 +66,10 @@ export default function Home({
           "modal_status",
           JSON.stringify({ dt: new Date() })
         );
+        gtagPageView({
+          title: "MemWalk Banner",
+          location: "/",
+        });
         setModalOpen(true);
       }
     }

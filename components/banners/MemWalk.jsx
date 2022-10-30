@@ -132,7 +132,7 @@ function MemWalkBanner() {
             <h2 className="sp-text-shadow text-sp-white text-lg font-medium">
               {t("mem_walk_subtitle")}
             </h2>
-            <Link href="/mobile-app">
+            <Link href="/memory-walk-download-app">
               <a className="mt-5 inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-3 px-7 text-sp-white dark:text-sp-black">
                 <ArrowRightIcon />
                 <span className="font-semibold ml-1">
@@ -155,7 +155,7 @@ function MemWalkBanner() {
             <h2 className="sp-text-shadow text-sp-white text-sm sm:text-base font-medium mb-8">
               {t("mem_walk_subtitle")}
             </h2>
-            <Link href="/mobile-app">
+            <Link href="/memory-walk-download-app">
               <a className="inline-flex items-center bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-sp-40 py-2.5 px-7 text-sp-white dark:text-sp-black">
                 <ArrowRightIcon />
                 <span className="font-semibold text-xs ml-1">
