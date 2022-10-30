@@ -38,7 +38,7 @@ export default function Home({
   function maybeOpenModal() {
     const date = new Date();
 
-    const start = new Date("2022-10-30");
+    const start = new Date("2022-10-31");
     const end = new Date("2022-11-02");
 
     // show modal only in selected range
@@ -60,7 +60,7 @@ export default function Home({
     const dt = JSON.parse(ms)?.dt;
     if (dt) {
       const diff = Math.abs(new Date() - new Date(dt));
-      // if diff > 11hrs, rounded down
+      // if diff > 8hrs, rounded down
       if (Math.floor(diff / 1000 / 3600) > 8) {
         localStorage.setItem(
           "modal_status",
