@@ -7,16 +7,16 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { MapboxSearch, SessionToken } from "@mapbox/search-js-core";
 
-import { Spinner } from "../Status";
+import { Spinner } from "../../Status";
 
-import { DeleteSpiritus } from "../../service/http/spiritus_crud";
+import { DeleteSpiritus } from "../../../service/http/spiritus_crud";
 
 export function SpiritusName({ name, setName, surname, setSurname }) {
   const { t } = useTranslation("common");
 
   return (
     <div>
-      <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
+      <h2 className="font-bold text-sp-black dark:text-sp-white text-xl mb-2">
         {t("edit_spiritus_title")}
       </h2>
       <div className="flex flex-col md:flex-row gap-2">
@@ -50,7 +50,7 @@ export function SpiritusDescription({ name, description, setDescription }) {
 
   return (
     <div>
-      <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
+      <h2 className="font-bold text-sp-black dark:text-sp-white text-xl mb-2">
         {t("edit_spiritus_quote")}
       </h2>
       <div className="flex flex-col md:flex-row">
@@ -93,7 +93,6 @@ export function SpiritusLocation({ location, setLocation }) {
         return result.suggestions;
       }
     } catch (err) {
-      console.log("ERR GETTING SUGGESTIONS", err);
       return [];
     }
   };
@@ -119,7 +118,6 @@ export function SpiritusLocation({ location, setLocation }) {
         setLocation(null);
       }
     } catch (err) {
-      console.log("ERR GETTING LOCATION", err);
       setLocation(null);
     } finally {
       setVisible(false);
@@ -162,7 +160,7 @@ export function SpiritusLocation({ location, setLocation }) {
 
   return (
     <div>
-      <h2 className="font-bold text-sp-black dark:text-sp-white text-2xl mb-2">
+      <h2 className="font-bold text-sp-black dark:text-sp-white text-xl mb-2">
         {t("edit_spiritus_location")}
       </h2>
       <div className="w-full">
@@ -218,7 +216,6 @@ export function DeleteSpiritusModal({ deleteId, isOpen, closeModal }) {
     } catch (error) {
       setErr(t("settings:delete_err"));
       setSubmitting(false);
-      console.log("ERR DELETING", error);
     }
   };
 

@@ -64,6 +64,9 @@
   "term_place": "Place",
   "term_story": "Story",
   "term_thanks": "Thank you!",
+  "term_images": "Images",
+  "term_guardians": "Guardians",
+  "term_delete": "Delete",
 
   "write_tribute": "Write Tribute",
   "give_rose": "Send Rose",
@@ -159,6 +162,7 @@
 
   "edit_spiritus_meta_title": "Spiritus | Edit Spiritus Content",
   "edit_spiritus_meta_desc": "Edit Spiritus content",
+  "edit_spiritus_menu_title": "Edit Spiritus",
   "edit_spiritus_date": "Dates",
   "edit_spiritus_title": "First and Last name",
   "edit_spiritus_quote": "Quote or Description",
@@ -186,5 +190,12 @@
 
   "message_error": "Error!",
   "message_success": "Success!",
-  "message_save_success": "Changes saved."
+  "message_save_success": "Changes saved.",
+  "message_save_failed": "Changes were not saved.",
+
+  "INVALID_FORMAT": "Unsupported format (use .png, .jpg)",
+  "INVALID_FILENAME": "Invalid filename",
+  "INVALID_FILE": "Invalid file",
+  "UNKNOWN_ERR": "Unknown error"
+
 }

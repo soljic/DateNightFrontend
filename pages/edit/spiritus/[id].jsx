@@ -1,87 +1,31 @@
 import { useState } from "react";
 
 import Head from "next/head";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 
-import { getSession, useSession } from "next-auth/react";
-import { CheckIcon, TrashIcon } from "@heroicons/react/outline";
-import { CalendarIcon, XIcon } from "@heroicons/react/outline";
+import { getSession } from "next-auth/react";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { getISOLocalDate } from "@wojtekmaj/date-utils";
-
 import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
-import { Alert, Spinner } from "../../../components/Status";
+import { Alert } from "../../../components/Status";
 
-import {
-  AddSpiritusImage,
-  DeleteSpiritusImage,
-  EditSpiritus,
-} from "../../../service/http/spiritus_crud";
-import {
-  ImageEditor,
-  IMG_ACTION_ADD,
-  IMG_ACTION_KEEP,
-  IMG_ACTION_REMOVE,
-} from "../../../components/ImageEditor";
 import { GetSpiritusById } from "../../../service/http/spiritus";
-import {
-  SpiritusDescription,
-  SpiritusName,
-  SpiritusLocation,
-  DeleteSpiritusModal,
-} from "../../../components/forms/EditSpiritus";
+import { DeleteSpiritusModal } from "../../../components/forms/editSpiritus/EditSpiritus";
+import { EditorLayout } from "../../../components/forms/editSpiritus/Layout";
+import { EditContent } from "../../../components/forms/editSpiritus/EditContent";
+import { EditImages } from "../../../components/forms/editSpiritus/EditImages";
 
 export default function EditSpiritusPage({ spiritus }) {
   const { t } = useTranslation("common");
-
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  // form fields
-  const [name, setName] = useState(spiritus.name);
-  const [surname, setSurname] = useState(spiritus.surname);
-  const [birth, setBirth] = useState(
-    spiritus.birth ? new Date(spiritus.birth) : null
-  );
-  const [death, setDeath] = useState(
-    spiritus.death ? new Date(spiritus.death) : null
-  );
-  const [description, setDescription] = useState(spiritus.description);
-  const [location, setLocation] = useState(spiritus.location);
-
-  const [images, setImages] = useState(() => {
-    return spiritus.images.map((img) => {
-      img.id = parseInt(img.url.split("/images/")[1].split("/")[0], 10);
-      img.file = null; // only images with IMG_ACTION_ADD have file populated
-      img.action = IMG_ACTION_KEEP;
-      return img;
-    });
-  });
-
-  const [deletedImages, setDeletedImages] = useState([]);
-
-  // true if view is waiting for BE response
-  const [pending, setPending] = useState(false);
-  const [pendingDelete, setPendingDelete] = useState(false);
-
   const [isSuccess, setIsSuccess] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
-  const clearToast = () => {
-    setToastOpen(false);
-    setToastMessage("");
-    setIsSuccess(false);
-  };
+  const [selectedMenuId, setSelectedMenuId] = useState(0);
 
-  // delete modal
   const [isOpen, setIsOpen] = useState(false);
 
-  // call from child to set deleteId and open modal
   function openModal() {
     setIsOpen(true);
   }
@@ -90,80 +34,48 @@ export default function EditSpiritusPage({ spiritus }) {
     setIsOpen(false);
   }
 
-  // update spiritus FLOW:
-  // 1. update spiritus content
-  // 2. try to add new images
-  // 3. tryo to delete images
-  // 4. refresh page to load new image data
-  const update = async () => {
-    try {
-      setPending(true);
+  function onDelete() {
+    openModal();
+  }
 
-      const body = {
-        id: spiritus.id, // id required for BE
-        name,
-        surname,
-        description,
-        birth: birth ? getISOLocalDate(birth) : null,
-        death: death ? getISOLocalDate(death) : null,
-        location: {
-          // must re-parse, location from BE uses "id" field
-          // which would break the edit request if present
-          longitude: location.longitude,
-          latitude: location.latitude,
-          address: location.address,
-          country: location.country,
-        },
-      };
-
-      await EditSpiritus(session.user.accessToken, body, router.locale);
-      await saveImages();
-      setPending(false);
-      setIsSuccess(true);
-      setToastMessage(t("message_save_success"));
-      setToastOpen(true);
-
-      // refresh page
-      // router.reload(window.location.pathname);
-    } catch (err) {
-      setPending(false);
-      setIsSuccess(false);
-      setToastMessage(t("message_error"));
-      setToastOpen(true);
-    }
+  const clearToast = () => {
+    setToastOpen(false);
+    setToastMessage("");
+    setIsSuccess(false);
   };
 
-  const saveImages = async () => {
-    try {
-      const form = new FormData();
-      let doAdd = false;
-      for (const img of images) {
-        if (img.action === IMG_ACTION_ADD && !img.id) {
-          form.append("files", img.file, img.file.name);
-          doAdd = true;
-        }
-      }
-      if (doAdd) {
-        await AddSpiritusImage(session.user.accessToken, spiritus.id, form);
-      }
-    } catch (err) {
-      console.log("ERROR ADDING IMAGES", err);
-    }
+  function onSuccess() {
+    setIsSuccess(true);
+    setToastMessage(t("message_save_success"));
+    setToastOpen(true);
+  }
 
-    try {
-      for (const img of deletedImages) {
-        if (img.action === IMG_ACTION_REMOVE && img.id) {
-          await DeleteSpiritusImage(
-            session.user.accessToken,
-            spiritus.id,
-            img.id
-          );
-        }
-      }
-    } catch (err) {
-      console.log("ERROR DELETING IMAGES", err);
+  function onError(message) {
+    setIsSuccess(false);
+    setToastMessage(message);
+    setToastOpen(true);
+  }
+
+  function selectEditor() {
+    switch (selectedMenuId) {
+      case 1:
+        return (
+          <EditImages
+            spiritus={spiritus}
+            onError={onError}
+            onSuccess={onSuccess}
+          />
+        );
+      default:
+        return (
+          <EditContent
+            spiritus={spiritus}
+            onError={onError}
+            onSuccess={onSuccess}
+          />
+        );
     }
-  };
+  }
 
   return (
     <LayoutNoFooter>
@@ -177,152 +89,28 @@ export default function EditSpiritusPage({ spiritus }) {
         isOpen={isOpen}
         closeModal={closeModal}
       />
-      {toastOpen && (
-        <div className="z-50 sticky top-4 max-w-md">
-          <div className="absolute">
-            <Alert
-              isSuccess={isSuccess}
-              message={toastMessage}
-              onClick={clearToast}
-            />
-          </div>
-        </div>
-      )}
-      <div className="py-5 min-h-screen mx-auto mb-64">
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={() => {
-              update();
-            }}
-            disabled={pending}
-            className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
-          >
-            {pending ? (
-              <Spinner text={""} />
-            ) : (
-              <CheckIcon className="w-6 h-6 text-green-800" />
-            )}
-          </button>
-          <button
-            onClick={openModal}
-            disabled={pendingDelete}
-            className="flex items-center justify-center rounded-full p-2 border-2 border-sp-medium"
-          >
-            {pendingDelete ? (
-              <Spinner text={""} />
-            ) : (
-              <TrashIcon className="w-6 h-6 text-red-800" />
-            )}
-          </button>
-        </div>
-        <form
-          id="editor-form"
-          className="flex flex-1 flex-col mb-10 mx-4 lg:mx-20 space-y-10 sm:space-y-10 md:space-y-8 lg:space-y-12"
-        >
-          <SpiritusName
-            name={name}
-            setName={setName}
-            surname={surname}
-            setSurname={setSurname}
-          />
-          <SpiritusDates
-            birth={birth}
-            setBirth={setBirth}
-            death={death}
-            setDeath={setDeath}
-          />
 
-          <SpiritusDescription
-            description={description}
-            setDescription={setDescription}
-          />
-          <SpiritusLocation location={location} setLocation={setLocation} />
-          <ImageEditor
-            images={images}
-            setImages={setImages}
-            setDeletedImages={setDeletedImages}
-          />
-        </form>
-        <div className="mt-16 lg:mx-20">
-          <button
-            onClick={() => {
-              update();
-            }}
-            disabled={pending}
-            className="inline-flex items-center justify-center w-full sm:w-52 py-4 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full text-sp-white dark:text-sp-black"
-          >
-            {pending ? (
-              <Spinner text={"Saving..."} />
-            ) : (
-              <span className="font-semibold tracking-wider">{t("save")}</span>
-            )}
-          </button>
-        </div>
+      <div className="relative py-5 min-h-screen mb-64">
+        {toastOpen && (
+          <div className="z-50 sticky top-8 right-0 mb-5">
+            <div className="flex justify-end">
+              <Alert
+                isSuccess={isSuccess}
+                message={toastMessage}
+                onClick={clearToast}
+              />
+            </div>
+          </div>
+        )}
+        <EditorLayout
+          menuId={selectedMenuId}
+          setMenuId={setSelectedMenuId}
+          onDelete={onDelete}
+        >
+          {selectEditor()}
+        </EditorLayout>
       </div>
     </LayoutNoFooter>
-  );
-}
-
-function SpiritusDates({ birth, setBirth, death, setDeath }) {
-  const { t } = useTranslation("common");
-
-  const DatePicker = dynamic(() =>
-    import("react-date-picker/dist/entry.nostyle").then((dp) => dp)
-  );
-
-  // I guess Suspense reduces the
-  return (
-    <div>
-      <p className="font-bold text-2xl">{t("edit_spiritus_date")}</p>
-      <div className="flex flex-col md:flex-row gap-2 mt-3">
-        <div className="w-full flex-1">
-          <label
-            htmlFor="birth"
-            className="dark:text-sp-white dark:text-opacity-75"
-          >
-            {t("create_spiritus_birth_placeholder")}
-          </label>
-          <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
-            <DatePicker
-              id="birth"
-              onChange={setBirth}
-              value={birth}
-              clearIcon={!birth ? null : <XIcon className="h-6 w-6" />}
-              dayPlaceholder="dd"
-              monthPlaceholder="mm"
-              yearPlaceholder="yyyy"
-              showLeadingZeros
-              calendarIcon={
-                <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
-              }
-            />
-          </div>
-        </div>
-        <div className="w-full flex-1">
-          <label
-            htmlFor="death"
-            className="dark:text-sp-white dark:text-opacity-75"
-          >
-            {t("create_spiritus_death_placeholder")}
-          </label>
-          <div className="my-2 rounded flex flex-col items-center border-2 border-sp-medium py-2.5">
-            <DatePicker
-              id="death"
-              onChange={setDeath}
-              value={death}
-              dayPlaceholder="dd"
-              monthPlaceholder="mm"
-              yearPlaceholder="yyyy"
-              showLeadingZeros
-              clearIcon={!death ? null : <XIcon className="h-6 w-6" />}
-              calendarIcon={
-                <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
-              }
-            />
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 

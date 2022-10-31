@@ -84,7 +84,7 @@ export function Sidebar({ selectedIndex }) {
             className={`flex w-full justify-start items-center rounded-sp-14 p-4 ${
               selectedIndex === index &&
               "bg-sp-day-50 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
-            } dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
+            } hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
           >
             {item.icon}
             <div className="ml-4">
@@ -94,9 +94,8 @@ export function Sidebar({ selectedIndex }) {
         </Link>
       ))}
       <button
-        href="/contact"
         onClick={() => logoutUser()}
-        className="flex w-full justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+        className="flex w-full justify-start items-center rounded-sp-14 p-4 hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
       >
         <div>
           <SettingsSignOutIcon />

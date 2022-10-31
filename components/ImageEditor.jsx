@@ -34,7 +34,7 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
         changed.push(img);
       } else {
         img.action = IMG_ACTION_REMOVE;
-        deleted.push(img)
+        deleted.push(img);
       }
     });
 
@@ -45,7 +45,7 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
   const onAdd = (files) => {
     const addFiles = Array.from(files).map((f) => {
       return {
-        id: null, 
+        id: null,
         file: f,
         // TODO:
         // check if this is leaking memory and refactor
@@ -87,7 +87,7 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
           >
             <PlusCircleIcon className="h-8 w-8" />
           </button>
-          <div className="grid grid-flow-row grid-cols-1 md:grid-cols-4 sm:grid-cols-2 gap-8">
+          <div className="grid grid-flow-row grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-8">
             {images.map((f, i) => {
               return (
                 <Thumbnail
@@ -106,7 +106,7 @@ export function ImageEditor({ images, setImages, setDeletedImages }) {
 }
 function Thumbnail({ imageUrl, onRemove, index }) {
   return (
-    <div className="relative h-40 w-36" id={index}>
+    <div className="relative h-40 w-36 mr-4" id={index}>
       <div className="mx-2 mt-1 rounded-lg overflow-clip">
         <img
           src={imageUrl}

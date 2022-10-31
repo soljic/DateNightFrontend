@@ -64,6 +64,9 @@
   "term_place": "Mjesto",
   "term_story": "Priča",
   "term_thanks": "Hvala!",
+  "term_images": "Slike",
+  "term_guardians": "Čuvari",
+  "term_delete": "Izbriši",
 
   "write_tribute": "Napiši Posvetu",
   "give_rose": "Pošalji ružu",
@@ -158,6 +161,7 @@
 
   "edit_spiritus_meta_title": "Spiritus | Uredi sadržaj Spiritusa",
   "edit_spiritus_meta_desc": "Uredi sadržaj Spiritusa",
+  "edit_spiritus_menu_title": "Uredi Spiritus",
   "edit_spiritus_date": "Datum priče",
   "edit_spiritus_title": "Ime i prezime",
   "edit_spiritus_quote": "Citat ili opis",
@@ -185,5 +189,11 @@
 
   "message_error": "Greška!",
   "message_success": "Izvršeno!",
-  "message_save_success": "Promjene spremljene."
+  "message_save_success": "Promjene spremljene.",
+  "message_save_failed": "Promjene nisu spremljene.",
+
+  "INVALID_FORMAT": "Nepodržan format (podržani su .png, .jpg)",
+  "INVALID_FILENAME": "Neispravan naziv datoteke",
+  "INVALID_FILE": "Neispravna datoteka",
+  "UNKNOWN_ERR": "Nepoznata greška"
 }

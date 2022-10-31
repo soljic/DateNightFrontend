@@ -87,7 +87,7 @@ export function Alert({ isSuccess, message, onClick }) {
             <p className="font-bold">{isSuccess ? t("message_success"): t("message_error")}</p>
           </div>
           <div className="break-words">
-            <p className="text-sm pr-4">
+            <p className="text-sm pr-4 whitespace-pre-line">
               {message}
             </p>
           </div>
