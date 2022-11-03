@@ -65,11 +65,11 @@ export function SpiritusOverview({
             </h2>
           </a>
         </Link>
-        {!!description && (
+        {description && description.length > 0 ? (
           <p className="border-l-4 pl-2 border-sp-day-900 dark:border-sp-fawn">
             {`"${description}"`}
           </p>
-        )}
+        ) : null}
       </div>
     </div>
   );

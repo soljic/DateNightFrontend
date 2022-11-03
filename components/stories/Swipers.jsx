@@ -268,6 +268,14 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
             spaceBetween={30}
             slidesPerView={3}
             slidesPerGroup={2}
+            breakpoints={{
+              340: {
+                slidesPerView: 2,
+              },
+              759: {
+                slidesPerView: 3,
+              },
+            }}
           >
             {categories.map((c, i) => {
               return (
