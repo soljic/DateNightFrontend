@@ -68,13 +68,13 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
           */}
       </div>
 
-      <div className="grid grid-cols-1 gap-y-10 gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:gap-x-10 mb-14">
+      <div className="grid grid-cols-1 gap-y-10 gap-x-5 sm:grid-cols-2 md:grid-cols-3 md:gap-x-7 lg:grid-cols-3 xl:gap-x-8 mb-14">
         {!!items &&
           items.map((item) => {
             if (item.imageUrl) {
               return (
                 <SectionTile
-                  key={item.itemId}
+                  key={`tile-${item.itemId}`}
                   itemId={item.itemId}
                   title={item.title}
                   subtitle={item.subtitle}
@@ -85,9 +85,12 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
             }
             return (
               <PlaceHolderTile
-                key={item.itemId}
-                story_id={item.itemId}
-                text={item.placeholderText}
+                key={`tile-${item.itemId}`}
+                itemId={item.itemId}
+                title={item.title}
+                subtitle={item.subtitle}
+                placeholderText={item.placeholderText}
+                itemType={item.itemNavigationType}
               />
             );
           })}
@@ -114,13 +117,58 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
   );
 }
 
-function PlaceHolderTile({ story_id, text }) {
-  return (
-    <Link href={`/stories/id/${story_id}`} key={story_id}>
-      <a className="flex flex-col justify-between w-full bg-gradient-to-r from-sp-dark-brown to-sp-brown h-80 mx-auto border-3 dark:border-none rounded-xl p-8">
-        <p className="text-sp-lighter dark:text-sp-white text-sm">{text}</p>
-        <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
-          <StoryHookIcon />
+function PlaceHolderTile({
+  itemId,
+  title,
+  subtitle,
+  itemType,
+  placeholderText,
+}) {
+  return itemType === "SPIRITUS_DETAILS" ? (
+    <Link href={`/spiritus/${itemId}`} key={title}>
+      <a className="flex flex-col">
+        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8">
+          <p className="text-sp-medlight dark:text-sp-white">
+            {placeholderText}
+          </p>
+          <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
+            <StoryHookIcon />
+          </div>
+        </div>
+        <div className="mt-2 flex flex-col justify-between">
+          <h3 className="text-lg dark:text-sp-white">
+            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+          </h3>
+          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+            {" "}
+            {subtitle.length > 64
+              ? `${subtitle.substring(0, 64)} ...`
+              : subtitle}
+          </p>
+        </div>
+      </a>
+    </Link>
+  ) : (
+    <Link href={`/stories/${itemId}`} key={itemId}>
+      <a className="flex flex-col">
+        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8">
+          <p className="text-sp-medlight dark:text-sp-white tracking-sp-tighten">
+            {placeholderText}
+          </p>
+          <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
+            <StoryHookIcon />
+          </div>
+        </div>
+        <div className="mt-2 flex flex-col justify-between">
+          <h3 className="text-lg dark:text-sp-white">
+            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+          </h3>
+          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+            {" "}
+            {subtitle.length > 64
+              ? `${subtitle.substring(0, 64)} ...`
+              : subtitle}
+          </p>
         </div>
       </a>
     </Link>

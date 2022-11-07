@@ -8,8 +8,8 @@ export function FeaturedStory({ title, subtitle, imageUrl }) {
 
   return (
     <Link href={`/featured-story`}>
-      <a key="sow" className="rounded-sp-14 my-10 cursor-pointer">
-        <div className="relative w-full overflow-hidden rounded-sp-14">
+      <a key="sow" id="story-of-the-week" className="cursor-pointer">
+        <div className="relative w-full overflow-hidden rounded-sp-14 my-10">
           <div className="absolute bg-gradient-to-b from-transparent to-sp-black opacity-80 w-full h-full z-10" />
           {imageUrl ? (
             <Image

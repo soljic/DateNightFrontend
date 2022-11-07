@@ -43,7 +43,7 @@ export function HomepageSwiper({
 
   return (
     items && (
-      <div className="mb-10">
+      <div className="my-10">
         <div className="inline-flex w-full items-start justify-between pb-5">
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white">

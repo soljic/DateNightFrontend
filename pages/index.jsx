@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -17,8 +16,7 @@ import {
 import Layout from "../components/layout/Layout";
 
 import { GetParsedHomepage } from "../service/http/homepage";
-import { MemWalkModal, CTAMemWalk } from "../components/banners/MemWalk";
-import { gtagPageView } from "../utils/gtag";
+import { CTAMemWalk } from "../components/banners/MemWalk";
 
 export default function Home({
   featuredStory,
@@ -58,7 +56,7 @@ export default function Home({
       </Head>
       <CTAMemWalk />
       <GetSpiritusCTA />
-      <div className="flex flex-col mx-auto items-center pt-10">
+      <div className="flex flex-col mx-auto items-center pt-5">
         <CTADownloadLinks />
       </div>
       <FeaturedStory
