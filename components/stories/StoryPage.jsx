@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState, Fragment, useEffect } from "react";
+import { useState, Fragment } from "react";
+
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Dialog, Transition } from "@headlessui/react";
+import { Popover, Dialog, Transition } from "@headlessui/react";
 import Lottie from "lottie-react";
 
 import giveRose from "../giveRose.json";
@@ -18,7 +19,13 @@ import {
   ChevronRightIcon,
 } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import { LockIcon, RoseIcon, StoryHookIcon } from "../../components/Icons";
+import {
+  InfoIcon,
+  InfoIconColored,
+  LockIcon,
+  RoseIcon,
+  StoryHookIcon,
+} from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 import { LoginModal } from "../../components/auth/Login";
 
@@ -40,7 +47,10 @@ export function Tags({ tags }) {
       {tags.map((tag) => {
         return (
           // NOTE: id of category section is hardcoded...
-          <Link href={`/category/3/item/${tag.id}?title=${tag.value}`} key={`tag-${tag.id}`}>
+          <Link
+            href={`/category/3/item/${tag.id}?title=${tag.value}`}
+            key={`tag-${tag.id}`}
+          >
             <a className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base">
               {t(translateCategoryTitle(tag.value))}
             </a>
@@ -346,7 +356,7 @@ export function MoreStories({ stories, spiritus, isGuardian, isLastPage }) {
       <div className="w-full my-10 text-sp-black dark:text-sp-white">
         <div className="flex w-full justify-between mb-2 items-center">
           <h1 className="font-semibold text-2xl">{t("more_stories_text")}</h1>
-          {isGuardian && (
+          {isGuardian ? (
             <Link href={`/create/story?spiritus=${spiritus.id}`}>
               <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-3 text-sp-white dark:text-sp-black">
                 <PlusCircleIcon className="h-6 w-6" />
@@ -355,6 +365,10 @@ export function MoreStories({ stories, spiritus, isGuardian, isLastPage }) {
                 </span>
               </a>
             </Link>
+          ) : (
+            <Sources
+              sources={spiritus.sources ? spiritus.sources : []}
+            />
           )}
         </div>
         {items && items.length ? (
@@ -422,7 +436,9 @@ export function StoryHook({ slug, title, subtitle, description, date, flags }) {
           <h3 className="text-lg py-2 font-medium tracking-sp-tighten leading-5">
             {titleStr}
           </h3>
-          <p className="text-xs sm:text-sm tracking-sp-tighten leading-5">{descPara}</p>
+          <p className="text-xs sm:text-sm tracking-sp-tighten leading-5">
+            {descPara}
+          </p>
         </div>
         <div className="flex flex-col items-start">
           <p className="text-sp-lighter text-sm">{date || ""}</p>
@@ -482,4 +498,90 @@ export function CTAAddMemory({ sessionStatus, spiritusId, name }) {
       />
     </div>
   );
+}
+
+function Sources({ sources }) {
+  const [open, setOpen] = useState(false);
+
+  const closeModal = () => {
+    setOpen(false);
+  };
+  return sources && sources.length > 0 ? (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className={`
+        ${open ? "" : "text-opacity-90"}
+        z-10 inline-flex items-center rounded-sp-10 gap-2 py-2.5 px-5 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
+      >
+        <InfoIcon />
+        <span className="text-sp-black dark:text-sp-white font-semibold leading-tight tracking-sp-tighten">
+          Sources
+        </span>
+      </button>
+      <Transition appear show={open} as={Fragment}>
+        <Dialog
+          as="div"
+          className="absolute inset-0 z-100"
+          onClose={closeModal}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-90 z-40" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto z-40">
+            <div className="flex items-center justify-center min-w-full min-h-full p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full sm:3/5 md:w-1/5 transition-all transform">
+                  <div className="overflow-hidden rounded-sp-10 shadow-lg bg-sp-day-300 dark:bg-sp-black text-sp-black dark:text-sp-white">
+                    <div class="flex flex-col w-full h-full p-8">
+                      <div class="mb-5 flex flex-col items-center justify-center">
+                        <InfoIconColored width={8} height={8} />
+                        <h3 class="text-lg font-bold text-sp-medlight dark:text-sp-white">
+                          Sources
+                        </h3>
+                      </div>
+                      <ul className="flex flex-col justify-between items-start gap-2 px-8">
+                        {sources && sources.length > 0
+                          ? sources.map((text, index) => (
+                              <li
+                                class="inline-flex items-center gap-2 text-sp-medlight dark:text-sp-white"
+                                key={`sources-dialog-item-${index}`}
+                              >
+                                <div class="my-1">
+                                  <InfoIconColored width={5} height={5} />
+                                </div>
+                                <p className="text-left font-medium tracking-sp-tighter leading-5">
+                                  {text}
+                                </p>
+                              </li>
+                            ))
+                          : null}
+                      </ul>
+                    </div>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
+  ) : null;
 }
