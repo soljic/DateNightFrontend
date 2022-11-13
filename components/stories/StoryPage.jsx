@@ -261,7 +261,7 @@ export function PageActions({
       }
       return;
     } catch (err) {
-      console.log("### ERR SAVING", err);
+      // console.log("### ERR SAVING", err);
     }
   };
 
@@ -347,7 +347,7 @@ export function MoreStories({ stories, spiritus, isGuardian, isLastPage }) {
     } catch (err) {
       // TODO: handle this
       setIsLoading(false);
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -574,6 +574,13 @@ function Sources({ sources }) {
                             ))
                           : null}
                       </ul>
+                      <div className="flex items-center justify-center mt-5">
+                        <button onClick={closeModal} className="items-center w-28 p-3 rounded-full bg-sp-fawn  dark:bg-sp-medium">
+                          <span className="text-sp-black dark:text-sp-white font-semibold text-lg">
+                            OK
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </Dialog.Panel>
