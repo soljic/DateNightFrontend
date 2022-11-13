@@ -490,7 +490,7 @@ export function CTAAddMemory({ sessionStatus, spiritusId, name }) {
         )}
       </div>
       <Image
-        src={"/images/memory_cta_bg.png"}
+        src={"/images/memory_cta_alter.png"}
         alt={"Add Memories Img"}
         width={130}
         height={130}
