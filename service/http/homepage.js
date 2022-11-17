@@ -18,6 +18,7 @@ export async function GetParsedHomepage() {
     discover: {},
     categories: {},
     anniversaries: {},
+    project: {},
 
     // maybe parse memory walk to extract
     // number of spiritus near user (requires location access)
@@ -70,6 +71,13 @@ export async function GetParsedHomepage() {
         item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
         sections.featured.items.push(item);
       });
+    } else if (section.flags.includes("PROJECTS_SECTION")) {
+        const data = section.items.content[0];
+        data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
+        sections.project.section_id = section.id
+        sections.project.item_id = data.id;
+        sections.project.title = data.title;
+        sections.project.subtitle = data.subtitle;
     } else if (section.flags.includes("FEATURED_SECTION")) {
       // this is the featured story
       if (section.viewType === "FEATURED" && section.items.content.length) {

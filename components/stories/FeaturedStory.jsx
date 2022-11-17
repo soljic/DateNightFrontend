@@ -35,7 +35,7 @@ export function FeaturedStory({ title, subtitle, imageUrl }) {
             <h3 className="text-4xl xl:text-4xl md:text-2xl sm:text-xl tracking-tight font-semibold mb-2 antialiased">
               {subtitle}
             </h3>
-            <div className="inline-flex bg-sp-white text-sp-black rounded-sp-40 px-4 py-2 items-center antialiased">
+            <div className="inline-flex bg-sp-white text-sp-black font-medium rounded-sp-40 px-4 py-2 items-center antialiased">
               {t("read_story")}
             </div>
           </div>

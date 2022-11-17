@@ -196,6 +196,9 @@
   "INVALID_FORMAT": "Unsupported format (use .png, .jpg)",
   "INVALID_FILENAME": "Invalid filename",
   "INVALID_FILE": "Invalid file",
-  "UNKNOWN_ERR": "Unknown error"
+  "UNKNOWN_ERR": "Unknown error",
 
+  "term_project": "Project",
+  "project_vukovar_title": "Eternally Grateful - Vukovar",
+  "project_vukovar_subtitle": "We're saving the memories of heroes of the Homeland War, forever."
 }

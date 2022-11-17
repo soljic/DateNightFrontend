@@ -195,5 +195,9 @@
   "INVALID_FORMAT": "Nepodržan format (podržani su .png, .jpg)",
   "INVALID_FILENAME": "Neispravan naziv datoteke",
   "INVALID_FILE": "Neispravna datoteka",
-  "UNKNOWN_ERR": "Nepoznata greška"
+  "UNKNOWN_ERR": "Nepoznata greška",
+
+  "term_project": "Projekt",
+  "project_vukovar_title": "Vječno hvala - Vukovar",
+  "project_vukovar_subtitle": "Spašavamo uspomene na heroje Domovinskog rata, vječno."
 }
