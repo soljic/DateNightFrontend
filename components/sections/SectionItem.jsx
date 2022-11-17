@@ -45,7 +45,7 @@ export function ProjectItemGrid({
         </h1>
 
         {subtitle ? (
-          <h2 className="text-sp-lighter dark:text-sp-lighter mt-5 w-3/4 text-center">
+          <h2 className="text-sp-lighter dark:text-sp-lighter mt-5 w-3/5 text-center">
             {t("project_vukovar_subtitle")}
           </h2>
         ) : null}

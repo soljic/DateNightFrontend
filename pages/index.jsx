@@ -38,7 +38,6 @@ export default function Home({
   }
 
   function maybeOpenModal() {
-    setModalOpen(true);
     const date = new Date();
 
     const start = new Date("2022-11-17");
