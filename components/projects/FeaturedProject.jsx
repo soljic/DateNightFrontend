@@ -9,7 +9,7 @@ export function FeaturedProject({ project }) {
   const { t } = useTranslation(["banners", "common"]);
 
   return (
-    <Link href={`/project/${project.section_id}/item/$${project.item_id}?title=Vukovar`}>
+    <Link href={`/project/${project.section_id}/item/${project.item_id}?title=Vukovar`}>
       <a
         key="featured-project-vukovar"
         id="featured-project-vukovar"
