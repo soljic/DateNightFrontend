@@ -200,7 +200,7 @@ function PlaceHolderTile({
   return itemType === "SPIRITUS_DETAILS" ? (
     <Link href={`/spiritus/${itemId}`} key={title}>
       <a className="flex flex-col">
-        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8">
+        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8 shadow-md">
           <p className="text-sp-medlight dark:text-sp-white">
             {placeholderText}
           </p>
@@ -224,7 +224,7 @@ function PlaceHolderTile({
   ) : (
     <Link href={`/stories/${itemId}`} key={itemId}>
       <a className="flex flex-col">
-        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8">
+        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8 shadow-md">
           <p className="text-sp-medlight dark:text-sp-white tracking-sp-tighten">
             {placeholderText}
           </p>
