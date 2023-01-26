@@ -421,7 +421,7 @@ export function StoryHook({ slug, title, subtitle, description, date, flags }) {
   return (
     <Link href={`/stories/${slug}`}>
       <a className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-4 text-sp-black dark:text-sp-white">
-        <div className="flex flex-col tracking-sp-tighten">
+        <div className="flex flex-col tracking-sp-tighten overflow-hidden text-ellipsis">
           <div className="flex justify-between items-center">
             <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
               <StoryHookIcon />
@@ -433,10 +433,10 @@ export function StoryHook({ slug, title, subtitle, description, date, flags }) {
             )}
           </div>
 
-          <h3 className="text-lg py-2 font-medium tracking-sp-tighten leading-5">
+          <h3 className="text-lg py-2 font-medium tracking-sp-tighten leading-5 text-ellipsis">
             {titleStr}
           </h3>
-          <p className="text-xs sm:text-sm tracking-sp-tighten leading-5">
+          <p className="text-xs sm:text-sm tracking-sp-tighten leading-5 text-ellipsis">
             {descPara}
           </p>
         </div>
@@ -548,12 +548,12 @@ function Sources({ sources }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full sm:3/5 md:w-1/5 transition-all transform">
+                <Dialog.Panel className="w-full md:w-3/5 lg:w-2/5 transition-all transform">
                   <div className="overflow-hidden rounded-sp-10 shadow-lg bg-sp-day-300 dark:bg-sp-black text-sp-black dark:text-sp-white">
-                    <div class="flex flex-col w-full h-full p-8">
-                      <div class="mb-5 flex flex-col items-center justify-center">
+                    <div className="flex flex-col w-full h-full p-8">
+                      <div className="mb-5 flex flex-col items-center justify-center">
                         <InfoIconColored width={8} height={8} />
-                        <h3 class="text-lg font-bold text-sp-medlight dark:text-sp-white">
+                        <h3 className="text-lg font-bold text-sp-medlight dark:text-sp-white">
                           Sources
                         </h3>
                       </div>
@@ -561,10 +561,10 @@ function Sources({ sources }) {
                         {sources && sources.length > 0
                           ? sources.map((text, index) => (
                               <li
-                                class="inline-flex items-center gap-2 text-sp-medlight dark:text-sp-white"
+                                className="inline-flex items-center gap-2 text-sp-medlight dark:text-sp-white"
                                 key={`sources-dialog-item-${index}`}
                               >
-                                <div class="my-1">
+                                <div className="my-1">
                                   <InfoIconColored width={5} height={5} />
                                 </div>
                                 <p className="text-left font-medium tracking-sp-tighter leading-5">
