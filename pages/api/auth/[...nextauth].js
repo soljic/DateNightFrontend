@@ -70,17 +70,30 @@ export default NextAuth({
           ...token,
           accessToken: user.access_token,
           refreshToken: user.refresh_token,
+          expire_date: user.expire_date,
+          expires_in: user.expires_in,
+
           // add user surname and code
           surname: user.surname,
           code: user.code,
         };
       }
 
+      let expire_date = new Date(token.expire_date);
+      // token expired return empty token to invalidate session in session callback)
+      if (expire_date < new Date()) {
+        return {}
+      }
       return token;
     },
 
     async session({ session, token }) {
-      const data = jwt_decode(token.accessToken);
+      // token expired; return empty session to invalidate
+      if (!token?.accessToken) {
+        return {};
+      }
+
+      // const data = jwt_decode(token.accessToken);
       session.user.accessToken = token.accessToken;
       session.user.code = token.code;
       session.user.surname = token.surname;
