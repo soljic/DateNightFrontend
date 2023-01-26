@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -31,59 +31,6 @@ export default function Home({
 }) {
   const { t } = useTranslation("common");
 
-  let [modalOpen, setModalOpen] = useState(false);
-
-  function closeModal() {
-    setModalOpen(false);
-  }
-
-  function maybeOpenModal() {
-    const date = new Date();
-
-    const start = new Date("2022-11-17");
-    const end = new Date("2022-11-19");
-
-    // show modal only in selected range
-    if (!(date > start && date < end)) {
-      return;
-    }
-
-    const ms = localStorage.getItem("modal_status");
-    if (!ms) {
-      localStorage.setItem("modal_status", JSON.stringify({ dt: new Date() }));
-      gtagPageView({
-        title: "Vukovar Banner",
-        location: "/",
-      });
-      setModalOpen(true);
-      return;
-    }
-
-    const dt = JSON.parse(ms)?.dt;
-    if (dt) {
-      const diff = Math.abs(new Date() - new Date(dt));
-      // if diff > 8hrs, rounded down
-      if (Math.floor(diff / 1000 / 3600) > 8) {
-        localStorage.setItem(
-          "modal_status",
-          JSON.stringify({ dt: new Date() })
-        );
-        gtagPageView({
-          title: "Vukovar Banner",
-          location: "/",
-        });
-        setModalOpen(true);
-      }
-    }
-  }
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      maybeOpenModal();
-    }, 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <Layout>
       <Head>
@@ -111,10 +58,6 @@ export default function Home({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      {modalOpen ? (
-        <VukovarModal isOpen={modalOpen} closeModal={closeModal} />
-      ) : null}
-      <FeaturedProject project={featuredProject}  />
       <GetSpiritusCTA />
       <div className="flex flex-col mx-auto items-center pt-5">
         <CTADownloadLinks />
@@ -131,6 +74,7 @@ export default function Home({
         items={anniversaries.items}
         title={anniversaries.title}
       />
+      <FeaturedProject project={featuredProject} />
       <SearchSpiritusCTA />
       <CategoriesSwiper
         sectionId={categories.id}
