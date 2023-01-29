@@ -11,7 +11,7 @@ import {
   AboutIcon,
 } from "../components/layout/Icons";
 
-export default function Custom404() {
+export default function Custom400() {
   const { t } = useTranslation("settings");
 
   return (
@@ -41,18 +41,18 @@ export default function Custom404() {
             </svg>
           </div>
 
-          <h3 className="text-sp-fawn text-sm font-bold">404 ERROR</h3>
+          <h3 className="text-sp-fawn text-sm font-bold">400 Error</h3>
 
           <h1 className="text-2xl text-center font-bold">
-            {t("settings:404_title")}
+            {t("settings:400_title")}
           </h1>
 
           <h2 className="text-sm font-medium text-sp-lighter text-center">
-            {t("settings:404_subtitle")}
+            {t("settings:400_subtitle")}
           </h2>
         </div>
         <p className="text-sm font-medium text-sp-lighter mt-16 text-center">
-          {t("settings:404_subtitle_2")}
+          {t("settings:400_subtitle_2")}
         </p>
         <Nav />
       </section>

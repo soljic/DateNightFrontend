@@ -43,5 +43,9 @@
   "404_subtitle": "Stranica na koju ste došli nije pronađena",
   "404_subtitle_2": "Posjetite ove stranice:",
 
+  "400_title": "Neovlašten pristup!",
+  "400_subtitle": "Nemate potrebna ovlaštenja za pristup ovoj stranice. Pokušajte se ponovno prijeviti ili nas kontaktirajte ukoliko trebate pomoć.",
+  "400_subtitle_2": "Posjetite ove stranice:",
+
   "sign_out": "Odjavi se"
 }

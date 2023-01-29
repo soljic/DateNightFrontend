@@ -43,5 +43,9 @@
   "404_subtitle": "The page you are looking for could not be found.",
   "404_subtitle_2": "Try these pages:",
 
+  "400_title": "Unauthorized access!",
+  "400_subtitle": "You are not authorized to access this page. Please sign in to continue or contact us in case you need assistence.",
+  "400_subtitle_2": "Try these pages:",
+
   "sign_out": "Sign Out"
 }
