@@ -139,7 +139,7 @@ export function MobileNav() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className="-m-3 flex items-center rounded-sp-14 px-2 py-4 transition duration-150 ease-in-out dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                        className="-m-3 flex items-center rounded-sp-14 px-2 py-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
                       >
                         <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
                           <item.icon aria-hidden="true" fill="#ED9A4C" />
