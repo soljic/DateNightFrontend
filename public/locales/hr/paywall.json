@@ -2,6 +2,7 @@
 	"create_spiritus": "Kreiraj Spiritus",
 	"start_button": "Započni",
 	"start_button_hint": "Naplata je posljednji korak.",
+
 	"list_elem_1_title": "Unesite osnovne podatke",
 	"list_elem_1_subtitle": "Imena i datumi su obavezni za svaki Spiritus koji kreirate.",
 	"list_elem_2_title": "Dodajte fotografije i opis",
@@ -9,5 +10,11 @@
 	"list_elem_3_title": "Kupite Spiritus Memorial",
 	"list_elem_3_subtitle": "Nakon plaćanja Spiritus Memoriala, omogućit će se pisanje priča o Vašim voljenima.",
 	"list_elem_4_title": "Bit će sačuvani, zauvijek",
-	"list_elem_4_subtitle": "Omogućavamo vječno čuvanje uspomena primjenom modernih tehnologija."
+	"list_elem_4_subtitle": "Omogućavamo vječno čuvanje uspomena primjenom modernih tehnologija.",
+
+	"init_payment_title": "Spiritus je spreman!",
+	"init_payment_total": "Ukupno za naplatu:",
+	"init_payment_coupon_placeholder": "Unesite kupon kod",
+	"init_payment_button": "Nastavi na naplatu",
+	"init_payment_redirect_notice": "Bit ćete preusmjereni na stranicu za plaćanje (stripe.com)"
 }

@@ -30,6 +30,11 @@ import {
   AddPhotosIcon,
   PurchaseIcon,
   SpiritusIcon,
+  CheckmarkIcon,
+  UserOutlineIcon,
+  LocationPinIcon,
+  DescriptionTextIcon,
+  TagIcon,
 } from "../../components/Icons";
 
 import { CreateSpiritus } from "../../service/http/spiritus_crud";
@@ -58,6 +63,22 @@ import { GetDefaultProduct } from "../../service/http/payment";
 //   currency: 'EUR'
 // }
 
+const mockSpiritus = {
+  id: 1,
+  name: "Ivan",
+  surname: "Horvat",
+  description: "Spiritus Description",
+  location: {
+    address: "Zagreb, Zagreb, Hrvatska",
+    country: "Croatia",
+  },
+  images: [
+    //   {
+    //   url: "http://localhost:3000/_next/image?url=https%3A%2F%2Fwalk.spiritusapp.com%2Fimages%2F17%2Fspiritus&w=3840&q=75",
+    //   },
+  ],
+};
+
 export default function CreateSpiritusPage({ user, product }) {
   const { t } = useTranslation("common");
   const router = useRouter();
@@ -75,12 +96,13 @@ export default function CreateSpiritusPage({ user, product }) {
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState();
   const [description, setDescription] = useState("");
-  const [spiritus, setSpiritus] = useState();
   const [location, setLocation] = useState(null);
 
   // looks like this:
   // [{"file": <file wrapper>, "previewUrl": blob}]
   const [images, setImages] = useState([]);
+
+  const [spiritus, setSpiritus] = useState(mockSpiritus);
 
   const createSpiritus = async () => {
     try {
@@ -207,7 +229,12 @@ export default function CreateSpiritusPage({ user, product }) {
           ) : (
             <>
               {spiritus ? (
-                <Success spiritus={spiritus} locale={router.locale} />
+                <InitializePayment
+                  spiritus={mockSpiritus}
+                  productCurrency={product.currency}
+                  productPrice={product.price}
+                  productId={product.pkgServerId}
+                />
               ) : (
                 <>
                   <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
@@ -279,6 +306,29 @@ function Paywall({ price, currency, acceptPaywall }) {
     currency: currency,
   });
 
+  const items = [
+    {
+      title: t("list_elem_1_title"),
+      subtitle: t("list_elem_1_subtitle"),
+      icon: <EnterInfoIcon width={8} height={8} />,
+    },
+    {
+      title: t("list_elem_2_title"),
+      subtitle: t("list_elem_2_subtitle"),
+      icon: <AddPhotosIcon width={8} height={8} />,
+    },
+    {
+      title: t("list_elem_3_title"),
+      subtitle: t("list_elem_3_subtitle"),
+      icon: <PurchaseIcon width={8} height={8} />,
+    },
+    {
+      title: t("list_elem_4_title"),
+      subtitle: t("list_elem_4_subtitle"),
+      icon: <ForeverBadgeIcon width={8} height={8} />,
+    },
+  ];
+
   return (
     <div className="flex flex-col items-center pt-24 h-screen">
       <div className="flex flex-col items-center justify-center gap-4">
@@ -288,7 +338,28 @@ function Paywall({ price, currency, acceptPaywall }) {
         <h1 className="font-bold text-sp-black dark:text-sp-white text-2xl text-center">
           {t("create_spiritus")}({priceFormatter.format(price)})
         </h1>
-        <PaywallFeatures />
+        <div className="text-sp-black dark:text-sp-white w-3/4 mt-5">
+          <ul>
+            {items.map((item) => (
+              <li
+                key={`pw-item-${item.title}`}
+                className="flex items-center p-2.5"
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12">
+                  {item.icon}
+                </div>
+                <div className="ml-4">
+                  <p className="text-lg font-semibold dark:text-sp-white">
+                    {t(item.title)}
+                  </p>
+                  <p className="dark:text-sp-white dark:text-opacity-60 text-sm">
+                    {t(item.subtitle)}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
         <button
           onClick={() => {
             acceptPaywall();
@@ -305,77 +376,55 @@ function Paywall({ price, currency, acceptPaywall }) {
   );
 }
 
-function PaywallFeatures() {
-  const { t } = useTranslation("paywall");
+// {" "}
+// <span>
+//   {" "}
+//   {spiritus.name} {spiritus.surname}
+// </span>
 
-  const items = [
-    {
-      title: t("list_elem_1_title"),
-      subtitle: t("list_elem_1_subtitle"),
-      icon: <EnterInfoIcon />,
-    },
-    {
-      title: t("list_elem_2_title"),
-      subtitle: t("list_elem_2_subtitle"),
-      icon: <AddPhotosIcon />,
-    },
-    {
-      title: t("list_elem_3_title"),
-      subtitle: t("list_elem_3_subtitle"),
-      icon: <PurchaseIcon />,
-    },
-    {
-      title: t("list_elem_4_title"),
-      subtitle: t("list_elem_4_subtitle"),
-      icon: <ForeverBadgeIcon />,
-    },
-  ];
+function InitializePayment({
+  spiritus,
+  productPrice,
+  productCurrency,
+  productId,
+}) {
+  const { t } = useTranslation("paywall", "common");
+  const priceFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: productCurrency,
+  });
 
-  return (
-    <div className="text-sp-black dark:text-sp-white w-3/4">
-      <ul className="">
-        {items.map((item) => (
-          <li key={`pw-item-${item.title}`} className="flex items-center p-2.5">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12">
-              {item.icon}
-            </div>
-            <div className="ml-4">
-              <p className="text-lg font-semibold dark:text-sp-white">
-                {t(item.title)}
-              </p>
-              <p className="dark:text-sp-white dark:text-opacity-60 text-sm">
-                {t(item.subtitle)}
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Success({ spiritus, locale }) {
-  const { t } = useTranslation("common");
   const dates = `${
     spiritus.birth ? localFormatDate(spiritus.birth, locale) : "\uE132"
   } — ${spiritus.death ? localFormatDate(spiritus.death, locale) : "\uE132"}`;
 
-  return (
-    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white">
-      <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
-        <Logo width={8} height={8} />
-      </div>
-      <h2 className="font-bold text-3xl">
-        {" "}
-        <span>
-          {" "}
-          {spiritus.name} {spiritus.surname}
-        </span>
-      </h2>
-      <p className="mt-1 text-center opacity-50 mb-5 capitalize">{dates}</p>
+  const items = [
+    {
+      title: `${spiritus.name} ${spiritus.surname}`,
+      subtitle: dates,
+      icon: <UserOutlineIcon width={8} height={8} />,
+    },
+    {
+      title: spiritus.location?.address ? spiritus.location.address : "",
+      subtitle: spiritus.location?.country ? spiritus.location.country : "",
+      icon: <LocationPinIcon width={8} height={8} />,
+    },
+    {
+      title: t("common:edit_spiritus_quote"),
+      subtitle: spiritus?.description ? spiritus.description : "",
+      icon: <DescriptionTextIcon width={8} height={8} />,
+    },
+    // {
+    //   title: t("list_elem_4_title"),
+    //   subtitle: t("list_elem_4_subtitle"),
+    //   icon: <TagIcon width={8} height={8} />,
+    // },
+  ];
 
-      {!!spiritus?.images.length && (
-        <div className="rounded-sp-14 overflow-hidden px-4">
+  return (
+    <div className="flex flex-col items-center my-4 gap-1 w-1/2 mx-auto sm:w-full md:w-1/2 dark:text-sp-white pt-24">
+      {!!spiritus?.images.length ? (
+        <div className="rounded-sp-14 overflow-hidden">
           <Image
             src={ImagePath(spiritus.images[0].url)}
             alt="Spiritus image"
@@ -384,43 +433,57 @@ function Success({ spiritus, locale }) {
             className="rounded-sp-14"
           />
         </div>
+      ) : (
+        <>
+          <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2 mb-2">
+            <CheckmarkIcon width={8} height={8} />
+          </div>
+          <h1 className="font-bold text-2xl">{t("init_payment_title")}</h1>
+        </>
       )}
-      <HorizontalDivider />
-      <div className="flex flex-col items-center gap-1 mt-5">
-        <h2 className="font-bold text-3xl">
-          {t("spiritus_success_first_story")}
-        </h2>
-        <p className="mt-1 text-center opacity-50 mb-8 w-3/4 text">
-          <span> {spiritus.name} </span> {t("spiritus_success_text")}
-        </p>
+      <div className="text-sp-black dark:text-sp-white mt-5">
+        <ul>
+          {items.map((item) => (
+            <>
+              {item.subtitle ? (
+                <li
+                  key={`pw-item-${item.title}`}
+                  className="flex items-center p-2.5"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12">
+                    {item.icon}
+                  </div>
+                  <div className="ml-4">
+                    <p className="font-semibold dark:text-sp-white">
+                      {t(item.title)}
+                    </p>
+                    <p className="dark:text-sp-white dark:text-opacity-60 text-sm">
+                      {t(item.subtitle)}
+                    </p>
+                  </div>
+                </li>
+              ) : (
+                <></>
+              )}
+            </>
+          ))}
+        </ul>
       </div>
-      <Link href={`/create/story?spiritus=${spiritus.id}`}>
-        <a className="bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-black font-medium">
-          {t("create_story")}
-        </a>
-      </Link>
-      <div className="flex mx-auto items-center justify-center gap-4 mt-8 text-sp-lighter dark:text-sp-white">
-        <Link
-          href={
-            spiritus?.slug
-              ? `/spiritus/${spiritus.slug}`
-              : `/spiritus/id/${spiritus.id}`
-          }
+
+      <div className="mt-20 flex-col space-y-1.5">
+        <div className="flex justify-between text-xl font-semibold">
+          <div>{t("init_payment_total")}</div>
+          <div>{priceFormatter.format(productPrice)}</div>
+        </div>
+        <button
+          onClick={() => {}}
+          className="font-semibold text-xl dark:text-sp-black dark:bg-sp-white px-4 py-3 rounded-sp-40 w-full border border-sp-lighter text-center"
         >
-          <a className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 p-4 gap-2">
-            <LinkIcon className="w-6 h-6" />
-            <p className="font-semibold">
-              {t("spiritus_success_link")} Spiritus
-            </p>
-          </a>
-        </Link>
-        {/* <CopyToClipboard text={spiritus.shortLink}> */}
-        <CopyToClipboard text={spiritus.shortLink}>
-          <button className="flex flex-col items-center justify-center h-24 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 p-4 gap-2">
-            <UploadIcon className="w-6 h-6" />
-            <p className="font-semibold">{t("share")} Spiritus</p>
-          </button>
-        </CopyToClipboard>
+          {t("init_payment_button")}
+        </button>
+        <p className="text-sp-black dark:text-sp-white dark:text-opacity-60 text-sm text-center">
+          {t("init_payment_redirect_notice")}
+        </p>
       </div>
     </div>
   );

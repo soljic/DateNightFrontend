@@ -26,6 +26,7 @@ const spiritus = {
   location: {
     address: "Zagreb, Zagreb, Hrvatska",
   },
+  images: [],
 };
 
 export default function SpiritusCreatedSuccess({ spiritus }) {
@@ -60,7 +61,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
           </h2>
           <p className="mt-1 text-center opacity-50 mb-5 capitalize">{dates}</p>
 
-          {!!spiritus?.images?.length && (
+          {!!spiritus?.images.length && (
             <div className="rounded-sp-14 overflow-hidden px-4">
               <Image
                 src={ImagePath(spiritus.images[0].url)}

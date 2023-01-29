@@ -19,6 +19,22 @@ export async function GetSpiritusById(id, accessToken) {
   return res;
 }
 
+export async function GetUnpaidSpiritusList(accessToken) {
+  const res = await axios.get(`${API_URL}/v2/spiritus/unpaid`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  res.data.forEach((elem) => {
+    elem.images.forEach((img) => {
+      img.url = img.url ? ImagePath(img.url) : null;
+    });
+  });
+
+  return res;
+}
+
 export async function GetSpiritusBySlug(slug, accessToken) {
   let res;
   if (accessToken) {

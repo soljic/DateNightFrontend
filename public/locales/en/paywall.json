@@ -2,6 +2,7 @@
 	"create_spiritus": "Create Spiritus",
 	"start_button": "Start",
 	"start_button_hint": "Payment is the last step in creation.",
+
 	"list_elem_1_title": "Enter basic info",
 	"list_elem_1_subtitle": "Names and dates are necessary for every Spiritus you save.",
 	"list_elem_2_title": "Add photos and description",
@@ -9,5 +10,11 @@
 	"list_elem_3_title": "Purchase your Spiritus Memory",
 	"list_elem_3_subtitle": "After payment, you can start writing stories for your loved one.",
 	"list_elem_4_title": "It will be saved, forever",
-	"list_elem_4_subtitle": "We are ensuring eternity through modern technology."
+	"list_elem_4_subtitle": "We are ensuring eternity through modern technology.",
+
+	"init_payment_title": "Spiritus Ready!",
+	"init_payment_total": "Total to pay:",
+	"init_payment_coupon_placeholder": "Enter coupon code",
+	"init_payment_button": "Proceed to payment",
+	"init_payment_redirect_notice": "You will be redirected to stripe.com to complete the payment"
 }
