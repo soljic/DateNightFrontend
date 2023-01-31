@@ -15,3 +15,28 @@ export async function GetDefaultProduct(accessToken, id) {
     }
   );
 }
+
+export async function CheckoutSpiritus(
+  accessToken,
+  spiritusId,
+  productId,
+  email
+) {
+  const loc = locale || "en";
+  const data = {
+    service: DEFAULT_PLATFORM,
+    packageId: productId,
+    email: email,
+  };
+
+  return await axios.post(
+    `${API_URL}/wapi/order/spiritus/${spiritusId}?service=${DEFAULT_PLATFORM}&packageId=${productId}`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-type": "application/json",
+      },
+    }
+  );
+}

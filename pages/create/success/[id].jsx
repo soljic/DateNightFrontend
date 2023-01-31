@@ -133,7 +133,6 @@ export async function getServerSideProps(context) {
     if (session && session?.user?.accessToken) {
       const res = await GetSpiritusById(id, session?.user?.accessToken);
       spiritus = res.data;
-      isGuardian = spiritus.flags.includes("GUARDIAN");
     } else {
       throw new Error("User is not the guardian of this spiritus");
     }
