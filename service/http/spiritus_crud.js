@@ -1,8 +1,19 @@
 import axios from "axios";
 import { API_URL } from "../constants";
 
+// uses v2/spiritus web API endpoint
 export async function CreateSpiritus(accessToken, spiritusFormData) {
   return await axios.post(`${API_URL}/wapi/spiritus`, spiritusFormData, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+
+// uses v2/spiritus mobile API endpoint
+export async function CreateSpiritusV2(accessToken, spiritusFormData) {
+  return await axios.post(`${API_URL}/v2/spiritus`, spiritusFormData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "multipart/form-data",

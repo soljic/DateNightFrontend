@@ -45,29 +45,45 @@ import { Checkout, Paywall } from "../../components/Payment";
 //   currency: 'EUR'
 // }
 
-const mockSpiritus = {
-  id: 1,
-  name: "Ivan",
-  surname: "Horvat",
-  description: "Spiritus Description",
-  location: {
-    address: "Zagreb, Zagreb, Hrvatska",
-    country: "Croatia",
-  },
-  images: [
-      {
-      url: "http://localhost:3000/_next/image?url=https%3A%2F%2Fwalk.spiritusapp.com%2Fimages%2F17%2Fspiritus&w=3840&q=75",
-      },
-  ],
-};
+// const mockSpiritus = {
+//   id: 1,
+//   name: "Ivan",
+//   surname: "Horvat",
+//   description: "Spiritus Description",
+//   location: {
+//     address: "Zagreb, Zagreb, Hrvatska",
+//     country: "Croatia",
+//   },
+//   images: [
+//     {
+//       url: "http://localhost:3000/_next/image?url=https%3A%2F%2Fwalk.spiritusapp.com%2Fimages%2F17%2Fspiritus&w=3840&q=75",
+//     },
+//   ],
+// };
+
+// const mockSpiritus = {
+//   id: 647223,
+//   name: "PETIPUT",
+//   surname: "V2MOBILEAPI",
+//   description: "Jos problema",
+//   birth: "2023-01-01",
+//   death: "2023-01-31",
+//   location: {
+//     id: 0,
+//     latitude: 45.81318664550781,
+//     longitude: 15.977176666259766,
+//     address: "Zagreb",
+//     country: "Croatia",
+//   },
+//   image: null,
+// };
 
 export default function CreateSpiritusPage({ user, product }) {
   const { t } = useTranslation("common");
 
   const [pending, setPending] = useState(false);
-  const [paywalAccepted, setPaywalAccepted] = useState(false);
 
-  // stepper is 0 indexed!
+  // stepper starts at 0
   const numSteps = 5;
   const [step, setStep] = useState(0);
 
@@ -83,7 +99,8 @@ export default function CreateSpiritusPage({ user, product }) {
   // [{"file": <file wrapper>, "previewUrl": blob}]
   const [images, setImages] = useState([]);
 
-  const [spiritus, setSpiritus] = useState(mockSpiritus);
+  const [spiritus, setSpiritus] = useState();
+  // const [spiritus, setSpiritus] = useState(mockSpiritus);
 
   const createSpiritus = async () => {
     try {
@@ -115,10 +132,6 @@ export default function CreateSpiritusPage({ user, product }) {
     }
   };
 
-  const acceptPaywall = () => {
-    setPaywalAccepted(true);
-  };
-
   const nextStep = () => {
     if (step < numSteps) {
       setStep(step + 1);
@@ -135,6 +148,15 @@ export default function CreateSpiritusPage({ user, product }) {
     switch (step) {
       case 1:
         return (
+          <SpiritusName
+            name={name}
+            setName={setName}
+            surname={surname}
+            setSurname={setSurname}
+          />
+        );
+      case 2:
+        return (
           <SpiritusDates
             name={name}
             birth={birth}
@@ -143,7 +165,7 @@ export default function CreateSpiritusPage({ user, product }) {
             setDeath={setDeath}
           />
         );
-      case 2:
+      case 3:
         return (
           <SpiritusImageUploader
             name={name}
@@ -151,7 +173,7 @@ export default function CreateSpiritusPage({ user, product }) {
             setImages={setImages}
           />
         );
-      case 3:
+      case 4:
         return (
           <SpiritusDescription
             name={name}
@@ -159,7 +181,7 @@ export default function CreateSpiritusPage({ user, product }) {
             setDescription={setDescription}
           />
         );
-      case 4:
+      case 5:
         return (
           <SpiritusLocation
             name={name}
@@ -169,11 +191,10 @@ export default function CreateSpiritusPage({ user, product }) {
         );
       default:
         return (
-          <SpiritusName
-            name={name}
-            setName={setName}
-            surname={surname}
-            setSurname={setSurname}
+          <Paywall
+            price={product.price}
+            currency={product.currency}
+            acceptPaywall={nextStep}
           />
         );
     }
@@ -200,81 +221,70 @@ export default function CreateSpiritusPage({ user, product }) {
             location,
           })}
         </p> */}
-        <div>
-          {!paywalAccepted ? (
-            <Paywall
-              price={product.price}
-              currency={product.currency}
-              acceptPaywall={acceptPaywall}
-            />
-          ) : (
-            <>
-              {spiritus ? (
-                <Checkout
-                  spiritus={mockSpiritus}
-                  productCurrency={product.currency}
-                  productPrice={product.price}
-                  productId={product.pkgServerId}
-                />
-              ) : (
-                <>
-                  <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
-                  <form id="stepper-form" className="flex flex-1 flex-col">
-                    <div className="mb-10">{showCurrentStep()}</div>
+        {spiritus ? (
+          <Checkout
+            spiritus={spiritus}
+            productCurrency={product.currency}
+            productPrice={product.price}
+            productId={product.pkgServerId}
+          />
+        ) : (
+          <>
+            <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
+            <form id="stepper-form" className="flex flex-1 flex-col">
+              <div className="mb-10">{showCurrentStep()}</div>
 
-                    <div className="flex flex-col-reverse md:flex-row justify-center mt-8 gap-2 md:gap-6">
-                      {step > 0 && (
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            prevStep();
-                          }}
-                          className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
-                            pending && "hidden"
-                          }`}
-                          disabled={pending}
-                        >
-                          {t("back")}
-                        </button>
-                      )}
-                      {step !== numSteps ? (
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            nextStep();
-                          }}
-                          disabled={!name || !surname}
-                          className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
-                            (name && surname) || "opacity-30"
-                          }`}
-                        >
-                          {t("next")}
-                        </button>
-                      ) : (
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            createSpiritus();
-                          }}
-                          disabled={pending || !location?.address}
-                          className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
-                            pending || !location?.address ? "opacity-30" : ""
-                          }`}
-                        >
-                          {pending ? (
-                            <Spinner text={t("creating")} />
-                          ) : (
-                            <span>{t("create")}</span>
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  </form>
-                </>
-              )}
-            </>
-          )}
-        </div>
+              <div className="flex flex-col-reverse md:flex-row justify-center mt-8 gap-2 md:gap-6">
+                {step > 0 && (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      prevStep();
+                    }}
+                    className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
+                      pending && "hidden"
+                    }`}
+                    disabled={pending}
+                  >
+                    {t("back")}
+                  </button>
+                )}
+                {step !== numSteps ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      nextStep();
+                    }}
+                    disabled={!name || !surname}
+                    className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
+                      (name && surname) || "opacity-30"
+                    }`}
+                  >
+                    {t("next")}
+                  </button>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      createSpiritus();
+                    }}
+                    disabled={pending || !location?.address}
+                    className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
+                      pending || !location?.address ? "opacity-30" : ""
+                    }`}
+                  >
+                    {pending ? (
+                      <Spinner text={t("creating")} />
+                    ) : (
+                      <span>{t("create")}</span>
+                    )}
+                  </button>
+                )}
+              </div>
+            </form>
+          </>
+        )}
+        {/* </div> */}
       </div>
     </LayoutNoFooter>
   );
@@ -282,7 +292,6 @@ export default function CreateSpiritusPage({ user, product }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log(session.user)
 
   if (!session) {
     return {
