@@ -18,24 +18,24 @@ import { HorizontalDivider, Logo } from "../../../components/layout/Common";
 import { ImagePath, localFormatDate } from "../../../service/util";
 import { GetSpiritusById } from "../../../service/http/spiritus";
 
-const spiritus = {
-  id: 1,
-  name: "Ivan",
-  surname: "Horvat",
-  description: "Spiritus Description",
-  location: {
-    address: "Zagreb, Zagreb, Hrvatska",
-  },
-  images: [],
-};
+// const spiritus = {
+//   id: 1,
+//   name: "Ivan",
+//   surname: "Horvat",
+//   description: "Spiritus Description",
+//   location: {
+//     address: "Zagreb, Zagreb, Hrvatska",
+//   },
+//   images: [],
+// };
 
 export default function SpiritusCreatedSuccess({ spiritus }) {
   const { t } = useTranslation("common");
   const router = useRouter();
 
   const dates = `${
-    spiritus.birth ? localFormatDate(spiritus.birth, locale) : "\uE132"
-  } — ${spiritus.death ? localFormatDate(spiritus.death, locale) : "\uE132"}`;
+    spiritus.birth ? localFormatDate(spiritus.birth, router.locale) : "\uE132"
+  } — ${spiritus.death ? localFormatDate(spiritus.death, router.locale) : "\uE132"}`;
 
   return (
     <LayoutNoFooter>
