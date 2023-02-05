@@ -10,7 +10,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import LayoutNoFooter from "../../components/layout/LayoutNoFooter";
-import { ProgressBar, Spinner } from "../../components/Status";
+import { Alert, ProgressBar, Spinner } from "../../components/Status";
 import {
   SpiritusDates,
   SpiritusDescription,
@@ -94,6 +94,8 @@ export default function CreateSpiritusPage({ user, product }) {
   const [death, setDeath] = useState();
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   // looks like this:
   // [{"file": <file wrapper>, "previewUrl": blob}]
@@ -127,7 +129,8 @@ export default function CreateSpiritusPage({ user, product }) {
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
-      console.log("GREŠKA", err);
+      const errMsg = err?.response?.data || err;
+      onError(errMsg);
       setPending(false);
     }
   };
@@ -142,6 +145,16 @@ export default function CreateSpiritusPage({ user, product }) {
     if (step > 0) {
       setStep(step - 1);
     }
+  };
+
+  function onError(message) {
+    setToastMessage(message);
+    setToastOpen(true);
+  }
+
+  const clearToast = () => {
+    setToastOpen(false);
+    setToastMessage("");
   };
 
   const showCurrentStep = () => {
@@ -232,8 +245,18 @@ export default function CreateSpiritusPage({ user, product }) {
           <>
             <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
             <form id="stepper-form" className="flex flex-1 flex-col">
+              {toastOpen && (
+                <div className="z-50 relative right-0 mb-5">
+                  <div className="flex justify-end mt-4">
+                    <Alert
+                      isSuccess={false}
+                      message={toastMessage}
+                      onClick={clearToast}
+                    />
+                  </div>
+                </div>
+              )}
               <div className="mb-10">{showCurrentStep()}</div>
-
               <div className="flex flex-col-reverse md:flex-row justify-center mt-8 gap-2 md:gap-6">
                 {step > 0 && (
                   <button
@@ -307,7 +330,7 @@ export async function getServerSideProps(context) {
     const res = await GetDefaultProduct(session?.user?.accessToken);
     productData = res.data;
   } catch {
-    // TODO: handle errs and not just redirect to 404
+    // TODO: handle errs and not just redirect to 400
     return {
       redirect: {
         destination: "/400",
