@@ -37,6 +37,7 @@
   border-radius: 10px;
   border: 3px solid #dbd4ce;
 }
+
 .ribbon {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
@@ -49,7 +50,7 @@
   height: 30px;
   overflow: hidden;
   background: linear-gradient(90deg, #d67915 0%, #ed9a4c 100%);
-  border: 3px solid #dbd4ce;
+  border: 2px solid #dbd4ce;
 }
 
 .mini-ribbon {
@@ -59,11 +60,15 @@
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
   position: absolute;
-  right: -30px;
-  width: 100px;
-  height: 25px;
+  right: -20px;
+  width: 90px;
+  height: 20px;
   overflow: hidden;
   background: linear-gradient(90deg, #d67915 0%, #ed9a4c 100%);
-  border: 3px solid #dbd4ce;
+  box-shadow: -1.41509px 1.41509px 0.943397px rgba(0, 0, 0, 0.15);
+  border: 2px solid #dbd4ce;
 }
 
+.dark .mini-ribbon {
+  border: 3px solid #171411;
+}

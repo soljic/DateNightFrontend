@@ -44,6 +44,7 @@ module.exports = {
       colors: {
         "sp-white": "#F0EFED",
         "sp-black": "#171411",
+        "sp-gray":  "#706E6B",
 
         // darkmode colors
         "sp-medium": "#302C29",
@@ -72,6 +73,7 @@ module.exports = {
 
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        fancy: ["Alegreya"],
       },
     },
   },

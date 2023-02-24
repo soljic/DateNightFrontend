@@ -150,15 +150,12 @@ export function Checkout({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("### CREATING ####");
     let res;
-    console.log("### TRY REQUEST ###");
     res = await CheckoutSpiritus(
       session?.user.accessToken,
       spiritus.id,
       productId
     );
-    console.log("CHECKOUT REQUEST", res);
     router.push(res.data);
   };
 

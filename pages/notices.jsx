@@ -2,22 +2,10 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import {
-  CTADownloadLinks,
-  GetSpiritusCTA,
-  SearchPlacesCTA,
-  SearchSpiritusCTA,
-} from "../components/stories/CTAs";
-import { FeaturedStory } from "../components/stories/FeaturedStory";
-import {
-  CategoriesSwiper,
-  HomepageSwiper,
-} from "../components/stories/Swipers";
 import Layout from "../components/layout/Layout";
 
-import { GetParsedHomepage } from "../service/http/homepage";
-import { FeaturedProject } from "../components/projects/FeaturedProject";
 import { NoticesGrid } from "../components/sections/Obituaries";
+import { GetObituaries } from "../service/http/obituary";
 
 const pavao = {
   id: 12,
@@ -59,8 +47,10 @@ const obs = [
   // pavao,
 ];
 
-export default function Notices({ isLastPage, initialItems }) {
+export default function Notices({ date, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
+
+  console.log("INITIAL ITEMS: ", initialItems);
 
   return (
     <Layout>
@@ -100,13 +90,26 @@ export default function Notices({ isLastPage, initialItems }) {
           rel="stylesheet"
         />
       </Head>
-      <NoticesGrid isLastPage={isLastPage} initialItems={initialItems} />
+      <NoticesGrid
+        date={date}
+        isLastPage={isLastPage}
+        initialItems={initialItems}
+      />
     </Layout>
   );
 }
 
 export async function getServerSideProps(context) {
-  // const { id, title } = context.query;
+  let { date } = context.query;
+
+  if (!date) {
+    // take only the date portion of the ISO string
+    date = new Date().toISOString().split("T")[0];
+  }
+
+  const obs = await GetObituaries(date);
+  console.log("DATE", date);
+  // console.log("OBS", obs.data);
 
   return {
     props: {
@@ -116,9 +119,9 @@ export async function getServerSideProps(context) {
         "settings",
         "auth",
       ])),
-      totalPages: 2,
-      isLastPage: false,
-      initialItems: obs,
+      date,
+      isLastPage: obs.data.last,
+      initialItems: obs.data.content,
     },
   };
 }
