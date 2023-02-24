@@ -2,10 +2,10 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../components/layout/Layout";
+import Layout from "../../components/layout/Layout";
 
-import { NoticesGrid } from "../components/sections/Obituaries";
-import { GetObituaries } from "../service/http/obituary";
+import { NoticesGrid } from "../../components/sections/Obituaries";
+import { GetObituaries } from "../../service/http/obituary";
 
 const pavao = {
   id: 12,
@@ -49,9 +49,6 @@ const obs = [
 
 export default function Notices({ date, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
-
-  console.log("INITIAL ITEMS: ", initialItems);
-
   return (
     <Layout>
       <Head>
@@ -100,16 +97,8 @@ export default function Notices({ date, isLastPage, initialItems }) {
 }
 
 export async function getServerSideProps(context) {
-  let { date } = context.query;
-
-  if (!date) {
-    // take only the date portion of the ISO string
-    date = new Date().toISOString().split("T")[0];
-  }
-
+  const date = new Date().toISOString().split("T")[0];
   const obs = await GetObituaries(date);
-  console.log("DATE", date);
-  // console.log("OBS", obs.data);
 
   return {
     props: {

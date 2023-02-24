@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "next-i18next";
 import dynamic from "next/dynamic";
+import { getISOLocalDate } from "@wojtekmaj/date-utils";
 
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/outline";
 
@@ -12,10 +14,13 @@ import { GetObituaries } from "../../service/http/obituary";
 
 export function NoticesGrid({ date, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
+  const router = useRouter();
+
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(initialItems);
   const [isLoading, setIsLoading] = useState(false);
+  const [switchDate, setSwitchDate] = useState(null);
 
   const DatePicker = dynamic(() =>
     import("react-date-picker/dist/entry.nostyle").then((dp) => dp)
@@ -35,10 +40,20 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
     }
   };
 
+  useEffect(() => {
+    if (switchDate) {
+      router.replace(`/notices/date/${switchDate}`).then(() => router.reload());
+    }
+  }, [switchDate]);
+
   const getNextDate = () => {
+    const now = new Date();
     const nextDate = new Date(date);
     nextDate.setDate(nextDate.getDate() + 1);
-    return nextDate.toISOString().split("T")[0];
+    if (nextDate <= now) {
+      return nextDate.toISOString().split("T")[0];
+    }
+    return now.toISOString().split("T")[0];
   };
 
   const getPrevDate = () => {
@@ -59,25 +74,28 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
 
         <div className="inline-flex mt-3 items-center gap-3">
           <div className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-1.5 px-4 text-base font-medium gap-x-4">
-            <a href={`/notices?date=${getPrevDate()}`}
-              className="text-sp-gray hover:text-sp-white">
-              <ChevronLeftIcon className="h-5 w-5" />
-            </a>
+            <Link href={`/notices/date/${getPrevDate()}`}>
+              <a className="text-sp-gray hover:text-sp-white">
+                <ChevronLeftIcon className="h-5 w-5" />
+              </a>
+            </Link>
             <DatePicker
               id="birth"
-              onChange={(date) => setDate(date)}
-              value={date}
+              onChange={(dt) => {
+                const routeDate = getISOLocalDate(dt);
+                setSwitchDate(routeDate);
+              }}
+              value={new Date(date)}
               clearIcon={null}
               calendarIcon={null}
               showLeadingZeros={true}
               format="dd.MM.yyyy"
             />
-            <a
-              href={`/notices?date=${getNextDate()}`}
-              className="text-sp-gray hover:text-sp-white"
-            >
-              <ChevronRightIcon className="h-5 w-5" />
-            </a>
+            <Link href={`/notices/date/${getNextDate()}`}>
+              <a disabled={true} className="text-sp-gray hover:text-sp-white">
+                <ChevronRightIcon className="h-5 w-5" />
+              </a>
+            </Link>
           </div>
           <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
           <button className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
