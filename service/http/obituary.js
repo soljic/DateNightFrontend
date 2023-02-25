@@ -19,20 +19,35 @@ export async function GetObituaries(date, page) {
 }
 
 export async function GetSingleObituary(id) {
-  const p = page ? page : 0;
-
   const res = await axios.get(`${API_URL}/wapi/obituary/${id}`);
 
   res.data.spiritus.images.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
 
-  res.data.obituary.religiousImage.url = res.data.obituary.religiousImage.url
-    ? ImagePath(res.data.obituary.religiousImage.url)
-    : null;
-  res.data.obituary.obituaryImage.url = res.data.obituary.obituaryImage.url
-    ? ImagePath(res.data.obituary.obituaryImage.url)
-    : null;
+  console.log("IMAGE", ImagePath(res.data.obituary.religiousImage.url));
+
+  if (res?.data?.obituary?.religiousImage) {
+    res.data.obituary.religiousImage.url = res.data.obituary.religiousImage.url
+      ? ImagePath(res.data.obituary.religiousImage.url)
+      : null;
+  }
+
+  if (res?.data?.obituary?.obituaryImage) {
+    res.data.obituary.obituaryImage.url = res.data.obituary.obituaryImage.url
+      ? ImagePath(res.data.obituary.obituaryImage.url)
+      : null;
+  }
+
+  return res;
+}
+
+export async function GetReligiousImages() {
+  const res = await axios.get(`${API_URL}/v2/partner/religious-image`);
+
+  res.data.forEach((img) => {
+    img.url = img?.url ? ImagePath(img.url) : null;
+  });
 
   return res;
 }
