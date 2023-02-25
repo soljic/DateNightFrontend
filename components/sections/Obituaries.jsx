@@ -105,7 +105,7 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-y-10 gap-x-5 sm:grid-cols-2 md:gap-x-7 mb-14">
+      <div className="w-full grid grid-cols-1 gap-y-10 gap-x-5 sm:grid-cols-2 md:gap-x-7 mb-14">
         {items.map((item, index) => (
           <ObituaryShort ob={item} key={index} />
         ))}
@@ -147,10 +147,10 @@ export function ObituaryFull({ spiritus, obituary }) {
     content[txt.type] = txt;
   });
   return (
-    <div className="w-full font-fancy hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-5 lg:p-6 bg-sp-day-50 dark:bg-sp-black">
+    <div className="w-full font-fancy hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-11">
       <div className="flex text-base font-normal tracking-sp-tighten justify-evenly gap-10">
-        <div className="flex flex-col items-center justify-start space-y-1 font-medium text-center break-words w-1/2">
-          <div className="pb-5">
+        <div className={`flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${spiritus?.images && spiritus?.images.length > 0 ? "w-1/2" : "w-4/5"}`}>
+          <div className="">
             {obituary?.religiousImage?.url ? (
               <Image
                 alt="Religious Symbol"
@@ -163,8 +163,8 @@ export function ObituaryFull({ spiritus, obituary }) {
               <ObImageIcon width={8} height={8} />
             )}
           </div>
-          <p className="px-4">{content.TOP?.text || ""}</p>
-          <h2 className="text-2xl font-medium py-1 tracking-normal">
+          <p className="px-2">{content.TOP?.text || ""}</p>
+          <h2 className="text-3xl font-medium">
             {!!spiritus.maidenName
               ? `${spiritus.name || ""} ${spiritus.surname || ""} rođ. ${
                   spiritus.maidenName || ""
@@ -172,7 +172,7 @@ export function ObituaryFull({ spiritus, obituary }) {
               : `${spiritus.name || ""} ${spiritus.surname || ""}`}
           </h2>
           {/* <p>05.10.1939 – 29.01.2023</p> */}
-          <p className="px-4">
+          <p className="px-2">
             {spiritus?.birth
               ? new Date(spiritus.birth).toLocaleDateString()
               : ""}{" "}
@@ -181,7 +181,7 @@ export function ObituaryFull({ spiritus, obituary }) {
               ? new Date(spiritus.death).toLocaleDateString()
               : ""}
           </p>
-          <p className="px-4">{content.MIDDLE?.text || ""}</p>
+          <p className="px-2">{content.MIDDLE?.text || ""}</p>
           <p className="text-xl font-medium">{content.BOLD_TEXT?.text || ""}</p>
         </div>
         {spiritus?.images && spiritus?.images.length > 0 ? (
@@ -218,7 +218,7 @@ export function ObituaryShort({ ob }) {
   const { t } = useTranslation("common");
 
   return (
-    <Link href={"/404"}>
+    <Link href={`/notices/spiritus/${ob.id}`}>
       <a className="flex hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-5 lg:p-6 bg-sp-day-50 dark:bg-sp-black">
         <div className="flex text-base font-normal tracking-sp-tighten justify-evenly gap-5 lg:gap-8 items-center min-w-[240px] min-h-[140px] ">
           <div className="flex flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
