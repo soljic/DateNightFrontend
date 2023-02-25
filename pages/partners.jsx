@@ -1,12 +1,12 @@
 import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useSession } from "next-auth/react";
 
 import Layout from "../components/layout/Layout";
 
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
+import { GetPartners } from "../service/http/obituary";
 
 const ps = [
   {
@@ -56,45 +56,52 @@ export default function Partners({ partners }) {
           className="flex flex-col justify-center items-center mt-8"
           key="obituary"
         >
-          {ps.map((p, i) => {
+          {partners.map((p, i) => {
             return (
               <div
                 key={i}
                 className="w-full lg:w-3/4 flex bg-sp-day-50 dark:bg-sp-black rounded-sp-14 border-2 border-sp-cotta/30 dark:border-sp-fawn/20 text-sp-black dark:text-sp-white"
               >
-                <div className="flex p-4">
-                  <div className="h-36 w-36 item-center overflow-hidden rounded-sp-14">
-                    <img
-                      src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg"
-                      alt=""
-                    />
+                {p.image && p.image?.url ? (
+                  <div className="flex p-4">
+                    <div className="h-36 w-36 item-center overflow-hidden rounded-sp-14">
+                      <img src={p.image.url || ""} alt="" />
+                    </div>
                   </div>
-                </div>
+                ) : null}
                 <div className="flex flex-col justify-start py-5 px-2">
                   <h5 className="mb-2 text-2xl font-bold">{p.name}</h5>
                   <ul className="list-disc ml-8">
-                    <li className="font-medium">{p.address}</li>
-                    <li className="font-medium">{p.phoneNumber}</li>
-                    <li>
-                      <a
-                        className="text-sp-cotta dark:text-sp-fawn"
-                        href={`${
-                          p.webpage.startsWith("http")
-                            ? p.webpage
-                            : "https://" + p.webpage
-                        }`}
-                      >
-                        {p.webpage}
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href={`mailto:${p.email}?subject=Contact - Spiritus Partner`}
-                        className="text-sp-cotta dark:text-sp-fawn"
-                      >
-                        {p.email}
-                      </a>
-                    </li>
+                    {!!p.address && (
+                      <li className="font-medium">{p.address}</li>
+                    )}
+                    {!!p.phoneNumber && (
+                      <li className="font-medium">{p.phoneNumber}</li>
+                    )}
+                    {!!p.webpage && (
+                      <li>
+                        <a
+                          className="text-sp-cotta dark:text-sp-fawn"
+                          href={`${
+                            p.webpage.startsWith("http")
+                              ? p.webpage
+                              : "https://" + p.webpage
+                          }`}
+                        >
+                          {p.webpage}
+                        </a>
+                      </li>
+                    )}
+                    {!!p.email && (
+                      <li>
+                        <a
+                          href={`mailto:${p.email}?subject=Contact - Spiritus Partner`}
+                          className="text-sp-cotta dark:text-sp-fawn"
+                        >
+                          {p.email}
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 </div>
               </div>
@@ -107,6 +114,8 @@ export default function Partners({ partners }) {
 }
 
 export async function getServerSideProps(context) {
+  const res = await GetPartners();
+  
   return {
     props: {
       key: `${context.locale}-notices-homepage`,
@@ -115,7 +124,7 @@ export async function getServerSideProps(context) {
         "settings",
         "auth",
       ])),
-      partners: ps,
+      partners: res.data || [],
     },
   };
 }

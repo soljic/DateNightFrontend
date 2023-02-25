@@ -51,3 +51,15 @@ export async function GetReligiousImages() {
 
   return res;
 }
+
+export async function GetPartners() {
+  const res = await axios.get(`${API_URL}/v2/organization`);
+
+  res.data.forEach((org) => {
+    if (org.image && org.image?.url) {
+      org.image.url = org.image.url ? ImagePath(org.image.url) : null;
+    }
+  });
+
+  return res;
+}
