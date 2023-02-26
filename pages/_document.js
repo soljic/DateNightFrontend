@@ -21,6 +21,17 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&amp;display=swap"
             rel="stylesheet"
           /> */}
+          {/* <!-- Google font --> */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin={""}
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500&display=swap"
+            rel="stylesheet"
+          />
           <link
             rel="stylesheet"
             href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -56,7 +67,7 @@ class MyDocument extends Document {
               <img
                 height="1"
                 width="1"
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 src={`https://www.facebook.com/tr?id=${process.env.NEXT_FACEBOOK_PIXEL_ID}&ev=PageView&noscript=1`}
               />
             </noscript>

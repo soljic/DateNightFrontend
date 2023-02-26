@@ -42,7 +42,7 @@ export function Navbar() {
           <MobileNav />
           <nav className="hidden ml-3 md:inline-flex">
             <NavItem text={t("stories")} link={"/"} />
-            <NavItem text={"Funeral Notices"} link={"/notices"} />
+            <NavItem text={t("menu_funeral_notices")} link={"/notices"} />
             <NavItem text={t("mobile")} link={"/mobile-app"} />
             <NavItem text={t("about")} link={"/about"} />
           </nav>
@@ -93,9 +93,9 @@ export function MobileNav() {
       icon: StoriesIcon,
     },
     {
-      name: "notices",
+      name: "menu_funeral_notices",
       // description: "The latest beautiful stories, memorials and anniversaries.",
-      description: "Funeral notices",
+      description: "menu_funeral_notices_desc",
       href: "/notices",
       icon: StoriesIcon,
     },

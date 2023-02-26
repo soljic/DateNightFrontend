@@ -200,5 +200,19 @@
 
   "term_project": "Project",
   "project_vukovar_title": "Eternally Grateful",
-  "project_vukovar_subtitle": "Every human life is so much more than just names and dates. Eternally Grateful is a project in which we are trying to collect and preserve memories of victims of Homeland War. If you knew our heroes, become their memory Guardian. By posting photos, anecdotes and life stories help us save the memory of them, forever."
+  "project_vukovar_subtitle": "Every human life is so much more than just names and dates. Eternally Grateful is a project in which we are trying to collect and preserve memories of victims of Homeland War. If you knew our heroes, become their memory Guardian. By posting photos, anecdotes and life stories help us save the memory of them, forever.",
+
+  "funeral_notice": "Funeral Notice",
+  "menu_funeral_notices": "Notices",
+  "menu_funeral_notices_title": "Funeral notices",
+  "menu_funeral_notices_subtitle": "See who has passed away recently.",
+  "menu_funeral_notices_desc": "View latest funeral notices and obituaries.",
+
+  "funeral_notices_partners": "Our Partners",
+  "funeral_notices_subtitle": "Funeral agencies we partner with. We are open to more partnerships. Let us know.",
+  "funeral_partner_org":  "Funeral partner organiser",
+  "see_all": "See all",
+
+  "obituary_bereaved": "Bereaved",
+  "obituary_farewell": "Farewell"
 }

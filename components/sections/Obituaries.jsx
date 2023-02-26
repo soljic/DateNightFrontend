@@ -67,19 +67,20 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
     <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
       <div className="flex flex-col items-center mb-20">
         <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-          Funeral Notices
+          {t("menu_funeral_notices_title")}
         </h1>
         <p className="text-sp-lighter dark:text-sp-lighter mt-2">
-          See who has passed away recently.
+          {t("funeral_notices_subtitle")}
         </p>
 
         <div className="inline-flex mt-3 items-center gap-3">
           <div className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-1.5 px-4 text-base font-medium gap-x-4">
-            <Link href={`/notices/date/${getPrevDate()}`}>
-              <a className="text-sp-gray hover:text-sp-white">
-                <ChevronLeftIcon className="h-5 w-5" />
-              </a>
-            </Link>
+            <a
+              href={`/notices/date/${getPrevDate()}`}
+              className="text-sp-gray hover:text-sp-white"
+            >
+              <ChevronLeftIcon className="h-5 w-5" />
+            </a>
             <DatePicker
               id="birth"
               onChange={(dt) => {
@@ -92,16 +93,20 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
               showLeadingZeros={true}
               format="dd.MM.yyyy"
             />
-            <Link href={`/notices/date/${getNextDate()}`}>
-              <a disabled={true} className="text-sp-gray hover:text-sp-white">
-                <ChevronRightIcon className="h-5 w-5" />
-              </a>
-            </Link>
+            <a
+              href={`/notices/date/${getNextDate()}`}
+              disabled={true}
+              className="text-sp-gray hover:text-sp-white"
+            >
+              <ChevronRightIcon className="h-5 w-5" />
+            </a>
           </div>
           <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
-          <button className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
-            Our Partners
-          </button>
+          <Link href="/partners">
+            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
+              {t("funeral_notices_partners")}
+            </a>
+          </Link>
         </div>
       </div>
 
@@ -147,31 +152,34 @@ export function ObituaryFull({ spiritus, obituary }) {
     content[txt.type] = txt;
   });
   return (
-    <div className="w-full font-fancy hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-11">
-      <div className="flex text-base font-normal tracking-sp-tighten justify-evenly gap-10">
-        <div className={`flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${spiritus?.images && spiritus?.images.length > 0 ? "w-1/2" : "w-4/5"}`}>
+    <div className="w-full font-fancy hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-8">
+      <div className="flex flex-col md:flex-row items-center text-base font-normal tracking-sp-tighten justify-evenly gap-10">
+        <div
+          className={`flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
+            spiritus?.images && spiritus?.images.length > 0 ? "w-1/2" : "w-4/5"
+          }`}
+        >
           <div className="">
             {obituary?.religiousImage?.url ? (
               <Image
                 alt="Religious Symbol"
                 src={obituary?.religiousImage?.url || ""}
                 className="object-contain"
-                width={65}
-                height={105}
+                width={60}
+                height={100}
               />
             ) : (
               <ObImageIcon width={8} height={8} />
             )}
           </div>
           <p className="px-2">{content.TOP?.text || ""}</p>
-          <h2 className="text-3xl font-medium">
+          <h2 className="text-3xl font-medium leading-relaxed">
             {!!spiritus.maidenName
               ? `${spiritus.name || ""} ${spiritus.surname || ""} rođ. ${
                   spiritus.maidenName || ""
                 }`
               : `${spiritus.name || ""} ${spiritus.surname || ""}`}
           </h2>
-          {/* <p>05.10.1939 – 29.01.2023</p> */}
           <p className="px-2">
             {spiritus?.birth
               ? new Date(spiritus.birth).toLocaleDateString()
@@ -190,23 +198,23 @@ export function ObituaryFull({ spiritus, obituary }) {
               <div className="ribbon"></div>
               <img
                 src={spiritus?.images[0]?.url || ""}
-                alt={title}
+                alt={"Spiritus obituary image"}
                 className="object-center h-52 w-44"
               />
             </div>
           </div>
         ) : null}
       </div>
-      <div className="mt-12 flex justify-center gap-6 text-[14px] tracking-sp-tighten font-medium">
-        <div className="w-1/2 px-2 md:px-8">
-          <h3 className="text-center text-xl">Ispraćaj</h3>
+      <div className="mt-12 flex flex-col md:flex-row justify-center items-center md:items-start gap-6 text-[14px] tracking-sp-tighten font-medium">
+        <div className="md:w-1/2 px-2 md:px-8 order-2 md:order-1">
+          <h3 className="text-center text-xl">{t("obituary_farewell")}</h3>
           <p className="text-center">{content.FAREWELL?.text || ""}</p>
         </div>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center order-1 md:order-2">
           <ObOliveIcon width={10} height={10} />
         </div>
-        <div className="w-1/2 px-2 md:px-8">
-          <h3 className="text-center text-xl">Ožalošćeni</h3>
+        <div className="md:w-1/2 px-2 md:px-8 order-3">
+          <h3 className="text-center text-xl">{t("obituary_bereaved")}</h3>
           <p className="text-center">{content.BEREAVED?.text || ""}</p>
         </div>
       </div>

@@ -199,5 +199,19 @@
 
   "term_project": "Projekt",
   "project_vukovar_title": "Vječno Hvala",
-  "project_vukovar_subtitle": "Svaki je ljudski život mnogo više od imena i datuma. Vječno Hvala je projekt u kojemu prikupljamo uspomene na žrtve Domovinskog rata. Ako ste poznavali naše heroje, postanite njihov Čuvar Uspomena. Postavite fotografije, anegdote i životne priče po kojima ćemo ih pamtiti, vječno."
+  "project_vukovar_subtitle": "Svaki je ljudski život mnogo više od imena i datuma. Vječno Hvala je projekt u kojemu prikupljamo uspomene na žrtve Domovinskog rata. Ako ste poznavali naše heroje, postanite njihov Čuvar Uspomena. Postavite fotografije, anegdote i životne priče po kojima ćemo ih pamtiti, vječno.",
+
+  "funeral_notice": "Obavijest o smrti",
+  "menu_funeral_notices": "Obavijesti",
+  "menu_funeral_notices_title": "Obavijesti o smrti",
+  "menu_funeral_notices_subtitle": "Provjeri najnovije obavijesti.",
+  "menu_funeral_notices_desc": "Pregledaj nove obavijesti o smrti.",
+
+  "funeral_notices_partners": "Partneri",
+  "funeral_notices_subtitle": "Pogrebna poduzeća s kojima surađujemo. Uvijek smo otvoreni za nove suradnje.",
+  "funeral_partner_org":  "Organizator sprovoda",
+  "see_all": "Vidi sve",
+
+  "obituary_bereaved": "Ožalošćeni",
+  "obituary_farewell": "Ispraćaj"
 }

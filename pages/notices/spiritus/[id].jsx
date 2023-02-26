@@ -20,138 +20,75 @@ import BecomeGuardianCTA from "../../../components/about/BecomeGuardianComponent
 import { HorizontalDivider } from "../../../components/layout/Common";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/outline";
-
-const obs = {
-  spiritus: {
-    id: 647247,
-    slug: "miroslav-blazevic-31a94216",
-    name: "Miroslav",
-    surname: "Blažević",
-    birth: "1935-02-10",
-    death: "2023-02-08",
-    description: "",
-    status: "APPROVED",
-    shortLink: "https://spiritus.page.link/8iF9qn7KTiNsZMGe8",
-    flags: [],
-    location: {
-      id: 14,
-      latitude: 45.08097457885742,
-      longitude: 13.642401695251465,
-      address: "Rovinj",
-      country: "Croatia",
-    },
-    users: [
-      {
-        id: 89184,
-        name: "Partner",
-        surname: "ADMIN",
-        email: "partnermanager@spiritus.app",
-        code: "67760024-eb40-4475-8402-1a580b02881c",
-      },
-    ],
-    images: [],
-    numberOfRoses: null,
-    numberOfTributes: null,
-    sources: [],
-  },
-  obituary: {
-    id: 6,
-    religiousImage: {
-      id: 2,
-      url: "/images/2/religious",
-      height: 60,
-      width: 60,
-    },
-    obituaryImage: null,
-    texts: [
-      {
-        type: "TOP",
-        templateId: 1,
-        templateLocaleId: 1,
-        text: "Lorem ipsum",
-      },
-      {
-        type: "MIDDLE",
-        templateId: 3,
-        templateLocaleId: 5,
-        text: "Amet",
-      },
-      {
-        type: "FAREWELL",
-        templateId: 5,
-        templateLocaleId: 9,
-        text: "Dolor sit",
-      },
-      {
-        type: "BEREAVED",
-        templateId: 7,
-        templateLocaleId: 13,
-        text: "Svi",
-      },
-    ],
-  },
-  organization: null,
-};
+import { ObFuneralPartner } from "../../../components/Icons";
 
 export default function SpiritusNotice({
   spiritus,
   obituary,
+  partner,
   stories,
   isLastPage,
 }) {
   const { t } = useTranslation("common");
-  const { data: session, status } = useSession();
 
   return (
     <Layout>
       <Head>
-        {/* <!-- Google font --> */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin={""}
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-        <title>{`Spiritus | Notices ${spiritus.surname} - ${spiritus.name}`}</title>
+        <title>{`Spiritus | Notice - ${spiritus.surname} ${spiritus.name}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
           content={
-            spiritus.description ||
-            `${t("meta_story_description")} ${spiritus.name} ${
-              spiritus.surname
-            }.`
+            spiritus.description || `${spiritus.name} ${spiritus.surname}.`
           }
         />
       </Head>
       <div className="flex flex-col items-center my-20">
         <h1 className="text-5xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
-          Funeral Notice
+          {t("funeral_notice")}
         </h1>
 
         <div className="inline-flex mt-3 items-center gap-3">
           <Link href={"/notices"}>
             <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-1.5 px-4 text-base font-medium gap-x-4">
-              <ArrowLeftIcon className="h-5 w-4" /> <span>See all</span>
+              <ArrowLeftIcon className="h-5 w-4" /> <span>{t("see_all")}</span>
             </a>
           </Link>
           <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
-          <button className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
-            Our Partners
-          </button>
+          <Link href="/partners">
+            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
+              {t("funeral_notices_partners")}
+            </a>
+          </Link>
         </div>
       </div>
       <section
         className="flex flex-col justify-center items-center mt-8"
         key="obituary"
       >
-        <div className="w-full lg:w-5/6 pb-8">
+        <div className="w-full lg:w-5/6 pb-12">
           <ObituaryFull spiritus={spiritus} obituary={obituary} />
         </div>
+
+        {partner && partner?.name ? (
+          <div className="flex items-center gap-2 text-sp-black/70 dark:text-sp-white/70">
+            {t("funeral_partner_org")}:{" "}
+            <span>
+              <a
+                href={
+                  partner.name.startsWith("http")
+                    ? partner.name
+                    : `https://${partner.name}`
+                }
+                target="_blank"
+                rel="noreferrer"
+                className="flex gap-2 justify-center items-center border rounded-lg py-1 px-3 text-sp-black dark:text-sp-white border-black/40 dark:border-white/40"
+              >
+                <ObFuneralPartner width={4} height={4} /> {partner.name}
+              </a>
+            </span>
+          </div>
+        ) : null}
 
         <div className="w-full md:w-3/4 lg:w-3/5 mx-auto text-sp-white mt-14 mb-4 lg:text-lg">
           <Tribute id={spiritus.id} />
@@ -169,7 +106,7 @@ export default function SpiritusNotice({
             />
             <div className="flex-1 items-center justify-center">
               <CTAAddMemory
-                sessionStatus={status}
+                sessionStatus={"unauthanticated"}
                 spiritusId={spiritus.id}
                 name={spiritus.name}
               />
@@ -200,14 +137,16 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      key: `${context.locale}-notices-homepage`,
+      key: `${context.locale}-notices-single-${id}`,
       ...(await serverSideTranslations(context.locale, [
         "common",
         "settings",
         "auth",
+        "about",
       ])),
       obituary: res.data.obituary,
       spiritus: res.data.spiritus,
+      partner: res.data.organization,
       stories,
       isLastPage: resStories.last,
     },
