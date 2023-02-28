@@ -152,7 +152,7 @@ export function ObituaryFull({ spiritus, obituary }) {
     content[txt.type] = txt;
   });
   return (
-    <div className="w-full md:w-[720px] mx-auto font-fancy items-center justify-center rounded-sp-14 border-4 border-[#948B84] dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-[60px] mb-8">
+    <div className="w-full text-sp-burgundy dark:text-sp-white md:w-[720px] mx-auto font-fancy items-center justify-center rounded-sp-14 border-4 border-[#948B84] dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-[60px] mb-8">
       <div className="flex flex-col md:flex-row text-base font-normal tracking-sp-tighten items-center md:items-start justify-between gap-10 pb-10">
         <div
           className={`w-full flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
@@ -236,7 +236,7 @@ export function ObituaryShort({ ob }) {
   return (
     <Link href={`/notices/spiritus/${ob.id}`}>
       {ob?.image?.url ? (
-        <a className="w-full hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
+        <a className="w-full text-sp-burgundy dark:text-sp-white hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
           <div className="flex items-center text-base font-normal tracking-sp-tighten gap-3 lg:gap-6 justify-between">
             <div className="flex mx-auto flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
               <div className="pb-1.5">
@@ -268,7 +268,7 @@ export function ObituaryShort({ ob }) {
           </div>
         </a>
       ) : (
-        <a className="w-full flex items-center justify-center hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
+        <a className="w-full text-sp-burgundy dark:text-sp-white flex items-center justify-center hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
           <div className="flex items-center text-base font-normal tracking-sp-tighten gap-3 lg:gap-6 justify-between">
             <div className="flex mx-auto flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
               <div className="pb-1.5">

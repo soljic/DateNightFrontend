@@ -68,7 +68,9 @@ module.exports = {
         
         // lightmode gradient
         "day-gradient-start": "#EDE1D5",
-        "day-gradient-stop": "#E8DED5"
+        "day-gradient-stop": "#E8DED5",
+
+        "sp-burgundy": "#582203"
       },
 
       fontFamily: {
