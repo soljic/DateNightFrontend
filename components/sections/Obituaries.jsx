@@ -152,11 +152,11 @@ export function ObituaryFull({ spiritus, obituary }) {
     content[txt.type] = txt;
   });
   return (
-    <div className="w-full font-fancy hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-8">
-      <div className="flex flex-col md:flex-row items-center text-base font-normal tracking-sp-tighten justify-evenly gap-10">
+    <div className="w-[355px] md:w-[720px] mx-auto font-fancy items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-[60px]">
+      <div className="flex flex-col md:flex-row text-base font-normal tracking-sp-tighten justify-between gap-10 pb-10">
         <div
           className={`flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
-            spiritus?.images && spiritus?.images.length > 0 ? "w-1/2" : "w-4/5"
+            spiritus?.images && spiritus?.images.length > 0 ? "w-2/3" : "w-4/5"
           }`}
         >
           <div className="">
@@ -165,22 +165,22 @@ export function ObituaryFull({ spiritus, obituary }) {
                 alt="Religious Symbol"
                 src={obituary?.religiousImage?.url || ""}
                 className="object-contain"
-                width={60}
-                height={100}
+                width={obituary?.religiousImage?.width || 30}
+                height={obituary?.religiousImage?.height || 50}
               />
             ) : (
               <ObImageIcon width={8} height={8} />
             )}
           </div>
-          <p className="px-2">{content.TOP?.text || ""}</p>
-          <h2 className="text-3xl font-medium leading-relaxed">
+          <p className="text-[14px]">{content.TOP?.text || ""}</p>
+          <h2 className="text-[48px] font-medium tracking-sp-tighten py-4">
             {!!spiritus.maidenName
               ? `${spiritus.name || ""} ${spiritus.surname || ""} rođ. ${
                   spiritus.maidenName || ""
                 }`
               : `${spiritus.name || ""} ${spiritus.surname || ""}`}
           </h2>
-          <p className="px-2">
+          <p className="text-[18px] leading-normal pb-2">
             {spiritus?.birth
               ? new Date(spiritus.birth).toLocaleDateString()
               : ""}{" "}
@@ -189,33 +189,41 @@ export function ObituaryFull({ spiritus, obituary }) {
               ? new Date(spiritus.death).toLocaleDateString()
               : ""}
           </p>
-          <p className="px-2">{content.MIDDLE?.text || ""}</p>
-          <p className="text-xl font-medium">{content.BOLD_TEXT?.text || ""}</p>
+          <p className="text-[14px] pb-2">{content.MIDDLE?.text || ""}</p>
+          <p className="text-[18px] font-medium">
+            {content.BOLD_TEXT?.text || ""}
+          </p>
         </div>
         {spiritus?.images && spiritus?.images.length > 0 ? (
-          <div className="h-52 w-44 relative overflow-hidden border-3 border-sp-day-200 rounded-lg">
+          <div className="h-[240px] w-[180px] relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-lg">
             <div className="overflow-hidden">
               <div className="ribbon"></div>
               <img
                 src={spiritus?.images[0]?.url || ""}
                 alt={"Spiritus obituary image"}
-                className="object-center h-52 w-44"
+                className="object-cover h-[240px] w-[180px]"
               />
             </div>
           </div>
         ) : null}
       </div>
-      <div className="mt-12 flex flex-col md:flex-row justify-center items-center md:items-start gap-6 text-[14px] tracking-sp-tighten font-medium">
+      <div className="flex flex-col md:flex-row justify-center items-start gap-10 text-[14px] tracking-sp-tighten font-medium">
         <div className="md:w-1/2 px-2 md:px-8 order-2 md:order-1">
-          <h3 className="text-center text-xl">{t("obituary_farewell")}</h3>
-          <p className="text-center">{content.FAREWELL?.text || ""}</p>
+          <h3 className="text-center text-[20px]">{t("obituary_farewell")}</h3>
+          <p className="text-center text-[14px]">
+            {content.FAREWELL?.text || ""}
+          </p>
         </div>
-        <div className="flex items-center justify-center order-1 md:order-2">
-          <ObOliveIcon width={10} height={10} />
+        <div className="flex flex-1 items-center order-1 md:order-2">
+          <div className="relative inset-0 top-8">
+            <ObOliveIcon width={10} height={10} />
+          </div>
         </div>
         <div className="md:w-1/2 px-2 md:px-8 order-3">
-          <h3 className="text-center text-xl">{t("obituary_bereaved")}</h3>
-          <p className="text-center">{content.BEREAVED?.text || ""}</p>
+          <h3 className="text-center text-[20px]">{t("obituary_bereaved")}</h3>
+          <p className="text-center text-[14px]">
+            {content.BEREAVED?.text || ""}
+          </p>
         </div>
       </div>
     </div>
