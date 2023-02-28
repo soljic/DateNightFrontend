@@ -66,9 +66,7 @@ export default function SpiritusNotice({
         className="flex flex-col justify-center items-center mt-8"
         key="obituary"
       >
-        <div className="w-full lg:w-5/6 pb-12">
-          <ObituaryFull spiritus={spiritus} obituary={obituary} />
-        </div>
+        <ObituaryFull spiritus={spiritus} obituary={obituary} />
 
         {partner && partner?.name ? (
           <div className="flex items-center gap-2 text-sp-black/70 dark:text-sp-white/70">

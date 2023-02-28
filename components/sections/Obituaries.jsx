@@ -152,14 +152,16 @@ export function ObituaryFull({ spiritus, obituary }) {
     content[txt.type] = txt;
   });
   return (
-    <div className="w-[355px] md:w-[720px] mx-auto font-fancy items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-[60px]">
-      <div className="flex flex-col md:flex-row text-base font-normal tracking-sp-tighten justify-between gap-10 pb-10">
+    <div className="w-full md:w-[720px] mx-auto font-fancy items-center justify-center rounded-sp-14 border-4 border-[#948B84] dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-[60px] mb-8">
+      <div className="flex flex-col md:flex-row text-base font-normal tracking-sp-tighten items-center md:items-start justify-between gap-10 pb-10">
         <div
-          className={`flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
-            spiritus?.images && spiritus?.images.length > 0 ? "w-2/3" : "w-4/5"
+          className={`w-full flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
+            spiritus?.images && spiritus?.images.length > 0
+              ? "md:w-3/5"
+              : ""
           }`}
         >
-          <div className="">
+          <div className="items-center flex justify-center">
             {obituary?.religiousImage?.url ? (
               <Image
                 alt="Religious Symbol"
@@ -173,23 +175,23 @@ export function ObituaryFull({ spiritus, obituary }) {
             )}
           </div>
           <p className="text-[14px]">{content.TOP?.text || ""}</p>
-          <h2 className="text-[48px] font-medium tracking-sp-tighten py-4">
+          <h2 className="text-[48px] font-medium tracking-sp-tighten leading-none py-2">
             {!!spiritus.maidenName
               ? `${spiritus.name || ""} ${spiritus.surname || ""} rođ. ${
                   spiritus.maidenName || ""
                 }`
               : `${spiritus.name || ""} ${spiritus.surname || ""}`}
           </h2>
-          <p className="text-[18px] leading-normal pb-2">
+          <p className="text-[18px] leading-normal pb-1.5">
             {spiritus?.birth
-              ? new Date(spiritus.birth).toLocaleDateString()
+              ? new Date(spiritus.birth).toLocaleDateString("hr-HR")
               : ""}{" "}
             –{" "}
             {spiritus?.death
-              ? new Date(spiritus.death).toLocaleDateString()
+              ? new Date(spiritus.death).toLocaleDateString("hr-HR")
               : ""}
           </p>
-          <p className="text-[14px] pb-2">{content.MIDDLE?.text || ""}</p>
+          <p className="text-[14px] pb-1.5">{content.MIDDLE?.text || ""}</p>
           <p className="text-[18px] font-medium">
             {content.BOLD_TEXT?.text || ""}
           </p>
@@ -207,19 +209,19 @@ export function ObituaryFull({ spiritus, obituary }) {
           </div>
         ) : null}
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-start gap-10 text-[14px] tracking-sp-tighten font-medium">
-        <div className="md:w-1/2 px-2 md:px-8 order-2 md:order-1">
+      <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-10 text-[14px] tracking-sp-tighten font-medium">
+        <div className="md:w-1/2 md:px-4 order-2 md:order-1">
           <h3 className="text-center text-[20px]">{t("obituary_farewell")}</h3>
           <p className="text-center text-[14px]">
             {content.FAREWELL?.text || ""}
           </p>
         </div>
         <div className="flex flex-1 items-center order-1 md:order-2">
-          <div className="relative inset-0 top-8">
+          <div className="relative inset-0 top-3 md:top-8">
             <ObOliveIcon width={10} height={10} />
           </div>
         </div>
-        <div className="md:w-1/2 px-2 md:px-8 order-3">
+        <div className="md:w-1/2 md:px-4 order-3">
           <h3 className="text-center text-[20px]">{t("obituary_bereaved")}</h3>
           <p className="text-center text-[14px]">
             {content.BEREAVED?.text || ""}
