@@ -156,9 +156,7 @@ export function ObituaryFull({ spiritus, obituary }) {
       <div className="flex flex-col md:flex-row text-base font-normal tracking-sp-tighten items-center md:items-start justify-between gap-10 pb-10">
         <div
           className={`w-full flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
-            spiritus?.images && spiritus?.images.length > 0
-              ? "md:w-3/5"
-              : ""
+            spiritus?.images && spiritus?.images.length > 0 ? "md:w-3/5" : ""
           }`}
         >
           <div className="items-center flex justify-center">
@@ -237,34 +235,61 @@ export function ObituaryShort({ ob }) {
 
   return (
     <Link href={`/notices/spiritus/${ob.id}`}>
-      <a className="flex hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 items-center justify-center rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-5 lg:p-6 bg-sp-day-50 dark:bg-sp-black">
-        <div className="flex text-base font-normal tracking-sp-tighten justify-evenly gap-5 lg:gap-8 items-center min-w-[240px] min-h-[140px] ">
-          <div className="flex flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
-            <div className="pb-1.5">
-              <ObImageIcon width={8} height={8} />
+      {ob?.image?.url ? (
+        <a className="w-full hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
+          <div className="flex items-center text-base font-normal tracking-sp-tighten gap-3 lg:gap-6 justify-between">
+            <div className="flex mx-auto flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
+              <div className="pb-1.5">
+                <ObImageIcon width={10} height={10} />
+              </div>
+              <h2 className="text-2xl md:text-[20px] lg:text-3xl font-medium tracking-normal leading-4">
+                {`${ob.name || ""} ${ob.surname || ""}`}
+              </h2>
+              <p className="px-2 text-[14px] md:text-lg">
+                {ob?.birth
+                  ? new Date(ob.birth).toLocaleDateString("hr-HR")
+                  : ""}{" "}
+                –{" "}
+                {ob?.death
+                  ? new Date(ob.death).toLocaleDateString("hr-HR")
+                  : ""}
+              </p>
             </div>
-            <h2 className="text-lg lg:text-2xl font-medium tracking-normal leading-4">
-              {`${ob.name || ""} ${ob.surname || ""}`}
-            </h2>
-            <p className="px-2 text-sm lg:text-lg">
-              {ob?.birth ? new Date(ob.birth).toLocaleDateString() : ""} –{" "}
-              {ob?.death ? new Date(ob.death).toLocaleDateString() : ""}
-            </p>
-          </div>
-          {ob?.image?.url ? (
-            <div className="h-32 w-28 lg:h-44 lg:w-36 relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-2xl">
+            <div className="h-[14vh] w-[11vh] relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-2xl">
               <div className="overflow-hidden">
                 <div className="mini-ribbon"></div>
                 <img
                   src={ob?.image?.url}
                   alt={"ob-image"}
-                  className="object-center h-32 w-28 lg:h-44 lg:w-36"
+                  className="object-center h-[14vh]"
                 />
               </div>
             </div>
-          ) : null}
-        </div>
-      </a>
+          </div>
+        </a>
+      ) : (
+        <a className="w-full flex items-center justify-center hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
+          <div className="flex items-center text-base font-normal tracking-sp-tighten gap-3 lg:gap-6 justify-between">
+            <div className="flex mx-auto flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
+              <div className="pb-1.5">
+                <ObImageIcon width={10} height={10} />
+              </div>
+              <h2 className="text-lg lg:text-2xl font-medium tracking-normal leading-4">
+                {`${ob.name || ""} ${ob.surname || ""}`}
+              </h2>
+              <p className="px-2 text-sm lg:text-lg">
+                {ob?.birth
+                  ? new Date(ob.birth).toLocaleDateString("hr-HR")
+                  : ""}{" "}
+                –{" "}
+                {ob?.death
+                  ? new Date(ob.death).toLocaleDateString("hr-HR")
+                  : ""}
+              </p>
+            </div>
+          </div>
+        </a>
+      )}
     </Link>
   );
 }
