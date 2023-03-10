@@ -1,6 +1,7 @@
 {
 	"create_spiritus": "Kreiraj Spiritus",
 	"create_spiritus_coupon_placeholder": "Unesi kupon",
+	"create_spiritus_coupon_invalid": "Neispravan kupon",
 	"start_button": "Započni",
 	"start_button_hint": "Naplata je posljednji korak.",
 

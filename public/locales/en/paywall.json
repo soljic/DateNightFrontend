@@ -1,6 +1,7 @@
 {
 	"create_spiritus": "Create Spiritus",
 	"create_spiritus_coupon_placeholder": "Enter a coupon",
+	"create_spiritus_coupon_invalid": "Invalid coupon",
 	"start_button": "Start",
 	"start_button_hint": "Payment is the last step in creation.",
 

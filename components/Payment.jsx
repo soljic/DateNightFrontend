@@ -19,9 +19,12 @@ import {
   TagIcon,
 } from "./Icons";
 
+import { CheckCircleIcon } from "@heroicons/react/outline";
+
 import { ImagePath, localFormatDate } from "../service/util";
 import { CheckoutSpiritus, GetCouponProduct } from "../service/http/payment";
 import { useEffect, useState } from "react";
+import { Spinner } from "./Status";
 
 export function Paywall({ price, currency, acceptPaywall }) {
   const { t } = useTranslation("paywall");
@@ -111,7 +114,13 @@ export function Checkout({
 }) {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [fetching, setFetching] = useState(false);
+
   const [coupon, setCoupon] = useState("");
+  const [couponSubtitle, setCouponSubtitle] = useState("");
+  const [isInvalid, setIsInvalid] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+
   const [id, setId] = useState(productId);
   const [price, setPrice] = useState(productPrice);
   const [currency, setCurrency] = useState(productCurrency);
@@ -153,23 +162,45 @@ export function Checkout({
 
   items = items.filter((item) => item.subtitle);
 
+  const reset = () => {
+    setId(productId);
+    setPrice(productPrice);
+    setCurrency(productCurrency);
+    setCouponSubtitle("");
+    setIsValid(false);
+  };
+
   useEffect(() => {
     const debounce = setTimeout(async () => {
+      setFetching(true);
+
       if (!coupon) {
-        setId(productId);
-        setPrice(productPrice);
-        setCurrency(productCurrency);
+        setFetching(false);
+        setIsInvalid(false);
+        reset();
         return;
       }
 
-      const res = await GetCouponProduct(session?.user.accessToken, coupon);
-      if (res?.data) {
-        setId(res.data.pkgServerId);
-        setPrice(res.data.price);
-        setCurrency(res.data.currency);
-        console.log(id, price, currency)
+      try {
+        const res = await GetCouponProduct(session?.user.accessToken, coupon);
+        if (res?.data) {
+          setIsInvalid(false);
+          setId(res.data.pkgServerId);
+          setPrice(res.data.price);
+          setCurrency(res.data.currency);
+          setCouponSubtitle(res.data.subtitle);
+          setIsValid(true)
+        } else {
+          setIsInvalid(true);
+          reset();
+        }
+      } catch (e) {
+        setIsInvalid(true);
+        reset();
       }
-    }, 300);
+      
+      setFetching(false);
+    }, 1000);
 
     return () => clearTimeout(debounce);
   }, [coupon]);
@@ -177,16 +208,21 @@ export function Checkout({
   const handleSubmit = async (event) => {
     event.preventDefault();
     let res;
-    res = await CheckoutSpiritus(session?.user.accessToken, spiritus.id, id, coupon);
+    res = await CheckoutSpiritus(
+      session?.user.accessToken,
+      spiritus.id,
+      id,
+      coupon
+    );
     router.push(res.data);
   };
 
   return (
     <div
-      className="flex flex-col justify-center items-center dark:text-sp-white p-24"
+      className="flex flex-col justify-center items-center dark:text-sp-white m-24"
       key="checkout-init-screen"
     >
-      <div className="flex flex-col items-center justify-center rounded-sp-14 shadow py-14 w-full space-y-4">
+      <div className="flex flex-col items-center justify-center py-14 w-full space-y-4">
         <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2">
           <CheckmarkIcon width={8} height={8} />
         </div>
@@ -230,48 +266,73 @@ export function Checkout({
                 <TagIcon width={8} height={8} />
               </div>
               <div className="ml-4">
-                <input
-                  value={coupon}
-                  onChange={(e) => {
-                    setCoupon(e.target.value);
-                  }}
-                  placeholder={t("create_spiritus_coupon_placeholder")}
-                  className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none min-w-52 rounded-sp-10 dark:text-sp-white"
-                />
+                <div className="relative">
+                  <input
+                    value={coupon}
+                    onChange={(e) => {
+                      setCoupon(e.target.value);
+                    }}
+                    placeholder={t("create_spiritus_coupon_placeholder")}
+                    className={`${
+                      coupon && isInvalid
+                        ? "border-red-400 dark:border-red-700"
+                        : "border-sp-lighter/60 dark:border-sp-medium"
+                    } p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2  appearance-none outline-none min-w-52 rounded-md dark:text-sp-white`}
+                  />
+                  {!fetching && isValid && (
+                    <CheckCircleIcon className="text-green-600 dark:text-green-400 w-5 h-5 absolute inset-y-4 right-2" />
+                  )}
+                </div>
+                {couponSubtitle && (
+                  <p className="text-sm tracking-tighter font-medium text-sp-black/70 py-0.5">
+                    {couponSubtitle}
+                  </p>
+                )}
+                {isInvalid && (
+                  <p className="text-sm font-medium text-red-400 dark:text-red-700">
+                    {t("create_spiritus_coupon_invalid")}
+                  </p>
+                )}
               </div>
             </li>
           </ul>
         </div>
       </div>
-
-      <form
-        // action={`/api/checkout/${spiritus.id}?service=STRIPE&packageId=${productId}`}
-        // method="POST"
-        onSubmit={handleSubmit}
-        className="mt-20 flex-col space-y-1.5"
-        key="init-checkout-form"
-      >
-        <div
-          className="flex justify-between text-xl font-semibold"
-          key="checkout-prices"
+      {!isInvalid && (
+        <form
+          // action={`/api/checkout/${spiritus.id}?service=STRIPE&packageId=${productId}`}
+          // method="POST"
+          onSubmit={handleSubmit}
+          className="mt-20 flex-col space-y-1.5 pb-14"
+          key="init-checkout-form"
         >
-          <div>{t("init_payment_total")}</div>
-          <div>{priceFormatter.format(price)}</div>
-        </div>
-        <button
-          type="submit"
-          className="font-semibold text-xl dark:text-sp-black dark:bg-sp-white px-4 py-3 rounded-sp-40 w-full border border-sp-lighter text-center"
-          key="submit-button"
-        >
-          {t("init_payment_button")}
-        </button>
-        <p
-          className="text-sp-black dark:text-sp-white dark:text-opacity-60 text-sm text-center"
-          key="redirect-notice"
-        >
-          {t("init_payment_redirect_notice")}
-        </p>
-      </form>
+          <div
+            className="flex justify-between text-xl font-semibold"
+            key="checkout-prices"
+          >
+            <div>{t("init_payment_total")}</div>
+            <div>{priceFormatter.format(price)}</div>
+          </div>
+          <button
+            type="submit"
+            disabled={fetching || isInvalid}
+            className={`${
+              fetching || isInvalid
+                ? "text-sp-black/60 dark:text-sp-black/70 border-sp-lighter/40"
+                : "dark:text-sp-black"
+            } font-semibold text-xl dark:bg-sp-white px-4 py-3 rounded-sp-40 w-full border border-sp-lighter text-center`}
+            key="submit-button"
+          >
+            {fetching ? <Spinner /> : t("init_payment_button")}
+          </button>
+          <p
+            className="text-sp-black dark:text-sp-white dark:text-opacity-60 text-sm text-center"
+            key="redirect-notice"
+          >
+            {t("init_payment_redirect_notice")}
+          </p>
+        </form>
+      )}
     </div>
   );
 }

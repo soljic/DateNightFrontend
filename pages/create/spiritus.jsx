@@ -23,60 +23,22 @@ import { CreateSpiritus } from "../../service/http/spiritus_crud";
 import { GetDefaultProduct } from "../../service/http/payment";
 import { Checkout, Paywall } from "../../components/Payment";
 
-// TODO: save stuff to local storage
-// TODO: add err handling and error toasts
-// location example:
-// {
-//   longitude: 15.977177,
-//   latitude: 45.813185,
-//   address: "Zagreb, Zagreb, Hrvatska",
-//   country: "Croatia",
-// }
-//
-// product example:
-// {
-//   id: 1,
-//   pkgServerId: 'prod_NBCX7827UTiGjU',
-//   title: '€44.99',
-//   subtitle: null,
-//   description: 'Kreiranje i pohrana digitalne uspomene na voljenu osobu!',
-//   originalPrice: 44.99,
-//   price: 44.99,
-//   currency: 'EUR'
-// }
-
-// const mockSpiritus = {
-//   id: 1,
-//   name: "Ivan",
-//   surname: "Horvat",
-//   description: "Spiritus Description",
-//   location: {
-//     address: "Zagreb, Zagreb, Hrvatska",
-//     country: "Croatia",
-//   },
-//   images: [
-//     {
-//       url: "http://localhost:3000/_next/image?url=https%3A%2F%2Fwalk.spiritusapp.com%2Fimages%2F17%2Fspiritus&w=3840&q=75",
-//     },
-//   ],
-// };
-
-// const mockSpiritus = {
-//   id: 647223,
-//   name: "PETIPUT",
-//   surname: "V2MOBILEAPI",
-//   description: "Jos problema",
-//   birth: "2023-01-01",
-//   death: "2023-01-31",
-//   location: {
-//     id: 0,
-//     latitude: 45.81318664550781,
-//     longitude: 15.977176666259766,
-//     address: "Zagreb",
-//     country: "Croatia",
-//   },
-//   images: [],
-// };
+const mockSpiritus = {
+  id: 647223,
+  name: "PETIPUT",
+  surname: "V2MOBILEAPI",
+  description: "Jos problema",
+  birth: "2023-01-01",
+  death: "2023-01-31",
+  location: {
+    id: 0,
+    latitude: 45.81318664550781,
+    longitude: 15.977176666259766,
+    address: "Zagreb",
+    country: "Croatia",
+  },
+  images: [],
+};
 
 export default function CreateSpiritusPage({ user, product }) {
   const { t } = useTranslation("common");
@@ -101,8 +63,8 @@ export default function CreateSpiritusPage({ user, product }) {
   // [{"file": <file wrapper>, "previewUrl": blob}]
   const [images, setImages] = useState([]);
 
-  const [spiritus, setSpiritus] = useState();
-  // const [spiritus, setSpiritus] = useState(mockSpiritus);
+  // const [spiritus, setSpiritus] = useState();
+  const [spiritus, setSpiritus] = useState(mockSpiritus);
 
   const createSpiritus = async () => {
     try {
