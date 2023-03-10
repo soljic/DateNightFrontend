@@ -23,22 +23,22 @@ import { CreateSpiritus } from "../../service/http/spiritus_crud";
 import { GetDefaultProduct } from "../../service/http/payment";
 import { Checkout, Paywall } from "../../components/Payment";
 
-const mockSpiritus = {
-  id: 647223,
-  name: "PETIPUT",
-  surname: "V2MOBILEAPI",
-  description: "Jos problema",
-  birth: "2023-01-01",
-  death: "2023-01-31",
-  location: {
-    id: 0,
-    latitude: 45.81318664550781,
-    longitude: 15.977176666259766,
-    address: "Zagreb",
-    country: "Croatia",
-  },
-  images: [],
-};
+// const mockSpiritus = {
+//   id: 647223,
+//   name: "PETIPUT",
+//   surname: "V2MOBILEAPI",
+//   description: "Jos problema",
+//   birth: "2023-01-01",
+//   death: "2023-01-31",
+//   location: {
+//     id: 0,
+//     latitude: 45.81318664550781,
+//     longitude: 15.977176666259766,
+//     address: "Zagreb",
+//     country: "Croatia",
+//   },
+//   images: [],
+// };
 
 export default function CreateSpiritusPage({ user, product }) {
   const { t } = useTranslation("common");
@@ -63,8 +63,8 @@ export default function CreateSpiritusPage({ user, product }) {
   // [{"file": <file wrapper>, "previewUrl": blob}]
   const [images, setImages] = useState([]);
 
-  // const [spiritus, setSpiritus] = useState();
-  const [spiritus, setSpiritus] = useState(mockSpiritus);
+  const [spiritus, setSpiritus] = useState();
+  // const [spiritus, setSpiritus] = useState(mockSpiritus);
 
   const createSpiritus = async () => {
     try {
