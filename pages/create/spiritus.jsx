@@ -75,7 +75,7 @@ import { Checkout, Paywall } from "../../components/Payment";
 //     address: "Zagreb",
 //     country: "Croatia",
 //   },
-//   image: null,
+//   images: [],
 // };
 
 export default function CreateSpiritusPage({ user, product }) {

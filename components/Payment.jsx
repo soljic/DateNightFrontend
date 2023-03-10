@@ -20,7 +20,8 @@ import {
 } from "./Icons";
 
 import { ImagePath, localFormatDate } from "../service/util";
-import { CheckoutSpiritus } from "../service/http/payment";
+import { CheckoutSpiritus, GetCouponProduct } from "../service/http/payment";
+import { useEffect, useState } from "react";
 
 export function Paywall({ price, currency, acceptPaywall }) {
   const { t } = useTranslation("paywall");
@@ -110,6 +111,10 @@ export function Checkout({
 }) {
   const router = useRouter();
   const { data: session, status } = useSession();
+  const [coupon, setCoupon] = useState("");
+  const [id, setId] = useState(productId);
+  const [price, setPrice] = useState(productPrice);
+  const [currency, setCurrency] = useState(productCurrency);
 
   const { t } = useTranslation("paywall", "common");
   const priceFormatter = new Intl.NumberFormat("en-US", {
@@ -148,30 +153,44 @@ export function Checkout({
 
   items = items.filter((item) => item.subtitle);
 
+  useEffect(() => {
+    const debounce = setTimeout(async () => {
+      if (!coupon) {
+        setId(productId);
+        setPrice(productPrice);
+        setCurrency(productCurrency);
+        return;
+      }
+
+      const res = await GetCouponProduct(session?.user.accessToken, coupon);
+      if (res?.data) {
+        setId(res.data.pkgServerId);
+        setPrice(res.data.price);
+        setCurrency(res.data.currency);
+        console.log(id, price, currency)
+      }
+    }, 300);
+
+    return () => clearTimeout(debounce);
+  }, [coupon]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     let res;
-    res = await CheckoutSpiritus(
-      session?.user.accessToken,
-      spiritus.id,
-      productId
-    );
+    res = await CheckoutSpiritus(session?.user.accessToken, spiritus.id, id, coupon);
     router.push(res.data);
   };
-
-  // TODO: remove
-  spiritus.images = [];
 
   return (
     <div
       className="flex flex-col justify-center items-center dark:text-sp-white p-24"
       key="checkout-init-screen"
     >
-      <div className="flex flex-col items-center justify-center rounded-sp-14 shadow dark:shadow-sp-fawn py-14 w-full md:w-2/3 lg:w-3/5 xl:1/2 space-y-4">
+      <div className="flex flex-col items-center justify-center rounded-sp-14 shadow py-14 w-full space-y-4">
         <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2">
           <CheckmarkIcon width={8} height={8} />
         </div>
-        <h1 className="font-bold text-2xl">{t("init_payment_title")}</h1>
+        <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
         {!!spiritus?.images.length && (
           <div className="rounded-sp-14 overflow-hidden">
             <Image
@@ -203,6 +222,24 @@ export function Checkout({
                 </div>
               </li>
             ))}
+            <li
+              key={`checkout-item-coupon`}
+              className="flex items-center p-2.5"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+                <TagIcon width={8} height={8} />
+              </div>
+              <div className="ml-4">
+                <input
+                  value={coupon}
+                  onChange={(e) => {
+                    setCoupon(e.target.value);
+                  }}
+                  placeholder={t("create_spiritus_coupon_placeholder")}
+                  className="p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2 border-sp-lighter dark:border-sp-medium appearance-none outline-none min-w-52 rounded-sp-10 dark:text-sp-white"
+                />
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -219,7 +256,7 @@ export function Checkout({
           key="checkout-prices"
         >
           <div>{t("init_payment_total")}</div>
-          <div>{priceFormatter.format(productPrice)}</div>
+          <div>{priceFormatter.format(price)}</div>
         </div>
         <button
           type="submit"
