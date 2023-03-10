@@ -100,6 +100,15 @@ export async function getServerSideProps(context) {
   const date = new Date().toISOString().split("T")[0];
   const obs = await GetObituaries(date);
 
+  if (process?.env?.NEXT_API_URL !== "https://walk.spiritusapp.com") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       key: `${context.locale}-notices-homepage`,

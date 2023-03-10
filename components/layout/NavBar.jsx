@@ -43,7 +43,9 @@ export function Navbar() {
           <nav className="hidden ml-3 md:inline-flex">
             <NavItem text={t("stories")} link={"/"} />
             <NavItem text={t("menu_funeral_notices")} link={"/notices"} />
-            <NavItem text={t("mobile")} link={"/mobile-app"} />
+            {process?.env?.NEXT_API_URL === "https://walk.spiritusapp.com" ? (
+              <NavItem text={t("mobile")} link={"/mobile-app"} />
+            ) : null}
             <NavItem text={t("about")} link={"/about"} />
           </nav>
         </div>
@@ -93,13 +95,6 @@ export function MobileNav() {
       icon: StoriesIcon,
     },
     {
-      name: "menu_funeral_notices",
-      // description: "The latest beautiful stories, memorials and anniversaries.",
-      description: "menu_funeral_notices_desc",
-      href: "/notices",
-      icon: StoriesIcon,
-    },
-    {
       name: "mobile",
       // description: "Download the app from Google Play and App Store.",
       description: "m_desc_mobile_app",
@@ -114,6 +109,39 @@ export function MobileNav() {
       icon: AboutIcon,
     },
   ];
+
+  if (process?.env?.NEXT_API_URL === "https://walk.spiritusapp.com") {
+    const menuItems = [
+      {
+        name: "stories",
+        // description: "The latest beautiful stories, memorials and anniversaries.",
+        description: "m_desc_stories",
+        href: "/",
+        icon: StoriesIcon,
+      },
+      {
+        name: "menu_funeral_notices",
+        // description: "The latest beautiful stories, memorials and anniversaries.",
+        description: "menu_funeral_notices_desc",
+        href: "/notices",
+        icon: StoriesIcon,
+      },
+      {
+        name: "mobile",
+        // description: "Download the app from Google Play and App Store.",
+        description: "m_desc_mobile_app",
+        href: "/mobile-app",
+        icon: MobileAppIcon,
+      },
+      {
+        name: "about",
+        // description: "Learn more about Spiritus and our mission.",
+        description: "m_desc_about",
+        href: "/about",
+        icon: AboutIcon,
+      },
+    ];
+  }
 
   return (
     <div className="ml-3 md:hidden sm:visible z-30">
