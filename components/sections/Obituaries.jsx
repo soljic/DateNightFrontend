@@ -197,7 +197,7 @@ export function ObituaryFull({ spiritus, obituary }) {
         {spiritus?.images && spiritus?.images.length > 0 ? (
           <div className="h-[240px] w-[180px] relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-lg">
             <div className="overflow-hidden">
-              <div className="ribbon"></div>
+              {/* <div className="ribbon"></div> */}
               <img
                 src={spiritus?.images[0]?.url || ""}
                 alt={"Spiritus obituary image"}
@@ -257,7 +257,7 @@ export function ObituaryShort({ ob }) {
             </div>
             <div className="h-[14vh] w-[11vh] relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-2xl">
               <div className="overflow-hidden">
-                <div className="mini-ribbon"></div>
+                {/* <div className="mini-ribbon"></div> */}
                 <img
                   src={ob?.image?.url}
                   alt={"ob-image"}
