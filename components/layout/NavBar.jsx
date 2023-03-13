@@ -42,10 +42,10 @@ export function Navbar() {
           <MobileNav />
           <nav className="hidden ml-3 md:inline-flex">
             <NavItem text={t("stories")} link={"/"} />
-            <NavItem text={t("menu_funeral_notices")} link={"/notices"} />
             {process?.env?.NEXT_API_URL === "https://walk.spiritusapp.com" ? (
-              <NavItem text={t("mobile")} link={"/mobile-app"} />
+              <NavItem text={t("menu_funeral_notices")} link={"/notices"} />
             ) : null}
+            <NavItem text={t("mobile")} link={"/mobile-app"} />
             <NavItem text={t("about")} link={"/about"} />
           </nav>
         </div>
