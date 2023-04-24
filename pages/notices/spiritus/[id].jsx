@@ -74,9 +74,9 @@ export default function SpiritusNotice({
             <span>
               <a
                 href={
-                  partner.name.startsWith("http")
-                    ? partner.name
-                    : `https://${partner.name}`
+                  partner.webpage.startsWith("http")
+                    ? partner.webpage
+                    : `https://${partner.webpage}`
                 }
                 target="_blank"
                 rel="noreferrer"

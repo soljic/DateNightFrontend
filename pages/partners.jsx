@@ -29,7 +29,7 @@ export default function Partners({ partners }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={"Spiritus partners"} />
       </Head>
-      <div className="h-screen">
+      <div className="min-h-screen">
         <div className="flex flex-col items-center my-20">
           <h1 className="text-5xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
             {t("funeral_notices_partners")}
