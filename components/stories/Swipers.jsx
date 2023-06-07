@@ -142,10 +142,11 @@ export function VerticalSwiper({ items, itemType, featured }) {
 
   return (
     items && (
-      <div className="flex flex-wrap space-y-6">
+      <div className="md:flex flex-wrap space-y-6 hidden">
         {items.slice(0, 3).map((item, i) => {
           return (
             <HomepageTileV2
+              key={`tile-${i}`}
               itemId={item.itemId}
               title={item.title}
               subtitle={item.subtitle}
@@ -162,18 +163,13 @@ export function VerticalSwiper({ items, itemType, featured }) {
 
 // itemType is used to calculate the link to the correct item
 // if itemType === "SPIRITUS_DETAILS" the link will point to SPIRITUS, ELSE will point to Story
-function HomepageTileV2({
-  itemId,
-  itemType,
-  title,
-  imageUrl,
-}) {
+function HomepageTileV2({ itemId, itemType, title, imageUrl }) {
   return (
     <Link
       href={
         itemType === "SPIRITUS" ? `/spiritus/${itemId}` : `/stories/${itemId}`
       }
-      key={itemId}
+      key={`link-item-elem-${itemId}`}
       className="group w-full"
     >
       <div className="w-full group-hover:opacity-75">
