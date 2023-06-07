@@ -1,0 +1,589 @@
+import { useState } from "react";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { ChevronDownIcon } from "@heroicons/react/outline";
+import { PencilIcon } from "@heroicons/react/solid";
+import { countryCodeEmoji } from "country-code-emoji";
+import countries from "i18n-iso-countries";
+import { useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
+import { Spinner } from "@/components/Status";
+
+import { SendRose } from "@/service/http/rose";
+
+import { StoryIcon } from "../Icons";
+import { SettingsCreateStoryIcon } from "../SettingsIcons";
+import {
+  AgeIcon,
+  CalendarIcon,
+  FuneralOrgIcon,
+  LinkIcon,
+  MemoryGuardianIcon,
+  MiniBioIcon,
+  PlaceIcon,
+  QuoteIcon,
+  RemindMeIcon,
+  RoseIcon,
+  ShareIcon,
+} from "./Icons";
+
+countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+countries.registerLocale(require("i18n-iso-countries/langs/hr.json"));
+
+const dateOptions = { year: "numeric", month: "short", day: "numeric" };
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export function ProfileHeader({
+  spiritus,
+  coverImages,
+  age,
+  birthDate,
+  deathDate,
+  isGuardian,
+}) {
+  const { t } = useTranslation("common");
+
+  let profileImage = null;
+  if (spiritus.profileImage && spiritus.profileImage?.url) {
+    profileImage = (
+      <Image
+        src={spiritus.profileImage.url}
+        alt="profile-image"
+        fill
+        className="block"
+      />
+    );
+    // profileImage = <Image src={spiritus.profileImage.url} alt="profile-image" width={spiritus.profileImage.width} height={spiritus.profileImage.height} className="block" />
+  } else if (spiritus.images && spiritus.images.length > 0) {
+    profileImage = (
+      <Image
+        src={spiritus.images[0].url}
+        alt="profile-image"
+        fill
+        className="block"
+      />
+    );
+    // profileImage = <Image src={spiritus.images[0].url} alt="profile-image" width={spiritus.images[0].width} height={spiritus.images[0].height} className="block" />
+  }
+
+  return (
+    <div className="relative h-full w-full overflow-hidden">
+      {spiritus.coverImage ? (
+        <Image
+          src={spiritus.coverImage.url}
+          alt="bg-image"
+          fill
+          className="block"
+        />
+      ) : (
+        coverImages &&
+        coverImages.length > 0 && (
+          <Image
+            src={coverImages[0].url}
+            alt="bg-image"
+            fill
+            className="object-center"
+          />
+        )
+      )}
+      <div className="mx-auto flex h-full w-full items-center justify-center md:w-5/6 md:justify-start lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="flex flex-col items-center gap-6 sm:flex-row">
+          {profileImage && (
+            <div className="relative h-[28vh] w-[58vw] overflow-hidden rounded-sp-10 border-2 border-white sm:h-[240px] sm:w-[200px]">
+              {profileImage}
+            </div>
+          )}
+          <div className="z-10 flex flex-col items-center justify-center drop-shadow-3xl sm:items-start">
+            <p className="text-center font-bold leading-8 text-white text-3xl sm:text-start sm:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
+            <p className="text-center font-bold leading-6 text-white text-lg sm:text-start">
+              {`${
+                birthDate
+                  ? new Intl.DateTimeFormat("hr", dateOptions).format(birthDate)
+                  : "?"
+              } - ${
+                deathDate
+                  ? new Intl.DateTimeFormat("hr", dateOptions).format(deathDate)
+                  : "?"
+              }`}
+              {age && <span className="ml-0.5">({age})</span>}
+            </p>
+            {isGuardian && (
+              <Link href={`/edit/spiritus/${spiritus.id}`} className="mt-2">
+                <button className="flex w-36 items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 font-semibold text-black text-sm">
+                  <PencilIcon className="h-6 w-6" />
+                  {t("edit_spiritus_menu_title")}
+                </button>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Tabs({ tabs }) {
+  const router = useRouter();
+
+  return (
+    <div className="mt-4 w-full">
+      <div className="px-2 sm:hidden">
+        <label htmlFor="tabs" className="sr-only">
+          Select a tab
+        </label>
+        {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
+        <select
+          id="tabs"
+          name="tabs"
+          onChange={(event) => router.push(event.target.value)}
+          className="block w-full rounded-sp-10 border border-sp-lighter bg-inherit px-2 py-2 pr-10 text-black dark:border-white dark:text-white"
+        >
+          {tabs.map((tab) => (
+            <option key={tab.name} value={tab.href} selected={tab.current}>
+              {tab.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="hidden sm:block">
+        <div className="border-b border-gray-300">
+          <nav className=" -mb-px flex space-x-8" aria-label="Tabs">
+            {tabs.map((tab) => (
+              <Link
+                key={tab.name}
+                href={tab.href}
+                className={classNames(
+                  tab.current
+                    ? "border-black dark:border-white"
+                    : "border-transparent",
+                  "whitespace-nowrap border-b-2 py-3"
+                )}
+                aria-current={tab.current ? "page" : "hr"}
+              >
+                <span className="from-day-gradient-start to-day-gradient-stop p-2 font-medium text-black hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+                  {tab.name}
+                </span>
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function About({ age, birth, death, quote, description, location }) {
+  const { t } = useTranslation("common");
+
+  const madeconia = [
+    "Macedonia",
+    "Makedonija",
+    "Sjeverna Makedonija",
+    "North Madeconia",
+  ];
+
+  let countryFlag = "";
+  if (location && location?.country) {
+    let code = countries.getAlpha2Code(location.country, "en");
+    if (!code) {
+      // fallback to croatian
+      code = countries.getAlpha2Code(location.country, "hr");
+    }
+    countryFlag = code ? countryCodeEmoji(code) : "";
+    if (!countryFlag && madeconia.includes(location.country)) {
+      countryFlag = "🇲🇰";
+    }
+  }
+
+  return (
+    <div className="overflow-hidden">
+      {
+        !!quote && <Quote quote={quote || description} />
+        // <Quote quote={quote || description} />
+      }
+      <div className="pb-1.5">
+        <h3 className="font-semibold leading-7 text-gray-900 text-lg dark:text-white">
+          {t("spiritus_about")}
+        </h3>
+      </div>
+      <dl>
+        {!!age && (
+          <div className="grid grid-cols-2 py-1.5 sm:grid-cols-3 sm:gap-4">
+            <dt className="flex gap-x-2 text-sp-day-400">
+              <AgeIcon className="h-5 w-5 fill-sp-day-400" />
+              {t("term_age")}
+            </dt>
+            <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
+              {age}
+            </dd>
+          </div>
+        )}
+        <div className="grid grid-cols-2 py-1.5 sm:grid-cols-3 sm:gap-4">
+          <dt className="flex gap-x-2 text-sp-day-400">
+            <CalendarIcon className="h-5 w-5 fill-sp-day-400" />
+            {t("create_spiritus_birth_placeholder")}
+          </dt>
+          <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
+            {birth
+              ? new Intl.DateTimeFormat("hr", dateOptions).format(birth)
+              : "?"}
+          </dd>
+        </div>
+        <div className="grid grid-cols-2 py-1.5 sm:grid-cols-3 sm:gap-4">
+          <dt className="flex gap-x-2 text-sp-day-400">
+            <CalendarIcon className="h-5 w-5 fill-sp-day-400" />
+            {t("create_spiritus_death_placeholder")}
+          </dt>
+          <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
+            {death
+              ? new Intl.DateTimeFormat("hr", dateOptions).format(death)
+              : "?"}
+          </dd>
+        </div>
+        <div className="grid grid-cols-2 py-1.5 sm:grid-cols-3 sm:gap-4">
+          <dt className="flex gap-x-2 text-sp-day-400">
+            <PlaceIcon className="h-5 w-5 fill-sp-day-400" />
+            {t("term_place")}
+          </dt>
+          <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
+            <span>
+              {location ? `${location.address}, ${location.country}` : ""}
+            </span>
+            <span className="ml-1 text-lg">{countryFlag}</span>{" "}
+          </dd>
+        </div>
+        <div className="grid grid-cols-2 py-1.5 sm:grid-cols-3 sm:gap-4">
+          <dt className="flex gap-x-2 text-sp-day-400">
+            <MiniBioIcon className="h-5 w-5 fill-sp-day-400" />
+            {t("mini_bio")}
+          </dt>
+          <dd className="col-span-2 mt-2 space-y-2 leading-normal text-gray-700 dark:text-white sm:mt-0">
+            <p>{description}</p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  );
+}
+
+export function Tributes({ spiritusId, tributes, isLastPage }) {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className="mt-6 w-full">
+      <div className="pb-2">
+        <h3 className="font-semibold leading-7 text-gray-900 text-lg dark:text-white">
+          {t("tributes_title")}
+        </h3>
+      </div>
+      <WriteTribute spiritusId={spiritusId} />
+      {tributes && tributes.length > 0 && (
+        <div className="mt-6 rounded-sp-10 border border-sp-day-200">
+          <dl className="divide-y divide-sp-day-200">
+            {tributes.map((msg, index) => {
+              return (
+                <div
+                  className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                  key={`tribute-${index}`}
+                >
+                  <dt className="font-medium leading-6 text-sp-day-400">
+                    <div className="flex items-center gap-2">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12.4 0.300049C14.1574 0.300049 15.594 1.67386 15.6944 3.40615L15.7 3.60005V8.00005H11.3L11.1061 8.00565C9.43796 8.10231 8.10225 9.43802 8.00559 11.1062L7.99999 11.3001V15.7001H3.59999C1.84254 15.7001 0.405961 14.3262 0.30559 12.594L0.299988 12.4001V3.60005C0.299988 1.8426 1.6738 0.406022 3.40609 0.305651L3.59999 0.300049H12.4ZM15.5908 9.10114C15.5056 9.36142 15.372 9.60492 15.1958 9.81818L15.0556 9.97223L9.97217 15.0557C9.72556 15.3023 9.42644 15.4843 9.10108 15.5908L9.09999 11.3001L9.10602 11.1359C9.18581 10.0544 10.0473 9.1904 11.1277 9.1067L11.3 9.10005L15.5908 9.10114Z"
+                          fill="#948B84"
+                        />
+                      </svg>
+
+                      {msg.sender}
+                    </div>
+                  </dt>
+                  <dd className="mt-1leading-6 space-y-1 text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
+                    <p>{msg.tribute}</p>
+                    <p className="text-sp-lighter/60 dark:text-sp-day-300/60">
+                      {msg.date}
+                    </p>
+                  </dd>
+                </div>
+              );
+            })}
+            {!isLastPage && (
+              <button className="flex w-full cursor-pointer flex-row items-center space-x-2 p-2 text-sp-day-400 focus:outline-none">
+                <ChevronDownIcon className="h-5 w-5" />
+                <span>{t("show_more")}</span>
+              </button>
+            )}
+          </dl>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function WriteTribute({ spiritusId }) {
+  const { t } = useTranslation("common");
+  const { data: session, status } = useSession();
+
+  const [sent, setSent] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [text, setText] = useState("");
+
+  const send = async () => {
+    try {
+      setPending(true);
+      await SendRose(spiritusId, text, session?.user?.accessToken || null);
+      // console.log(text, session?.user?.accessToken || null)
+      setSent(true);
+      setText("");
+    } catch (err) {
+      setPending(false);
+      setSent(false);
+    }
+  };
+
+  return (
+    <div className="w-full rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-6 dark:from-sp-dark-brown dark:to-sp-brown">
+      <form className="relative text-black dark:text-sp-white">
+        {sent ? (
+          <div className="flex w-full items-center justify-center">
+            <div className="inline-flex w-1/3 justify-center">
+              <RoseIcon className="h-6 w-6" />
+              <span className="ml-1 font-semibold text-sp-lighter text-lg dark:text-sp-white">
+                {t("term_thanks")}
+              </span>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="overflow-hidden rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-4 dark:bg-sp-black">
+              <label htmlFor="tribute" className="pt-2.5 font-semibold">
+                {t("write_tribute")}
+              </label>
+              <textarea
+                rows="2"
+                name="tribute"
+                id="tribute"
+                disabled={pending}
+                onChange={(event) => setText(event.target.value)}
+                className="mb-20 w-full resize-none border-0 bg-inherit py-0 font-normal text-gray-600 placeholder:text-gray-400 focus:outline-none focus:ring-0 dark:text-gray-200 sm:mb-12"
+                placeholder={t("write_tribute_placeholder")}
+              ></textarea>
+            </div>
+            <div className="absolute inset-x-px bottom-0">
+              <div className="flex items-center justify-between space-x-3 px-2 py-3 sm:px-3">
+                <div className="flex w-full flex-row justify-end space-x-2">
+                  {/* <button type="button" className="border border-sp-day-400 rounded-sp-10 flex justify-center items-center px-3 py-1.5 text-gray-900 dark:text-white">
+                <AttachmentIcon className="h-5 w-5 fill-black dark:fill-white" aria-hidden="true" />
+                <span>
+                Attach a file
+                
+                </span>
+              </button> */}
+                  <button
+                    disabled={pending || text.length === 0}
+                    onClick={() => send()}
+                    className={`${
+                      pending || text.length === 0 ? "opacity-50" : ""
+                    } w-full items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-3 py-1.5 text-center text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn md:w-40`}
+                  >
+                    {pending ? (
+                      <Spinner text={""} />
+                    ) : (
+                      <span>{t("send_tribute")}</span>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </form>
+    </div>
+  );
+}
+
+export function Quote({ quote }) {
+  return (
+    <div className="mb-6 flex items-center justify-center rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
+      <div className="flex justify-center gap-2 p-6">
+        <QuoteIcon className="h-6 w-6" />
+        <p className="font-fancy font-bold italic leading-6 text-black subpixel-antialiased text-lg tracking-wide dark:text-white">
+          {quote}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
+  const { t } = useTranslation("common");
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <div className="divide-y divide-sp-day-200 text-sm">
+      {/* share links */}
+      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+        <div className="flex items-center space-x-2.5">
+          <ShareIcon className="fill-black dark:fill-white" />
+          <h3 className=" font-semibold ">{t("share_spiritus")}</h3>
+        </div>
+        <CopyToClipboard text={shortLink} onCopy={() => setCopied(true)}>
+          <button className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center ">
+            {copied ? (
+              <div className="flex items-center justify-center">
+                <LinkIcon className="mr-2 h-4 w-4 fill-black dark:fill-white" />
+                {t("copied")}
+              </div>
+            ) : (
+              t("copy_link")
+            )}
+          </button>
+        </CopyToClipboard>
+
+        <a className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center">
+          {t("share_facebook")}
+        </a>
+        <a
+          href={`mailto:?subject=In loving memory of our dearest&body=The loving memory of our dearest lives on: ${shortLink}`}
+          className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center "
+        >
+          {t("share_email")}
+        </a>
+      </div>
+
+      {/* stories */}
+      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+        <div className="flex items-center space-x-2.5">
+          <SettingsCreateStoryIcon className="h-5 w-5 fill-black dark:fill-white" />
+          <h3 className=" font-semibold ">{t("new_story_title")}</h3>
+        </div>
+        <p className=" text-center font-normal text-sp-day-400">
+          {t("new_story_subtitle")}
+        </p>
+        <Link
+          href={`/create/story?spiritus=${spiritusId}`}
+          className="flex w-full items-center justify-center gap-2 rounded-sp-10 border border-sp-day-400 p-1.5 text-center"
+        >
+          {t("create_story")}
+        </Link>
+      </div>
+
+      {/* notifications */}
+      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+        <div className="flex items-center space-x-2.5">
+          <RemindMeIcon className="fill-black dark:fill-white" />
+          <h3 className=" font-semibold ">{t("remind_me")}</h3>
+        </div>
+        <p className=" text-center font-normal text-sp-day-400">
+          {t("remind_me_subtitle")}
+        </p>
+        <button
+          onClick={() => console.log("clicked")}
+          className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center "
+        >
+          {t("remind_me_button")}
+        </button>
+      </div>
+
+      {/* guardians */}
+      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+        <div className="flex items-center space-x-2.5">
+          <MemoryGuardianIcon className="h-5 w-5 fill-black dark:fill-white" />
+          <h3 className=" font-semibold ">{t("memory_guardian")}</h3>
+        </div>
+        <p className=" text-center font-normal text-sp-day-400">
+          {memoryGuardians ? memoryGuardians : t("no_memory_guardian")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export function Links({ shortLink, obituary, spiritusId, memoryGuardians }) {
+  const { t } = useTranslation("common");
+  const organization = obituary?.organization || null;
+
+  return (
+    <div className="sticky top-4 divide-y divide-sp-day-200 rounded-sp-10 border border-sp-day-200 font-semibold text-black dark:text-white">
+      {organization && (
+        <div className="flex w-full items-center justify-center py-6 text-sp-black dark:text-sp-white">
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <div className="flex items-center space-x-2.5">
+              <FuneralOrgIcon className="fill-black dark:fill-white" />
+              <h3 className="text-center font-semibold">
+                {t("funeral_partner_org")}
+              </h3>
+            </div>
+            {organization.image && organization.image?.url ? (
+              <div className="relative items-center justify-center overflow-hidden rounded-sp-5 px-2">
+                <Image
+                  src={organization.image.url || ""}
+                  width={organization.image.width}
+                  height={organization.image.height}
+                  alt="funeral organizer logo"
+                  className="object-fit"
+                />
+              </div>
+            ) : null}
+            <div className="flex flex-col justify-center">
+              <h5 className="text-center font-semibold text-xl">
+                {organization.name}
+              </h5>
+              <ul className="text-center">
+                {!!organization.address && (
+                  <li className="text-sm">{organization.address}</li>
+                )}
+                {!!organization.phoneNumber && (
+                  <li className="text-sm">{organization.phoneNumber}</li>
+                )}
+                {!!organization.webpage && (
+                  <li>
+                    <a
+                      className="text-sp-cotta text-sm dark:text-sp-fawn"
+                      href={`${
+                        organization.webpage.startsWith("http")
+                          ? organization.webpage
+                          : "https://" + organization.webpage
+                      }`}
+                    >
+                      {organization.webpage}
+                    </a>
+                  </li>
+                )}
+                {!!organization.email && (
+                  <li>
+                    <a
+                      href={`mailto:${organization.email}?subject=Contact - Spiritus Partner`}
+                      className="text-sp-cotta text-sm dark:text-sp-fawn"
+                    >
+                      {organization.email}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+      <SpiritusActions
+        shortLink={shortLink}
+        spiritusId={spiritusId}
+        memoryGuardians={memoryGuardians}
+      />
+    </div>
+  );
+}

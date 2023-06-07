@@ -1,12 +1,11 @@
-import { useTranslation } from "next-i18next";
 import { XIcon } from "@heroicons/react/outline";
-
+import { useTranslation } from "next-i18next";
 
 export function Spinner({ text }) {
   return (
     <div className="inline-flex items-center p-0.5">
       <svg
-        className="animate-spin h-5 w-5 text-sp-black dark:text-sp-lighter"
+        className="h-5 w-5 animate-spin text-sp-black dark:text-sp-lighter"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -32,10 +31,10 @@ export function Spinner({ text }) {
 
 export function ProgressBar({ step, maxSteps }) {
   return (
-    <div className="flex-auto mx-auto mt-12">
-      <div className="w-full bg-sp-lighter h-1">
+    <div className="mx-auto mt-12 flex-auto">
+      <div className="h-1 w-full bg-sp-lighter">
         <div
-          className="bg-sp-dark-fawn dark:bg-sp-fawn h-1"
+          className="h-1 bg-sp-dark-fawn dark:bg-sp-fawn"
           style={{ width: `${Math.floor((step * 100) / maxSteps)}%` }}
         ></div>
       </div>
@@ -48,19 +47,19 @@ export function Alert({ isSuccess, message, onClick }) {
 
   return (
     <div
-      className={`cursor-pointer border-l-4 rounded-sp-10 text-teal-900 px-2 py-3 ${
+      className={`cursor-pointer rounded-sp-10 border-l-4 px-2 py-3 text-teal-900 ${
         isSuccess
-          ? "bg-green-100 border-green-500"
-          : "bg-red-100 border-red-500"
+          ? "border-green-500 bg-green-100"
+          : "border-red-500 bg-red-100"
       }`}
       role="alert"
       onClick={() => onClick()}
     >
-      <div className="flex w-full items-center min-w-[16rem]">
-        <div className="py-2 px-1 mr-2">
+      <div className="flex w-full min-w-[16rem] items-center">
+        <div className="mr-2 px-1 py-2">
           {isSuccess ? (
             <svg
-              className="h-5 w-5 text-green-500 mt-0.5"
+              className="mt-0.5 h-5 w-5 text-green-500"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -71,7 +70,7 @@ export function Alert({ isSuccess, message, onClick }) {
             </svg>
           ) : (
             <svg
-              className="h-5 w-5 text-red-500 mt-0.5"
+              className="mt-0.5 h-5 w-5 text-red-500"
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -82,18 +81,18 @@ export function Alert({ isSuccess, message, onClick }) {
             </svg>
           )}
         </div>
-        <div className="flex flex-col w-full">
-          <div className="w-full items-center flex flex-row justify-between">
-            <p className="font-bold">{isSuccess ? t("message_success"): t("message_error")}</p>
+        <div className="flex w-full flex-col">
+          <div className="flex w-full flex-row items-center justify-between">
+            <p className="font-bold">
+              {isSuccess ? t("message_success") : t("message_error")}
+            </p>
           </div>
           <div className="break-words">
-            <p className="text-sm pr-4 whitespace-pre-line">
-              {message}
-            </p>
+            <p className="whitespace-pre-line pr-4 text-sm">{message}</p>
           </div>
         </div>
         <button className="">
-          <XIcon className="w-6 h-6" />
+          <XIcon className="h-6 w-6" />
         </button>
       </div>
     </div>

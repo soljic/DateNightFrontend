@@ -25,7 +25,7 @@ export function GraveIcon({ width, height }) {
 
   return (
     <svg
-      className={`${w} ${h} dark:fill-sp-white fill-sp-lighter`}
+      className={`${w} ${h} fill-sp-lighter dark:fill-sp-white`}
       viewBox="0 0 21 19"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -51,12 +51,10 @@ export function SpiritusIcon({ width, height }) {
   );
 }
 
-export function StoryIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
+export function StoryIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h}`}
+      className={className}
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -214,16 +212,12 @@ export function RangeIcon({ width, height }) {
   );
 }
 
-export function ImageIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function ImageIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-fawn`}
       viewBox="0 0 21 21"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path d="M17.75 3C19.5449 3 21 4.45507 21 6.25L21 17.75C21 19.5449 19.5449 21 17.75 21L6.25 21C4.45507 21 3 19.5449 3 17.75L3 11.5019C3.47425 11.6996 3.97687 11.8428 4.50009 11.9236L4.5 17.75C4.5 17.9584 4.53643 18.1583 4.60326 18.3437L10.4258 12.643C11.2589 11.8273 12.5675 11.7885 13.4458 12.5266L13.5742 12.6431L19.3964 18.3447C19.4634 18.159 19.5 17.9588 19.5 17.75L19.5 6.25C19.5 5.2835 18.7165 4.5 17.75 4.5L11.9236 4.50009C11.8428 3.97687 11.6996 3.47425 11.5019 3L17.75 3ZM11.5588 13.644L11.4752 13.7148L5.66845 19.4011C5.8504 19.4651 6.04613 19.5 6.25 19.5L17.75 19.5C17.9535 19.5 18.1489 19.4653 18.3305 19.4014L12.5247 13.7148C12.2596 13.4553 11.8501 13.4316 11.5588 13.644ZM15.2521 6.5C16.4959 6.5 17.5042 7.50831 17.5042 8.75212C17.5042 9.99592 16.4959 11.0042 15.2521 11.0042C14.0083 11.0042 13 9.99592 13 8.75212C13 7.50831 14.0083 6.5 15.2521 6.5ZM5.5 0C8.53757 0 11 2.46243 11 5.5C11 8.53757 8.53757 11 5.5 11C2.46243 11 0 8.53757 0 5.5C0 2.46243 2.46243 0 5.5 0ZM15.2521 8C14.8367 8 14.5 8.33673 14.5 8.75212C14.5 9.1675 14.8367 9.50423 15.2521 9.50423C15.6675 9.50423 16.0042 9.1675 16.0042 8.75212C16.0042 8.33673 15.6675 8 15.2521 8ZM5.5 1.99923L5.41012 2.00729C5.20603 2.04433 5.0451 2.20527 5.00806 2.40936L5 2.49923L4.99965 4.99923L2.49765 5L2.40777 5.00806C2.20368 5.0451 2.04275 5.20603 2.00571 5.41012L1.99765 5.5L2.00571 5.58988C2.04275 5.79397 2.20368 5.9549 2.40777 5.99194L2.49765 6L5.00065 5.99923L5.00111 8.50348L5.00916 8.59336C5.04621 8.79745 5.20714 8.95839 5.41123 8.99543L5.50111 9.00348L5.59098 8.99543C5.79508 8.95839 5.95601 8.79745 5.99305 8.59336L6.00111 8.50348L6.00065 5.99923L8.50457 6L8.59444 5.99194C8.79853 5.9549 8.95947 5.79397 8.99651 5.58988L9.00457 5.5L8.99651 5.41012C8.95947 5.20603 8.79853 5.0451 8.59444 5.00806L8.50457 5L5.99965 4.99923L6 2.49923L5.99194 2.40936C5.9549 2.20527 5.79397 2.04433 5.58988 2.00729L5.5 1.99923Z" />
     </svg>
@@ -329,13 +323,10 @@ export function ShieldIcon({ width, height }) {
   );
 }
 
-export function LockIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function LockIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h}`}
+      className={className}
       width="12"
       height="16"
       viewBox="0 0 12 16"

@@ -8,12 +8,12 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'xs': '340px',
-      'sm': '576px',
-      'md': '719px',
-      'lg': '1280px',
-      'xl': '1536px',
-      '2xl': '2100px',
+      xs: "340px",
+      sm: "576px",
+      md: "719px",
+      lg: "1280px",
+      xl: "1536px",
+      "2xl": "2100px",
     },
     borderWidth: {
       DEFAULT: "1px",
@@ -27,24 +27,46 @@ module.exports = {
       8: "8px",
     },
     extend: {
+      dropShadow: {
+        "3xl": "0 5px 40px #000000",
+      },
       fontSize: {
-        "cta": ['44px', '50px'],
+        cta: ["44px", "50px"],
       },
       borderRadius: {
+        "sp-5": "5px",
         "sp-10": "10px",
         "sp-14": "14px",
-        "sp-40": "40px"
+        "sp-40": "40px",
+      },
+      padding: {
+        7.5: "30px",
       },
       letterSpacing: {
         "sp-tighten": "-0.01em",
       },
       height: {
-        "92": "372px",
+        86: "360px",
+        92: "372px",
+        obituary: "600px",
+        38: "140px",
+      },
+      width: {
+        30: "120px",
+        obituary: "960px",
+      },
+      maxHeight: {
+        86: "360px",
+        92: "372px",
+        obituary: "600px",
+      },
+      maxWidth: {
+        obituary: "960px",
       },
       colors: {
         "sp-white": "#F0EFED",
         "sp-black": "#171411",
-        "sp-gray":  "#706E6B",
+        "sp-gray": "#706E6B",
 
         // darkmode colors
         "sp-medium": "#302C29",
@@ -55,6 +77,7 @@ module.exports = {
         // darkmode accents
         "sp-cotta": "#DB6D56",
         "sp-fawn": "#E3AA6D",
+        "sp-day-fawn": "#D17615",
         "sp-dark-fawn": "#ED9A4C",
         "sp-brown": "#2B231A",
         "sp-dark-brown": "#2C2117",
@@ -64,13 +87,14 @@ module.exports = {
         "sp-day-100": "#DED4CA",
         "sp-day-200": "#DBD4CE", //200
         "sp-day-300": "#E3D4C5", // 300
+        "sp-day-400": "#948B84",
         "sp-day-900": "#D67915",
-        
+
         // lightmode gradient
         "day-gradient-start": "#EDE1D5",
         "day-gradient-stop": "#E8DED5",
 
-        "sp-burgundy": "#582203"
+        "sp-burgundy": "#582203",
       },
 
       fontFamily: {
@@ -83,6 +107,7 @@ module.exports = {
     require("@tailwindcss/forms")({
       strategy: "class",
     }),
-    require('tailwindcss-font-inter')
+    require("tailwindcss-font-inter"),
+    require("@tailwindcss/typography"),
   ],
 };

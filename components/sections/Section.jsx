@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { useState } from "react";
 import { useTranslation } from "next-i18next";
@@ -36,14 +36,14 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
-      <div className="flex flex-col items-center mb-16">
-        <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
+    <div className="mb-8 mt-16 flex flex-col items-center lg:mb-24 lg:mt-12">
+      <div className="mb-16 flex flex-col items-center">
+        <h1 className="font-bold tracking-tight text-sp-black subpixel-antialiased text-cta dark:text-sp-white">
           {t(translateSectionTitle(title))}
         </h1>
 
         {title === "Featured stories" && (
-          <p className="text-sp-lighter dark:text-sp-lighter mt-2">
+          <p className="mt-2 text-sp-lighter dark:text-sp-lighter">
             {t("section_generic_subtitle")}
           </p>
         )}
@@ -68,7 +68,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
           */}
       </div>
 
-      <div className="grid grid-cols-1 gap-y-10 gap-x-5 sm:grid-cols-2 md:grid-cols-3 md:gap-x-7 lg:grid-cols-3 xl:gap-x-8 mb-14">
+      <div className="mb-14 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-3 md:gap-x-7 lg:grid-cols-3 xl:gap-x-8">
         {!!items &&
           items.map((item) => {
             if (item.imageUrl) {
@@ -97,13 +97,13 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       </div>
 
       {!isLast && (
-        <div className="flex justify-center mt-16 w-full">
+        <div className="mt-16 flex w-full justify-center">
           <button
             onClick={() => {
               loadMore();
             }}
             disabled={isLast}
-            className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+            className="w-full cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown sm:w-1/3"
           >
             {isLoading ? (
               <Spinner text={t("loading")} />
@@ -125,52 +125,42 @@ function PlaceHolderTile({
   placeholderText,
 }) {
   return itemType === "SPIRITUS_DETAILS" ? (
-    <Link href={`/spiritus/${itemId}`} key={title}>
-      <a className="flex flex-col">
-        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8 shadow-md">
-          <p className="text-sp-medlight dark:text-sp-white">
-            {placeholderText}
-          </p>
-          <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
-            <StoryHookIcon />
-          </div>
+    <Link href={`/spiritus/${itemId}`} key={title} className="flex flex-col">
+      <div className="to-gradient-stop flex min-h-[248px] w-full grow flex-col justify-between rounded-sp-14 bg-gradient-to-r from-day-gradient-start p-8 shadow-md dark:from-sp-dark-brown dark:to-sp-brown">
+        <p className="text-sp-medlight dark:text-sp-white">{placeholderText}</p>
+        <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-fawn dark:bg-opacity-10">
+          <StoryHookIcon />
         </div>
-        <div className="mt-2 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">
-            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-          </h3>
-          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
-            {" "}
-            {subtitle.length > 64
-              ? `${subtitle.substring(0, 64)} ...`
-              : subtitle}
-          </p>
-        </div>
-      </a>
+      </div>
+      <div className="mt-2 flex flex-col justify-between">
+        <h3 className="text-lg dark:text-sp-white">
+          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+        </h3>
+        <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+          {" "}
+          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
+        </p>
+      </div>
     </Link>
   ) : (
-    <Link href={`/stories/${itemId}`} key={itemId}>
-      <a className="flex flex-col">
-        <div className="grow flex flex-col justify-between w-full min-h-[248px] bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 p-8 shadow-md">
-          <p className="text-sp-medlight dark:text-sp-white tracking-sp-tighten">
-            {placeholderText}
-          </p>
-          <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-1.5">
-            <StoryHookIcon />
-          </div>
+    <Link href={`/stories/${itemId}`} key={itemId} className="flex flex-col">
+      <div className="flex min-h-[248px] w-full grow flex-col justify-between rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-8 shadow-md dark:from-sp-dark-brown dark:to-sp-brown">
+        <p className="text-sp-medlight tracking-sp-tighten dark:text-sp-white">
+          {placeholderText}
+        </p>
+        <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-fawn dark:bg-opacity-10">
+          <StoryHookIcon />
         </div>
-        <div className="mt-2 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">
-            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-          </h3>
-          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
-            {" "}
-            {subtitle.length > 64
-              ? `${subtitle.substring(0, 64)} ...`
-              : subtitle}
-          </p>
-        </div>
-      </a>
+      </div>
+      <div className="mt-2 flex flex-col justify-between">
+        <h3 className="text-lg dark:text-sp-white">
+          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+        </h3>
+        <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+          {" "}
+          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
+        </p>
+      </div>
     </Link>
   );
 }
@@ -178,53 +168,45 @@ function PlaceHolderTile({
 // Render a Link to SPIRITUS or STORY depending on itemType.
 function SectionTile({ itemId, title, subtitle, imageUrl, itemType }) {
   return itemType === "SPIRITUS_DETAILS" ? (
-    <Link href={`/spiritus/${itemId}`} key={title}>
-      <a className="group">
-        <div className="group-hover:opacity-75">
-          <Image
-            src={imageUrl}
-            className="object-cover rounded-sp-14"
-            width={220}
-            height={248}
-            layout="responsive"
-          />
-        </div>
-        <div className="mt-3 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">
-            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-          </h3>
-          <p className="dark:text-sp-white dark:text-opacity-60">
-            {subtitle.length > 64
-              ? `${subtitle.substring(0, 64)} ...`
-              : subtitle}
-          </p>
-        </div>
-      </a>
+    <Link href={`/spiritus/${itemId}`} key={title} className="group">
+      <div className="group-hover:opacity-75">
+        <Image
+          src={imageUrl}
+          className="rounded-sp-14 object-cover"
+          width={220}
+          height={248}
+          layout="responsive"
+        />
+      </div>
+      <div className="mt-3 flex flex-col justify-between">
+        <h3 className="text-lg dark:text-sp-white">
+          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+        </h3>
+        <p className="dark:text-sp-white dark:text-opacity-60">
+          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
+        </p>
+      </div>
     </Link>
   ) : (
-    <Link href={`/stories/${itemId}`} key={title}>
-      <a className="group">
-        <div className="rounded-xl overflow-hidden group-hover:opacity-75">
-          <Image
-            src={imageUrl}
-            className="object-cover rounded-sp-14"
-            width={220}
-            height={248}
-            layout="responsive"
-          />
-        </div>
-        <div className="mt-2 flex flex-col justify-between">
-          <h3 className="text-lg dark:text-sp-white">
-            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-          </h3>
-          <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
-            {" "}
-            {subtitle.length > 64
-              ? `${subtitle.substring(0, 64)} ...`
-              : subtitle}
-          </p>
-        </div>
-      </a>
+    <Link href={`/stories/${itemId}`} key={title} className="group">
+      <div className="overflow-hidden rounded-xl group-hover:opacity-75">
+        <Image
+          src={imageUrl}
+          className="rounded-sp-14 object-cover"
+          width={220}
+          height={248}
+          layout="responsive"
+        />
+      </div>
+      <div className="mt-2 flex flex-col justify-between">
+        <h3 className="text-lg dark:text-sp-white">
+          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+        </h3>
+        <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
+          {" "}
+          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
+        </p>
+      </div>
     </Link>
   );
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
   const [switchDate, setSwitchDate] = useState(null);
 
   const DatePicker = dynamic(() =>
-    import("react-date-picker/dist/entry.nostyle").then((dp) => dp)
+    import("react-date-picker").then((dp) => dp)
   );
 
   const loadMore = async () => {
@@ -64,17 +64,17 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
   };
 
   return (
-    <div className="flex flex-col items-center mt-16 mb-8 lg:mb-24 lg:mt-12">
-      <div className="flex flex-col items-center mb-20">
-        <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
+    <div className="mb-8 mt-16 flex flex-col items-center lg:mb-24 lg:mt-12">
+      <div className="mb-20 flex flex-col items-center">
+        <h1 className="font-bold tracking-tight text-sp-black subpixel-antialiased text-cta dark:text-sp-white">
           {t("menu_funeral_notices_title")}
         </h1>
-        <p className="text-sp-lighter dark:text-sp-lighter mt-2">
+        <p className="mt-2 text-sp-lighter dark:text-sp-lighter">
           {t("funeral_notices_subtitle")}
         </p>
 
-        <div className="inline-flex mt-3 items-center gap-3">
-          <div className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-1.5 px-4 text-base font-medium gap-x-4">
+        <div className="mt-3 inline-flex items-center gap-3">
+          <div className="inline-flex items-center gap-1 gap-x-4 rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-4 py-1.5 font-medium text-base hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
             <a
               href={`/notices/date/${getPrevDate()}`}
               className="text-sp-gray hover:text-sp-white"
@@ -101,29 +101,30 @@ export function NoticesGrid({ date, isLastPage, initialItems }) {
               <ChevronRightIcon className="h-5 w-5" />
             </a>
           </div>
-          <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
-          <Link href="/partners">
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
-              {t("funeral_notices_partners")}
-            </a>
+          <div className="h-5 w-1 rounded-sm border-r-3 border-sp-brown"></div>
+          <Link
+            href="/partners"
+            className="inline-flex items-center gap-1 rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-4 py-2 font-medium text-base hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+          >
+            {t("funeral_notices_partners")}
           </Link>
         </div>
       </div>
 
-      <div className="w-full grid grid-cols-1 gap-y-10 gap-x-5 sm:grid-cols-2 md:gap-x-7 mb-14">
+      <div className="mb-14 grid w-full grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 md:gap-x-7">
         {items.map((item, index) => (
           <ObituaryShort ob={item} key={index} />
         ))}
       </div>
 
       {!isLast && (
-        <div className="flex justify-center mt-16 w-full">
+        <div className="mt-16 flex w-full justify-center">
           <button
             onClick={() => {
               loadMore();
             }}
             disabled={isLast}
-            className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+            className="w-full cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown sm:w-1/3"
           >
             {isLoading ? (
               <Spinner text={t("loading")} />
@@ -152,14 +153,14 @@ export function ObituaryFull({ spiritus, obituary }) {
     content[txt.type] = txt;
   });
   return (
-    <div className="w-full text-sp-burgundy dark:text-sp-white md:w-[720px] mx-auto font-fancy items-center justify-center rounded-sp-14 border-4 border-[#948B84] dark:border-sp-medium bg-sp-day-50 dark:bg-sp-black p-[60px] mb-8">
-      <div className="flex flex-col md:flex-row text-base font-normal tracking-sp-tighten items-center md:items-start justify-between gap-10 pb-10">
+    <div className="mx-auto mb-8 w-full items-center justify-center rounded-sp-14 border-4 border-[#948B84] bg-sp-day-50 p-[60px] font-fancy text-sp-burgundy dark:border-sp-medium dark:bg-sp-black dark:text-sp-white md:w-[720px]">
+      <div className="flex flex-col items-center justify-between gap-10 pb-10 font-normal text-base tracking-sp-tighten md:flex-row md:items-start">
         <div
-          className={`w-full flex flex-col items-center justify-start space-y-1 font-medium text-center break-words ${
+          className={`flex w-full flex-col items-center justify-start space-y-1 break-words text-center font-medium ${
             spiritus?.images && spiritus?.images.length > 0 ? "md:w-3/5" : ""
           }`}
         >
-          <div className="items-center flex justify-center">
+          <div className="flex items-center justify-center">
             {obituary?.religiousImage?.url ? (
               <Image
                 alt="Religious Symbol"
@@ -173,14 +174,14 @@ export function ObituaryFull({ spiritus, obituary }) {
             )}
           </div>
           <p className="text-[14px]">{content.TOP?.text || ""}</p>
-          <h2 className="text-[48px] font-medium tracking-sp-tighten leading-none py-2">
+          <h2 className="py-2 text-[48px] font-medium leading-none tracking-sp-tighten">
             {!!spiritus.maidenName
               ? `${spiritus.name || ""} ${spiritus.surname || ""} rođ. ${
                   spiritus.maidenName || ""
                 }`
               : `${spiritus.name || ""} ${spiritus.surname || ""}`}
           </h2>
-          <p className="text-[18px] leading-normal pb-1.5">
+          <p className="pb-1.5 text-[18px] leading-normal">
             {spiritus?.birth
               ? new Date(spiritus.birth).toLocaleDateString("hr-HR")
               : ""}{" "}
@@ -189,37 +190,37 @@ export function ObituaryFull({ spiritus, obituary }) {
               ? new Date(spiritus.death).toLocaleDateString("hr-HR")
               : ""}
           </p>
-          <p className="text-[14px] pb-1.5">{content.MIDDLE?.text || ""}</p>
+          <p className="pb-1.5 text-[14px]">{content.MIDDLE?.text || ""}</p>
           <p className="text-[18px] font-medium">
             {content.BOLD_TEXT?.text || ""}
           </p>
         </div>
         {spiritus?.images && spiritus?.images.length > 0 ? (
-          <div className="h-[240px] w-[180px] relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-lg">
+          <div className="relative h-[240px] w-[180px] overflow-hidden rounded-lg border-4 border-sp-day-200 dark:border-sp-medium">
             <div className="overflow-hidden">
               {/* <div className="ribbon"></div> */}
               <img
                 src={spiritus?.images[0]?.url || ""}
                 alt={"Spiritus obituary image"}
-                className="object-cover h-[240px] w-[180px]"
+                className="h-[240px] w-[180px] object-cover"
               />
             </div>
           </div>
         ) : null}
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-10 text-[14px] tracking-sp-tighten font-medium">
-        <div className="md:w-1/2 md:px-4 order-2 md:order-1">
+      <div className="flex flex-col items-center justify-center gap-10 text-[14px] font-medium tracking-sp-tighten md:flex-row md:items-start">
+        <div className="order-2 md:order-1 md:w-1/2 md:px-4">
           <h3 className="text-center text-[20px]">{t("obituary_farewell")}</h3>
           <p className="text-center text-[14px]">
             {content.FAREWELL?.text || ""}
           </p>
         </div>
-        <div className="flex flex-1 items-center order-1 md:order-2">
+        <div className="order-1 flex flex-1 items-center md:order-2">
           <div className="relative inset-0 top-3 md:top-8">
             <ObOliveIcon width={10} height={10} />
           </div>
         </div>
-        <div className="md:w-1/2 md:px-4 order-3">
+        <div className="order-3 md:w-1/2 md:px-4">
           <h3 className="text-center text-[20px]">{t("obituary_bereaved")}</h3>
           <p className="text-center text-[14px]">
             {content.BEREAVED?.text || ""}
@@ -236,13 +237,13 @@ export function ObituaryShort({ ob }) {
   return (
     <Link href={`/notices/spiritus/${ob.id}`}>
       {ob?.image?.url ? (
-        <a className="w-full text-sp-burgundy dark:text-sp-white hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
-          <div className="flex items-center text-base font-normal tracking-sp-tighten gap-3 lg:gap-6 justify-between">
-            <div className="flex mx-auto flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
+        <div className="w-full rounded-sp-14 border-4 border-sp-day-200 bg-sp-day-50 p-3 text-sp-burgundy hover:border-sp-dark-fawn/70 dark:border-sp-gray dark:bg-sp-black dark:text-sp-white hover:dark:border-sp-fawn lg:p-5">
+          <div className="flex items-center justify-between gap-3 font-normal text-base tracking-sp-tighten lg:gap-6">
+            <div className="mx-auto flex flex-col items-center justify-center space-y-1 break-words text-center font-fancy font-medium">
               <div className="pb-1.5">
                 <ObImageIcon width={10} height={10} />
               </div>
-              <h2 className="text-2xl md:text-[20px] lg:text-3xl font-medium tracking-normal leading-4">
+              <h2 className="font-medium leading-4 text-2xl tracking-normal md:text-[20px] lg:text-3xl">
                 {`${ob.name || ""} ${ob.surname || ""}`}
               </h2>
               <p className="px-2 text-[14px] md:text-lg">
@@ -255,26 +256,26 @@ export function ObituaryShort({ ob }) {
                   : ""}
               </p>
             </div>
-            <div className="h-[14vh] w-[11vh] relative overflow-hidden border-4 border-sp-day-200 dark:border-sp-medium rounded-2xl">
+            <div className="relative h-[14vh] w-[11vh] overflow-hidden rounded-2xl border-4 border-sp-day-200 dark:border-sp-medium">
               <div className="overflow-hidden">
                 {/* <div className="mini-ribbon"></div> */}
                 <img
                   src={ob?.image?.url}
                   alt={"ob-image"}
-                  className="object-center h-[14vh]"
+                  className="h-[14vh] object-center"
                 />
               </div>
             </div>
           </div>
-        </a>
+        </div>
       ) : (
-        <a className="w-full text-sp-burgundy dark:text-sp-white flex items-center justify-center hover:dark:border-sp-fawn hover:border-sp-dark-fawn/70 rounded-sp-14 border-4 border-sp-day-200 dark:border-sp-gray p-3 lg:p-5 bg-sp-day-50 dark:bg-sp-black">
-          <div className="flex items-center text-base font-normal tracking-sp-tighten gap-3 lg:gap-6 justify-between">
-            <div className="flex mx-auto flex-col items-center justify-center space-y-1 font-medium text-center break-words font-fancy">
+        <div className="flex w-full items-center justify-center rounded-sp-14 border-4 border-sp-day-200 bg-sp-day-50 p-3 text-sp-burgundy hover:border-sp-dark-fawn/70 dark:border-sp-gray dark:bg-sp-black dark:text-sp-white hover:dark:border-sp-fawn lg:p-5">
+          <div className="flex items-center justify-between gap-3 font-normal text-base tracking-sp-tighten lg:gap-6">
+            <div className="mx-auto flex flex-col items-center justify-center space-y-1 break-words text-center font-fancy font-medium">
               <div className="pb-1.5">
                 <ObImageIcon width={10} height={10} />
               </div>
-              <h2 className="text-lg lg:text-2xl font-medium tracking-normal leading-4">
+              <h2 className="font-medium leading-4 text-lg tracking-normal lg:text-2xl">
                 {`${ob.name || ""} ${ob.surname || ""}`}
               </h2>
               <p className="px-2 text-sm lg:text-lg">
@@ -288,7 +289,7 @@ export function ObituaryShort({ ob }) {
               </p>
             </div>
           </div>
-        </a>
+        </div>
       )}
     </Link>
   );

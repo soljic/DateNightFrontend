@@ -1,33 +1,292 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
+
+import { CalendarIcon, XIcon } from "@heroicons/react/outline";
+import { getISOLocalDate } from "@wojtekmaj/date-utils";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
+import DatePicker from "react-date-picker";
 
-import DatePicker from "react-date-picker/dist/entry.nostyle";
+import { Spinner } from "@/components/Status";
+import { SpiritusProfileImageUploader } from "@/components/Uploaders";
 
-import { CalendarIcon, XIcon, SearchIcon } from "@heroicons/react/outline";
+import { CreateStory } from "@/service/http/story_crud";
 
-import { GetTags } from "../../service/http/spiritus";
-import { CommentIcon, LocationIcon, RangeIcon, SpiritusIcon } from "../Icons";
+import { HashFilename } from "@/utils/filenames";
+
 import { MultiSelectInput } from "../Dropdowns";
 
-export function StoryType({ setIsPrivate, nextStep }) {
+export function CreateStoryFormV2({
+  spiritusId,
+  tagChoices,
+  onSuccess,
+  onError,
+}) {
+  const { t } = useTranslation("common");
+
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  const [pending, setPending] = useState(false);
+
+  const [isPrivate, setIsPrivate] = useState(false);
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState([]);
+  const [storyText, setStoryText] = useState("");
+  const [date, setDate] = useState(null);
+  const [summary, setSummary] = useState();
+  const [dpLoaded, setDpLooaded] = useState(false);
+
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    setDpLooaded(true);
+  }, []);
+
+  const setParagraphs = (story) => {
+    return story
+      .trim()
+      .split("\n\n")
+      .map((para, idx) => {
+        return { index: idx, text: para.trim() };
+      });
+  };
+
+  const createStory = async () => {
+    try {
+      setPending(true);
+      const form = new FormData();
+      const body = {
+        spiritusId: spiritusId,
+        title,
+        tags: tags.map((t) => t.id),
+        paragraphs: setParagraphs(storyText),
+        description: summary,
+        date: date ? getISOLocalDate(date) : null,
+        private: isPrivate,
+      };
+
+      const blob = new Blob([JSON.stringify(body)], {
+        type: "application/json",
+      });
+      form.append("request", blob);
+
+      if (images.length > 0) {
+        const fileName = await HashFilename(images[0].file.name);
+        form.append("file", images[0].file, fileName);
+      }
+      const res = await CreateStory(session.user.accessToken, form);
+      onSuccess(res.data);
+      setPending(false);
+      router.push(`/edit/spiritus/${spiritusId}/stories`);
+    } catch (err) {
+      const msg = err?.response?.data;
+      onError(msg ? msg : t("message_save_failed"));
+      setPending(false);
+    }
+  };
+
+  const cancel = () => {
+    router.push(`/edit/spiritus/${spiritusId}/stories`);
+  };
+
+  return (
+    <form id="edit-form" className="mx-auto space-y-3 px-4">
+      <h2 className="px-1.5 font-bold text-sp-black text-2xl dark:text-sp-white">
+        {t("create_story")}
+      </h2>
+
+      <div className="mx-auto flex flex-1 flex-col space-y-6 font-medium">
+        <StoryType isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
+        <div>
+          <h2 className="text-sp-black dark:text-sp-white">
+            <span className="text-red-500">*</span>
+            {t("edit_story_title")}
+          </h2>
+          <div>
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full flex-1">
+                <div className="my-1 rounded-sp-10">
+                  <input
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                    placeholder={t("create_story_title_placeholder")}
+                    className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-sp-black dark:text-sp-white">
+            <span className="text-red-500">*</span>
+
+            {t("edit_story_text")}
+          </h2>
+          <div>
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full flex-1">
+                <div className="my-1 rounded">
+                  <textarea
+                    value={storyText}
+                    onChange={(e) => {
+                      setStoryText(e.target.value);
+                    }}
+                    placeholder={t("create_story_text_placeholder")}
+                    rows="20"
+                    className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-sp-black dark:text-sp-white">
+            <span className="text-red-500">*</span>
+            {t("story_tags_label")}
+          </h2>
+          <div>
+            <div className="my-1 flex flex-col md:flex-row">
+              <div className="w-full flex-1">
+                <div className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                  <MultiSelectInput
+                    items={tagChoices}
+                    selected={tags}
+                    setSelected={setTags}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-sp-black dark:text-sp-white">
+            <span className="text-red-500">*</span>
+
+            {t("edit_story_summary")}
+          </h2>
+          <div>
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full flex-1">
+                <div className="my-1 rounded">
+                  <textarea
+                    value={summary}
+                    onChange={(e) => {
+                      setSummary(e.target.value);
+                    }}
+                    placeholder={t("create_story_summary_placeholder")}
+                    rows="6"
+                    className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* dates */}
+        {dpLoaded && (
+          <div className="mt-4">
+            <h2 className="text-sp-black dark:text-sp-white">
+              {t("create_story_date_placeholder")}
+            </h2>
+            <div className="my-1 flex flex-col gap-2 md:flex-row">
+              <div className="w-full flex-1">
+                <div className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                  <DatePicker
+                    id="date"
+                    onChange={setDate}
+                    value={date}
+                    clearIcon={!date ? null : <XIcon className="h-6 w-6" />}
+                    dayPlaceholder="dd"
+                    monthPlaceholder="mm"
+                    yearPlaceholder="yyyy"
+                    showLeadingZeros
+                    calendarIcon={
+                      <CalendarIcon className="mx-3 h-6 w-6 text-sp-lighter" />
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-4">
+          <h2 className="text-sp-black dark:text-sp-white">
+            {t("term_images")}
+          </h2>
+          <div className="my-1 flex flex-col gap-2 md:flex-row">
+            <div className="w-full flex-1">
+              <SpiritusProfileImageUploader
+                name={""}
+                images={images}
+                setImages={setImages}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="inline-flex space-x-2">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              createStory();
+            }}
+            disabled={pending}
+            className="flex w-32 justify-center rounded-sp-10 border bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-5 py-1.5 text-sp-white dark:border-sp-medium dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black"
+          >
+            {pending ? (
+              <Spinner text={""} />
+            ) : (
+              <span className="ml-1 font-semibold">{t("save")}</span>
+            )}
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              cancel();
+            }}
+            disabled={pending}
+            className="inline-flex w-20 justify-center rounded-sp-10 border border-sp-day-400 px-5 py-1.5 text-sp-day-400"
+          >
+            {t("cancel")}
+          </button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+function StoryType({ isPrivate, setIsPrivate }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-2 mt-12 lg:mx-8">
-      <h2 className="text-2xl font-bold text-sp-black dark:text-sp-white">
+    <div>
+      <h2 className="font-normal text-sp-black dark:text-sp-white">
+        <span className="text-red-500">*</span>
         {t("create_story_type_title")}
       </h2>
-      <div className="mt-4 mx-auto">
+      <div className="mx-auto mt-2">
         <div className="flex flex-col gap-2 md:flex-row">
           <button
             onClick={(e) => {
               e.preventDefault();
               setIsPrivate(false);
-              nextStep();
             }}
-            className="flex appearance-none items-center gap-4 rounded-xl dark:border-2 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:border-sp-medium dark:from-sp-medlight dark:to-sp-medlight p-4 text-sp-black dark:text-sp-white outline-none"
+            className={`flex appearance-none items-center gap-4 rounded-xl border-2 p-4 text-sp-black outline-none dark:text-sp-white ${
+              !isPrivate ? "border-sp-fawn" : "border-sp-day-400/40"
+            }`}
           >
-            <div className="rounded-lg bg-sp-fawn bg-opacity-20 p-2 align-middle">
+            <div className="rounded-sp-10 bg-sp-fawn bg-opacity-40 p-2 align-middle">
               <svg
                 width="20"
                 height="18"
@@ -40,7 +299,7 @@ export function StoryType({ setIsPrivate, nextStep }) {
             </div>
             <div className="flex flex-col items-start">
               <p className="font-semibold">{t("public")}</p>
-              <p className="text-sp-lighter text-left">
+              <p className="text-left font-normal text-sp-day-400 text-sm">
                 {t("create_story_public_text")}
               </p>
             </div>
@@ -49,11 +308,12 @@ export function StoryType({ setIsPrivate, nextStep }) {
             onClick={(e) => {
               e.preventDefault();
               setIsPrivate(true);
-              nextStep();
             }}
-            className="flex appearance-none items-center gap-4 rounded-xl dark:border-2 bg-sp-medlight bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:border-sp-medium dark:from-sp-medlight dark:to-sp-medlight p-4 text-sp-black dark:text-sp-white outline-none"
+            className={`flex appearance-none items-center gap-4 rounded-xl border-2 p-4 text-sp-black outline-none dark:text-sp-white ${
+              isPrivate ? "border-sp-fawn" : "border-sp-day-400/40"
+            }`}
           >
-            <div className="rounded-lg bg-sp-fawn bg-opacity-20 p-2 align-middle">
+            <div className="rounded-sp-10 bg-sp-fawn bg-opacity-40 p-2 align-middle">
               <svg
                 width="18"
                 height="20"
@@ -66,213 +326,12 @@ export function StoryType({ setIsPrivate, nextStep }) {
             </div>
             <div className="flex flex-col items-start">
               <p className="font-semibold">{t("private")}</p>
-              <p className="text-sp-lighter text-left">
+              <p className="text-left font-normal text-sp-day-400 text-sm">
                 {t("create_story_private_text")}
               </p>
             </div>
           </button>
         </div>
-      </div>
-    </div>
-  );
-}
-
-export function StoryDate({ date, setDate }) {
-  const { t } = useTranslation("common");
-
-  return (
-    <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <RangeIcon fill />
-      </div>
-      <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        {t("create_story_date_title")}
-      </p>
-      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
-      <div className="mt-6">
-        <div className="flex flex-col md:flex-row gap-2">
-          <div className="w-full flex-1">
-            <label
-              htmlFor="birth"
-              className="dark:text-sp-white dark:text-opacity-75"
-            >
-              {t("create_story_date_placeholder")}
-            </label>
-            <div className="my-2 rounded flex items-center border-2 border-sp-medium py-2.5">
-              <DatePicker
-                onChange={setDate}
-                value={date}
-                clearIcon={!date ? null : <XIcon className="h-6 w-6" />}
-                dayPlaceholder="dd"
-                monthPlaceholder="mm"
-                yearPlaceholder="yyyy"
-                showLeadingZeros
-                calendarIcon={
-                  <CalendarIcon className="h-6 w-6 text-sp-lighter mx-3" />
-                }
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function StoryLocation({ location, setLocation }) {
-  const { t } = useTranslation("common");
-
-  return (
-    <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <LocationIcon fill />
-      </div>
-      <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        {t("create_story_location_title")}
-      </p>
-      <p className="text-sp-lighter text-sm mt-2">*{t("optional")}</p>
-
-      <div className="mt-4">
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full flex-1">
-            <div className="my-2 rounded flex flex-row items-center border-2 border-sp-medium">
-              <input
-                value={location}
-                onChange={(e) => {
-                  setLocation(e.target.value);
-                }}
-                placeholder={t("create_story_location_placeholder")}
-                className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black appearance-none outline-none w-full rounded"
-              />
-              <SearchIcon className="h-6 w-6 text-sp-lighter mx-3" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function StoryTitle({ title, setTitle, tags, setTags }) {
-  const { t } = useTranslation("common");
-
-  const [itemsList, setItemsList] = useState([]);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await GetTags();
-        if (res?.data.length) {
-          setItemsList(res.data);
-        }
-      } catch {}
-    }
-    fetchData();
-  }, []);
-
-  return (
-    <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <SpiritusIcon fill />
-      </div>
-      <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        {t("create_story_title_title")}
-      </p>
-      <p className="text-sp-lighter text-sm">
-        {t("create_story_title_subtitle")}
-      </p>
-      <div className="mt-4">
-        <div className="flex flex-col md:flex-row gap-2">
-          <div className="w-full flex-1">
-            <div className="my-2 rounded">
-              <input
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                placeholder={t("create_story_title_placeholder")}
-                className="p-3 bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium appearance-none outline-none w-full rounded"
-              />
-            </div>
-          </div>
-          <div className="w-full flex-1">
-            <div className="my-2 rounded">
-              <div className="border-2 rounded border-sp-medium p-2.5">
-                <MultiSelectInput
-                  items={itemsList}
-                  selected={tags}
-                  setSelected={setTags}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function StorySummary({ summary, setSummary }) {
-  const { t } = useTranslation("common");
-
-  return (
-    <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6">
-        <CommentIcon fill />
-      </div>
-      <p className="font-bold text-sp-black dark:text-sp-white text-2xl">
-        {t("create_story_summary_title")}
-      </p>
-      <p className="text-sp-lighter text-sm">
-        {t("create_story_summary_subtitle")}
-      </p>
-      <div className="mt-4">
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full flex-1">
-            <div className="my-2 rounded">
-              <textarea
-                value={summary}
-                onChange={(e) => {
-                  if (!(e.target.value.length > 150))
-                    setSummary(e.target.value);
-                }}
-                maxLength="150"
-                placeholder={t("create_story_summary_placeholder")}
-                rows="3"
-                className="p-3  bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-2 border-sp-medium  appearance-none outline-none w-full rounded "
-              />
-              <p className="text-sp-lighter text-sm mt-2">
-                <span>{summary.length}</span>/150
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export function StoryTextEditor({ storyText, setStoryText }) {
-  const { t } = useTranslation("common");
-
-  return (
-    <div className="mx-2 mt-12 lg:mx-8">
-      <h2 className="text-2xl font-bold text-sp-black dark:text-sp-white">
-        {t("create_story_text_title")}
-      </h2>
-      <p className="text-sp-lighter text-sm">
-        {t("create_story_text_subtitle")}
-      </p>
-      <div className="mt-4">
-        <textarea
-          value={storyText}
-          onChange={(e) => {
-            setStoryText(e.target.value);
-          }}
-          className="w-full text-lg py-3 px-4 text-bottom rounded-md border  bg-sp-day-50 placeholder-gray-500 dark:bg-sp-black border-sp-medium "
-          placeholder={t("create_story_text_placeholder")}
-          rows="10"
-        ></textarea>
       </div>
     </div>
   );

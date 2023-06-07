@@ -40,6 +40,7 @@
   "cta_get_spiritus_button": "Preuzmi Spiritus",
 
   "create_spiritus": "Kreiraj Spiritus",
+  "create_spiritus_subtitle": "Spiritus je digitalna uspomena sačuvana kroz priče.",
   "goto_search": "Pretraži",
   "search_placeholder": "Pretraži",
   "searching": "Pretražujem...",
@@ -54,12 +55,16 @@
   "read_story": "Pročitaj",
 
   "discover": "Istraži",
+  "memory_guardian": "Čuvar uspomene",
+  "no_memory_guardian": "Ovaj Spiritus još nema Čuvara.",
+  "mini_bio": "Kratka biografija",
 
   "find_loved_title": "Pronađite svoje voljene!",
   "find_loved_subtitle": "U našoj bazi imamo preko 500 000 imena! Među njima potražite svoje najmilije i ispričajte njihovu priču. Ako ih ne možete pronaći, dodajte ih.",
 
   "term_rated": "Ocijenjeno",
   "term_on": "na",
+  "term_for": "za",
 
   "term_place": "Mjesto",
   "term_story": "Priča",
@@ -67,18 +72,34 @@
   "term_images": "Slike",
   "term_guardians": "Čuvari",
   "term_delete": "Izbriši",
+  "term_age": "Godine",
 
-  "write_tribute": "Napiši Posvetu",
+  "tributes_title": "Posvete",
+  "write_tribute": "Napiši posvetu",
+  "write_tribute_placeholder": "Ovdje unesite tekst posvete",
+  "send_tribute": "Pošalji posvetu",
   "give_rose": "Pošalji ružu",
   "with_tribute": "s posvetom",
   "save": "Spremi",
   "share": "Podijeli",
+  "share_spiritus": "Podijeli Spiritus",
+  "share_facebook": "Podijeli na Facebooku",
+  "share_email": "Podijeli e-mailom",
+  "remind_me": "Podsjeti me",
+  "remind_me_subtitle": "Postavite podsjetnike za ovaj Spiritus.",
+  "remind_me_button": "Primaj obavijesti",
+  "copied": "Kopirano!",
+  "copy_link": "Kopiraj poveznicu",
+  "show_more": "Prikaži više...",
   "next": "Sljedeće",
   "back": "Natrag",
+  "cancel": "Otkaži",
   "create": "Kreiraj",
   "creating": "Kreiranje...",
   "optional": "Neobavezno",
   "loading": "Učitavanje...",
+  "new_story_title": "Dodaj priču",
+  "new_story_subtitle": "Podijelite svoju priču o ovom Spiritusu.",
 
   "spiritus_success_first_story": "Napišite prvu priču",
   "spiritus_success_text": "vjerojatno Vas podsjeća na lijepe trenutke i draga mjesta. Sačuvajte te uspomene.",
@@ -102,17 +123,21 @@
   "create_spiritus_birth_placeholder": "Datum rođenja",
   "create_spiritus_death_placeholder": "Datum smrti",
 
-  "create_spiritus_description_title1": "Podsjeća li Vas",
-  "create_spiritus_description_title2": "na neku rečenicu koju je često koristio/la? Ako da - dodajte ju.",
-  "create_spiritus_description_placeholder": "Unesi citat",
+  "create_spiritus_quote_title": "Koji je vaš omiljeni citat Spiritusa?",
+  "create_spiritus_quote_placeholder": "Upišite citat",
+  "create_spiritus_description_title": "Odgovorite ukratko na pitanje: Tko je",
+  "create_spiritus_description_placeholder": "Unesite kratki opis",
+  "create_spiritus_description_char_limit": "Molimo unesite 30-150 znakova",
 
-  "create_spiritus_location_title": "Vas vjerojatno podsjeća na određeno mjesto. Upišite mjesto",
+  "create_spiritus_location_title": "Vas vjerojatno podsjeća na određeno mjesto. Upišite mjesto.",
   "create_spiritus_location_subtitle": "Ovo može biti mjesto rođenja, mjesto gdje je osoba pokopana ili gdje je najdulje živjela.",
   "create_spiritus_location_placeholder": "Unesi lokaciju",
 
+  "create_spiritus_profile_image_button": "Postavite sliku",
   "create_spiritus_image_title1": "Imate li slike iz života Spiritusa",
   "create_spiritus_image_title2": "? Ako da, možete ih dodati",
   "create_story_image_title": "Image li sliku vezanu uz ovu priču? Ovdje ju možete dodati.",
+  "upload_spiritus_images_button": "Dodajte slike",
 
   "create_story_type_title": "Kakvu priču želite kreirati?",
   "public": "Javnu",
@@ -158,6 +183,8 @@
   "edit_story_summary": "Sažetak",
   "edit_story_text": "Sadržaj priče",
   "edit_story_visibility": "Vidljivost priče",
+  "cover_image": "Slika naslovnice",
+  "story_tags_label": "Koje teme obuhvaća ova priča?",
 
   "edit_spiritus_meta_title": "Spiritus | Uredi sadržaj Spiritusa",
   "edit_spiritus_meta_desc": "Uredi sadržaj Spiritusa",
@@ -213,5 +240,9 @@
   "see_all": "Vidi sve",
 
   "obituary_bereaved": "Ožalošćeni",
-  "obituary_farewell": "Ispraćaj"
+  "obituary_farewell": "Ispraćaj",
+
+  "spiritus_about": "Osnovno",
+  "spiritus_stories": "Priče",
+  "spiritus_gallery": "Galerija"
 }

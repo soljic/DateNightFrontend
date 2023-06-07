@@ -57,41 +57,45 @@ export function AccesibilityMenu() {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute -translate-x-3/4 z-100 mt-2 px-4">
-              <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
+            <Popover.Panel className="z-100 absolute mt-2 -translate-x-3/4 px-4">
+              <div className="overflow-hidden rounded-sp-14 border-2 border-sp-fawn bg-sp-day-300 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
                 <div className="flex flex-col justify-evenly gap-y-2 p-3">
                   <Disclosure>
                     {({ open }) => (
                       <>
-                        <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                        <Disclosure.Button className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
                           {open ? (
-                            <ChevronLeftIcon className="w-6 h-6 text-sp-lighter" />
+                            <ChevronLeftIcon className="h-6 w-6 text-sp-lighter" />
                           ) : (
                             <div>
-                              <SettingsGlobeIcon />
+                              <SettingsGlobeIcon className="w-6 h-6 fill-sp-dark-fawn dark:fill-sp-white" />
                             </div>
                           )}
-                          <div className="flex justify-between w-full">
+                          <div className="flex w-full justify-between">
                             <div className="ml-4">
-                              <p className="text-sm font-medium capitalize">
+                              <p className="font-medium capitalize text-sm">
                                 {t("settings:language")}
                               </p>
                             </div>
                           </div>
                           {!open && (
-                            <ChevronRightIcon className="w-6 h-6 text-sp-lighter" />
+                            <ChevronRightIcon className="h-6 w-6 text-sp-lighter" />
                           )}
                         </Disclosure.Button>
                         <Disclosure.Panel className="grid grid-cols-2 items-center">
-                          <Link href="/" locale="en">
-                            <a className="flex justify-center text-sm font-medium items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
-                              EN
-                            </a>
+                          <Link
+                            href="/"
+                            locale="en"
+                            className="flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                          >
+                            EN
                           </Link>
-                          <Link href="/" locale="hr">
-                            <a className="flex justify-center text-sm font-medium items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
-                              HR
-                            </a>
+                          <Link
+                            href="/"
+                            locale="hr"
+                            className="flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                          >
+                            HR
                           </Link>
                         </Disclosure.Panel>
                       </>
@@ -100,70 +104,78 @@ export function AccesibilityMenu() {
                   <Disclosure>
                     {({ open }) => (
                       <>
-                        <Disclosure.Button className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
+                        <Disclosure.Button className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
                           {open ? (
-                            <ChevronLeftIcon className="w-6 h-6 text-sp-lighter" />
+                            <ChevronLeftIcon className="h-6 w-6 text-sp-lighter" />
                           ) : (
-                            <SettingsDevicesIcon />
+                            <SettingsDevicesIcon className="w-6 h-6 fill-sp-dark-fawn dark:fill-sp-white" />
                           )}
-                          <div className="flex justify-between w-full">
+                          <div className="flex w-full justify-between">
                             <div className="ml-4">
-                              <p className="text-sm font-medium capitalize">{`${t("theme")} (${t(theme)})`}</p>
+                              <p className="font-medium capitalize text-sm">{`${t(
+                                "theme"
+                              )} (${t(theme)})`}</p>
                             </div>
                           </div>
                           {!open && (
-                            <ChevronRightIcon className="w-6 h-6 text-sp-lighter" />
+                            <ChevronRightIcon className="h-6 w-6 text-sp-lighter" />
                           )}
                         </Disclosure.Button>
                         <Disclosure.Panel>
                           <button
                             onClick={() => setTheme("system")}
                             key={"sys"}
-                            className="flex w-56 justify-start items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                            className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
-                            <SettingsDevicesIcon width={5} height={5} />
-                            <div className="flex justify-between w-full">
+                            <SettingsDevicesIcon className="w-5 h-5 fill-sp-day-400" />
+                            <div className="flex w-full justify-between">
                               <div className="ml-4">
-                                <p className="text-sm font-medium">{t("system")}</p>
+                                <p className="font-medium text-sm">
+                                  {t("system")}
+                                </p>
                               </div>
                               {theme === "system" ? (
-                                <SettingsCheckSelectedIcon />
+                                <SettingsCheckSelectedIcon className="w-4 h-4" />
                               ) : (
-                                <SettingsCheckUnselectedIcon w={4} h={4} />
+                                <SettingsCheckUnselectedIcon className="w-4 h-4" />
                               )}
                             </div>
                           </button>
                           <button
                             onClick={() => setTheme("light")}
                             key={"light"}
-                            className="flex w-56 justify-start items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                            className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
-                            <SunIcon className="w-5 h-5 text-sp-cotta" />
-                            <div className="flex justify-between w-full">
+                            <SunIcon className="h-5 w-5 text-sp-cotta" />
+                            <div className="flex w-full justify-between">
                               <div className="ml-4">
-                                <p className="text-sm font-medium">{t("light")}</p>
+                                <p className="font-medium text-sm">
+                                  {t("light")}
+                                </p>
                               </div>
                               {theme === "light" ? (
-                                <SettingsCheckSelectedIcon />
+                                <SettingsCheckSelectedIcon className="w-4 h-4" />
                               ) : (
-                                <SettingsCheckUnselectedIcon w={4} h={4} />
+                                <SettingsCheckUnselectedIcon className="w-4 h-4" />
                               )}
                             </div>
                           </button>
                           <button
                             onClick={() => setTheme("dark")}
                             key={"dark"}
-                            className="flex w-56 justify-start items-center rounded-sp-14 p-4 hover:bg-sp-day-50 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                            className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
-                            <MoonIcon className="h-5 w-5 text-sp-fawn -scale-x-100" />
-                            <div className="flex justify-between w-full">
+                            <MoonIcon className="h-5 w-5 -scale-x-100 text-sp-fawn" />
+                            <div className="flex w-full justify-between">
                               <div className="ml-4">
-                                <p className="text-sm font-medium">{t("dark")}</p>
+                                <p className="font-medium text-sm">
+                                  {t("dark")}
+                                </p>
                               </div>
                               {theme === "dark" ? (
-                                <SettingsCheckSelectedIcon />
+                                <SettingsCheckSelectedIcon className="w-4 h-4" />
                               ) : (
-                                <SettingsCheckUnselectedIcon w={4} h={4} />
+                                <SettingsCheckUnselectedIcon className="w-4 h-4" />
                               )}
                             </div>
                           </button>
@@ -171,19 +183,18 @@ export function AccesibilityMenu() {
                       </>
                     )}
                   </Disclosure>
-                  <Link href="mailto:hello@spiritus.app?subject=Contact Form - Spiritus.app">
-                    <a
-                      className="flex w-56 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
-                    >
-                      <div>
-                        <SettingsQuestionIcon />
+                  <Link
+                    href="mailto:hello@spiritus.app?subject=Contact Form - Spiritus.app"
+                    className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                  >
+                    <div>
+                      <SettingsQuestionIcon className="w-6 h-6 fill-sp-dark-fawn dark:fill-sp-white" />
+                    </div>
+                    <div className="flex w-full justify-between">
+                      <div className="ml-4">
+                        <p className="font-medium text-sm">{t("contact")}</p>
                       </div>
-                      <div className="flex justify-between w-full">
-                        <div className="ml-4">
-                          <p className="text-sm font-medium">{t("contact")}</p>
-                        </div>
-                      </div>
-                    </a>
+                    </div>
                   </Link>
                 </div>
               </div>

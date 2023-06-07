@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Head from "next/head";
 
 import { useTranslation } from "next-i18next";
@@ -16,11 +16,17 @@ import { SpiritusOverview } from "../components/spiritus/Overview";
 import { SpiritusCarousel } from "../components/spiritus/Carousel";
 import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
 
-import { GetSpiritusById } from "../service/http/spiritus";
+import { GetSpiritusById, GetSpiritusGalleryImages } from "../service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
 import { GetParsedHomepage } from "../service/http/homepage";
 
-export default function FeaturedStory({ displayStory, stories, spiritus, isLastPage }) {
+export default function FeaturedStory({
+  displayStory,
+  stories,
+  spiritus,
+  images,
+  isLastPage,
+}) {
   const { t } = useTranslation("common");
 
   const calculateImageLayout = (width, height) => {
@@ -47,18 +53,18 @@ export default function FeaturedStory({ displayStory, stories, spiritus, isLastP
         />
       </Head>
       <section
-        className="flex flex-col justify-center items-center mt-16 subpixel-antialiased"
+        className="mt-16 flex flex-col items-center justify-center subpixel-antialiased"
         key={"featured-story"}
       >
-        <div className="w-full flex flex-col items-center text-left">
-          <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
+        <div className="flex w-full flex-col items-center text-left">
+          <div className="flex w-3/4 flex-col justify-center text-sp-black dark:text-sp-white">
             <h1 className="mb-5 text-center uppercase">{displayStory.title}</h1>
             {!!displayStory.subtitle && (
-              <h2 className="mb-6 text-cta px-4 font-bold text-center">
+              <h2 className="mb-6 px-4 text-center font-bold text-cta">
                 {displayStory.subtitle}
               </h2>
             )}
-            <h2 className="mb-10 text-2xl md:text-cta px-4 font-bold text-center">
+            <h2 className="mb-10 px-4 text-center font-bold text-2xl md:text-cta">
               {displayStory.description}
             </h2>
           </div>
@@ -84,11 +90,11 @@ export default function FeaturedStory({ displayStory, stories, spiritus, isLastP
           )}
 
           {displayStory.paragraphs.length ? (
-            <div className="w-full md:w-3/4 lg:w-4/5 mt-10 mb-3">
+            <div className="mb-3 mt-10 w-full md:w-3/4 lg:w-4/5">
               {displayStory.paragraphs.map((p, i) => {
                 return (
                   <p
-                    className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg"
+                    className="whitespace-pre-line break-words pt-5 subpixel-antialiased text-base tracking-sp-tighten lg:text-lg"
                     key={`para-${i}`}
                   >
                     {p.text}
@@ -100,22 +106,26 @@ export default function FeaturedStory({ displayStory, stories, spiritus, isLastP
             <></>
           )}
         </div>
-        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
+        <div className="mx-auto w-full text-sp-white md:w-3/4 lg:w-4/5 lg:text-lg">
           {displayStory.tags?.length ? (
             <Tags tags={displayStory.tags} />
           ) : (
             <></>
           )}
         </div>
-        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white mt-8 lg:text-lg">
+        <div className="mx-auto mt-8 w-full text-sp-white md:w-3/4 lg:w-4/5 lg:text-lg">
           <Tribute id={spiritus.id} />
           <HorizontalDivider />
         </div>
-        <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
+        <div className="mt-4 flex w-full flex-col items-center justify-center text-sp-white lg:w-4/5 xl:w-5/6">
           <SpiritusOverview {...spiritus} />
-          <SpiritusCarousel images={spiritus.images} />
-          <div className="w-full text-sp-white mt-4">
-            <MoreStories stories={stories} spiritus={spiritus} isLastPage={isLastPage} />
+          <SpiritusCarousel images={images} />
+          <div className="mt-4 w-full text-sp-white">
+            <MoreStories
+              stories={stories}
+              spiritus={spiritus}
+              isLastPage={isLastPage}
+            />
             <div className="flex-1 items-center justify-center">
               <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
             </div>
@@ -133,6 +143,7 @@ export async function getStaticProps(context) {
   const { data: story } = await GetStoryById(featuredStory.itemId);
   const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
   const { data: allStories } = await GetSpiritusStoriesBySlug(spiritus.slug);
+  const { data: gallery} = await GetSpiritusGalleryImages(spiritus.id)
 
   let content = allStories?.content ? allStories?.content : [];
 
@@ -167,6 +178,7 @@ export async function getStaticProps(context) {
       stories: content.filter((s) => s.flags.includes("PUBLIC")),
       spiritus: spiritus,
       isLastPage: allStories.last,
+      images: gallery?.content || [],
       total: allStories.numberOfElements,
     },
     // in seconds

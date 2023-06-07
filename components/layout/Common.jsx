@@ -2,15 +2,13 @@ import Link from "next/link";
 
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
-export function NavItem({ text, link, textsize }) {
-  const size = textsize || "base";
+export function NavItem({ text, link }) {
   return (
-    <Link href={link || "/"}>
-      <a
-        className={`text-${size} px-3 md:mx-1 py-2 font-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none hover:rounded-full`}
-      >
-        {text}
-      </a>
+    <Link
+      href={link || "/"}
+      className="text-center md:text-base lg:text-lg leading-5 from-day-gradient-start to-day-gradient-stop px-1.5 py-2 hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:mx-1"
+    >
+      {text}
     </Link>
   );
 }
@@ -37,7 +35,7 @@ export function Logo({ width, height }) {
 
 export function ImagePlaceholder() {
   return (
-    <div className="flex w-full h-full mx-auto border-2 dark:border-2 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-xl justify-center items-center">
+    <div className="mx-auto flex h-full w-full items-center justify-center rounded-xl border-2 border-sp-day-200 dark:border-2 dark:border-sp-fawn dark:border-opacity-10">
       <div className="mx-auto">
         <svg
           className="h-16 w-16 text-sp-fawn text-opacity-20"
@@ -59,7 +57,7 @@ export function HorizontalDivider() {
   return (
     <div className="relative flex w-full items-center py-5">
       <div className="flex-grow border-t-3 border-sp-day-200 dark:border-sp-medium"></div>
-      <div className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2">
+      <div className="mx-2 rounded-lg bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-dark-brown">
         <ChevronDownIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
       </div>
       <div className="flex-grow border-t-3 border-sp-day-200 dark:border-sp-medium"></div>

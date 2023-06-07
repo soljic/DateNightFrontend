@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
 import { useTranslation } from "next-i18next";
@@ -39,14 +39,14 @@ export function PlacesGrid({ id, title, isLastPage, initialItems }) {
   };
 
   return (
-    <div className="flex flex-col mt-12 lg:mb-24">
-      <div className="flex flex-col items-center mb-12">
-        <h1 className="text-cta font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
+    <div className="mt-12 flex flex-col lg:mb-24">
+      <div className="mb-12 flex flex-col items-center">
+        <h1 className="font-bold tracking-tight text-sp-black subpixel-antialiased text-cta dark:text-sp-white">
           {title}
         </h1>
 
-        <p className="text-sp-lighter dark:text-sp-lighter mt-2">
-          {t('places_subtitle')}
+        <p className="mt-2 text-sp-lighter dark:text-sp-lighter">
+          {t("places_subtitle")}
         </p>
 
         {/* <div className="inline-flex mt-6 items-center gap-3">
@@ -65,20 +65,20 @@ export function PlacesGrid({ id, title, isLastPage, initialItems }) {
         </div> */}
       </div>
 
-      <div className="grid grid-cols-1 gap-y-14 gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:gap-x-10 mb-14">
+      <div className="mb-14 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:gap-x-10">
         {items.map((item) => {
           return <SpiritusTile key={item.id} {...item} />;
         })}
       </div>
 
       {!isLast && (
-        <div className="flex justify-center mt-16">
+        <div className="mt-16 flex justify-center">
           <button
             onClick={() => {
               loadMore();
             }}
             disabled={isLast}
-            className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+            className="w-full cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown sm:w-1/3"
           >
             {isLoading ? (
               <Spinner text={t("loading")} />
@@ -96,44 +96,42 @@ function SpiritusTile({ slug, name, surname, birth, death, images }) {
   const router = useRouter();
 
   const fullName = `${name} ${surname}`;
-  const dates = `${birth ? localFormatDate(birth, router.locale) : "\uE132"} — ${
-    death ? localFormatDate(death, router.locale) : "\uE132"
-  }`;
+  const dates = `${
+    birth ? localFormatDate(birth, router.locale) : "\uE132"
+  } — ${death ? localFormatDate(death, router.locale) : "\uE132"}`;
 
   return (
-    <Link href={`/spiritus/${slug}`}>
-      <a key={slug} className="group">
-        {/* <div className="relative group-hover:opacity-75 h-2/3"> */}
-        {/* {featured && (
+    <Link href={`/spiritus/${slug}`} key={slug} className="group">
+      {/* <div className="relative group-hover:opacity-75 h-2/3"> */}
+      {/* {featured && (
             <div className="absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg">
               <CrownIcon width={5} height={5} />
             </div>
           )} */}
-        {images && images.length ? (
-          <div className="relative group-hover:opacity-75">
-            <Image
-              src={images[0].url}
-              className="object-cover rounded-sp-14"
-              width={192}
-              height={248}
-              layout="responsive"
-            />
-          </div>
-        ) : (
-          <div className="h-5/6">
-            <ImagePlaceholder />
-          </div>
-        )}
-        {/* </div> */}
-        <div className="flex flex-col justify-between mt-3 antialiased font-medium tracking-sp-tighten leading-4">
-          <h3 className="text-lg dark:text-sp-white leading-snug">
-            {fullName > 64 ? `${fullName.substring(0, 64)} ...` : fullName}
-          </h3>
-          <p className="text-sm mt-1 dark:text-sp-white opacity-50 capitalize">
-            {dates}
-          </p>
+      {images && images.length ? (
+        <div className="relative group-hover:opacity-75">
+          <Image
+            src={images[0].url}
+            className="rounded-sp-14 object-cover"
+            width={192}
+            height={248}
+            layout="responsive"
+          />
         </div>
-      </a>
+      ) : (
+        <div className="h-5/6">
+          <ImagePlaceholder />
+        </div>
+      )}
+      {/* </div> */}
+      <div className="mt-3 flex flex-col justify-between font-medium leading-4 antialiased tracking-sp-tighten">
+        <h3 className="leading-snug text-lg dark:text-sp-white">
+          {fullName > 64 ? `${fullName.substring(0, 64)} ...` : fullName}
+        </h3>
+        <p className="mt-1 capitalize opacity-50 text-sm dark:text-sp-white">
+          {dates}
+        </p>
+      </div>
     </Link>
   );
 }

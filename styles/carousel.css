@@ -9,6 +9,8 @@
 .sw-spiritus .swiper-slide {
   height: 40vh;
   width: 100vh;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
 .sw-gallery-spiritus {

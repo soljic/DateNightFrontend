@@ -23,22 +23,22 @@ export default function Facts() {
   ];
 
   return (
-    <section className="mt-14 flex flex-col sm:flex-row justify-evenly py-8 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14 text-sp-black dark:text-sp-white">
+    <section className="mt-14 flex flex-col justify-evenly rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop py-8 text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white sm:flex-row">
       {elements.map((elem, index) => {
         return (
           <div
-            className="flex flex-col justify-center items-center gap-1.5 py-5 sm:p-0"
+            className="flex flex-col items-center justify-center gap-1.5 py-5 sm:p-0"
             key={`fact-${index}`}
           >
             <div className="flex items-center gap-1">
-              <h2 className="font-bold text-2xl md:text-cta md:tracking-wide">
+              <h2 className="font-bold text-2xl md:tracking-wide md:text-cta">
                 {elem.number}
               </h2>
               <ArrowUpIcon width={5} height={5} />
             </div>
             <div className="flex items-center gap-1.5">
               {elem.icon}
-              <p className="text-xs sm:text-sm tracking-sp-tighten dark:text-sp-white">
+              <p className="text-xs tracking-sp-tighten dark:text-sp-white sm:text-sm">
                 {elem.title}
               </p>
             </div>
@@ -58,7 +58,7 @@ function ArrowUpIcon({ width, height }) {
       width="16"
       height="9"
       viewBox="0 0 16 9"
-      className={`${w} ${h} dark:fill-sp-white fill-sp-lighter`}
+      className={`${w} ${h} fill-sp-lighter dark:fill-sp-white`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M2.10204 8.98145C1.0281 8.98145 0.454118 7.71655 1.16132 6.90832L6.68315 0.597654C7.38037 -0.199167 8.61995 -0.199169 9.31717 0.597654L14.839 6.90831C15.5462 7.71654 14.9722 8.98145 13.8983 8.98145H2.10204Z" />

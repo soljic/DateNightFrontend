@@ -23,13 +23,13 @@ function EditBtn({ spiritusId }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex justify-end mt-4">
+    <div className="mt-4 flex justify-end">
       <a
         href={`/edit/spiritus/${spiritusId}`}
-        className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium py-2 px-6 text-sp-white dark:text-sp-black"
+        className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium px-6 py-2 text-sp-white dark:text-sp-black"
       >
-        <PencilIcon className="w-5 h-5 text-sp-lighter" />
-        <span className="text-sp-lighter ml-2">{t("edit_button_text")}</span>
+        <PencilIcon className="h-5 w-5 text-sp-lighter" />
+        <span className="ml-2 text-sp-lighter">{t("edit_button_text")}</span>
       </a>
     </div>
   );
@@ -64,10 +64,10 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
         ""
       )}
 
-      <section className="mx-auto w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
+      <section className="mx-auto mt-4 flex w-full flex-col items-center justify-center text-sp-white lg:w-4/5 xl:w-5/6">
         <SpiritusOverview {...spiritus} />
         <SpiritusCarousel images={spiritus.images} />
-        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
+        <div className="mx-auto w-full text-sp-white md:w-3/4 lg:w-4/5 lg:text-lg">
           <PageActions
             shareLink={spiritus.shortLink}
             id={spiritus.id}
@@ -76,7 +76,7 @@ export default function SpiritusIDPage({ spiritus, stories, isLastPage }) {
             saved={spiritus.flags.includes("SAVED")}
           />
         </div>
-        <div className="text-sp-white mt-4">
+        <div className="mt-4 text-sp-white">
           <MoreStories
             stories={stories}
             spiritus={spiritus}

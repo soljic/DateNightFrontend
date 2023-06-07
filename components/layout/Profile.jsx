@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 import Link from "next/link";
@@ -8,18 +8,15 @@ import { useTranslation } from "next-i18next";
 
 import { Popover, Transition } from "@headlessui/react";
 
-import { BookmarkIcon } from "@heroicons/react/outline";
 import {
   SettingsGuardianIcon,
   SettingsSignOutIcon,
   SettingsSpiritusIcon,
-  SettingsSuggestionsIcon,
-  SettingsAccountIcon,
 } from "../SettingsIcons";
 
-import { PlusCircleIcon } from "@heroicons/react/solid";
+import { UserIcon } from "./Icons";
 
-export function ProfileMenu({ token, profileName }) {
+export function ProfileMenu() {
   const { t } = useTranslation(["settings", "common"]);
   const router = useRouter();
 
@@ -34,11 +31,9 @@ export function ProfileMenu({ token, profileName }) {
         {({ open }) => (
           <>
             <Popover.Button
-              className={`
-				${open ? "" : "text-opacity-90"}
-				border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex justify-center rounded-sp-40 py-2 px-5 font-semibold`}
+              className="rounded-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
-              {profileName}
+              <UserIcon className="h-5 w-5 fill-sp-black dark:fill-sp-white" />
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -49,26 +44,28 @@ export function ProfileMenu({ token, profileName }) {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="absolute -translate-x-1/2 z-100 mt-2">
-                <div className="overflow-hidden rounded-sp-14 shadow-lg bg-sp-day-300 border-sp-fawn dark:bg-sp-black border-2 dark:border-sp-medium text-sp-black dark:text-sp-white">
+              <Popover.Panel className="z-100 absolute mt-2 -translate-x-48">
+                <div className="overflow-hidden rounded-sp-14 border-2 border-sp-fawn bg-sp-day-300 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
                   <div className="flex flex-col justify-evenly gap-y-1 p-3">
-                    <Link href="/create/spiritus">
-                      <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
-                        <PlusCircleIcon className="h-5 w-5 dark:fill-sp-white fill-sp-dark-fawn" />
-                        <div className="ml-4">
-                          <p className="text-sm font-medium">
-                            {t("common:create_spiritus")}
-                          </p>
-                        </div>
-                      </a>
-                    </Link>
-                    <Link href="/account/settings/my-spiritus">
-                      <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3  dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
-                        <SettingsSpiritusIcon width={5} height={5} />
-                        <div className="ml-4">
-                          <p className="text-sm font-medium">{t("spiritus")}</p>
-                        </div>
-                      </a>
+                    {/* <Link
+                      href="/create/spiritus"
+                      className="flex w-52 items-center justify-start rounded-sp-14 px-4 py-3 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                    >
+                      <PlusCircleIcon className="h-5 w-5 fill-sp-dark-fawn dark:fill-sp-white" />
+                      <div className="ml-4">
+                        <p className="font-medium text-sm">
+                          {t("common:create_spiritus")}
+                        </p>
+                      </div>
+                    </Link> */}
+                    <Link
+                      href="/account/settings/my-spiritus"
+                      className="flex w-52 items-center justify-start rounded-sp-14 px-4 py-3  hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                    >
+                      <SettingsSpiritusIcon className="w-6 h-6 fill-sp-dark-fawn" />
+                      <div className="ml-4">
+                        <p className="font-medium text-sm">{t("spiritus")}</p>
+                      </div>
                     </Link>
                     {/* <Link href="/">
                       <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
@@ -96,25 +93,26 @@ export function ProfileMenu({ token, profileName }) {
                         </div>
                       </a>
                     </Link> */}
-                    <Link href="/account/settings/my-guardian-id">
-                      <a className="flex w-52 justify-start items-center rounded-sp-14 px-4 py-3 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none">
-                        <SettingsGuardianIcon width={5} height={5} alterFill />
-                        <div className="ml-4">
-                          <p className="text-sm font-medium">
-                            {t("guardian_id")}
-                          </p>
-                        </div>
-                      </a>
+                    <Link
+                      href="/account/settings/my-guardian-id"
+                      className="flex w-52 items-center justify-start rounded-sp-14 px-4 py-3 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                    >
+                      <SettingsGuardianIcon  className="w-6 h-6 fill-sp-dark-fawn" />
+                      <div className="ml-4">
+                        <p className="font-medium text-sm">
+                          {t("guardian_id")}
+                        </p>
+                      </div>
                     </Link>
                     <button
                       onClick={() => logoutUser()}
-                      className="flex w-52 justify-start items-center rounded-sp-14 p-4 dark:hover:bg-gradient-to-r hover:bg-sp-day-50 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none"
+                      className="flex w-52 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                     >
                       <div>
-                        <SettingsSignOutIcon />
+                        <SettingsSignOutIcon  className="w-6 h-6 fill-sp-cotta" />
                       </div>
-                      <div className="flex justify-between w-full ml-3">
-                        <p className="text-sm text-sp-cotta font-semibold">
+                      <div className="ml-3 flex w-full justify-between">
+                        <p className="font-semibold text-sp-cotta text-sm">
                           {t("sign_out")}
                         </p>
                       </div>

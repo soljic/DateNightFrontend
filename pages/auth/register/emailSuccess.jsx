@@ -6,18 +6,17 @@ import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 export default function EmailRegister() {
   return (
     <LayoutNoNav>
-      <section className="flex flex-col justify-center items-center text-sp-white subpixel-antialiased">
-
-        <div className="flex flex-col justify-center items-center gap-4 mb-10">
+      <section className="flex flex-col items-center justify-center text-sp-white subpixel-antialiased">
+        <div className="mb-10 flex flex-col items-center justify-center gap-4">
           <ShieldIcon width={12} height={12} />
-          <h4 className="text-3xl text-center font-bold mt-5">Congrats</h4>
-          <p className="text-center w-3/4 mb-5">
+          <h4 className="mt-5 text-center font-bold text-3xl">Congrats</h4>
+          <p className="mb-5 w-3/4 text-center">
             You’ve just became a Guardian. We’ve sent you a confirmation email.
           </p>
           {/* login button */}
           <a
             href="/"
-            className="text-center w-1/2 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-5 text-sp-black text-lg"
+            className="w-1/2 rounded-sp-40 border-5 border-sp-medium border-opacity-80 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn p-5 text-center text-sp-black text-lg"
           >
             Got it
           </a>

@@ -53,37 +53,38 @@ export default function ForgotPassword() {
         <meta name="description" content="Spiritus Email Login" />
       </Head>
       {sent ? (
-        <section className="flex flex-col justify-center items-center text-sp-white">
+        <section className="flex flex-col items-center justify-center text-sp-white">
           {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
-          <div className="flex flex-col justify-center items-center gap-3 pb-8">
+          <div className="flex flex-col items-center justify-center gap-3 pb-8">
             <ShieldIcon width={12} height={12} />
-            <h1 className="text-3xl text-center font-bold">
+            <h1 className="text-center font-bold text-3xl">
               {t("success_title")}
             </h1>
-            <h2 className="text-center text-xl font-medium">
+            <h2 className="text-center font-medium text-xl">
               {t("success_subtitle")}
             </h2>
           </div>
-          <h2 className="text-center text-xl font-medium mt-8 mb-4">
+          <h2 className="mb-4 mt-8 text-center font-medium text-xl">
             {t("success_login_cta")}
           </h2>
-          <Link href="/auth/login">
-            <a className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 text-lg font-semibold text-sp-white">
-              {t("success_login")}
-            </a>
+          <Link
+            href="/auth/login"
+            className=" rounded-sp-40 border border-sp-lighter bg-sp-black px-3 py-2 font-semibold text-sp-white text-lg"
+          >
+            {t("success_login")}
           </Link>
         </section>
       ) : (
-        <section className="flex flex-col justify-center items-center text-sp-white">
+        <section className="flex flex-col items-center justify-center text-sp-white">
           {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
-          <div className="flex flex-col justify-center items-center gap-3 pb-8">
+          <div className="flex flex-col items-center justify-center gap-3 pb-8">
             <ShieldIcon width={12} height={12} />
-            <h1 className="text-3xl text-center font-bold">
+            <h1 className="text-center font-bold text-3xl">
               {t("forgot_password")}
             </h1>
-            <p className="text-center text-lg font-medium">
+            <p className="text-center font-medium text-lg">
               {t("forgot_password_subtitle")}
             </p>
           </div>
@@ -96,25 +97,25 @@ export default function ForgotPassword() {
                   validate: (v) => isEmailValid(v) || t("email_address_err"),
                 })}
                 type="text"
-                className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+                className="form-control m-0 block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
                 id="email"
               />
               {errors.email && (
-                <p className="text-sm text-red-600 py-2 px-1">
+                <p className="px-1 py-2 text-red-600 text-sm">
                   {errors.email.message}
                 </p>
               )}
             </div>
-            <div className="flex flex-col justify-center items-center text-center mt-5">
+            <div className="mt-5 flex flex-col items-center justify-center text-center">
               {/* login button */}
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-sp-black text-lg"
+                className="w-2/3 rounded-sp-40 border-5 border-sp-medium border-opacity-80 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn p-4 text-sp-black text-lg"
               >
                 {submitting ? <Spinner text="" /> : t("send_reset_link")}
               </button>
-              {err && <p className="text-sm text-red-600 py-2 px-1">{err}</p>}
+              {err && <p className="px-1 py-2 text-red-600 text-sm">{err}</p>}
             </div>
           </form>
         </section>

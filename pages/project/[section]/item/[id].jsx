@@ -21,7 +21,9 @@ export default function Project({
   return (
     <Layout>
       <Head>
-        <title>{`${t("meta_section_title")} | ${t("project_vukovar_title")}`}</title>
+        <title>{`${t("meta_section_title")} | ${t(
+          "project_vukovar_title"
+        )}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_section_description")} />
       </Head>

@@ -1,13 +1,10 @@
 // custom icon designed by Spiritus team //
 ///////////////////////////////////////////
 
-export function SettingsGuardianIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsGuardianIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} dark:fill-sp-white fill-sp-dark-fawn`}
+      className={className}
       viewBox="0 0 22 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -17,15 +14,12 @@ export function SettingsGuardianIcon({ width, height }) {
   );
 }
 
-export function SettingsSignOutIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsSignOutIcon({ className }) {
   return (
     <svg
       width="15"
       height="15"
-      className={`${w} ${h} fill-sp-cotta`}
+      className={className}
       viewBox="0 0 15 15"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -34,13 +28,10 @@ export function SettingsSignOutIcon({ width, height }) {
   );
 }
 
-export function SettingsSpiritusIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsSpiritusIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
+      className={className}
       width="14"
       height="16"
       viewBox="0 0 14 16"
@@ -88,13 +79,10 @@ export function SettingsAccountIcon({ width, height }) {
   );
 }
 
-export function SettingsGlobeIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsGlobeIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
+      className={className}
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -106,31 +94,25 @@ export function SettingsGlobeIcon({ width, height }) {
   );
 }
 
-export function SettingsDevicesIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsDevicesIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
       width="16"
       height="16"
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path d="M4 1H14C14.5523 1 15 1.44772 15 2V9C15 9.55228 14.5523 10 14 10H7V11H10V13H7V14H12.5C12.7761 14 13 13.7761 13 13.5C13 13.2239 12.7761 13 12.5 13H11V11H14C15.1046 11 16 10.1046 16 9V2C16 0.895431 15.1046 0 14 0H4C2.89543 0 2 0.895431 2 2V5H3V2C3 1.44772 3.44772 1 4 1ZM2.5 13C2.22386 13 2 13.2239 2 13.5C2 13.7761 2.22386 14 2.5 14H3.5C3.77614 14 4 13.7761 4 13.5C4 13.2239 3.77614 13 3.5 13H2.5ZM0 7.5C0 6.67157 0.671573 6 1.5 6H4.5C5.32843 6 6 6.67157 6 7.5V14.5C6 15.3284 5.32843 16 4.5 16H1.5C0.671573 16 0 15.3284 0 14.5V7.5ZM1.5 7C1.22386 7 1 7.22386 1 7.5V14.5C1 14.7761 1.22386 15 1.5 15H4.5C4.77614 15 5 14.7761 5 14.5V7.5C5 7.22386 4.77614 7 4.5 7H1.5Z" />
     </svg>
   );
 }
 
-export function SettingsQuestionIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsQuestionIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
+      className={className}
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -142,10 +124,7 @@ export function SettingsQuestionIcon({ width, height }) {
   );
 }
 
-export function SettingsCheckSelectedIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsCheckSelectedIcon({ className }) {
   return (
     <svg
       width="16"
@@ -153,6 +132,7 @@ export function SettingsCheckSelectedIcon({ width, height }) {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M8 13C10.7614 13 13 10.7614 13 8C13 5.23858 10.7614 3 8 3C5.23858 3 3 5.23858 3 8C3 10.7614 5.23858 13 8 13ZM8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8Z"
@@ -175,16 +155,14 @@ export function SettingsCheckSelectedIcon({ width, height }) {
   );
 }
 
-export function SettingsCheckUnselectedIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsCheckUnselectedIcon({ className }) {
   return (
     <svg
       width="16"
       height="16"
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1ZM0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8Z"
@@ -194,16 +172,13 @@ export function SettingsCheckUnselectedIcon({ width, height }) {
   );
 }
 
-export function SettingsEditSpiritusIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsEditSpiritusIcon({ className }) {
   return (
     <svg
       width="17"
       height="18"
       viewBox="0 0 17 18"
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M7 0C4.79086 0 3 1.79086 3 4C3 6.20914 4.79086 8 7 8C9.20914 8 11 6.20914 11 4C11 1.79086 9.20914 0 7 0ZM4 4C4 2.34315 5.34315 1 7 1C8.65685 1 10 2.34315 10 4C10 5.65685 8.65685 7 7 7C5.34315 7 4 5.65685 4 4ZM2.00873 9C0.903151 9 0 9.88687 0 11C0 12.6912 0.83281 13.9663 2.13499 14.7966C3.18457 15.4658 4.53332 15.8459 6.0057 15.9617C6.01428 15.86 6.03122 15.757 6.05716 15.6532L6.2267 14.9751C4.81404 14.8824 3.58095 14.5326 2.67262 13.9534C1.62226 13.2837 1 12.3088 1 11C1 10.4467 1.44786 10 2.00873 10L9.94265 10L10.9427 9L2.00873 9ZM7.97975 13.3772L12.8092 8.54776C13.5395 7.81741 14.7237 7.81741 15.454 8.54776C16.1843 9.27811 16.1843 10.4622 15.454 11.1926L10.6246 16.022C10.343 16.3036 9.99019 16.5033 9.60387 16.5999L8.10597 16.9744C7.45456 17.1372 6.86451 16.5472 7.02737 15.8958L7.40184 14.3979C7.49842 14.0116 7.69818 13.6588 7.97975 13.3772Z" />
@@ -211,16 +186,13 @@ export function SettingsEditSpiritusIcon({ width, height }) {
   );
 }
 
-export function SettingsCreateStoryIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsCreateStoryIcon({ className }) {
   return (
     <svg
+      className={className}
       width="16"
       height="16"
       viewBox="0 0 16 16"
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d="M9 4.5C9 6.98528 6.98528 9 4.5 9C2.01472 9 0 6.98528 0 4.5C0 2.01472 2.01472 0 4.5 0C6.98528 0 9 2.01472 9 4.5ZM5 2.5C5 2.22386 4.77614 2 4.5 2C4.22386 2 4 2.22386 4 2.5V4H2.5C2.22386 4 2 4.22386 2 4.5C2 4.77614 2.22386 5 2.5 5H4L4 6.5C4 6.77614 4.22386 7 4.5 7C4.77614 7 5 6.77614 5 6.5V5H6.5C6.77614 5 7 4.77614 7 4.5C7 4.22386 6.77614 4 6.5 4H5V2.5ZM13 3H9.79297C9.69436 2.65136 9.56223 2.31679 9.40029 2H13C14.5977 2 15.9037 3.24892 15.9949 4.82373L16 5V9.37868C16 9.85018 15.8335 10.3045 15.5331 10.6631L15.4142 10.7929L10.7929 15.4142C10.4595 15.7476 10.0205 15.9511 9.55453 15.9923L9.37868 16H5C3.40232 16 2.09634 14.7511 2.00509 13.1763L2 13V9.40029C2.31679 9.56223 2.65136 9.69436 3 9.79297V13C3 14.0544 3.81588 14.9182 4.85074 14.9945L5 15H9V12C9 10.4023 10.2489 9.09634 11.8237 9.00509L12 9H15V5C15 3.94564 14.1841 3.08183 13.1493 3.00549L13 3ZM14.7825 10.0013L12 10C10.9456 10 10.0818 10.8159 10.0055 11.8507L10 12V14.781L10.0858 14.7071L14.7071 10.0858C14.7339 10.059 14.7591 10.0307 14.7825 10.0013Z" />

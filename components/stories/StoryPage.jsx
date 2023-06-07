@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState, Fragment } from "react";
 
 import { useSession } from "next-auth/react";
@@ -50,10 +50,9 @@ export function Tags({ tags }) {
           <Link
             href={`/category/3/item/${tag.id}?title=${tag.value}`}
             key={`tag-${tag.id}`}
+            className="rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 px-3 py-2 font-semibold text-sp-black text-sm dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white lg:text-base"
           >
-            <a className="py-2 px-3 rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown text-sp-black dark:text-sp-white font-semibold text-sm lg:text-base">
-              {t(translateCategoryTitle(tag.value))}
-            </a>
+            {t(translateCategoryTitle(tag.value))}
           </Link>
         );
       })}
@@ -88,7 +87,7 @@ export function Tribute({ id }) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-100" onClose={closeModal}>
+        <Dialog as="div" className="z-100 relative" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-1000"
@@ -98,11 +97,11 @@ export function Tribute({ id }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-70 z-10" />
+            <div className="fixed inset-0 z-10 bg-black bg-opacity-70" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto z-10">
-            <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex h-full min-w-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-1000"
@@ -114,13 +113,13 @@ export function Tribute({ id }) {
               >
                 <Dialog.Panel
                   onClick={closeModal}
-                  className="absolute overflow-hidden content-center transition-all transform"
+                  className="absolute transform content-center overflow-hidden transition-all"
                 >
-                  <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
-                    <div className="relative mx-auto w-3/4 h-3/4 md:w-1/2 md:h-1/2">
+                  <div className="flex h-full min-w-full items-center justify-center p-4 text-center">
+                    <div className="relative mx-auto h-3/4 w-3/4 md:h-1/2 md:w-1/2">
                       <Lottie animationData={confetti} loop={false} />
                     </div>
-                    <div className="absolute mx-auto w-full h-full md:w-1/2 md:h-1/2">
+                    <div className="absolute mx-auto h-full w-full md:h-1/2 md:w-1/2">
                       <Lottie animationData={giveRose} loop={false} />
                     </div>
                   </div>
@@ -132,8 +131,8 @@ export function Tribute({ id }) {
       </Transition>
 
       {sent ? (
-        <div className="w-full flex items-center justify-center">
-          <div className="inline-flex w-1/3 justify-center rounded-sp-40 border-2 border-sp-lighter border-opacity-30 dark:border-sp-medium p-4">
+        <div className="flex w-full items-center justify-center">
+          <div className="inline-flex w-1/3 justify-center rounded-sp-40 border-2 border-sp-lighter border-opacity-30 p-4 dark:border-sp-medium">
             <svg
               width="16"
               height="22"
@@ -156,7 +155,7 @@ export function Tribute({ id }) {
               </defs>
             </svg>
 
-            <span className="text-lg font-semibold ml-1 text-sp-lighter dark:text-sp-white">
+            <span className="ml-1 font-semibold text-sp-lighter text-lg dark:text-sp-white">
               {t("term_thanks")}
             </span>
           </div>
@@ -174,7 +173,7 @@ export function Tribute({ id }) {
                   type="text"
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  className="w-full h-16 text-xl py-3.5 px-8 font-medium align-text-bottom bg-sp-day-50 dark:bg-sp-black rounded-sp-40 border-3 border-sp-day-200 dark:border-sp-lighter placeholder-sp-lighter transition-all duration-500 focus:h-36"
+                  className="h-16 w-full rounded-sp-40 border-3 border-sp-day-200 bg-sp-day-50 px-8 py-3.5 align-text-bottom font-medium placeholder-sp-lighter transition-all duration-500 text-xl focus:h-36 dark:border-sp-lighter dark:bg-sp-black"
                   placeholder={t("write_tribute")}
                 ></textarea>
               </>
@@ -186,15 +185,15 @@ export function Tribute({ id }) {
               }}
               className={`${
                 sent ? "opacity-30" : ""
-              } flex justify-center w-full bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-day-200 dark:border-sp-medium border-opacity-80 rounded-sp-40 py-4 px-7`}
+              } flex w-full justify-center rounded-sp-40 border-4 border-sp-day-200 border-opacity-80 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-7 py-4 dark:border-sp-medium dark:from-sp-dark-fawn dark:to-sp-fawn`}
             >
               <RoseIcon />
-              <span className="text-lg font-semibold ml-1 text-sp-white dark:text-sp-black">
+              <span className="ml-1 font-semibold text-sp-white text-lg dark:text-sp-black">
                 {t("give_rose")}
               </span>
               {!!text && (
                 <span
-                  className={`text-lg font-semibold ml-1 text-sp-white dark:text-sp-black`}
+                  className={`ml-1 font-semibold text-sp-white text-lg dark:text-sp-black`}
                 >
                   {t("with_tribute")}
                 </span>
@@ -266,19 +265,19 @@ export function PageActions({
   };
 
   return (
-    <div className="w-full mx-auto items-center mt-4">
-      <div className="flex mx-auto justify-evenly space-x-3 lg:space-x-4 text-sp-lighter dark:text-sp-white">
+    <div className="mx-auto mt-4 w-full items-center">
+      <div className="mx-auto flex justify-evenly space-x-3 text-sp-lighter dark:text-sp-white lg:space-x-4">
         {!isGuardian && (
           <button
             onClick={() => toggleSave()}
             className={`${
               status !== "authenticated" ? "opacity-30" : ""
-            } flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4`}
+            } flex w-1/3 flex-col items-center rounded-sp-10 p-4 font-medium tracking-sp-tighten hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
             disabled={status !== "authenticated"}
           >
             <BookmarkIcon
-              className={`w-6 h-6 ${
-                isSaved ? "text-sp-fawn fill-sp-fawn dark:text-opacity-0" : ""
+              className={`h-6 w-6 ${
+                isSaved ? "fill-sp-fawn text-sp-fawn dark:text-opacity-0" : ""
               }`}
             />
             {t("save")}
@@ -286,30 +285,31 @@ export function PageActions({
         )}
         <CopyToClipboard
           text={shareLink || ""}
-          className="flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4"
+          className="flex w-1/3 flex-col items-center rounded-sp-10 p-4 font-medium tracking-sp-tighten hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
         >
           <button>
-            <UploadIcon className="w-6 h-6" />
+            <UploadIcon className="h-6 w-6" />
             {t("share")}
           </button>
         </CopyToClipboard>
         {/* TODO: refactor nested ternaries*/}
         {type === "STORY" ? (
           nextStorySlug ? (
-            <Link href={`/stories/${nextStorySlug ? nextStorySlug : ""}`}>
-              <a className="flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4">
-                <ReplyIcon className="w-6 h-6 -scale-x-100" />
-                {t("next")}
-              </a>
+            <Link
+              href={`/stories/${nextStorySlug ? nextStorySlug : ""}`}
+              className="flex w-1/3 flex-col items-center rounded-sp-10 p-4 font-medium tracking-sp-tighten hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+            >
+              <ReplyIcon className="h-6 w-6 -scale-x-100" />
+              {t("next")}
             </Link>
           ) : (
             <button
               disabled
               className={`${
                 !nextStorySlug ? "opacity-30" : ""
-              } flex flex-col w-1/3 items-center font-medium tracking-sp-tighten hover:from-sp-day-300 hover:to-sp-day-100 hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-10 p-4`}
+              } flex w-1/3 flex-col items-center rounded-sp-10 p-4 font-medium tracking-sp-tighten hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
             >
-              <ReplyIcon className="w-6 h-6 -scale-x-100" />
+              <ReplyIcon className="h-6 w-6 -scale-x-100" />
               {t("next")}
             </button>
           )
@@ -353,26 +353,25 @@ export function MoreStories({ stories, spiritus, isGuardian, isLastPage }) {
 
   return (
     <section key={"stories-showcase"}>
-      <div className="w-full my-10 text-sp-black dark:text-sp-white">
-        <div className="flex w-full justify-between mb-2 items-center">
+      <div className="my-10 w-full text-sp-black dark:text-sp-white">
+        <div className="mb-2 flex w-full items-center justify-between">
           <h1 className="font-semibold text-2xl">{t("more_stories_text")}</h1>
           {isGuardian ? (
-            <Link href={`/create/story?spiritus=${spiritus.id}`}>
-              <a className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn rounded-full py-2 px-3 text-sp-white dark:text-sp-black">
-                <PlusCircleIcon className="h-6 w-6" />
-                <span className="font-semibold ml-1">
-                  {t("cta_add_story_button")}
-                </span>
-              </a>
+            <Link
+              href={`/create/story?spiritus=${spiritus.id}`}
+              className="inline-flex rounded-full bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-3 py-2 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black"
+            >
+              <PlusCircleIcon className="h-6 w-6" />
+              <span className="ml-1 font-semibold">
+                {t("cta_add_story_button")}
+              </span>
             </Link>
           ) : (
-            <Sources
-              sources={spiritus.sources ? spiritus.sources : []}
-            />
+            <Sources sources={spiritus.sources ? spiritus.sources : []} />
           )}
         </div>
         {items && items.length ? (
-          <div className="grid grid-cols-1 xs:grid-cols-2 gap-x-6 gap-y-6 md:grid-cols-3 md:gap-x-4 md:gap-y-4 mt-3">
+          <div className="mt-3 grid grid-cols-1 gap-x-6 gap-y-6 xs:grid-cols-2 md:grid-cols-3 md:gap-x-4 md:gap-y-4">
             {items.map((s) => (
               <StoryHook {...s} key={s.title} />
             ))}
@@ -383,13 +382,13 @@ export function MoreStories({ stories, spiritus, isGuardian, isLastPage }) {
           </p>
         )}
         {!isLast && (
-          <div className="flex justify-center items-center mt-8">
+          <div className="mt-8 flex items-center justify-center">
             <button
               onClick={() => {
                 loadMore();
               }}
               disabled={isLast}
-              className="dark:bg-sp-medlight w-full sm:w-1/3 border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+              className="w-full cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown sm:w-1/3"
             >
               {isLoading ? (
                 <Spinner text={t("loading")} />
@@ -419,31 +418,32 @@ export function StoryHook({ slug, title, subtitle, description, date, flags }) {
   }
 
   return (
-    <Link href={`/stories/${slug}`}>
-      <a className="flex flex-col justify-between h-72 rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown p-4 text-sp-black dark:text-sp-white">
-        <div className="flex flex-col tracking-sp-tighten overflow-hidden text-ellipsis">
-          <div className="flex justify-between items-center">
-            <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
-              <StoryHookIcon />
-            </div>
-            {flags.includes("PRIVATE") && (
-              <div className="flex justify-center items-center rounded-full bg-sp-day-900 bg-opacity-10 dark:bg-sp-fawn dark:bg-opacity-10 p-2">
-                <LockIcon />
-              </div>
-            )}
+    <Link
+      href={`/stories/${slug}`}
+      className="flex h-72 flex-col justify-between rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 p-4 text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white"
+    >
+      <div className="flex flex-col overflow-hidden text-ellipsis tracking-sp-tighten">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-2 dark:bg-sp-fawn dark:bg-opacity-10">
+            <StoryHookIcon />
           </div>
+          {flags.includes("PRIVATE") && (
+            <div className="flex items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-2 dark:bg-sp-fawn dark:bg-opacity-10">
+              <LockIcon />
+            </div>
+          )}
+        </div>
 
-          <h3 className="text-lg py-2 font-medium tracking-sp-tighten leading-5 text-ellipsis">
-            {titleStr}
-          </h3>
-          <p className="text-xs sm:text-sm tracking-sp-tighten leading-5 text-ellipsis">
-            {descPara}
-          </p>
-        </div>
-        <div className="flex flex-col items-start">
-          <p className="text-sp-lighter text-sm">{date || ""}</p>
-        </div>
-      </a>
+        <h3 className="text-ellipsis py-2 font-medium leading-5 text-lg tracking-sp-tighten">
+          {titleStr}
+        </h3>
+        <p className="text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
+          {descPara}
+        </p>
+      </div>
+      <div className="flex flex-col items-start">
+        <p className="text-sp-lighter text-sm">{date || ""}</p>
+      </div>
     </Link>
   );
 }
@@ -462,11 +462,11 @@ export function CTAAddMemory({ sessionStatus, spiritusId, name }) {
   }
 
   return (
-    <div className="w-full flex flex-row justify-between overflow-clip rounded-sp-14 border-3 border-sp-day-200 dark:border-sp-medium text-sp-black dark:text-sp-white">
+    <div className="flex w-full flex-row justify-between overflow-clip rounded-sp-14 border-3 border-sp-day-200 text-sp-black dark:border-sp-medium dark:text-sp-white">
       <LoginModal isOpen={isOpen} closeModal={closeModal} />
 
       <div className="flex h-full flex-col py-3 pl-4">
-        <h2 className="title-font py-1 text-xl font-medium">
+        <h2 className="title-font py-1 font-medium text-xl">
           {t("cta_add_memory")}
           <span> {name}</span>?
         </h2>
@@ -477,7 +477,7 @@ export function CTAAddMemory({ sessionStatus, spiritusId, name }) {
             className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn"
           >
             {t("cta_add_memory_button")}
-            <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
+            <ChevronRightIcon className="h-4 w-4 text-sp-day-900 dark:text-sp-fawn" />
           </a>
         ) : (
           <button
@@ -485,7 +485,7 @@ export function CTAAddMemory({ sessionStatus, spiritusId, name }) {
             className="mt-6 inline-flex items-center font-bold text-sp-day-900 dark:text-sp-fawn"
           >
             {t("cta_add_memory_button")}
-            <ChevronRightIcon className="w-4 h-4 text-sp-day-900 dark:text-sp-fawn" />
+            <ChevronRightIcon className="h-4 w-4 text-sp-day-900 dark:text-sp-fawn" />
           </button>
         )}
       </div>
@@ -512,17 +512,17 @@ function Sources({ sources }) {
         onClick={() => setOpen(true)}
         className={`
         ${open ? "" : "text-opacity-90"}
-        z-10 inline-flex items-center rounded-sp-10 gap-2 py-2.5 px-5 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
+        z-10 inline-flex items-center gap-2 rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-5 py-2.5 hover:from-sp-day-300 hover:to-sp-day-100 dark:from-sp-dark-brown dark:to-sp-brown dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
       >
         <InfoIcon />
-        <span className="text-sp-black dark:text-sp-white font-semibold leading-tight tracking-sp-tighten">
+        <span className="font-semibold leading-tight text-sp-black tracking-sp-tighten dark:text-sp-white">
           Sources
         </span>
       </button>
       <Transition appear show={open} as={Fragment}>
         <Dialog
           as="div"
-          className="absolute inset-0 z-100"
+          className="z-100 absolute inset-0"
           onClose={closeModal}
         >
           <Transition.Child
@@ -534,11 +534,11 @@ function Sources({ sources }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-90 z-40" />
+            <div className="fixed inset-0 z-40 bg-black bg-opacity-90" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto z-40">
-            <div className="flex items-center justify-center min-w-full min-h-full p-4 text-center">
+          <div className="fixed inset-0 z-40 overflow-y-auto">
+            <div className="flex min-h-full min-w-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -548,16 +548,16 @@ function Sources({ sources }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full md:w-3/5 lg:w-2/5 transition-all transform">
-                  <div className="overflow-hidden rounded-sp-10 shadow-lg bg-sp-day-300 dark:bg-sp-black text-sp-black dark:text-sp-white">
-                    <div className="flex flex-col w-full h-full p-8">
+                <Dialog.Panel className="w-full transform transition-all md:w-3/5 lg:w-2/5">
+                  <div className="overflow-hidden rounded-sp-10 bg-sp-day-300 text-sp-black shadow-lg dark:bg-sp-black dark:text-sp-white">
+                    <div className="flex h-full w-full flex-col p-8">
                       <div className="mb-5 flex flex-col items-center justify-center">
                         <InfoIconColored width={8} height={8} />
-                        <h3 className="text-lg font-bold text-sp-medlight dark:text-sp-white">
+                        <h3 className="font-bold text-sp-medlight text-lg dark:text-sp-white">
                           Sources
                         </h3>
                       </div>
-                      <ul className="flex flex-col justify-between items-start gap-2 px-8">
+                      <ul className="flex flex-col items-start justify-between gap-2 px-8">
                         {sources && sources.length > 0
                           ? sources.map((text, index) => (
                               <li
@@ -567,16 +567,19 @@ function Sources({ sources }) {
                                 <div className="my-1">
                                   <InfoIconColored width={5} height={5} />
                                 </div>
-                                <p className="text-left font-medium tracking-sp-tighter leading-5">
+                                <p className="tracking-sp-tighter text-left font-medium leading-5">
                                   {text}
                                 </p>
                               </li>
                             ))
                           : null}
                       </ul>
-                      <div className="flex items-center justify-center mt-5">
-                        <button onClick={closeModal} className="items-center w-28 p-3 rounded-full bg-sp-fawn  dark:bg-sp-medium">
-                          <span className="text-sp-black dark:text-sp-white font-semibold text-lg">
+                      <div className="mt-5 flex items-center justify-center">
+                        <button
+                          onClick={closeModal}
+                          className="w-28 items-center rounded-full bg-sp-fawn p-3  dark:bg-sp-medium"
+                        >
+                          <span className="font-semibold text-sp-black text-lg dark:text-sp-white">
                             OK
                           </span>
                         </button>

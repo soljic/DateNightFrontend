@@ -1,5 +1,5 @@
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import Script from "next/script";
-import Document, { Html, Head, Main, NextScript } from "next/document";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -31,10 +31,6 @@ class MyDocument extends Document {
           <link
             href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500&display=swap"
             rel="stylesheet"
-          />
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
           />
           {process.env.NEXT_FACEBOOK_DOMAIN_ID && (
             <meta

@@ -3,26 +3,23 @@ import { useState } from "react";
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
-
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import LayoutNoFooter from "../../../components/layout/LayoutNoFooter";
-import { Alert } from "../../../components/Status";
+import { Alert } from "@/components/Status";
+import { DeleteSpiritusModal } from "@/components/forms/DeleteSpiritusModal";
+import { EditStories } from "@/components/forms/EditStories";
+import { EditorLayout } from "@/components/forms/Layout";
+import Layout from "@/components/layout/Layout";
 
-import { GetSpiritusById } from "../../../service/http/spiritus";
-import { DeleteSpiritusModal } from "../../../components/forms/editSpiritus/EditSpiritus";
-import { EditorLayout } from "../../../components/forms/editSpiritus/Layout";
-import { EditContent } from "../../../components/forms/editSpiritus/EditContent";
-import { EditImages } from "../../../components/forms/editSpiritus/EditImages";
+import { GetSpiritusById } from "@/service/http/spiritus";
+import { GetSpiritusStoriesBySlug } from "@/service/http/story";
 
-export default function EditSpiritusPage({ spiritus }) {
+export default function EditSpiritusStories({ spiritus, stories }) {
   const { t } = useTranslation("common");
   const [isSuccess, setIsSuccess] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-
-  const [selectedMenuId, setSelectedMenuId] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -34,7 +31,7 @@ export default function EditSpiritusPage({ spiritus }) {
     setIsOpen(false);
   }
 
-  function onDelete() {
+  function onDeleteSpiritus() {
     openModal();
   }
 
@@ -56,43 +53,23 @@ export default function EditSpiritusPage({ spiritus }) {
     setToastOpen(true);
   }
 
-  function selectEditor() {
-    switch (selectedMenuId) {
-      case 1:
-        return (
-          <EditImages
-            spiritus={spiritus}
-            onError={onError}
-            onSuccess={onSuccess}
-          />
-        );
-      default:
-        return (
-          <EditContent
-            spiritus={spiritus}
-            onError={onError}
-            onSuccess={onSuccess}
-          />
-        );
-    }
-  }
-
   return (
-    <LayoutNoFooter>
+    <Layout>
       <Head>
         <title>{t("edit_spiritus_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("edit_spiritus_meta_desc")} />
       </Head>
-      <DeleteSpiritusModal
-        deleteId={spiritus.id}
-        isOpen={isOpen}
-        closeModal={closeModal}
-      />
-
-      <div className="relative py-5 min-h-screen mb-64">
+      {isOpen && (
+        <DeleteSpiritusModal
+          deleteId={spiritus.id}
+          isOpen={isOpen}
+          closeModal={closeModal}
+        />
+      )}
+      <div className="relative mb-64 min-h-screen">
         {toastOpen && (
-          <div className="z-50 sticky top-8 right-0 mb-5">
+          <div className="sticky right-0 top-8 z-50 mb-5">
             <div className="flex justify-end">
               <Alert
                 isSuccess={isSuccess}
@@ -103,14 +80,23 @@ export default function EditSpiritusPage({ spiritus }) {
           </div>
         )}
         <EditorLayout
-          menuId={selectedMenuId}
-          setMenuId={setSelectedMenuId}
-          onDelete={onDelete}
+          menuId={2}
+          name={spiritus.name}
+          surname={spiritus.surname}
+          birth={spiritus.birth}
+          death={spiritus.death}
+          spiritusId={spiritus.id}
+          onDelete={onDeleteSpiritus}
         >
-          {selectEditor()}
+          <EditStories
+            spiritus={spiritus}
+            initialStories={stories}
+            onError={onError}
+            onSuccess={onSuccess}
+          />
         </EditorLayout>
       </div>
-    </LayoutNoFooter>
+    </Layout>
   );
 }
 
@@ -129,6 +115,13 @@ export async function getServerSideProps(context) {
 
   try {
     const { data: spiritus } = await GetSpiritusById(id);
+    const res = await GetSpiritusStoriesBySlug(
+      spiritus.slug,
+      0,
+      20,
+      session.user.accessToken
+    );
+    const stories = res.data.content;
 
     if (!spiritus || !spiritus?.users) {
       throw "missing spiritus data";
@@ -139,6 +132,7 @@ export async function getServerSideProps(context) {
         return {
           props: {
             spiritus,
+            stories,
             ...(await serverSideTranslations(context.locale, [
               "common",
               "settings",
@@ -157,7 +151,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
-    console.log("error fetching spiritus\n", err);
+    console.log(err);
     // redirect to home in case of err
     // known errs: 404 Not Found Spiritus
     return {

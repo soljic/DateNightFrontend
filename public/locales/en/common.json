@@ -40,6 +40,7 @@
   "cta_get_spiritus_button": "Get Spiritus",
 
   "create_spiritus": "Create Spiritus",
+  "create_spiritus_subtitle": "Spiritus is a digital memorial with storytelling.",
   "goto_search": "Go to search",
   "search_placeholder": "Search",
   "searching": "Searching...",
@@ -54,12 +55,16 @@
   "read_story": "Read story",
 
   "discover": "Discover",
+  "memory_guardian": "Memory guardian",
+  "no_memory_guardian": "This Spiritus does not have Guardians.",
+  "mini_bio": "Mini bio",
 
   "find_loved_title": "Find your loved ones!",
   "find_loved_subtitle": "Currently we store over 500 000 names. Search and find your loved ones and tell their stories. If you cannot find them, you can add them.",
 
   "term_rated": "Rated",
   "term_on": "on",
+  "term_for": "za",
 
   "term_place": "Place",
   "term_story": "Story",
@@ -67,18 +72,34 @@
   "term_images": "Images",
   "term_guardians": "Guardians",
   "term_delete": "Delete",
+  "term_age": "Age",
 
+  "tributes_title": "Tributes",
   "write_tribute": "Write Tribute",
+  "write_tribute_placeholder": "Add your tribute text here",
+  "send_tribute": "Send Tribute",
   "give_rose": "Send Rose",
   "with_tribute": "with tribute",
   "save": "Save",
   "share": "Share",
+  "share_spiritus": "Share this Spiritus",
+  "share_facebook": "Share on Facebooku",
+  "share_email": "Share via e-mailom",
+  "remind_me": "Remind me",
+  "remind_me_subtitle": "We will send you updates for this Spiritus.",
+  "remind_me_button": "Get notified",
+  "show_more": "Show more...",
+  "copied": "Copied!",
+  "copy_link": "Copy link",
   "next": "Next",
   "back": "Back",
+  "cancel": "Cancel",
   "create": "Create",
   "creating": "Creating...",
   "optional": "Optional",
   "loading": "Loading...",
+  "new_story_title": "Add Story",
+  "new_story_subtitle": "Share your story about this Spiritus.",
 
   "spiritus_success_first_story": "Write first story",
   "spiritus_success_text": "must have done many beautiful things. Save those memories forever.",
@@ -102,17 +123,22 @@
   "create_spiritus_birth_placeholder": "Date of Birth",
   "create_spiritus_death_placeholder": "Date of Passing",
 
-  "create_spiritus_description_title1": "Does",
-  "create_spiritus_description_title2": "have any sentence which he/she always said? If yes, please add it here.",
-  "create_spiritus_description_placeholder": "Enter sentence",
+  "create_spiritus_quote_title": "What is your favorite quote from",
+  "create_spiritus_quote_placeholder": "Write a short quote",
+  "create_spiritus_description_title": "Answer briefly: Who was",
+  "create_spiritus_description_placeholder": "Write short description",
+  "create_spiritus_description_char_limit": "Please enter 30-150 characters.",
+
 
   "create_spiritus_location_title": "must associate you to a one place. Please select that place.",
   "create_spiritus_location_subtitle": "It can be place of birth, death, or the place where he/she lived the longest.",
   "create_spiritus_location_placeholder": "Enter sentence",
 
+  "create_spiritus_profile_image_button": "Upload profile image",
   "create_spiritus_image_title1": "Does",
   "create_spiritus_image_title2": "have any images from his/her life? If yes, please add them here.",
   "create_story_image_title": "Do you have an image for this story? If yes, please add it here.",
+  "upload_spiritus_images_button": "Upload images",
 
   "create_story_type_title": "What type of Story do you want to create?",
   "public": "Public",
@@ -159,6 +185,8 @@
   "edit_story_summary": "Summary",
   "edit_story_text": "Content",
   "edit_story_visibility": "Visibility",
+  "cover_image": "Cover image",
+  "story_tags_label": "What is the Story about?",
 
   "edit_spiritus_meta_title": "Spiritus | Edit Spiritus Content",
   "edit_spiritus_meta_desc": "Edit Spiritus content",
@@ -214,5 +242,9 @@
   "see_all": "See all",
 
   "obituary_bereaved": "Bereaved",
-  "obituary_farewell": "Farewell"
+  "obituary_farewell": "Farewell",
+
+  "spiritus_about": "About",
+  "spiritus_stories": "Stories",
+  "spiritus_gallery": "Gallery"
 }

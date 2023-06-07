@@ -1,31 +1,32 @@
-import { useState, useEffect } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
+import Head from "next/head";
+import Image from "next/legacy/image";
+import Link from "next/link";
+
+import { ClockIcon, SearchIcon, XIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { PlusCircleIcon } from "@heroicons/react/solid";
-import { SearchIcon, XIcon, ClockIcon } from "@heroicons/react/outline";
+import { Spinner } from "@/components/Status";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import LayoutNoFooter from "../components/layout/LayoutNoFooter";
-import { Spinner } from "../components/Status";
+import { GlobalSearch } from "@/service/http/search";
 
 import {
-  FILTER_SPIRITUS,
   FILTER_PLACE,
+  FILTER_SPIRITUS,
   FILTER_STORY,
 } from "../service/constants";
-import { GlobalSearch } from "../service/http/search";
 
-export default function Search({ defaultFilter }) {
+export default function Search({ defaultFilter, defaultName }) {
   const { t } = useTranslation("common");
 
   const [searchFilter, setSearchFilter] = useState(
     defaultFilter || FILTER_SPIRITUS
   );
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(defaultName || "");
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState([]);
   const [notFound, setNotFound] = useState(false);
@@ -46,7 +47,7 @@ export default function Search({ defaultFilter }) {
   useEffect(() => {
     const debounce = setTimeout(async () => {
       if (!searchTerm) {
-        clear()
+        clear();
         return;
       }
       setSearching(true);
@@ -65,7 +66,9 @@ export default function Search({ defaultFilter }) {
       }
     }, 400);
 
-    return () => clearTimeout(debounce);
+    return () => {
+      clearTimeout(debounce);
+    };
   }, [searchTerm]);
 
   const loadMore = async () => {
@@ -86,15 +89,15 @@ export default function Search({ defaultFilter }) {
   };
 
   return (
-    <LayoutNoFooter>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_search_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_search_description")} />
       </Head>
-      <div className="min-h-screen mx-auto my-20 w-full lg:w-1/2 md:w-2/3 sm:w-full">
+      <div className="mx-auto my-5 min-h-screen w-11/12 md:my-20 md:w-2/3 lg:w-1/3 xl:w-1/4">
         <div
-          className={`flex gap-x-2 items-center rounded-sp-14 py-2 border border-sp-lighter ${
+          className={`flex items-center gap-x-2 rounded-sp-14 border border-sp-lighter py-2 ${
             results.length && !searching ? "bg-none" : "dark:bg-sp-medium"
           } dark:border-sp-medium`}
         >
@@ -102,7 +105,7 @@ export default function Search({ defaultFilter }) {
             {searching ? (
               <Spinner />
             ) : (
-              <SearchIcon className="w-6 h-6 text-sp-lighter" />
+              <SearchIcon className="h-6 w-6 text-sp-lighter" />
             )}
           </div>
           <div className="inline-flex w-full">
@@ -112,14 +115,14 @@ export default function Search({ defaultFilter }) {
                 setSearchTerm(e.target.value);
               }}
               value={searchTerm}
-              className="mr-2 p-1.5 w-full bg-inherit outline-none placeholder-sp-lighter text-lg text-sp-black dark:text-sp-white caret-sp-fawn"
+              className="mr-2 w-full bg-inherit p-1.5 text-sp-black placeholder-sp-lighter caret-sp-fawn outline-none text-lg dark:text-sp-white"
               type="text"
               placeholder={t("search_placeholder")}
               autoFocus
             />
             {!!searchTerm && (
               <button onClick={() => clear()} className="mr-3">
-                <XIcon className="w-5 h-5 text-sp-lighter dark:text-sp-white" />
+                <XIcon className="h-5 w-5 text-sp-lighter dark:text-sp-white" />
               </button>
             )}
           </div>
@@ -130,10 +133,7 @@ export default function Search({ defaultFilter }) {
           clear={clear}
         />
         {!!results.length && !searching && (
-          <GlobalSearchResults
-            results={results}
-            total={total}
-          />
+          <GlobalSearchResults results={results} total={total} />
         )}
         {searching && <SearchContentPlacaholder />}
         {notFound && <NotFound searchTerm={searchTerm} filter={searchFilter} />}
@@ -144,7 +144,7 @@ export default function Search({ defaultFilter }) {
                 loadMore();
               }}
               disabled={isLast}
-              className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none rounded-full py-3 px-8 font-semibold cursor-pointer"
+              className="cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
               {searching ? (
                 <Spinner text={t("loading")} />
@@ -155,7 +155,7 @@ export default function Search({ defaultFilter }) {
           </div>
         )}
       </div>
-    </LayoutNoFooter>
+    </FullWidthLayout>
   );
 }
 
@@ -163,15 +163,15 @@ function Filter({ filter, setFilter, clear }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex justify-between w-3/4 mx-auto mt-6">
+    <div className="mx-auto mt-6 flex w-3/4 justify-between">
       <button
         onClick={() => {
           clear();
           setFilter(FILTER_SPIRITUS);
         }}
-        className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
+        className={`px-0.5 pb-1.5 font-semibold text-sm tracking-sp-tighten ${
           filter === FILTER_SPIRITUS
-            ? "border-b-3 text-sp-cotta border-sp-cotta dark:text-sp-fawn dark:border-sp-fawn"
+            ? "border-b-3 border-sp-cotta text-sp-cotta dark:border-sp-fawn dark:text-sp-fawn"
             : ""
         }`}
       >
@@ -182,9 +182,9 @@ function Filter({ filter, setFilter, clear }) {
           clear();
           setFilter(FILTER_PLACE);
         }}
-        className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
+        className={`px-0.5 pb-1.5 font-semibold text-sm tracking-sp-tighten ${
           filter === FILTER_PLACE
-            ? "border-b-3 text-sp-cotta border-sp-cotta dark:text-sp-fawn dark:border-sp-fawn"
+            ? "border-b-3 border-sp-cotta text-sp-cotta dark:border-sp-fawn dark:text-sp-fawn"
             : ""
         }`}
       >
@@ -195,9 +195,9 @@ function Filter({ filter, setFilter, clear }) {
           clear();
           setFilter(FILTER_STORY);
         }}
-        className={`font-semibold pb-1.5 px-0.5 text-sm tracking-sp-tighten ${
+        className={`px-0.5 pb-1.5 font-semibold text-sm tracking-sp-tighten ${
           filter === FILTER_STORY
-            ? "border-b-3 text-sp-cotta border-sp-cotta dark:text-sp-fawn dark:border-sp-fawn"
+            ? "border-b-3 border-sp-cotta text-sp-cotta dark:border-sp-fawn dark:text-sp-fawn"
             : ""
         }`}
       >
@@ -211,9 +211,9 @@ function NotFound({ searchTerm, filter }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex flex-col text-sp-lighter items-center justify-center mt-12">
+    <div className="mt-12 flex flex-col items-center justify-center text-sp-lighter">
       <svg
-        className="w-10 h-10"
+        className="h-10 w-10"
         viewBox="0 0 32 32"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -223,18 +223,18 @@ function NotFound({ searchTerm, filter }) {
           fill="currentColor"
         />
       </svg>
-      <p className="text-center w-full lg:w-2/3 p-2 mb-4">
+      <p className="mb-4 w-full p-2 text-center lg:w-2/3">
         {t("search_not_found_part_1")} <span>“{searchTerm}”.</span>{" "}
         {filter === FILTER_SPIRITUS ? t("search_not_found_part_2") : ""}
       </p>
       {filter === FILTER_SPIRITUS && (
-        <a
+        <Link
           href="/create/spiritus"
-          className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-5 border-sp-fawn dark:border-sp-medium dark:border-opacity-80 rounded-full py-3 px-7 text-sp-white dark:text-sp-black"
+          className="inline-flex rounded-full border-5 border-sp-fawn bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-7 py-3 text-sp-white dark:border-sp-medium dark:border-opacity-80 dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black"
         >
           <PlusCircleIcon className="h-6 w-6" />
-          <span className="font-semibold ml-1">{t("create_spiritus")}</span>
-        </a>
+          <span className="ml-1 font-semibold">{t("create_spiritus")}</span>
+        </Link>
       )}
     </div>
   );
@@ -251,7 +251,7 @@ function SearchContentPlacaholder() {
   }
   return (
     <div className="flex flex-col rounded-sp-14 py-2">
-      <p className="p-2 text-sp-lighter text-center">{t("searching")}</p>
+      <p className="p-2 text-center text-sp-lighter">{t("searching")}</p>
       <div className="flex w-full flex-col items-start">{ph}</div>
     </div>
   );
@@ -262,16 +262,16 @@ function Placeholder() {
     <div className="flex w-3/4 p-2">
       <div
         // data-placeholder
-        className="animate-pulse relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
+        className="relative mr-2 h-20 w-20 animate-pulse overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
       ></div>
       <div className="flex w-full flex-col justify-center gap-2">
         <div
           // data-placeholder
-          className="animate-pulse rounded-sp-14 relative h-5 w-full overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
+          className="relative h-5 w-full animate-pulse overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
         ></div>
         <div
           // data-placeholder
-          className="animate-pulse rounded-sp-14 relative h-5 w-3/4 overflow-hidden bg-sp-day-200 dark:bg-sp-medium"
+          className="relative h-5 w-3/4 animate-pulse overflow-hidden rounded-sp-14 bg-sp-day-200 dark:bg-sp-medium"
         ></div>
       </div>
     </div>
@@ -293,7 +293,7 @@ function GlobalSearchResults({ results, total }) {
 
   return (
     <div className="flex flex-col rounded-sp-14 py-2">
-      <p className="p-2 text-sp-lighter text-center">
+      <p className="p-2 text-center text-sp-lighter">
         {results.length}/{total} <span> {t("search_results")}</span>
       </p>
       <div className="flex flex-col items-start">
@@ -324,41 +324,40 @@ function GlobalSearchRow({
     }
   };
   return (
-    <Link href={getURL(navigationType)}>
-      <a className="flex w-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown rounded-sp-14 text-sp-medlight dark:text-sp-white">
-        {imageUrl ? (
-          <div className="relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
-            <Image
-              src={imageUrl}
-              alt={"Search result thumbnail"}
-              layout="fill"
-            />
-          </div>
-        ) : (
-          <div className="flex items-center justify-center h-20 w-20">
-            <ClockIcon className="w-7 h-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
-          </div>
-        )}
-        <div className="flex w-full flex-col justify-center py-2 px-2 text-lg tracking-sp-tighten">
-          <p className="break-words pr-4 capitalize">{title.toLowerCase()}</p>
-          {!!subtitle && (
-            <p className="text-opacity-60 dark:text-opacity-60 text-sp-black dark:text-sp-white tracking-sp-tighten capitalize">
-              {subtitle.toLowerCase()}
-            </p>
-          )}
+    <Link
+      href={getURL(navigationType)}
+      className="flex w-full rounded-sp-14 p-2 text-sp-medlight hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+    >
+      {imageUrl ? (
+        <div className="relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
+          <Image src={imageUrl} alt={"Search result thumbnail"} layout="fill" />
         </div>
-      </a>
+      ) : (
+        <div className="flex h-20 w-20 items-center justify-center">
+          <ClockIcon className="h-7 w-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
+        </div>
+      )}
+      <div className="flex w-full flex-col justify-center px-2 py-2 text-lg tracking-sp-tighten">
+        <p className="break-words pr-4 capitalize">{title.toLowerCase()}</p>
+        {!!subtitle && (
+          <p className="capitalize text-sp-black text-opacity-60 tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
+            {subtitle.toLowerCase()}
+          </p>
+        )}
+      </div>
     </Link>
   );
 }
 
-// defaultFilter can be selected using ?query=place|spiritus|story
+// defaultFilter can be selected using ?filter=place|spiritus|story
+// defaultName can be selected using ?name=string
 // if none is provided spiritus search is assumed
 export async function getServerSideProps(context) {
   let defaultFilter = "";
-  const { query } = context;
-  if (query?.query) {
-    switch (query?.query.toUpperCase()) {
+  const { filter, name } = context.query;
+
+  if (filter) {
+    switch (filter.toUpperCase()) {
       case FILTER_STORY:
         defaultFilter = FILTER_STORY;
         break;
@@ -372,7 +371,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      defaultFilter,
+      defaultFilter: filter || null,
+      defaultName: name || null,
       ...(await serverSideTranslations(context.locale, [
         "common",
         "settings",

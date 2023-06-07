@@ -1,25 +1,24 @@
+import { useRef, useState } from "react";
+
+import Image from "next/legacy/image";
 import Link from "next/link";
-import Image from "next/image";
-
-import { useState, useRef } from "react";
-import { ImagePlaceholder } from "../layout/Common";
-import { useTranslation } from "next-i18next";
-
-import SwiperCore, { Navigation, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   ChevronRightIcon,
 } from "@heroicons/react/outline";
-
+import { useTranslation } from "next-i18next";
+import SwiperCore, { A11y, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { CrownIcon } from "../Icons";
+import { Swiper, SwiperSlide } from "swiper/react";
+
 import { translateCategoryTitle } from "../../utils/translations";
+import { CrownIcon } from "../Icons";
+import { ImagePlaceholder } from "../layout/Common";
 
 SwiperCore.use([Navigation, A11y]);
 
@@ -46,44 +45,45 @@ export function HomepageSwiper({
       <div className="my-10">
         <div className="inline-flex w-full items-start justify-between pb-5">
           <div className="flex flex-col">
-            <h2 className="text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white">
+            <h2 className="font-bold text-sp-black text-2xl tracking-tight dark:text-sp-white">
               {t(titleTranslation)}
             </h2>
-            {!!subtitle &&
-            <h3 className="mt-1 leading-4 tracking-sp-tighten font-medium dark:text-sp-white opacity-50">
-              {t(subtitle)}
-            </h3>
-            }
+            {!!subtitle && (
+              <h3 className="mt-1 font-medium leading-4 opacity-50 tracking-sp-tighten dark:text-sp-white">
+                {t(subtitle)}
+              </h3>
+            )}
           </div>
-          <Link href={`/section/id/${sectionId}?title=${title}`}>
-            <a className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1">
-              <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn opacity-40" />
-            </a>
+          <Link
+            href={`/section/id/${sectionId}?title=${title}`}
+            className="rounded-lg bg-sp-day-900 bg-opacity-10 p-1 dark:bg-sp-dark-brown"
+          >
+            <ChevronRightIcon className="h-5 w-5 text-sp-day-900 opacity-40 dark:text-sp-fawn" />
           </Link>
         </div>
         <div className="relative">
           <div
-            className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 h-5/6 flex items-center ${
+            className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 flex h-5/6 items-center ${
               hidePrevBtn ? "hidden" : ""
             }`}
           >
             <button
               ref={prevRef}
-              className="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+              className="-ml-2 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow focus:outline-none lg:-ml-4"
             >
-              <ArrowLeftIcon className="w-5 h-5 text-black" />
+              <ArrowLeftIcon className="h-5 w-5 text-black" />
             </button>
           </div>
           <div
-            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-5/6 flex items-center ${
+            className={`swiper-next-step absolute inset-y-0 right-0 z-10 -mr-1 flex h-5/6 items-center ${
               hideNextBtn ? "hidden" : ""
             }`}
           >
             <button
               ref={nextRef}
-              className="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+              className="-mr-2 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow focus:outline-none lg:-mr-4"
             >
-              <ArrowRightIcon className="w-5 h-5 text-black" />
+              <ArrowRightIcon className="h-5 w-5 text-black" />
             </button>
           </div>
           <Swiper
@@ -152,37 +152,37 @@ function HomepageTile({
       href={
         itemType === "SPIRITUS" ? `/spiritus/${itemId}` : `/stories/${itemId}`
       }
+      key={itemId}
+      className="group"
     >
-      <a key={itemId} className="group">
-        <div className="relative group-hover:opacity-75">
-          {featured && (
-            <div className="absolute z-10 top-3 left-3 p-1.5 bg-sp-black bg-opacity-75 rounded-lg">
-              <CrownIcon width={5} height={5} />
-            </div>
-          )}
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              className="object-cover rounded-sp-14"
-              width={220}
-              height={248}
-              layout="responsive"
-            />
-          ) : (
-            <ImagePlaceholder />
-          )}
-        </div>
-        <div className="flex flex-col justify-between mt-3 antialiased font-medium tracking-sp-tighten leading-4">
-          <h3 className="text-lg dark:text-sp-white leading-snug">
-            {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-          </h3>
-          <p className="text-sm mt-1 dark:text-sp-white opacity-50">
-            {subtitle.length > 64
-              ? `${subtitle.substring(0, 64)} ...`
-              : subtitle}
-          </p>
-        </div>
-      </a>
+      <div className="relative group-hover:opacity-75">
+        {featured && (
+          <div className="absolute left-3 top-3 z-10 rounded-lg bg-sp-black bg-opacity-75 p-1.5">
+            <CrownIcon width={5} height={5} />
+          </div>
+        )}
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            className="rounded-sp-14 object-cover"
+            alt={title}
+            width={220}
+            height={248}
+            layout="responsive"
+            loading="eager"
+          />
+        ) : (
+          <ImagePlaceholder />
+        )}
+      </div>
+      <div className="mt-3 flex flex-col justify-between font-medium leading-4 antialiased tracking-sp-tighten">
+        <h3 className="leading-snug text-lg dark:text-sp-white">
+          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+        </h3>
+        <p className="mt-1 opacity-50 text-sm dark:text-sp-white">
+          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
+        </p>
+      </div>
     </Link>
   );
 }
@@ -192,13 +192,14 @@ function HomepageTile({
 // NOTE: currently we navigate to sections using IDs and title
 function ExpandSectionTile({ sectionId, title }) {
   return (
-    <Link href={`/section/id/${sectionId}?title=${title}`}>
-      <a className="flex flex-col h-72 lg:h-92 items-center justify-center border-3 dark:border-3 border-sp-day-200 dark:border-sp-fawn dark:border-opacity-10 rounded-sp-14">
-        <div className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1.5 mx-2 mb-2">
-          <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
-        </div>
-        <p className="dark:text-sp-white">See all</p>
-      </a>
+    <Link
+      href={`/section/id/${sectionId}?title=${title}`}
+      className="flex h-72 flex-col items-center justify-center rounded-sp-14 border-3 border-sp-day-200 dark:border-3 dark:border-sp-fawn dark:border-opacity-10 lg:h-92"
+    >
+      <div className="mx-2 mb-2 rounded-lg bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-dark-brown">
+        <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
+      </div>
+      <p className="dark:text-sp-white">See all</p>
     </Link>
   );
 }
@@ -219,36 +220,36 @@ export function CategoriesSwiper({ sectionId, categories, titleTranslation }) {
     categories && (
       <div className="mb-10">
         <div className="inline-flex w-full items-center justify-between pb-5">
-          <h2 className="text-2xl font-bold tracking-tight text-sp-black dark:text-sp-white">
+          <h2 className="font-bold text-sp-black text-2xl tracking-tight dark:text-sp-white">
             {t(titleTranslation)}
           </h2>
-          <div className="bg-sp-day-900 bg-opacity-10 dark:bg-sp-dark-brown rounded-lg p-1">
-            <ChevronRightIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn opacity-40" />
+          <div className="rounded-lg bg-sp-day-900 bg-opacity-10 p-1 dark:bg-sp-dark-brown">
+            <ChevronRightIcon className="h-5 w-5 text-sp-day-900 opacity-40 dark:text-sp-fawn" />
           </div>
         </div>
         <div className="relative">
           <div
-            className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 h-4/5 flex items-center ${
+            className={`swiper-prev-step absolute inset-y-0 left-0 z-10 -ml-1 flex h-4/5 items-center ${
               hidePrevBtn ? "hidden" : ""
             }`}
           >
             <button
               ref={prevRef}
-              className="bg-white -ml-2 lg:-ml-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+              className="-ml-2 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow focus:outline-none lg:-ml-4"
             >
-              <ArrowLeftIcon className="w-5 h-5 text-black" />
+              <ArrowLeftIcon className="h-5 w-5 text-black" />
             </button>
           </div>
           <div
-            className={`swiper-next-step absolute inset-y-0 right-0 -mr-1 z-10 h-4/5 flex items-center ${
+            className={`swiper-next-step absolute inset-y-0 right-0 z-10 -mr-1 flex h-4/5 items-center ${
               hideNextBtn ? "hidden" : ""
             }`}
           >
             <button
               ref={nextRef}
-              className="bg-white -mr-2 lg:-mr-4 flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+              className="-mr-2 flex h-9 w-9 items-center justify-center rounded-full bg-white shadow focus:outline-none lg:-mr-4"
             >
-              <ArrowRightIcon className="w-5 h-5 text-black" />
+              <ArrowRightIcon className="h-5 w-5 text-black" />
             </button>
           </div>
           <Swiper
@@ -305,24 +306,24 @@ function CategoryTile({ sectionId, categoryId, title, imageUrl }) {
         {imageUrl ? (
           <Image
             src={imageUrl}
-            className="object-cover rounded-sp-14"
+            className="rounded-sp-14 object-cover"
             width={220}
             height={124}
             layout="responsive"
+            loading="eager"
+            alt={title}
           />
         ) : (
           <ImagePlaceholder />
         )}
       </div>
-      <div className="mt-2 flex justify-between antialiased tracking-sp-tighten font-medium">
+      <div className="mt-2 flex justify-between font-medium antialiased tracking-sp-tighten">
         <h3 className="text-lg dark:text-sp-white">
           <Link
             href={`/category/${sectionId}/item/${categoryId}?title=${title}`}
           >
-            <a>
-              <span aria-hidden="true" className="absolute inset-0" />
-              {title}
-            </a>
+            <span aria-hidden="true" className="absolute inset-0" />
+            {title}
           </Link>
         </h3>
       </div>

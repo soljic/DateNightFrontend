@@ -25,7 +25,23 @@ export async function GetSingleObituary(id) {
     img.url = img.url ? ImagePath(img.url) : null;
   });
 
-  console.log("IMAGE", ImagePath(res.data.obituary.religiousImage.url));
+  if (res?.data?.obituary?.religiousImage) {
+    res.data.obituary.religiousImage.url = res.data.obituary.religiousImage.url
+      ? ImagePath(res.data.obituary.religiousImage.url)
+      : null;
+  }
+
+  if (res?.data?.obituary?.obituaryImage) {
+    res.data.obituary.obituaryImage.url = res.data.obituary.obituaryImage.url
+      ? ImagePath(res.data.obituary.obituaryImage.url)
+      : null;
+  }
+
+  return res;
+}
+
+export async function GetObituaryBySpiritusId(spiritusId) {
+  const res = await axios.get(`${API_URL}/v2/obituary/spiritus/${spiritusId}`);
 
   if (res?.data?.obituary?.religiousImage) {
     res.data.obituary.religiousImage.url = res.data.obituary.religiousImage.url
@@ -36,6 +52,12 @@ export async function GetSingleObituary(id) {
   if (res?.data?.obituary?.obituaryImage) {
     res.data.obituary.obituaryImage.url = res.data.obituary.obituaryImage.url
       ? ImagePath(res.data.obituary.obituaryImage.url)
+      : null;
+  }
+
+  if (res?.data?.organization?.image) {
+    res.data.organization.image.url = res.data.organization.image.url 
+      ? ImagePath(res.data.organization.image.url )
       : null;
   }
 

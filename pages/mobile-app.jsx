@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -23,24 +23,35 @@ export default function MobileAppCTA() {
         <meta name="description" content={t("common:meta_desc_mobile_app")} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Spiritus" />
-        <meta property="og:title" content="Spiritus - Download Our App"/>
-        <meta property="og:url" content="https://spiritus.app/mobile-app"/>
-        <meta property="og:description" content="Spiritus is the first digital assets platform that keeps your memories - forever! Download our App and create beautiful memorials of your loved ones."/>
-        <meta property="og:image" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/>
-        <meta property="og:image:url" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/>
+        <meta property="og:title" content="Spiritus - Download Our App" />
+        <meta property="og:url" content="https://spiritus.app/mobile-app" />
+        <meta
+          property="og:description"
+          content="Spiritus is the first digital assets platform that keeps your memories - forever! Download our App and create beautiful memorials of your loved ones."
+        />
+        <meta
+          property="og:image"
+          itemProp="image"
+          content="https://spiritus.app/images/share/banner_mobile.jpg"
+        />
+        <meta
+          property="og:image:url"
+          itemProp="image"
+          content="https://spiritus.app/images/share/banner_mobile.jpg"
+        />
         {/* <meta property="og:image:secure_url" itemProp="image" content="https://spiritus.app/images/share/banner_mobile.jpg"/> */}
-        <meta property="og:image:width" content="1200"/>
-        <meta property="og:image:height" content="630"/>
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </Head>
 
-      <div className="flex flex-col justify-center items-center bg-gradient-to-b from-sp-day-50 to-sp-day-300 text-sp-black dark:text-sp-white dark:from-sp-black dark:to-sp-brown rounded-lg">
-        <div className="text-center mx-auto">
+      <div className="flex mx-auto flex-col items-center justify-center lg:w-5/6 rounded-lg bg-gradient-to-b from-sp-day-50 to-sp-day-300 text-sp-black dark:from-sp-black dark:to-sp-brown dark:text-sp-white">
+        <div className="mx-auto text-center">
           <div className="mt-14">
             <Image src={spiritusiOS} />
           </div>
-          <div className="flex-col justify-center items-center text-center">
+          <div className="flex-col items-center justify-center text-center">
             <h2
-              className="text-center text-cta font-bold mb-4 break"
+              className="break mb-4 text-center font-bold text-cta"
               dangerouslySetInnerHTML={{ __html: t("all_of_your_loved") }}
             />
             <p className="mt-5 font-semibold">
@@ -50,12 +61,12 @@ export default function MobileAppCTA() {
             </p>
 
             <div className="my-3">
-              <Image src={qrCode} className="rounded-sp-10"/>
+              <Image src={qrCode} className="rounded-sp-10" />
             </div>
 
-            <p className="opacity-75 mb-1.5">{t("go_directly_to the_store")}</p>
+            <p className="mb-1.5 opacity-75">{t("go_directly_to the_store")}</p>
 
-            <div className="flex justify-center items-center pb-20 gap-2">
+            <div className="flex items-center justify-center gap-2 pb-20">
               <a
                 href="https://apps.apple.com/hr/app/spiritus/id1584613380"
                 target="_blank"
@@ -72,7 +83,7 @@ export default function MobileAppCTA() {
               </a>
             </div>
 
-            <div className="flex justify-center items-center w-auto">
+            <div className="flex w-auto items-center justify-center">
               <Image src={iphoneCut} />
             </div>
           </div>
@@ -85,7 +96,12 @@ export default function MobileAppCTA() {
 export async function getStaticProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "mobile", "settings", "auth"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "mobile",
+        "settings",
+        "auth",
+      ])),
     },
   };
 }

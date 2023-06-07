@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import { useTranslation } from "next-i18next";
 
-import { PlusCircleIcon } from "@heroicons/react/solid";
 import { XIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
 
 import { ImageIcon } from "./Icons";
 
@@ -50,13 +50,11 @@ export function StoryImageUploader({ images, setImages }) {
   };
 
   return (
-    <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
+    <div className="mx-2 mt-12 lg:mx-12">
+      <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-sp-fawn bg-opacity-20 text-sp-black dark:text-sp-white">
         <ImageIcon fill />
       </div>
-      <p className="font-bold text-2xl">
-        {t("create_story_image_title")}
-      </p>
+      <p className="font-bold text-2xl">{t("create_story_image_title")}</p>
       <p className="text-sp-lighter text-sm">*{t("optional")}</p>
       <input
         type="file"
@@ -70,14 +68,14 @@ export function StoryImageUploader({ images, setImages }) {
 
       {!images.length ? (
         <button
-          className="inline-flex bg-sp-white rounded-3xl py-2 px-6 text-sp-black mt-3"
+          className="mt-3 inline-flex rounded-3xl bg-sp-white px-6 py-2 text-sp-black"
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
-          <span className="font-semibold ml-1">{t("add_image")}</span>
+          <span className="ml-1 font-semibold">{t("add_image")}</span>
         </button>
       ) : (
-        <div className="flex flex-row items-center justify-center mt-4 mb-8">
+        <div className="mb-8 mt-4 flex flex-row items-center justify-center">
           {images.map((f, i) => {
             return (
               <Preview
@@ -136,8 +134,8 @@ export function SpiritusImageUploader({ name, images, setImages }) {
   };
 
   return (
-    <div className="mt-12 mx-2 lg:mx-12">
-      <div className="flex justify-center items-center rounded-xl bg-sp-fawn bg-opacity-20 h-12 w-12 mb-6 text-sp-black dark:text-sp-white">
+    <div className="mx-2 mt-12 lg:mx-12">
+      <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-sp-fawn bg-opacity-20 text-sp-black dark:text-sp-white">
         <ImageIcon fill />
       </div>
       <p className="font-bold text-2xl">
@@ -159,21 +157,21 @@ export function SpiritusImageUploader({ name, images, setImages }) {
 
       {!images.length ? (
         <button
-          className="inline-flex bg-opacity-40 dark:bg-sp-white border border-sp-lighter rounded-3xl py-2 px-6 text-sp-black mt-3"
+          className="mt-3 inline-flex rounded-3xl border border-sp-lighter bg-opacity-40 px-6 py-2 text-sp-black dark:bg-sp-white"
           onClick={onOpenFileDialog}
         >
           <PlusCircleIcon className="h-6 w-6" />
-          <span className="font-semibold ml-1">{t("add_image")}</span>
+          <span className="ml-1 font-semibold">{t("add_image")}</span>
         </button>
       ) : (
         <div className="flex flex-row items-start justify-start gap-4 p-4">
           <button
             onClick={onOpenFileDialog}
-            className="flex items-center justify-center selection w-24 h-24 mt-1 border border-sp-day-200 bg-sp-fawn bg-opacity-20 dark:bg-sp-medium dark:border-none rounded-lg dark:text-sp-white focus:outline-none"
+            className="selection mt-1 flex h-24 w-24 items-center justify-center rounded-lg border border-sp-day-200 bg-sp-fawn bg-opacity-20 focus:outline-none dark:border-none dark:bg-sp-medium dark:text-sp-white"
           >
             <PlusCircleIcon className="h-8 w-8" />
           </button>
-          <div className="grid grid-flow-row grid-cols-2 lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 gap-y-2">
+          <div className="grid grid-flow-row grid-cols-2 gap-y-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
             {images.map((f, i) => {
               return (
                 <Thumbnail
@@ -192,18 +190,125 @@ export function SpiritusImageUploader({ name, images, setImages }) {
   );
 }
 
-export function Thumbnail({ previewURL, title, onRemove, index }) {
+export function SpiritusProfileImageUploader({ name, images, setImages }) {
+  const { t } = useTranslation("common");
+
+  const inputFile = useRef(null);
+
+  const onOpenFileDialog = (event) => {
+    event.preventDefault();
+    inputFile.current.click();
+  };
+
+  const onChangeFile = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const files = event.target.files;
+    onAdd(files);
+  };
+
+  const onRemove = (idx) => {
+    if (idx === 0) {
+      setImages((prev) => prev.slice(1));
+    } else if (idx === images.length) {
+      setImages((prev) => prev.slice(0, idx));
+    } else {
+      setImages((prev) => prev.slice(0, idx).concat(prev.slice(idx + 1)));
+    }
+  };
+
+  const onAdd = (files) => {
+    const addFiles = Array.from(files).map((f) => {
+      return {
+        file: f,
+        previewURL: URL.createObjectURL(f),
+      };
+    });
+
+    setImages((prev) => prev.concat(addFiles));
+  };
+
   return (
-    <div className="relative h-24 w-24" id={index}>
-      <div className="mx-1 mt-1 rounded-lg overflow-clip">
-        <img src={previewURL} alt={title} className="h-24 w-24 border-gray-400 dark:border-none" />
+    <div className="pb-2">
+      {images.length ? (
+        <div className="flex gap-2">
+          {images.map((f, i) => {
+            return (
+              <ProfileImagePreview
+                title={f?.file?.name || "profile-image-spiritus"}
+                previewURL={f?.previewURL || f.url}
+                key={i}
+                index={i}
+                onRemove={onRemove}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex h-48 w-full justify-center rounded-sp-10 border border-dashed border-sp-day-400 bg-sp-day-50 p-12 font-medium text-sp-day-400 text-sm dark:bg-sp-black">
+          <button
+            onClick={onOpenFileDialog}
+            className="relative cursor-pointer rounded-sp-10 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
+          >
+            <ImageIcon
+              className="mx-auto h-7 w-7 fill-sp-day-400"
+              aria-hidden="true"
+            />
+            <p className="mt-1">{t("create_spiritus_profile_image_button")}</p>
+          </button>
+          <input
+            type="file"
+            id="file"
+            className="sr-only"
+            accept="image/*"
+            ref={inputFile}
+            onChange={onChangeFile}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ProfileImagePreview({ previewURL, title, onRemove, index }) {
+  return (
+    <div className="relative h-48 max-w-fit" id={index}>
+      <div className="h-full w-full overflow-hidden rounded-sp-10">
+        <img
+          src={previewURL}
+          alt={title}
+          className="h-full w-full border-sp-day-400 dark:border-none"
+        />
       </div>
       <button
         onClick={(e) => {
           e.preventDefault();
           onRemove(index);
         }}
-        className="absolute top-0 right-0 text-opacity-60 text-black overflow-visible rounded-full bg-red-400 p-1"
+        className="absolute right-0 top-0 -mr-1 -mt-2 overflow-visible rounded-full bg-red-400 p-1 text-black text-opacity-60"
+      >
+        <XIcon className="h-3 w-3" />
+      </button>
+    </div>
+  );
+}
+
+export function Thumbnail({ previewURL, title, onRemove, index }) {
+  return (
+    <div className="relative h-24 w-24" id={index}>
+      <div className="mx-1 mt-1 overflow-clip rounded-lg">
+        <img
+          src={previewURL}
+          alt={title}
+          className="h-24 w-24 border-gray-400 dark:border-none"
+        />
+      </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          onRemove(index);
+        }}
+        className="absolute right-0 top-0 overflow-visible rounded-full bg-red-400 p-1 text-black text-opacity-60"
       >
         <XIcon className="h-3 w-3" />
       </button>
@@ -214,7 +319,7 @@ export function Thumbnail({ previewURL, title, onRemove, index }) {
 export function Preview({ previewURL, title, onRemove, index }) {
   return (
     <div className="relative h-72 w-72" id={index}>
-      <div className="mx-2 mt-2 rounded-2xl overflow-clip">
+      <div className="mx-2 mt-2 overflow-clip rounded-2xl">
         <img src={previewURL} alt={title} className="h-72 w-72" />
       </div>
       <button
@@ -222,7 +327,7 @@ export function Preview({ previewURL, title, onRemove, index }) {
           e.preventDefault();
           onRemove(index);
         }}
-        className="absolute top-0 right-0 text-opacity-60 text-black overflow-visible rounded-full bg-red-400 p-2"
+        className="absolute right-0 top-0 overflow-visible rounded-full bg-red-400 p-2 text-black text-opacity-60"
       >
         <XIcon className="h-4 w-4" />
       </button>

@@ -43,27 +43,29 @@ export default function SpiritusNotice({
           }
         />
       </Head>
-      <div className="flex flex-col items-center my-20">
-        <h1 className="text-5xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
+      <div className="my-20 flex flex-col items-center">
+        <h1 className="font-bold text-sp-black subpixel-antialiased text-5xl tracking-tight dark:text-sp-white">
           {t("funeral_notice")}
         </h1>
 
-        <div className="inline-flex mt-3 items-center gap-3">
-          <Link href={"/notices"}>
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-1.5 px-4 text-base font-medium gap-x-4">
-              <ArrowLeftIcon className="h-5 w-4" /> <span>{t("see_all")}</span>
-            </a>
+        <div className="mt-3 inline-flex items-center gap-3">
+          <Link
+            href={"/notices"}
+            className="inline-flex items-center gap-1 gap-x-4 rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-4 py-1.5 font-medium text-base hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+          >
+            <ArrowLeftIcon className="h-5 w-4" /> <span>{t("see_all")}</span>
           </Link>
-          <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
-          <Link href="/partners">
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
-              {t("funeral_notices_partners")}
-            </a>
+          <div className="h-5 w-1 rounded-sm border-r-3 border-sp-brown"></div>
+          <Link
+            href="/partners"
+            className="inline-flex items-center gap-1 rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-4 py-2 font-medium text-base hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+          >
+            {t("funeral_notices_partners")}
           </Link>
         </div>
       </div>
       <section
-        className="flex flex-col justify-center items-center mt-8"
+        className="mt-8 flex flex-col items-center justify-center"
         key="obituary"
       >
         <ObituaryFull spiritus={spiritus} obituary={obituary} />
@@ -80,7 +82,7 @@ export default function SpiritusNotice({
                 }
                 target="_blank"
                 rel="noreferrer"
-                className="flex gap-2 justify-center items-center border rounded-lg py-1 px-3 text-sp-black dark:text-sp-white border-black/40 dark:border-white/40"
+                className="flex items-center justify-center gap-2 rounded-lg border border-black/40 px-3 py-1 text-sp-black dark:border-white/40 dark:text-sp-white"
               >
                 <ObFuneralPartner width={4} height={4} /> {partner.name}
               </a>
@@ -88,14 +90,14 @@ export default function SpiritusNotice({
           </div>
         ) : null}
 
-        <div className="w-full md:w-3/4 lg:w-3/5 mx-auto text-sp-white mt-14 mb-4 lg:text-lg">
+        <div className="mx-auto mb-4 mt-14 w-full text-sp-white md:w-3/4 lg:w-3/5 lg:text-lg">
           <Tribute id={spiritus.id} />
           <HorizontalDivider />
         </div>
-        <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
+        <div className="mt-4 flex w-full flex-col items-center justify-center text-sp-white lg:w-4/5 xl:w-5/6">
           <SpiritusOverview {...spiritus} />
           <SpiritusCarousel images={spiritus.images} />
-          <div className="w-full text-sp-white mt-4">
+          <div className="mt-4 w-full text-sp-white">
             <MoreStories
               stories={stories}
               spiritus={spiritus}

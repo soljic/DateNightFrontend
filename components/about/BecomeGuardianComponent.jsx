@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useTranslation } from "next-i18next";
 
 import playStore from "../../public/images/mobile/playStore.svg";
@@ -10,10 +10,10 @@ function BecomeGuardianCTA() {
   const { t } = useTranslation("about");
 
   return (
-    <section className="mt-48 pb-10 bg-gradient-to-b from-sp-day-50 to-day-gradient-stop dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown rounded-sp-14">
-      <div className="flex flex-col justify-center items-center md:flex-row px-5 gap-6">
-        <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col justify-center items-center md:justify-start md:items-start gap-2.5 pb-8">
-          <div className="flex justify-center w-12 h-14 items-center bg-gradient-to-r dark:bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-10 p-3">
+    <section className="mt-48 rounded-sp-14 bg-gradient-to-b from-sp-day-50 to-day-gradient-stop pb-10 dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown">
+      <div className="flex flex-col items-center justify-center gap-6 px-5 md:flex-row">
+        <div className="flex w-full flex-col items-center justify-center gap-2.5 pb-8 md:w-1/2 md:items-start md:justify-start lg:w-1/3">
+          <div className="flex h-14 w-12 items-center justify-center rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-3 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
             <svg
               width="12"
               height="20"
@@ -41,14 +41,14 @@ function BecomeGuardianCTA() {
             </svg>
           </div>
 
-          <p className="text-[22px] text-center md:text-left font-bold tracking-[0.03em] leading-6 text-sp-black dark:text-sp-white">
+          <p className="text-center text-[22px] font-bold leading-6 tracking-[0.03em] text-sp-black dark:text-sp-white md:text-left">
             {t("become_guardian_title")}
           </p>
 
-          <p className="font-medium tracking-sp-tighten leading-5 opacity-70 dark:text-sp-white">
+          <p className="font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white">
             {t("become_guardian_subtitle")}
           </p>
-          <div className="flex justify-start items-center gap-2">
+          <div className="flex items-center justify-start gap-2">
             <a
               href="https://apps.apple.com/hr/app/spiritus/id1584613380"
               target="_blank"
@@ -65,12 +65,8 @@ function BecomeGuardianCTA() {
             </a>
           </div>
         </div>
-        <div className="w-full md:w-1/2 -mx-10">
-          <Image
-            src={CTAImage}
-            width={510}
-            height={510}
-          />
+        <div className="-mx-10 w-full md:w-1/2">
+          <Image src={CTAImage} width={510} height={510} />
         </div>
       </div>
     </section>

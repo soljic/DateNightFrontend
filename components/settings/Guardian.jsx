@@ -1,7 +1,6 @@
 import { useTranslation } from "next-i18next";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-
 export function GuardianID({ guardianID }) {
   const { t } = useTranslation(["settings"]);
 
@@ -34,17 +33,17 @@ export function GuardianID({ guardianID }) {
           </defs>
         </svg>
       </div>
-      <h2 className="font-bold text-3xl tracking-sp-tighten subpixel-antialiased">
+      <h2 className="font-bold subpixel-antialiased text-3xl tracking-sp-tighten">
         {t("guardian_id")}
       </h2>
-      <p className="w-4/5 text-lg tracking-sp-tighten text-center subpixel-antialiased">
+      <p className="w-4/5 text-center subpixel-antialiased text-lg tracking-sp-tighten">
         {t("guardian_id_text")}
       </p>
-      <p className="text-sm text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60 tracking-sp-tighten text-center subpixel-antialiased mb-5">
+      <p className="mb-5 text-center text-sp-black text-opacity-60 subpixel-antialiased text-sm tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
         {t("guardian_id_code")} {guardianID.split("-")[0]}***
       </p>
       <CopyToClipboard text={guardianID}>
-        <button className="inline-flex bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn dark:from-sp-dark-fawn dark:to-sp-fawn border-4 border-sp-fawn dark:border-sp-dark-brown dark:border-opacity-90 rounded-full py-3 px-7 text-sp-white dark:text-sp-black">
+        <button className="inline-flex rounded-full border-4 border-sp-fawn bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-7 py-3 text-sp-white dark:border-sp-dark-brown dark:border-opacity-90 dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black">
           <span className="font-semibold">{t("guardian_id_copy_code")}</span>
         </button>
       </CopyToClipboard>

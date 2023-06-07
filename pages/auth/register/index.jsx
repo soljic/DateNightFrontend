@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { getSession } from "next-auth/react";
 
@@ -23,35 +23,36 @@ export default function LoginComponent() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Spiritus - Register" />
       </Head>
-      <section className="flex flex-col justify-center items-center text-sp-white">
-        <div className="flex flex-col justify-center items-center gap-8">
+      <section className="flex flex-col items-center justify-center text-sp-white">
+        <div className="flex flex-col items-center justify-center gap-8">
           <ShieldIcon width={12} height={12} />
-          <h1 className="text-3xl text-center font-bold mb-10">
+          <h1 className="mb-10 text-center font-bold text-3xl">
             {t("register_title")}
           </h1>
         </div>
-        <div className="flex flex-col w-full justify-center items-center text-center gap-3">
+        <div className="flex w-full flex-col items-center justify-center gap-3 text-center">
           <p className="text-center text-xs">
             {t("register_disclaimer_1")}{" "}
             <Link
               href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
               key="terms"
+              className="underline underline-offset-4"
             >
-              <a className="underline underline-offset-4">
-                {t("register_disclaimer_terms")}
-              </a>
+              {t("register_disclaimer_terms")}
             </Link>
             <span> {t("register_disclaimer_2")} </span>
-            <Link href="/privacy-policy" key="priv">
-              <a className="underline underline-offset-4">
-                {t("register_disclaimer_privacy")}
-              </a>
+            <Link
+              href="/privacy-policy"
+              key="priv"
+              className="underline underline-offset-4"
+            >
+              {t("register_disclaimer_privacy")}
             </Link>
             .
           </p>
           <a
             href={`${API_URL}/v2/authentication/social/login`}
-            className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+            className="inline-flex w-full items-center justify-start rounded-sp-40 border-sp-medium border-opacity-80 bg-sp-white p-4 font-semibold text-sp-black text-lg"
           >
             <div className="w-1/5 p-2">
               <svg
@@ -73,7 +74,7 @@ export default function LoginComponent() {
           </a>
           <a
             href={`${API_URL}/v2/authentication/social/login?type=facebook`}
-            className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-lg font-semibold text-sp-black"
+            className="inline-flex w-full items-center justify-start rounded-sp-40 border-sp-medium border-opacity-80 bg-sp-white p-4 font-semibold text-sp-black text-lg"
           >
             <div className="w-1/5 p-2">
               <svg
@@ -91,35 +92,37 @@ export default function LoginComponent() {
             </div>
             <p className="w-4/6">{t("login_facebook")}</p>
           </a>
-          <Link href="/auth/register/email">
-            <a className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-4 text-lg font-semibold text-sp-white">
-              <div className="w-1/5 p-2">
-                <svg
-                  width="16"
-                  height="13"
-                  viewBox="0 0 16 13"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M16.0001 3.373V10.5C16.0001 11.8807 14.8808 13 13.5001 13H2.50008C1.11937 13 0 11.8807 0 10.5V3.373L7.74657 7.93097C7.90304 8.02301 8.09711 8.02301 8.25359 7.93097L16.0001 3.373ZM13.5001 0C14.7871 0 15.847 0.972604 15.9849 2.22293L8.00008 6.91991L0.0152595 2.22293C0.153116 0.972604 1.21302 0 2.50008 0H13.5001Z"
-                    fill="#F0EFED"
-                  />
-                </svg>
-              </div>
-              <p className="w-4/6">{t("register_email")}</p>
-            </a>
+          <Link
+            href="/auth/register/email"
+            className="inline-flex w-full items-center justify-start rounded-sp-40 border  border-sp-lighter bg-sp-black p-4 font-semibold text-sp-white text-lg"
+          >
+            <div className="w-1/5 p-2">
+              <svg
+                width="16"
+                height="13"
+                viewBox="0 0 16 13"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.0001 3.373V10.5C16.0001 11.8807 14.8808 13 13.5001 13H2.50008C1.11937 13 0 11.8807 0 10.5V3.373L7.74657 7.93097C7.90304 8.02301 8.09711 8.02301 8.25359 7.93097L16.0001 3.373ZM13.5001 0C14.7871 0 15.847 0.972604 15.9849 2.22293L8.00008 6.91991L0.0152595 2.22293C0.153116 0.972604 1.21302 0 2.50008 0H13.5001Z"
+                  fill="#F0EFED"
+                />
+              </svg>
+            </div>
+            <p className="w-4/6">{t("register_email")}</p>
           </Link>
         </div>
-        <div className="flex justify-center items-center w-44  mt-4 overflow-hidden">
+        <div className="mt-4 flex w-44 items-center  justify-center overflow-hidden">
           <Image src={Auth0Logo} alt="Supported by Auth0" />
         </div>
-        <div className="flex flex-col justify-center items-center mt-24 text-lg gap-3">
+        <div className="mt-24 flex flex-col items-center justify-center gap-3 text-lg">
           <p>{t("register_redirect_login")}</p>
-          <Link href="/auth/login">
-            <a className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 text-lg font-semibold text-sp-white">
-              {t("login_title")}
-            </a>
+          <Link
+            href="/auth/login"
+            className=" rounded-sp-40 border border-sp-lighter bg-sp-black px-3 py-2 font-semibold text-sp-white text-lg"
+          >
+            {t("login_title")}
           </Link>
         </div>
       </section>

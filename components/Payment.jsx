@@ -1,29 +1,26 @@
-import Image from "next/image";
+import { useEffect, useState } from "react";
 
-import { useSession } from "next-auth/react";
-
-import { useTranslation } from "next-i18next";
-
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
+import { CheckCircleIcon } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
+
+import { CheckoutSpiritus, GetCouponProduct } from "../service/http/payment";
+import { ImagePath, localFormatDate } from "../service/util";
 import {
+  AddPhotosIcon,
+  CheckmarkIcon,
+  DescriptionTextIcon,
   EnterInfoIcon,
   ForeverBadgeIcon,
-  AddPhotosIcon,
+  LocationPinIcon,
   PurchaseIcon,
   SpiritusIcon,
-  CheckmarkIcon,
-  UserOutlineIcon,
-  LocationPinIcon,
-  DescriptionTextIcon,
   TagIcon,
+  UserOutlineIcon,
 } from "./Icons";
-
-import { CheckCircleIcon } from "@heroicons/react/outline";
-
-import { ImagePath, localFormatDate } from "../service/util";
-import { CheckoutSpiritus, GetCouponProduct } from "../service/http/payment";
-import { useEffect, useState } from "react";
 import { Spinner } from "./Status";
 
 export function Paywall({ price, currency, acceptPaywall }) {
@@ -58,15 +55,15 @@ export function Paywall({ price, currency, acceptPaywall }) {
   ];
 
   return (
-    <div className="flex flex-col items-center pt-24 h-screen">
+    <div className="flex h-screen flex-col items-center pt-24">
       <div className="flex flex-col items-center justify-center gap-4">
-        <div className="bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-10 p-2.5">
+        <div className="rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
           <SpiritusIcon fill />
         </div>
-        <h1 className="font-bold text-sp-black dark:text-sp-white text-2xl text-center">
+        <h1 className="text-center font-bold text-sp-black text-2xl dark:text-sp-white">
           {t("create_spiritus")}({priceFormatter.format(price)})
         </h1>
-        <div className="text-sp-black dark:text-sp-white w-3/4 mt-5">
+        <div className="mt-5 w-3/4 text-sp-black dark:text-sp-white">
           <ul>
             {items.map((item) => (
               <li
@@ -77,10 +74,10 @@ export function Paywall({ price, currency, acceptPaywall }) {
                   {item.icon}
                 </div>
                 <div className="ml-4">
-                  <p className="text-lg font-semibold dark:text-sp-white">
+                  <p className="font-semibold text-lg dark:text-sp-white">
                     {t(item.title)}
                   </p>
-                  <p className="dark:text-sp-white dark:text-opacity-60 text-sm">
+                  <p className="text-sm dark:text-sp-white dark:text-opacity-60">
                     {t(item.subtitle)}
                   </p>
                 </div>
@@ -92,11 +89,11 @@ export function Paywall({ price, currency, acceptPaywall }) {
           onClick={() => {
             acceptPaywall();
           }}
-          className="px-4 py-3 rounded-sp-40 w-80 font-semibold border border-sp-lighter text-center mt-20"
+          className="mt-20 w-80 rounded-sp-40 border border-sp-lighter px-4 py-3 text-center font-semibold"
         >
           {t("start_button")}
         </button>
-        <p className="text-sp-black dark:text-sp-white dark:text-opacity-60 text-sm">
+        <p className="text-sp-black text-sm dark:text-sp-white dark:text-opacity-60">
           {t("start_button_hint")}
         </p>
       </div>
@@ -189,7 +186,7 @@ export function Checkout({
           setPrice(res.data.price);
           setCurrency(res.data.currency);
           setCouponSubtitle(res.data.subtitle);
-          setIsValid(true)
+          setIsValid(true);
         } else {
           setIsInvalid(true);
           reset();
@@ -198,7 +195,7 @@ export function Checkout({
         setIsInvalid(true);
         reset();
       }
-      
+
       setFetching(false);
     }, 1000);
 
@@ -219,16 +216,16 @@ export function Checkout({
 
   return (
     <div
-      className="flex flex-col justify-center items-center dark:text-sp-white m-24"
+      className="mb-96 flex flex-col items-center justify-center dark:text-sp-white lg:mt-12"
       key="checkout-init-screen"
     >
-      <div className="flex flex-col items-center justify-center py-14 w-full space-y-4">
-        <div className="bg-sp-fawn bg-opacity-25 rounded-xl p-2">
+      <div className="flex w-full flex-col items-center justify-center space-y-4">
+        <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
           <CheckmarkIcon width={8} height={8} />
         </div>
         <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
         {!!spiritus?.images.length && (
-          <div className="rounded-sp-14 overflow-hidden">
+          <div className="overflow-hidden rounded-sp-14">
             <Image
               src={ImagePath(spiritus.images[0].url)}
               alt="Spiritus image"
@@ -238,7 +235,7 @@ export function Checkout({
             />
           </div>
         )}
-        <div className="flex flex-col text-sp-black dark:text-sp-white mt-5 w-full items-center">
+        <div className="mt-5 flex w-full flex-col items-center text-sp-black dark:text-sp-white">
           <ul>
             {items.map((item, index) => (
               <li
@@ -252,7 +249,7 @@ export function Checkout({
                   <p className="font-semibold dark:text-sp-white">
                     {t(item.title)}
                   </p>
-                  <p className="dark:text-sp-white dark:text-opacity-60 text-sm">
+                  <p className="text-sm dark:text-sp-white dark:text-opacity-60">
                     {t(item.subtitle)}
                   </p>
                 </div>
@@ -277,19 +274,19 @@ export function Checkout({
                       coupon && isInvalid
                         ? "border-red-400 dark:border-red-700"
                         : "border-sp-lighter/60 dark:border-sp-medium"
-                    } p-3 placeholder-gray-500 bg-sp-day-50 dark:bg-sp-black border-2  appearance-none outline-none min-w-52 rounded-md dark:text-sp-white`}
+                    } min-w-52 appearance-none rounded-md border-2 bg-sp-day-50  p-3 placeholder-gray-500 outline-none dark:bg-sp-black dark:text-sp-white`}
                   />
                   {!fetching && isValid && (
-                    <CheckCircleIcon className="text-green-600 dark:text-green-400 w-5 h-5 absolute inset-y-4 right-2" />
+                    <CheckCircleIcon className="absolute inset-y-4 right-2 h-5 w-5 text-green-600 dark:text-green-400" />
                   )}
                 </div>
                 {couponSubtitle && (
-                  <p className="text-sm tracking-tighter font-medium text-sp-black/70 py-0.5">
+                  <p className="py-0.5 font-medium text-sp-black/70 text-sm tracking-tighter">
                     {couponSubtitle}
                   </p>
                 )}
                 {isInvalid && (
-                  <p className="text-sm font-medium text-red-400 dark:text-red-700">
+                  <p className="font-medium text-red-400 text-sm dark:text-red-700">
                     {t("create_spiritus_coupon_invalid")}
                   </p>
                 )}
@@ -307,7 +304,7 @@ export function Checkout({
           key="init-checkout-form"
         >
           <div
-            className="flex justify-between text-xl font-semibold"
+            className="flex justify-between font-semibold text-xl"
             key="checkout-prices"
           >
             <div>{t("init_payment_total")}</div>
@@ -318,15 +315,15 @@ export function Checkout({
             disabled={fetching || isInvalid}
             className={`${
               fetching || isInvalid
-                ? "text-sp-black/60 dark:text-sp-black/70 border-sp-lighter/40"
+                ? "border-sp-lighter/40 text-sp-black/60 dark:text-sp-black/70"
                 : "dark:text-sp-black"
-            } font-semibold text-xl dark:bg-sp-white px-4 py-3 rounded-sp-40 w-full border border-sp-lighter text-center`}
+            } w-full rounded-sp-40 border border-sp-lighter px-4 py-3 text-center font-semibold text-xl dark:bg-sp-white`}
             key="submit-button"
           >
             {fetching ? <Spinner /> : t("init_payment_button")}
           </button>
           <p
-            className="text-sp-black dark:text-sp-white dark:text-opacity-60 text-sm text-center"
+            className="text-center text-sp-black text-sm dark:text-sp-white dark:text-opacity-60"
             key="redirect-notice"
           >
             {t("init_payment_redirect_notice")}

@@ -16,11 +16,11 @@ export default function PrivacyPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_home_description")} />
       </Head>
-      <div className="px-3 mx-auto mt-24 w-full leading-6 box-border text-neutral-800 dark:text-sp-white">
-        <div className="flex-none leading-6 box-border">
-          <div className="mb-5 text-2xl font-medium tracking-normal leading-6 box-border">
+      <div className="mx-auto mt-24 box-border w-full px-3 leading-6 text-neutral-800 dark:text-sp-white">
+        <div className="box-border flex-none leading-6">
+          <div className="mb-5 box-border font-medium leading-6 text-2xl tracking-normal">
             <div className="flex flex-col justify-start">
-              <div className="flex w-16 justify-center bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:border-sp-medium dark:from-sp-medlight dark:to-sp-medlight rounded-sp-14 p-3">
+              <div className="flex w-16 justify-center rounded-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 p-3 dark:border-sp-medium dark:from-sp-medlight dark:to-sp-medlight">
                 <svg
                   width="20"
                   height="22"
@@ -47,115 +47,95 @@ export default function PrivacyPage() {
                   </defs>
                 </svg>
               </div>
-              <p className="mt-4 mb-4 text-xs font-medium tracking-normal leading-6 opacity-60 box-border">
+              <p className="mb-4 mt-4 box-border font-medium leading-6 opacity-60 text-xs tracking-normal">
                 Updated October 27, 2022
               </p>
             </div>
 
-            <h1 className="text-5xl font-bold mb-10 tracking-normal leading-6 box-border">
+            <h1 className="mb-10 box-border font-bold leading-6 text-5xl tracking-normal">
               Privacy Policy
             </h1>
 
-            <div className="flex flex-col items-start justify-start mt-24">
-              <p className="py-0  mb-2 text-sm font-bold tracking-normal leading-6  box-border">
+            <div className="mt-24 flex flex-col items-start justify-start">
+              <p className="mb-2  box-border py-0 font-bold leading-6 text-sm  tracking-normal">
                 SECTIONS:
               </p>
-              <ul className="list-none mt-0 mb-4 text-sm font-medium tracking-normal box-border">
+              <ul className="mb-4 mt-0 box-border list-none font-medium text-sm tracking-normal">
                 <Link href="#personal-info">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (01) PERSONAL INFORMATION WE COLLECT
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (01) PERSONAL INFORMATION WE COLLECT
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#use-info">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1 font-medium tracking-normal leading-6  box-border">
-                        (02) HOW DO WE USE YOUR PERSONAL INFORMATION?
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0 box-border font-medium leading-6  tracking-normal">
+                      (02) HOW DO WE USE YOUR PERSONAL INFORMATION?
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#share-info">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (03) SHARING YOUR PERSONAL INFORMATION
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (03) SHARING YOUR PERSONAL INFORMATION
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#bihevioral-add">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (04) BEHAVIOURAL ADVERTISING
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (04) BEHAVIOURAL ADVERTISING
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#not-track">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (05) DO NOT TRACK
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (05) DO NOT TRACK
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#your-right">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (06) YOUR RIGHTS
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (06) YOUR RIGHTS
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#data-retention">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (07) DATA RETENTION
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (07) DATA RETENTION
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#minors">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1 font-medium tracking-normal leading-6  box-border">
-                        (08) MINORS
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0 box-border font-medium leading-6  tracking-normal">
+                      (08) MINORS
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#changes">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (09) CHANGES
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (09) CHANGES
+                    </p>
+                  </li>
                 </Link>
                 <Link href="#contact">
-                  <a>
-                    <li className="flex items-center">
-                      <p className="mt-0 mb-1  font-medium tracking-normal leading-6  box-border">
-                        (10) CONTACT US
-                      </p>
-                    </li>
-                  </a>
+                  <li className="flex items-center">
+                    <p className="mb-1 mt-0  box-border font-medium leading-6  tracking-normal">
+                      (10) CONTACT US
+                    </p>
+                  </li>
                 </Link>
               </ul>
             </div>
             <div
               id="personal-info"
-              className="py-10  mb-5 text-xl font-bold tracking-normal leading-6  box-border"
+              className="mb-5  box-border py-10 font-bold leading-6 text-xl  tracking-normal"
             >
               <p>
                 This Privacy Policy describes how your personal information is
@@ -169,11 +149,11 @@ export default function PrivacyPage() {
         </div>
         <div
           id="use-info"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           (1) PERSONAL INFORMATION WE COLLECT
         </div>
-        <div className="mb-5 font-medium tracking-normal leading-6  box-border">
+        <div className="mb-5 box-border font-medium leading-6  tracking-normal">
           <p>
             When you visit the Site, we automatically collect certain
             information about your device, including information about your web
@@ -185,9 +165,9 @@ export default function PrivacyPage() {
             this automatically-collected information as “Device Information.”
           </p>
         </div>
-        <div className="font-medium tracking-normal leading-6  box-border">
+        <div className="box-border font-medium leading-6  tracking-normal">
           We collect Device Information using the following technologies:
-          <ul className="pl-8 mt-3 mb-5 list-disc font-medium tracking-normal leading-6 box-border">
+          <ul className="mb-5 mt-3 box-border list-disc pl-8 font-medium leading-6 tracking-normal">
             <li className="py-1">
               “Cookies” are data files that are placed on your device or
               computer and often include an anonymous unique identifier. For
@@ -205,7 +185,7 @@ export default function PrivacyPage() {
             </li>
           </ul>
         </div>
-        <div className="mb-5 font-medium tracking-normal leading-6 box-border">
+        <div className="mb-5 box-border font-medium leading-6 tracking-normal">
           <p>
             Additionally when you make a purchase or attempt to make a purchase
             through the Site, we collect certain information from you, including
@@ -214,7 +194,7 @@ export default function PrivacyPage() {
             refer to this information as “Order Information.”
           </p>
         </div>
-        <div className="mb-20 font-medium tracking-normal leading-6 box-border">
+        <div className="mb-20 box-border font-medium leading-6 tracking-normal">
           <p>
             When we talk about “Personal Information” in this Privacy Policy, we
             are talking both about Device Information and Order Information.
@@ -222,11 +202,11 @@ export default function PrivacyPage() {
         </div>
         <div
           id="share-info"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p> (2) HOW DO WE USE YOUR PERSONAL INFORMATION?</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             We use the Order Information that we collect generally to fulfill
             any orders placed through the Site (including processing your
@@ -248,11 +228,11 @@ export default function PrivacyPage() {
         </div>
         <div
           id="bihevioral-add"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p>(3) SHARING YOUR PERSONAL INFORMATION</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             We share your Personal Information with third parties to help us use
             your Personal Information, as described above. For example, we use
@@ -272,11 +252,11 @@ export default function PrivacyPage() {
 
         <div
           id="not-track"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p>(4) BEHAVIOURAL ADVERTISING</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             As described above, we use your Personal Information to provide you
             with targeted advertisements or marketing communications we believe
@@ -296,11 +276,11 @@ export default function PrivacyPage() {
         </div>
         <div
           id="your-right"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p>(5) DO NOT TRACK</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             Please note that we do not alter our Site’s data collection and use
             practices when we see a Do Not Track signal from your browser.{" "}
@@ -308,11 +288,11 @@ export default function PrivacyPage() {
         </div>
         <div
           id="data-retention"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p>(6) YOUR RIGHTS</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             If you are a European resident, you have the right to access
             personal information we hold about you and to ask that your personal
@@ -329,11 +309,11 @@ export default function PrivacyPage() {
         </div>
         <div
           id="minors"
-          className="mb-5 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-5 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p>(7) DATA RETENTION</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             When you place an order through the Site, we will maintain your
             Order Information for our records unless and until you ask us to
@@ -342,44 +322,44 @@ export default function PrivacyPage() {
         </div>
         <div
           id="changes"
-          className="mb-6 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-6 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p>(8) MINORS</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p> The Site is not intended for individuals under the age of 18. </p>
         </div>
         <div
           id="contact"
-          className="mb-6 text-2xl font-bold tracking-normal leading-6 box-border"
+          className="mb-6 box-border font-bold leading-6 text-2xl tracking-normal"
         >
           <p> (9) CHANGES</p>
         </div>
-        <div className="mb-20  font-medium tracking-normal leading-6  box-border">
+        <div className="mb-20  box-border font-medium leading-6  tracking-normal">
           <p>
             We may update this privacy policy from time to time in order to
             reflect, for example, changes to our practices or for other
             operational, legal or regulatory reasons.{" "}
           </p>
         </div>
-        <div className="py-2 sm:px-10 md:px-40 lg:px-60 mb-6 text-2xl font-bold tracking-normal leading-6 box-border">
+        <div className="mb-6 box-border py-2 font-bold leading-6 text-2xl tracking-normal sm:px-10 md:px-40 lg:px-60">
           (10) CONTACT US
         </div>
-        <div className="font-medium tracking-normal leading-6  box-border">
+        <div className="box-border font-medium leading-6  tracking-normal">
           <p>
             For more information about our privacy practices, if you have
             questions, or if you would like to make a complaint, please contact
             us by e-mail at{" "}
             <a href="mailto:hello@spiritus.app">
-              <span className="border-b border-solid box-border border-zinc-100">
+              <span className="box-border border-b border-solid border-zinc-100">
                 hello@spiritus.app
               </span>
             </a>{" "}
             or by mail using the details provided below:
           </p>
         </div>
-        <div className="font-medium tracking-normal leading-6">
-          <span className="font-medium tracking-normal leading-7 border-b border-solid box-border border-zinc-100">
+        <div className="font-medium leading-6 tracking-normal">
+          <span className="box-border border-b border-solid border-zinc-100 font-medium leading-7 tracking-normal">
             Ivana Meštrovića 35, Sesvete, 21, 10000, Croatia ↗
           </span>
         </div>

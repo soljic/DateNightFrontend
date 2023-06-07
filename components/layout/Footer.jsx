@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { NavItem } from "./Common";
 import { useTranslation } from "next-i18next";
 
@@ -6,12 +6,16 @@ export function Footer() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="text-sp-medium dark:text-sp-white mt-44">
+    <div className="mt-44 text-sp-medium dark:text-sp-white">
       <div className="flex flex-col justify-start md:flex-row md:justify-center">
         <NavItem text={t("about")} textsize={"sm"} link={"/about"} />
         <NavItem text={t("stories")} textsize={"sm"} />
         <NavItem text={t("mobile")} link="/mobile-app" textsize={"sm"} />
-        <NavItem text={t("tos")} textsize={"sm"} link="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf" />
+        <NavItem
+          text={t("tos")}
+          textsize={"sm"}
+          link="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
+        />
         <NavItem text={t("privacy")} link="/privacy-policy" textsize={"sm"} />
         <NavItem
           text={t("contact")}
@@ -19,11 +23,16 @@ export function Footer() {
           textsize={"sm"}
         />
       </div>
-      <div className="my-2 pb-4 mx-auto border-t border-sp-day-200 dark:border-sp-lighter"></div>
+      <div className="mx-auto my-2 border-t border-sp-day-200 pb-4 dark:border-sp-lighter"></div>
       {/* partners and socials */}
-      <div className="flex flex-col md:flex-row justify-between gap-4 mb-4">
+      <div className="mb-4 flex flex-col justify-between gap-4 md:flex-row">
         <div className="mix-blend-difference">
-          <Image src="/images/partners_single_image.png" width={400} height={50} alt="logo" />
+          <Image
+            src="/images/partners_single_image.png"
+            width={400}
+            height={50}
+            alt="logo"
+          />
         </div>
         <div className="flex flex-col items-center gap-4">
           <div className="flex flex-row gap-2">
@@ -99,9 +108,8 @@ export function Footer() {
             </a>
           </div>
         </div>
-
       </div>
-      <div className="text-sm text-sp-lighter text-center pb-12">
+      <div className="pb-12 text-center text-sp-lighter text-sm">
         ©{new Date().getFullYear()} {t("rights_reserved")}
       </div>
     </div>

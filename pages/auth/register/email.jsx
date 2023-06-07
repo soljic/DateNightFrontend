@@ -88,26 +88,30 @@ export default function EmailRegister() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Spiritus - Register - Email" />
       </Head>
-      <section className="flex flex-col justify-center items-center text-sp-white subpixel-antialiased">
+      <section className="flex flex-col items-center justify-center text-sp-white subpixel-antialiased">
         {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
-        <div className="flex flex-col justify-center items-center gap-4 mb-10">
+        <div className="mb-10 flex flex-col items-center justify-center gap-4">
           <ShieldIcon width={12} height={12} />
-          <h4 className="text-3xl text-center font-bold mt-5">
+          <h4 className="mt-5 text-center font-bold text-3xl">
             {t("register_title")}
           </h4>
           <p className="text-center">
             {t("register_disclaimer_1")}{" "}
-            <Link href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf" key="terms">
-              <a className="underline underline-offset-4">
-                {t("register_disclaimer_terms")}
-              </a>
+            <Link
+              href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
+              key="terms"
+              className="underline underline-offset-4"
+            >
+              {t("register_disclaimer_terms")}
             </Link>
             <span> {t("register_disclaimer_2")} </span>
-            <Link href="/privacy-policy" key="priv">
-              <a className="underline underline-offset-4">
-                {t("register_disclaimer_privacy")}
-              </a>
+            <Link
+              href="/privacy-policy"
+              key="priv"
+              className="underline underline-offset-4"
+            >
+              {t("register_disclaimer_privacy")}
             </Link>
             .
           </p>
@@ -121,11 +125,11 @@ export default function EmailRegister() {
                 validate: (v) => (!!v && v.length > 2) || t("first_name_err"),
               })}
               type="text"
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="firstName"
             />
             {errors.firstName && (
-              <p className="text-sm text-red-600 py-2 px-1">
+              <p className="px-1 py-2 text-red-600 text-sm">
                 {errors.firstName.message}
               </p>
             )}
@@ -138,11 +142,11 @@ export default function EmailRegister() {
                 validate: (v) => (!!v && v.length > 2) || t("last_name_err"),
               })}
               type="text"
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="lastName"
             />
             {errors.lastName && (
-              <p className="text-sm text-red-600 py-2 px-1">
+              <p className="px-1 py-2 text-red-600 text-sm">
                 {errors.lastName.message}
               </p>
             )}
@@ -155,11 +159,11 @@ export default function EmailRegister() {
                 validate: (v) => isEmailValid(v) || t("email_address_err"),
               })}
               type="text"
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="email"
             />
             {errors.email && (
-              <p className="text-sm text-red-600 py-2 px-1">
+              <p className="px-1 py-2 text-red-600 text-sm">
                 {errors.email.message}
               </p>
             )}
@@ -170,7 +174,7 @@ export default function EmailRegister() {
               {...register("phone")}
               placeholder="+385"
               type="text"
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter placeholder-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white placeholder-sp-lighter transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="phone"
             />
           </div>
@@ -182,40 +186,40 @@ export default function EmailRegister() {
                 validate: (v) => (!!v && v.length > 8) || t("password_len_err"),
               })}
               type={showPass ? "text" : "password"}
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="password"
             />
             {errors.password && (
-              <p className="text-sm text-red-600 py-2 px-1">
+              <p className="px-1 py-2 text-red-600 text-sm">
                 {errors.password.message}
               </p>
             )}
             <button
               type="button"
-              className="absolute inset-y-0 right-0 pr-3 items-center text-sm leading-5 mt-5"
+              className="absolute inset-y-0 right-0 mt-5 items-center pr-3 leading-5 text-sm"
               onClick={(e) => {
                 e.preventDefault();
                 setShowPass((prev) => !prev);
               }}
             >
               {showPass ? (
-                <EyeOffIcon className="w-6 h-6 text-sp-lighter" />
+                <EyeOffIcon className="h-6 w-6 text-sp-lighter" />
               ) : (
-                <EyeIcon className="w-6 h-6 text-sp-lighter" />
+                <EyeIcon className="h-6 w-6 text-sp-lighter" />
               )}
             </button>
           </div>
-          {err && <p className="text-sm text-red-600 py-2 px-1">{err}</p>}
+          {err && <p className="px-1 py-2 text-red-600 text-sm">{err}</p>}
 
           <div
-            className="flex flex-col justify-center items-center text-center mt-10"
+            className="mt-10 flex flex-col items-center justify-center text-center"
             key="submit"
           >
             {/* login button */}
             <button
               type="submit"
               disabled={submitting}
-              className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-sp-black text-lg"
+              className="w-2/3 rounded-sp-40 border-5 border-sp-medium border-opacity-80 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn p-4 text-sp-black text-lg"
             >
               {submitting ? <Spinner text="" /> : t("register_create_account")}
             </button>

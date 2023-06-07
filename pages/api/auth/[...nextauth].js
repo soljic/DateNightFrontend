@@ -82,7 +82,7 @@ export default NextAuth({
       let expire_date = new Date(token.expire_date);
       // token expired return empty token to invalidate session in session callback)
       if (expire_date < new Date()) {
-        return {}
+        return {};
       }
       return token;
     },

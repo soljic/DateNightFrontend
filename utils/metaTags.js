@@ -128,13 +128,13 @@ export function SetSpiritusOG(spiritus) {
       key={`spiritus-${spiritus.id}-desc`}
     />,
   ];
-  if (spiritus.images.length) {
-    const useImage = spiritus.images[0];
+  if (spiritus.profileImage) {
+    const useImage = spiritus.profileImage;
     tags = tags.concat([
       <meta
         property="og:image"
         itemProp="image"
-        content={useImage.url}
+        content={spiritus.profileImage}
         key={`spiritus-${spiritus.id}-image`}
       />,
       <meta

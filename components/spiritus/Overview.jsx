@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 
 import { countryCodeEmoji } from "country-code-emoji";
 import countries from "i18n-iso-countries";
-countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
-countries.registerLocale(require("i18n-iso-countries/langs/hr.json"));
 
 import { localFormatDate } from "../../service/util";
+
+countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+countries.registerLocale(require("i18n-iso-countries/langs/hr.json"));
 
 export function SpiritusOverview({
   id,
@@ -45,28 +46,26 @@ export function SpiritusOverview({
   } — ${death ? localFormatDate(death, router.locale) : "\uE132"}`;
 
   return (
-    <div className="w-full md:w-3/4 flex flex-col justify-between items-center py-4 mb-4">
-      <div className="flex flex-col tracking-sp-tighten text-sp-black dark:text-sp-white">
-        <Link href={`/spiritus/${slug}`}>
-          <a className="flex flex-col items-center">
-            {location && location?.address ? (
-              <button className="px-5 py-1 items-center bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown rounded-full">
-                <span className="text-lg">{countryFlag}</span>{" "}
-                <span className="ml-2 text-sm font-semibold">
-                  {location.address}
-                </span>
-              </button>
-            ) : (
-              <></>
-            )}
-            <p className="py-4 capitalize">{dates}</p>
-            <h2 className="font-bold text-left md:text-center text-cta pb-4 capitalize">
-              {`${name} ${surname}`.toLowerCase()}
-            </h2>
-          </a>
+    <div className="mb-4 flex w-full flex-col items-center justify-between py-4 md:w-3/4">
+      <div className="flex flex-col text-sp-black tracking-sp-tighten dark:text-sp-white">
+        <Link href={`/spiritus/${slug}`} className="flex flex-col items-center">
+          {location && location?.address ? (
+            <button className="items-center rounded-full bg-gradient-to-r from-sp-day-300 to-sp-day-100 px-5 py-1 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
+              <span className="text-lg">{countryFlag}</span>{" "}
+              <span className="ml-2 font-semibold text-sm">
+                {location.address}
+              </span>
+            </button>
+          ) : (
+            <></>
+          )}
+          <p className="py-4 capitalize">{dates}</p>
+          <h2 className="pb-4 text-left font-bold capitalize text-cta md:text-center">
+            {`${name} ${surname}`.toLowerCase()}
+          </h2>
         </Link>
         {description && description.length > 0 ? (
-          <p className="border-l-4 pl-2 border-sp-day-900 dark:border-sp-fawn">
+          <p className="border-l-4 border-sp-day-900 pl-2 dark:border-sp-fawn">
             {`"${description}"`}
           </p>
         ) : null}

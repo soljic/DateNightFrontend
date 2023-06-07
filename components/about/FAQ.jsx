@@ -10,19 +10,20 @@ export default function FAQSection() {
   const { t } = useTranslation(["about", "faq"]);
   return (
     <section id="features" key={"features-section"}>
-      <div className="flex justify-center items-center my-24 subpixel-antialiased mx-auto">
-        <div className="flex flex-col items-center justify-start w-2/3 lg:w-1/2">
-          <h2 className="font-bold text-center tracking-sp-tighten leading-5 text-sp-fawn">
+      <div className="mx-auto my-24 flex items-center justify-center subpixel-antialiased">
+        <div className="flex w-2/3 flex-col items-center justify-start lg:w-1/2">
+          <h2 className="text-center font-bold leading-5 text-sp-fawn tracking-sp-tighten">
             {t("faq_title")}
           </h2>
-          <p className="my-2.5 text-2xlh sm:w-full md:w-3/4 text-center font-bold tracking-tight dark:text-sp-white">
+          <p className="text-2xlh my-2.5 text-center font-bold tracking-tight dark:text-sp-white sm:w-full md:w-3/4">
             {t("faq_subtitle")}
           </p>
-          <p className="md:w-full text-center font-medium tracking-sp-tighten leading-5 opacity-70 dark:text-sp-white">
-            <Link href="mailto:hello@spiritus.app?subject=FAQ - Contact Form">
-              <a className="underline underline-offset-2 mr-1">
-                {t("faq_cta_text")}
-              </a>
+          <p className="text-center font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white md:w-full">
+            <Link
+              href="mailto:hello@spiritus.app?subject=FAQ - Contact Form"
+              className="mr-1 underline underline-offset-2"
+            >
+              {t("faq_cta_text")}
             </Link>
             {t("faq_text")}
           </p>
@@ -96,7 +97,7 @@ function Questions() {
   ];
 
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-2.5">
+    <div className="flex w-full flex-col items-center justify-center gap-2.5">
       {items.map((item, i) => (
         <Accordion
           key={`faq-section-question-${i}`}
@@ -119,7 +120,7 @@ function Accordion({ title, text }) {
 
   return (
     <div
-      className={`w-full md:w-2/3 cursor-pointer rounded-sp-10 ${
+      className={`w-full cursor-pointer rounded-sp-10 md:w-2/3 ${
         open
           ? "bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:from-sp-dark-brown dark:to-sp-brown"
           : ""
@@ -127,19 +128,19 @@ function Accordion({ title, text }) {
     >
       <button
         onClick={toggleOpen}
-        className="w-full py-2.5 lg:py-5 px-4 flex justify-between items-center rounded-sp-10 dark:text-sp-white  hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+        className="flex w-full items-center justify-between rounded-sp-10 px-4 py-2.5 hover:bg-gradient-to-r hover:from-day-gradient-start  hover:to-day-gradient-stop dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown lg:py-5"
       >
-        <div className="font-medium text-lg lg:text-xl tracking-sp-tighten leading-[22px] text-left">
+        <div className="text-left font-medium leading-[22px] text-lg tracking-sp-tighten lg:text-xl">
           {title}
         </div>
         {open ? (
-          <XIcon className="w-5 h-5 text-sp-lighter" />
+          <XIcon className="h-5 w-5 text-sp-lighter" />
         ) : (
-          <PlusIcon className="w-5 h-5 text-sp-lighter" />
+          <PlusIcon className="h-5 w-5 text-sp-lighter" />
         )}
       </button>
       {open && (
-        <p className="whitespace-pre-line pb-3 md:pb-6 lg:pb-8 px-4 text-base font-medium tracking-sp-tighten leading-6 text-sp-black dark:text-sp-white text-opacity-70 dark:text-opacity-70">
+        <p className="whitespace-pre-line px-4 pb-3 font-medium leading-6 text-sp-black text-opacity-70 text-base tracking-sp-tighten dark:text-sp-white dark:text-opacity-70 md:pb-6 lg:pb-8">
           {text}
         </p>
       )}

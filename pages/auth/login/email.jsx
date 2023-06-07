@@ -80,12 +80,12 @@ export default function EmailLogin() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Spiritus Email Login" />
       </Head>
-      <section className="flex flex-col justify-center items-center text-sp-white">
+      <section className="flex flex-col items-center justify-center text-sp-white">
         {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
 
-        <div className="flex flex-col justify-center items-center gap-8">
+        <div className="flex flex-col items-center justify-center gap-8">
           <ShieldIcon width={12} height={12} />
-          <h4 className="text-3xl text-center font-bold mb-10">
+          <h4 className="mb-10 text-center font-bold text-3xl">
             {t("login_title")}
           </h4>
         </div>
@@ -95,15 +95,14 @@ export default function EmailLogin() {
             <input
               {...register("email", {
                 required: true,
-                validate: (v) =>
-                  isEmailValid(v) || t("email_address_err"),
+                validate: (v) => isEmailValid(v) || t("email_address_err"),
               })}
               type="text"
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control m-0 block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="email"
             />
             {errors.email && (
-              <p className="text-sm text-red-600 py-2 px-1">
+              <p className="px-1 py-2 text-red-600 text-sm">
                 {errors.email.message}
               </p>
             )}
@@ -115,39 +114,43 @@ export default function EmailLogin() {
                 required: true,
               })}
               type={showPass ? "text" : "password"}
-              className="form-control rounded p-4 block w-full text-base font-normal text-sp-white bg-inherit bg-clip-padding border border-solid border-sp-lighter transition ease-in-out m-0 focus:text-sp-white focus:bg-inherit focus:border-sp-white focus:outline-none"
+              className="form-control m-0 block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
               id="password"
             />
             <button
               type="button"
-              className="absolute inset-y-0 right-0 pr-3 items-center text-sm leading-5 mt-5"
+              className="absolute inset-y-0 right-0 mt-5 items-center pr-3 leading-5 text-sm"
               onClick={(e) => {
                 e.preventDefault();
                 setShowPass((prev) => !prev);
               }}
             >
               {showPass ? (
-                <EyeOffIcon className="w-6 h-6 text-sp-lighter" />
+                <EyeOffIcon className="h-6 w-6 text-sp-lighter" />
               ) : (
-                <EyeIcon className="w-6 h-6 text-sp-lighter" />
+                <EyeIcon className="h-6 w-6 text-sp-lighter" />
               )}
             </button>
           </div>
-          {err && <p className="text-sm text-red-600 py-2 px-1">{err}</p>}
+          {err && <p className="px-1 py-2 text-red-600 text-sm">{err}</p>}
 
-          <div className="flex flex-col justify-center items-center text-center mt-5" key="submit">
+          <div
+            className="mt-5 flex flex-col items-center justify-center text-center"
+            key="submit"
+          >
             {/* login button */}
             <button
               type="submit"
               disabled={submitting}
-              className="w-2/3 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-medium border-opacity-80 rounded-sp-40 p-4 text-sp-black text-lg"
+              className="w-2/3 rounded-sp-40 border-5 border-sp-medium border-opacity-80 bg-gradient-to-r from-sp-dark-fawn to-sp-fawn p-4 text-sp-black text-lg"
             >
               {submitting ? <Spinner text="" /> : "Log in"}
             </button>
-            <Link href="/auth/login/password-reset">
-              <a className="text-sp-lighter hover:text-sp-fawn mt-7">
-                {t("forgot_password")}
-              </a>
+            <Link
+              href="/auth/login/password-reset"
+              className="mt-7 text-sp-lighter hover:text-sp-fawn"
+            >
+              {t("forgot_password")}
             </Link>
           </div>
         </form>

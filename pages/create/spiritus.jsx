@@ -1,27 +1,24 @@
-import Head from "next/head";
-import Image from "next/image";
-
 import { useState } from "react";
-import { getSession } from "next-auth/react";
 
+import Head from "next/head";
+
+import { CalendarIcon, XIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import { getISOLocalDate } from "@wojtekmaj/date-utils";
+import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import DatePicker from "react-date-picker";
+import { HashFilename } from "utils/filenames";
 
-import { getISOLocalDate } from "@wojtekmaj/date-utils";
+import { Checkout, Paywall } from "@/components/Payment";
+import { Alert, Spinner } from "@/components/Status";
+import { SpiritusProfileImageUploader } from "@/components/Uploaders";
+import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
+import Layout from "@/components/layout/Layout";
 
-import LayoutNoFooter from "../../components/layout/LayoutNoFooter";
-import { Alert, ProgressBar, Spinner } from "../../components/Status";
-import {
-  SpiritusDates,
-  SpiritusDescription,
-  SpiritusLocation,
-  SpiritusName,
-} from "../../components/forms/CreateSpiritus";
-import { SpiritusImageUploader } from "../../components/Uploaders";
-
-import { CreateSpiritus } from "../../service/http/spiritus_crud";
-import { GetDefaultProduct } from "../../service/http/payment";
-import { Checkout, Paywall } from "../../components/Payment";
+import { GetDefaultProduct } from "@/service/http/payment";
+import { CreateSpiritus } from "@/service/http/spiritus_crud";
 
 // const mockSpiritus = {
 //   id: 647223,
@@ -44,16 +41,14 @@ export default function CreateSpiritusPage({ user, product }) {
   const { t } = useTranslation("common");
 
   const [pending, setPending] = useState(false);
-
-  // stepper starts at 0
-  const numSteps = 5;
-  const [step, setStep] = useState(0);
+  const [paywallSeen, setPaywallSeen] = useState(false);
 
   // form fields
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState();
+  const [quote, setQuote] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
   const [toastOpen, setToastOpen] = useState(false);
@@ -74,38 +69,29 @@ export default function CreateSpiritusPage({ user, product }) {
         surname,
         birth: birth ? getISOLocalDate(birth) : null,
         death: birth ? getISOLocalDate(death) : null,
-        description,
+        description: description || null,
+        qupte: quote || null,
         location,
       };
       const form = new FormData();
       const blob = new Blob([JSON.stringify(body)], {
         type: "application/json",
       });
-
       form.append("request", blob);
-      images.forEach((img) => {
-        form.append("files", img.file, img.file.name);
-      });
+
+      if (images.length > 0) {
+        const fileName = await HashFilename(images[0].file.name);
+        form.append("files", images[0].file, fileName);
+      }
 
       const res = await CreateSpiritus(user.accessToken, form);
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
+      console.log(err);
       const errMsg = err?.response?.data || err;
       onError(errMsg);
       setPending(false);
-    }
-  };
-
-  const nextStep = () => {
-    if (step < numSteps) {
-      setStep(step + 1);
-    }
-  };
-
-  const prevStep = () => {
-    if (step > 0) {
-      setStep(step - 1);
     }
   };
 
@@ -119,64 +105,8 @@ export default function CreateSpiritusPage({ user, product }) {
     setToastMessage("");
   };
 
-  const showCurrentStep = () => {
-    switch (step) {
-      case 1:
-        return (
-          <SpiritusName
-            name={name}
-            setName={setName}
-            surname={surname}
-            setSurname={setSurname}
-          />
-        );
-      case 2:
-        return (
-          <SpiritusDates
-            name={name}
-            birth={birth}
-            setBirth={setBirth}
-            death={death}
-            setDeath={setDeath}
-          />
-        );
-      case 3:
-        return (
-          <SpiritusImageUploader
-            name={name}
-            images={images}
-            setImages={setImages}
-          />
-        );
-      case 4:
-        return (
-          <SpiritusDescription
-            name={name}
-            description={description}
-            setDescription={setDescription}
-          />
-        );
-      case 5:
-        return (
-          <SpiritusLocation
-            name={name}
-            location={location}
-            setLocation={setLocation}
-          />
-        );
-      default:
-        return (
-          <Paywall
-            price={product.price}
-            currency={product.currency}
-            acceptPaywall={nextStep}
-          />
-        );
-    }
-  };
-
   return (
-    <LayoutNoFooter>
+    <Layout>
       <Head>
         <title>{t("meta_create_spiritus_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -185,7 +115,7 @@ export default function CreateSpiritusPage({ user, product }) {
           content={t("meta_create_spiritus_description")}
         />
       </Head>
-      <div className="py-5 h-screen">
+      <div className="min-h-screen py-5">
         {/* <p className="text-sp-black dark:text-sp-white">
           {JSON.stringify({
             birth,
@@ -194,6 +124,7 @@ export default function CreateSpiritusPage({ user, product }) {
             surname,
             description,
             location,
+            images,
           })}
         </p> */}
         {spiritus ? (
@@ -205,73 +136,235 @@ export default function CreateSpiritusPage({ user, product }) {
           />
         ) : (
           <>
-            <ProgressBar maxSteps={numSteps + 1} step={step + 1} />
-            <form id="stepper-form" className="flex flex-1 flex-col">
-              {toastOpen && (
-                <div className="z-50 relative right-0 mb-5">
-                  <div className="flex justify-end mt-4">
-                    <Alert
-                      isSuccess={false}
-                      message={toastMessage}
-                      onClick={clearToast}
-                    />
+            {!paywallSeen ? (
+              <Paywall
+                price={product.price}
+                currency={product.currency}
+                acceptPaywall={() => setPaywallSeen(true)}
+              />
+            ) : (
+              <form id="create-form" className="mx-auto space-y-4 pb-96">
+                {toastOpen && (
+                  <div className="relative right-0 z-50 mb-5">
+                    <div className="mt-4 flex justify-end">
+                      <Alert
+                        isSuccess={false}
+                        message={toastMessage}
+                        onClick={clearToast}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
-              <div className="mb-10">{showCurrentStep()}</div>
-              <div className="flex flex-col-reverse md:flex-row justify-center mt-8 gap-2 md:gap-6">
-                {step > 0 && (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      prevStep();
-                    }}
-                    className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold text-sp-black dark:text-sp-white border-sp-lighter border-3 hover:bg-sp-white dark:hover:text-sp-black hover:text-sp-black ${
-                      pending && "hidden"
-                    }`}
-                    disabled={pending}
-                  >
-                    {t("back")}
-                  </button>
                 )}
-                {step !== numSteps ? (
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      nextStep();
-                    }}
-                    disabled={!name || !surname}
-                    className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
-                      (name && surname) || "opacity-30"
-                    }`}
-                  >
-                    {t("next")}
-                  </button>
-                ) : (
+                <div className="mb-8 space-y-2">
+                  <h1 className="text-center font-bold text-sp-black text-4xl dark:text-sp-white">
+                    {t("create_spiritus")}
+                  </h1>
+                  <p className="text-center">{t("create_spiritus_subtitle")}</p>
+                </div>
+
+                {/* names */}
+                <div className="mx-auto flex w-3/4 flex-1 flex-col space-y-6 rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-6 py-10 font-medium dark:from-sp-dark-brown dark:to-sp-brown">
+                  <div className="mx-2">
+                    <h2 className="text-sp-black dark:text-sp-white">
+                      <span className="text-red-500">*</span>
+                      {t("create_spiritus_names_title")}
+                    </h2>
+                    <div className="">
+                      <div className="flex flex-col gap-2 md:flex-row">
+                        <div className="w-full flex-1">
+                          <div className="my-1 rounded-sp-10">
+                            <input
+                              value={name}
+                              onChange={(e) => {
+                                setName(e.target.value);
+                              }}
+                              placeholder={t(
+                                "create_spiritus_firstname_placeholder"
+                              )}
+                              className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                            />
+                          </div>
+                        </div>
+                        <div className="w-full flex-1">
+                          <div className="my-1 rounded-sp-10">
+                            <input
+                              value={surname}
+                              onChange={(e) => {
+                                setSurname(e.target.value);
+                              }}
+                              placeholder={t(
+                                "create_spiritus_lastname_placeholder"
+                              )}
+                              className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* dates */}
+                  <div className="mx-2 mt-4">
+                    <h2 className="text-sp-black dark:text-sp-white">
+                      {t("create_spiritus_dates_title1")}{" "}
+                      <span> {name ? name : "Spiritus"} </span>{" "}
+                      {t("create_spiritus_dates_title2")}
+                    </h2>
+                    <div className="my-1 flex flex-col gap-2 md:flex-row">
+                      <div className="w-full flex-1">
+                        <div className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                          <DatePicker
+                            id="birth"
+                            onChange={setBirth}
+                            value={birth}
+                            clearIcon={
+                              !birth ? null : <XIcon className="h-6 w-6" />
+                            }
+                            dayPlaceholder="dd"
+                            monthPlaceholder="mm"
+                            yearPlaceholder="yyyy"
+                            showLeadingZeros
+                            calendarIcon={
+                              <CalendarIcon className="mx-3 h-6 w-6 text-sp-lighter" />
+                            }
+                          />
+                        </div>
+                      </div>
+                      <div className="w-full flex-1">
+                        <div className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                          <DatePicker
+                            id="death"
+                            onChange={setDeath}
+                            value={death}
+                            dayPlaceholder="dd"
+                            monthPlaceholder="mm"
+                            yearPlaceholder="yyyy"
+                            showLeadingZeros
+                            clearIcon={
+                              !death ? null : <XIcon className="h-6 w-6" />
+                            }
+                            calendarIcon={
+                              <CalendarIcon className="mx-3 h-6 w-6 text-sp-lighter" />
+                            }
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* image */}
+
+                  <SpiritusProfileImageUploader
+                    name={name ? name : "Spiritus"}
+                    images={images}
+                    setImages={setImages}
+                  />
+
+                  {/* location */}
+                  <SpiritusLocationInput
+                    name={name ? name : "Spiritus"}
+                    location={location}
+                    setLocation={setLocation}
+                  />
+
+                  {/* quote */}
+                  <div className="mx-2">
+                    <h2 className="text-sp-black dark:text-sp-white">
+                      <span className="text-red-500">*</span>
+                      {t("create_spiritus_quote_title")}
+                    </h2>
+                    <div className="">
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full flex-1">
+                          <div className="my-1 rounded">
+                            <textarea
+                              value={quote || ""}
+                              onChange={(e) => {
+                                setQuote(e.target.value);
+                              }}
+                              placeholder={t(
+                                "create_spiritus_quote_placeholder"
+                              )}
+                              rows="4"
+                              className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                            />
+                            <p className="text-sp-day-400 text-sm">
+                              {t("create_spiritus_description_char_limit")}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mx-2">
+                    <h2 className="text-sp-black dark:text-sp-white">
+                      {t("create_spiritus_description_title")}
+                      <span> {name ? name : "Spiritus"}? </span>
+                    </h2>
+                    <div className="">
+                      <div className="flex flex-col md:flex-row">
+                        <div className="w-full flex-1">
+                          <div className="my-1 rounded">
+                            <textarea
+                              value={description}
+                              onChange={(e) => {
+                                setDescription(e.target.value);
+                              }}
+                              placeholder={t(
+                                "create_spiritus_description_placeholder"
+                              )}
+                              rows="4"
+                              className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                            />
+                            <p className="text-sp-day-400 text-sm">
+                              {t("create_spiritus_description_char_limit")}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       createSpiritus();
                     }}
-                    disabled={pending || !location?.address}
-                    className={`px-4 py-3 rounded-full w-full md:w-52 font-semibold bg-gradient-to-r from-sp-dark-fawn to-sp-fawn border-5 border-sp-day-200 dark:border-sp-medium dark:border-opacity-80 text-sp-black ${
-                      pending || !location?.address ? "opacity-30" : ""
-                    }`}
+                    disabled={
+                      pending ||
+                      ![name, surname, location?.address].every((elem) =>
+                        Boolean(elem)
+                      )
+                    }
+                    className={`inline-flex justify-center rounded-[16px] border-4
+                      border-sp-fawn bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-7 py-3 text-sp-white dark:border-sp-medium dark:border-opacity-80 dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black
+                      ${
+                        pending ||
+                        ![name, surname, location?.address].every((elem) =>
+                          Boolean(elem)
+                        )
+                          ? "opacity-30"
+                          : ""
+                      }`}
                   >
                     {pending ? (
                       <Spinner text={t("creating")} />
                     ) : (
-                      <span>{t("create")}</span>
+                      <>
+                        <PlusCircleIcon className="h-6 w-6" />
+                        <span className="ml-1 font-semibold">
+                          {t("create_spiritus")}
+                        </span>
+                      </>
                     )}
                   </button>
-                )}
-              </div>
-            </form>
+                </div>
+              </form>
+            )}
           </>
         )}
-        {/* </div> */}
       </div>
-    </LayoutNoFooter>
+    </Layout>
   );
 }
 

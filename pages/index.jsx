@@ -1,8 +1,10 @@
 import Head from "next/head";
-import { useState, useEffect } from "react";
+
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import Layout from "../components/layout/Layout";
+import { FeaturedProject } from "../components/projects/FeaturedProject";
 import {
   CTADownloadLinks,
   GetSpiritusCTA,
@@ -14,12 +16,7 @@ import {
   CategoriesSwiper,
   HomepageSwiper,
 } from "../components/stories/Swipers";
-import Layout from "../components/layout/Layout";
-
 import { GetParsedHomepage } from "../service/http/homepage";
-import { VukovarModal } from "../components/banners/Vukovar";
-import { gtagPageView } from "../utils/gtag";
-import { FeaturedProject } from "../components/projects/FeaturedProject";
 
 export default function Home({
   featuredStory,
@@ -59,7 +56,7 @@ export default function Home({
         <meta property="og:image:height" content="630" />
       </Head>
       <GetSpiritusCTA />
-      <div className="flex flex-col mx-auto items-center pt-5">
+      <div className="mx-auto flex flex-col items-center pt-5">
         <CTADownloadLinks />
       </div>
       <FeaturedStory

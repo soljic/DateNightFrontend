@@ -30,48 +30,51 @@ export default function Partners({ partners }) {
         <meta name="description" content={"Spiritus partners"} />
       </Head>
       <div className="min-h-screen">
-        <div className="flex flex-col items-center my-20">
-          <h1 className="text-5xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
+        <div className="my-20 flex flex-col items-center">
+          <h1 className="font-bold text-sp-black subpixel-antialiased text-5xl tracking-tight dark:text-sp-white">
             {t("funeral_notices_partners")}
           </h1>
-          <p className="text-sp-lighter dark:text-sp-lighter mt-2 w-full lg:w-1/2 text-center">
+          <p className="mt-2 w-full text-center text-sp-lighter dark:text-sp-lighter lg:w-1/2">
             {t("funeral_notices_subtitle")}
           </p>
 
-          <div className="inline-flex mt-3 items-center gap-3">
-            <Link href={"/notices"}>
-              <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-1.5 px-4 text-base font-medium gap-x-4">
-                <ArrowLeftIcon className="h-5 w-4" />{" "}
-                <span>{t("funeral_notice")}</span>
-              </a>
+          <div className="mt-3 inline-flex items-center gap-3">
+            <Link
+              href={"/notices"}
+              className="inline-flex items-center gap-1 gap-x-4 rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-4 py-1.5 font-medium text-base hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+            >
+              <ArrowLeftIcon className="h-5 w-4" />{" "}
+              <span>{t("funeral_notice")}</span>
             </Link>
-            <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
-            <button className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 text-base font-medium">
+            <div className="h-5 w-1 rounded-sm border-r-3 border-sp-brown"></div>
+            <button className="inline-flex items-center gap-1 rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-4 py-2 font-medium text-base hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
               {t("contact")}
             </button>
           </div>
         </div>
         <section
-          className="flex flex-col justify-center items-center mt-8 gap-6"
+          className="mt-8 flex flex-col items-center justify-center gap-6"
           key="obituary"
         >
           {partners.map((p, i) => {
             return (
               <div
                 key={i}
-                className="w-full lg:w-3/4 flex p-2 flex-col items-center md:flex-row md:items-start bg-sp-day-50 dark:bg-sp-black rounded-sp-14 border-2 border-sp-cotta/30 dark:border-sp-fawn/20 text-sp-black dark:text-sp-white"
+                className="flex w-full flex-col items-center rounded-sp-14 border-2 border-sp-cotta/30 bg-sp-day-50 p-2 text-sp-black dark:border-sp-fawn/20 dark:bg-sp-black dark:text-sp-white md:flex-row md:items-start lg:w-3/4"
               >
                 {p.image && p.image?.url ? (
-                  <div className="h-44 w-56 md:h-44 md:w-44 p-4 flex">
-                    <div className="flex 
-                    justify-center items-center overflow-hidden rounded-sp-14">
-                      <img src={p.image.url || ""}  />
+                  <div className="flex h-44 w-56 p-4 md:h-44 md:w-44">
+                    <div
+                      className="flex 
+                    items-center justify-center overflow-hidden rounded-sp-14"
+                    >
+                      <img src={p.image.url || ""} />
                     </div>
                   </div>
                 ) : null}
-                <div className="flex flex-col justify-start py-5 px-2">
-                  <h5 className="mb-2 text-2xl font-bold">{p.name}</h5>
-                  <ul className="list-disc ml-8">
+                <div className="flex flex-col justify-start px-2 py-5">
+                  <h5 className="mb-2 font-bold text-2xl">{p.name}</h5>
+                  <ul className="ml-8 list-disc">
                     {!!p.address && (
                       <li className="font-medium">{p.address}</li>
                     )}
@@ -115,7 +118,7 @@ export default function Partners({ partners }) {
 
 export async function getServerSideProps(context) {
   const res = await GetPartners();
-  
+
   return {
     props: {
       key: `${context.locale}-notices-homepage`,

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
@@ -16,7 +16,7 @@ export function LoginModal({ isOpen, closeModal }) {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-100" onClose={closeModal}>
+      <Dialog as="div" className="z-100 relative" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-1000"
@@ -26,11 +26,11 @@ export function LoginModal({ isOpen, closeModal }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-40" />
+          <div className="fixed inset-0 z-40 bg-black bg-opacity-90" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto z-40">
-          <div className="flex items-center justify-center min-w-full min-h-full p-4 text-center">
+        <div className="fixed inset-0 z-40 overflow-y-auto">
+          <div className="flex min-h-full min-w-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-1000"
@@ -42,7 +42,7 @@ export function LoginModal({ isOpen, closeModal }) {
             >
               <Dialog.Panel
                 onClick={closeModal}
-                className="w-full px-5 md:w-1/2 md:px-0 lg:w-1/3 xl:w-1/5 content-center transition-all transform"
+                className="w-full transform content-center px-5 transition-all md:w-1/2 md:px-0 lg:w-1/3 xl:w-1/5"
               >
                 <LoginForm />
               </Dialog.Panel>
@@ -58,17 +58,17 @@ function LoginForm() {
   const { t } = useTranslation("auth");
 
   return (
-    <section className="flex flex-col justify-center items-center text-sp-white border border-sp-lighter rounded-sp-14 p-8 bg-sp-black">
-      <div className="flex flex-col justify-center items-center gap-8">
+    <section className="flex flex-col items-center justify-center rounded-sp-14 border border-sp-lighter bg-sp-black p-8 text-sp-white">
+      <div className="flex flex-col items-center justify-center gap-8">
         <ShieldIcon width={12} height={12} />
-        <h4 className="text-2xl text-center font-bold mb-6">
+        <h4 className="mb-6 text-center font-bold text-2xl">
           {t("login_title")}
         </h4>
       </div>
-      <div className="flex flex-col w-full justify-center items-center text-center gap-3">
+      <div className="flex w-full flex-col items-center justify-center gap-3 text-center">
         <a
           href={`${API_URL}/v2/authentication/social/login`}
-          className="inline-flex justify-start w-full items-center bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-2.5 text-lg font-semibold text-sp-black"
+          className="inline-flex w-full items-center justify-start rounded-sp-40 border-sp-medium border-opacity-80 bg-sp-white p-2.5 font-semibold text-sp-black text-lg"
         >
           <div className="w-1/5 p-2">
             <svg
@@ -90,7 +90,7 @@ function LoginForm() {
         </a>
         <a
           href={`${API_URL}/v2/authentication/social/login?type=facebook`}
-          className="inline-flex items-center justify-start w-full bg-sp-white border-sp-medium border-opacity-80 rounded-sp-40 p-2.5 text-lg font-semibold text-sp-black"
+          className="inline-flex w-full items-center justify-start rounded-sp-40 border-sp-medium border-opacity-80 bg-sp-white p-2.5 font-semibold text-sp-black text-lg"
         >
           <div className="w-1/5 p-2">
             <svg
@@ -108,35 +108,37 @@ function LoginForm() {
           </div>
           <p className="w-4/6">{t("login_facebook")}</p>
         </a>
-        <Link href="/auth/login/email">
-          <a className="inline-flex items-center justify-start w-full bg-sp-black border  border-sp-lighter rounded-sp-40 p-2.5 text-lg font-semibold text-sp-white">
-            <div className="w-1/5 p-2">
-              <svg
-                width="16"
-                height="13"
-                viewBox="0 0 16 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M16.0001 3.373V10.5C16.0001 11.8807 14.8808 13 13.5001 13H2.50008C1.11937 13 0 11.8807 0 10.5V3.373L7.74657 7.93097C7.90304 8.02301 8.09711 8.02301 8.25359 7.93097L16.0001 3.373ZM13.5001 0C14.7871 0 15.847 0.972604 15.9849 2.22293L8.00008 6.91991L0.0152595 2.22293C0.153116 0.972604 1.21302 0 2.50008 0H13.5001Z"
-                  fill="#F0EFED"
-                />
-              </svg>
-            </div>
-            <p className="w-4/6">{t("login_email")}</p>
-          </a>
+        <Link
+          href="/auth/login/email"
+          className="inline-flex w-full items-center justify-start rounded-sp-40 border  border-sp-lighter bg-sp-black p-2.5 font-semibold text-sp-white text-lg"
+        >
+          <div className="w-1/5 p-2">
+            <svg
+              width="16"
+              height="13"
+              viewBox="0 0 16 13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.0001 3.373V10.5C16.0001 11.8807 14.8808 13 13.5001 13H2.50008C1.11937 13 0 11.8807 0 10.5V3.373L7.74657 7.93097C7.90304 8.02301 8.09711 8.02301 8.25359 7.93097L16.0001 3.373ZM13.5001 0C14.7871 0 15.847 0.972604 15.9849 2.22293L8.00008 6.91991L0.0152595 2.22293C0.153116 0.972604 1.21302 0 2.50008 0H13.5001Z"
+                fill="#F0EFED"
+              />
+            </svg>
+          </div>
+          <p className="w-4/6">{t("login_email")}</p>
         </Link>
       </div>
-      <div className="flex justify-center items-center w-44 mt-4 overflow-hidden">
+      <div className="mt-4 flex w-44 items-center justify-center overflow-hidden">
         <Image src={Auth0Logo} alt="Supported by Auth0" />
       </div>
-      <div className="flex flex-col justify-center items-center mt-16 gap-1">
+      <div className="mt-16 flex flex-col items-center justify-center gap-1">
         <p>{t("register_cta")}</p>
-        <Link href="/auth/register">
-          <a className=" bg-sp-black border border-sp-lighter rounded-sp-40 py-2 px-3 font-semibold text-sp-white">
-            {t("become_guardian_cta")}
-          </a>
+        <Link
+          href="/auth/register"
+          className=" rounded-sp-40 border border-sp-lighter bg-sp-black px-3 py-2 font-semibold text-sp-white"
+        >
+          {t("become_guardian_cta")}
         </Link>
       </div>
     </section>

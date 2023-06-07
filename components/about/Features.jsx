@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import AboutImage1 from "../../public/images/about/img_about_01.png";
 import AboutImage2 from "../../public/images/about/img_about_02.png";
 import AboutImage3 from "../../public/images/about/img_about_03.png";
@@ -10,15 +10,15 @@ export default function FeaturesSection() {
   const { t } = useTranslation("about");
   return (
     <section id="features" key={"features-section"}>
-      <div className="flex justify-center items-center my-24 subpixel-antialiased mx-auto">
-        <div className="flex flex-col items-center justify-start w-2/3 lg:w-1/2">
-          <h2 className="font-bold text-center tracking-sp-tighten leading-5 text-sp-fawn">
+      <div className="mx-auto my-24 flex items-center justify-center subpixel-antialiased">
+        <div className="flex w-2/3 flex-col items-center justify-start lg:w-1/2">
+          <h2 className="text-center font-bold leading-5 text-sp-fawn tracking-sp-tighten">
             {t("term_mission")}
           </h2>
-          <p className="my-2.5 text-2xl sm:w-full md:w-3/4 text-center font-bold tracking-tight dark:text-sp-white">
+          <p className="my-2.5 text-center font-bold text-2xl tracking-tight dark:text-sp-white sm:w-full md:w-3/4">
             {t("features_title")}
           </p>
-          <p className="md:w-full text-center font-medium tracking-sp-tighten leading-5 opacity-70 dark:text-sp-white">
+          <p className="text-center font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white md:w-full">
             {t("features_subtitle")}
           </p>
         </div>
@@ -75,30 +75,30 @@ function FeatureElements() {
             key={`article-${idx}`}
             className={`flex flex-col-reverse ${
               idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-            } justify-center items-center mb-3 px-2 gap-4 my-16`}
+            } my-16 mb-3 items-center justify-center gap-4 px-2`}
           >
             <div
-              className="w-full md:w-1/2 flex flex-col items-start justify-start px-1 mb-3"
+              className="mb-3 flex w-full flex-col items-start justify-start px-1 md:w-1/2"
               key={`feature-${idx}`}
             >
-              <div className="bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-10 p-2.5">
+              <div className="rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
                 {elem.icon}
               </div>
-              <h3 className="my-4 text-[22px] font-bold tracking-wide leading-6 dark:text-sp-white">
+              <h3 className="my-4 text-[22px] font-bold leading-6 tracking-wide dark:text-sp-white">
                 {elem.title}
               </h3>
-              <p className="mb-4 tracking-sp-tighten text-[13px] font-medium leading-[18px] opacity-70 dark:text-sp-white">
+              <p className="mb-4 text-[13px] font-medium leading-[18px] opacity-70 tracking-sp-tighten dark:text-sp-white">
                 {elem.subtitle}
               </p>
 
-              <ul className="list-none text-[13px] leading-[18px] font-medium tracking-sp-tighten dark:text-sp-white">
+              <ul className="list-none text-[13px] font-medium leading-[18px] tracking-sp-tighten dark:text-sp-white">
                 {elem.list.map((item, i) => {
                   return (
                     <li className="flex items-center" key={`item-${idx}-${i}`}>
-                      <div className="bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown rounded-full p-0.5">
-                        <CheckIcon className="w-3.5 h-3.5 text-sp-dark-fawn" />
+                      <div className="rounded-full bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-0.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
+                        <CheckIcon className="h-3.5 w-3.5 text-sp-dark-fawn" />
                       </div>
-                      <p className="mt-0 mb-1 px-2  not-italic font-medium tracking-normal leading-5 opacity-70 dark:text-sp-white">
+                      <p className="mb-1 mt-0 px-2  font-medium not-italic leading-5 opacity-70 tracking-normal dark:text-sp-white">
                         {item}
                       </p>
                     </li>
@@ -107,7 +107,7 @@ function FeatureElements() {
               </ul>
             </div>
 
-            <div className="w-full md:w-1/2 bg-gradient-to-r relative from-day-gradient-start to-day-gradient-stop dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown rounded-sp-14">
+            <div className="relative w-full rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown md:w-1/2">
               <Image
                 src={elem.image}
                 width={510}

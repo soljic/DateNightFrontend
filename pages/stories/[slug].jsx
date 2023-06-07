@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Head from "next/head";
 
 import { useState } from "react";
@@ -33,13 +33,13 @@ function EditBtn({ storyId }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="flex justify-end mt-8">
+    <div className="mt-8 flex justify-end">
       <a
         href={`/edit/story/${storyId}`}
-        className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium py-2 px-6 text-sp-white dark:text-sp-black"
+        className="inline-flex items-center rounded-sp-40 border-2 border-sp-medium px-6 py-2 text-sp-white dark:text-sp-black"
       >
-        <PencilIcon className="w-5 h-5 text-sp-lighter" />
-        <span className="text-sp-lighter ml-2">{t("edit_button_text")}</span>
+        <PencilIcon className="h-5 w-5 text-sp-lighter" />
+        <span className="ml-2 text-sp-lighter">{t("edit_button_text")}</span>
       </a>
     </div>
   );
@@ -97,18 +97,18 @@ export default function StoryPage({
         ""
       )}
       <section
-        className="mx-auto flex flex-col justify-center items-center mt-8"
+        className="mx-auto mt-8 flex flex-col items-center justify-center"
         key="story"
       >
-        <div className="w-full flex flex-col items-center text-left subpixel-antialiased">
-          <div className="w-3/4 flex flex-col justify-center text-sp-black dark:text-sp-white">
+        <div className="flex w-full flex-col items-center text-left subpixel-antialiased">
+          <div className="flex w-3/4 flex-col justify-center text-sp-black dark:text-sp-white">
             <h1 className="mb-5 text-center uppercase">{displayStory.title}</h1>
             {!!displayStory.subtitle && (
-              <h2 className="mb-6 text-cta px-4 font-bold text-center">
+              <h2 className="mb-6 px-4 text-center font-bold text-cta">
                 {displayStory.subtitle}
               </h2>
             )}
-            <h2 className="mb-10 text-2xl md:text-cta px-4 font-bold text-center">
+            <h2 className="mb-10 px-4 text-center font-bold text-2xl md:text-cta">
               {displayStory.description}
             </h2>
           </div>
@@ -134,13 +134,13 @@ export default function StoryPage({
           )}
 
           {displayStory.paragraphs.length ? (
-            <div className="w-full md:w-3/4 lg:w-4/5 mt-10 mb-3">
+            <div className="mb-3 mt-10 w-full md:w-3/4 lg:w-4/5">
               {displayStory.paragraphs.map((p, i) => {
                 // if andrija cordas, center all text because this is a poem/song
                 if (displayStory.slug === "story-of-andrija-cordas-f7067426") {
                   return (
                     <p
-                      className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg text-center"
+                      className="whitespace-pre-line break-words pt-5 text-center subpixel-antialiased text-base tracking-sp-tighten lg:text-lg"
                       key={`para-${i}`}
                     >
                       {p.text}
@@ -150,7 +150,7 @@ export default function StoryPage({
 
                 return (
                   <p
-                    className="tracking-sp-tighten subpixel-antialiased pt-5 text-base whitespace-pre-line break-words lg:text-lg"
+                    className="whitespace-pre-line break-words pt-5 subpixel-antialiased text-base tracking-sp-tighten lg:text-lg"
                     key={`para-${i}`}
                   >
                     {p.text}
@@ -162,14 +162,14 @@ export default function StoryPage({
             <></>
           )}
         </div>
-        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white lg:text-lg">
+        <div className="mx-auto w-full text-sp-white md:w-3/4 lg:w-4/5 lg:text-lg">
           {displayStory.tags?.length ? (
             <Tags tags={displayStory.tags} />
           ) : (
             <></>
           )}
         </div>
-        <div className="w-full md:w-3/4 lg:w-4/5 mx-auto text-sp-white mt-14 mb-4 lg:text-lg">
+        <div className="mx-auto mb-4 mt-14 w-full text-sp-white md:w-3/4 lg:w-4/5 lg:text-lg">
           {!isGuardian && <Tribute id={spiritus.id} />}
           <PageActions
             shareLink={displayStory.shortLink}
@@ -181,10 +181,10 @@ export default function StoryPage({
           />
           <HorizontalDivider />
         </div>
-        <div className="w-full lg:w-4/5 xl:w-5/6 flex flex-col justify-center items-center text-sp-white mt-4">
+        <div className="mt-4 flex w-full flex-col items-center justify-center text-sp-white lg:w-4/5 xl:w-5/6">
           <SpiritusOverview {...spiritus} />
           <SpiritusCarousel images={spiritus.images} />
-          <div className="w-full text-sp-white mt-4">
+          <div className="mt-4 w-full text-sp-white">
             <MoreStories
               stories={stories}
               spiritus={spiritus}

@@ -13,9 +13,11 @@ export async function GetSpiritusById(id, accessToken) {
   } else {
     res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}`);
   }
-  res.data.images.forEach((img) => {
-    img.url = img.url ? ImagePath(img.url) : null;
-  });
+
+  if (res.data?.profileImage) {
+    res.data.profileImage.url = res.data.profileImage.url ? ImagePath(res.data.profileImage.url) : null;
+  }
+
   return res;
 }
 
@@ -35,6 +37,30 @@ export async function GetUnpaidSpiritusList(accessToken) {
   return res;
 }
 
+export async function GetSpiritusGalleryImages(spiritusId, offset, limit) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  const res = await axios.get(`${API_URL}/wapi/spiritus/${spiritusId}/image?page=${o}&size=${l}`);
+  // returns [ { id, url, height, width, profile }, ... ]
+  res.data.content.forEach((img) => {
+    img.url = img.url ? ImagePath(img.url) : null;
+  });
+
+  return res;
+}
+
+export async function GetSpiritusTributes(spiritusId, offset, limit) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  const res = await axios.get(
+    `${API_URL}/wapi/rose/spiritus/${spiritusId}/tribute?page=${o}&size=${l}`
+  );
+ 
+  return res;
+}
+
 export async function GetSpiritusBySlug(slug, accessToken) {
   let res;
   if (accessToken) {
@@ -46,9 +72,10 @@ export async function GetSpiritusBySlug(slug, accessToken) {
   } else {
     res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`);
   }
-  res.data.images.forEach((img) => {
-    img.url = img.url ? ImagePath(img.url) : null;
-  });
+
+  if (res.data?.profileImage) {
+    res.data.profileImage.url = res.data.profileImage.url ? ImagePath(res.data.profileImage.url) : null;
+  }
 
   return res;
 }
@@ -133,5 +160,13 @@ export async function GetSpiritusByPlaceId(placeId, offset, limit) {
     });
   });
 
+  return res;
+}
+
+export async function GetSpiritusCoverImages() {
+  const res = await axios.get(`${API_URL}/wapi/spiritus/coverImage`);
+  res.data.forEach((img) => {
+    img.url = img.url ? ImagePath(img.url) : null;
+  });
   return res;
 }

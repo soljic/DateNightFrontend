@@ -1,10 +1,11 @@
 import axios from "axios";
-import { ImagePath } from "../util";
+
 import { API_URL, defaultLimit, defaultOffset } from "../constants";
+import { ImagePath } from "../util";
 
 export async function GetStoryById(id) {
   const res = await axios.get(`${API_URL}/wapi/stories/id/${id}`);
-  res.data.images.forEach((img) => {
+  res.data?.images?.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
   return res;
@@ -22,19 +23,36 @@ export async function GetStoryBySlug(slug, accessToken) {
     res = await axios.get(`${API_URL}/wapi/stories/${slug}`);
   }
 
-  res.data.images.forEach((img) => {
+  res.data?.images?.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
   return res;
 }
 
-export async function GetSpiritusStoriesBySlug(spiritus_slug, offset, limit) {
+export async function GetSpiritusStoriesBySlug(
+  spiritus_slug,
+  offset,
+  limit,
+  accessToken
+) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
-  const res = await axios.get(
-    `${API_URL}/wapi/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`
-  );
+  let res;
+  if (accessToken) {
+    res = await axios.get(
+      `${API_URL}/wapi/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } else {
+    res = await axios.get(
+      `${API_URL}/wapi/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`
+    );
+  }
 
   // expand image paths to full paths
   res.data.content.forEach((story) => {

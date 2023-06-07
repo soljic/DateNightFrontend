@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useTranslation } from "next-i18next";
 
-import { XIcon, ChevronDownIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon, XIcon } from "@heroicons/react/outline";
+import { useTranslation } from "next-i18next";
 
 export function MultiSelectInput({ items, selected, setSelected }) {
   const { t } = useTranslation("common");
@@ -23,24 +23,26 @@ export function MultiSelectInput({ items, selected, setSelected }) {
   };
 
   return (
-    <div className="w-full flex flex-col items-center mx-auto">
+    <div className="mx-auto flex w-full flex-col items-center">
       <div className="w-full">
-        <div className="flex flex-col items-center relative">
+        <div className="relative flex flex-col items-center">
           <div className="w-full">
-            <div className="flex appearance-none outline-none text-sp-black dark:text-sp-white">
-              <div className="flex flex-auto flex-wrap gap-1 items-center">
+            <div className="flex appearance-none text-sp-black outline-none dark:text-sp-white">
+              <div className="flex flex-auto flex-wrap items-center gap-1">
                 {!selected.length ? (
-                  <p className="text-gray-500">{t("create_story_tags_placeholder")}</p>
+                  <p className="text-gray-500">
+                    {t("create_story_tags_placeholder")}
+                  </p>
                 ) : (
                   selected.map((tag, index) => {
                     return (
                       <div
                         key={index}
-                        className="flex justify-center items-center font-medium px-2 py-1 rounded-2xl border border-sp-black dark:border-sp-lighter"
+                        className="flex items-center justify-center rounded-sp-10 border border-sp-day-400 px-2 py-1 font-medium"
                       >
-                        <div className="text-sm leading-none">{tag.value}</div>
+                        <div className="leading-none text-sm">{tag.value}</div>
                         <XIcon
-                          className="w-4 h-4 ml-1"
+                          className="ml-1 h-4 w-4"
                           onClick={() => removeItem(tag)}
                         />
                       </div>
@@ -49,7 +51,7 @@ export function MultiSelectInput({ items, selected, setSelected }) {
                 )}
               </div>
               <div
-                className="text-gray-300 w-8 py-1 pl-2 pr-1 border-l-2 flex items-center border-sp-medium"
+                className="flex w-8 items-center py-1 pl-2 pr-1 text-gray-300"
                 onClick={(e) => {
                   e.preventDefault();
                   toogleDropdown();
@@ -77,21 +79,21 @@ function Dropdown({ items, addItem }) {
   return (
     <div
       id="dropdown"
-      className="absolute top-10 right-0 w-full bg-sp-day-100 dark:bg-sp-black text-sp-black dark:text-sp-white z-40 rounded-lg border-2 border-sp-medium max-h-select"
+      className="max-h-select absolute right-0 top-10 z-40 w-full rounded-lg border border-sp-day-400 bg-sp-day-100 text-sp-black dark:bg-sp-black dark:text-sp-white"
     >
-      <div className="flex flex-col w-full">
+      <div className="flex w-full flex-col">
         {items.map((item, key) => {
           return (
             <div
               key={key}
-              className="cursor-pointer hover:bg-sp-day-900 hover:bg-opacity-40 dark:hover:bg-sp-fawn dark:hover:bg-opacity-100 hover:text-sp-black rounded-lg"
+              className="cursor-pointer rounded-lg hover:bg-sp-day-900 hover:bg-opacity-40 hover:text-sp-black dark:hover:bg-sp-fawn dark:hover:bg-opacity-100"
               onClick={(e) => {
                 e.preventDefault();
                 addItem(item);
               }}
             >
               <div className="flex w-full items-center p-2">
-                <div className="w-full items-center flex">
+                <div className="flex w-full items-center">
                   <div className="mx-2 leading-6">{item.value}</div>
                 </div>
               </div>

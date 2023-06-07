@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-
-import { useTheme } from "next-themes";
-
-import { useTranslation } from "next-i18next";
+import { useEffect, useState } from "react";
 
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
+import { useTheme } from "next-themes";
+
 import {
   SettingsCheckSelectedIcon,
   SettingsCheckUnselectedIcon,
@@ -23,7 +22,7 @@ export function Theme() {
 
   return (
     <div className="mx-4 mb-80 w-full">
-      <h1 className="text-2xl font-bold subpixel-antialiased tracking-tight text-sp-black dark:text-sp-white">
+      <h1 className="font-bold text-sp-black subpixel-antialiased text-2xl tracking-tight dark:text-sp-white">
         {t("theme")}
       </h1>
       {mounted && (
@@ -31,51 +30,51 @@ export function Theme() {
           <button
             onClick={() => setTheme("system")}
             key={"system"}
-            className="flex justify-start items-center rounded-t-sp-14 p-4 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown focus:outline-none"
+            className="flex items-center justify-start rounded-t-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 p-4 focus:outline-none dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
           >
-            <SettingsDevicesIcon width={5} height={5} />
-            <div className="flex justify-between w-full">
+            <SettingsDevicesIcon className="h-4 w-4 fill-sp-day-400" />
+            <div className="flex w-full justify-between">
               <div className="ml-4">
-                <p className="text-sm font-medium">{t("system")}</p>
+                <p className="font-medium text-sm">{t("system")}</p>
               </div>
               {theme === "system" ? (
-                <SettingsCheckSelectedIcon w={4} h={4} />
+                <SettingsCheckSelectedIcon className="h-4 w-4" />
               ) : (
-                <SettingsCheckUnselectedIcon w={4} h={4} />
+                <SettingsCheckUnselectedIcon className="h-4 w-4" />
               )}
             </div>
           </button>
           <button
             onClick={() => setTheme("light")}
             key={"light"}
-            className="flex justify-start items-center p-4 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown focus:outline-none"
+            className="flex items-center justify-start bg-gradient-to-r from-sp-day-300 to-sp-day-100 p-4 focus:outline-none dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
           >
-            <SunIcon className="w-5 h-5 text-sp-cotta" />
-            <div className="flex justify-between w-full">
+            <SunIcon className="h-5 w-5 text-sp-cotta" />
+            <div className="flex w-full justify-between">
               <div className="ml-4">
-                <p className="text-sm font-medium">{t("light")}</p>
+                <p className="font-medium text-sm">{t("light")}</p>
               </div>
               {theme === "light" ? (
-                <SettingsCheckSelectedIcon w={4} h={4} />
+                <SettingsCheckSelectedIcon className="h-4 w-4" />
               ) : (
-                <SettingsCheckUnselectedIcon w={4} h={4} />
+                <SettingsCheckUnselectedIcon className="h-4 w-4" />
               )}
             </div>
           </button>
           <button
             onClick={() => setTheme("dark")}
             key={"dark"}
-            className="flex justify-start items-center rounded-b-sp-14 p-4 bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown focus:outline-none"
+            className="flex items-center justify-start rounded-b-sp-14 bg-gradient-to-r from-sp-day-300 to-sp-day-100 p-4 focus:outline-none dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
           >
-            <MoonIcon className="h-5 w-5 text-sp-fawn -scale-x-100" />
-            <div className="flex justify-between w-full">
+            <MoonIcon className="h-5 w-5 -scale-x-100 text-sp-fawn" />
+            <div className="flex w-full justify-between">
               <div className="ml-4">
-                <p className="text-sm font-medium">{t("dark")}</p>
+                <p className="font-medium text-sm">{t("dark")}</p>
               </div>
               {theme === "dark" ? (
-                <SettingsCheckSelectedIcon w={4} h={4} />
+                <SettingsCheckSelectedIcon className="h-4 w-4" />
               ) : (
-                <SettingsCheckUnselectedIcon w={4} h={4} />
+                <SettingsCheckUnselectedIcon className="h-4 w-4" />
               )}
             </div>
           </button>

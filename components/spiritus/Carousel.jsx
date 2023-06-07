@@ -1,16 +1,16 @@
-import { useState, useRef, useEffect, Fragment } from "react";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Pagination, Navigation } from "swiper/core";
-import { EffectCards, EffectFade } from "swiper";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/outline";
+import { Fragment, useEffect, useRef, useState } from "react";
+
+import Image from "next/legacy/image";
 
 import { Dialog, Transition } from "@headlessui/react";
-
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/outline";
+import { EffectCards, EffectFade } from "swiper";
+import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper/core";
 import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import "swiper/css/effect-cards";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -43,7 +43,8 @@ export function SpiritusCarousel({ images }) {
   }
 
   return (
-    !!images.length && (
+    !!images &&
+    images.length > 0 && (
       <>
         <FullScreenSwiper
           isOpen={isOpen}
@@ -51,21 +52,21 @@ export function SpiritusCarousel({ images }) {
           images={images}
           fullScreenIndex={fullScreenIndex}
         />
-        <div className="sw-spiritus relative w-full my-16 overflow-hidden">
-          <div className="swiper-prev-step absolute inset-y-1/2 left-0 sm:left-4 z-10">
+        <div className="sw-spiritus relative my-16 w-full overflow-hidden">
+          <div className="swiper-prev-step absolute inset-y-1/2 left-0 z-10 sm:left-4">
             <button
               ref={prevRef}
-              className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white shadow focus:outline-none"
             >
-              <ArrowLeftIcon className="w-5 h-5 text-black" />
+              <ArrowLeftIcon className="h-5 w-5 text-black" />
             </button>
           </div>
-          <div className="swiper-next-step absolute inset-y-1/2 right-0 sm:right-4 z-10 ">
+          <div className="swiper-next-step absolute inset-y-1/2 right-0 z-10 sm:right-4 ">
             <button
               ref={nextRef}
-              className="bg-white flex justify-center items-center w-9 h-9 rounded-full shadow focus:outline-none"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white shadow focus:outline-none"
             >
-              <ArrowRightIcon className="w-5 h-5 text-black" />
+              <ArrowRightIcon className="h-5 w-5 text-black" />
             </button>
           </div>
           <Swiper
@@ -102,7 +103,7 @@ export function SpiritusCarousel({ images }) {
             {images.map((img, i) => {
               return (
                 <SwiperSlide key={`slider-image-${i}`}>
-                  <div onClick={() => openModal(i)} className="w-full h-full">
+                  <div onClick={() => openModal(i)} className="h-full w-full">
                     <Image
                       src={img.url}
                       alt={"spiritus-image"}
@@ -124,7 +125,7 @@ export function SpiritusCarousel({ images }) {
 function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-100" onClose={closeModal}>
+      <Dialog as="div" className="z-100 relative" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-1000"
@@ -134,11 +135,11 @@ function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-90 z-40" />
+          <div className="fixed inset-0 z-40 bg-black bg-opacity-90" />
         </Transition.Child>
 
-        <div className="fixed inset-0 overflow-y-auto z-40">
-          <div className="flex items-center justify-center min-w-full h-full p-4 text-center">
+        <div className="fixed inset-0 z-40 overflow-y-auto">
+          <div className="flex h-full min-w-full items-center justify-center p-4 text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-1000"
@@ -150,7 +151,7 @@ function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
             >
               <Dialog.Panel
                 onClick={closeModal}
-                className="absolute overflow-hidden content-center transition-all transform"
+                className="absolute transform content-center overflow-hidden transition-all"
               >
                 <div className="sw-gallery-spiritus relative h-[66vh] overflow-hidden">
                   <Swiper
@@ -167,7 +168,7 @@ function FullScreenSwiper({ isOpen, closeModal, images, fullScreenIndex }) {
                     {images.map((img, i) => {
                       return (
                         <SwiperSlide key={`slider-image-${i}`}>
-                          <div className="flex inset-0 w-[60vw] h-[66vh] sm:h-[80vh] max-h-screen content-center">
+                          <div className="inset-0 flex h-[66vh] max-h-screen w-[60vw] content-center sm:h-[80vh]">
                             <Image
                               src={img.url}
                               alt={"spiritus-gallery-image"}

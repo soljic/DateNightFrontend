@@ -24,9 +24,9 @@ export default function Custom400() {
           content="Ooooopsie... that page does not exist"
         />
       </Head>
-      <section className="flex flex-col justify-center items-center text-sp-white">
-        <div className="flex flex-col justify-center items-center gap-2">
-          <div className="p-4 bg-gradient-to-r from-sp-dark-brown to-sp-brown rounded-sp-14 mb-10">
+      <section className="flex flex-col items-center justify-center text-sp-white">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <div className="mb-10 rounded-sp-14 bg-gradient-to-r from-sp-dark-brown to-sp-brown p-4">
             <svg
               width="28"
               height="28"
@@ -41,17 +41,17 @@ export default function Custom400() {
             </svg>
           </div>
 
-          <h3 className="text-sp-fawn text-sm font-bold">400 Error</h3>
+          <h3 className="font-bold text-sp-fawn text-sm">400 Error</h3>
 
-          <h1 className="text-2xl text-center font-bold">
+          <h1 className="text-center font-bold text-2xl">
             {t("settings:400_title")}
           </h1>
 
-          <h2 className="text-sm font-medium text-sp-lighter text-center">
+          <h2 className="text-center font-medium text-sp-lighter text-sm">
             {t("settings:400_subtitle")}
           </h2>
         </div>
-        <p className="text-sm font-medium text-sp-lighter mt-16 text-center">
+        <p className="mt-16 text-center font-medium text-sp-lighter text-sm">
           {t("settings:400_subtitle_2")}
         </p>
         <Nav />
@@ -90,24 +90,22 @@ function Nav() {
   return (
     <div className="z-10">
       <div className="text-sp-black dark:text-sp-white">
-        <div className="relative grid gap-6 p-6 grid-cols-1">
+        <div className="relative grid grid-cols-1 gap-6 p-6">
           {menuItems.map((item) => (
-            <Link href={item.href} key={item.name}>
-              <a
-                className="flex items-center rounded-sp-14 px-2 py-4 ease-in-out hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown"
-              >
-                <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
-                  {item.icon}
-                </div>
-                <div className="ml-4">
-                  <p className="text-lg font-semibold pb-0.5 text-sp-white">
-                    {t(item.name)}
-                  </p>
-                  <p className="text-sm text-sp-lighter">
-                    {t(item.description)}
-                  </p>
-                </div>
-              </a>
+            <Link
+              href={item.href}
+              key={item.name}
+              className="flex items-center rounded-sp-14 px-2 py-4 ease-in-out hover:bg-gradient-to-r hover:from-sp-dark-brown hover:to-sp-brown"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-start justify-center sm:h-12 sm:w-12">
+                {item.icon}
+              </div>
+              <div className="ml-4">
+                <p className="pb-0.5 font-semibold text-sp-white text-lg">
+                  {t(item.name)}
+                </p>
+                <p className="text-sp-lighter text-sm">{t(item.description)}</p>
+              </div>
             </Link>
           ))}
         </div>

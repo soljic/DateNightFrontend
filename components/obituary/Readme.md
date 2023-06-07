@@ -1,0 +1,1 @@
+Copy pasta from partnerapp to save some time during prototyping.
