@@ -70,7 +70,7 @@ export default function CreateSpiritusPage({ user, product }) {
         birth: birth ? getISOLocalDate(birth) : null,
         death: birth ? getISOLocalDate(death) : null,
         description: description || null,
-        qupte: quote || null,
+        quote: quote || null,
         location,
       };
       const form = new FormData();
