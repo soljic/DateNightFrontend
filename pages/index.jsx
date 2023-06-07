@@ -63,6 +63,8 @@ export default function Home({
         title={featuredStory.title}
         subtitle={featuredStory.subtitle}
         imageUrl={featuredStory.imageUrl}
+        featuredStories={featured.items}
+        items={featured.items}
       />
       <HomepageSwiper
         sectionId={anniversaries.id}

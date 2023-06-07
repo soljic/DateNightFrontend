@@ -137,6 +137,69 @@ export function HomepageSwiper({
   );
 }
 
+export function VerticalSwiper({ items, itemType, featured }) {
+  const { t } = useTranslation("common");
+
+  return (
+    items && (
+      <div className="flex flex-wrap space-y-6">
+        {items.slice(0, 3).map((item, i) => {
+          return (
+            <HomepageTileV2
+              itemId={item.itemId}
+              title={item.title}
+              subtitle={item.subtitle}
+              imageUrl={item.imageUrl}
+              itemType={itemType}
+              featured={featured}
+            />
+          );
+        })}
+      </div>
+    )
+  );
+}
+
+// itemType is used to calculate the link to the correct item
+// if itemType === "SPIRITUS_DETAILS" the link will point to SPIRITUS, ELSE will point to Story
+function HomepageTileV2({
+  itemId,
+  itemType,
+  title,
+  imageUrl,
+}) {
+  return (
+    <Link
+      href={
+        itemType === "SPIRITUS" ? `/spiritus/${itemId}` : `/stories/${itemId}`
+      }
+      key={itemId}
+      className="group w-full"
+    >
+      <div className="w-full group-hover:opacity-75">
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            className="w-full rounded-sp-10 object-cover"
+            alt={title}
+            width={160}
+            height={130}
+            loading="eager"
+            layout="responsive"
+          />
+        ) : (
+          <ImagePlaceholder />
+        )}
+      </div>
+      <div className="flex flex-col justify-between font-medium leading-4 antialiased tracking-sp-tighten">
+        <h3 className="leading-snug dark:text-sp-white">
+          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
+        </h3>
+      </div>
+    </Link>
+  );
+}
+
 // itemType is used to calculate the link to the correct item
 // if itemType === "SPIRITUS_DETAILS" the link will point to SPIRITUS, ELSE will point to Story
 function HomepageTile({
