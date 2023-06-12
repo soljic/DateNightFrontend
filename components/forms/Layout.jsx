@@ -69,9 +69,9 @@ export function EditorLayout({
   const deathDate = death ? new Date(death) : null;
 
   return (
-    <div className="mt-8 grid w-full grid-cols-1 md:grid-cols-3 lg:grid-cols-4 lg:gap-6">
+    <div className="mt-8 grid w-full grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
       <div className="col-span-1">
-        <div className="hidden space-y-4 rounded-sp-10 border border-sp-day-400 px-3.5 py-6 md:col-span-1 md:block">
+        <div className="hidden space-y-4 rounded-sp-10 border border-sp-day-200 px-3.5 py-6 md:col-span-1 md:block">
           <div className="px-1.5">
             <h2 className="font-medium">{`${name} ${surname}`}</h2>
             <p className="text-sp-day-400">
@@ -139,11 +139,11 @@ function Sidebar({ menuId, spiritusId, onDelete }) {
       )}
       <button
         onClick={() => onDelete()}
-        className="flex w-full items-center justify-start rounded-sp-5 p-3 hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop hover:text-red-600 focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+        className="flex w-full items-center justify-start rounded-sp-5 p-3 hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
       >
-        <TrashIcon className="h-5 w-5 text-red-500" />
+        <TrashIcon className="h-5 w-5 text-sp-day-400 dark:text-sp-day-200" />
         <div className="ml-4 flex w-full justify-between">
-          <p className="font-medium">{t("term_delete")}</p>
+          <p className="font-medium leading-4">{t("term_delete")} Spiritus</p>
         </div>
       </button>
     </aside>

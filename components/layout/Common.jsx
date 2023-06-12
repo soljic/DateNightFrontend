@@ -6,7 +6,7 @@ export function NavItem({ text, link }) {
   return (
     <Link
       href={link || "/"}
-      className="text-center md:text-base lg:text-lg leading-5 from-day-gradient-start to-day-gradient-stop px-1.5 py-2 hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:mx-1"
+      className="from-day-gradient-start to-day-gradient-stop px-1.5 py-2 text-center leading-5 hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:mx-1 md:text-base lg:text-lg"
     >
       {text}
     </Link>
@@ -55,12 +55,12 @@ export function ImagePlaceholder() {
 
 export function HorizontalDivider() {
   return (
-    <div className="relative flex w-full items-center py-5">
-      <div className="flex-grow border-t-3 border-sp-day-200 dark:border-sp-medium"></div>
-      <div className="mx-2 rounded-lg bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-dark-brown">
-        <ChevronDownIcon className="h-5 w-5 text-sp-day-900 dark:text-sp-fawn" />
+    <div className="relative flex w-full items-center">
+      <div className="flex-grow border-t-2 border-sp-day-200 dark:border-sp-medium"></div>
+      <div className="mx-2 p-1.5 opacity-20">
+        <Logo />
       </div>
-      <div className="flex-grow border-t-3 border-sp-day-200 dark:border-sp-medium"></div>
+      <div className="flex-grow border-t-2 border-sp-day-200 dark:border-sp-medium"></div>
     </div>
   );
 }

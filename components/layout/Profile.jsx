@@ -1,19 +1,17 @@
 import { Fragment } from "react";
-import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 
 import Link from "next/link";
-
-import { useTranslation } from "next-i18next";
+import { useRouter } from "next/navigation";
 
 import { Popover, Transition } from "@headlessui/react";
+import { signOut } from "next-auth/react";
+import { useTranslation } from "next-i18next";
 
 import {
   SettingsGuardianIcon,
   SettingsSignOutIcon,
   SettingsSpiritusIcon,
 } from "../SettingsIcons";
-
 import { UserIcon } from "./Icons";
 
 export function ProfileMenu() {
@@ -30,9 +28,7 @@ export function ProfileMenu() {
       <Popover>
         {({ open }) => (
           <>
-            <Popover.Button
-              className="rounded-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-            >
+            <Popover.Button className="rounded-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
               <UserIcon className="h-5 w-5 fill-sp-black dark:fill-sp-white" />
             </Popover.Button>
             <Transition
@@ -62,7 +58,7 @@ export function ProfileMenu() {
                       href="/account/settings/my-spiritus"
                       className="flex w-52 items-center justify-start rounded-sp-14 px-4 py-3  hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                     >
-                      <SettingsSpiritusIcon className="w-6 h-6 fill-sp-dark-fawn" />
+                      <SettingsSpiritusIcon className="h-6 w-6 fill-sp-dark-fawn" />
                       <div className="ml-4">
                         <p className="font-medium text-sm">{t("spiritus")}</p>
                       </div>
@@ -97,7 +93,7 @@ export function ProfileMenu() {
                       href="/account/settings/my-guardian-id"
                       className="flex w-52 items-center justify-start rounded-sp-14 px-4 py-3 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                     >
-                      <SettingsGuardianIcon  className="w-6 h-6 fill-sp-dark-fawn" />
+                      <SettingsGuardianIcon className="h-6 w-6 fill-sp-dark-fawn" />
                       <div className="ml-4">
                         <p className="font-medium text-sm">
                           {t("guardian_id")}
@@ -109,7 +105,7 @@ export function ProfileMenu() {
                       className="flex w-52 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                     >
                       <div>
-                        <SettingsSignOutIcon  className="w-6 h-6 fill-sp-cotta" />
+                        <SettingsSignOutIcon className="h-6 w-6 fill-sp-cotta" />
                       </div>
                       <div className="ml-3 flex w-full justify-between">
                         <p className="font-semibold text-sp-cotta text-sm">

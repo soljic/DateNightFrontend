@@ -1,10 +1,12 @@
 import React from "react";
+
 import Image from "next/legacy/image";
+
 import { useTranslation } from "next-i18next";
 
-import playStore from "../../public/images/mobile/playStore.svg";
-import appleStore from "../../public/images/mobile/appStore.svg";
 import CTAImage from "../../public/images/about/image_download_cta.png";
+import appleStore from "../../public/images/mobile/appStore.svg";
+import playStore from "../../public/images/mobile/playStore.svg";
 
 function BecomeGuardianCTA() {
   const { t } = useTranslation("about");
@@ -45,7 +47,7 @@ function BecomeGuardianCTA() {
             {t("become_guardian_title")}
           </p>
 
-          <p className="font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white">
+          <p className="font-medium leading-5 text-sp-black opacity-70 tracking-sp-tighten dark:text-sp-white">
             {t("become_guardian_subtitle")}
           </p>
           <div className="flex items-center justify-start gap-2">
@@ -54,19 +56,24 @@ function BecomeGuardianCTA() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src={appleStore} />
+              <Image src={appleStore} alt="apple store" />
             </a>
             <a
               href="https://play.google.com/store/apps/details?id=app.spiritus"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Image src={playStore} />
+              <Image src={playStore} alt="play store" />
             </a>
           </div>
         </div>
         <div className="-mx-10 w-full md:w-1/2">
-          <Image src={CTAImage} width={510} height={510} />
+          <Image
+            src={CTAImage}
+            width={510}
+            height={510}
+            alt="Download mobile app"
+          />
         </div>
       </div>
     </section>

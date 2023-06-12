@@ -38,7 +38,7 @@ export default function FuneralNoticePage({
 
   const tabs = [
     {
-      name: t("spiritus_about"),
+      name: "Spiritus",
       href: `/spiritus/${spiritus.slug}`,
       current: false,
     },
@@ -77,16 +77,14 @@ export default function FuneralNoticePage({
         />
         {SetSpiritusOG(spiritus)}
       </Head>
-      <header className="h-[50vh] w-full sm:h-96">
-        <ProfileHeader
-          spiritus={spiritus}
-          coverImages={coverImages}
-          age={age}
-          deathDate={deathDate}
-          birthDate={birthDate}
-          isGuardian={isGuardian}
-        />
-      </header>
+      <ProfileHeader
+        spiritus={spiritus}
+        coverImages={coverImages}
+        age={age}
+        deathDate={deathDate}
+        birthDate={birthDate}
+        isGuardian={isGuardian}
+      />
 
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={tabs} />

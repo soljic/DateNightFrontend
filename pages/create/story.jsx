@@ -1,20 +1,27 @@
 import { useState } from "react";
 
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Alert } from "@/components/Status";
-import { CreateStoryFormV2 } from "@/components/forms/CreateStory";
+import {
+  CreateStoryFormV2,
+  CreateStorySuccess,
+} from "@/components/forms/CreateStory";
 import Layout from "@/components/layout/Layout";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 
 export default function CreateStoryPage({ spiritus, tags }) {
   const { t } = useTranslation("common");
-  const [isSuccess, setIsSuccess] = useState(false);
+  const router = useRouter();
+
+  const [isSuccess, setIsSuccess] = useState(true);
+  const [newStoryURL, setNewStoryURL] = useState("");
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
 
@@ -28,11 +35,16 @@ export default function CreateStoryPage({ spiritus, tags }) {
     setToastMessage("");
   };
 
-  function onSuccess() {
-    setIsSuccess(true);
-    setToastMessage(t("message_save_success"));
-    setToastOpen(true);
-  }
+  // scroll to top and redirect user to new story after 6 seconds
+  const onSuccess = async (storySlug) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const url = `/spiritus/${spiritus.slug}/story/${storySlug}`;
+    setNewStoryURL(url);
+
+    setTimeout(async () => {}, 7000);
+    router.push(url);
+  };
 
   return (
     <Layout>
@@ -53,16 +65,27 @@ export default function CreateStoryPage({ spiritus, tags }) {
             </div>
           </div>
         )}
-        <div className="mx-auto mt-12 flex w-3/4 flex-1 flex-col space-y-6 pb-96">
-          <div className="w-full rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-6 py-10 font-medium dark:from-sp-dark-brown dark:to-sp-brown">
-            <CreateStoryFormV2
-              spiritusId={spiritus.id}
-              tagChoices={tags}
-              onError={onError}
-              onSuccess={onSuccess}
-            />
+        {newStoryURL ? (
+          <CreateStorySuccess
+            redirectURL={newStoryURL}
+            name={spiritus.name}
+            surname={spiritus.surname}
+          />
+        ) : (
+          <div className="mx-auto mt-12 flex w-3/4 flex-1 flex-col space-y-6 pb-96">
+            <div className="w-full rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-6 py-10 font-medium dark:from-sp-dark-brown dark:to-sp-brown">
+              <h2 className="mb-6 px-1.5 text-center font-bold text-sp-black text-2xl dark:text-sp-white xl:text-3xl">
+                {t("create_story")}
+              </h2>
+              <CreateStoryFormV2
+                spiritusId={spiritus.id}
+                tagChoices={tags}
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Layout>
   );

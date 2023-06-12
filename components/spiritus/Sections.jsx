@@ -17,13 +17,13 @@ import { Spinner } from "@/components/Status";
 import { SendRose } from "@/service/http/rose";
 
 import { StoryIcon } from "../Icons";
-import { SettingsCreateStoryIcon } from "../SettingsIcons";
+import { SettingsCreateStorySolidIcon } from "../SettingsIcons";
 import {
   AgeIcon,
   CalendarIcon,
   FuneralOrgIcon,
   LinkIcon,
-  MemoryGuardianIcon,
+  MemoryGuardianAlterIcon,
   MiniBioIcon,
   PlaceIcon,
   QuoteIcon,
@@ -75,58 +75,64 @@ export function ProfileHeader({
   }
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
-      {spiritus.coverImage ? (
-        <Image
-          src={spiritus.coverImage.url}
-          alt="bg-image"
-          fill
-          className="block"
-        />
-      ) : (
-        coverImages &&
-        coverImages.length > 0 && (
+    <header className="h-[50vh] w-full sm:h-[34vh]">
+      <div className="relative h-full w-full overflow-hidden">
+        {spiritus.coverImage ? (
           <Image
-            src={coverImages[0].url}
+            src={spiritus.coverImage.url}
             alt="bg-image"
             fill
-            className="object-center"
+            className="block"
           />
-        )
-      )}
-      <div className="mx-auto flex h-full w-full items-center justify-center md:w-5/6 md:justify-start lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-        <div className="flex flex-col items-center gap-6 sm:flex-row">
-          {profileImage && (
-            <div className="relative h-[28vh] w-[58vw] overflow-hidden rounded-sp-10 border-2 border-white sm:h-[240px] sm:w-[200px]">
-              {profileImage}
-            </div>
-          )}
-          <div className="z-10 flex flex-col items-center justify-center drop-shadow-3xl sm:items-start">
-            <p className="text-center font-bold leading-8 text-white text-3xl sm:text-start sm:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
-            <p className="text-center font-bold leading-6 text-white text-lg sm:text-start">
-              {`${
-                birthDate
-                  ? new Intl.DateTimeFormat("hr", dateOptions).format(birthDate)
-                  : "?"
-              } - ${
-                deathDate
-                  ? new Intl.DateTimeFormat("hr", dateOptions).format(deathDate)
-                  : "?"
-              }`}
-              {age && <span className="ml-0.5">({age})</span>}
-            </p>
-            {isGuardian && (
-              <Link href={`/edit/spiritus/${spiritus.id}`} className="mt-2">
-                <button className="flex w-36 items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 font-semibold text-black text-sm">
-                  <PencilIcon className="h-6 w-6" />
-                  {t("edit_spiritus_menu_title")}
-                </button>
-              </Link>
+        ) : (
+          coverImages &&
+          coverImages.length > 0 && (
+            <Image
+              src={coverImages[0].url}
+              alt="bg-image"
+              fill
+              className="object-center"
+            />
+          )
+        )}
+        <div className="mx-auto flex h-full w-full items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            {profileImage && (
+              <div className="relative h-[28vh] w-[58vw] overflow-hidden rounded-sp-10 border-2 border-white sm:h-[240px] sm:w-[210px]">
+                {profileImage}
+              </div>
             )}
+            <div className="z-10 flex flex-col items-center justify-center text-center drop-shadow-3xl">
+              <p className="text-center font-bold leading-8 text-white text-3xl sm:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
+              <p className="text-center font-bold leading-6 text-white text-lg">
+                {`${
+                  birthDate
+                    ? new Intl.DateTimeFormat("hr", dateOptions).format(
+                        birthDate
+                      )
+                    : "?"
+                } - ${
+                  deathDate
+                    ? new Intl.DateTimeFormat("hr", dateOptions).format(
+                        deathDate
+                      )
+                    : "?"
+                }`}
+                {age && <span className="ml-0.5">({age})</span>}
+              </p>
+              {isGuardian && (
+                <Link href={`/edit/spiritus/${spiritus.id}`} className="mt-2">
+                  <button className="flex w-36 items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 font-semibold text-black text-sm">
+                    <PencilIcon className="h-6 w-6" />
+                    {t("edit_spiritus_menu_title")}
+                  </button>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 
@@ -206,7 +212,7 @@ export function About({ age, birth, death, quote, description, location }) {
   return (
     <div className="overflow-hidden">
       {
-        !!quote && <Quote quote={quote || description} />
+        !!quote && <Quote quote={quote} />
         // <Quote quote={quote || description} />
       }
       <div className="pb-1.5">
@@ -421,7 +427,7 @@ export function Quote({ quote }) {
     <div className="mb-6 flex items-center justify-center rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
       <div className="flex justify-center gap-2 p-6">
         <QuoteIcon className="h-6 w-6" />
-        <p className="font-fancy font-bold italic leading-6 text-black subpixel-antialiased text-lg tracking-wide dark:text-white">
+        <p className="font-bold italic leading-6 text-black subpixel-antialiased dark:text-white xl:text-lg">
           {quote}
         </p>
       </div>
@@ -442,7 +448,7 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
           <h3 className=" font-semibold ">{t("share_spiritus")}</h3>
         </div>
         <CopyToClipboard text={shortLink} onCopy={() => setCopied(true)}>
-          <button className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center ">
+          <button className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 ">
             {copied ? (
               <div className="flex items-center justify-center">
                 <LinkIcon className="mr-2 h-4 w-4 fill-black dark:fill-white" />
@@ -454,12 +460,12 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
           </button>
         </CopyToClipboard>
 
-        <a className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center">
+        <a className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2">
           {t("share_facebook")}
         </a>
         <a
           href={`mailto:?subject=In loving memory of our dearest&body=The loving memory of our dearest lives on: ${shortLink}`}
-          className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center "
+          className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
         >
           {t("share_email")}
         </a>
@@ -468,7 +474,7 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
       {/* stories */}
       <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
         <div className="flex items-center space-x-2.5">
-          <SettingsCreateStoryIcon className="h-5 w-5 fill-black dark:fill-white" />
+          <SettingsCreateStorySolidIcon className="h-5 w-5 fill-black dark:fill-white" />
           <h3 className=" font-semibold ">{t("new_story_title")}</h3>
         </div>
         <p className=" text-center font-normal text-sp-day-400">
@@ -476,38 +482,38 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
         </p>
         <Link
           href={`/create/story?spiritus=${spiritusId}`}
-          className="flex w-full items-center justify-center gap-2 rounded-sp-10 border border-sp-day-400 p-1.5 text-center"
+          className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
         >
           {t("create_story")}
         </Link>
+      </div>
+
+      {/* guardians */}
+      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+        <div className="flex items-center space-x-2.5">
+          <MemoryGuardianAlterIcon className="h-5 w-5 fill-black dark:fill-white" />
+          <h3 className="font-semibold ">{t("memory_guardian")}</h3>
+        </div>
+        <p className=" text-center font-normal text-sp-day-400">
+          {memoryGuardians ? memoryGuardians : t("no_memory_guardian")}
+        </p>
       </div>
 
       {/* notifications */}
       <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
         <div className="flex items-center space-x-2.5">
           <RemindMeIcon className="fill-black dark:fill-white" />
-          <h3 className=" font-semibold ">{t("remind_me")}</h3>
+          <h3 className="font-semibold ">{t("remind_me")}</h3>
         </div>
         <p className=" text-center font-normal text-sp-day-400">
           {t("remind_me_subtitle")}
         </p>
         <button
           onClick={() => console.log("clicked")}
-          className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center "
+          className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
         >
           {t("remind_me_button")}
         </button>
-      </div>
-
-      {/* guardians */}
-      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
-        <div className="flex items-center space-x-2.5">
-          <MemoryGuardianIcon className="h-5 w-5 fill-black dark:fill-white" />
-          <h3 className=" font-semibold ">{t("memory_guardian")}</h3>
-        </div>
-        <p className=" text-center font-normal text-sp-day-400">
-          {memoryGuardians ? memoryGuardians : t("no_memory_guardian")}
-        </p>
       </div>
     </div>
   );

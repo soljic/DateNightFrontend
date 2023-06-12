@@ -1,13 +1,13 @@
 import Head from "next/head";
 
+import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { Gallery } from "@/components/spiritus/Gallery";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
-import { getSession } from "next-auth/react";
-
+import { CreateStoryCTA } from "@/components/spiritus/StoryList";
 
 import {
   GetSpiritusBySlug,
@@ -17,7 +17,12 @@ import {
 
 import { SetSpiritusOG } from "@/utils/metaTags";
 
-export default function SpiritusGalleryPage({ spiritus, coverImages, images, isGuardian }) {
+export default function SpiritusGalleryPage({
+  spiritus,
+  coverImages,
+  images,
+  isGuardian,
+}) {
   const { t } = useTranslation("common");
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
@@ -32,7 +37,7 @@ export default function SpiritusGalleryPage({ spiritus, coverImages, images, isG
 
   const tabs = [
     {
-      name: t("spiritus_about"),
+      name: "Spiritus",
       href: `/spiritus/${spiritus.slug}`,
       current: false,
     },
@@ -71,19 +76,20 @@ export default function SpiritusGalleryPage({ spiritus, coverImages, images, isG
         />
         {SetSpiritusOG(spiritus)}
       </Head>
-      <header className="h-[50vh] w-full sm:h-96">
-        <ProfileHeader
-          spiritus={spiritus}
-          coverImages={coverImages}
-          age={age}
-          deathDate={deathDate}
-          birthDate={birthDate}
-          isGuardian={isGuardian}
-        />
-      </header>
+      <ProfileHeader
+        spiritus={spiritus}
+        coverImages={coverImages}
+        age={age}
+        deathDate={deathDate}
+        birthDate={birthDate}
+        isGuardian={isGuardian}
+      />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={spiritus.obituaryId ? tabs : tabs.slice(0, 3)} />
         <div className="px-4 md:px-0">
+          <div className="mt-7">
+            <CreateStoryCTA spiritusId={spiritus.id} />
+          </div>
           {!!images && images.length > 0 && <Gallery images={images} />}
         </div>
       </section>

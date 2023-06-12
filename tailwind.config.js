@@ -59,6 +59,12 @@ module.exports = {
         86: "360px",
         92: "372px",
         obituary: "600px",
+        "story-mobile": "400px",
+        "story-desktop": "640px",
+      },
+      minHeight: {
+        "story-mobile": "400px",
+        "story-desktop": "640px",
       },
       maxWidth: {
         obituary: "960px",
@@ -77,6 +83,7 @@ module.exports = {
         // darkmode accents
         "sp-cotta": "#DB6D56",
         "sp-fawn": "#E3AA6D",
+        "sp-fawn-subtle": "#EBD4BC",
         "sp-day-fawn": "#D17615",
         "sp-dark-fawn": "#ED9A4C",
         "sp-brown": "#2B231A",

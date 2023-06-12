@@ -11,6 +11,8 @@ import { Spinner } from "@/components/Status";
 
 import { GetSpiritusStoriesBySlug } from "@/service/http/story";
 
+import { PaperPlaneIcon } from "./Icons";
+
 export function StoryList({ stories, spiritus, isGuardian, isLastPage }) {
   const { t } = useTranslation("common");
   const [current, setCurrent] = useState(0);
@@ -41,11 +43,11 @@ export function StoryList({ stories, spiritus, isGuardian, isLastPage }) {
   };
 
   return (
-    <div className="mx-auto mt-7 min-h-screen w-11/12 text-sp-black dark:text-sp-white md:w-full">
+    <div className="mx-auto mt-5 w-11/12 text-sp-black dark:text-sp-white md:w-full lg:mt-2">
       {items && items.length ? (
-        <div className="w-full columns-2 space-x-4 space-y-8 md:columns-3 md:space-y-12 xl:columns-3">
+        <div className="w-full columns-2 space-y-8 md:columns-3 md:space-y-12 xl:columns-3">
           {items.map((s) => (
-            <StoryCard {...s} key={s.title} />
+            <StoryCard spiritusSlug={spiritus.slug} {...s} key={s.title} />
           ))}
         </div>
       ) : (
@@ -54,7 +56,7 @@ export function StoryList({ stories, spiritus, isGuardian, isLastPage }) {
         </p>
       )}
       {!isLast && (
-        <div className="mt-7 flex items-center justify-center">
+        <div className="mt-5 flex items-center justify-center">
           <button
             onClick={() => {
               loadMore();
@@ -76,6 +78,7 @@ export function StoryList({ stories, spiritus, isGuardian, isLastPage }) {
 
 export function StoryCard({
   slug,
+  spiritusSlug,
   title,
   subtitle,
   images,
@@ -132,13 +135,33 @@ export function StoryCard({
           </p>
         </div>
         <Link
-          href={`/stories/${slug}`}
+          href={`/spiritus/${spiritusSlug}/story/${slug}`}
           className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center font-semibold text-sm"
         >
           {t("read_story")}
         </Link>
       </div>
     </article>
+  );
+}
+
+export function CreateStoryCTA({ spiritusId }) {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className="mb-6 flex w-full items-center justify-between rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-4 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
+      <div className="leading-6 text-black subpixel-antialiased text-base dark:text-white">
+        <h3 className="font-semibold">{t("send_story_title")}</h3>
+        <p className="text-sm">{t("send_story_subtitle")}</p>
+      </div>
+      <Link
+        href={`/create/story?spiritus=${spiritusId}`}
+        className="flex items-center justify-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-4 py-2.5 text-center font-medium leading-5 text-sp-white dark:border-none dark:from-sp-dark-fawn dark:to-sp-fawn"
+      >
+        <PaperPlaneIcon className="mr-2 h-5 w-5 fill-white" />
+        {t("send_story")}
+      </Link>
+    </div>
   );
 }
 

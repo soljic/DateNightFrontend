@@ -2,20 +2,19 @@ import { useState } from "react";
 import { Fragment } from "react";
 
 import Link from "next/link";
+
+import { Popover, Transition } from "@headlessui/react";
+import { SearchIcon } from "@heroicons/react/outline";
+import { MenuIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
-import { Popover, Transition } from "@headlessui/react";
-import { MenuIcon } from "@heroicons/react/solid";
-import { SearchIcon } from "@heroicons/react/outline";
-
-import { Logo, NavItem } from "./Common";
-import { AccesibilityMenu } from "./Accesibility";
-import { ProfileMenu } from "./Profile";
-import { StoriesIcon, MobileAppIcon, AboutIcon } from "./Icons";
 import { LoginModal } from "../auth/Login";
+import { AccesibilityMenu } from "./Accesibility";
+import { Logo, NavItem } from "./Common";
+import { AboutIcon, MobileAppIcon, StoriesIcon } from "./Icons";
 import { MobileMenu } from "./MobileMenu";
-
+import { ProfileMenu } from "./Profile";
 
 export function Navbar() {
   const { data: session } = useSession();
@@ -32,19 +31,19 @@ export function Navbar() {
   }
 
   return (
-    <div className="bg-sp-day-50 dark:bg-sp-black py-2">
+    <div className="bg-sp-day-50 py-2 dark:bg-sp-black">
       <LoginModal isOpen={isOpen} closeModal={closeModal} />
-      <div className="hidden md:flex w-full justify-evenly text-sp-black dark:text-sp-white items-center px-3 md:px-0">
-        <div className="flex items-center justify-start w-full">
+      <div className="hidden w-full items-center justify-evenly px-3 text-sp-black dark:text-sp-white md:flex md:px-0">
+        <div className="flex w-full items-center justify-start">
           <Link href="/" className="flex items-center">
-            <div className="bg-white p-1 rounded-sp-10 dark:bg-transparent">
+            <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
               <Logo />
             </div>
-            <div className="hidden md:block text-xl font-semibold ml-2">
+            <div className="ml-2 hidden font-semibold text-xl md:block">
               Spiritus
             </div>
           </Link>
-          <nav className="ml-3 flex justify-center items-center">
+          <nav className="ml-3 flex items-center justify-center">
             <NavItem text={t("stories")} link={"/"} />
             {/* {process?.env?.NEXT_API_URL === "https://walk.spiritusapp.com" ? (
               <NavItem text={t("menu_funeral_notices")} link={"/notices"} />
@@ -53,7 +52,7 @@ export function Navbar() {
             <NavItem text={t("about")} link={"/about"} />
           </nav>
         </div>
-        <div className="flex justify-end w-full items-center space-x-1 md:space-x-2">
+        <div className="flex w-full items-center justify-end space-x-1 md:space-x-2">
           <Link
             href="/search"
             className="from-sp-day-300 to-sp-day-100 p-2 hover:rounded-full hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
@@ -62,7 +61,7 @@ export function Navbar() {
           </Link>
           <Link
             href="/create/spiritus"
-            className="flex text-center leading-5 items-center h-10 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-sp-white font-medium dark:from-sp-dark-fawn dark:to-sp-fawn"
+            className="flex h-10 items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
           >
             {t("create_spiritus")}
           </Link>
@@ -74,7 +73,7 @@ export function Navbar() {
           ) : (
             <button
               onClick={openModal}
-              className="text-center rounded-sp-10 border border-sp-day-200 px-3 py-2 font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+              className="rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
               {t("login")}
             </button>
@@ -84,11 +83,8 @@ export function Navbar() {
         </div>
       </div>
 
-
-
-
       <MobileMenu />
-    </div >
+    </div>
   );
 }
 

@@ -1,24 +1,28 @@
-import Image from "next/legacy/image";
 import Head from "next/head";
+import Image from "next/legacy/image";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../components/layout/Layout";
+import { StoryList } from "@/components/spiritus/StoryList";
+
+import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
 import { HorizontalDivider } from "../components/layout/Common";
+import Layout from "../components/layout/Layout";
+import { SpiritusCarousel } from "../components/spiritus/Carousel";
+import { SpiritusOverview } from "../components/spiritus/Overview";
 import {
   CTAAddMemory,
   MoreStories,
   Tags,
   Tribute,
 } from "../components/stories/StoryPage";
-import { SpiritusOverview } from "../components/spiritus/Overview";
-import { SpiritusCarousel } from "../components/spiritus/Carousel";
-import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
-
-import { GetSpiritusById, GetSpiritusGalleryImages } from "../service/http/spiritus";
-import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
 import { GetParsedHomepage } from "../service/http/homepage";
+import {
+  GetSpiritusById,
+  GetSpiritusGalleryImages,
+} from "../service/http/spiritus";
+import { GetSpiritusStoriesBySlug, GetStoryById } from "../service/http/story";
 
 export default function FeaturedStory({
   displayStory,
@@ -114,25 +118,26 @@ export default function FeaturedStory({
           )}
         </div>
         <div className="mx-auto mt-8 w-full text-sp-white md:w-3/4 lg:w-4/5 lg:text-lg">
-          <Tribute id={spiritus.id} />
           <HorizontalDivider />
         </div>
         <div className="mt-4 flex w-full flex-col items-center justify-center text-sp-white lg:w-4/5 xl:w-5/6">
-          <SpiritusOverview {...spiritus} />
-          <SpiritusCarousel images={images} />
-          <div className="mt-4 w-full text-sp-white">
-            <MoreStories
+          <div className="w-full text-sp-white">
+            {/* <MoreStories
               stories={stories}
               spiritus={spiritus}
+              isGuardian={false}
+              isLastPage={isLastPage}
+            /> */}
+            <StoryList
+              stories={stories}
+              spiritus={spiritus}
+              isGuardian={false}
               isLastPage={isLastPage}
             />
-            <div className="flex-1 items-center justify-center">
-              <CTAAddMemory spiritusId={spiritus.id} name={spiritus.name} />
-            </div>
           </div>
         </div>
+        <BecomeGuardianCTA />
       </section>
-      <BecomeGuardianCTA />
     </Layout>
   );
 }
@@ -143,7 +148,7 @@ export async function getStaticProps(context) {
   const { data: story } = await GetStoryById(featuredStory.itemId);
   const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
   const { data: allStories } = await GetSpiritusStoriesBySlug(spiritus.slug);
-  const { data: gallery} = await GetSpiritusGalleryImages(spiritus.id)
+  const { data: gallery } = await GetSpiritusGalleryImages(spiritus.id);
 
   let content = allStories?.content ? allStories?.content : [];
 

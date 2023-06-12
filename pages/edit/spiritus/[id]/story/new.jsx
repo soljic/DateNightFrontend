@@ -1,13 +1,17 @@
 import { useState } from "react";
 
 import Head from "next/head";
+import { useRouter } from "next/navigation";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Alert } from "@/components/Status";
-import { CreateStoryFormV2 } from "@/components/forms/CreateStory";
+import {
+  CreateStoryFormV2,
+  CreateStorySuccess,
+} from "@/components/forms/CreateStory";
 import { EditorLayout } from "@/components/forms/Layout";
 import Layout from "@/components/layout/Layout";
 
@@ -15,9 +19,18 @@ import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 
 export default function NewStory({ spiritus, tags }) {
   const { t } = useTranslation("common");
+  const router = useRouter();
+
   const [isSuccess, setIsSuccess] = useState(false);
+  const [newStoryURL, setNewStoryURL] = useState("");
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+
+  function onError(message) {
+    setIsSuccess(false);
+    setToastMessage(message);
+    setToastOpen(true);
+  }
 
   const clearToast = () => {
     setToastOpen(false);
@@ -25,17 +38,17 @@ export default function NewStory({ spiritus, tags }) {
     setIsSuccess(false);
   };
 
-  function onSuccess() {
-    setIsSuccess(true);
-    setToastMessage(t("message_save_success"));
-    setToastOpen(true);
-  }
+  // scroll to top and redirect user to new story after 6 seconds
+  const onSuccess = async (storySlug) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
-  function onError(message) {
-    setIsSuccess(false);
-    setToastMessage(message);
-    setToastOpen(true);
-  }
+    const url = `/spiritus/${spiritus.slug}/story/${storySlug}`;
+    setNewStoryURL(url);
+
+    setTimeout(async () => {}, 7000);
+    router.push(url);
+  };
+
   return (
     <Layout>
       <Head>
@@ -65,12 +78,20 @@ export default function NewStory({ spiritus, tags }) {
           onDelete={() => {}}
         >
           <div className="pb-96">
-            <CreateStoryFormV2
-              spiritusId={spiritus.id}
-              tagChoices={tags}
-              onError={onError}
-              onSuccess={onSuccess}
-            />
+            {newStoryURL ? (
+              <CreateStorySuccess
+                redirectURL={newStoryURL}
+                name={spiritus.name}
+                surname={spiritus.surname}
+              />
+            ) : (
+              <CreateStoryFormV2
+                spiritusId={spiritus.id}
+                tagChoices={tags}
+                onError={onError}
+                onSuccess={onSuccess}
+              />
+            )}
           </div>
         </EditorLayout>
       </div>

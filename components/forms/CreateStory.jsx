@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
@@ -16,6 +17,39 @@ import { CreateStory } from "@/service/http/story_crud";
 import { HashFilename } from "@/utils/filenames";
 
 import { MultiSelectInput } from "../Dropdowns";
+import { StoryIcon } from "../Icons";
+
+export function CreateStorySuccess({ redirectURL, name, surname }) {
+  const { t } = useTranslation("common");
+
+  return (
+    <div className="mx-auto px-4">
+      <div className="flex w-full flex-col items-center gap-1 rounded-sp-14 border-2 border-sp-day-200 p-20 text-sp-black dark:text-sp-white">
+        <div className="mb-2 rounded-xl bg-sp-fawn bg-opacity-25 p-2">
+          <StoryIcon className="h-8 w-8" />
+        </div>
+        <h2 className="font-bold text-3xl">{t("story_success_title")}</h2>
+        <div className="flex flex-col items-center gap-1">
+          <p className="text mt-1 w-3/4 text-center opacity-50">
+            {t("story_success_subtitle")}{" "}
+            <span>
+              {name} {surname}
+            </span>
+          </p>
+          <div className="animate-pulse pt-12 text-center">
+            <p>{t("redirect_title")}</p>
+            <Link
+              href={redirectURL}
+              className=" text-center text-sp-day-400 text-sm"
+            >
+              {t("redirect_proceed_message")}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function CreateStoryFormV2({
   spiritusId,
@@ -77,9 +111,8 @@ export function CreateStoryFormV2({
         form.append("file", images[0].file, fileName);
       }
       const res = await CreateStory(session.user.accessToken, form);
-      onSuccess(res.data);
+      onSuccess(res.data.slug);
       setPending(false);
-      router.push(`/edit/spiritus/${spiritusId}/stories`);
     } catch (err) {
       const msg = err?.response?.data;
       onError(msg ? msg : t("message_save_failed"));
@@ -88,15 +121,11 @@ export function CreateStoryFormV2({
   };
 
   const cancel = () => {
-    router.push(`/edit/spiritus/${spiritusId}/stories`);
+    router.push(`/spiritus/${spiritusId}/stories`);
   };
 
   return (
     <form id="edit-form" className="mx-auto space-y-3 px-4">
-      <h2 className="px-1.5 font-bold text-sp-black text-2xl dark:text-sp-white">
-        {t("create_story")}
-      </h2>
-
       <div className="mx-auto flex flex-1 flex-col space-y-6 font-medium">
         <StoryType isPrivate={isPrivate} setIsPrivate={setIsPrivate} />
         <div>
@@ -270,19 +299,19 @@ function StoryType({ isPrivate, setIsPrivate }) {
   const { t } = useTranslation("common");
 
   return (
-    <div>
+    <div className="">
       <h2 className="font-normal text-sp-black dark:text-sp-white">
         <span className="text-red-500">*</span>
         {t("create_story_type_title")}
       </h2>
       <div className="mx-auto mt-2">
-        <div className="flex flex-col gap-2 md:flex-row">
+        <div className="flex w-full flex-col gap-2 md:flex-row">
           <button
             onClick={(e) => {
               e.preventDefault();
               setIsPrivate(false);
             }}
-            className={`flex appearance-none items-center gap-4 rounded-xl border-2 p-4 text-sp-black outline-none dark:text-sp-white ${
+            className={`flex w-full appearance-none items-center gap-4 rounded-xl border-2 p-4 text-sp-black outline-none dark:text-sp-white md:w-1/2 ${
               !isPrivate ? "border-sp-fawn" : "border-sp-day-400/40"
             }`}
           >
@@ -309,7 +338,7 @@ function StoryType({ isPrivate, setIsPrivate }) {
               e.preventDefault();
               setIsPrivate(true);
             }}
-            className={`flex appearance-none items-center gap-4 rounded-xl border-2 p-4 text-sp-black outline-none dark:text-sp-white ${
+            className={`flex w-full appearance-none items-center gap-4 rounded-xl border-2 p-4 text-sp-black outline-none dark:text-sp-white md:w-1/2 ${
               isPrivate ? "border-sp-fawn" : "border-sp-day-400/40"
             }`}
           >

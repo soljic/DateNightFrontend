@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 
-import { TrashIcon } from "@heroicons/react/outline";
+import { Popover, Transition } from "@headlessui/react";
+import { ChevronDownIcon, TrashIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -68,7 +69,7 @@ export function EditStories({ spiritus, initialStories, onSuccess, onError }) {
         </Link>
       </div>
       {stories && stories.length ? (
-        <div className="w-full columns-2 space-x-4 space-y-8 md:columns-3">
+        <div className="w-full columns-2 space-y-8">
           {stories.map((s) => (
             <EditStoryCard spiritusId={spiritus.id} {...s} key={s.title} />
           ))}
@@ -161,15 +162,41 @@ function EditStoryCard({
           >
             {t("edit_button_text")}
           </Link>
-          <button
-            onClick={() => {
-              onDeleteStory(id);
-            }}
-            className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-red-500 text-sm"
-          >
-            <TrashIcon className="mr-1 h-4 w-4" />
-            {t("term_delete")}
-          </button>
+          <Popover className="flex w-full">
+            {({ open }) => (
+              <>
+                <Popover.Button className="flex w-full flex-1 items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm">
+                  {t("term_options")}
+                  <ChevronDownIcon className="ml-1 h-4 w-4" />
+                </Popover.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Popover.Panel className="absolute z-50 mt-2 -translate-x-9 translate-y-7">
+                    <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                      <button
+                        onClick={() => {
+                          onDeleteStory(id);
+                        }}
+                        className="flex w-44 items-center justify-center rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      >
+                        <TrashIcon className="mr-1 h-6 w-6 text-sp-cotta" />
+                        <p className="font-semibold text-sp-cotta text-sm">
+                          {t("term_delete")}
+                        </p>
+                      </button>
+                    </div>
+                  </Popover.Panel>
+                </Transition>
+              </>
+            )}
+          </Popover>
         </div>
       </div>
     </article>

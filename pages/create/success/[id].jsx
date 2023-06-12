@@ -10,7 +10,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import { HorizontalDivider, Logo } from "@/components/layout/Common";
-import LayoutNoFooter from "@/components/layout/LayoutNoFooter";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById } from "@/service/http/spiritus";
 import { ImagePath, localFormatDate } from "@/service/util";
@@ -37,7 +37,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
   }`;
 
   return (
-    <LayoutNoFooter>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_create_spiritus_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,10 +60,10 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
           </h2>
           <p className="mb-5 mt-1 text-center capitalize opacity-50">{dates}</p>
 
-          {!!spiritus?.images.length && (
+          {!!spiritus?.profileImage?.url && (
             <div className="overflow-hidden rounded-sp-14 px-4">
               <Image
-                src={ImagePath(spiritus.images[0].url)}
+                src={ImagePath(spiritus.profileImage.url)}
                 alt="Spiritus image"
                 width={270}
                 height={300}
@@ -99,7 +99,6 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
               <p className="font-semibold">
                 {t("spiritus_success_link")} Spiritus
               </p>
-              Í{" "}
             </Link>
             {/* <CopyToClipboard text={spiritus.shortLink}> */}
             <CopyToClipboard text={spiritus.shortLink}>
@@ -111,7 +110,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
           </div>
         </div>
       </div>
-    </LayoutNoFooter>
+    </FullWidthLayout>
   );
 }
 

@@ -4,9 +4,7 @@
     "jsx": "preserve",
     "paths": {
       // "*": ["./*.js", "./*.jsx"],
-      "@/*": [
-        "./*"
-      ],
+      "@/*": ["./*"]
     }
   },
   "exclude": ["node_modules"]

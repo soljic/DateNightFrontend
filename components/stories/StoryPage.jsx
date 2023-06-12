@@ -1,24 +1,21 @@
-import Link from "next/link";
+import { Fragment, useState } from "react";
+
 import Image from "next/legacy/image";
-import { useState, Fragment } from "react";
+import Link from "next/link";
 
-import { useSession } from "next-auth/react";
-import { useTranslation } from "next-i18next";
-
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { Popover, Dialog, Transition } from "@headlessui/react";
-import Lottie from "lottie-react";
-
-import giveRose from "../giveRose.json";
-import confetti from "../confetti.json";
-
+import { Dialog, Popover, Transition } from "@headlessui/react";
 import {
   BookmarkIcon,
-  UploadIcon,
-  ReplyIcon,
   ChevronRightIcon,
+  ReplyIcon,
+  UploadIcon,
 } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import Lottie from "lottie-react";
+import { useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import {
   InfoIcon,
   InfoIconColored,
@@ -28,16 +25,17 @@ import {
 } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 import { LoginModal } from "../../components/auth/Login";
-
+import { SendRose } from "../../service/http/rose";
 import {
-  SaveStory,
-  UnSaveStory,
   SaveSpiritus,
+  SaveStory,
   UnSaveSpiritus,
+  UnSaveStory,
 } from "../../service/http/save";
 import { GetSpiritusStoriesBySlug } from "../../service/http/story";
-import { SendRose } from "../../service/http/rose";
 import { translateCategoryTitle } from "../../utils/translations";
+import confetti from "../confetti.json";
+import giveRose from "../giveRose.json";
 
 export function Tags({ tags }) {
   const { t } = useTranslation("common");
@@ -50,7 +48,7 @@ export function Tags({ tags }) {
           <Link
             href={`/category/3/item/${tag.id}?title=${tag.value}`}
             key={`tag-${tag.id}`}
-            className="rounded-xl bg-gradient-to-r from-sp-day-300 to-sp-day-100 px-3 py-2 font-semibold text-sp-black text-sm dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white lg:text-base"
+            className="rounded-xl bg-gradient-to-b from-day-gradient-start to-day-gradient-stop px-3 py-2 font-semibold text-sp-day-fawn text-sm dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-day-300"
           >
             {t(translateCategoryTitle(tag.value))}
           </Link>

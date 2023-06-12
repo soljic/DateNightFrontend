@@ -72,6 +72,7 @@
   "term_images": "Slike",
   "term_guardians": "Čuvari",
   "term_delete": "Izbriši",
+  "term_options": "Postavke",
   "term_age": "Godine",
 
   "tributes_title": "Posvete",
@@ -109,6 +110,9 @@
   "new_story": "Nova priča",
 
   "create_story": "Kreiraj priču",
+  "send_story": "Pošalji priču",
+  "send_story_title": "Imaš priču o ovom Spiritusu?",
+  "send_story_subtitle": "Podijeli priče, fotografije, uspomene...",
 
   "add_guardian": "Dodajte Čuvara",
   "add_resting_place": "Dodajte Počivalište",

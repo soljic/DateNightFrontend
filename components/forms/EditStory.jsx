@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+
+import { useRouter } from "next/router";
 
 import { Dialog, Transition } from "@headlessui/react";
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
@@ -6,11 +8,16 @@ import { getISOLocalDate } from "@wojtekmaj/date-utils";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import DatePicker from "react-date-picker";
+import { useForm } from "react-hook-form";
 
 import { Spinner } from "@/components/Status";
 import { SpiritusProfileImageUploader } from "@/components/Uploaders";
 
-import { AddStoryImage, EditStory } from "@/service/http/story_crud";
+import {
+  AddStoryImage,
+  DeleteStory,
+  EditStory,
+} from "@/service/http/story_crud";
 
 import { HashFilename } from "@/utils/filenames";
 
@@ -301,7 +308,7 @@ export function DeleteStoryModal({ deleteId, isOpen, closeModal }) {
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="z-100 relative" onClose={onClose}>
+      <Dialog as="div" className="relative z-50" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-500"
@@ -325,8 +332,8 @@ export function DeleteStoryModal({ deleteId, isOpen, closeModal }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="flex h-1/2 transform items-center justify-center transition-all">
-                <div className="w-full rounded-sp-14 border border-sp-lighter bg-sp-day-100 dark:bg-sp-black md:max-w-lg">
+              <Dialog.Panel className="flex transform items-center justify-center transition-all">
+                <div className="w-96 rounded-sp-14 border border-sp-lighter bg-sp-day-100 dark:bg-sp-black">
                   <div className="flex flex-col justify-center gap-y-4 px-4 md:px-8">
                     <div className="mt-8 flex justify-end">
                       <button
@@ -371,7 +378,7 @@ export function DeleteStoryModal({ deleteId, isOpen, closeModal }) {
                             t("settings:delete_modal_confirm_err"),
                         })}
                         type="text"
-                        className="form-control m-0 block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-white transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:text-sp-white focus:outline-none"
+                        className="form-control m-0 block w-full rounded border border-solid border-sp-lighter bg-inherit bg-clip-padding p-4 font-normal text-sp-black transition ease-in-out text-base focus:border-sp-white focus:bg-inherit focus:outline-none dark:text-sp-white"
                         id="confirm"
                       />
                       {errors.confirm && (

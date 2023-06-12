@@ -6,7 +6,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
-import { StoryList } from "@/components/spiritus/StoryList";
+import { CreateStoryCTA, StoryList } from "@/components/spiritus/StoryList";
 
 import {
   GetSpiritusBySlug,
@@ -37,7 +37,7 @@ export default function SpiritusStoriesPage({
 
   const tabs = [
     {
-      name: t("spiritus_about"),
+      name: "Spiritus",
       href: `/spiritus/${spiritus.slug}`,
       current: false,
     },
@@ -76,19 +76,21 @@ export default function SpiritusStoriesPage({
         />
         {SetSpiritusOG(spiritus)}
       </Head>
-      <header className="h-[50vh] w-full sm:h-96">
-        <ProfileHeader
-          spiritus={spiritus}
-          coverImages={coverImages}
-          age={age}
-          deathDate={deathDate}
-          birthDate={birthDate}
-          isGuardian={isGuardian}
-        />
-      </header>
+      <ProfileHeader
+        spiritus={spiritus}
+        coverImages={coverImages}
+        age={age}
+        deathDate={deathDate}
+        birthDate={birthDate}
+        isGuardian={isGuardian}
+      />
       {/* <section className="min-h-screen mx-auto flex flex-col md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5 h-full items-center text-sp-white"> */}
       <section className="mx-auto text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={spiritus.obituaryId ? tabs : tabs.slice(0, 3)} />
+        <div className="mt-7">
+          <CreateStoryCTA spiritusId={spiritus.id} />
+        </div>
+
         <StoryList
           stories={stories}
           spiritus={spiritus}

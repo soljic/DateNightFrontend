@@ -72,6 +72,7 @@
   "term_images": "Images",
   "term_guardians": "Guardians",
   "term_delete": "Delete",
+  "term_options": "Options",
   "term_age": "Age",
 
   "tributes_title": "Tributes",
@@ -109,6 +110,10 @@
   "new_story": "New story",
 
   "create_story": "Create story",
+
+  "send_story": "Send story",
+  "send_story_title": "Do you have any stories about this Spiritus?",
+  "send_story_subtitle": "Share your stories, photos, memories...",
 
   "add_guardian": "Add Guardian",
   "add_resting_place": "Add Resting place",
