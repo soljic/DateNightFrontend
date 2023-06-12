@@ -30,6 +30,10 @@ export default function CreateStoryPage({ spiritus, tags }) {
     setToastOpen(true);
   }
 
+  function onCancel() {
+    router.push(`/spiritus/${spiritus.slug}/stories`);
+  }
+
   const clearToast = () => {
     setToastOpen(false);
     setToastMessage("");
@@ -82,6 +86,7 @@ export default function CreateStoryPage({ spiritus, tags }) {
                 tagChoices={tags}
                 onError={onError}
                 onSuccess={onSuccess}
+                onCancel={onCancel}
               />
             </div>
           </div>

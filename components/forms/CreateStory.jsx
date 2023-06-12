@@ -56,6 +56,7 @@ export function CreateStoryFormV2({
   tagChoices,
   onSuccess,
   onError,
+  onCancel,
 }) {
   const { t } = useTranslation("common");
 
@@ -118,10 +119,6 @@ export function CreateStoryFormV2({
       onError(msg ? msg : t("message_save_failed"));
       setPending(false);
     }
-  };
-
-  const cancel = () => {
-    router.push(`/spiritus/${spiritusId}/stories`);
   };
 
   return (
@@ -282,7 +279,7 @@ export function CreateStoryFormV2({
           <button
             onClick={(e) => {
               e.preventDefault();
-              cancel();
+              onCancel();
             }}
             disabled={pending}
             className="inline-flex w-20 justify-center rounded-sp-10 border border-sp-day-400 px-5 py-1.5 text-sp-day-400"

@@ -49,6 +49,10 @@ export default function NewStory({ spiritus, tags }) {
     router.push(url);
   };
 
+  function onCancel() {
+    router.push(`/edit/spiritus/${spiritus.id}/stories`);
+  }
+
   return (
     <Layout>
       <Head>
@@ -90,6 +94,7 @@ export default function NewStory({ spiritus, tags }) {
                 tagChoices={tags}
                 onError={onError}
                 onSuccess={onSuccess}
+                onCancel={onCancel}
               />
             )}
           </div>
