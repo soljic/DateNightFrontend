@@ -122,7 +122,7 @@ function Sidebar({ menuId, spiritusId, spiritusSlug, onDelete }) {
       >
         <div className="flex items-center justify-start space-x-4 ">
           <UserIcon className="h-5 w-5 fill-sp-day-400" />
-          <p className="font-medium leading-4">Open Spiritus</p>
+          <p className="font-medium leading-4">{t("spiritus_view_spiritus")}</p>
         </div>
         <ArrowUpRightIcon className="h-4 w-4 fill-sp-day-400" />
       </Link>
@@ -205,7 +205,9 @@ function MobileSidebar({ menuId, spiritusId, spiritusSlug, onDelete }) {
                       >
                         <div className="flex items-center justify-start space-x-4 ">
                           <UserIcon className="h-5 w-5 fill-sp-day-400" />
-                          <p className="font-medium leading-4">Open Spiritus</p>
+                          <p className="font-medium leading-4">
+                            {t("spiritus_view_spiritus")}
+                          </p>
                         </div>
                         <ArrowUpRightIcon className="h-4 w-4 fill-sp-day-400" />
                       </Link>
