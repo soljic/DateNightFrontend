@@ -129,8 +129,8 @@ export default function StoryPage({
         <div className="mb-10 mt-16">
           <HorizontalDivider />
         </div>
-        <h2 className="text-[22px] font-bold text-black tracking-sp-tighten lg:text-[24px]">
-          Read other stories
+        <h2 className="text-[22px] font-bold text-black tracking-sp-tighten dark:text-sp-white lg:text-[24px]">
+          {t("story_more_stories")}
         </h2>
         <StoryList
           stories={stories}
