@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import { PencilIcon } from "@heroicons/react/solid";
+import { CheckCircleIcon, PencilIcon } from "@heroicons/react/solid";
 import { countryCodeEmoji } from "country-code-emoji";
 import countries from "i18n-iso-countries";
 import { useSession } from "next-auth/react";
@@ -438,6 +438,7 @@ export function Quote({ quote }) {
 function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
   const { t } = useTranslation("common");
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   return (
     <div className="divide-y divide-sp-day-200 text-sm">
@@ -460,9 +461,9 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
           </button>
         </CopyToClipboard>
 
-        <a className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2">
+        {/* <a className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2">
           {t("share_facebook")}
-        </a>
+        </a> */}
         <a
           href={`mailto:?subject=In loving memory of our dearest&body=The loving memory of our dearest lives on: ${shortLink}`}
           className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
@@ -509,10 +510,18 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
           {t("remind_me_subtitle")}
         </p>
         <button
-          onClick={() => console.log("clicked")}
-          className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
+          onClick={() => setSaved(true)}
+          disabled={saved}
+          className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
         >
-          {t("remind_me_button")}
+          {saved ? (
+            <>
+              <CheckCircleIcon className="mr-2 h-5 w-5 fill-sp-fawn" />
+              {t("remind_me_activated")}
+            </>
+          ) : (
+            <>{t("remind_me_button")}</>
+          )}
         </button>
       </div>
     </div>
