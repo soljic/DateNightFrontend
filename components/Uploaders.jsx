@@ -272,14 +272,12 @@ export function SpiritusProfileImageUploader({ name, images, setImages }) {
 
 export function ProfileImagePreview({ previewURL, title, onRemove, index }) {
   return (
-    <div className="relative h-48 max-w-fit" id={index}>
-      <div className="h-full w-full overflow-hidden rounded-sp-10">
-        <img
-          src={previewURL}
-          alt={title}
-          className="h-full w-full border-sp-day-400 dark:border-none"
-        />
-      </div>
+    <div className="relative" id={index}>
+      <img
+        src={previewURL}
+        alt={title}
+        className="aspect-auto max-h-56 max-w-xs overflow-hidden rounded-sp-10 object-cover"
+      />
       <button
         onClick={(e) => {
           e.preventDefault();

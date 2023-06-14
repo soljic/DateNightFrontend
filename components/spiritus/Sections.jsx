@@ -75,7 +75,7 @@ export function ProfileHeader({
   }
 
   return (
-    <header className="h-[50vh] w-full sm:h-[34vh]">
+    <header className="h-[50vh] w-full sm:h-[60vh] md:h-[50vh] xl:h-[34vh]">
       <div className="relative h-full w-full overflow-hidden">
         {spiritus.coverImage ? (
           <Image
@@ -103,8 +103,8 @@ export function ProfileHeader({
               </div>
             )}
             <div className="z-10 flex flex-col items-center justify-center text-center drop-shadow-3xl">
-              <p className="text-center font-bold leading-8 text-white text-3xl sm:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
-              <p className="text-center font-bold leading-6 text-white text-lg">
+              <p className="text-center font-bold leading-6 text-white text-2xl lg:leading-8 lg:text-3xl xl:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
+              <p className="text-center font-bold leading-6 text-white text-base lg:text-lg">
                 {`${
                   birthDate
                     ? new Intl.DateTimeFormat("hr", dateOptions).format(

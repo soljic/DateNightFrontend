@@ -59,6 +59,7 @@ export default function EditStoryPage({ spiritus, story, tags }) {
         )}
         <EditorLayout
           menuId={2} //stories
+          spiritusSlug={spiritus.slug}
           name={spiritus.name}
           surname={spiritus.surname}
           spiritusId={spiritus.id}

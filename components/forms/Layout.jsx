@@ -13,6 +13,8 @@ import {
 } from "@/components/SettingsIcons";
 import { ImagesIcon, StoryIcon } from "@/components/spiritus/Icons";
 
+import { ArrowUpRightIcon, UserIcon } from "../layout/Icons";
+
 const dateOptions = { year: "numeric", month: "short", day: "numeric" };
 const baseHref = "/edit/spiritus";
 
@@ -57,6 +59,7 @@ const menuItems = [
 
 export function EditorLayout({
   spiritusId,
+  spiritusSlug,
   name,
   surname,
   birth,
@@ -89,6 +92,7 @@ export function EditorLayout({
           <Sidebar
             menuId={menuId}
             spiritusId={spiritusId}
+            spiritusSlug={spiritusSlug}
             onDelete={onDelete}
           />
         </div>
@@ -97,6 +101,7 @@ export function EditorLayout({
         <MobileSidebar
           menuId={menuId}
           spiritusId={spiritusId}
+          spiritusSlug={spiritusSlug}
           onDelete={onDelete}
         />
       </div>
@@ -105,11 +110,22 @@ export function EditorLayout({
   );
 }
 
-function Sidebar({ menuId, spiritusId, onDelete }) {
+function Sidebar({ menuId, spiritusId, spiritusSlug, onDelete }) {
   const { t } = useTranslation("common");
 
   return (
     <aside className="flex flex-col justify-evenly gap-y-1">
+      <Link
+        key="open-spiritus-link"
+        href={`/spiritus/${spiritusSlug}`}
+        className="mb-4 flex w-full items-center justify-between space-x-4 rounded-sp-5 border border-sp-day-400 p-3 hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+      >
+        <div className="flex items-center justify-start space-x-4 ">
+          <UserIcon className="h-5 w-5 fill-sp-day-400" />
+          <p className="font-medium leading-4">Open Spiritus</p>
+        </div>
+        <ArrowUpRightIcon className="h-4 w-4 fill-sp-day-400" />
+      </Link>
       {menuItems.map((item) =>
         item.active ? (
           <Link
@@ -150,7 +166,7 @@ function Sidebar({ menuId, spiritusId, onDelete }) {
   );
 }
 
-function MobileSidebar({ menuId, spiritusId, onDelete }) {
+function MobileSidebar({ menuId, spiritusId, spiritusSlug, onDelete }) {
   const { t } = useTranslation("common");
 
   return (
@@ -179,9 +195,20 @@ function MobileSidebar({ menuId, spiritusId, onDelete }) {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="z-100 absolute mt-2 w-[91vw]">
+                <Popover.Panel className="z-100 absolute mt-2 w-[80vw]">
                   <div className="overflow-hidden rounded-sp-14 border-2 border-sp-fawn bg-sp-day-300 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
                     <div className="flex flex-col justify-evenly gap-y-1 p-3">
+                      <Link
+                        key="open-spiritus-link"
+                        href={`/spiritus/${spiritusSlug}`}
+                        className="mb-4 flex w-full items-center justify-between space-x-4 rounded-sp-10 border border-sp-day-400 p-3 hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      >
+                        <div className="flex items-center justify-start space-x-4 ">
+                          <UserIcon className="h-5 w-5 fill-sp-day-400" />
+                          <p className="font-medium leading-4">Open Spiritus</p>
+                        </div>
+                        <ArrowUpRightIcon className="h-4 w-4 fill-sp-day-400" />
+                      </Link>
                       {menuItems.map((item, index) =>
                         item.active ? (
                           <Link

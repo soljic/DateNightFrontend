@@ -81,6 +81,7 @@ export default function EditSpiritusStories({ spiritus, stories }) {
         )}
         <EditorLayout
           menuId={2}
+          spiritusSlug={spiritus.slug}
           name={spiritus.name}
           surname={spiritus.surname}
           birth={spiritus.birth}

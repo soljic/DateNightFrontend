@@ -79,6 +79,7 @@ export default function EditSpiritusImages({ spiritus, coverImages }) {
         )}
         <EditorLayout
           menuId={1}
+          spiritusSlug={spiritus.slug}
           name={spiritus.name}
           surname={spiritus.surname}
           birth={spiritus.birth}
