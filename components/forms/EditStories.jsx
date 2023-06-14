@@ -75,7 +75,12 @@ export function EditStories({ spiritus, initialStories, onSuccess, onError }) {
       {stories && stories.length ? (
         <div className="w-full columns-2 space-y-8">
           {stories.map((s) => (
-            <EditStoryCard spiritusId={spiritus.id} {...s} key={s.title} />
+            <EditStoryCard
+              spiritusId={spiritus.id}
+              spiritusSlug={spiritus.slug}
+              {...s}
+              key={s.title}
+            />
           ))}
         </div>
       ) : (
@@ -89,6 +94,7 @@ export function EditStories({ spiritus, initialStories, onSuccess, onError }) {
 
 function EditStoryCard({
   spiritusId,
+  spiritusSlug,
   id,
   slug,
   title,
@@ -161,7 +167,7 @@ function EditStoryCard({
         </div>
         <div className="flex space-x-2">
           <Link
-            href={`/spiritus/${slug}`}
+            href={`/spiritus/${spiritusSlug}/story/${slug}`}
             className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm"
           >
             {t("term_view")}
@@ -186,7 +192,7 @@ function EditStoryCard({
                     <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
                       <Link
                         href={`/edit/spiritus/${spiritusId}/story/${id}`}
-                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                        className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
                       >
                         <PencilIcon className="mr-2 h-5 w-5 text-sp-day-400" />
                         {t("edit_button_text")}
@@ -195,7 +201,7 @@ function EditStoryCard({
                         onClick={() => {
                           onDeleteStory(id);
                         }}
-                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                        className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
                       >
                         <TrashIcon className="mr-2 h-6 w-6 text-sp-cotta" />
                         <p className="text-sp-cotta">{t("term_delete")}</p>

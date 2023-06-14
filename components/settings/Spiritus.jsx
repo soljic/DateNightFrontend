@@ -348,9 +348,9 @@ function Tile({ id, slug, title, subtitle, image, openModal }) {
                       <Link
                         href={`/edit/spiritus/${id}`}
                         key={`${t("settings:edit_spiritus")}-${id}`}
-                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                        className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
                       >
-                        <SettingsEditSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn dark:fill-sp-white" />
+                        <SettingsEditSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn" />
                         <div className="ml-4">
                           <p>{t("settings:edit_spiritus")}</p>
                         </div>
@@ -359,7 +359,7 @@ function Tile({ id, slug, title, subtitle, image, openModal }) {
                         onClick={() => {
                           openModal(id);
                         }}
-                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                        className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
                       >
                         <TrashIcon className="h-6 w-6 text-sp-cotta" />
                         <p className="ml-4 font-semibold text-sp-cotta">
