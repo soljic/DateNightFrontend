@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { PencilIcon } from "@heroicons/react/outline";
-import { PlusCircleIcon, TrashIcon, XIcon } from "@heroicons/react/outline";
+import { ChevronDownIcon, TrashIcon, XIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
@@ -77,12 +77,13 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
         </h1>
       </div>
 
-      <div className="mb-12 mt-2 columns-2 space-y-4 md:columns-3 md:space-y-8 xl:columns-4">
+      <div className="mb-12 mt-2 columns-2 space-y-4 md:columns-3 md:space-y-8 xl:columns-3">
         {items.map((item) => {
           return (
             <div className="h-full w-full" key={item.id}>
               <Tile
                 id={item.id}
+                slug={item.slug}
                 title={item.title}
                 subtitle={item.subtitle}
                 image={item.image}
@@ -275,11 +276,13 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
 }
 
 // Passes setItems to DeleteModal
-function Tile({ id, title, subtitle, image, openModal }) {
+function Tile({ id, slug, title, subtitle, image, openModal }) {
+  const { t } = useTranslation(["common", "settings"]);
+
   return (
     <>
       <div className="flex break-inside-avoid flex-col">
-        <Link href={`/edit/spiritus/${id}`}>
+        <Link href={`/spiritus/${slug}`}>
           {image?.url ? (
             <div className="h-full w-full">
               <Image
@@ -308,15 +311,69 @@ function Tile({ id, title, subtitle, image, openModal }) {
             </div>
           )}
 
-          <div className="mt-3">
-            <h3 className="text-lg dark:text-sp-white">{title}</h3>
-            <p className="text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60">
+          <div className="mt-1">
+            <h3 className="font-semibold leading-6 text-lg dark:text-sp-white">
+              {title}
+            </h3>
+            <p className="text-sp-black text-opacity-60 text-sm dark:text-sp-white dark:text-opacity-60">
               {subtitle}
             </p>
           </div>
         </Link>
-
-        <EditBtn id={id} openModal={openModal} />
+        <div className="mt-1 flex space-x-1">
+          <Link
+            href={`/spiritus/${slug}`}
+            className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm"
+          >
+            {t("term_view")}
+          </Link>
+          <Popover className="flex w-full">
+            {({ open }) => (
+              <>
+                <Popover.Button className="flex w-full flex-1 items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm">
+                  {t("term_options")}
+                  <ChevronDownIcon className="ml-1 h-4 w-4" />
+                </Popover.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Popover.Panel className="absolute z-50 mt-2 -translate-x-16 translate-y-7">
+                    <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
+                      <Link
+                        href={`/edit/spiritus/${id}`}
+                        key={`${t("settings:edit_spiritus")}-${id}`}
+                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      >
+                        <SettingsEditSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn dark:fill-sp-white" />
+                        <div className="ml-4">
+                          <p>{t("settings:edit_spiritus")}</p>
+                        </div>
+                      </Link>
+                      <button
+                        onClick={() => {
+                          openModal(id);
+                        }}
+                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      >
+                        <TrashIcon className="h-6 w-6 text-sp-cotta" />
+                        <p className="ml-4 font-semibold text-sp-cotta">
+                          {t("term_delete")}
+                        </p>
+                      </button>
+                    </div>
+                  </Popover.Panel>
+                </Transition>
+              </>
+            )}
+          </Popover>
+        </div>
+        {/* <EditBtn id={id} openModal={openModal} /> */}
       </div>
     </>
   );
@@ -345,7 +402,7 @@ function EditBtn({ id, openModal }) {
             leaveTo="opacity-0 translate-y-1"
           >
             <Popover.Panel className="absolute z-50 mt-2 max-w-md">
-              <div className="overflow-hidden rounded-sp-14 border-2 border-sp-fawn bg-sp-day-300 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+              <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
                 <div className="flex flex-col justify-evenly gap-y-1 p-3">
                   <Link
                     href={`/edit/spiritus/${id}`}
@@ -354,9 +411,7 @@ function EditBtn({ id, openModal }) {
                   >
                     <SettingsEditSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn dark:fill-sp-white" />
                     <div className="ml-4">
-                      <p className="font-medium text-sm">
-                        {t("settings:edit_spiritus")}
-                      </p>
+                      <p className="text-sm">{t("settings:edit_spiritus")}</p>
                     </div>
                   </Link>
 
@@ -366,7 +421,7 @@ function EditBtn({ id, openModal }) {
                   >
                     <TrashIcon className="h-6 w-6 text-sp-cotta" />
                     <div className="ml-3 flex w-full justify-between">
-                      <p className="font-semibold text-sp-cotta text-sm">
+                      <p className="text-sp-cotta text-sm">
                         {t("settings:delete")}
                       </p>
                     </div>

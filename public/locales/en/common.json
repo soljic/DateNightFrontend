@@ -74,6 +74,7 @@
   "term_delete": "Delete",
   "term_options": "Options",
   "term_age": "Age",
+  "term_view": "View",
 
   "tributes_title": "Tributes",
   "write_tribute": "Write Tribute",
@@ -104,7 +105,6 @@
 
   "spiritus_success_first_story": "Write first story",
   "spiritus_success_text": "must have done many beautiful things. Save those memories forever.",
-  "spiritus_success_link": "View",
   "story_success_title": "Nice work!",
   "story_success_subtitle": "you've just created a Story for",
   "new_story": "New story",

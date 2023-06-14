@@ -4,7 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronDownIcon, TrashIcon } from "@heroicons/react/outline";
+import {
+  ChevronDownIcon,
+  PencilIcon,
+  TrashIcon,
+} from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -157,10 +161,10 @@ function EditStoryCard({
         </div>
         <div className="flex space-x-2">
           <Link
-            href={`/edit/spiritus/${spiritusId}/story/${id}`}
+            href={`/spiritus/${slug}`}
             className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm"
           >
-            {t("edit_button_text")}
+            {t("term_view")}
           </Link>
           <Popover className="flex w-full">
             {({ open }) => (
@@ -178,18 +182,23 @@ function EditStoryCard({
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Popover.Panel className="absolute z-50 mt-2 -translate-x-9 translate-y-7">
-                    <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                  <Popover.Panel className="absolute z-50 mt-2 -translate-x-4 translate-y-7">
+                    <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
+                      <Link
+                        href={`/edit/spiritus/${spiritusId}/story/${id}`}
+                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      >
+                        <PencilIcon className="mr-2 h-5 w-5 text-sp-day-400" />
+                        {t("edit_button_text")}
+                      </Link>
                       <button
                         onClick={() => {
                           onDeleteStory(id);
                         }}
-                        className="flex w-44 items-center justify-center rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                        className="flex w-44 items-center justify-start rounded-sp-10 p-4 text-center hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                       >
-                        <TrashIcon className="mr-1 h-6 w-6 text-sp-cotta" />
-                        <p className="font-semibold text-sp-cotta text-sm">
-                          {t("term_delete")}
-                        </p>
+                        <TrashIcon className="mr-2 h-6 w-6 text-sp-cotta" />
+                        <p className="text-sp-cotta">{t("term_delete")}</p>
                       </button>
                     </div>
                   </Popover.Panel>

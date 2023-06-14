@@ -96,9 +96,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
               className="flex h-24 flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
               <LinkIcon className="h-6 w-6" />
-              <p className="font-semibold">
-                {t("spiritus_success_link")} Spiritus
-              </p>
+              <p className="font-semibold">{t("term_view")} Spiritus</p>
             </Link>
             {/* <CopyToClipboard text={spiritus.shortLink}> */}
             <CopyToClipboard text={spiritus.shortLink}>
