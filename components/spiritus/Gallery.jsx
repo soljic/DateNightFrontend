@@ -5,6 +5,10 @@ import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { EffectFade } from "swiper";
 import { Navigation, Pagination } from "swiper/core";
+import "swiper/css";
+import "swiper/css/effect-cards";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 export function FullScreenSwiper({
@@ -15,7 +19,7 @@ export function FullScreenSwiper({
 }) {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="z-100 relative" onClose={closeModal}>
+      <Dialog as="div" className="relative z-50" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-1000"
@@ -62,8 +66,8 @@ export function FullScreenSwiper({
                             <Image
                               src={img.url}
                               alt={"spiritus-gallery-image"}
-                              layout="fill"
-                              objectFit="contain"
+                              fill
+                              className="object-contain"
                             />
                           </div>
                         </SwiperSlide>
@@ -94,33 +98,34 @@ export function Gallery({ images }) {
   }
 
   return (
-    <div className="mt-6 h-full w-full">
+    <>
       <FullScreenSwiper
         isOpen={isOpen}
         closeModal={closeModal}
         images={images}
         fullScreenIndex={fullScreenIndex}
       />
-      <div className="mt-7 space-y-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-4">
-        {images.map((image, index) => {
-          return (
-            <div
-              key={index}
-              onClick={() => openModal(index)}
-              className="h-full w-full"
-            >
-              <Image
-                src={image.url}
-                alt={`sp-gallery-image-${index}`}
-                height={image.height}
-                width={image.width}
-                objectFit="contain"
-                className="relative rounded-sp-10"
-              />
-            </div>
-          );
-        })}
+      <div className="mt-6 h-full w-full">
+        <div className="mt-7 space-y-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-4">
+          {images.map((image, index) => {
+            return (
+              <div
+                key={index}
+                onClick={() => openModal(index)}
+                className="h-full w-full"
+              >
+                <Image
+                  src={image.url}
+                  alt={`sp-gallery-image-${index}`}
+                  height={image.height}
+                  width={image.width}
+                  className="rounded-sp-10 object-contain"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

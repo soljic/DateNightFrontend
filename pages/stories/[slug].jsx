@@ -87,6 +87,7 @@ export default function StoryPage({
               shortLink={spiritus.shortLink}
               obituary={null}
               spiritusId={spiritus.id}
+              spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
             />
           </div>

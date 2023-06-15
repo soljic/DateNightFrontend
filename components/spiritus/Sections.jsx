@@ -16,8 +16,8 @@ import { Spinner } from "@/components/Status";
 
 import { SendRose } from "@/service/http/rose";
 
-import { StoryIcon } from "../Icons";
 import { SettingsCreateStorySolidIcon } from "../SettingsIcons";
+import { ArrowUpRightIcon } from "../layout/Icons";
 import {
   AgeIcon,
   CalendarIcon,
@@ -61,7 +61,6 @@ export function ProfileHeader({
         className="block"
       />
     );
-    // profileImage = <Image src={spiritus.profileImage.url} alt="profile-image" width={spiritus.profileImage.width} height={spiritus.profileImage.height} className="block" />
   } else if (spiritus.images && spiritus.images.length > 0) {
     profileImage = (
       <Image
@@ -71,12 +70,11 @@ export function ProfileHeader({
         className="block"
       />
     );
-    // profileImage = <Image src={spiritus.images[0].url} alt="profile-image" width={spiritus.images[0].width} height={spiritus.images[0].height} className="block" />
   }
 
   return (
-    <header className="h-[50vh] w-full sm:h-[60vh] md:h-[50vh] xl:h-[34vh]">
-      <div className="relative h-full w-full overflow-hidden">
+    <header className="h-[50vh] w-full sm:h-[60vh] md:h-[384px] xl:h-[448px]">
+      <div className="relative h-full w-full overflow-hidden py-10">
         {spiritus.coverImage ? (
           <Image
             src={spiritus.coverImage.url}
@@ -98,7 +96,7 @@ export function ProfileHeader({
         <div className="mx-auto flex h-full w-full items-center justify-center">
           <div className="flex flex-col items-center justify-center gap-4">
             {profileImage && (
-              <div className="relative h-[28vh] w-[58vw] overflow-hidden rounded-sp-10 border-2 border-white sm:h-[240px] sm:w-[210px]">
+              <div className="relative h-[28vh] w-[58vw] overflow-hidden rounded-sp-10 border-2 border-white sm:h-[220px] sm:w-[192px]">
                 {profileImage}
               </div>
             )}
@@ -435,7 +433,12 @@ export function Quote({ quote }) {
   );
 }
 
-function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
+function SpiritusActions({
+  shortLink,
+  spiritusId,
+  spiritusSlug,
+  memoryGuardians,
+}) {
   const { t } = useTranslation("common");
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -448,6 +451,17 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
           <ShareIcon className="fill-black dark:fill-white" />
           <h3 className=" font-semibold ">{t("share_spiritus")}</h3>
         </div>
+
+        {!!spiritusSlug && (
+          <a
+            href={`/spiritus/${spiritusSlug}`}
+            className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
+          >
+            {t("spiritus_view_spiritus")}{" "}
+            <ArrowUpRightIcon className="ml-3 fill-black dark:fill-white" />
+          </a>
+        )}
+
         <CopyToClipboard text={shortLink} onCopy={() => setCopied(true)}>
           <button className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 ">
             {copied ? (
@@ -528,7 +542,13 @@ function SpiritusActions({ shortLink, spiritusId, memoryGuardians }) {
   );
 }
 
-export function Links({ shortLink, obituary, spiritusId, memoryGuardians }) {
+export function Links({
+  shortLink,
+  obituary,
+  spiritusId,
+  spiritusSlug,
+  memoryGuardians,
+}) {
   const { t } = useTranslation("common");
   const organization = obituary?.organization || null;
 
@@ -597,6 +617,7 @@ export function Links({ shortLink, obituary, spiritusId, memoryGuardians }) {
       <SpiritusActions
         shortLink={shortLink}
         spiritusId={spiritusId}
+        spiritusSlug={spiritusSlug}
         memoryGuardians={memoryGuardians}
       />
     </div>
