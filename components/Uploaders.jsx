@@ -190,7 +190,7 @@ export function SpiritusImageUploader({ name, images, setImages }) {
   );
 }
 
-export function SpiritusProfileImageUploader({ name, images, setImages }) {
+export function SpiritusProfileImageUploader({ images, setImages }) {
   const { t } = useTranslation("common");
 
   const inputFile = useRef(null);

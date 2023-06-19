@@ -40,7 +40,7 @@
   "cta_get_spiritus_button": "Get Spiritus",
 
   "create_spiritus": "Create Spiritus",
-  "create_spiritus_subtitle": "Spiritus is a digital memorial with storytelling.",
+  "create_spiritus_subtitle": "Preserve the life of your loved ones through storytelling.",
   "goto_search": "Go to search",
   "search_placeholder": "Search",
   "searching": "Searching...",
@@ -120,7 +120,7 @@
   "add_resting_place": "Add Resting place",
   "add_image": "Add Image",
 
-  "create_spiritus_names_title": "Enter first and last name for Spiritus.",
+  "create_spiritus_names_title": "Enter the name of your loved one.",
   "create_spiritus_firstname_placeholder": "Enter first name",
   "create_spiritus_lastname_placeholder": "Enter last name",
 
@@ -129,14 +129,14 @@
   "create_spiritus_birth_placeholder": "Date of Birth",
   "create_spiritus_death_placeholder": "Date of Passing",
 
-  "create_spiritus_quote_title": "What is your favorite quote from",
+  "create_spiritus_quote_title": "What was your loved one's favorite quote?",
   "create_spiritus_quote_placeholder": "Write a short quote",
-  "create_spiritus_description_title": "Answer briefly: Who was",
+  "create_spiritus_description_title": "Briefly describe your loved one.",
   "create_spiritus_description_placeholder": "Write short description",
   "create_spiritus_description_char_limit": "Please enter 30-150 characters.",
 
 
-  "create_spiritus_location_title": "must associate you to a one place. Please select that place.",
+  "create_spiritus_location_title": "Select your loved one's birthplace or the place they lived in.",
   "create_spiritus_location_subtitle": "It can be place of birth, death, or the place where he/she lived the longest.",
   "create_spiritus_location_placeholder": "Enter sentence",
 

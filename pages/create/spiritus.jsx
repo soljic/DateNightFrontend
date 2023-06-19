@@ -155,7 +155,7 @@ export default function CreateSpiritusPage({ user, product }) {
                     </div>
                   </div>
                 )}
-                <div className="mb-8 space-y-2">
+                <div className="my-8 space-y-2">
                   <h1 className="text-center font-bold text-sp-black text-4xl dark:text-sp-white">
                     {t("create_spiritus")}
                   </h1>
@@ -163,7 +163,7 @@ export default function CreateSpiritusPage({ user, product }) {
                 </div>
 
                 {/* names */}
-                <div className="mx-auto flex w-3/4 flex-1 flex-col space-y-6 rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-6 py-10 font-medium dark:from-sp-dark-brown dark:to-sp-brown">
+                <div className="mx-auto flex w-full flex-1 flex-col space-y-6 rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-6 py-10 font-medium dark:from-sp-dark-brown dark:to-sp-brown md:w-3/4">
                   <div className="mx-2">
                     <h2 className="text-sp-black dark:text-sp-white">
                       <span className="text-red-500">*</span>
@@ -255,14 +255,12 @@ export default function CreateSpiritusPage({ user, product }) {
                   {/* image */}
 
                   <SpiritusProfileImageUploader
-                    name={name ? name : "Spiritus"}
                     images={images}
                     setImages={setImages}
                   />
 
                   {/* location */}
                   <SpiritusLocationInput
-                    name={name ? name : "Spiritus"}
                     location={location}
                     setLocation={setLocation}
                   />
@@ -300,7 +298,6 @@ export default function CreateSpiritusPage({ user, product }) {
                   <div className="mx-2">
                     <h2 className="text-sp-black dark:text-sp-white">
                       {t("create_spiritus_description_title")}
-                      <span> {name ? name : "Spiritus"}? </span>
                     </h2>
                     <div className="">
                       <div className="flex flex-col md:flex-row">

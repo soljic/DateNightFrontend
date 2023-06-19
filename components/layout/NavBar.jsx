@@ -59,24 +59,34 @@ export function Navbar() {
           >
             <SearchIcon className="h-6 w-6 text-sp-black dark:text-sp-white" />
           </Link>
-          <Link
-            href="/create/spiritus"
-            className="flex h-10 items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
-          >
-            {t("create_spiritus")}
-          </Link>
           {session?.user.name ? (
-            <ProfileMenu
-              // token={session.user.accessToken}
-              profileName={session?.user.name}
-            />
+            <>
+              <Link
+                href="/create/spiritus"
+                className="flex h-10 items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+              >
+                {t("create_spiritus")}
+              </Link>
+              <ProfileMenu
+                // token={session.user.accessToken}
+                profileName={session?.user.name}
+              />
+            </>
           ) : (
-            <button
-              onClick={openModal}
-              className="rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-            >
-              {t("login")}
-            </button>
+            <>
+              <button
+                onClick={openModal}
+                className="flex h-10 items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+              >
+                {t("create_spiritus")}
+              </button>
+              <button
+                onClick={openModal}
+                className="rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+              >
+                {t("login")}
+              </button>
+            </>
           )}
 
           <AccesibilityMenu />

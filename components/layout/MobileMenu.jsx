@@ -129,11 +129,11 @@ function MobilePopover() {
                     ))}
                   </div>
                   <QuickSettings />
-                  <div className="flex items-center justify-center space-x-2 p-4">
+                  {/* <div className="flex items-center justify-center space-x-2 p-4">
                     <div className="">FB</div>
                     <div className="">IN</div>
                     <div className="">LI</div>
-                  </div>
+                  </div> */}
                 </div>
               </Popover.Panel>
             </Transition>
@@ -186,6 +186,8 @@ function MobileSearch() {
 }
 
 function QuickSettings() {
+  const router = useRouter();
+
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation("settings");
@@ -216,14 +218,14 @@ function QuickSettings() {
             </Disclosure.Button>
             <Disclosure.Panel className="inline-flex items-start space-x-2 px-2">
               <Link
-                href="/"
+                href={router.pathname}
                 locale="en"
                 className="flex items-center justify-center rounded-sp-10 p-3 font-medium hover:bg-sp-day-100 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
               >
                 EN
               </Link>
               <Link
-                href="/"
+                href={router.pathname}
                 locale="hr"
                 className="flex items-center justify-center rounded-sp-10 p-3 font-medium hover:bg-sp-day-100 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
               >

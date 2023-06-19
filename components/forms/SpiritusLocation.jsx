@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { SearchBoxCore, SessionToken } from "@mapbox/search-js-core";
 import { useTranslation } from "next-i18next";
 
-export function SpiritusLocationInput({ name, location, setLocation }) {
+export function SpiritusLocationInput({ location, setLocation }) {
   const { t } = useTranslation("common");
 
   const [search, setSearch] = useState("");
@@ -91,7 +91,6 @@ export function SpiritusLocationInput({ name, location, setLocation }) {
     <div className="mx-2">
       <h2 className="text-sp-black dark:text-sp-white">
         <span className="text-red-500">*</span>
-        <span>{name} </span>
         {t("create_spiritus_location_title")}
       </h2>
       <div className="mt-1 w-full">

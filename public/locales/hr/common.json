@@ -119,7 +119,7 @@
   "add_resting_place": "Dodajte Počivalište",
   "add_image": "Dodajte sliku",
 
-  "create_spiritus_names_title": "Unesite ime i prezime vašeg Spiritusa",
+  "create_spiritus_names_title": "Unesite ime i prezime svoje voljene osobe.",
   "create_spiritus_firstname_placeholder": "Unesi ime",
   "create_spiritus_lastname_placeholder": "Unesi prezime",
 
@@ -128,13 +128,13 @@
   "create_spiritus_birth_placeholder": "Datum rođenja",
   "create_spiritus_death_placeholder": "Datum smrti",
 
-  "create_spiritus_quote_title": "Koji je vaš omiljeni citat Spiritusa?",
+  "create_spiritus_quote_title": "Upišite omiljeni citat Vaše voljene osobe.",
   "create_spiritus_quote_placeholder": "Upišite citat",
-  "create_spiritus_description_title": "Odgovorite ukratko na pitanje: Tko je",
+  "create_spiritus_description_title": "Ukratko opišite svoju voljenu osobu.",
   "create_spiritus_description_placeholder": "Unesite kratki opis",
   "create_spiritus_description_char_limit": "Molimo unesite 30-150 znakova",
 
-  "create_spiritus_location_title": "Vas vjerojatno podsjeća na određeno mjesto. Upišite mjesto.",
+  "create_spiritus_location_title": "Odaberite mjesto rođenja ili mjesto u kojemu je živjela Vaša voljena osoba.",
   "create_spiritus_location_subtitle": "Ovo može biti mjesto rođenja, mjesto gdje je osoba pokopana ili gdje je najdulje živjela.",
   "create_spiritus_location_placeholder": "Unesi lokaciju",
 

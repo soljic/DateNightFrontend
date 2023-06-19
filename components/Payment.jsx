@@ -61,14 +61,14 @@ export function Paywall({ price, currency, acceptPaywall }) {
           <SpiritusIcon fill />
         </div>
         <h1 className="text-center font-bold text-sp-black text-2xl dark:text-sp-white">
-          {t("create_spiritus")}({priceFormatter.format(price)})
+          {`${t("create_spiritus")} (${priceFormatter.format(price)})`}
         </h1>
-        <div className="mt-5 w-3/4 text-sp-black dark:text-sp-white">
-          <ul>
+        <div className="mx-auto mt-5 flex w-3/4 justify-center text-sp-black dark:text-sp-white">
+          <ul className="flex flex-col justify-center">
             {items.map((item) => (
               <li
                 key={`pw-item-${item.title}`}
-                className="flex items-center p-2.5"
+                className="mx-auto flex w-full p-2.5 md:w-4/5"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12">
                   {item.icon}

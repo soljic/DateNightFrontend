@@ -1,17 +1,16 @@
-import { useState, useEffect, Fragment } from "react";
-
-import { useTheme } from "next-themes";
+import { Fragment, useEffect, useState } from "react";
 
 import Link from "next/link";
-
-import { DotsHorizontalIcon } from "@heroicons/react/outline";
-import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/solid";
-import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 import { Disclosure } from "@headlessui/react";
 import { Popover, Transition } from "@headlessui/react";
-
+import { DotsHorizontalIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
+import { useTheme } from "next-themes";
+
 import {
   SettingsCheckSelectedIcon,
   SettingsCheckUnselectedIcon,
@@ -22,6 +21,8 @@ import {
 
 export function AccesibilityMenu() {
   const [mounted, setMounted] = useState(false);
+
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
   const { t } = useTranslation("settings");
 
@@ -68,7 +69,7 @@ export function AccesibilityMenu() {
                             <ChevronLeftIcon className="h-6 w-6 text-sp-lighter" />
                           ) : (
                             <div>
-                              <SettingsGlobeIcon className="w-6 h-6 fill-sp-dark-fawn dark:fill-sp-white" />
+                              <SettingsGlobeIcon className="h-6 w-6 fill-sp-dark-fawn dark:fill-sp-white" />
                             </div>
                           )}
                           <div className="flex w-full justify-between">
@@ -84,14 +85,14 @@ export function AccesibilityMenu() {
                         </Disclosure.Button>
                         <Disclosure.Panel className="grid grid-cols-2 items-center">
                           <Link
-                            href="/"
+                            href={router.pathname}
                             locale="en"
                             className="flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
                             EN
                           </Link>
                           <Link
-                            href="/"
+                            href={router.pathname}
                             locale="hr"
                             className="flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
@@ -108,7 +109,7 @@ export function AccesibilityMenu() {
                           {open ? (
                             <ChevronLeftIcon className="h-6 w-6 text-sp-lighter" />
                           ) : (
-                            <SettingsDevicesIcon className="w-6 h-6 fill-sp-dark-fawn dark:fill-sp-white" />
+                            <SettingsDevicesIcon className="h-6 w-6 fill-sp-dark-fawn dark:fill-sp-white" />
                           )}
                           <div className="flex w-full justify-between">
                             <div className="ml-4">
@@ -127,7 +128,7 @@ export function AccesibilityMenu() {
                             key={"sys"}
                             className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
-                            <SettingsDevicesIcon className="w-5 h-5 fill-sp-day-400" />
+                            <SettingsDevicesIcon className="h-5 w-5 fill-sp-day-400" />
                             <div className="flex w-full justify-between">
                               <div className="ml-4">
                                 <p className="font-medium text-sm">
@@ -135,9 +136,9 @@ export function AccesibilityMenu() {
                                 </p>
                               </div>
                               {theme === "system" ? (
-                                <SettingsCheckSelectedIcon className="w-4 h-4" />
+                                <SettingsCheckSelectedIcon className="h-4 w-4" />
                               ) : (
-                                <SettingsCheckUnselectedIcon className="w-4 h-4" />
+                                <SettingsCheckUnselectedIcon className="h-4 w-4" />
                               )}
                             </div>
                           </button>
@@ -154,9 +155,9 @@ export function AccesibilityMenu() {
                                 </p>
                               </div>
                               {theme === "light" ? (
-                                <SettingsCheckSelectedIcon className="w-4 h-4" />
+                                <SettingsCheckSelectedIcon className="h-4 w-4" />
                               ) : (
-                                <SettingsCheckUnselectedIcon className="w-4 h-4" />
+                                <SettingsCheckUnselectedIcon className="h-4 w-4" />
                               )}
                             </div>
                           </button>
@@ -173,9 +174,9 @@ export function AccesibilityMenu() {
                                 </p>
                               </div>
                               {theme === "dark" ? (
-                                <SettingsCheckSelectedIcon className="w-4 h-4" />
+                                <SettingsCheckSelectedIcon className="h-4 w-4" />
                               ) : (
-                                <SettingsCheckUnselectedIcon className="w-4 h-4" />
+                                <SettingsCheckUnselectedIcon className="h-4 w-4" />
                               )}
                             </div>
                           </button>
@@ -188,7 +189,7 @@ export function AccesibilityMenu() {
                     className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                   >
                     <div>
-                      <SettingsQuestionIcon className="w-6 h-6 fill-sp-dark-fawn dark:fill-sp-white" />
+                      <SettingsQuestionIcon className="h-6 w-6 fill-sp-dark-fawn dark:fill-sp-white" />
                     </div>
                     <div className="flex w-full justify-between">
                       <div className="ml-4">
