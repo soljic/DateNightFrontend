@@ -46,8 +46,8 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
           content={t("meta_create_spiritus_description")}
         />
       </Head>
-      <div className="h-screen py-5">
-        <div className="mx-auto my-4 flex w-1/2 flex-col items-center gap-1 dark:text-sp-white sm:w-full md:w-1/2">
+      <div className="min-h-screen py-5">
+        <div className="mx-auto my-4 flex w-full flex-col items-center gap-1 dark:text-sp-white sm:w-full md:w-1/2">
           <div className="mb-2 rounded-xl bg-sp-fawn bg-opacity-25 p-2">
             <Logo width={8} height={8} />
           </div>
@@ -71,12 +71,14 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
               />
             </div>
           )}
-          <HorizontalDivider />
+          <div className="flex w-1/2">
+            <HorizontalDivider />
+          </div>
           <div className="mt-5 flex flex-col items-center gap-1">
-            <h2 className="font-bold text-3xl">
+            <h2 className="font-bold text-2xl md:text-3xl">
               {t("spiritus_success_first_story")}
             </h2>
-            <p className="text mb-8 mt-1 w-3/4 text-center opacity-50">
+            <p className="mb-8 mt-1 w-3/4 text-center opacity-50 text-sm md:text-base">
               <span> {spiritus.name} </span> {t("spiritus_success_text")}
             </p>
           </div>
@@ -93,16 +95,19 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
                   ? `/spiritus/${spiritus.slug}`
                   : `/spiritus/id/${spiritus.id}`
               }
-              className="flex h-24 flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+              className="flex flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
               <LinkIcon className="h-6 w-6" />
-              <p className="font-semibold">{t("term_view")} Spiritus</p>
+              <p className="text-center font-semibold">
+                {t("term_view")} Spiritus
+              </p>
             </Link>
-            {/* <CopyToClipboard text={spiritus.shortLink}> */}
             <CopyToClipboard text={spiritus.shortLink}>
-              <button className="flex h-24 flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+              <button className="flex flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
                 <UploadIcon className="h-6 w-6" />
-                <p className="font-semibold">{t("share")} Spiritus</p>
+                <p className="text-center font-semibold">
+                  {t("share")} Spiritus
+                </p>
               </button>
             </CopyToClipboard>
           </div>

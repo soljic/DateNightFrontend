@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { ChevronDownIcon } from "@heroicons/react/outline";
-
 export function NavItem({ text, link }) {
   return (
     <Link
