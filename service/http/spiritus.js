@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ImagePath } from "../util";
+
 import { API_URL, defaultLimit, defaultOffset } from "../constants";
+import { ImagePath } from "../util";
 
 export async function GetSpiritusById(id, accessToken) {
   let res;
@@ -15,7 +16,9 @@ export async function GetSpiritusById(id, accessToken) {
   }
 
   if (res.data?.profileImage) {
-    res.data.profileImage.url = res.data.profileImage.url ? ImagePath(res.data.profileImage.url) : null;
+    res.data.profileImage.url = res.data.profileImage.url
+      ? ImagePath(res.data.profileImage.url)
+      : null;
   }
 
   return res;
@@ -37,15 +40,57 @@ export async function GetUnpaidSpiritusList(accessToken) {
   return res;
 }
 
+// [DEPRECATED] it does not contain the embedded spiritus response
 export async function GetSpiritusGalleryImages(spiritusId, offset, limit) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
-  const res = await axios.get(`${API_URL}/wapi/spiritus/${spiritusId}/image?page=${o}&size=${l}`);
+  const res = await axios.get(
+    `${API_URL}/wapi/spiritus/${spiritusId}/image?page=${o}&size=${l}`
+  );
   // returns [ { id, url, height, width, profile }, ... ]
   res.data.content.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
+
+  return res;
+}
+
+export async function GetSpiritusGalleryImagesV2(
+  spiritusId,
+  offset,
+  limit,
+  accessToken
+) {
+  const o = offset ? offset : defaultOffset;
+  const l = limit ? limit : defaultLimit;
+
+  let res;
+  if (accessToken) {
+    res = await axios.get(
+      `${API_URL}/wapi/spiritus/${spiritusId}/images?page=${o}&size=${l}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } else {
+    res = await axios.get(
+      `${API_URL}/wapi/spiritus/${spiritusId}/images?page=${o}&size=${l}`
+    );
+  }
+
+  // returns [ { id, url, height, width, profile }, ... ]
+  res.data.images.content.forEach((img) => {
+    img.url = img.url ? ImagePath(img.url) : null;
+  });
+
+  if (res.data?.spiritus?.profileImage) {
+    res.data.spiritus.profileImage.url = res.data.spiritus.profileImage.url
+      ? ImagePath(res.data.spiritus.profileImage.url)
+      : null;
+  }
 
   return res;
 }
@@ -57,7 +102,7 @@ export async function GetSpiritusTributes(spiritusId, offset, limit) {
   const res = await axios.get(
     `${API_URL}/wapi/rose/spiritus/${spiritusId}/tribute?page=${o}&size=${l}`
   );
- 
+
   return res;
 }
 
@@ -74,7 +119,9 @@ export async function GetSpiritusBySlug(slug, accessToken) {
   }
 
   if (res.data?.profileImage) {
-    res.data.profileImage.url = res.data.profileImage.url ? ImagePath(res.data.profileImage.url) : null;
+    res.data.profileImage.url = res.data.profileImage.url
+      ? ImagePath(res.data.profileImage.url)
+      : null;
   }
 
   return res;

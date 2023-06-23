@@ -8,10 +8,7 @@ import FullWidthLayout from "@/components/layout/LayoutV2";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
 import { CreateStoryCTA, StoryList } from "@/components/spiritus/StoryList";
 
-import {
-  GetSpiritusBySlug,
-  GetSpiritusCoverImages,
-} from "@/service/http/spiritus";
+import { GetSpiritusBySlug } from "@/service/http/spiritus";
 import { GetSpiritusStoriesBySlug } from "@/service/http/story";
 
 import { SetSpiritusOG } from "@/utils/metaTags";
@@ -78,7 +75,6 @@ export default function SpiritusStoriesPage({
       </Head>
       <ProfileHeader
         spiritus={spiritus}
-        coverImages={coverImages}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
@@ -109,8 +105,8 @@ export async function getServerSideProps(context) {
 
   let isGuardian = false;
 
+  let res;
   try {
-    let res;
     if (session && session?.user?.accessToken) {
       res = await GetSpiritusBySlug(slug, session.user.accessToken);
       isGuardian = res?.data?.flags.includes("GUARDIAN");
@@ -118,9 +114,6 @@ export async function getServerSideProps(context) {
       res = await GetSpiritusBySlug(slug);
     }
     const spiritus = res.data;
-
-    const resCover = await GetSpiritusCoverImages();
-    const coverImages = resCover.data;
 
     const { data: resStories } = await GetSpiritusStoriesBySlug(
       slug,
@@ -142,7 +135,6 @@ export async function getServerSideProps(context) {
         ])),
         spiritus,
         stories,
-        coverImages,
         isLastPage: resStories.last,
         isGuardian,
       },

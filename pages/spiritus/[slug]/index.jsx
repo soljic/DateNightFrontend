@@ -13,10 +13,9 @@ import {
   Tributes,
 } from "@/components/spiritus/Sections";
 
-import { GetObituaryBySpiritusId } from "@/service/http/obituary";
+import { GetObituaryBySpiritusSlug } from "@/service/http/obituary";
 import {
   GetSpiritusBySlug,
-  GetSpiritusCoverImages,
   GetSpiritusTributes,
 } from "@/service/http/spiritus";
 
@@ -27,7 +26,6 @@ export default function SpiritusPage({
   tributes,
   isLastPage,
   obituary,
-  coverImages,
   isGuardian,
 }) {
   const { t } = useTranslation("common");
@@ -91,7 +89,6 @@ export default function SpiritusPage({
       </Head>
       <ProfileHeader
         spiritus={spiritus}
-        coverImages={coverImages}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
@@ -120,8 +117,13 @@ export default function SpiritusPage({
           <div className="relative col-span-1">
             <Links
               shortLink={spiritus.shortLink}
-              obituary={obituary}
+              funeralOrg={
+                obituary && obituary?.organization
+                  ? obituary.organization
+                  : null
+              }
               spiritusId={spiritus.id}
+              spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
             />
           </div>
@@ -147,9 +149,6 @@ export async function getServerSideProps(context) {
     }
     const spiritus = res.data;
 
-    const resCover = await GetSpiritusCoverImages();
-    const coverImages = resCover.data;
-
     const resTributes = await GetSpiritusTributes(
       spiritus.id,
       session?.user?.accessToken
@@ -159,7 +158,7 @@ export async function getServerSideProps(context) {
     let obituary = null;
     if (spiritus.obituaryId) {
       try {
-        const resObituary = await GetObituaryBySpiritusId(spiritus.id);
+        const resObituary = await GetObituaryBySpiritusSlug(spiritus.id);
         obituary = resObituary.data;
       } catch (error) {
         // do nothing
@@ -177,7 +176,6 @@ export async function getServerSideProps(context) {
         spiritus,
         tributes: resTributes.data?.content || [],
         isLastPage: resTributes.data?.last || true,
-        coverImages,
         obituary,
         isGuardian,
       },

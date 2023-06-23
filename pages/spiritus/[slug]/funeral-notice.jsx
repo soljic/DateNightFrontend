@@ -9,17 +9,13 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
 
-import { GetObituaryBySpiritusId } from "@/service/http/obituary";
-import {
-  GetSpiritusBySlug,
-  GetSpiritusCoverImages,
-} from "@/service/http/spiritus";
+import { GetObituaryBySpiritusSlug } from "@/service/http/obituary";
+import { GetSpiritusBySlug } from "@/service/http/spiritus";
 
 import { SetSpiritusOG } from "@/utils/metaTags";
 
 export default function FuneralNoticePage({
   spiritus,
-  coverImages,
   obituary,
   organization,
   isGuardian,
@@ -79,7 +75,6 @@ export default function FuneralNoticePage({
       </Head>
       <ProfileHeader
         spiritus={spiritus}
-        coverImages={coverImages}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
@@ -161,24 +156,12 @@ export async function getServerSideProps(context) {
   let isGuardian = false;
 
   try {
-    let res;
-    if (session && session?.user?.accessToken) {
-      res = await GetSpiritusBySlug(slug, session.user.accessToken);
-      isGuardian = res?.data?.flags.includes("GUARDIAN");
-    } else {
-      res = await GetSpiritusBySlug(slug);
-    }
-    const spiritus = res.data;
-
-    const resCover = await GetSpiritusCoverImages();
-    const coverImages = resCover.data;
-
-    if (!spiritus.obituaryId) {
-      throw "No obituary id";
-    }
-
-    const resObituary = await GetObituaryBySpiritusId(spiritus.id);
-    const obituary = resObituary.data;
+    const resObituary = await GetObituaryBySpiritusSlug(
+      slug,
+      session?.user?.accessToken || null
+    );
+    const data = resObituary.data;
+    isGuardian = data?.spiritus.flags.includes("GUARDIAN");
 
     return {
       props: {
@@ -188,10 +171,9 @@ export async function getServerSideProps(context) {
           "settings",
           "auth",
         ])),
-        spiritus,
-        coverImages,
-        obituary: obituary.obituary,
-        organization: obituary.organization,
+        spiritus: data.spiritus,
+        obituary: data.obituary,
+        organization: data.spiritus.funeralOrg,
         isGuardian,
       },
     };

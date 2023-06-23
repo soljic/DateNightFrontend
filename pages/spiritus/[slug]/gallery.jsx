@@ -9,20 +9,11 @@ import { Gallery } from "@/components/spiritus/Gallery";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
 import { CreateStoryCTA } from "@/components/spiritus/StoryList";
 
-import {
-  GetSpiritusBySlug,
-  GetSpiritusCoverImages,
-  GetSpiritusGalleryImages,
-} from "@/service/http/spiritus";
+import { GetSpiritusGalleryImagesV2 } from "@/service/http/spiritus";
 
 import { SetSpiritusOG } from "@/utils/metaTags";
 
-export default function SpiritusGalleryPage({
-  spiritus,
-  coverImages,
-  images,
-  isGuardian,
-}) {
+export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
   const { t } = useTranslation("common");
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
@@ -78,7 +69,6 @@ export default function SpiritusGalleryPage({
       </Head>
       <ProfileHeader
         spiritus={spiritus}
-        coverImages={coverImages}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
@@ -103,22 +93,15 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
 
   let isGuardian = false;
-
   try {
-    let res;
-    if (session && session?.user?.accessToken) {
-      res = await GetSpiritusBySlug(slug, session.user.accessToken);
-      isGuardian = res?.data?.flags.includes("GUARDIAN");
-    } else {
-      res = await GetSpiritusBySlug(slug);
-    }
-    res = await GetSpiritusBySlug(slug);
-    const spiritus = res.data;
-
-    const resCover = await GetSpiritusCoverImages();
-    const coverImages = resCover.data;
-
-    const resGallery = await GetSpiritusGalleryImages(spiritus.id);
+    const resGallery = await GetSpiritusGalleryImagesV2(
+      slug,
+      0,
+      20,
+      session?.user?.accessToken || null
+    );
+    const spiritus = resGallery.data.spiritus;
+    isGuardian = spiritus.flags.includes("GUARDIAN");
 
     return {
       props: {
@@ -129,12 +112,11 @@ export async function getServerSideProps(context) {
           "auth",
         ])),
         spiritus,
-        coverImages,
-        images: resGallery.data.content,
+        images: resGallery.data.images.content,
         isGuardian,
       },
     };
-  } catch {
+  } catch (err) {
     return {
       redirect: {
         destination: "/404",

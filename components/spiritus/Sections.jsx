@@ -544,13 +544,13 @@ function SpiritusActions({
 
 export function Links({
   shortLink,
-  obituary,
+  funeralOrg,
   spiritusId,
   spiritusSlug,
   memoryGuardians,
 }) {
   const { t } = useTranslation("common");
-  const organization = obituary?.organization || null;
+  const organization = funeralOrg || null;
 
   return (
     <div className="sticky top-4 divide-y divide-sp-day-200 rounded-sp-10 border border-sp-day-200 font-semibold text-black dark:text-white">

@@ -11,11 +11,6 @@ import { Links, ProfileHeader, Tributes } from "@/components/spiritus/Sections";
 import { SpiritusStory } from "@/components/spiritus/Story";
 import { StoryList } from "@/components/spiritus/StoryList";
 
-import {
-  GetSpiritusById,
-  GetSpiritusCoverImages,
-  GetSpiritusTributes,
-} from "@/service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryBySlug } from "@/service/http/story";
 
 import { SetStoryOG } from "@/utils/metaTags";
@@ -25,7 +20,6 @@ export default function StoryPage({
   stories,
   spiritus,
   tributes,
-  coverImages,
   isGuardian,
   isLastPage,
 }) {
@@ -66,7 +60,7 @@ export default function StoryPage({
       </Head>
       <ProfileHeader
         spiritus={spiritus}
-        coverImages={coverImages}
+        coverImages={[]}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
@@ -79,13 +73,13 @@ export default function StoryPage({
             <Tributes
               spiritusId={spiritus.id}
               tributes={tributes}
-              isLastPage={isLastPage}
+              isLastPage={spiritus.tributes.last}
             />
           </div>
           <div className="relative col-span-1">
             <Links
               shortLink={spiritus.shortLink}
-              obituary={null}
+              obituary={spiritus.funeralOrg}
               spiritusId={spiritus.id}
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
@@ -126,37 +120,25 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let isGuardian = false;
 
+  let data = {};
   try {
-    let resStory;
-    let resSpiritus;
     if (session && session?.user?.accessToken) {
-      resStory = await GetStoryBySlug(slug, session.user.accessToken);
-      resSpiritus = await GetSpiritusById(
-        resStory.data.spiritus.id,
-        session.user.accessToken
-      );
-      isGuardian = resSpiritus?.data?.flags.includes("GUARDIAN");
+      const resStory = await GetStoryBySlug(slug, session.user.accessToken);
+      data = resStory.data;
+      isGuardian = data?.spiritus?.flags.includes("GUARDIAN");
     } else {
-      resStory = await GetStoryBySlug(slug);
-      resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
+      const resStory = await GetStoryBySlug(slug);
+      data = resStory.data;
     }
 
-    const resTributes = await GetSpiritusTributes(
-      resStory.data.spiritus.id,
-      session?.user?.accessToken
-    );
-
-    const resCover = await GetSpiritusCoverImages();
-    const coverImages = resCover.data;
-
-    const resAllStories = await GetSpiritusStoriesBySlug(resSpiritus.data.slug);
+    const resAllStories = await GetSpiritusStoriesBySlug(data.spiritus.slug);
 
     let content = resAllStories.data?.content
       ? resAllStories.data?.content
       : [];
     // sort story paragraphs by index
-    if (resStory.paragraphs) {
-      resStory.paragraphs.sort((p1, p2) => {
+    if (data.paragraphs) {
+      data.paragraphs.sort((p1, p2) => {
         if (p1.index < p2.index) {
           return -1;
         }
@@ -182,17 +164,30 @@ export async function getServerSideProps(context) {
           "about",
         ])),
         key: `${context.locale}-${slug}`,
-        displayStory: resStory.data,
+        // spiritus info
+        spiritus: data.spiritus,
+        tributes: data.spiritus.tributes || [],
         stories: filterStories(content, isGuardian),
-        spiritus: resSpiritus.data,
         isLastPage: resAllStories.data.last,
-        tributes: resTributes.data?.content || [],
         isGuardian,
-        coverImages,
+        // story info
+        displayStory: {
+          id: data.id,
+          slug: data.slug,
+          title: data.title,
+          subtitle: data.subtitle,
+          shortLink: data.shortLink,
+          date: data.date,
+          description: data.description,
+          status: data.status,
+          paragraphs: data.paragraphs,
+          images: data.images,
+          tags: data.tags,
+          sources: data.sources,
+        },
       },
     };
   } catch (err) {
-    console.log(err);
     return {
       redirect: {
         destination: "/404",

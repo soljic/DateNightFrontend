@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ImagePath } from "../util";
+
 import { API_URL } from "../constants";
+import { ImagePath } from "../util";
 
 export async function GetObituaries(date, page) {
   const p = page ? page : 0;
@@ -40,8 +41,17 @@ export async function GetSingleObituary(id) {
   return res;
 }
 
-export async function GetObituaryBySpiritusId(spiritusId) {
-  const res = await axios.get(`${API_URL}/v2/obituary/spiritus/${spiritusId}`);
+export async function GetObituaryBySpiritusSlug(slug, accessToken) {
+  let res;
+  if (accessToken) {
+    res = await axios.get(`${API_URL}/wapi/obituary/spiritus/${slug}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } else {
+    res = await axios.get(`${API_URL}/wapi/obituary/spiritus/${slug}`);
+  }
 
   if (res?.data?.obituary?.religiousImage) {
     res.data.obituary.religiousImage.url = res.data.obituary.religiousImage.url
@@ -56,8 +66,21 @@ export async function GetObituaryBySpiritusId(spiritusId) {
   }
 
   if (res?.data?.organization?.image) {
-    res.data.organization.image.url = res.data.organization.image.url 
-      ? ImagePath(res.data.organization.image.url )
+    res.data.organization.image.url = res.data.organization.image.url
+      ? ImagePath(res.data.organization.image.url)
+      : null;
+  }
+
+  if (res.data?.spiritus?.profileImage) {
+    res.data.spiritus.profileImage.url = res.data.spiritus.profileImage.url
+      ? ImagePath(res.data.spiritus.profileImage.url)
+      : null;
+  }
+
+  if (res.data?.spiritus?.funeralOrg?.image) {
+    res.data.spiritus.funeralOrg.image.url = res.data.spiritus.funeralOrg.image
+      .url
+      ? ImagePath(res.data.spiritus.funeralOrg.image.url)
       : null;
   }
 

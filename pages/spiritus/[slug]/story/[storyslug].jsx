@@ -16,7 +16,7 @@ import {
 import { SpiritusStory } from "@/components/spiritus/Story";
 import { StoryList } from "@/components/spiritus/StoryList";
 
-import { GetObituaryBySpiritusId } from "@/service/http/obituary";
+import { GetObituaryBySpiritusSlug } from "@/service/http/obituary";
 import {
   GetSpiritusById,
   GetSpiritusCoverImages,
@@ -29,7 +29,6 @@ import { SetStoryOG } from "@/utils/metaTags";
 export default function StoryPage({
   displayStory,
   stories,
-  obituary,
   tributes,
   coverImages,
   spiritus,
@@ -119,7 +118,7 @@ export default function StoryPage({
           <div className="relative col-span-1">
             <Links
               shortLink={spiritus.shortLink}
-              obituary={obituary}
+              funeralOrg={spiritus.funeralOrg}
               spiritusId={spiritus.id}
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
@@ -160,45 +159,22 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let isGuardian = false;
 
-  let spiritus;
+  let data = {};
   try {
-    let resStory;
-    let resSpiritus;
     if (session && session?.user?.accessToken) {
-      resStory = await GetStoryBySlug(storyslug, session.user.accessToken);
-      resSpiritus = await GetSpiritusById(
-        resStory.data.spiritus.id,
+      const resStory = await GetStoryBySlug(
+        storyslug,
         session.user.accessToken
       );
-      isGuardian = resSpiritus?.data?.flags.includes("GUARDIAN");
-      spiritus = resSpiritus.data;
+      data = resStory.data;
+      isGuardian = data?.spiritus?.flags.includes("GUARDIAN");
     } else {
-      resStory = await GetStoryBySlug(storyslug);
-      resSpiritus = await GetSpiritusById(resStory.data.spiritus.id);
-      spiritus = resSpiritus.data;
-    }
-
-    const resCover = await GetSpiritusCoverImages();
-    const coverImages = resCover.data;
-
-    const resTributes = await GetSpiritusTributes(
-      resStory.data.spiritus.id,
-      session?.user?.accessToken
-    );
-
-    // this req can fail
-    let obituary = null;
-    if (spiritus.obituaryId) {
-      try {
-        const resObituary = await GetObituaryBySpiritusId(spiritus.id);
-        obituary = resObituary.data;
-      } catch (error) {
-        // do nothing
-      }
+      const resStory = await GetStoryBySlug(storyslug);
+      data = resStory.data;
     }
 
     const resAllStories = await GetSpiritusStoriesBySlug(
-      resSpiritus.data.slug,
+      data.spiritus.slug,
       0,
       20,
       session?.user?.accessToken || null
@@ -208,8 +184,8 @@ export async function getServerSideProps(context) {
       ? resAllStories.data?.content
       : [];
     // sort story paragraphs by index
-    if (resStory.paragraphs) {
-      resStory.paragraphs.sort((p1, p2) => {
+    if (data.paragraphs) {
+      data.paragraphs.sort((p1, p2) => {
         if (p1.index < p2.index) {
           return -1;
         }
@@ -235,17 +211,30 @@ export async function getServerSideProps(context) {
           "about",
         ])),
         key: `${context.locale}-${storyslug}`,
-        displayStory: resStory.data,
+        // spiritus info
+        spiritus: data.spiritus,
+        tributes: data.spiritus.tributes || [],
         stories: filterStories(content, isGuardian),
-        coverImages,
-        tributes: resTributes.data?.content || [],
-        spiritus,
         isLastPage: resAllStories.data.last,
-        obituary,
         isGuardian,
+        // story info
+        displayStory: {
+          id: data.id,
+          slug: data.slug,
+          title: data.title,
+          subtitle: data.subtitle,
+          shortLink: data.shortLink,
+          date: data.date,
+          description: data.description,
+          status: data.status,
+          paragraphs: data.paragraphs,
+          images: data.images,
+          tags: data.tags,
+          sources: data.sources,
+        },
       },
     };
-  } catch {
+  } catch (err) {
     return {
       redirect: {
         destination: "/404",

@@ -26,6 +26,13 @@ export async function GetStoryBySlug(slug, accessToken) {
   res.data?.images?.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
+
+  if (res.data?.spiritus?.profileImage?.url) {
+    res.data.spiritus.profileImage.url = res.data.spiritus.profileImage.url
+      ? ImagePath(res.data.spiritus.profileImage.url)
+      : null;
+  }
+
   return res;
 }
 
