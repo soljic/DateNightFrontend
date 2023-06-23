@@ -33,6 +33,13 @@ export async function GetStoryBySlug(slug, accessToken) {
       : null;
   }
 
+  if (res.data?.spiritus?.funeralOrg?.image) {
+    res.data.spiritus.funeralOrg.image.url = res.data.spiritus.funeralOrg.image
+      .url
+      ? ImagePath(res.data.spiritus.funeralOrg.image.url)
+      : null;
+  }
+
   return res;
 }
 

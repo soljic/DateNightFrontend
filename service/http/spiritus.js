@@ -124,6 +124,12 @@ export async function GetSpiritusBySlug(slug, accessToken) {
       : null;
   }
 
+  if (res.data?.funeralOrg?.image) {
+    res.data.funeralOrg.image.url = res.data.funeralOrg.image.url
+      ? ImagePath(res.data.spiritus.funeralOrg.image.url)
+      : null;
+  }
+
   return res;
 }
 
