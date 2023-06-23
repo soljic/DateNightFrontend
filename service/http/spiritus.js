@@ -126,7 +126,7 @@ export async function GetSpiritusBySlug(slug, accessToken) {
 
   if (res.data?.funeralOrg?.image) {
     res.data.funeralOrg.image.url = res.data.funeralOrg.image.url
-      ? ImagePath(res.data.spiritus.funeralOrg.image.url)
+      ? ImagePath(res.data.funeralOrg.image.url)
       : null;
   }
 

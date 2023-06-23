@@ -13,7 +13,6 @@ import {
   Tributes,
 } from "@/components/spiritus/Sections";
 
-import { GetObituaryBySpiritusSlug } from "@/service/http/obituary";
 import {
   GetSpiritusBySlug,
   GetSpiritusTributes,
@@ -25,7 +24,6 @@ export default function SpiritusPage({
   spiritus,
   tributes,
   isLastPage,
-  obituary,
   isGuardian,
 }) {
   const { t } = useTranslation("common");
@@ -117,11 +115,7 @@ export default function SpiritusPage({
           <div className="relative col-span-1">
             <Links
               shortLink={spiritus.shortLink}
-              funeralOrg={
-                obituary && obituary?.organization
-                  ? obituary.organization
-                  : null
-              }
+              funeralOrg={spiritus.funeralOrg || null}
               spiritusId={spiritus.id}
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
@@ -154,17 +148,6 @@ export async function getServerSideProps(context) {
       session?.user?.accessToken
     );
 
-    // this req can fail
-    let obituary = null;
-    if (spiritus.obituaryId) {
-      try {
-        const resObituary = await GetObituaryBySpiritusSlug(spiritus.id);
-        obituary = resObituary.data;
-      } catch (error) {
-        // do nothing
-      }
-    }
-
     return {
       props: {
         key: `${context.locale}-spiritus-index-${slug}`,
@@ -176,7 +159,6 @@ export async function getServerSideProps(context) {
         spiritus,
         tributes: resTributes.data?.content || [],
         isLastPage: resTributes.data?.last || true,
-        obituary,
         isGuardian,
       },
     };
