@@ -15,7 +15,7 @@ import { SpiritusProfileImageUploader } from "@/components/Uploaders";
 
 import {
   AddStoryImage,
-  DeleteStory,
+  DeleteStoryImage,
   EditStory,
 } from "@/service/http/story_crud";
 
@@ -68,20 +68,7 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
         private: isPrivate,
       };
       await EditStory(session.user.accessToken, story.id, body);
-
-      // image removed or not changed
-      if (images.length === 0 || (images.length === 1 && images[0].id)) {
-        setPending(false);
-        onSuccess();
-        return;
-      }
-
-      const form = new FormData();
-      if (images.length > 0) {
-        const fileName = await HashFilename(images[0].file.name);
-        form.append("file", images[0].file, fileName);
-        await AddStoryImage(session.user.accessToken, story.id, form);
-      }
+      await updateImages();
       setPending(false);
       onSuccess();
     } catch (err) {
@@ -90,13 +77,42 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
       setPending(false);
     }
   };
+
+  const updateImages = async () => {
+    const rmImages = [];
+    let newImage = null;
+    story.images.forEach((img) => {
+      if (!images.find((i) => i.url === img.url)) {
+        rmImages.push(img.id);
+      }
+    });
+    for (const img of images) {
+      if (!img.id && !img.url) {
+        newImage = img;
+        break;
+      }
+    }
+
+    for (const id of rmImages) {
+      await DeleteStoryImage(session.user.accessToken, id);
+    }
+
+    if (newImage) {
+      const form = new FormData();
+      const fileName = await HashFilename(images[0].file.name);
+      form.append("file", images[0].file, fileName);
+      await AddStoryImage(session.user.accessToken, story.id, form);
+    }
+  };
+
   const cancel = () => {
     setIsPrivate(!story.flags.includes("PUBLIC"));
-    setTitlesetIsPrivate(story.title);
-    setTagssetIsPrivate(story.tags);
-    setStoryTextsetIsPrivate(story.storyText);
-    setDatesetIsPrivate(story.date ? new Date(story.date) : null);
-    setSummarysetIsPrivate(story.description);
+    setTitle(story.title);
+    setIsPrivate(story.isPrivate);
+    setTags(story.tags);
+    setStoryText(story.storyText);
+    setDate(story.date ? new Date(story.date) : null);
+    setSummary(story.description);
   };
 
   return (
