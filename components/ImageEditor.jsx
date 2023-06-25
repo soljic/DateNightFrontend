@@ -1,6 +1,9 @@
 import { useRef } from "react";
 
-import { TrashIcon, XIcon } from "@heroicons/react/outline";
+import Image from "next/image";
+
+import { Popover } from "@headlessui/react";
+import { DotsHorizontalIcon, TrashIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 
@@ -130,7 +133,12 @@ function Thumbnail({ imageUrl, onRemove, index }) {
   );
 }
 
-export function SpiritusImageEditor({ images, setImages, setDeletedImages }) {
+export function SpiritusImageEditor({
+  images,
+  setImages,
+  setProfileImage,
+  setDeletedImages,
+}) {
   const { t } = useTranslation("common");
 
   const inputFile = useRef(null);
@@ -218,14 +226,15 @@ export function SpiritusImageEditor({ images, setImages, setDeletedImages }) {
               <p className="mt-1">{t("upload_spiritus_images_button")}</p>
             </button>
           </div>
-          <div className="columns-1 space-y-4 sm:columns-2 md:columns-3">
-            {images.map((f, i) => {
+          <div className="columns-1 space-y-4 sm:columns-2 lg:columns-3">
+            {images.map((img, idx) => {
               return (
                 <ThumbnailV2
-                  imageUrl={f.url}
-                  key={i}
-                  index={i}
+                  image={img}
+                  key={idx}
+                  index={idx}
                   onRemove={onRemove}
+                  onSetProfile={setProfileImage}
                 />
               );
             })}
@@ -236,27 +245,60 @@ export function SpiritusImageEditor({ images, setImages, setDeletedImages }) {
   );
 }
 
-function ThumbnailV2({ imageUrl, onRemove, index }) {
+function ThumbnailV2({ image, onRemove, onSetProfile, index }) {
+  const { t } = useTranslation("common");
+
   return (
     <div key={index} className="relative h-full w-full">
-      <img
-        src={imageUrl}
-        alt={`story-image-${index}`}
-        className="rounded-sp-10 border-gray-400 object-cover dark:border-none"
-      />
-      <div className="itemx-center absolute bottom-3 w-full rounded-sp-5">
-        <div className="px-2">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onRemove(index);
-            }}
-            className="flex w-full items-center justify-center rounded-sp-5 border border-sp-day-400 bg-white py-2 text-black drop-shadow-2xl text-sm"
-          >
-            <TrashIcon className="mr-1 inline-block h-4 w-4" />
-            Remove
-          </button>
-        </div>
+      <div
+        key={index}
+        onClick={() => openModal(index)}
+        className="h-full w-full"
+      >
+        <Image
+          src={image.url}
+          alt={`sp-gallery-image-${index}`}
+          height={image.height}
+          width={image.width}
+          className="rounded-sp-10 object-contain"
+        />
+      </div>
+      <div className="absolute right-2 top-2">
+        <Popover className="flex w-full">
+          {({ open }) => (
+            <>
+              <Popover.Button className="flex w-full items-center justify-center rounded-full border border-sp-day-400 bg-sp-day-50 p-1.5 text-black opacity-90 drop-shadow-2xl text-sm lg:p-1">
+                <DotsHorizontalIcon className="h-5 w-5" />
+              </Popover.Button>
+
+              <Popover.Panel className="absolute z-50 mt-2 -translate-x-36 translate-y-7">
+                <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
+                  <button
+                    onClick={() => {
+                      onSetProfile(image.id);
+                    }}
+                    className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
+                  >
+                    <ImageIcon
+                      className="mr-2 h-5 w-5 fill-sp-day-400"
+                      aria-hidden="true"
+                    />
+                    {t("set_profile_image")}
+                  </button>
+                  <button
+                    onClick={() => {
+                      onRemove(id);
+                    }}
+                    className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
+                  >
+                    <TrashIcon className="mr-2 h-5 w-5 text-sp-cotta" />
+                    <p className="text-sp-cotta">{t("term_delete")}</p>
+                  </button>
+                </div>
+              </Popover.Panel>
+            </>
+          )}
+        </Popover>
       </div>
     </div>
   );

@@ -2,9 +2,14 @@
   "compilerOptions": {
     "target": "es6",
     "jsx": "preserve",
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
-      // "*": ["./*.js", "./*.jsx"],
-      "@/*": ["./*"]
+      "@/components/*": ["./components/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/service/*": ["./service/*"],
+      "@/utils/*": ["./utils/*"]
     }
   },
   "exclude": ["node_modules"]

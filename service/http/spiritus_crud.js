@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { API_URL } from "../constants";
 
 // uses v2/spiritus web API endpoint
@@ -22,7 +23,7 @@ export async function CreateSpiritusV2(accessToken, spiritusFormData) {
 }
 
 export async function EditSpiritus(accessToken, spiritusData, locale) {
-  const loc = locale || "en"
+  const loc = locale || "en";
 
   return await axios.put(`${API_URL}/wapi/spiritus`, spiritusData, {
     headers: {
@@ -65,7 +66,11 @@ export async function AddSpiritusImage(accessToken, spiritusId, imageFormData) {
   );
 }
 
-export async function SetSpiritusCoverImage(accessToken, spiritusId, coverImageId) {
+export async function SetSpiritusCoverImage(
+  accessToken,
+  spiritusId,
+  coverImageId
+) {
   return await axios.put(
     `${API_URL}/wapi/spiritus/${spiritusId}/coverImage?coverImageId=${coverImageId}`,
     {},
@@ -74,10 +79,14 @@ export async function SetSpiritusCoverImage(accessToken, spiritusId, coverImageI
         Authorization: `Bearer ${accessToken}`,
       },
     }
-  )
+  );
 }
 
-export async function AddSpiritusProfileImage(accessToken, spiritusId, imageFormData) {
+export async function AddSpiritusProfileImage(
+  accessToken,
+  spiritusId,
+  imageFormData
+) {
   return await axios.post(
     `${API_URL}/wapi/spiritus/${spiritusId}/profileImage`,
     imageFormData,
@@ -90,7 +99,11 @@ export async function AddSpiritusProfileImage(accessToken, spiritusId, imageForm
   );
 }
 
-export async function SetSpiritusProfileImage(accessToken, spiritusId, profileImageId) {
+export async function SetSpiritusProfileImage(
+  accessToken,
+  spiritusId,
+  profileImageId
+) {
   return await axios.put(
     `${API_URL}/wapi/spiritus/${spiritusId}/profileImage?profileImageId=${profileImageId}`,
     {},
@@ -99,5 +112,5 @@ export async function SetSpiritusProfileImage(accessToken, spiritusId, profileIm
         Authorization: `Bearer ${accessToken}`,
       },
     }
-  )
+  );
 }
