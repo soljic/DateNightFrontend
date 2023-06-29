@@ -32,6 +32,7 @@ export function EditImages({ spiritus, onSuccess, onError }) {
 
   const [loaded, setLoaded] = useState(false);
   const [pending, setPending] = useState(false);
+  const [pendingSaveCover, setPendingSaveCover] = useState(false);
 
   const [images, setImages] = useState();
   const [selectedCoverId, setSelectedCoverId] = useState(
@@ -121,16 +122,16 @@ export function EditImages({ spiritus, onSuccess, onError }) {
 
   const updateCoverImage = async () => {
     try {
-      setPending(true);
+      setPendingSaveCover(true);
       await SetSpiritusCoverImage(
         session.user.accessToken,
         spiritus.id,
         selectedCoverId
       );
       onSuccess();
-      setPending(false);
+      setPendingSaveCover(false);
     } catch (err) {
-      setPending(false);
+      setPendingSaveCover(false);
       onError(translateErrors(err));
     }
   };
@@ -171,7 +172,11 @@ export function EditImages({ spiritus, onSuccess, onError }) {
                 disabled={pending}
                 className="flex w-24 items-center justify-center rounded-sp-10 border bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn py-1 text-white dark:border-sp-medium dark:from-sp-dark-fawn dark:to-sp-fawn"
               >
-                {pending ? <Spinner text={""} /> : <span>{t("save")}</span>}
+                {pendingSaveCover ? (
+                  <Spinner text={""} />
+                ) : (
+                  <span>{t("save")}</span>
+                )}
               </button>
 
               <button
