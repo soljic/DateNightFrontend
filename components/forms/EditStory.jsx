@@ -15,6 +15,7 @@ import { SpiritusProfileImageUploader } from "@/components/Uploaders";
 
 import {
   AddStoryImage,
+  DeleteStory,
   DeleteStoryImage,
   EditStory,
 } from "@/service/http/story_crud";
