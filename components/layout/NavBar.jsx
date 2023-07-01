@@ -36,10 +36,10 @@ export function Navbar() {
       <div className="hidden w-full items-center justify-evenly px-3 text-sp-black dark:text-sp-white md:flex md:px-0">
         <div className="flex w-full items-center justify-start">
           <Link href="/" className="flex items-center">
-            <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
+            <div className="rounded-sp-10 bg-white p-0.5">
               <Logo />
             </div>
-            <div className="ml-2 hidden font-semibold text-xl md:block">
+            <div className="ml-2.5 hidden font-semibold text-xl md:block">
               Spiritus
             </div>
           </Link>
