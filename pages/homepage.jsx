@@ -5,20 +5,9 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { CreateMemorialBanner } from "@/components/homepage/CreateMemorialBanner";
-import LayoutHeroImage from "@/components/layout/LayoutHeroImage";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/NavBar";
 
-import { FeaturedProject } from "../components/projects/FeaturedProject";
-import {
-  CTADownloadLinks,
-  GetSpiritusCTA,
-  SearchPlacesCTA,
-  SearchSpiritusCTA,
-} from "../components/stories/CTAs";
-import { FeaturedStory } from "../components/stories/FeaturedStory";
-import {
-  CategoriesSwiper,
-  HomepageSwiper,
-} from "../components/stories/Swipers";
 import { GetParsedHomepage } from "../service/http/homepage";
 
 export default function Home(
@@ -34,7 +23,7 @@ export default function Home(
   const { t } = useTranslation("common");
 
   return (
-    <LayoutHeroImage>
+    <>
       <Head>
         <title>{t("meta_home_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,7 +49,51 @@ export default function Home(
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-    </LayoutHeroImage>
+      <div>
+        <div className="w-full bg-sp-day-50 dark:bg-sp-black">
+          <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+            <Navbar />
+          </div>
+        </div>
+        <div className="relative h-[100svh] md:h-screen">
+          <div className="overflow-none absolute h-full w-full">
+            <Image
+              src="/images/img_hero_desktop.jpg"
+              alt="bg-image"
+              quality={100}
+              priority={true}
+              className="-z-20 -mt-12 hidden object-cover md:block"
+              width={0}
+              height={0}
+              sizes="100vw"
+              fill
+            />
+            <Image
+              src="/images/img_hero_mobile.jpg"
+              alt="bg-image-mobile"
+              quality={100}
+              priority={true}
+              className="-z-20 -mt-12 block object-cover md:hidden"
+              width={0}
+              height={0}
+              sizes="100vw"
+              fill
+            />
+          </div>
+          <div className="absolute h-screen w-full bg-subtle-white dark:bg-subtle-black">
+            <div className="z-50 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+              <CreateMemorialBanner />
+            </div>
+          </div>
+        </div>
+        <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+          <div className="mx-5">
+            <main></main>
+            <Footer />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

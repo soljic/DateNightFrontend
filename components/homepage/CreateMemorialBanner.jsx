@@ -109,7 +109,7 @@ export function CreateMemorialBanner() {
           </Link>
         </div>
       </div>
-      <div className="mx-auto flex w-full justify-center space-x-2 pt-2">
+      <div className="mx-auto flex w-full flex-wrap justify-center space-x-2 pt-2">
         {stats.map((elem, index) => (
           <div className="inline-flex" key={`stat-elem-${index}`}>
             <elem.icon className="inline-block h-5 w-5 fill-sp-black dark:fill-sp-white" />
