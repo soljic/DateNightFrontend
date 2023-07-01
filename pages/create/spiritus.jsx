@@ -37,15 +37,20 @@ import { CreateSpiritus } from "@/service/http/spiritus_crud";
 //   images: [],
 // };
 
-export default function CreateSpiritusPage({ user, product }) {
+export default function CreateSpiritusPage({
+  user,
+  product,
+  initialName,
+  initialSurname,
+}) {
   const { t } = useTranslation("common");
 
   const [pending, setPending] = useState(false);
   const [paywallSeen, setPaywallSeen] = useState(false);
 
   // form fields
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [name, setName] = useState(initialName || "");
+  const [surname, setSurname] = useState(initialSurname || "");
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState();
   const [quote, setQuote] = useState("");
@@ -367,6 +372,7 @@ export default function CreateSpiritusPage({ user, product }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  const { name, surname } = context.query;
 
   if (!session) {
     return {
@@ -401,6 +407,8 @@ export async function getServerSideProps(context) {
       ])),
       user: session.user,
       product: productData,
+      initialName: name || null,
+      initialSurname: surname || null,
     },
   };
 }

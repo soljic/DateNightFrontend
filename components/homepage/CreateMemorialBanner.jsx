@@ -68,55 +68,55 @@ export function CreateMemorialBanner() {
   const [surname, setSurname] = useState("");
 
   return (
-    <div className="z-40 mt-12 flex flex-col items-center lg:mt-16 xl:mt-20 2xl:mt-32">
+    <div className="z-40 mt-24 flex flex-col items-center 2xl:mt-32">
       <h1 className="mb-8 text-center text-[44px] font-bold leading-tight subpixel-antialiased sm:text-5xl lg:text-6xl xl:text-7xl">
         {t("create_memorial_title")}
       </h1>
-      <div className="w-full max-w-md space-y-2">
-        <h2 className="font-medium text-sp-black subpixel-antialiased dark:text-sp-white">
+      <div className="w-full md:max-w-md">
+        <h2 className="mb-2 px-4 font-medium text-sp-black subpixel-antialiased dark:text-sp-white">
           {t("create_memorial_subtitle")}
         </h2>
-        <div className="block rounded-sp-10">
-          <input
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            placeholder={t("first_name")}
-            className="w-full appearance-none rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 placeholder-sp-day-400 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
-          />
-        </div>
+        <div className="space-y-2 px-1">
+          <div className="block rounded-sp-10">
+            <input
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              placeholder={t("first_name")}
+              className="w-full appearance-none rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 placeholder-sp-day-400 outline-none dark:bg-sp-black dark:text-sp-white"
+            />
+          </div>
 
-        <div className="block rounded-sp-10">
-          <input
-            value={surname}
-            onChange={(e) => {
-              setSurname(e.target.value);
-            }}
-            placeholder={t("last_name")}
-            className="w-full appearance-none rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 placeholder-sp-day-400 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
-          />
-        </div>
-        <div>
-          <div className="flex overflow-hidden rounded-sp-14 border-6 border-sp-fawn/20">
-            <Link
-              className="w-full bg-sp-black px-4 py-2 text-center font-medium text-sp-white text-lg dark:bg-sp-day-50 dark:text-sp-black"
-              href="/create/spiritus"
-            >
-              {t("create_memorial")}
-              <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
-            </Link>
+          <div className="block rounded-sp-10">
+            <input
+              value={surname}
+              onChange={(e) => {
+                setSurname(e.target.value);
+              }}
+              placeholder={t("last_name")}
+              className="w-full appearance-none rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 placeholder-sp-day-400 outline-none dark:bg-sp-black dark:text-sp-white"
+            />
           </div>
         </div>
-        <div className="mx-auto flex w-full justify-center space-x-2 pt-2">
-          {stats.map((elem, index) => (
-            <div className="inline-flex" key={`stat-elem-${index}`}>
-              <elem.icon className="inline-block h-5 w-5 fill-sp-black dark:fill-sp-white" />
-              <span className="mx-1 font-semibold">{elem.number}</span>
-              <span>{t(elem.text)}</span>
-            </div>
-          ))}
+        <div className="mt-2 flex overflow-hidden rounded-2xl border-6 border-sp-fawn/30">
+          <Link
+            className="w-full bg-sp-black px-4 py-2 text-center font-medium text-sp-white text-lg dark:bg-sp-day-50 dark:text-sp-black xl:py-3"
+            href={`/create/spiritus?name=${name}&surname=${surname}`}
+          >
+            {t("create_memorial")}
+            <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
+          </Link>
         </div>
+      </div>
+      <div className="mx-auto flex w-full justify-center space-x-2 pt-2">
+        {stats.map((elem, index) => (
+          <div className="inline-flex" key={`stat-elem-${index}`}>
+            <elem.icon className="inline-block h-5 w-5 fill-sp-black dark:fill-sp-white" />
+            <span className="mx-1 font-semibold">{elem.number}</span>
+            <span>{t(elem.text)}</span>
+          </div>
+        ))}
       </div>
     </div>
   );

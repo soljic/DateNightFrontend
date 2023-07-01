@@ -15,18 +15,6 @@ module.exports = {
       xl: "1536px",
       "2xl": "2100px",
     },
-    gradientColorStopPositions: {
-      74: "74%",
-      50: "50%",
-    },
-    backgroundImage: {
-      "hero-gradient":
-        "linear-gradient(180deg, #F0EBE6 0%, rgba(240, 235, 230, 0.74) 43.84%, rgba(240, 235, 230, 0.5) 54.37%, rgba(240, 235, 230, 0) 65.24%);",
-      "hero-dark-gradient":
-        "linear-gradient(180deg, #171411 0%, rgba(23, 20, 17, 0.74) 43.84%, rgba(23, 20, 17, 0.5) 54.37%, rgba(23, 20, 17, 0) 65.24%);",
-      //   hero: "url('/images/img_hero_desktop.jpg')",
-      //   "hero-mobile": "url('/images/img_hero_mobile.jpg')",
-    },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",
@@ -50,6 +38,12 @@ module.exports = {
         "sp-10": "10px",
         "sp-14": "14px",
         "sp-40": "40px",
+      },
+      backgroundImage: {
+        "subtle-white":
+          "linear-gradient(180deg, #F0EBE6 0%, rgba(240, 235, 230, 0.74) 43.84%, rgba(240, 235, 230, 0.5) 54.37%, rgba(240, 235, 230, 0) 65.24%)",
+        "subtle-black":
+          "linear-gradient(180deg, #171411 0%, rgba(23, 20, 17, 0.74) 43.84%, rgba(23, 20, 17, 0.5) 54.37%, rgba(23, 20, 17, 0) 65.24%)",
       },
       padding: {
         7.5: "30px",
