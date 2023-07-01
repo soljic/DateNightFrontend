@@ -78,11 +78,3 @@
 .dark .ribbon {
   border: 3px solid #171411;
 }
-
-.hero-gradient {
-  background: linear-gradient(180deg, #F0EBE6 0%, rgba(240, 235, 230, 0.74) 43.84%, rgba(240, 235, 230, 0.5) 54.37%, rgba(240, 235, 230, 0) 65.24%);
-}
-
-.dark-hero-gradient {
-  background: linear-gradient(180deg, #171411 0%, rgba(23, 20, 17, 0.74) 43.84%, rgba(23, 20, 17, 0.5) 54.37%, rgba(23, 20, 17, 0) 65.24%);
-}

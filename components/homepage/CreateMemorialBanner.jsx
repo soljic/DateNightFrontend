@@ -69,11 +69,11 @@ export function CreateMemorialBanner() {
 
   return (
     <div className="z-40 mt-12 flex flex-col items-center lg:mt-16 xl:mt-20 2xl:mt-32">
-      <h1 className="mb-8 text-center text-[44px] font-bold leading-tight sm:text-5xl lg:text-6xl xl:text-7xl">
+      <h1 className="mb-8 text-center text-[44px] font-bold leading-tight subpixel-antialiased sm:text-5xl lg:text-6xl xl:text-7xl">
         {t("create_memorial_title")}
       </h1>
       <div className="w-full max-w-md space-y-2">
-        <h2 className="font-medium text-sp-black dark:text-sp-white">
+        <h2 className="font-medium text-sp-black subpixel-antialiased dark:text-sp-white">
           {t("create_memorial_subtitle")}
         </h2>
         <div className="block rounded-sp-10">

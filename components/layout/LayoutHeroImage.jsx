@@ -37,7 +37,7 @@ export default function LayoutHeroImage({ locale, children }) {
             fill
           />
         </div>
-        <div className="hero-gradient dark-hero-gradient h-screen">
+        <div className="absolute h-screen w-full bg-hero-gradient dark:bg-hero-dark-gradient">
           <div className="z-50 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
             <CreateMemorialBanner />
           </div>
