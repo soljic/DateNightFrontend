@@ -39,6 +39,14 @@
 
   "cta_get_spiritus_button": "Get Spiritus",
 
+  "create_memorial": "Create a Memorial",
+  "create_memorial_title": "Save memories, forever.",
+  "create_memorial_subtitle": "Enter name for your Spiritus Memorial",
+  "memorials_count_text": "memorials",
+  "users_count_text": "users",
+  "rating_count_text": "rating",
+
+
   "create_spiritus": "Create Spiritus",
   "create_spiritus_subtitle": "Preserve the life of your loved ones through storytelling.",
   "goto_search": "Go to search",
@@ -122,6 +130,8 @@
   "add_resting_place": "Add Resting place",
   "add_image": "Add Image",
 
+  "first_name": "First name",
+  "last_name": "Last name",
   "create_spiritus_names_title": "Enter the name of your loved one.",
   "create_spiritus_firstname_placeholder": "Enter first name",
   "create_spiritus_lastname_placeholder": "Enter last name",

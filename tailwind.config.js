@@ -15,6 +15,14 @@ module.exports = {
       xl: "1536px",
       "2xl": "2100px",
     },
+    gradientColorStopPositions: {
+      74: "74%",
+      50: "50%",
+    },
+    // backgroundImage: {
+    //   hero: "url('/images/img_hero_desktop.jpg')",
+    //   "hero-mobile": "url('/images/img_hero_mobile.jpg')",
+    // },
     borderWidth: {
       DEFAULT: "1px",
       0: "0",
