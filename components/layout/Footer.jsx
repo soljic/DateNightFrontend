@@ -1,6 +1,8 @@
 import Image from "next/legacy/image";
-import { NavItem } from "./Common";
+
 import { useTranslation } from "next-i18next";
+
+import { NavItem } from "./Common";
 
 export function Footer() {
   const { t } = useTranslation("common");
@@ -109,7 +111,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="pb-12 text-center text-sp-lighter text-sm">
+      <div className="pb-4 text-center text-sp-lighter text-sm">
         ©{new Date().getFullYear()} {t("rights_reserved")}
       </div>
     </div>

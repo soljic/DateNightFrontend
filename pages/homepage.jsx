@@ -94,20 +94,8 @@ export default function Home(
           <SearchBanner />
         </div>
       </main>
-      <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-        <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-          <div className="mx-5">
-            <main></main>
-            <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-              <div className="mx-5">
-                <main></main>
-                <Footer />
-                <Footer />
-              </div>
-            </div>
-            <Footer />
-          </div>
-        </div>
+      <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-3/5">
+        <Footer />
       </div>
     </>
   );
