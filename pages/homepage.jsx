@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { CreateMemorialBanner } from "@/components/homepage/CreateMemorialBanner";
+import { SearchBanner } from "@/components/homepage/SearchBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/NavBar";
 
@@ -49,13 +50,13 @@ export default function Home(
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <div>
+      <main>
         <div className="w-full bg-sp-day-50 dark:bg-sp-black">
           <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
             <Navbar />
           </div>
         </div>
-        <div className="relative h-[100svh] md:h-screen">
+        <div className="relative h-[100svh] lg:h-screen">
           <div className="overflow-none absolute h-full w-full">
             <Image
               src="/images/img_hero_desktop.jpg"
@@ -80,15 +81,30 @@ export default function Home(
               fill
             />
           </div>
-          <div className="absolute h-screen w-full bg-subtle-white dark:bg-subtle-black">
-            <div className="z-50 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+          <div
+            className="absolute h-screen w-full bg-subtle-white dark:bg-subtle-black"
+            id="create-memorial"
+          >
+            <div className="z-50 mx-auto w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
               <CreateMemorialBanner />
             </div>
           </div>
         </div>
+        <div className="z-10 mx-auto w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+          <SearchBanner />
+        </div>
+      </main>
+      <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <div className="mx-5">
             <main></main>
+            <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+              <div className="mx-5">
+                <main></main>
+                <Footer />
+                <Footer />
+              </div>
+            </div>
             <Footer />
           </div>
         </div>

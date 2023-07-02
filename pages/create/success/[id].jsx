@@ -49,7 +49,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
       <div className="min-h-screen py-5">
         <div className="mx-auto my-4 flex w-full flex-col items-center gap-1 dark:text-sp-white sm:w-full md:w-1/2">
           <div className="mb-2 rounded-xl bg-sp-fawn bg-opacity-25 p-2">
-            <Logo width={8} height={8} />
+            <Logo className="h-8 w-8" />
           </div>
           <h2 className="font-bold text-3xl">
             {" "}

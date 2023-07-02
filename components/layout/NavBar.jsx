@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Fragment } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import { Popover, Transition } from "@headlessui/react";
@@ -35,19 +36,16 @@ export function Navbar() {
       <LoginModal isOpen={isOpen} closeModal={closeModal} />
       <div className="hidden w-full items-center justify-evenly px-3 text-sp-black dark:text-sp-white md:flex md:px-0">
         <div className="flex w-full items-center justify-start">
-          <Link href="/" className="flex items-center">
-            <div className="rounded-sp-10 bg-white p-0.5">
-              <Logo />
+          <Link href="/" className="flex items-center" key="desktop-nav-home">
+            <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
+              <div className="relative h-6 w-6">
+                <Image src="/images/logo/spiritus.svg" fill alt="logo" />
+              </div>
             </div>
-            <div className="ml-2.5 hidden font-semibold text-xl md:block">
-              Spiritus
-            </div>
+            <div className="ml-2.5 font-semibold text-xl">Spiritus</div>
           </Link>
           <nav className="ml-3 flex items-center justify-center">
             <NavItem text={t("stories")} link={"/"} />
-            {/* {process?.env?.NEXT_API_URL === "https://walk.spiritusapp.com" ? (
-              <NavItem text={t("menu_funeral_notices")} link={"/notices"} />
-            ) : null} */}
             <NavItem text={t("mobile")} link={"/mobile-app"} />
             <NavItem text={t("about")} link={"/about"} />
           </nav>
@@ -93,7 +91,7 @@ export function Navbar() {
         </div>
       </div>
 
-      <MobileMenu />
+      <MobileMenu key="mobile-home-nav" />
     </div>
   );
 }

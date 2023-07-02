@@ -11,15 +11,13 @@ export function NavItem({ text, link }) {
   );
 }
 
-export function Logo({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function Logo({ className }) {
   return (
     <svg
       width="30"
       height="30"
       viewBox="0 0 30 30"
+      className={className}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -71,7 +69,7 @@ export function HorizontalDivider() {
     <div className="relative flex w-full items-center">
       <div className="flex-grow border-t-2 border-sp-day-200 dark:border-sp-medium"></div>
       <div className="mx-2 p-1.5 opacity-20">
-        <Logo />
+        <Logo className="h-6 w-6" />
       </div>
       <div className="flex-grow border-t-2 border-sp-day-200 dark:border-sp-medium"></div>
     </div>

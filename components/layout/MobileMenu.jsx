@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -19,7 +20,6 @@ import { useTheme } from "next-themes";
 
 import { UserIcon } from "../Icons";
 import { SettingsDevicesIcon } from "../SettingsIcons";
-import { Logo } from "./Common";
 
 export function MobileMenu() {
   const { data: session } = useSession();
@@ -27,9 +27,11 @@ export function MobileMenu() {
 
   return (
     <div className="flex w-full items-center justify-between space-x-2 pt-2 text-sp-black dark:text-sp-white md:hidden md:px-2">
-      <Link href="/" className="flex w-10 items-center">
-        <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
-          <Logo />
+      <Link href="/" className="flex items-center">
+        <div className="rounded-sp-10 bg-white p-2 dark:bg-transparent">
+          <div className="relative h-6 w-6">
+            <Image src="/images/logo/spiritus.svg" fill alt="logo" />
+          </div>
         </div>
       </Link>
       {router.pathname !== "/search" ? <MobileSearch /> : null}
@@ -108,12 +110,12 @@ function MobilePopover() {
                     {t("create_spiritus")}
                   </Link>
                   {!session?.user?.name && (
-                    <a
+                    <Link
                       href="/auth/login"
                       className="w-full rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                     >
                       {t("login")}
-                    </a>
+                    </Link>
                   )}
                 </div>
                 <div className="divide-y divide-sp-day-200 dark:divide-sp-medium">
