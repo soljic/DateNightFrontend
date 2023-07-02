@@ -102,7 +102,7 @@ const team = [
   {
     img: matija,
     name: "Matija Salopek",
-    postition: "Blokchain",
+    postition: "Web3",
     socials: "https://github.com/MSalopek",
   },
   {
