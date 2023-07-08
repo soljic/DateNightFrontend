@@ -85,14 +85,14 @@ export function AccesibilityMenu() {
                         </Disclosure.Button>
                         <Disclosure.Panel className="grid grid-cols-2 items-center">
                           <Link
-                            href={router.pathname}
+                            href={router.asPath}
                             locale="en"
                             className="flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
                             EN
                           </Link>
                           <Link
-                            href={router.pathname}
+                            href={router.asPath}
                             locale="hr"
                             className="flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                           >
