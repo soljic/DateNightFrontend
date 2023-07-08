@@ -83,6 +83,7 @@ export default function StoryPage({
               spiritusId={spiritus.id}
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
+              isGuardian={isGuardian}
             />
           </div>
         </div>

@@ -25,6 +25,7 @@ export default function SpiritusPage({
   tributes,
   isLastPage,
   isGuardian,
+  saved,
 }) {
   const { t } = useTranslation("common");
 
@@ -119,6 +120,8 @@ export default function SpiritusPage({
               spiritusId={spiritus.id}
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
+              isGuardian={isGuardian}
+              saved={saved}
             />
           </div>
         </div>
@@ -132,17 +135,18 @@ export async function getServerSideProps(context) {
   const { slug } = context.query;
   const session = await getSession(context);
   let isGuardian = false;
+  let saved = false;
 
   try {
     let res;
     if (session && session?.user?.accessToken) {
       res = await GetSpiritusBySlug(slug, session.user.accessToken);
       isGuardian = res?.data?.flags.includes("GUARDIAN");
+      saved = res?.data?.flags.includes("SAVED");
     } else {
       res = await GetSpiritusBySlug(slug);
     }
     const spiritus = res.data;
-
     const resTributes = await GetSpiritusTributes(
       spiritus.id,
       session?.user?.accessToken
@@ -160,6 +164,7 @@ export async function getServerSideProps(context) {
         tributes: resTributes.data?.content || [],
         isLastPage: resTributes.data?.last || true,
         isGuardian,
+        saved,
       },
     };
   } catch (err) {

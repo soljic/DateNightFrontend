@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -16,12 +16,6 @@ import {
 import { SpiritusStory } from "@/components/spiritus/Story";
 import { StoryList } from "@/components/spiritus/StoryList";
 
-import { GetObituaryBySpiritusSlug } from "@/service/http/obituary";
-import {
-  GetSpiritusById,
-  GetSpiritusCoverImages,
-  GetSpiritusTributes,
-} from "@/service/http/spiritus";
 import { GetSpiritusStoriesBySlug, GetStoryBySlug } from "@/service/http/story";
 
 import { SetStoryOG } from "@/utils/metaTags";
@@ -34,9 +28,9 @@ export default function StoryPage({
   spiritus,
   isLastPage,
   isGuardian,
+  saved,
 }) {
   const { t } = useTranslation("common");
-  const { data: session, status } = useSession();
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
@@ -122,6 +116,8 @@ export default function StoryPage({
               spiritusId={spiritus.id}
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
+              isGuardian={isGuardian}
+              saved={saved}
             />
           </div>
         </div>
@@ -158,6 +154,7 @@ export async function getServerSideProps(context) {
   const { storyslug } = context.query;
   const session = await getSession(context);
   let isGuardian = false;
+  let saved = false;
 
   let data = {};
   try {
@@ -168,6 +165,7 @@ export async function getServerSideProps(context) {
       );
       data = resStory.data;
       isGuardian = data?.spiritus?.flags.includes("GUARDIAN");
+      saved = data?.spiritus?.flags.includes("SAVED");
     } else {
       const resStory = await GetStoryBySlug(storyslug);
       data = resStory.data;
@@ -217,6 +215,7 @@ export async function getServerSideProps(context) {
         stories: filterStories(content, isGuardian),
         isLastPage: resAllStories.data.last,
         isGuardian,
+        saved,
         // story info
         displayStory: {
           id: data.id,

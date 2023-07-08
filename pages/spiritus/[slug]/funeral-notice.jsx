@@ -10,7 +10,6 @@ import FullWidthLayout from "@/components/layout/LayoutV2";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
 
 import { GetObituaryBySpiritusSlug } from "@/service/http/obituary";
-import { GetSpiritusBySlug } from "@/service/http/spiritus";
 
 import { SetSpiritusOG } from "@/utils/metaTags";
 

@@ -15,6 +15,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Spinner } from "@/components/Status";
 
 import { SendRose } from "@/service/http/rose";
+import { SaveSpiritus, UnSaveSpiritus } from "@/service/http/save";
 
 import { SettingsCreateStorySolidIcon } from "../SettingsIcons";
 import { LoginModal } from "../auth/Login";
@@ -439,10 +440,12 @@ function SpiritusActions({
   spiritusId,
   spiritusSlug,
   memoryGuardians,
+  isGuardian,
+  saved,
 }) {
   const { t } = useTranslation("common");
   const [copied, setCopied] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(saved || false);
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
 
@@ -453,6 +456,16 @@ function SpiritusActions({
   function openModal() {
     setIsOpen(true);
   }
+
+  const saveSpiritus = async () => {
+    await SaveSpiritus(session.user.accessToken, spiritusId);
+    setIsSaved(true);
+  };
+
+  const unSaveSpiritus = async () => {
+    await UnSaveSpiritus(session.user.accessToken, spiritusId);
+    setIsSaved(false);
+  };
 
   return (
     <div className="divide-y divide-sp-day-200 text-sm">
@@ -536,29 +549,30 @@ function SpiritusActions({
       </div>
 
       {/* notifications */}
-      <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
-        <div className="flex items-center space-x-2.5">
-          <RemindMeIcon className="fill-black dark:fill-white" />
-          <h3 className="font-semibold ">{t("remind_me")}</h3>
+      {!isGuardian && (
+        <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+          <div className="flex items-center space-x-2.5">
+            <RemindMeIcon className="fill-black dark:fill-white" />
+            <h3 className="font-semibold ">{t("remind_me")}</h3>
+          </div>
+          <p className=" text-center font-normal text-sp-day-400">
+            {t("remind_me_subtitle")}
+          </p>
+          <button
+            onClick={() => (isSaved ? unSaveSpiritus() : saveSpiritus())}
+            className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
+          >
+            {isSaved ? (
+              <>
+                <CheckCircleIcon className="mr-2 h-5 w-5 fill-sp-fawn" />
+                {t("remind_me_activated")}
+              </>
+            ) : (
+              <>{t("remind_me_button")}</>
+            )}
+          </button>
         </div>
-        <p className=" text-center font-normal text-sp-day-400">
-          {t("remind_me_subtitle")}
-        </p>
-        <button
-          onClick={() => setSaved(true)}
-          disabled={saved}
-          className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
-        >
-          {saved ? (
-            <>
-              <CheckCircleIcon className="mr-2 h-5 w-5 fill-sp-fawn" />
-              {t("remind_me_activated")}
-            </>
-          ) : (
-            <>{t("remind_me_button")}</>
-          )}
-        </button>
-      </div>
+      )}
     </div>
   );
 }
@@ -569,6 +583,8 @@ export function Links({
   spiritusId,
   spiritusSlug,
   memoryGuardians,
+  isGuardian,
+  saved,
 }) {
   const { t } = useTranslation("common");
   const organization = funeralOrg || null;
@@ -640,6 +656,8 @@ export function Links({
         spiritusId={spiritusId}
         spiritusSlug={spiritusSlug}
         memoryGuardians={memoryGuardians}
+        isGuardian={isGuardian}
+        saved={saved}
       />
     </div>
   );

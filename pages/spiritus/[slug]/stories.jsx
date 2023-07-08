@@ -16,7 +16,6 @@ import { SetSpiritusOG } from "@/utils/metaTags";
 export default function SpiritusStoriesPage({
   spiritus,
   stories,
-  coverImages,
   isLastPage,
   isGuardian,
 }) {
