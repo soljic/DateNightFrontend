@@ -17,6 +17,7 @@ import { Spinner } from "@/components/Status";
 import { SendRose } from "@/service/http/rose";
 
 import { SettingsCreateStorySolidIcon } from "../SettingsIcons";
+import { LoginModal } from "../auth/Login";
 import { ArrowUpRightIcon } from "../layout/Icons";
 import {
   AgeIcon,
@@ -442,9 +443,20 @@ function SpiritusActions({
   const { t } = useTranslation("common");
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
 
   return (
     <div className="divide-y divide-sp-day-200 text-sm">
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
       {/* share links */}
       <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
         <div className="flex items-center space-x-2.5">
@@ -495,12 +507,21 @@ function SpiritusActions({
         <p className=" text-center font-normal text-sp-day-400">
           {t("new_story_subtitle")}
         </p>
-        <Link
-          href={`/create/story?spiritus=${spiritusId}`}
-          className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
-        >
-          {t("create_story")}
-        </Link>
+        {session?.user.name ? (
+          <Link
+            href={`/create/story?spiritus=${spiritusId}`}
+            className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
+          >
+            {t("create_story")}
+          </Link>
+        ) : (
+          <button
+            onClick={openModal}
+            className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
+          >
+            {t("create_story")}
+          </button>
+        )}
       </div>
 
       {/* guardians */}
