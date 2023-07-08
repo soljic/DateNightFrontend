@@ -107,10 +107,13 @@
   "spiritus_success_first_story": "Napišite prvu priču",
   "spiritus_success_text": "vjerojatno Vas podsjeća na lijepe trenutke i draga mjesta. Sačuvajte te uspomene.",
   "story_success_title": "Odlično!",
-  "story_success_subtitle": "kreirali ste priču za",
+  "story_success_subtitle": "Kreirali ste priču za",
   "new_story": "Nova priča",
 
   "create_story": "Kreiraj priču",
+  "suggest_story": "Predloži priču",
+  "suggest_story_subtitle": "Čuvari uspomene mogu odobriti priču i dodati je Spiritusu.",
+
   "send_story": "Pošalji priču",
   "send_story_title": "Imaš priču o ovom Spiritusu?",
   "send_story_subtitle": "Podijeli priče, fotografije, uspomene...",

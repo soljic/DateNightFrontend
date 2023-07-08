@@ -23,7 +23,7 @@ export function CreateStorySuccess({ redirectURL, name, surname }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-auto px-4">
+    <div className="mx-auto w-full px-4 lg:w-3/4">
       <div className="flex w-full flex-col items-center gap-1 rounded-sp-14 border-2 border-sp-day-200 p-20 text-sp-black dark:text-sp-white">
         <div className="mb-2 rounded-xl bg-sp-fawn bg-opacity-25 p-2">
           <StoryIcon className="h-8 w-8" />
@@ -31,7 +31,8 @@ export function CreateStorySuccess({ redirectURL, name, surname }) {
         <h2 className="font-bold text-3xl">{t("story_success_title")}</h2>
         <div className="flex flex-col items-center gap-1">
           <p className="text mt-1 w-3/4 text-center opacity-50">
-            {t("story_success_subtitle")}{" "}
+            {t("story_success_subtitle")}
+            <br></br>
             <span>
               {name} {surname}
             </span>

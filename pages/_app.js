@@ -5,6 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 
+import { MediaSizeIndicator } from "@/components/layout/MediaSizeIndicator";
+
 import nextI18nConfig from "../next-i18next.config";
 import "../styles/globals.css";
 
@@ -12,7 +14,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session} refetchInterval={0}>
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
-        <Component {...pageProps} />{" "}
+        <Component {...pageProps} /> <MediaSizeIndicator />
       </ThemeProvider>
     </SessionProvider>
   );

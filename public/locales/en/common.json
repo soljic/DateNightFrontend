@@ -107,10 +107,12 @@
   "spiritus_success_first_story": "Write first story",
   "spiritus_success_text": "must have done many beautiful things. Save those memories forever.",
   "story_success_title": "Nice work!",
-  "story_success_subtitle": "you've just created a Story for",
+  "story_success_subtitle": "You've just created a Story for",
   "new_story": "New story",
 
   "create_story": "Create story",
+  "suggest_story": "Suggest story",
+  "suggest_story_subtitle": "Memory Giardians can review your story and add it to the Spiritus.",
 
   "send_story": "Send story",
   "send_story_title": "Do you have any stories about this Spiritus?",
