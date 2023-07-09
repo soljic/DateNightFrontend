@@ -13,10 +13,9 @@ const p2 = "memorials from biggest Croatian cemeteries.";
 
 export function SearchBanner() {
   return (
-    // <div class="mx-5 flex h-[40vh] items-center justify-center md:mx-0 md:justify-between">
-    <div class="mx-5 flex h-[40vh] items-center md:mx-0 lg:h-[55vh] lg:justify-evenly">
+    <div className="mx-5 flex h-[40vh] items-center justify-center md:mx-0 lg:h-[55vh] lg:justify-evenly">
       <div className="flex w-full max-w-2xl flex-col items-center space-y-4 md:space-y-8 lg:items-start">
-        <h2 className="text-center font-bold leading-none subpixel-antialiased text-4xl md:text-[44px] lg:text-start xl:text-5xl">
+        <h2 className="text-center font-bold leading-none subpixel-antialiased text-3xl sm:text-4xl md:text-[44px] lg:text-start xl:text-5xl">
           Spiritus is a platform for creating digital memorials through
           storytelling.
         </h2>

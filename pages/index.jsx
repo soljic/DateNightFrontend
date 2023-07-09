@@ -1,35 +1,22 @@
 import Head from "next/head";
+import Image from "next/image";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../components/layout/Layout";
-import { FeaturedProject } from "../components/projects/FeaturedProject";
-import {
-  CTADownloadLinks,
-  GetSpiritusCTA,
-  SearchPlacesCTA,
-  SearchSpiritusCTA,
-} from "../components/stories/CTAs";
-import { FeaturedStory } from "../components/stories/FeaturedStory";
-import {
-  CategoriesSwiper,
-  HomepageSwiper,
-} from "../components/stories/Swipers";
+import { CreateMemorialBanner } from "@/components/homepage/CreateMemorialBanner";
+import { SearchBanner } from "@/components/homepage/SearchBanner";
+import { TabSections } from "@/components/homepage/TabSections";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/NavBar";
+
 import { GetParsedHomepage } from "../service/http/homepage";
 
-export default function Home({
-  featuredStory,
-  featured,
-  discover,
-  categories,
-  anniversaries,
-  featuredProject,
-}) {
+export default function Home({ featured, categories, anniversaries, recent }) {
   const { t } = useTranslation("common");
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>{t("meta_home_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,51 +42,59 @@ export default function Home({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <GetSpiritusCTA />
-      <div className="mx-auto flex flex-col items-center pt-5">
-        <CTADownloadLinks />
+      <main>
+        <div className="w-full bg-sp-day-50 dark:bg-sp-black">
+          <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+            <Navbar />
+          </div>
+        </div>
+        <div className="relative h-[100svh] lg:h-screen">
+          <div className="overflow-none absolute h-full w-full">
+            <Image
+              src="/images/img_hero_desktop.jpg"
+              alt="bg-image"
+              quality={100}
+              priority={true}
+              className="-z-20 -mt-12 hidden object-cover sm:hidden md:block"
+              width={0}
+              height={0}
+              sizes="100vw"
+              fill
+            />
+            <Image
+              src="/images/img_hero_mobile.jpg"
+              alt="bg-image-mobile"
+              quality={100}
+              priority={true}
+              className="-z-20 -mt-12 block object-cover sm:block md:hidden"
+              width={0}
+              height={0}
+              sizes="100vw"
+              fill
+            />
+          </div>
+          <div
+            className="absolute h-screen w-full bg-subtle-white dark:bg-subtle-black"
+            id="create-memorial"
+          >
+            <div className="z-50 mx-auto w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+              <CreateMemorialBanner />
+            </div>
+          </div>
+        </div>
+        <div className="z-10 mx-auto w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+          <SearchBanner />
+          <TabSections
+            featured={featured}
+            anniversaries={anniversaries}
+            recent={recent}
+          />
+        </div>
+      </main>
+      <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-3/5">
+        <Footer />
       </div>
-      <FeaturedStory
-        title={featuredStory.title}
-        subtitle={featuredStory.subtitle}
-        imageUrl={featuredStory.imageUrl}
-        featuredStories={featured.items}
-        items={featured.items}
-      />
-      <HomepageSwiper
-        sectionId={anniversaries.id}
-        itemType={anniversaries.itemType}
-        titleTranslation={"section_anniversaries_title"}
-        items={anniversaries.items}
-        title={anniversaries.title}
-      />
-      <FeaturedProject project={featuredProject} />
-      <SearchSpiritusCTA />
-      <CategoriesSwiper
-        sectionId={categories.id}
-        categories={categories.items}
-        itemType={categories.itemType}
-        titleTranslation={"section_categories_title"}
-      />
-      <HomepageSwiper
-        sectionId={discover.id}
-        itemType={discover.itemType}
-        titleTranslation={"section_discover_title"}
-        items={discover.items}
-        title={discover.title}
-      />
-
-      <HomepageSwiper
-        sectionId={featured.id}
-        itemType={featured.itemType}
-        titleTranslation={"section_featured_title"}
-        items={featured.items}
-        featured={true}
-        title={featured.title}
-        subtitle={"section_featured_subtitle"}
-      />
-      <SearchPlacesCTA />
-    </Layout>
+    </>
   );
 }
 
@@ -107,32 +102,22 @@ export default function Home({
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
-  const sections = await GetParsedHomepage();
-  // const sections = {
-  // featuredStory: {},
-  // featured: {},
-  // discover: {},
-  // categories: {},
-  // anniversaries: {},
-  // };
+  const { featured, anniversaries, recent } = await GetParsedHomepage();
+  console.log(anniversaries);
 
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
         "common",
+        "homepage",
         "settings",
         "auth",
-        "banners",
       ])),
       key: `${context.locale}-stories-index-page`,
-      featuredProject: sections.project,
-      featuredStory: sections.featuredStory,
-      featured: sections.featured,
-      discover: sections.discover,
-      categories: sections.categories,
-      anniversaries: sections.anniversaries,
+      featured,
+      anniversaries,
+      recent,
     },
-    // in seconds
     revalidate: 60 * 10, // 10min
   };
 }

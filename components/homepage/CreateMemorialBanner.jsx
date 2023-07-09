@@ -33,8 +33,8 @@ export function CreateMemorialBanner() {
   const [surname, setSurname] = useState("");
 
   return (
-    <div className="z-40 mx-5 mt-24 flex flex-col items-center md:mx-0 2xl:mt-32">
-      <h1 className="mb-8 text-center text-[44px] font-bold leading-tight subpixel-antialiased sm:text-5xl lg:text-6xl xl:text-7xl">
+    <div className="z-40 mx-5 mt-16 flex flex-col items-center md:mx-0 lg:mt-28 2xl:mt-32">
+      <h1 className="mb-6 text-center text-[44px] font-bold leading-none subpixel-antialiased sm:text-5xl lg:text-6xl xl:text-7xl">
         {t("create_memorial_title")}
       </h1>
       <div className="w-full md:max-w-md">

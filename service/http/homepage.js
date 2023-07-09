@@ -1,6 +1,8 @@
 import axios from "axios";
-import { ImagePath } from "../util";
+
 import { API_URL } from "../constants";
+import { ImagePath } from "../util";
+import { MockResponse } from "./hp";
 
 export async function GetHomepage() {
   return await axios.get(`${API_URL}/wapi/homepage`);
@@ -10,41 +12,25 @@ export async function GetHomepage() {
 // Sections are parsed and their imageUrls are expanded
 // to include the full image URL.
 export async function GetParsedHomepage() {
-  const res = await GetHomepage();
+  // const res = await GetHomepage();
+  const res = MockResponse;
   const sections = {
-    featuredStory: {},
-
     featured: {},
-    discover: {},
     categories: {},
     anniversaries: {},
-    project: {},
-
-    // maybe parse memory walk to extract
-    // number of spiritus near user (requires location access)
-    // "memory_walk": [],
+    recent: {},
   };
 
-  if (!res.data?.homeListItems) {
+  if (!res?.homeListItems) {
     return sections;
   }
 
   // does in-place replacements on imageUrl string while iterating
-  res.data.homeListItems.forEach((section) => {
-    if (section.flags.includes("DISCOVERY_SECTION")) {
-      sections.discover.id = section.id;
-      sections.discover.title = section.title;
-      sections.discover.itemType = "STORY";
-
-      sections.discover.items = [];
-      section.items.content.forEach((item, i) => {
-        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
-        sections.discover.items.push(item);
-      });
-    } else if (section.flags.includes("CATEGOIRES_SECTION")) {
+  res.homeListItems.forEach((section) => {
+    if (section.flags.includes("CATEGOIRES_SECTION")) {
       sections.categories.id = section.id;
       sections.categories.title = section.title;
-      sections.categories.itemType = "STORY";
+      sections.categories.itemType = "SECTION";
 
       sections.categories.items = [];
       section.items.content.forEach((item) => {
@@ -71,23 +57,20 @@ export async function GetParsedHomepage() {
         item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
         sections.featured.items.push(item);
       });
-    } else if (section.flags.includes("PROJECTS_SECTION")) {
-        const data = section.items.content[0];
-        data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
-        sections.project.section_id = section.id
-        sections.project.item_id = data.id;
-        sections.project.title = data.title;
-        sections.project.subtitle = data.subtitle;
-    } else if (section.flags.includes("FEATURED_SECTION")) {
-      // this is the featured story
-      if (section.viewType === "FEATURED" && section.items.content.length) {
-        const data = section.items.content[0];
-        data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
-        sections.featuredStory.id = section.id;
-        sections.featuredStory.title = data.title;
-        sections.featuredStory.subtitle = data.subtitle;
-        sections.featuredStory = data;
-      }
+    } else if (section.flags.includes("NEW_SECTION")) {
+      const data = section.items.content[0];
+      data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
+      sections.recent.section_id = section.id;
+      sections.recent.item_id = data.id;
+      sections.recent.title = data.title;
+      sections.recent.subtitle = data.subtitle;
+      sections.recent.itemType = "SPIRITUS";
+
+      sections.recent.items = [];
+      section.items.content.forEach((item) => {
+        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        sections.recent.items.push(item);
+      });
     }
   });
 
