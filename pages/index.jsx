@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import { CTA } from "@/components/homepage/CTA";
+import { CategoryTiles } from "@/components/homepage/Categories";
 import { CreateMemorialBanner } from "@/components/homepage/CreateMemorialBanner";
 import { SearchBanner } from "@/components/homepage/SearchBanner";
 import { TabSections } from "@/components/homepage/TabSections";
@@ -82,16 +84,24 @@ export default function Home({ featured, categories, anniversaries, recent }) {
             </div>
           </div>
         </div>
-        <div className="z-10 mx-auto w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="mx-auto h-[60vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <SearchBanner />
+        </div>
+        <div className="mx-auto min-h-screen w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <TabSections
             featured={featured}
             anniversaries={anniversaries}
             recent={recent}
           />
         </div>
+        <div className="mx-auto mt-32 min-h-[50vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+          <CategoryTiles categories={categories} />
+        </div>
+        <div className="mx-auto w-full bg-gradient-to-b from-day-gradient-start to-day-gradient-stop py-24 dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown">
+          <CTA />
+        </div>
       </main>
-      <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-3/5">
+      <div className="mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-3/5">
         <Footer />
       </div>
     </>
@@ -102,9 +112,8 @@ export default function Home({ featured, categories, anniversaries, recent }) {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
-  const { featured, anniversaries, recent } = await GetParsedHomepage();
-  console.log(anniversaries);
-
+  const { featured, anniversaries, recent, categories } =
+    await GetParsedHomepage();
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
@@ -112,11 +121,13 @@ export async function getStaticProps(context) {
         "homepage",
         "settings",
         "auth",
+        "about",
       ])),
       key: `${context.locale}-stories-index-page`,
       featured,
       anniversaries,
       recent,
+      categories,
     },
     revalidate: 60 * 10, // 10min
   };
