@@ -1,6 +1,7 @@
 import axios from "axios";
-import { ImagePath } from "../util";
+
 import { API_URL } from "../constants";
+import { ImagePath } from "../util";
 
 export async function GetSection(id, page) {
   const p = page ? page : 0;

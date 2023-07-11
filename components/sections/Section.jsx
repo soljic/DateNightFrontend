@@ -1,14 +1,13 @@
 import { useState } from "react";
 
-import Image from "next/legacy/image";
-import Link from "next/link";
-
 import { useTranslation } from "next-i18next";
 
-import { StoryHookIcon } from "../../components/Icons";
-import { Spinner } from "../../components/Status";
-import { GetSection } from "../../service/http/sections";
-import { translateSectionTitle } from "../../utils/translations";
+import { Spinner } from "@/components/Status";
+
+import { GetSection } from "@/service/http/sections";
+
+import { translateSectionTitle } from "@/utils/translations";
+
 import { SpiritusCard, StoryCard } from "../spiritus/Card";
 
 export function SectionGrid({ id, title, isLastPage, initialItems }) {
@@ -51,7 +50,6 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
       <div className="w-full columns-1 space-y-8 md:columns-2 md:space-y-12 lg:columns-3">
         {!!items &&
           items.map((item) => {
-            console.log(item);
             if (item.itemNavigationType === "SPIRITUS_DETAILS") {
               return (
                 <SpiritusCard
@@ -96,53 +94,5 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
         </div>
       )}
     </div>
-  );
-}
-
-function PlaceHolderTile({
-  itemId,
-  title,
-  subtitle,
-  itemType,
-  placeholderText,
-}) {
-  return itemType === "SPIRITUS_DETAILS" ? (
-    <Link href={`/spiritus/${itemId}`} key={title} className="flex flex-col">
-      <div className="to-gradient-stop flex min-h-[248px] w-full grow flex-col justify-between rounded-sp-14 bg-gradient-to-r from-day-gradient-start p-8 shadow-md dark:from-sp-dark-brown dark:to-sp-brown">
-        <p className="text-sp-medlight dark:text-sp-white">{placeholderText}</p>
-        <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-fawn dark:bg-opacity-10">
-          <StoryHookIcon />
-        </div>
-      </div>
-      <div className="mt-2 flex flex-col justify-between">
-        <h3 className="text-lg dark:text-sp-white">
-          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-        </h3>
-        <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
-          {" "}
-          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
-        </p>
-      </div>
-    </Link>
-  ) : (
-    <Link href={`/stories/${itemId}`} key={itemId} className="flex flex-col">
-      <div className="flex min-h-[248px] w-full grow flex-col justify-between rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-8 shadow-md dark:from-sp-dark-brown dark:to-sp-brown">
-        <p className="text-sp-medlight tracking-sp-tighten dark:text-sp-white">
-          {placeholderText}
-        </p>
-        <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-fawn dark:bg-opacity-10">
-          <StoryHookIcon />
-        </div>
-      </div>
-      <div className="mt-2 flex flex-col justify-between">
-        <h3 className="text-lg dark:text-sp-white">
-          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-        </h3>
-        <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
-          {" "}
-          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
-        </p>
-      </div>
-    </Link>
   );
 }

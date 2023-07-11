@@ -1,13 +1,15 @@
-import Link from "next/link";
-import Image from "next/legacy/image";
-
 import { useState } from "react";
+
+import Image from "next/legacy/image";
+import Link from "next/link";
+
 import { useTranslation } from "next-i18next";
 
-import { StoryHookIcon } from "../Icons";
-import { Spinner } from "../Status";
 import { GetSectionItem } from "../../service/http/sections";
 import { translateCategoryTitle } from "../../utils/translations";
+import { StoryHookIcon } from "../Icons";
+import { Spinner } from "../Status";
+import { SpiritusCard, StoryCard } from "../spiritus/Card";
 
 export function ProjectItemGrid({
   section,
@@ -40,7 +42,7 @@ export function ProjectItemGrid({
   return (
     <div className="mb-8 mt-16 flex flex-col items-center lg:mb-24 lg:mt-12">
       <div className="mb-16 flex flex-col items-center">
-        <h1 className="font-bold tracking-tight text-sp-black subpixel-antialiased text-cta dark:text-sp-white">
+        <h1 className="font-bold text-sp-black subpixel-antialiased tracking-tight text-cta dark:text-sp-white">
           {t("project_vukovar_title")}
         </h1>
 
@@ -130,7 +132,7 @@ export function SectionItemGrid({
   return (
     <div className="mb-8 mt-16 flex flex-col items-center lg:mb-24 lg:mt-12">
       <div className="mb-16 flex flex-col items-center">
-        <h1 className="font-bold tracking-tight text-sp-black subpixel-antialiased text-cta dark:text-sp-white">
+        <h1 className="font-bold text-sp-black subpixel-antialiased tracking-tight text-cta dark:text-sp-white">
           {t(translateCategoryTitle(title))}
         </h1>
 
@@ -141,29 +143,30 @@ export function SectionItemGrid({
         )}
       </div>
 
-      <div className="mb-14 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-3 md:gap-x-7 lg:grid-cols-3 xl:gap-x-8">
+      <div className="w-full columns-1 space-y-8 md:columns-2 md:space-y-12 lg:columns-3">
         {!!items &&
           items.map((item) => {
-            if (item.imageUrl) {
+            if (item.itemNavigationType === "SPIRITUS_DETAILS") {
               return (
-                <SectionTile
-                  key={item.itemId}
-                  itemId={item.itemId}
+                <SpiritusCard
+                  key={`tile-${item.itemId}`}
+                  slug={item.itemId}
                   title={item.title}
                   subtitle={item.subtitle}
-                  itemType={item.itemNavigationType}
+                  description={item.placeholderText}
                   imageUrl={item.imageUrl}
                 />
               );
             }
             return (
-              <PlaceHolderTile
+              <StoryCard
                 key={`tile-${item.itemId}`}
-                itemId={item.itemId}
+                spiritusSlug={item.parentId}
+                slug={item.itemId}
                 title={item.title}
-                subtitle={item.subtitle}
-                placeholderText={item.placeholderText}
-                itemType={item.itemNavigationType}
+                subtitle={item.placeholderText}
+                imageUrl={item.imageUrl}
+                tags={item.flags}
               />
             );
           })}

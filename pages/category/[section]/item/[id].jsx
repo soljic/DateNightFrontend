@@ -3,9 +3,10 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../../../../components/layout/Layout";
-import { GetSectionItem } from "../../../../service/http/sections";
-import { SectionItemGrid } from "../../../../components/sections/SectionItem";
+import Layout from "@/components/layout/Layout";
+import { SectionItemGrid } from "@/components/sections/SectionItem";
+
+import { GetSectionItem } from "@/service/http/sections";
 
 export default function Category({
   section,
