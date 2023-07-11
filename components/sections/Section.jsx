@@ -9,6 +9,7 @@ import { StoryHookIcon } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 import { GetSection } from "../../service/http/sections";
 import { translateSectionTitle } from "../../utils/translations";
+import { SpiritusCard, StoryCard } from "../spiritus/Card";
 
 export function SectionGrid({ id, title, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
@@ -47,29 +48,31 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
         )}
       </div>
 
-      <div className="mb-14 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-3 md:gap-x-7 lg:grid-cols-3 xl:gap-x-8">
+      <div className="w-full columns-1 space-y-8 md:columns-2 md:space-y-12 lg:columns-3">
         {!!items &&
           items.map((item) => {
-            if (item.imageUrl) {
+            console.log(item);
+            if (item.itemNavigationType === "SPIRITUS_DETAILS") {
               return (
-                <SectionTile
+                <SpiritusCard
                   key={`tile-${item.itemId}`}
-                  itemId={item.itemId}
+                  slug={item.itemId}
                   title={item.title}
                   subtitle={item.subtitle}
-                  itemType={item.itemNavigationType}
+                  description={item.placeholderText}
                   imageUrl={item.imageUrl}
                 />
               );
             }
             return (
-              <PlaceHolderTile
+              <StoryCard
                 key={`tile-${item.itemId}`}
-                itemId={item.itemId}
+                spiritusSlug={item.parentId}
+                slug={item.itemId}
                 title={item.title}
-                subtitle={item.subtitle}
-                placeholderText={item.placeholderText}
-                itemType={item.itemNavigationType}
+                subtitle={item.placeholderText}
+                imageUrl={item.imageUrl}
+                tags={item.flags}
               />
             );
           })}
@@ -130,52 +133,6 @@ function PlaceHolderTile({
         <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-sp-day-900 bg-opacity-10 p-1.5 dark:bg-sp-fawn dark:bg-opacity-10">
           <StoryHookIcon />
         </div>
-      </div>
-      <div className="mt-2 flex flex-col justify-between">
-        <h3 className="text-lg dark:text-sp-white">
-          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-        </h3>
-        <p className="mt-1 dark:text-sp-white dark:text-opacity-60">
-          {" "}
-          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
-        </p>
-      </div>
-    </Link>
-  );
-}
-
-// Render a Link to SPIRITUS or STORY depending on itemType.
-function SectionTile({ itemId, title, subtitle, imageUrl, itemType }) {
-  return itemType === "SPIRITUS_DETAILS" ? (
-    <Link href={`/spiritus/${itemId}`} key={title} className="group">
-      <div className="group-hover:opacity-75">
-        <Image
-          src={imageUrl}
-          className="rounded-sp-14 object-cover"
-          width={220}
-          height={248}
-          layout="responsive"
-        />
-      </div>
-      <div className="mt-3 flex flex-col justify-between">
-        <h3 className="text-lg dark:text-sp-white">
-          {title.length > 64 ? `${title.substring(0, 64)} ...` : title}
-        </h3>
-        <p className="dark:text-sp-white dark:text-opacity-60">
-          {subtitle.length > 64 ? `${subtitle.substring(0, 64)} ...` : subtitle}
-        </p>
-      </div>
-    </Link>
-  ) : (
-    <Link href={`/stories/${itemId}`} key={title} className="group">
-      <div className="overflow-hidden rounded-xl group-hover:opacity-75">
-        <Image
-          src={imageUrl}
-          className="rounded-sp-14 object-cover"
-          width={220}
-          height={248}
-          layout="responsive"
-        />
       </div>
       <div className="mt-2 flex flex-col justify-between">
         <h3 className="text-lg dark:text-sp-white">

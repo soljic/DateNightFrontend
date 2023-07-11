@@ -49,7 +49,7 @@ export function ImagePlaceholder() {
     <div className="mx-auto flex h-full w-full items-center justify-center rounded-xl border-2 border-sp-day-200 dark:border-2 dark:border-sp-fawn dark:border-opacity-10">
       <div className="mx-auto">
         <svg
-          className="h-16 w-16 text-sp-fawn text-opacity-20"
+          className="h-16 w-16 text-sp-day-400 text-opacity-80"
           viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
