@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import BecomeGuardianCTA from "@/components/about/BecomeGuardianComponent";
+import { CTA } from "@/components/homepage/CTA";
 import { HorizontalDivider } from "@/components/layout/Common";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import {
@@ -134,8 +135,10 @@ export default function StoryPage({
           isGuardian={false}
           isLastPage={isLastPage}
         />
-        <BecomeGuardianCTA />
       </section>
+      <div className="mx-auto w-full bg-gradient-to-b from-day-gradient-start to-day-gradient-stop py-24 dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown">
+        <CTA />
+      </div>
     </FullWidthLayout>
   );
 }
