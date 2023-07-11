@@ -51,9 +51,6 @@ export async function getServerSideProps(context) {
   const { id, title } = context.query;
 
   const res = await GetSection(id);
-  // const res = {
-  //   data: content
-  // }
 
   return {
     props: {

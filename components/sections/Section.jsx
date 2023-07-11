@@ -1,14 +1,12 @@
-import Link from "next/link";
-import Image from "next/legacy/image";
-
 import { useState } from "react";
+
+import Image from "next/legacy/image";
+import Link from "next/link";
+
 import { useTranslation } from "next-i18next";
 
-import { ArrowLeftIcon, StarIcon } from "@heroicons/react/outline";
-
-import { FilterIcon, StoryHookIcon } from "../../components/Icons";
+import { StoryHookIcon } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
-
 import { GetSection } from "../../service/http/sections";
 import { translateSectionTitle } from "../../utils/translations";
 
@@ -38,7 +36,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
   return (
     <div className="mb-8 mt-16 flex flex-col items-center lg:mb-24 lg:mt-12">
       <div className="mb-16 flex flex-col items-center">
-        <h1 className="font-bold tracking-tight text-sp-black subpixel-antialiased text-cta dark:text-sp-white">
+        <h1 className="font-bold text-sp-black subpixel-antialiased tracking-tight text-cta dark:text-sp-white">
           {t(translateSectionTitle(title))}
         </h1>
 
@@ -47,25 +45,6 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
             {t("section_generic_subtitle")}
           </p>
         )}
-
-        {/* 
-        <div className="inline-flex mt-6 items-center gap-3">
-          <Link href="/">
-            <a className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 font-semibold">
-              <ArrowLeftIcon className="w-4 h-4" /> {t("stories")}
-            </a>
-          </Link>
-          <div className="border-r-3 h-5 w-1 border-sp-brown rounded-sm"></div>
-
-          <button className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 font-semibold">
-            <StarIcon className="w-4 h-4 text-sp-black dark:text-sp-white" />{" "}
-            {t("action_favourite")}
-          </button>
-          <button className="dark:bg-sp-medlight border border-sp-lighter dark:border-sp-medium hover:bg-gradient-to-r from-sp-day-300 to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown focus:outline-none inline-flex items-center gap-1 rounded-full py-2 px-4 font-semibold">
-            <FilterIcon width={4} height={4} /> {t("Filter")}
-          </button>
-        </div>
-          */}
       </div>
 
       <div className="mb-14 grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 md:grid-cols-3 md:gap-x-7 lg:grid-cols-3 xl:gap-x-8">

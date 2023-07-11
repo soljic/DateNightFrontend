@@ -58,12 +58,9 @@ export async function GetParsedHomepage() {
         sections.featured.items.push(item);
       });
     } else if (section.flags.includes("NEW_SECTION")) {
-      const data = section.items.content[0];
-      data.imageUrl = data.imageUrl ? ImagePath(data.imageUrl) : null;
-      sections.recent.section_id = section.id;
-      sections.recent.item_id = data.id;
-      sections.recent.title = data.title;
-      sections.recent.subtitle = data.subtitle;
+      sections.recent.id = section.id;
+      sections.recent.title = section.title;
+      sections.recent.subtitle = section.subtitle;
       sections.recent.itemType = "SPIRITUS";
 
       sections.recent.items = [];
