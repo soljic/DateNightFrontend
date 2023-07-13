@@ -18,6 +18,9 @@ jobs:
           NEXT_FACEBOOK_DOMAIN_ID: t66tfbeww0ftnvsiw1ifcb0739nzk5
           NEXT_FACEBOOK_PIXEL_ID: '2128824390633412'
         with:
+          proxy_host: ${{ secrets.AWS_PROXY_HOST }}
+          proxy_username: ${{ secrets.AWS_PROXY_USERNAME }}
+          proxy_key: ${{ secrets.AWS_PROXY_KEY }}
           host: ${{ secrets.AWS_PROD_HOST }}
           username: ${{ secrets.AWS_PROD_USERNAME }}
           key: ${{ secrets.AWS_PROD_KEY }}
@@ -35,26 +38,26 @@ jobs:
             exit 0
 
   deploy:
-    runs-on: ubuntu-latest
-    needs: remote-build
-    steps:
-      - name: Deploy Production
-        uses: appleboy/ssh-action@master
-        env:
-          NEXT_JWT_SECRET: ${{ secrets.NEXT_JWT_SECRET }}
-          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          NEXT_API_URL: https://app.spiritusapp.com
-          NEXT_PUBLIC_GTAG_ID: G-V676N67D7Y
-          NEXT_FACEBOOK_DOMAIN_ID: t66tfbeww0ftnvsiw1ifcb0739nzk5
-          NEXT_FACEBOOK_PIXEL_ID: '2128824390633412'
-        with:
-          host: ${{ secrets.AWS_PROD_HOST }}
-          username: ${{ secrets.AWS_PROD_USERNAME }}
-          key: ${{ secrets.AWS_PROD_KEY }}
-          envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET,NEXT_PUBLIC_GTAG_ID,NEXT_FACEBOOK_DOMAIN_ID,NEXT_FACEBOOK_PIXEL_ID
-          script: |
-            cd webapp
-            echo "## Building and starting containers"
-            echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET\nNEXT_PUBLIC_GTAG_ID=$NEXT_PUBLIC_GTAG_ID\nNEXT_FACEBOOK_DOMAIN_ID=$NEXT_FACEBOOK_DOMAIN_ID\nNEXT_FACEBOOK_PIXEL_ID=$NEXT_FACEBOOK_PIXEL_ID" > .env
-            docker compose up spiritus-web -d
-            echo "## DEPLOY DONE ##"
+    # runs-on: ubuntu-latest
+    # needs: remote-build
+    # steps:
+    #   - name: Deploy Production
+    #     uses: appleboy/ssh-action@master
+    #     env:
+    #       NEXT_JWT_SECRET: ${{ secrets.NEXT_JWT_SECRET }}
+    #       NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+    #       NEXT_API_URL: https://app.spiritusapp.com
+    #       NEXT_PUBLIC_GTAG_ID: G-V676N67D7Y
+    #       NEXT_FACEBOOK_DOMAIN_ID: t66tfbeww0ftnvsiw1ifcb0739nzk5
+    #       NEXT_FACEBOOK_PIXEL_ID: '2128824390633412'
+    #     with:
+    #       host: ${{ secrets.AWS_PROD_HOST }}
+    #       username: ${{ secrets.AWS_PROD_USERNAME }}
+    #       key: ${{ secrets.AWS_PROD_KEY }}
+    #       envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET,NEXT_PUBLIC_GTAG_ID,NEXT_FACEBOOK_DOMAIN_ID,NEXT_FACEBOOK_PIXEL_ID
+    #       script: |
+    #         cd webapp
+    #         echo "## Building and starting containers"
+    #         echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET\nNEXT_PUBLIC_GTAG_ID=$NEXT_PUBLIC_GTAG_ID\nNEXT_FACEBOOK_DOMAIN_ID=$NEXT_FACEBOOK_DOMAIN_ID\nNEXT_FACEBOOK_PIXEL_ID=$NEXT_FACEBOOK_PIXEL_ID" > .env
+    #         docker compose up spiritus-web -d
+    #         echo "## DEPLOY DONE ##"
