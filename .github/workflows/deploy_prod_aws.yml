@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build container on remote host
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.9
         env:
           NEXT_JWT_SECRET: ${{ secrets.NEXT_JWT_SECRET }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
