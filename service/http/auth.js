@@ -83,3 +83,20 @@ export async function ProfileSpiritus(accessToken, offset, limit) {
   });
   return res;
 }
+
+// updateData = { name, surname, email, phone }
+export async function UpdateProfile(accessToken, updateData) {
+  return await axios.put(`${API_URL}/wapi/user/account`, updateData, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+export async function DeleteProfile(accessToken) {
+  return await axios.delete(`${API_URL}/wapi/user/account`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}

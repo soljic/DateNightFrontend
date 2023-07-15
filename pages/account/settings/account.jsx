@@ -5,11 +5,18 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import FullWidthLayout from "@/components/layout/LayoutV2";
-import { GuardianID } from "@/components/settings/Guardian";
+import { AccountSettings } from "@/components/settings/Account";
 import { MobileSidebar } from "@/components/settings/MobileSidebar";
 import { Sidebar } from "@/components/settings/Sidebar";
 
-export default function GuardianIDPage() {
+import { GetBasicProfileInfo, GetProfile } from "@/service/http/auth";
+
+export default function AccountSettingsPage({
+  name,
+  surname,
+  email,
+  phoneNumber,
+}) {
   const { data: session } = useSession();
   const { t } = useTranslation(["settings"]);
 
@@ -23,13 +30,18 @@ export default function GuardianIDPage() {
       <section className="mx-auto min-h-screen w-full p-2 pt-5 lg:w-2/3 xl:w-2/3 2xl:w-2/5">
         <div className="grid w-full grid-cols-1 md:grid-cols-4">
           <div className="col-span-1 hidden sm:hidden md:block">
-            <Sidebar selectedIndex={2} />
+            <Sidebar selectedIndex={0} />
           </div>
           <div className="md:col-span-1 md:hidden">
-            <MobileSidebar selectedIndex={2} />
+            <MobileSidebar selectedIndex={0} />
           </div>
           <div className="flex justify-start md:col-span-3">
-            <GuardianID guardianID={session?.user.code || ""} />
+            <AccountSettings
+              initialName={name}
+              initialSurname={surname}
+              initialEmail={email}
+              initialPhoneNumber={phoneNumber}
+            />
           </div>
         </div>
       </section>
@@ -49,10 +61,19 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const res = await GetProfile(session.user.accessToken);
   return {
     props: {
-      key: `${context.locale}-settings-guardian-id`,
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      name: res.data.name || "",
+      surname: res.data.surname || "",
+      email: res.data.email || "",
+      phoneNumber: res.data.phoneNumber || "",
+      key: `${context.locale}-settings-account-basic`,
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "account",
+        "settings",
+      ])),
     },
   };
 }

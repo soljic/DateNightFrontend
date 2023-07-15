@@ -43,15 +43,12 @@ export function SettingsSpiritusIcon({ className }) {
   );
 }
 
-export function SettingsSuggestionsIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsSuggestionsIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
       width="14"
       height="16"
+      className={className}
       viewBox="0 0 14 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -61,13 +58,10 @@ export function SettingsSuggestionsIcon({ width, height }) {
   );
 }
 
-export function SettingsAccountIcon({ width, height }) {
-  const w = width ? `w-${width}` : `w-6`;
-  const h = height ? `h-${height}` : `h-6`;
-
+export function SettingsAccountIcon({ className }) {
   return (
     <svg
-      className={`${w} ${h} fill-sp-dark-fawn dark:fill-sp-white`}
+      className={className}
       width="14"
       height="16"
       viewBox="0 0 14 16"

@@ -27,10 +27,10 @@ export default function SpiritusPage({ spiritus, isLastPage }) {
       <section className="mx-auto min-h-screen w-full p-2 pt-5 lg:w-2/3 xl:w-2/3 2xl:w-2/5">
         <div className="grid w-full grid-cols-1 md:grid-cols-4">
           <div className="col-span-1 hidden sm:hidden md:block">
-            <Sidebar selectedIndex={0} />
+            <Sidebar selectedIndex={1} />
           </div>
           <div className="md:col-span-1 md:hidden">
-            <MobileSidebar selectedIndex={0} />
+            <MobileSidebar selectedIndex={1} />
           </div>
           <div className="col-span-1 md:col-span-3">
             <MySpiritusGrid spiritus={spiritus} isLastPage={isLastPage} />

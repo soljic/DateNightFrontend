@@ -1,0 +1,16 @@
+{
+  "account": "Postavke računa",
+  "name": "Ime",
+  "surname": "Prezime",
+  "email": "Email adresa",
+  "phone": "Broj telefona",
+
+  "save": "Spremi",
+  "cancel": "Otkaži",
+  "reset_password": "Resetiraj lozinku",
+  "change_password": "Promijeni lozinku",
+  "deactivate_account": "Deaktiviraj račun",
+
+  "message_save_success": "Promjene spremljene.",
+  "message_save_failed": "Promjene nisu spremljene."
+}

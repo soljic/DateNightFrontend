@@ -32,15 +32,15 @@ export function MobileSidebar({ selectedIndex }) {
 
   const menuItems = [
     {
+      name: t("account"),
+      href: "/account/settings/account",
+      icon: <SettingsAccountIcon className="h-5 w-5 fill-sp-dark-fawn" />,
+    },
+    {
       name: t("spiritus"),
       href: "/account/settings/my-spiritus",
       icon: <SettingsSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn" />,
     },
-    // {
-    //   name: t("account"),
-    //   href: "/",
-    //   icon: <SettingsAccountIcon width={5} height={5} />,
-    // },
     // {
     //   name: t("saved"),
     //   href: "/",

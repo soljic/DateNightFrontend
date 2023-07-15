@@ -1,0 +1,16 @@
+{
+  "account": "Account",
+  "name": "Name",
+  "surname": "Surname",
+  "email": "Email address",
+  "phone": "Phone number",
+
+  "save": "Save",
+  "cancel": "Cancel",
+  "reset_password": "Reset password",
+  "change_password": "Change password",
+  "deactivate_account": "Deactivate account",
+
+  "message_save_success": "Changes saved.",
+  "message_save_failed": "Changes were not saved."
+}
