@@ -41,16 +41,19 @@
 
   "create_memorial": "Create a Memorial",
   "create_memorial_title": "Save memories, forever.",
-  "create_memorial_subtitle": "Enter name for your Spiritus Memorial",
+  "create_memorial_subtitle": "Enter the name for your loved one",
   "memorials_count_text": "memorials",
   "users_count_text": "users",
   "rating_count_text": "rating",
 
 
   "create_spiritus": "Create Spiritus",
+  "create_spiritus_memorial": "Create memorijal",
   "create_spiritus_subtitle": "Preserve the life of your loved ones through storytelling.",
   "goto_search": "Go to search",
   "search_placeholder": "Search",
+  "search_memorials_placeholder": "Search Spiritus Memorials",
+  "search_memorials_title": "Spiritus keeps memories alive through storytelling.",
   "searching": "Searching...",
   "search_results": "results",
   "search_not_found_part_1": "Sorry, we found no results for",

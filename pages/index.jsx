@@ -46,7 +46,7 @@ export default function Home({ featured, categories, anniversaries, recent }) {
       </Head>
       <main>
         <div className="w-full bg-sp-day-50 dark:bg-sp-black">
-          <div className="z-10 mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+          <div className="z-10 mx-auto w-full max-w-7xl p-2">
             <Navbar />
           </div>
         </div>
@@ -94,14 +94,14 @@ export default function Home({ featured, categories, anniversaries, recent }) {
             recent={recent}
           />
         </div>
-        <div className="mx-auto mt-32 min-h-[50vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="mx-auto my-32 min-h-[50vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <CategoryTiles categories={categories} />
         </div>
         <div className="mx-auto w-full bg-gradient-to-b from-day-gradient-start to-day-gradient-stop py-24 dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown">
           <CTA />
         </div>
       </main>
-      <div className="mx-auto w-full p-2 md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-3/5">
+      <div className="mx-auto w-full max-w-7xl p-2">
         <Footer />
       </div>
     </>

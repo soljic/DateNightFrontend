@@ -41,16 +41,19 @@
 
   "create_memorial": "Sačuvaj uspomenu",
   "create_memorial_title": "Sačuvaj uspomene, zauvijek.",
-  "create_memorial_subtitle": "Unesi ime osobe koju želiš sačuvati",
+  "create_memorial_subtitle": "Upiši ime svoje voljene osobe",
 
   "memorials_count_text": "uspomena",
   "users_count_text": "korisnika",
   "rating_count_text": "ocjena",
 
   "create_spiritus": "Kreiraj Spiritus",
+  "create_spiritus_memorial": "Kreiraj memorijal",
   "create_spiritus_subtitle": "Spiritus je digitalna uspomena sačuvana kroz priče.",
   "goto_search": "Pretraži",
   "search_placeholder": "Pretraži",
+  "search_memorials_placeholder": "Pretraži Spiritus memorijale",
+  "search_memorials_title": "Spiritus čuva uspomene kroz priče.",
   "searching": "Pretražujem...",
   "search_results": "rezultata",
   "search_not_found_part_1": "Nismo pronašli rezultate za",

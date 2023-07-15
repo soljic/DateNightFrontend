@@ -20,11 +20,11 @@ export function CategoryTiles({ categories }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-5 p-1">
+    <div className="mx-3.5 md:mx-5 md:p-1">
       <h2 className="mb-4 text-start font-bold text-2xl">
         {t("section_categories_title")}
       </h2>
-      <div className=" mt-5 rounded-sp-10 bg-gradient-to-b from-day-gradient-start to-day-gradient-stop p-8 text-sp-black dark:from-sp-fawn/40 dark:to-sp-fawn/30 dark:text-sp-white md:w-full lg:mt-2">
+      <div className="mt-5 rounded-sp-10 bg-gradient-to-b from-day-gradient-start to-day-gradient-stop px-4 py-4 text-sp-black dark:from-sp-fawn/40 dark:to-sp-fawn/30 dark:text-sp-white md:w-full md:px-8 md:py-8 lg:mt-2">
         {categories && categories?.items.length ? (
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {categories.items.map((item) => (
