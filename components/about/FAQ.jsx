@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { PlusIcon, XIcon } from "@heroicons/react/outline";
-
-import { useTranslation } from "next-i18next";
-
-import { CheckIcon } from "@heroicons/react/outline";
 import { useState } from "react";
+
+import Link from "next/link";
+
+import { PlusIcon, XIcon } from "@heroicons/react/outline";
+import { CheckIcon } from "@heroicons/react/outline";
+import { useTranslation } from "next-i18next";
 
 export default function FAQSection() {
   const { t } = useTranslation(["about", "faq"]);
