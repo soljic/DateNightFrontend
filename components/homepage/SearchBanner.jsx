@@ -6,30 +6,21 @@ import Link from "next/link";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 
-import { MemoryGuardianIcon } from "../spiritus/Icons";
-
-const p1 = "Search for over";
-const p2 = "memorials from biggest Croatian cemeteries.";
-
 export function SearchBanner() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-5 flex h-[40vh] items-center justify-center md:mx-0 lg:h-[55vh] lg:justify-evenly">
+    <div className="mx-5 flex min-h-[40vh] items-center justify-center md:mx-0 lg:h-[55vh] lg:justify-evenly">
       <div className="flex w-full max-w-2xl flex-col items-center space-y-4 md:space-y-8 lg:items-start">
-        <h2 className="text-center font-bold leading-none subpixel-antialiased text-3xl sm:text-4xl md:text-[44px] lg:text-start xl:text-5xl">
+        <h2 className="text-center font-bold subpixel-antialiased text-3xl tracking-sp-tighten sm:text-4xl md:text-[44px] md:leading-[3rem] lg:pr-10 lg:text-start xl:text-5xl">
           {t("search_memorials_title")}
         </h2>
         <div className="max-w-[480px]">
           <SearchInput />
-          <p className="mt-2.5 font-normal text-sm">
-            {p1}{" "}
-            <span className="font-medium">
-              <MemoryGuardianIcon className="mr-0.5 inline-block h-5 w-5 fill-sp-black dark:fill-sp-white" />
-              700k
-            </span>{" "}
-            {p2}
-          </p>
+          <p
+            className="mt-2.5 whitespace-pre-line font-medium leading-5 text-sm"
+            dangerouslySetInnerHTML={{ __html: t("search_memorials_subtitle") }}
+          ></p>
         </div>
       </div>
       <div className="hidden lg:block">
@@ -98,7 +89,7 @@ function SearchInput() {
             onChange={(e) => {
               setSearchTerm(e.target.value);
             }}
-            className="block w-full rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 pl-10 text-gray-900 placeholder-sp-day-400 outline-none ring-inset dark:border-sp-gray dark:bg-sp-black dark:text-sp-white placeholder:text-sm md:placeholder:text-base"
+            className="block w-full rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 pl-10 text-gray-900 placeholder-sp-day-400 outline-none ring-inset placeholder:text-sm dark:border-sp-gray dark:bg-sp-black dark:text-sp-white md:placeholder:text-base"
             placeholder={`${t("search_memorials_placeholder")}`}
           />
         </div>

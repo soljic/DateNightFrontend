@@ -121,7 +121,7 @@ function SeeMoreButton({ sectionId, title }) {
         className="flex w-full items-center justify-center rounded-xl border border-black bg-sp-day-50 px-4 py-2 text-center font-medium text-sp-black text-lg dark:border-sp-day-400 dark:bg-sp-black dark:text-sp-white xl:py-3"
         href={`/section/id/${sectionId}?title=${title}`}
       >
-        {`${t("action_show_more_from")} ${title}`}
+        {t("explore_more_memories")}
         <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
       </Link>
     </div>

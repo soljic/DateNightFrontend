@@ -84,7 +84,7 @@ export default function Home({ featured, categories, anniversaries, recent }) {
             </div>
           </div>
         </div>
-        <div className="mx-auto h-[60vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="mx-auto mb-16 min-h-[60vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <SearchBanner />
         </div>
         <div className="mx-auto min-h-screen w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
