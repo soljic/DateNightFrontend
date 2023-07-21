@@ -2,7 +2,8 @@ import axios from "axios";
 
 import { API_URL } from "../constants";
 import { ImagePath } from "../util";
-import { MockResponse } from "./hp";
+
+// import { MockResponse } from "./hp";
 
 export async function GetHomepage() {
   return await axios.get(`${API_URL}/wapi/homepage`);
@@ -12,8 +13,8 @@ export async function GetHomepage() {
 // Sections are parsed and their imageUrls are expanded
 // to include the full image URL.
 export async function GetParsedHomepage() {
-  // const res = await GetHomepage();
-  const res = MockResponse;
+  const res = await GetHomepage();
+
   const sections = {
     featured: {},
     categories: {},
@@ -21,12 +22,12 @@ export async function GetParsedHomepage() {
     recent: {},
   };
 
-  if (!res?.homeListItems) {
+  if (!res?.data?.homeListItems) {
     return sections;
   }
 
   // does in-place replacements on imageUrl string while iterating
-  res.homeListItems.forEach((section) => {
+  res.data.homeListItems.forEach((section) => {
     if (section.flags.includes("CATEGOIRES_SECTION")) {
       sections.categories.id = section.id;
       sections.categories.title = section.title;
@@ -34,7 +35,9 @@ export async function GetParsedHomepage() {
 
       sections.categories.items = [];
       section.items.content.forEach((item) => {
-        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        item.imageObject.url = item.imageObject.url
+          ? ImagePath(item.imageObject.url)
+          : null;
         sections.categories.items.push(item);
       });
     } else if (section.flags.includes("ANNIVERSARIES_SECTION")) {
@@ -44,7 +47,9 @@ export async function GetParsedHomepage() {
 
       sections.anniversaries.items = [];
       section.items.content.forEach((item) => {
-        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        item.imageObject.url = item.imageObject.url
+          ? ImagePath(item.imageObject.url)
+          : null;
         sections.anniversaries.items.push(item);
       });
     } else if (section.flags.includes("FEATURED_STORIES")) {
@@ -54,7 +59,9 @@ export async function GetParsedHomepage() {
 
       sections.featured.items = [];
       section.items.content.forEach((item) => {
-        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        item.imageObject.url = item.imageObject.url
+          ? ImagePath(item.imageObject.url)
+          : null;
         sections.featured.items.push(item);
       });
     } else if (section.flags.includes("NEW_SECTION")) {
@@ -65,7 +72,9 @@ export async function GetParsedHomepage() {
 
       sections.recent.items = [];
       section.items.content.forEach((item) => {
-        item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+        item.imageObject.url = item.imageObject.url
+          ? ImagePath(item.imageObject.url)
+          : null;
         sections.recent.items.push(item);
       });
     }

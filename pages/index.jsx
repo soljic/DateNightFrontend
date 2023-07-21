@@ -114,6 +114,7 @@ export default function Home({ featured, categories, anniversaries, recent }) {
 export async function getStaticProps(context) {
   const { featured, anniversaries, recent, categories } =
     await GetParsedHomepage();
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [

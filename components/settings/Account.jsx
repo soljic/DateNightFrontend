@@ -30,7 +30,7 @@ export function AccountSettings({
   const save = async (e) => {
     try {
       setPending(true);
-      const data = { name, surname, email, phone: phoneNumber };
+      const data = { name, phone: phoneNumber, lastName: surname };
       const res = await UpdateProfile(session.user.accessToken, data);
       onSuccess();
       setPending(false);
@@ -145,11 +145,12 @@ export function AccountSettings({
                   <div className="my-1 rounded">
                     <input
                       value={email}
+                      disabled={true}
                       onChange={(e) => {
                         setEmail(e.target.value);
                       }}
                       placeholder={t("email")}
-                      className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                      className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-100 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
                     />
                   </div>
                 </div>

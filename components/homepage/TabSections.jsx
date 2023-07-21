@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
@@ -72,8 +71,8 @@ function FeaturedStories({ featured }) {
               slug={s.itemId}
               title={s.title}
               subtitle={s.placeholderText}
-              imageUrl={s.imageUrl}
-              tags={s.flags}
+              image={s.imageObject}
+              tags={[]}
               key={`story-elem-featured-${s.title}-${s.itemId}`}
             />
           ))}
@@ -99,7 +98,7 @@ function FeaturedSpiritus({ featured }) {
               title={s.title}
               subtitle={s.subtitle}
               description={s.placeholderText}
-              imageUrl={s.imageUrl}
+              image={s.imageObject}
               key={`spiritus-elem-featured-${s.title}-${s.itemId}`}
             />
           ))}

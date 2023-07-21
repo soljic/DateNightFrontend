@@ -55,6 +55,15 @@ export default function Cropper() {
 }
 
 export async function getStaticProps(context) {
+  if (process.env.NODE_ENV === "production") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [

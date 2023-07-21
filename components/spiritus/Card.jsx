@@ -3,22 +3,21 @@ import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
 
-import { StoryHookIcon } from "../Icons";
 import { ImagePlaceholder } from "../layout/Common";
 
-export function SpiritusCard({ slug, title, subtitle, imageUrl, description }) {
+export function SpiritusCard({ slug, title, subtitle, image, description }) {
   const { t } = useTranslation(["common", "settings"]);
 
   return (
     <div className="flex break-inside-avoid flex-col">
       <Link href={`/spiritus/${slug}`}>
-        {!!imageUrl ? (
+        {!!image && image.url ? (
           <div className="h-full w-full">
             <Image
-              src={imageUrl}
+              src={image.url}
               alt={`featured-spiritus-image-${slug}`}
-              height={0}
-              width={0}
+              height={image.height}
+              width={image.width}
               sizes="100vw"
               className="aspect-auto h-auto w-full rounded-sp-14 object-cover"
             />
@@ -57,7 +56,7 @@ export function StoryCard({
   spiritusSlug,
   title,
   subtitle,
-  imageUrl,
+  image,
   tags,
 }) {
   const { t } = useTranslation("common");
@@ -70,13 +69,13 @@ export function StoryCard({
   }
   return (
     <article className="break-inside-avoid-column text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white">
-      {!!imageUrl ? (
+      {!!image && image.url ? (
         <div className="h-full w-full">
           <Image
-            src={imageUrl}
+            src={image.url}
             alt={`featured-story-image-${slug}`}
-            height={0}
-            width={0}
+            height={image.height}
+            width={image.width}
             sizes="100vw"
             className="aspect-auto h-auto w-full rounded-sp-14 object-cover"
           />

@@ -11,7 +11,11 @@ export async function GetSection(id, page) {
   );
 
   res.data.items.content.forEach((item) => {
-    item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+    if (item?.imageObject.url) {
+      item.imageObject.url = item.imageObject.url
+        ? ImagePath(item.imageObject.url)
+        : null;
+    }
   });
 
   return res;
@@ -25,7 +29,11 @@ export async function GetSectionItem(sectionId, itemId, page) {
   );
 
   res.data.items.content.forEach((item) => {
-    item.imageUrl = item.imageUrl ? ImagePath(item.imageUrl) : null;
+    if (item?.imageObject.url) {
+      item.imageObject.url = item.imageObject.url
+        ? ImagePath(item.imageObject.url)
+        : null;
+    }
   });
 
   return res;

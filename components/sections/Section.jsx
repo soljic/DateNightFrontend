@@ -58,7 +58,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
                   title={item.title}
                   subtitle={item.subtitle}
                   description={item.placeholderText}
-                  imageUrl={item.imageUrl}
+                  image={item.imageObject}
                 />
               );
             }
@@ -69,7 +69,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems }) {
                 slug={item.itemId}
                 title={item.title}
                 subtitle={item.placeholderText}
-                imageUrl={item.imageUrl}
+                image={item.imageObject}
                 tags={item.flags}
               />
             );
