@@ -40,7 +40,7 @@
   "cta_get_spiritus_button": "Preuzmi Spiritus",
 
   "create_memorial": "Sačuvaj uspomenu",
-  "create_memorial_title": "Sačuvajte svoja sjećanja, vječno",
+  "create_memorial_title": "Sačuvaj sjećanja, vječno",
   "create_memorial_subtitle": "Upišite ime svoje voljene osobe koja je preminula",
 
   "memorials_count_text": "uspomena",
@@ -51,10 +51,10 @@
   "create_spiritus_memorial": "Kreiraj memorijal",
   "create_spiritus_subtitle": "Spiritus je digitalna uspomena sačuvana kroz priče.",
   "goto_search": "Pretraži",
-  "search_placeholder": "Pretraži",
-  "search_memorials_placeholder": "Pretraži Spiritus memorijale",
+  "search_placeholder": "Traži memorijal",
+  "search_memorials_placeholder": "Upišite ime",
   "search_memorials_title": "Spiritus je platforma za vječno čuvanje uspomena kroz životne priče.",
-  "search_memorials_subtitle": "Više od 700 tisuća životnih priča spašeno je od zaborava.\nPretraži jesu li memorijali tvojih najmilijih već postali dio našega muzeja.",
+  "search_memorials_subtitle": "Pretražite jesu li memorijali Vaših najmilijih već postali dio našega muzeja.",
   "searching": "Pretražujem...",
   "search_results": "rezultata",
   "search_not_found_part_1": "Nismo pronašli rezultate za",

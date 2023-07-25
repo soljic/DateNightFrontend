@@ -15,12 +15,11 @@ export function SearchBanner() {
         <h2 className="text-center font-bold subpixel-antialiased text-3xl tracking-sp-tighten sm:text-4xl md:text-[44px] md:leading-[3rem] lg:pr-10 lg:text-start xl:text-5xl">
           {t("search_memorials_title")}
         </h2>
-        <div className="max-w-[480px]">
+        <div className="max-w-lg">
           <SearchInput />
-          <p
-            className="mt-2.5 whitespace-pre-line font-medium leading-5 text-sm"
-            dangerouslySetInnerHTML={{ __html: t("search_memorials_subtitle") }}
-          ></p>
+          <p className="mt-2.5 whitespace-pre-line font-medium leading-5 text-sm">
+            {t("search_memorials_subtitle")}
+          </p>
         </div>
       </div>
       <div className="hidden lg:block">
@@ -62,7 +61,7 @@ function SearchInput() {
               setSearchTerm(e.target.value);
             }}
             className="block w-full rounded-none rounded-l-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 pl-10 text-gray-900 placeholder-sp-day-400 outline-none ring-inset dark:border-sp-gray dark:bg-sp-black dark:text-sp-white"
-            placeholder={`${t("search_placeholder")} Spiritus`}
+            placeholder={t("search_memorials_placeholder")}
           />
         </div>
         <Link

@@ -8,14 +8,14 @@
 	"hero_contact": "Javi nam se",
 
 	"term_mission": "Misija",
-	"features_title": "Život je puno više od imena i datuma.",
-	"features_subtitle": "Život su priče koje Vaši voljeni ostavljaju za sobom. Zato smo napravili platformu za čuvanje životnih uspomena.",
+	"features_title": "Život je više od imena i datuma zapisanih u kamenu.",
+	"features_subtitle": "Život su priče koje Vaši voljeni ostavljaju za sobom.\n\nSačuvajte sjećanja na svoje najmilije trajno, sigurno i lako u prvom digitalnom muzeju priča.",
 
 	"feature_1_title": "Vaša su sjećanja Vaše najveće blago!",
 	"feature_1_subtitle": "Sjećanja na Vaše najmilije mogu biti pohranjena prelijepo, sigurno i brzo, uz najnapredniju dostupnu tehnologiju.",
 	"feature_1_list_1": "3000+ Čuvara Uspomena",
-	"feature_1_list_2": "150+ izvrsnih 5.0★ recenzija",
-	"feature_1_list_3": "Stvaranje vječnosti pomoću modernih tehnologija.",
+	"feature_1_list_2": "150+ pozitivnih 5.0★ recenzija",
+	"feature_1_list_3": "Naša tehnologija osigurava vječnost",
 
 	"feature_2_title": "Najbolje životne priče nisu u knjigama.",
 	"feature_2_subtitle": "Otkrij sve neobične priče neznanih junaka iz svog okruženja. Čitaj o tome kako su se zaljubljivali, nadilazili životne nedaće i učinili svoje živote vrijednim pamćenja.",
@@ -52,6 +52,5 @@
 	"faq_cta_text": "Javite nam se",
 	"faq_text": "ako imate dodatnih upita.",
 
-	"learn_more_about_us": "Više o nama"
-
+	"learn_more_about_us": "Saznaj više o Spiritusu"
 }

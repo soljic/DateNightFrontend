@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { Disclosure } from "@headlessui/react";
 import { Popover, Transition } from "@headlessui/react";
-import { DotsHorizontalIcon } from "@heroicons/react/outline";
+import { DotsHorizontalIcon, MenuIcon } from "@heroicons/react/outline";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
@@ -44,7 +44,7 @@ export function AccesibilityMenu() {
 				${open ? "" : "text-opacity-90"}
 				z-10 items-center rounded-full px-2 py-2 font-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:hover:from-sp-dark-brown dark:hover:to-sp-brown`}
           >
-            <DotsHorizontalIcon
+            <MenuIcon
               className="h-6 w-6 text-sp-black dark:text-sp-white"
               aria-hidden="true"
             />

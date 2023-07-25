@@ -51,10 +51,10 @@
   "create_spiritus_memorial": "Create memorijal",
   "create_spiritus_subtitle": "Preserve the life of your loved ones through storytelling.",
   "goto_search": "Go to search",
-  "search_placeholder": "Search",
-  "search_memorials_placeholder": "Search Spiritus Memorials",
-  "search_memorials_title": "Spiritus is a platform for creating and storing digital memorials through storytelling.",
-  "search_memorials_subtitle": "More than 700k life stories are saved from the oblivion.\nExplore if the memorial of your dearly departed already resides within the museum.",
+  "search_placeholder": "Search Memorial",
+  "search_memorials_placeholder": "Enter name",
+  "search_memorials_title": "Spiritus is a platform for creating digital memorials through storytelling.",
+  "search_memorials_subtitle": "Explore if the memorial of your dearly departed already resides within the museum.",
   "searching": "Searching...",
   "search_results": "results",
   "search_not_found_part_1": "Sorry, we found no results for",
@@ -194,7 +194,7 @@
   "section_featured_subtitle": "Explore the most memorable Stories.",
 
   "section_anniversaries_title": "Anniversaries",
-  "section_categories_title": "Discover life stories through topics",
+  "section_categories_title": "Discover life stories by topics",
   "section_generic_subtitle": "The best stories that we think are on Spiritus.",
 
   "action_favourite": "Favourite",
