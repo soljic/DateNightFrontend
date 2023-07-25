@@ -59,7 +59,7 @@ jobs:
           envs: NEXT_API_URL,NEXT_JWT_SECRET,NEXTAUTH_SECRET,NEXT_PUBLIC_GTAG_ID,NEXT_FACEBOOK_DOMAIN_ID,NEXT_FACEBOOK_PIXEL_ID
           script: |
             cd webapp
-            echo "## Building and starting containers"
+            echo "## Building and starting containers on AWS"
             echo -e "NEXT_API_URL=$NEXT_API_URL\nNEXT_JWT_SECRET=$NEXT_JWT_SECRET\nNEXTAUTH_SECRET=$NEXTAUTH_SECRET\nNEXT_PUBLIC_GTAG_ID=$NEXT_PUBLIC_GTAG_ID\nNEXT_FACEBOOK_DOMAIN_ID=$NEXT_FACEBOOK_DOMAIN_ID\nNEXT_FACEBOOK_PIXEL_ID=$NEXT_FACEBOOK_PIXEL_ID" > .env
-            docker compose up spiritus-web -d --build
+            docker compose up -d --build
             echo "## DEPLOY DONE ##"
