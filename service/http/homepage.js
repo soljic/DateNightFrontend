@@ -40,9 +40,11 @@ export async function GetParsedHomepage(lang) {
 
       sections.categories.items = [];
       section.items.content.forEach((item) => {
-        item.imageObject.url = item.imageObject.url
-          ? ImagePath(item.imageObject.url)
-          : null;
+        if (item?.imageObject?.url) {
+          item.imageObject.url = item.imageObject.url
+            ? ImagePath(item.imageObject.url)
+            : null;
+        }
         sections.categories.items.push(item);
       });
     } else if (section.flags.includes("ANNIVERSARIES_SECTION")) {
@@ -51,10 +53,13 @@ export async function GetParsedHomepage(lang) {
       sections.anniversaries.itemType = "SPIRITUS";
 
       sections.anniversaries.items = [];
+
       section.items.content.forEach((item) => {
-        item.imageObject.url = item.imageObject.url
-          ? ImagePath(item.imageObject.url)
-          : null;
+        if (item?.imageObject?.url) {
+          item.imageObject.url = item.imageObject.url
+            ? ImagePath(item.imageObject.url)
+            : null;
+        }
         sections.anniversaries.items.push(item);
       });
     } else if (section.flags.includes("FEATURED_STORIES")) {
@@ -64,9 +69,11 @@ export async function GetParsedHomepage(lang) {
 
       sections.featured.items = [];
       section.items.content.forEach((item) => {
-        item.imageObject.url = item.imageObject.url
-          ? ImagePath(item.imageObject.url)
-          : null;
+        if (item?.imageObject?.url) {
+          item.imageObject.url = item.imageObject.url
+            ? ImagePath(item.imageObject.url)
+            : null;
+        }
         sections.featured.items.push(item);
       });
     } else if (section.flags.includes("NEW_SECTION")) {
@@ -77,9 +84,11 @@ export async function GetParsedHomepage(lang) {
 
       sections.recent.items = [];
       section.items.content.forEach((item) => {
-        item.imageObject.url = item.imageObject.url
-          ? ImagePath(item.imageObject.url)
-          : null;
+        if (item?.imageObject?.url) {
+          item.imageObject.url = item.imageObject.url
+            ? ImagePath(item.imageObject.url)
+            : null;
+        }
         sections.recent.items.push(item);
       });
     }
