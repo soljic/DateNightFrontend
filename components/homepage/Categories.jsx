@@ -10,6 +10,7 @@ import {
   FamilyIcon,
   HeartIcon,
   HobbyIcon,
+  RequiemIcon,
   SportsIcon,
   StarIcon,
   TargetIcon,
@@ -33,6 +34,7 @@ export function CategoryTiles({ categories }) {
                 title={item.title}
                 sectionId={categories.id}
                 categoryId={item.id}
+                categoryCode={item.code}
               />
             ))}
           </div>
@@ -42,8 +44,8 @@ export function CategoryTiles({ categories }) {
   );
 }
 
-function CategoryTile({ sectionId, categoryId, title }) {
-  const c = iconMap.get(categoryId);
+function CategoryTile({ sectionId, categoryId, categoryCode, title }) {
+  const c = iconMap.get(categoryCode);
 
   return (
     <Link
@@ -62,92 +64,15 @@ function CategoryTile({ sectionId, categoryId, title }) {
 }
 
 const iconMap = new Map([
-  [
-    33,
-    {
-      id: 33,
-      title: "Biografija",
-      icon: BioIcon,
-    },
-  ],
-  [
-    8,
-    {
-      id: 8,
-      title: "Znameniti",
-      icon: StarIcon,
-    },
-  ],
-
-  [
-    31,
-    {
-      id: 31,
-      title: "Ljubav",
-      icon: HeartIcon,
-    },
-  ],
-
-  [
-    39,
-    {
-      id: 39,
-      title: "Anegdote",
-      icon: AnecdotesIcon,
-    },
-  ],
-
-  [
-    34,
-    {
-      id: 34,
-      title: "Obitelj",
-      icon: FamilyIcon,
-    },
-  ],
-
-  [
-    40,
-    {
-      id: 40,
-      title: "Motivacija",
-      icon: TargetIcon,
-    },
-  ],
-
-  [
-    41,
-    {
-      id: 41,
-      title: "Sport",
-      icon: SportsIcon,
-    },
-  ],
-
-  [
-    42,
-    {
-      id: 42,
-      title: "Umjetnost",
-      icon: ArtIcon,
-    },
-  ],
-
-  [
-    32,
-    {
-      id: 32,
-      title: "Rat",
-      icon: WarIcon,
-    },
-  ],
-
-  [
-    36,
-    {
-      id: 36,
-      title: "Hobi",
-      icon: HobbyIcon,
-    },
-  ],
+  ["BIO", { icon: BioIcon }],
+  ["FAM", { icon: StarIcon }],
+  ["LVE", { icon: HeartIcon }],
+  ["ACD", { icon: AnecdotesIcon }],
+  ["FMY", { icon: FamilyIcon }],
+  ["MTV", { icon: TargetIcon }],
+  ["SPT", { icon: SportsIcon }],
+  ["ART", { icon: ArtIcon }],
+  ["WAR", { icon: WarIcon }],
+  ["HBY", { icon: HobbyIcon }],
+  ["REQ", { icon: RequiemIcon }],
 ]);

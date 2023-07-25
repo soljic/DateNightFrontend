@@ -113,7 +113,8 @@ export default function Home({ featured, categories, anniversaries, recent }) {
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
   const { featured, anniversaries, recent, categories } =
-    await GetParsedHomepage();
+    // { locales: [ 'hr', 'en' ], locale: 'en', defaultLocale: 'hr' }
+    await GetParsedHomepage(context.locale);
 
   return {
     props: {

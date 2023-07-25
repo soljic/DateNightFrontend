@@ -5,15 +5,20 @@ import { ImagePath } from "../util";
 
 // import { MockResponse } from "./hp";
 
-export async function GetHomepage() {
-  return await axios.get(`${API_URL}/wapi/homepage`);
+// default language is "hr"
+export async function GetHomepage(lang) {
+  return await axios.get(`${API_URL}/wapi/homepage`, {
+    headers: {
+      "Accept-Language": lang ? lang : "hr",
+    },
+  });
 }
 
 // check example/example_homepage.json for details
 // Sections are parsed and their imageUrls are expanded
 // to include the full image URL.
-export async function GetParsedHomepage() {
-  const res = await GetHomepage();
+export async function GetParsedHomepage(lang) {
+  const res = await GetHomepage(lang);
 
   const sections = {
     featured: {},
