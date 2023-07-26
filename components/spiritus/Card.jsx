@@ -34,7 +34,7 @@ export function SpiritusCard({ slug, title, subtitle, image, description }) {
           <p className="text-sp-black text-opacity-60 text-sm dark:text-sp-white dark:text-opacity-60">
             {subtitle}
           </p>
-          <p className="text-sp-black text-opacity-60 text-base dark:text-sp-white dark:text-opacity-60">
+          <p className="line-clamp-3 text-sp-black text-opacity-60 text-base dark:text-sp-white dark:text-opacity-60">
             {description}
           </p>
         </div>
@@ -90,7 +90,7 @@ export function StoryCard({
           <h3 className="text-ellipsis font-bold leading-5 text-lg tracking-sp-tighten">
             {titleStr}
           </h3>
-          <p className="text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
+          <p className="line-clamp-3 text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
             {descPara}
           </p>
         </div>
