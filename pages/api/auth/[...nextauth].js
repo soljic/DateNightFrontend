@@ -1,11 +1,12 @@
+import jwt_decode from "jwt-decode";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+
 import {
   GetProfile,
   LoginCode,
   LoginCredentials,
 } from "../../../service/http/auth";
-import jwt_decode from "jwt-decode";
 
 export default NextAuth({
   providers: [

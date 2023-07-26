@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useRouter as useNavigationRouter } from "next/router";
 
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { CheckCircleIcon, PencilIcon } from "@heroicons/react/solid";
@@ -52,6 +53,7 @@ export function ProfileHeader({
   isGuardian,
 }) {
   const { t } = useTranslation("common");
+  const router = useNavigationRouter();
 
   let profileImage = null;
   if (spiritus.profileImage && spiritus.profileImage?.url) {
@@ -107,15 +109,17 @@ export function ProfileHeader({
               <p className="text-center font-bold leading-6 text-white text-base lg:text-lg">
                 {`${
                   birthDate
-                    ? new Intl.DateTimeFormat("hr", dateOptions).format(
-                        birthDate
-                      )
+                    ? new Intl.DateTimeFormat(
+                        router.locale || "en",
+                        dateOptions
+                      ).format(birthDate)
                     : "?"
                 } - ${
                   deathDate
-                    ? new Intl.DateTimeFormat("hr", dateOptions).format(
-                        deathDate
-                      )
+                    ? new Intl.DateTimeFormat(
+                        router.locale || "en",
+                        dateOptions
+                      ).format(deathDate)
                     : "?"
                 }`}
                 {age && <span className="ml-0.5">({age})</span>}
@@ -188,6 +192,7 @@ export function Tabs({ tabs }) {
 
 export function About({ age, birth, death, quote, description, location }) {
   const { t } = useTranslation("common");
+  const router = useNavigationRouter();
 
   const madeconia = [
     "Macedonia",
@@ -197,12 +202,18 @@ export function About({ age, birth, death, quote, description, location }) {
   ];
 
   let countryFlag = "";
+  let displayCountry = location?.country || "";
   if (location && location?.country) {
-    let code = countries.getAlpha2Code(location.country, "en");
+    let code = countries.getAlpha2Code(location.country, "hr");
     if (!code) {
-      // fallback to croatian
-      code = countries.getAlpha2Code(location.country, "hr");
+      // fallback to en
+      code = countries.getAlpha2Code(location.country, "en");
     }
+
+    if (router.locale !== "hr") {
+      displayCountry = countries.getName(code, "en");
+    }
+
     countryFlag = code ? countryCodeEmoji(code) : "";
     if (!countryFlag && madeconia.includes(location.country)) {
       countryFlag = "🇲🇰";
@@ -239,7 +250,10 @@ export function About({ age, birth, death, quote, description, location }) {
           </dt>
           <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
             {birth
-              ? new Intl.DateTimeFormat("hr", dateOptions).format(birth)
+              ? new Intl.DateTimeFormat(
+                  router.locale || "en",
+                  dateOptions
+                ).format(birth)
               : "?"}
           </dd>
         </div>
@@ -250,7 +264,10 @@ export function About({ age, birth, death, quote, description, location }) {
           </dt>
           <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
             {death
-              ? new Intl.DateTimeFormat("hr", dateOptions).format(death)
+              ? new Intl.DateTimeFormat(
+                  router.locale || "en",
+                  dateOptions
+                ).format(death)
               : "?"}
           </dd>
         </div>
@@ -261,7 +278,7 @@ export function About({ age, birth, death, quote, description, location }) {
           </dt>
           <dd className="leading-normal text-gray-700 dark:text-white sm:col-span-2 sm:mt-0">
             <span>
-              {location ? `${location.address}, ${location.country}` : ""}
+              {location ? `${location.address}, ${displayCountry}` : ""}
             </span>
             <span className="ml-1 text-lg">{countryFlag}</span>{" "}
           </dd>

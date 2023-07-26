@@ -87,18 +87,6 @@ export function StoryCard({
   flags,
 }) {
   const { t } = useTranslation("common");
-  let titleStr = title.length <= 32 ? title : `${title.substring(0, 29)}...`;
-
-  let descPara = "";
-  if (subtitle && subtitle.length) {
-    descPara =
-      subtitle.length <= 150 ? subtitle : `${subtitle.substring(0, 147)}...`;
-  } else {
-    descPara =
-      description.length <= 150
-        ? description
-        : `${description.substring(0, 147)}...`;
-  }
 
   return (
     <article className="break-inside-avoid-column text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white">
@@ -128,10 +116,10 @@ export function StoryCard({
         </div>
         <div>
           <h3 className="text-ellipsis font-bold leading-5 text-lg tracking-sp-tighten">
-            {titleStr}
+            {title}
           </h3>
-          <p className="text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
-            {descPara}
+          <p className="text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm line-clamp-3">
+            {description || subtitle || ""}
           </p>
         </div>
         <Link

@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Popover, Transition } from "@headlessui/react";
 import { TrashIcon } from "@heroicons/react/outline";
@@ -70,6 +71,7 @@ export function EditorLayout({
 }) {
   const birthDate = birth ? new Date(birth) : null;
   const deathDate = death ? new Date(death) : null;
+  const router = useRouter();
 
   return (
     <div className="mt-8 grid w-full grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
@@ -80,11 +82,17 @@ export function EditorLayout({
             <p className="text-sp-day-400">
               {`${
                 birthDate
-                  ? new Intl.DateTimeFormat("hr", dateOptions).format(birthDate)
+                  ? new Intl.DateTimeFormat(
+                      router.locale || "en",
+                      dateOptions
+                    ).format(birthDate)
                   : "?"
               } - ${
                 deathDate
-                  ? new Intl.DateTimeFormat("hr", dateOptions).format(deathDate)
+                  ? new Intl.DateTimeFormat(
+                      router.locale || "en",
+                      dateOptions
+                    ).format(deathDate)
                   : "?"
               }`}
             </p>
