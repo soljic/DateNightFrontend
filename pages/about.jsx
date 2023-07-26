@@ -3,20 +3,22 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../components/layout/Layout";
-import Hero from "../components/about/Hero";
-import Partnership from "../components/about/Partnership";
-import Facts from "../components/about/Facts";
-import Team from "../components/about/Team";
-import Features from "../components/about/Features";
+import FullWidthLayout from "@/components/layout/LayoutV2";
+
 import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
 import FAQSection from "../components/about/FAQ";
+import Facts from "../components/about/Facts";
+import Features from "../components/about/Features";
+import Hero from "../components/about/Hero";
+import Partnership from "../components/about/Partnership";
+import Team from "../components/about/Team";
+import Layout from "../components/layout/Layout";
 
 export default function About() {
   const { t } = useTranslation("about");
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_about_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,14 +46,18 @@ export default function About() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-      <Hero />
-      <Features />
-      <Partnership />
-      <Facts />
-      <Team />
-      <FAQSection />
-      <BecomeGuardianCTA />
-    </Layout>
+      <div className="mx-auto mb-96 h-full min-h-screen flex-col md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="mx-4 lg:mx-0">
+          <Hero />
+        </div>
+        <Features />
+        <Partnership />
+        <Facts />
+        <Team />
+        <FAQSection />
+        <BecomeGuardianCTA />
+      </div>
+    </FullWidthLayout>
   );
 }
 

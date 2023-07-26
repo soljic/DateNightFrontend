@@ -209,8 +209,9 @@ export function About({ age, birth, death, quote, description, location }) {
       // fallback to en
       code = countries.getAlpha2Code(location.country, "en");
     }
-
-    if (router.locale !== "hr") {
+    if (router.locale === "hr") {
+      displayCountry = countries.getName(code, "hr");
+    } else {
       displayCountry = countries.getName(code, "en");
     }
 

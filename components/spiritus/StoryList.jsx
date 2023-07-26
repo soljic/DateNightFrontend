@@ -118,7 +118,7 @@ export function StoryCard({
           <h3 className="text-ellipsis font-bold leading-5 text-lg tracking-sp-tighten">
             {title}
           </h3>
-          <p className="text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm line-clamp-3">
+          <p className="line-clamp-3 text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
             {description || subtitle || ""}
           </p>
         </div>
