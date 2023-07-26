@@ -118,7 +118,7 @@ function SeeMoreButton({ sectionId, title }) {
   const { t } = useTranslation(["common"]);
 
   return (
-    <div className="mx-5 mt-12 flex overflow-hidden rounded-2xl border-6 border-sp-fawn/30">
+    <div className="mx-5 mt-12 flex overflow-hidden rounded-2xl border-6 border-sp-fawn/30 md:mx-0">
       <Link
         className="flex w-full items-center justify-center rounded-xl border border-black bg-sp-day-50 px-4 py-2 text-center font-medium text-sp-black text-lg dark:border-sp-day-400 dark:bg-sp-black dark:text-sp-white xl:py-3"
         href={`/section/id/${sectionId}?title=${title}`}
