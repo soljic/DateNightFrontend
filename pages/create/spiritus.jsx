@@ -13,7 +13,10 @@ import { HashFilename } from "utils/filenames";
 
 import { Checkout, Paywall } from "@/components/Payment";
 import { Alert, Spinner } from "@/components/Status";
-import { SpiritusProfileImageUploader } from "@/components/Uploaders";
+import {
+  SpiritusProfileCropper,
+  SpiritusProfileImageUploader,
+} from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 import Layout from "@/components/layout/Layout";
 
@@ -259,7 +262,7 @@ export default function CreateSpiritusPage({
 
                   {/* image */}
 
-                  <SpiritusProfileImageUploader
+                  <SpiritusProfileCropper
                     images={images}
                     setImages={setImages}
                   />

@@ -1,10 +1,13 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+
+import Image from "next/image";
 
 import { XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 
 import { ImageIcon } from "./Icons";
+import { CropEditor } from "./cropper/SpiritusProfileImage";
 
 // Image uploader for stories.
 // There are subtle differences between this uploader
@@ -266,6 +269,91 @@ export function SpiritusProfileImageUploader({ images, setImages }) {
           />
         </div>
       )}
+    </div>
+  );
+}
+
+export function SpiritusProfileCropper({ images, setImages }) {
+  const { t } = useTranslation("common");
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const onRemove = () => {
+    setImages([]);
+    setDialogOpen(false);
+  };
+
+  const onAdd = (imageUrl, file, cropped) => {
+    setImages([
+      {
+        file: file || null,
+        previewURL: imageUrl,
+        cropped: cropped,
+      },
+    ]);
+    setDialogOpen(false);
+  };
+
+  return (
+    <div className="p-2">
+      {images.length ? (
+        <div className="flex gap-2">
+          {images.map((f, i) => {
+            return (
+              <CroppedImagePreview
+                title={f?.file?.name || "profile-image-spiritus"}
+                previewURL={f?.previewURL || f.url}
+                key={i}
+                index={i}
+                onRemove={onRemove}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex h-48 w-full justify-center rounded-sp-10 border border-dashed border-sp-day-400 bg-sp-day-50 p-12 font-medium text-sp-day-400 text-sm dark:bg-sp-black">
+          <button
+            onClick={() => setDialogOpen(true)}
+            type="button"
+            className="relative cursor-pointer rounded-sp-10 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
+          >
+            <ImageIcon
+              className="mx-auto h-7 w-7 fill-sp-day-400"
+              aria-hidden="true"
+            />
+            <p className="mt-1">{t("create_spiritus_profile_image_button")}</p>
+          </button>
+          <CropEditor
+            open={dialogOpen}
+            setOpen={setDialogOpen}
+            onAdd={onAdd}
+            onRemove={onRemove}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function CroppedImagePreview({ previewURL, title, onRemove, index }) {
+  return (
+    <div className="relative" id={index}>
+      <Image
+        src={previewURL}
+        alt={title}
+        className="aspect-auto max-w-xs overflow-hidden rounded-sp-10 object-cover"
+        width={192}
+        height={220}
+        sizes="100vw"
+      />
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          onRemove(index);
+        }}
+        className="absolute right-0 top-0 -mr-1 -mt-2 overflow-visible rounded-full bg-red-400 p-1 text-black text-opacity-60"
+      >
+        <XIcon className="h-3 w-3" />
+      </button>
     </div>
   );
 }
