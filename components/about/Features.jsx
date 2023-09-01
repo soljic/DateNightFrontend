@@ -1,10 +1,11 @@
 import Image from "next/legacy/image";
+
+import { CheckIcon } from "@heroicons/react/outline";
+import { useTranslation } from "next-i18next";
+
 import AboutImage1 from "../../public/images/about/img_about_01.png";
 import AboutImage2 from "../../public/images/about/img_about_02.png";
 import AboutImage3 from "../../public/images/about/img_about_03.png";
-import { useTranslation } from "next-i18next";
-
-import { CheckIcon } from "@heroicons/react/outline";
 
 export default function FeaturesSection() {
   const { t } = useTranslation("about");

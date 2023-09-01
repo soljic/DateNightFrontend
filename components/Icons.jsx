@@ -1,6 +1,92 @@
 // custom icon designed by Spiritus team //
 ///////////////////////////////////////////
 
+export function CommunityIcon({ width, height }) {
+  const w = width ? `w-${width}` : `w-6`;
+  const h = height ? `h-${height}` : `h-6`;
+
+  return (
+    <svg
+      className={`${w} ${h}`}
+      width="72"
+      height="72"
+      viewBox="0 0 72 72"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect
+        width="72"
+        height="72"
+        rx="20"
+        fill="url(#paint0_linear_10389_24672)"
+      />
+      <path
+        d="M25 16C22.2386 16 20 18.2386 20 21V51C20 53.7614 22.2386 56 25 56H51.5C52.3284 56 53 55.3284 53 54.5C53 53.6716 52.3284 53 51.5 53H25C23.8954 53 23 52.1046 23 51H51.5C52.3284 51 53 50.3284 53 49.5V21C53 18.2386 50.7614 16 48 16H25ZM43 36.5V37.499C43 39.5 40.2336 41 36.5 41C32.7663 41 30 39.5 30 37.499V36.5C30 35.6716 30.6716 35 31.5 35H41.5C42.3284 35 43 35.6716 43 36.5ZM40 29.4909C40 31.4246 38.4337 32.9922 36.5 32.9922C34.5663 32.9922 33 31.4246 33 29.4909C33 27.5573 34.5663 26 36.5 26C38.4337 26 40 27.5573 40 29.4909Z"
+        fill="url(#paint1_linear_10389_24672)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_10389_24672"
+          x1="9.34652e-08"
+          y1="36"
+          x2="72"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#EDE1D5" />
+          <stop offset="1" stopColor="#E8DED5" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear_10389_24672"
+          x1="20"
+          y1="36"
+          x2="53"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#D67915" />
+          <stop offset="1" stopColor="#ED9A4C" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function PeopleIcon({ width, height }) {
+  const w = width ? `w-${width}` : `w-6`;
+  const h = height ? `h-${height}` : `h-6`;
+
+  return (
+    <svg
+      className={`${w} ${h}`}
+      width="72"
+      height="72"
+      viewBox="0 0 72 72"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="72" height="72" rx="20" fill="#F0EBE6" />
+      <path
+        d="M41.508 32C43.441 32 45.008 33.567 45.008 35.5V44.9979C45.008 49.9696 40.9777 54 36.006 54C31.0342 54 27.0039 49.9696 27.0039 44.9979V35.5C27.0039 33.567 28.5709 32 30.5039 32H41.508ZM26.2626 31.9981C25.5637 32.8436 25.1127 33.9017 25.0211 35.0608L25.0039 35.5V44.9979C25.0039 46.6912 25.3864 48.2951 26.0697 49.728C25.4115 49.9061 24.718 50 24.0025 50C19.5828 50 16 46.4172 16 41.9975V35.5C16 33.6637 17.4142 32.1576 19.2129 32.0116L19.5 32L26.2626 31.9981ZM45.7493 31.9981L52.5 32C54.433 32 56 33.567 56 35.5V42C56 46.4183 52.4183 50 48 50C47.2871 50 46.5961 49.9068 45.9383 49.7318C46.5393 48.476 46.9076 47.0905 46.9903 45.6288L47.008 44.9979V35.5C47.008 34.1695 46.5356 32.9493 45.7493 31.9981ZM36 18C39.3137 18 42 20.6863 42 24C42 27.3137 39.3137 30 36 30C32.6863 30 30 27.3137 30 24C30 20.6863 32.6863 18 36 18ZM49 20C51.7614 20 54 22.2386 54 25C54 27.7614 51.7614 30 49 30C46.2386 30 44 27.7614 44 25C44 22.2386 46.2386 20 49 20ZM23 20C25.7614 20 28 22.2386 28 25C28 27.7614 25.7614 30 23 30C20.2386 30 18 27.7614 18 25C18 22.2386 20.2386 20 23 20Z"
+        fill="url(#paint0_linear_10389_24586)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_10389_24586"
+          x1="16"
+          y1="36"
+          x2="56"
+          y2="36"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#D67915" />
+          <stop offset="1" stopColor="#ED9A4C" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
 export function GuardianIcon({ width, height, alterFill }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;

@@ -99,7 +99,7 @@ function SavedMemorialsIcon({ width, height }) {
   );
 }
 
-function CemeteryDealsIcon({ width, height }) {
+export function CemeteryDealsIcon({ width, height }) {
   const w = width ? `w-${width}` : `w-6`;
   const h = height ? `h-${height}` : `h-6`;
 

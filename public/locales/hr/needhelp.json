@@ -1,0 +1,32 @@
+{
+	"meta_about_title": "Spiritus | Trebate pomoć",
+	"meta_about_description": "Lorem ipsum dolor lorem ipsum dolor",
+
+	"hero_title": "Učinimo da priče Vaših najmilijih postanu vječne, zajedno.",
+	"hero_subtitle": "Tu smo da Vam pomognemo. Kontaktirajte nas na",
+	"hero_subtitle_email_span": "hello@spiritus.app",
+
+	"needhelp_1_question": "Što je Spiritus memorijal?",
+	"needhelp_1_answer": "Spiritus memorijal je digitalni memorijal koji sadrži imena, godišnjice, životne priče, fotografije i ostala vrijedna sjećanja na preminule voljene osobe.",
+
+	"needhelp_2_question": "Što je Čuvar uspomene?",
+	"needhelp_2_answer": "Čuvar Sjećanja, odnosno čuvar digitalne uspomene je svaki registrirani korisnik unutar Spiritus aplikacije. To su najčešće članovi uže i šire obitelji pokojnika ili njegovi bliski prijatelji.\n\n Svaki registrirani korisnik može slati počasti i saočešća te predlagati priče i fotografije za postojeće memorijale. Ipak, kako biste mogli pročitati primljene počasti te odobriti prikazivanje priča i fotografija na digitalnoj uspomeni, trebate imati vlasništvo nad memorijalom.\n\n Digitalnu uspomenu Vaših najmilijih možete čuvati tako da preuzmete vlasništvo nad postojećim memorijalom (koji nema svog Čuvara) ili tako da kreirate novi memorijal.\n\n Svaki Čuvar pomoću digitalnog certifikata može dokazati posjedovanje memorijala, koji je vječno sačuvan.",
+
+	"needhelp_3_question": "Može li jedan memorijal imati više Čuvara?",
+	"needhelp_3_answer": "Može. Jedan memorijal može imati do 5 Čuvara uspomene.",
+
+	"needhelp_4_question": "Što Spiritus čini posebnim?",
+	"needhelp_4_answer": "Spiritus je jedina platforma kroz koju možete vječno pohraniti sjećanja o svojim najmilijima.\n\n Svaki vječno spremljeni memorijal predstavljen je kroz jedan jedinstveni NFT token. Njega posjeduju samo njegovi Čuvari.",
+
+	"needhelp_5_question": "Mogu li izbrisati Spiritus?",
+	"needhelp_5_answer": "SSvaki Čuvar Sjećanja može izbrisati podatke svog Spiritusa. Ne može izbrisati podatke koji su trajno spremljeni putem Eternity tokena.",
+
+	"needhelp_6_question": "Može li štetan sadržaj biti trajno sačuvan?",
+	"needhelp_6_answer": "Ne. Svaka priča ili memorijal prvo moraju dobiti naše odobrenje kako bi bili trajno sačuvani. Inzistiramo da svaka životna priča mora biti primjerena i napisana u dobroj vjeri. Cijenimo naše priče i važno nam je da budemo ponosni na svaku sačuvanu životnu priču",
+
+	"needhelp_7_question": "Što sprječava druge korisnike da objavljuju pogrdan sadržaj?",
+	"needhelp_7_answer": "Ako ste vi Čuvar uspomene, onda jedino vi možete objavljivati sadržaj na memorijalima svojih najmilijih. Svi ostali korisnici sadržaj mogu samo predlagati. Svaki predloženi sadržaj isprva se dostavlja Čuvaru na potvrdu, a tek nakon potvrde on može biti vidljiv drugim korisnicima aplikacije",
+
+	"needhelp_8_question": "Nisam siguran u svoje spisateljske sposobnosti. Kako mogu dobiti pomoć pri pisanju priča?",
+	"needhelp_8_answer": "Ako niste sigurni kako napisati najljepšu priču koja će biti sačuvana u vječnosti, ne brinite. Mi ćemo Vam pomoći. Uz kupnju trajnog plana dolazi i usluga profesionalne pomoći pri pisanju."
+}

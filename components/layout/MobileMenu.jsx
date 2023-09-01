@@ -58,19 +58,34 @@ function MobilePopover() {
 
   const menuItems = [
     {
-      name: "stories",
-      description: "m_desc_stories",
-      href: "/",
+      name: "about",
+      description: "m_desc_about",
+      href: "/about",
+    },
+    {
+      name: "need-help",
+      description: "need-help",
+      href: "/need-help",
+    },
+    {
+      name: "museums",
+      description: "museums",
+      href: "/museums",
+    },
+    {
+      name: "pricing",
+      description: "pricing",
+      href: "/pricing",
+    },
+    {
+      name: "why-us",
+      description: "why-us",
+      href: "/why-us",
     },
     {
       name: "mobile",
       description: "m_desc_mobile_app",
       href: "/mobile-app",
-    },
-    {
-      name: "about",
-      description: "m_desc_about",
-      href: "/about",
     },
   ];
 
