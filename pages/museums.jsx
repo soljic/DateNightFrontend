@@ -125,8 +125,8 @@ function ThirdIcon({ className }) {
         fill="url(#paint0_linear_10219_31172)"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M15.0996 12.768L8.70375 17.4137C8.69528 17.4199 8.68384 17.4199 8.67529 17.4139C8.66437 17.4062 8.64927 17.4087 8.64142 17.4195L4.27413 23.4308C4.09709 23.6745 4.15108 24.0155 4.39472 24.1926L6.74825 25.9032C6.99198 26.0804 7.33317 26.0264 7.51025 25.7826L11.3928 20.4379C11.4265 20.3916 11.4672 20.3509 11.5135 20.3172L11.7051 20.1779C12.102 19.8895 12.6482 20.2308 12.5629 20.7139L11.7796 25.154C11.6552 25.8582 11.7218 26.583 11.9726 27.2527C12.2234 27.9225 12.6492 28.5127 13.2056 28.962L19.8737 34.5581C19.947 34.6196 20.0028 34.6994 20.0356 34.7893L23.879 45.3475C23.9821 45.6306 24.295 45.7765 24.5781 45.6735L27.313 44.6785C27.5961 44.5755 27.7421 44.2625 27.639 43.9794L23.4296 32.4133C23.3968 32.3234 23.341 32.2436 23.2677 32.1821L19.4987 29.0184C19.3495 28.8932 19.2784 28.6978 19.3122 28.506L20.446 22.0727C20.5268 21.614 21.1168 21.4545 21.4422 21.7878C22.6041 22.9781 23.9715 23.9537 25.4818 24.6657C25.9639 24.893 26.4574 25.092 26.9598 25.2621C27.1797 25.3366 27.4196 25.2547 27.5657 25.0743C28.5264 23.8874 29.8125 22.9748 31.2882 22.4719C31.3875 22.4381 31.4556 22.3457 31.4556 22.2408C31.4556 22.1078 31.3477 22.0004 31.2148 21.9973C29.7459 21.9629 28.3015 21.6046 26.9854 20.9469C25.5974 20.2532 24.3902 19.2456 23.4596 18.004C23.1516 17.594 22.8116 16.806 22.4396 15.64C22.1091 14.6041 21.464 13.6969 20.5941 13.0446C19.7242 12.3922 18.6726 12.0271 17.5856 12C16.6944 11.971 15.8192 12.2414 15.0996 12.768ZM17.6272 9.82843C18.3773 10.5786 19.3947 11 20.4556 11C21.5165 11 22.5339 10.5786 23.284 9.82843C24.0342 9.07828 24.4556 8.06087 24.4556 7C24.4556 5.93913 24.0342 4.92172 23.284 4.17157C22.5339 3.42143 21.5165 3 20.4556 3C19.3947 3 18.3773 3.42143 17.6272 4.17157C16.877 4.92172 16.4556 5.93913 16.4556 7C16.4556 8.06087 16.877 9.07828 17.6272 9.82843ZM7.66578 44.6716C7.89654 44.8651 8.24052 44.835 8.43414 44.6043L14.4639 37.4188C14.4956 37.3811 14.5219 37.3393 14.5424 37.2946L15.8732 34.3779C15.975 34.1546 15.9153 33.8909 15.7272 33.7333L13.0727 31.5101C12.7791 31.2643 12.3303 31.3894 12.2064 31.7517L11.0045 35.2638C10.9827 35.3274 10.9494 35.3864 10.9062 35.4379L5.37034 42.0341C5.17664 42.2649 5.20677 42.609 5.43762 42.8026L7.66578 44.6716Z"
         fill="url(#paint1_linear_10219_31172)"
       />
@@ -158,29 +158,56 @@ function ThirdIcon({ className }) {
   );
 }
 
-const elements = [
-  {
-    icon: <FirstIcon className="h-10 w-10" />,
-    image: Image1,
-    title: "Stories of your loved ones can become part of your local museum.",
-  },
-  {
-    icon: <SecondIcon className="h-10 w-10" />,
-    image: Image2,
-    bg: "bg-gradient-to-b from-day-gradient-start to-day-gradient-stop dark:from-sp-fawn/40 dark:to-sp-fawn/30 rounded-sp-14",
-    title: "With Spiritus, cemeteries are becoming inspiring.",
-  },
-  {
-    icon: <ThirdIcon className="h-10 w-10" />,
-    image: Image3,
-    title: "Also with Spiritus:",
-    list: [
-      "Search and find every grave location.",
-      "Suggest stories and photos for people you used to know.",
-      "Enjoy routes for discovering local heroes.",
-    ],
-  },
-];
+// const testimonials = [
+//   {
+//     company: t("testimonial_1_company"),
+//     text: t("testimonial_1_text"),
+//     person: t("testimonial_1_person"),
+//     personJob: t("testimonial_1_person_job"),
+//     personCompany: t("testimonial_1_person_company")
+//   },
+//   {
+//     company: t("testimonial_2_company"),
+//     text: t("testimonial_2_text"),
+//     person: t("testimonial_2_person"),
+//     personJob: t("testimonial_2_person_job"),
+//     personCompany: t("testimonial_2_person_company")
+//   },
+//   {
+//     company: t("testimonial_3_company"),
+//     text: t("testimonial_3_text"),
+//     person: t("testimonial_3_person"),
+//     personJob: t("testimonial_3_person_job"),
+//     personCompany: t("testimonial_3_person_company")
+//   },
+//   {
+//     company: t("testimonial_4_company"),
+//     text: t("testimonial_4_text"),
+//     person: t("testimonial_4_person"),
+//     personJob: t("testimonial_4_person_job"),
+//     personCompany: t("testimonial_4_person_company")
+//   }
+// ]
+
+// const partners = {
+//   heading: t("partners_heading"),
+//   partners: [t("partner_1"), t("partner_2"), t("partner_3"), t("partner_4")],
+// }
+
+// const stats = [
+//   {
+//     number: t("stat_1_number"),
+//     fact: t("stat_1_fact")
+//   },
+//   {
+//     number: t("stat_2_number"),
+//     fact: t("stat_2_fact")
+//   },
+//   {
+//     number: t("stat_2_number"),
+//     fact: t("stat_2_fact")
+//   }
+// ]
 
 function Article({ idx, elem }) {
   const flexDirection = idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse";
@@ -232,21 +259,22 @@ function Article({ idx, elem }) {
 }
 
 function MuseumsCTA() {
+  const { t } = useTranslation("museums");
+
   return (
     <div className="flex min-h-[600px] w-full flex-col items-center justify-center space-y-6 rounded-sp-10 bg-gradient-to-b from-day-gradient-start to-day-gradient-stop px-4 py-4 text-center text-sp-black dark:from-sp-fawn/40 dark:to-sp-fawn/30 dark:text-sp-white md:py-8 ">
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-sp-fawn-subtle dark:bg-sp-fawn dark:bg-opacity-40">
         <CemeteryDealsIcon width={8} height={8} />
       </div>
       <h1 className="max-w-4xl text-center font-bold leading-none subpixel-antialiased text-4xl sm:text-5xl">
-        Transforming city cemeteries into{" "}
+        {t("hero_title_span_1")}{" "}
         <span className="underline decoration-sp-fawn underline-offset-[6px]">
-          digital museums
+          {t("hero_title_span_2")}
         </span>{" "}
-        of life stories.
+        {t("hero_title_span_3")}
       </h1>
       <p className="max-w-lg font-semibold leading-none text-lg">
-        Enter the Memory Walk and discover beautiful and hidden stories!
-        Available on mobile apps.
+        {t("hero_subtitle")}
       </p>
       <div className="flex items-center justify-center gap-2">
         <a
@@ -269,7 +297,31 @@ function MuseumsCTA() {
 }
 
 export default function MuseumsPage() {
-  const { t } = useTranslation("about");
+  const { t } = useTranslation("museums");
+
+  const articleElements = [
+    {
+      icon: <FirstIcon className="h-10 w-10" />,
+      image: Image1,
+      title: t("article_heading_1"),
+    },
+    {
+      icon: <SecondIcon className="h-10 w-10" />,
+      image: Image2,
+      bg: "bg-gradient-to-b from-day-gradient-start to-day-gradient-stop dark:from-sp-fawn/40 dark:to-sp-fawn/30 rounded-sp-14",
+      title: t("article_heading_2"),
+    },
+    {
+      icon: <ThirdIcon className="h-10 w-10" />,
+      image: Image3,
+      title: t("article_heading_3"),
+      list: [
+        t("article_heading_3_list_element_1"),
+        t("article_heading_3_list_element_2"),
+        t("article_heading_3_list_element_3"),
+      ],
+    },
+  ];
 
   return (
     <FullWidthLayout>
@@ -303,7 +355,7 @@ export default function MuseumsPage() {
       <div className="mx-auto mb-96 h-full min-h-screen max-w-7xl flex-col px-4">
         <MuseumsCTA />
         <div className="lg:my-24">
-          {elements.map((elem, idx) => {
+          {articleElements.map((elem, idx) => {
             return (
               <Article idx={idx} elem={elem} key={`elem-article-idx-${idx}`} />
             );
@@ -325,6 +377,7 @@ export async function getStaticProps(context) {
         "about",
         "faq",
         "auth",
+        "museums",
       ])),
     },
   };

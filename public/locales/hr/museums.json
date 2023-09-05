@@ -1,0 +1,47 @@
+{
+    "meta_about_title": "Spiritus | Muzeji",
+	"meta_about_description": "Lorem ipsum dolor lorem ipsum dolor",
+
+    "hero_title_span_1": "Pretvaramo gradska groblja u",
+    "hero_title_span_2": "digitalne muzeje",
+    "hero_title_span_3": "životnih priča.",
+	"hero_subtitle": "Prošetajte Alejom Sjećanja i otkrijte predivne, dosad neispričane priče. Dostupno na mobilnoj aplikaciji.",
+
+    "partners_heading": "Spasili smo mnogo predivnih uspomena zahvaljujući našim partnerima:",
+    "partner_1": "Catholic Cemetery Organisation",
+    "partner_2": "Mirogoj Cemetery Zagreb",
+    "partner_3": "Varaždin City Cemetery",
+    "partnet_4": "Cleveland",
+
+    "testimonial_1_company": "Circolles",
+    "testimonial_1_text": "Until now, the only people that aren't forgotten are famous ones. We believe that every person has a story worth telling and remembering.",
+    "testimonial_1_person": "Vlatko Vlatkovic",
+    "testimonial_1_person_job": "CEO",
+    "testimonial_1_person_company": "Circolles",
+
+    "testimonial_2_company": "Catalog",
+    "testimonial_2_text": "Neki testimonial",
+    "testimonial_2_person": "Boris Borovic",
+    "testimonial_2_person_job": "CEO",
+    "testimonial_2_person_company": "Catalog",
+
+    "testimonial_3_company": "Layers",
+    "testimonial_3_text": "Opet neki testimonial",
+    "testimonial_3_person": "Matko Matkovic",
+    "testimonial_3_person_job": "CEO",
+    "testimonial_3_person_company": "Layers",
+	
+    "article_heading_1": "Životna priča Vaših voljenih kao zvijezda vodilja budućim generacijama.",
+    "article_heading_2": "Kroz Spiritus, groblja postaju mjesta inspiracije.",
+    "article_heading_3": "Spiritus aplikacija Vam omogućava:",
+    "article_heading_3_list_element_1": "Pretraživanje grobnih lokacija na najvećim hrvatskim grobljima.",
+    "article_heading_3_list_element_2": "Pretraživanje grobnih lokacija na najvećim hrvatskim grobljima.",
+    "article_heading_3_list_element_3": "Čitanje priča Vaših prijatelja, susjeda, kao i osoba iz cijeloga svijeta.",
+
+    "stat_1_number": "7",
+    "stat_1_fact": "Gradova partnera memorijala",
+    "stat_2_number": "70",
+    "stat_2_fact": "Novih muzeja",
+    "stat_3_number": "1M +",
+    "stat_3_fact": "Sačuvanih"
+}

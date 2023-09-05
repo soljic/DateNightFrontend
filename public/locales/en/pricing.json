@@ -7,7 +7,7 @@
 
     "pricing_plan_1_title": "Explorer plan",
     "pricing_plan_1_subtitle": "Free forever.",
-    "pricing_plan_1_price": "$0",
+    "pricing_plan_1_price": "0€",
     "pricing_plan_1_list_1": "Visit other memorials",
     "pricing_plan_1_list_2": "Send tributes to your loved ones",
     "pricing_plan_1_list_3": "Suggest photos and stories",
@@ -15,7 +15,7 @@
 
     "pricing_plan_2_title": "Starter plan",
     "pricing_plan_2_subtitle": "Billed monthly per memorial.",
-    "pricing_plan_2_price": "$10/mth",
+    "pricing_plan_2_price": "10€/mth",
     "pricing_plan_2_list_1": "All from Explorer plan",
     "pricing_plan_2_list_2": "Receive tributes and notifications",
     "pricing_plan_2_list_3": "See and accept suggested stories",
@@ -25,7 +25,7 @@
     
     "pricing_plan_3_title": "Life time plan",
     "pricing_plan_3_subtitle": "One time fee per memorial.",
-    "pricing_plan_3_price": "$75",
+    "pricing_plan_3_price": "75€",
     "pricing_plan_3_list_1": "All from Explorer and Starter plan",
     "pricing_plan_3_list_2": "Memorial becomes a part of your family's heritage",
     "pricing_plan_3_list_3": "Everlasting access to your memorial",

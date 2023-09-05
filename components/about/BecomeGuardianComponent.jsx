@@ -43,7 +43,7 @@ function BecomeGuardianCTA() {
             </svg>
           </div>
 
-          <p className="text-center text-[22px] font-bold leading-6 tracking-[0.03em] text-sp-black dark:text-sp-white md:text-left">
+          <p className="whitespace-pre-line text-center text-[22px] font-bold leading-4 tracking-[0.03em] text-sp-black dark:text-sp-white md:text-left">
             {t("become_guardian_title")}
           </p>
 
