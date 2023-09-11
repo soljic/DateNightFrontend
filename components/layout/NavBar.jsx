@@ -5,14 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Popover, Transition } from "@headlessui/react";
-import { SearchIcon } from "@heroicons/react/outline";
+import { Disclosure } from "@headlessui/react";
+import { ChevronDownIcon, SearchIcon } from "@heroicons/react/outline";
 import { MenuIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { LoginModal } from "../auth/Login";
 import { AccesibilityMenu } from "./Accesibility";
-import { Logo, NavItem } from "./Common";
+import { Logo, NavItem, SubNavItem } from "./Common";
 import { AboutIcon, MobileAppIcon, StoriesIcon } from "./Icons";
 import { MobileMenu } from "./MobileMenu";
 import { ProfileMenu } from "./Profile";
@@ -45,11 +46,16 @@ export function Navbar() {
             <div className="ml-2.5 font-semibold text-xl">Spiritus</div>
           </Link>
           <nav className="ml-3 flex items-center justify-center">
-            <NavItem text={t("about")} link={"/about"} />
+            <SubnavigationMenu
+              title={t("about")}
+              links={[
+                { text: t("why-us"), href: "/why-us" },
+                { text: t("pricing"), href: "/pricing" },
+                { text: t("about"), href: "/about" },
+              ]}
+            />
             <NavItem text={t("need-help")} link={"/need-help"} />
             <NavItem text={t("museums")} link={"/museums"} />
-            <NavItem text={t("pricing")} link={"/pricing"} />
-            <NavItem text={t("why-us")} link={"/why-us"} />
             <NavItem text={t("mobile")} link={"/mobile-app"} />
           </nav>
         </div>
@@ -95,6 +101,48 @@ export function Navbar() {
       </div>
 
       <MobileMenu key="mobile-home-nav" />
+    </div>
+  );
+}
+
+export function SubnavigationMenu({ title, links }) {
+  const { t } = useTranslation(["settings", "common"]);
+
+  return (
+    <div className="z-30">
+      <Popover>
+        {({ open }) => (
+          <>
+            <Popover.Button className="flex items-center rounded-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+              {title}
+              <ChevronDownIcon className="ml-1 h-5 w-5 text-sp-black dark:text-sp-white" />
+            </Popover.Button>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-200"
+              enterFrom="opacity-0 translate-y-1"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in duration-150"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 translate-y-1"
+            >
+              <Popover.Panel className="z-100 absolute mt-2">
+                <div className="overflow-hidden rounded-sp-14 border-2 border-sp-day-400/50 bg-sp-day-50 text-sp-black shadow-lg dark:border-sp-medium dark:bg-sp-black dark:text-sp-white">
+                  <div className="flex w-48 flex-col items-start justify-evenly gap-y-1 p-2">
+                    {links.map((link) => (
+                      <SubNavItem
+                        text={link.text}
+                        link={link.href}
+                        key={link.href}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </Popover.Panel>
+            </Transition>
+          </>
+        )}
+      </Popover>
     </div>
   );
 }

@@ -11,6 +11,17 @@ export function NavItem({ text, link }) {
   );
 }
 
+export function SubNavItem({ text, link }) {
+  return (
+    <Link
+      href={link || "/"}
+      className="w-full from-day-gradient-start to-day-gradient-stop p-2 text-start hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+    >
+      {text}
+    </Link>
+  );
+}
+
 export function Logo({ className }) {
   return (
     <svg
