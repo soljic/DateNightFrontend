@@ -107,10 +107,14 @@ export async function getServerSideProps(context) {
   let res;
   try {
     if (session && session?.user?.accessToken) {
-      res = await GetSpiritusBySlug(slug, session.user.accessToken);
+      res = await GetSpiritusBySlug(
+        slug,
+        session.user.accessToken,
+        context.locale
+      );
       isGuardian = res?.data?.flags.includes("GUARDIAN");
     } else {
-      res = await GetSpiritusBySlug(slug);
+      res = await GetSpiritusBySlug(slug, null, context.locale);
     }
     const spiritus = res.data;
 
@@ -118,7 +122,8 @@ export async function getServerSideProps(context) {
       slug,
       0,
       20,
-      session?.user?.accessToken || null
+      session?.user?.accessToken || null,
+      context.locale
     );
     const stories = isGuardian
       ? resStories.content.sort((c) => (c.flags.includes("PUBLIC") ? -1 : 1))

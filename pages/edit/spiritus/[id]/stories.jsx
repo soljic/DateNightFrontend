@@ -120,7 +120,8 @@ export async function getServerSideProps(context) {
       spiritus.slug,
       0,
       20,
-      session.user.accessToken
+      session.user.accessToken,
+      context.locale
     );
     const stories = res.data.content;
 
@@ -152,7 +153,6 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
-    console.log(err);
     // redirect to home in case of err
     // known errs: 404 Not Found Spiritus
     return {

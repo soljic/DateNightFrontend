@@ -124,15 +124,22 @@ export async function getServerSideProps(context) {
   let data = {};
   try {
     if (session && session?.user?.accessToken) {
-      const resStory = await GetStoryBySlug(slug, session.user.accessToken);
+      const resStory = await GetStoryBySlug(
+        slug,
+        session.user.accessToken,
+        context.locale
+      );
       data = resStory.data;
       isGuardian = data?.spiritus?.flags.includes("GUARDIAN");
     } else {
-      const resStory = await GetStoryBySlug(slug);
+      const resStory = await GetStoryBySlug(slug, null, context.locale);
       data = resStory.data;
     }
 
-    const resAllStories = await GetSpiritusStoriesBySlug(data.spiritus.slug);
+    const resAllStories = await GetSpiritusStoriesBySlug(
+      data.spiritus.slug,
+      (accessToken = context.locale)
+    );
 
     let content = resAllStories.data?.content
       ? resAllStories.data?.content

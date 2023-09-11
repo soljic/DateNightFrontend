@@ -224,13 +224,13 @@ export function Checkout({
           <CheckmarkIcon width={8} height={8} />
         </div>
         <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
-        {!!spiritus?.images.length && (
+        {!!spiritus?.profileImage?.url && (
           <div className="overflow-hidden rounded-sp-14">
             <Image
-              src={ImagePath(spiritus.images[0].url)}
+              src={ImagePath(spiritus.profileImage.url)}
               alt="Spiritus image"
-              width={270}
-              height={300}
+              width={192}
+              height={220}
               className="rounded-sp-14"
             />
           </div>

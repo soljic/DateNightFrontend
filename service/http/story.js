@@ -3,25 +3,26 @@ import axios from "axios";
 import { API_URL, defaultLimit, defaultOffset } from "../constants";
 import { ImagePath } from "../util";
 
-export async function GetStoryById(id) {
-  const res = await axios.get(`${API_URL}/wapi/stories/id/${id}`);
+export async function GetStoryById(id, lang) {
+  const res = await axios.get(`${API_URL}/wapi/stories/id/${id}`, {
+    headers: {
+      "Accept-Language": lang ? lang : "hr",
+    },
+  });
   res.data?.images?.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
   });
   return res;
 }
 
-export async function GetStoryBySlug(slug, accessToken) {
-  let res;
+export async function GetStoryBySlug(slug, accessToken, lang) {
+  const headers = {
+    "Accept-Language": lang ? lang : "hr",
+  };
   if (accessToken) {
-    res = await axios.get(`${API_URL}/wapi/stories/${slug}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-  } else {
-    res = await axios.get(`${API_URL}/wapi/stories/${slug}`);
+    headers.Authorization = `Bearer ${accessToken}`;
   }
+  const res = await axios.get(`${API_URL}/wapi/stories/${slug}`, { headers });
 
   res.data?.images?.forEach((img) => {
     img.url = img.url ? ImagePath(img.url) : null;
@@ -47,26 +48,22 @@ export async function GetSpiritusStoriesBySlug(
   spiritus_slug,
   offset,
   limit,
-  accessToken
+  accessToken,
+  lang
 ) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
-  let res;
+  const headers = {
+    "Accept-Language": lang ? lang : "hr",
+  };
   if (accessToken) {
-    res = await axios.get(
-      `${API_URL}/wapi/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-  } else {
-    res = await axios.get(
-      `${API_URL}/wapi/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`
-    );
+    headers.Authorization = `Bearer ${accessToken}`;
   }
+  const res = await axios.get(
+    `${API_URL}/wapi/stories/spiritus/${spiritus_slug}?page=${o}&size=${l}`,
+    { headers }
+  );
 
   // expand image paths to full paths
   res.data.content.forEach((story) => {
@@ -77,12 +74,17 @@ export async function GetSpiritusStoriesBySlug(
   return res;
 }
 
-export async function GetSpiritusStoriesByID(id, offset, limit) {
+export async function GetSpiritusStoriesByID(id, offset, limit, lang) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
   const res = await axios.get(
-    `${API_URL}/stories/spiritus/${id}?page=${o}&size=${l}`
+    `${API_URL}/stories/spiritus/${id}?page=${o}&size=${l}`,
+    {
+      headers: {
+        "Accept-Language": lang ? lang : "hr",
+      },
+    }
   );
 
   // expand image paths to full paths

@@ -3,12 +3,13 @@ import axios from "axios";
 import { API_URL, defaultLimit, defaultOffset } from "../constants";
 import { ImagePath } from "../util";
 
-export async function GetSpiritusById(id, accessToken) {
+export async function GetSpiritusById(id, accessToken, lang) {
   let res;
   if (accessToken) {
     res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "Accept-Language": lang ? lang : "hr",
       },
     });
   } else {
@@ -106,17 +107,14 @@ export async function GetSpiritusTributes(spiritusId, offset, limit) {
   return res;
 }
 
-export async function GetSpiritusBySlug(slug, accessToken) {
-  let res;
+export async function GetSpiritusBySlug(slug, accessToken, lang) {
+  const headers = {
+    "Accept-Language": lang ? lang : "hr",
+  };
   if (accessToken) {
-    res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-  } else {
-    res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`);
+    headers.Authorization = `Bearer ${accessToken}`;
   }
+  const res = await axios.get(`${API_URL}/wapi/spiritus/${slug}`, { headers });
 
   if (res.data?.profileImage) {
     res.data.profileImage.url = res.data.profileImage.url

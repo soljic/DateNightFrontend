@@ -13,12 +13,9 @@ import { HashFilename } from "utils/filenames";
 
 import { Checkout, Paywall } from "@/components/Payment";
 import { Alert, Spinner } from "@/components/Status";
-import {
-  SpiritusProfileCropper,
-  SpiritusProfileImageUploader,
-} from "@/components/Uploaders";
+import { SpiritusProfileCropper } from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetDefaultProduct } from "@/service/http/payment";
 import { CreateSpiritus } from "@/service/http/spiritus_crud";
@@ -89,14 +86,22 @@ export default function CreateSpiritusPage({
 
       if (images.length > 0) {
         const fileName = await HashFilename(images[0].file.name);
-        form.append("files", images[0].file, fileName);
+        form.append("original_profile", images[0].file, fileName);
+        if (images[0].cropped) {
+          const data = await fetch(images[0].previewURL);
+          const croppedBlob = await data.blob();
+          const croppedFile = new File([croppedBlob], fileName, {
+            type: croppedBlob.type,
+          });
+          const coppedFilename = "C_" + fileName;
+          form.append("cropped_profile", croppedFile, coppedFilename);
+        }
       }
 
       const res = await CreateSpiritus(user.accessToken, form);
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
-      console.log(err);
       const errMsg = err?.response?.data || err;
       onError(errMsg);
       setPending(false);
@@ -114,7 +119,7 @@ export default function CreateSpiritusPage({
   };
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_create_spiritus_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -123,7 +128,7 @@ export default function CreateSpiritusPage({
           content={t("meta_create_spiritus_description")}
         />
       </Head>
-      <div className="min-h-screen py-5">
+      <div className="mx-auto min-h-screen max-w-7xl py-5">
         {/* <p className="text-sp-black dark:text-sp-white">
           {JSON.stringify({
             birth,
@@ -369,7 +374,7 @@ export default function CreateSpiritusPage({
           </>
         )}
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 

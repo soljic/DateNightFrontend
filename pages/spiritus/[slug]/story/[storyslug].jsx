@@ -164,13 +164,14 @@ export async function getServerSideProps(context) {
     if (session && session?.user?.accessToken) {
       const resStory = await GetStoryBySlug(
         storyslug,
-        session.user.accessToken
+        session.user.accessToken,
+        context.locale
       );
       data = resStory.data;
       isGuardian = data?.spiritus?.flags.includes("GUARDIAN");
       saved = data?.spiritus?.flags.includes("SAVED");
     } else {
-      const resStory = await GetStoryBySlug(storyslug);
+      const resStory = await GetStoryBySlug(storyslug, null, context.locale);
       data = resStory.data;
     }
 
@@ -178,7 +179,8 @@ export async function getServerSideProps(context) {
       data.spiritus.slug,
       0,
       20,
-      session?.user?.accessToken || null
+      session?.user?.accessToken || null,
+      context.locale
     );
 
     let content = resAllStories.data?.content
@@ -237,6 +239,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
+    console.log(err);
     return {
       redirect: {
         destination: "/404",

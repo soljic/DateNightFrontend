@@ -65,8 +65,8 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
               <Image
                 src={ImagePath(spiritus.profileImage.url)}
                 alt="Spiritus image"
-                width={270}
-                height={300}
+                width={192}
+                height={220}
                 className="rounded-sp-14"
               />
             </div>

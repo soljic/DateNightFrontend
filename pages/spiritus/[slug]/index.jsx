@@ -140,7 +140,11 @@ export async function getServerSideProps(context) {
   try {
     let res;
     if (session && session?.user?.accessToken) {
-      res = await GetSpiritusBySlug(slug, session.user.accessToken);
+      res = await GetSpiritusBySlug(
+        slug,
+        session.user.accessToken,
+        context.locale
+      );
       isGuardian = res?.data?.flags.includes("GUARDIAN");
       saved = res?.data?.flags.includes("SAVED");
     } else {
