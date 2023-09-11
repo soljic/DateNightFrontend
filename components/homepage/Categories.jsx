@@ -21,7 +21,7 @@ export function CategoryTiles({ categories }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-3.5 md:mx-5 md:p-1">
+    <div className="mx-5 md:mx-0">
       <h2 className="mb-4 text-start font-bold text-2xl">
         {t("section_categories_title")}
       </h2>

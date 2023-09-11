@@ -84,7 +84,7 @@ export default function Home({ featured, categories, anniversaries, recent }) {
             </div>
           </div>
         </div>
-        <div className="mx-auto mb-16 min-h-[60vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="mx-auto mb-8 min-h-[60vh] w-full md:w-5/6 lg:mb-16 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <SearchBanner />
         </div>
         <div className="mx-auto min-h-screen w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
@@ -94,7 +94,7 @@ export default function Home({ featured, categories, anniversaries, recent }) {
             recent={recent}
           />
         </div>
-        <div className="mx-auto my-32 min-h-[50vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
+        <div className="mx-auto my-12 min-h-[50vh] w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <CategoryTiles categories={categories} />
         </div>
         <div className="mx-auto w-full bg-gradient-to-b from-day-gradient-start to-day-gradient-stop py-24 dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown">

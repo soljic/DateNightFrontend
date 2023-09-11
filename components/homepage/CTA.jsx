@@ -11,8 +11,8 @@ export function CTA() {
 
   return (
     <section className="from-sp-day-start flex items-center justify-center">
-      <div className="flex flex-col items-start justify-center gap-12 px-5 md:flex-row">
-        <div className="flex w-full flex-col items-center justify-center gap-2.5 pb-8 md:w-1/2 md:items-start lg:w-1/3">
+      <div className="flex flex-col items-center justify-center gap-12 px-5 md:flex-row">
+        <div className="flex w-full flex-col items-start justify-center gap-2.5 pb-8 md:w-1/2 lg:w-1/3">
           <div className="relative mb-4 h-8 w-8 rounded-sp-10 bg-sp-day-50 md:mb-2">
             <Image
               src="/images/logo/spiritus.svg"

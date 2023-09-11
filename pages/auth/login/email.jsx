@@ -62,7 +62,7 @@ export default function EmailLogin() {
       });
 
       if (!res.error) {
-        return Router.push("/");
+        Router.back()
       }
 
       handleErr(res.error);
@@ -82,7 +82,6 @@ export default function EmailLogin() {
       </Head>
       <section className="flex flex-col items-center justify-center text-sp-white">
         {/* <pre>{JSON.stringify(watch(), null, 2)}</pre> */}
-
         <div className="flex flex-col items-center justify-center gap-8">
           <ShieldIcon width={12} height={12} />
           <h4 className="mb-10 text-center font-bold text-3xl">

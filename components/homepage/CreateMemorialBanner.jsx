@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 import Link from "next/link";
 
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
+import { LoginModal } from "../auth/Login";
 import { MemoryGuardianIcon } from "../spiritus/Icons";
 import { StarIcon, UsersIcon } from "./Icons";
 
@@ -29,11 +32,21 @@ const stats = [
 export function CreateMemorialBanner() {
   const { t } = useTranslation("common");
 
+  const { data: session } = useSession();
+
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   return (
     <div className="z-40 mx-3.5 mt-6 flex flex-col items-center sm:mx-5 sm:mt-10 md:mx-0 md:mt-16 lg:mt-28 2xl:mt-32">
+      {!session?.user ? (
+        <LoginModal isOpen={isOpen} closeModal={closeModal} />
+      ) : null}
       <h1 className="mb-6 text-center font-bold leading-none subpixel-antialiased text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
         {t("create_memorial_title")}
       </h1>
@@ -66,6 +79,7 @@ export function CreateMemorialBanner() {
         </div>
         <div className="mt-2 flex overflow-hidden rounded-2xl border-5 border-sp-fawn/30 md:border-6">
           <Link
+            onClick={openModal}
             className="flex w-full items-center justify-center bg-sp-black px-4 py-2 text-center font-medium text-sp-white dark:bg-sp-day-50 dark:text-sp-black md:text-lg xl:py-3"
             href={`/create/spiritus?name=${name}&surname=${surname}`}
           >
