@@ -5,16 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Popover, Transition } from "@headlessui/react";
-import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon, SearchIcon } from "@heroicons/react/outline";
-import { MenuIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { LoginModal } from "../auth/Login";
 import { AccesibilityMenu } from "./Accesibility";
-import { Logo, NavItem, SubNavItem } from "./Common";
-import { AboutIcon, MobileAppIcon, StoriesIcon } from "./Icons";
+import { NavItem, SubNavItem } from "./Common";
 import { MobileMenu } from "./MobileMenu";
 import { ProfileMenu } from "./Profile";
 
@@ -113,7 +110,7 @@ export function SubnavigationMenu({ title, links }) {
       <Popover>
         {({ open }) => (
           <>
-            <Popover.Button className="flex items-center rounded-full p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+            <Popover.Button className="flex items-center rounded-sp-10 p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:text-base lg:text-lg">
               {title}
               <ChevronDownIcon className="ml-1 h-5 w-5 text-sp-black dark:text-sp-white" />
             </Popover.Button>
