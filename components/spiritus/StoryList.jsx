@@ -89,47 +89,48 @@ export function StoryCard({
   const { t } = useTranslation("common");
 
   return (
-    <Link
-      href={`/spiritus/${spiritusSlug}/story/${slug}`}
-      className="break-inside-avoid-column text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white"
-    >
-      {images && images.length > 0 && (
-        <div className="relative mb-2">
-          <Image
-            src={images[0].url}
-            alt={`story-image-${slug}`}
-            height={images[0].height}
-            width={images[0].width}
-            className="w-full rounded-sp-10 object-cover"
-          />
-        </div>
-      )}
-      <div className="flex flex-col space-y-2 overflow-hidden text-ellipsis tracking-sp-tighten">
-        <div className="flex justify-between">
-          <div className="font-semibold text-sp-day-fawn text-sm dark:text-sp-fawn">
-            {tags && tags.length > 0 && tags.map((tag) => tag.value).join(", ")}
+    <article className="flex break-inside-avoid flex-col">
+      <Link href={`/spiritus/${spiritusSlug}/story/${slug}`}>
+        {images && images.length > 0 && (
+          <div className="relative mb-2">
+            <Image
+              src={images[0].url}
+              alt={`story-image-${slug}`}
+              height={images[0].height}
+              width={images[0].width}
+              className="w-full rounded-sp-10 object-cover"
+            />
           </div>
-          <div className="flex items-center justify-between">
-            {flags.includes("PRIVATE") && (
-              <div className="flex items-center justify-center">
-                <LockIcon className="h-5 w-5" />
-              </div>
-            )}
+        )}
+        <div className="flex flex-col space-y-2 overflow-hidden text-ellipsis tracking-sp-tighten">
+          <div className="flex justify-between">
+            <div className="font-semibold text-sp-day-fawn text-sm dark:text-sp-fawn">
+              {tags &&
+                tags.length > 0 &&
+                tags.map((tag) => tag.value).join(", ")}
+            </div>
+            <div className="flex items-center justify-between">
+              {flags.includes("PRIVATE") && (
+                <div className="flex items-center justify-center">
+                  <LockIcon className="h-5 w-5" />
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-ellipsis font-bold leading-5 text-lg tracking-sp-tighten">
+              {title}
+            </h3>
+            <p className="line-clamp-3 text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
+              {description || subtitle || ""}
+            </p>
+          </div>
+          <div className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center font-semibold text-sm">
+            {t("read_story")}
           </div>
         </div>
-        <div>
-          <h3 className="text-ellipsis font-bold leading-5 text-lg tracking-sp-tighten">
-            {title}
-          </h3>
-          <p className="line-clamp-3 text-ellipsis leading-5 text-xs tracking-sp-tighten sm:text-sm">
-            {description || subtitle || ""}
-          </p>
-        </div>
-        <div className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center font-semibold text-sm">
-          {t("read_story")}
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </article>
   );
 }
 
