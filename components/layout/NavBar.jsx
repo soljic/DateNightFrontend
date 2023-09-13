@@ -47,8 +47,8 @@ export function Navbar() {
               title={t("about")}
               links={[
                 { text: t("why-us"), href: "/why-us" },
-                { text: t("pricing"), href: "/pricing" },
-                { text: t("about"), href: "/about" },
+                // { text: t("pricing"), href: "/pricing" },
+                { text: t("our-story"), href: "/about" },
               ]}
             />
             <NavItem text={t("need-help")} link={"/need-help"} />
@@ -67,7 +67,7 @@ export function Navbar() {
             <>
               <Link
                 href="/create/spiritus"
-                className="flex h-10 items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
               >
                 {t("create_spiritus")}
               </Link>
@@ -80,13 +80,13 @@ export function Navbar() {
             <>
               <button
                 onClick={openModal}
-                className="rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                className="w-24 rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
               >
                 {t("login")}
               </button>
               <button
                 onClick={openModal}
-                className="flex h-10 items-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
               >
                 {t("create_spiritus")}
               </button>
@@ -110,7 +110,7 @@ export function SubnavigationMenu({ title, links }) {
       <Popover>
         {({ open }) => (
           <>
-            <Popover.Button className="flex items-center rounded-sp-10 p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:text-base lg:text-lg">
+            <Popover.Button className="flex items-center rounded-sp-10 p-2 hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:text-base xl:text-lg">
               {title}
               <ChevronDownIcon className="ml-1 h-5 w-5 text-sp-black dark:text-sp-white" />
             </Popover.Button>

@@ -38,10 +38,10 @@ export function SpiritusCard({ slug, title, subtitle, image, description }) {
             {description}
           </p>
         </div>
+        <div className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm">
+          {t("term_view")}
+        </div>
       </Link>
-      <div className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm">
-        {t("term_view")}
-      </div>
     </article>
   );
 }

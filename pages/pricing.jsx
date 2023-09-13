@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 import { CheckIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
@@ -138,9 +139,12 @@ export default function About() {
             <p className="font-semibold text-lg tracking-tight dark:text-sp-white">
               {t("still_have_questions_heading")}
             </p>
-            <button className="w-64 rounded-sp-10 border-2 border-sp-day-400 px-12 py-2 text-center">
+            <Link
+              href="/need-help"
+              className="w-64 rounded-sp-10 border-2 border-sp-day-400 px-12 py-2 text-center"
+            >
               {t("still_have_questions_need_help")}
-            </button>
+            </Link>
           </div>
           <p className="text-md tracking-sp-tighten dark:text-sp-white">
             {t("still_have_questions_subheading")}

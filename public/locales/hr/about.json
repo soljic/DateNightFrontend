@@ -1,5 +1,5 @@
 {
-	"meta_about_title": "Spiritus | O nama",
+	"meta_about_title": "Spiritus | Naša priča",
 	"meta_about_description": "Nauči više o Spiritusu, našoj viziji, misiji i predivnim ljudima koji se brinu da se uspomene na tvoje voljene sačuvaju - vječno.",
 
 	"hero_title": "Svatko ima Priču koju vrijedi sačuvati.",
@@ -36,18 +36,19 @@
 	"partnerships_subtitle": "Očuvajte uspomene svoje zajednice kroz Spiritus.",
 	"partnerships_text": "Temelj svake zajednice su uspomene. Kroz suradnju s gradovima, sveučilištima i mnogim drugim ustanovama želimo sačuvati bogatu povijest. Javite nam se. Nijedna životna priča ne treba biti zaboravljena!",
 
-	"facts_1": "Spašenih Memorijala",
-	"facts_1_number": "700.000+",
-	"facts_2": "Suradnji s gradovima",
-	"facts_2_number": "12",
-	"facts_3": "Čuvara Sjećanja",
-	"facts_3_number": "3.000+",
+	"facts_1": "gradova partnera",
+	"facts_1_number": "7",
+	"facts_2": "novih muzeja",
+	"facts_2_number": "50",
+	"facts_3": "sačuvanih memorijala",
+	"facts_3_number": "1M+",
+
 
 	"team_title": "Ljudi Spiritusa",
 	"team_subtitle": "Upoznajte naš dream team.",
 	"team_text": "Izazov je napraviti odličan proizvod ako niste okruženi znatiželjnim pojedincima. Okupljamo nagrađivane stručnjake iz mnogih područja.",
 
-	"faq_title": "Trebate pomoć?",
+	"faq_title": "Korisnička podrška",
 	"faq_subtitle": "Često postavljena pitanja",
 	"faq_cta_text": "Javite nam se",
 	"faq_text": "ako imate dodatnih upita.",

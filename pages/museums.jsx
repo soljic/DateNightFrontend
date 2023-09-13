@@ -5,6 +5,7 @@ import { CheckIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import Facts from "@/components/about/Facts";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
@@ -224,19 +225,22 @@ function Article({ idx, elem }) {
         <div className="rounded-sp-10 bg-sp-fawn-subtle p-2.5 dark:bg-sp-fawn dark:bg-opacity-40">
           {elem.icon}
         </div>
-        <h3 className="my-4 max-w-lg font-bold text-3xl tracking-wide dark:text-sp-white md:text-4xl lg:text-5xl">
+        <h2 className="my-4 max-w-lg font-bold text-3xl dark:text-sp-white md:text-4xl lg:text-5xl">
           {elem.title}
-        </h3>
+        </h2>
 
         {elem?.list && elem.list.length > 0 && (
           <ul className="list-none text-[13px] font-medium leading-[18px] tracking-sp-tighten dark:text-sp-white">
             {elem.list.map((item, i) => {
               return (
-                <li className="flex items-center" key={`item-${idx}-${i}`}>
-                  <div className="align-self-start rounded-full bg-sp-fawn p-0.5">
-                    <CheckIcon className="h-3.5 w-3.5 text-sp-white" />
+                <li
+                  className="flex items-start justify-center"
+                  key={`item-${idx}-${i}`}
+                >
+                  <div className="mt-1 rounded-full bg-sp-fawn p-0.5">
+                    <CheckIcon className="h-4 w-4 text-sp-white" />
                   </div>
-                  <p className="mb-1 mt-0 px-2 opacity-70 text-base tracking-normal dark:text-sp-white">
+                  <p className="mb-1 mt-0 px-2 opacity-70 text-base tracking-normal dark:text-sp-white md:text-xl">
                     {item}
                   </p>
                 </li>
@@ -361,6 +365,7 @@ export default function MuseumsPage() {
             );
           })}
         </div>
+        <Facts />
         <BecomeGuardianCTA />
       </div>
     </FullWidthLayout>

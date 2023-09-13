@@ -3,7 +3,8 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "../../../components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
+
 import { SectionGrid } from "../../../components/sections/Section";
 import { GetSection } from "../../../service/http/sections";
 
@@ -26,11 +27,12 @@ export default function Section({
   totalPages,
   isLastPage,
   initialItems,
+  lang,
 }) {
   const { t } = useTranslation("common");
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_section_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,15 +44,16 @@ export default function Section({
         totalPages={totalPages}
         isLastPage={isLastPage}
         initialItems={initialItems}
+        lang={lang}
       />
-    </Layout>
+    </FullWidthLayout>
   );
 }
 
 export async function getServerSideProps(context) {
   const { id, title } = context.query;
 
-  const res = await GetSection(id);
+  const res = await GetSection(id, 0, context.locale);
 
   return {
     props: {
@@ -62,6 +65,7 @@ export async function getServerSideProps(context) {
       ])),
       id: res.data.id,
       title: title,
+      lang: context.locale,
       totalPages: res.data.items.totalPages,
       isLastPage: res.data.items.last,
       initialItems: res.data.items.content,

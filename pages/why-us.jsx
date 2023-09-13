@@ -105,17 +105,17 @@ export default function About() {
         </div>
 
         {/* Features section */}
-        <div class="grid grid-cols-1 gap-8 px-4 md:grid-cols-2">
-          <div class="appearance-none rounded-sp-14 border-2 border-sp-day-200 p-4 md:col-span-2">
-            <div class="grid grid-cols-1 items-center gap-4 md:grid-cols-2">
-              <div class="md:order-1">
+        <div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-2">
+          <div className="rounded-sp-14 border-2 border-sp-day-200 p-4 md:col-span-2">
+            <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-2">
+              <div className="rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown md:order-1">
                 <Image
                   src={WhyUsImage1}
                   alt="Image"
                   className="h-auto w-full rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-20 py-4 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
                 />
               </div>
-              <div class="md:order-2">
+              <div className="md:order-2">
                 <h2 className="text-[22px] font-bold leading-6 tracking-wide dark:text-sp-white">
                   {t("feature_1_title")}
                 </h2>
@@ -152,27 +152,24 @@ export default function About() {
           </div>
 
           {features.map((feature, idx) => (
-            <div
-              key={`feature-scnd-row-${idx}`}
-              className="flex justify-between"
-            >
-              <div class="w-full rounded-sp-14 border-2 border-sp-day-300 p-4">
-                <div>
+            <div key={`feature-scnd-row-${idx}`} className="flex justify-start">
+              <div className="flex w-full flex-col justify-between space-y-2 rounded-sp-14 border-2 border-sp-day-300 p-4">
+                <div className="rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-20 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
                   <Image
                     src={feature.image}
                     alt="Image"
-                    className="h-auto w-full rounded-sp-14 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-20 py-4 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
+                    className="h-auto w-full"
                   />
                 </div>
-                <div>
-                  <h2 className="my-4 text-[22px] font-bold leading-6 tracking-wide dark:text-sp-white">
-                    {t(feature.title)}
-                  </h2>
-                  <p className="mb-4 opacity-70 text-base tracking-sp-tighten dark:text-sp-white">
-                    {t(feature.subtitle)}
-                  </p>
+                <h2 className="text-[22px] font-bold leading-6 tracking-sp-tighten dark:text-sp-white">
+                  {t(feature.title)}
+                </h2>
+                <p className="opacity-70 text-base tracking-sp-tighten dark:text-sp-white">
+                  {t(feature.subtitle)}
+                </p>
 
-                  <ul className="flex list-none flex-col gap-2 text-base tracking-sp-tighten dark:text-sp-white">
+                <div className="flex flex-col">
+                  <ul className="list-none space-y-2 text-base tracking-sp-tighten dark:text-sp-white">
                     {feature.list.map((item, idx) => {
                       return (
                         <li
@@ -191,7 +188,7 @@ export default function About() {
                   </ul>
                   <Link
                     href={feature.buttonLink || "/why-us"}
-                    className="mt-12 block w-full rounded-sp-14 border-2 border-sp-day-200 p-2 text-center font-semibold"
+                    className="mt-12 w-full rounded-sp-14 border-2 border-sp-day-200 p-2 text-center font-semibold"
                   >
                     {t(feature.buttonText)}
                   </Link>
@@ -202,7 +199,7 @@ export default function About() {
         </div>
 
         {/* Join community section */}
-        <div className="mx-auto mb-64 mt-32 flex max-w-4xl flex-col items-center justify-center gap-2">
+        <div className="mx-auto my-64 flex max-w-4xl flex-col items-center justify-center gap-2">
           <CommunityIcon width={15} height={15} />
           <h1 className="mb-3 mt-4 px-2 text-center font-bold text-4xl dark:text-sp-white md:text-5xl">
             {t("join_community_title")}
@@ -216,7 +213,7 @@ export default function About() {
           </h2>
           <Link
             href="/auth/register"
-            className="items-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-6 py-4 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+            className="items-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-6 py-4 text-center font-medium leading-5 text-sp-white dark:border-sp-fawn-subtle/50 dark:from-sp-dark-fawn dark:to-sp-fawn"
           >
             {t("join_community_become_guardian")}
           </Link>

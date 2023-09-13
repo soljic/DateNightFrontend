@@ -4,19 +4,19 @@ import Image from "next/legacy/image";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import spiritusiOS from "../public/images/mobile/spiritusiOS.svg";
-import playStore from "../public/images/mobile/playStore.svg";
-import appStore from "../public/images/mobile/appStore.svg";
-import qrCode from "../public/images/mobile/qrCode.svg";
-import iphoneCut from "../public/images/mobile/iphoneCut.png";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import Layout from "../components/layout/Layout";
+import appStore from "../public/images/mobile/appStore.svg";
+import iphoneCut from "../public/images/mobile/iphoneCut.png";
+import playStore from "../public/images/mobile/playStore.svg";
+import qrCode from "../public/images/mobile/qrCode.svg";
+import spiritusiOS from "../public/images/mobile/spiritusiOS.svg";
 
 export default function MobileAppCTA() {
   const { t } = useTranslation(["mobile", "common"]);
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("common:meta_title_mobile_app")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,7 +44,7 @@ export default function MobileAppCTA() {
         <meta property="og:image:height" content="630" />
       </Head>
 
-      <div className="flex mx-auto flex-col items-center justify-center lg:w-5/6 rounded-lg bg-gradient-to-b from-sp-day-50 to-sp-day-300 text-sp-black dark:from-sp-black dark:to-sp-brown dark:text-sp-white">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center rounded-lg bg-gradient-to-b from-sp-day-50 to-sp-day-300 text-sp-black dark:from-sp-black dark:to-sp-brown dark:text-sp-white lg:w-5/6">
         <div className="mx-auto text-center">
           <div className="mt-14">
             <Image src={spiritusiOS} />
@@ -83,13 +83,13 @@ export default function MobileAppCTA() {
               </a>
             </div>
 
-            <div className="flex w-auto items-center justify-center">
+            <div className="flex w-auto max-w-4xl items-center justify-center pt-16">
               <Image src={iphoneCut} />
             </div>
           </div>
         </div>
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 

@@ -96,12 +96,17 @@ export async function GetSpiritusGalleryImagesV2(
   return res;
 }
 
-export async function GetSpiritusTributes(spiritusId, offset, limit) {
+export async function GetSpiritusTributes(spiritusId, offset, limit, lang) {
   const o = offset ? offset : defaultOffset;
   const l = limit ? limit : defaultLimit;
 
   const res = await axios.get(
-    `${API_URL}/wapi/rose/spiritus/${spiritusId}/tribute?page=${o}&size=${l}`
+    `${API_URL}/wapi/rose/spiritus/${spiritusId}/tribute?page=${o}&size=${l}`,
+    {
+      headers: {
+        "Accept-Language": lang ? lang : "hr",
+      },
+    }
   );
 
   return res;

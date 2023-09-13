@@ -148,12 +148,14 @@ export async function getServerSideProps(context) {
       isGuardian = res?.data?.flags.includes("GUARDIAN");
       saved = res?.data?.flags.includes("SAVED");
     } else {
-      res = await GetSpiritusBySlug(slug);
+      res = await GetSpiritusBySlug(slug, null, context.locale);
     }
     const spiritus = res.data;
     const resTributes = await GetSpiritusTributes(
       spiritus.id,
-      session?.user?.accessToken
+      0,
+      12,
+      context.locale
     );
 
     return {
