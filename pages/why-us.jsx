@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 import { CheckIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
@@ -20,9 +21,15 @@ export default function About() {
     {
       title: "feature_2_title",
       subtitle: "feature_2_subtitle_1",
-      list: ["feature_2_list_1", "feature_2_list_2", "feature_2_list_3"],
+      list: [
+        "feature_2_list_1",
+        "feature_2_list_2",
+        "feature_2_list_3",
+        "feature_2_list_4",
+      ],
       image: WhyUsImage2,
       buttonText: "feature_2_create_memorial",
+      buttonLink: "/create/spiritus",
     },
     {
       title: "feature_3_title",
@@ -35,14 +42,14 @@ export default function About() {
       ],
       image: WhyUsImage3,
       buttonText: "feature_3_learn_about_museum",
+      buttonLink: "/museums",
     },
   ];
 
   return (
     <FullWidthLayout>
       <Head>
-        {/* {t("meta_about_title")} */}
-        <title>Why Us</title>
+        <title>{t("meta_about_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Why us description */}
         <meta name="description" content={"Why us description"} />
@@ -175,16 +182,19 @@ export default function About() {
                           <div className="align-self-start rounded-full bg-sp-fawn p-0.5">
                             <CheckIcon className="h-3.5 w-3.5 text-sp-white" />
                           </div>
-                          <p className="mb-1 mt-0 px-2 opacity-70 tracking-normal dark:text-sp-white">
+                          <p className="px-2 opacity-70 tracking-normal dark:text-sp-white">
                             {t(item)}
                           </p>
                         </li>
                       );
                     })}
                   </ul>
-                  <button className="mt-12 w-full rounded-sp-14 border-2 border-sp-day-200 p-2 text-center font-semibold">
+                  <Link
+                    href={feature.buttonLink || "/why-us"}
+                    className="mt-12 block w-full rounded-sp-14 border-2 border-sp-day-200 p-2 text-center font-semibold"
+                  >
                     {t(feature.buttonText)}
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -204,9 +214,12 @@ export default function About() {
               {t("join_community_subtitle_forever_span")}
             </span>
           </h2>
-          <button className="items-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-6 py-4 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn">
+          <Link
+            href="/auth/register"
+            className="items-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-6 py-4 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+          >
             {t("join_community_become_guardian")}
-          </button>
+          </Link>
         </div>
 
         {/* Become a guardian section */}
