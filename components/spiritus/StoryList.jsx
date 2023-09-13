@@ -89,7 +89,10 @@ export function StoryCard({
   const { t } = useTranslation("common");
 
   return (
-    <article className="break-inside-avoid-column text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white">
+    <Link
+      href={`/spiritus/${spiritusSlug}/story/${slug}`}
+      className="break-inside-avoid-column text-sp-black dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white"
+    >
       {images && images.length > 0 && (
         <div className="relative mb-2">
           <Image
@@ -122,14 +125,11 @@ export function StoryCard({
             {description || subtitle || ""}
           </p>
         </div>
-        <Link
-          href={`/spiritus/${spiritusSlug}/story/${slug}`}
-          className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center font-semibold text-sm"
-        >
+        <div className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center font-semibold text-sm">
           {t("read_story")}
-        </Link>
+        </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
