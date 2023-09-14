@@ -38,6 +38,20 @@
   "delete_story_modal_subtitle": "Akcija se ne može poništiti.",
   "delete_story_modal_cancel": "Ne, zadrži Priču",
 
+  "add_guardian_modal_title": "Dodaj novog Čuvara",
+  "add_guardian_modal_subtitle_1": "Dodaj novog Čuvara za",
+  "add_guardian_modal_subtitle_2": "Zatraži identifikacijski kod.",
+  "add_guardian_modal_guardian_code_explanation": "Moj profil -> Podijeli status Čuvara",
+  "add_guardian_modal_guardian_id_label": "Identifikacijski kod Čuvara",
+  "add_guardian_modal_confirm": "Dodaj novog Čuvara",
+  "add_guardian_modal_cancel": "Ne sada",
+  "add_guardian_modal_error": "Čuvar se ne može dodati. Pokušajte kasnije.",
+
+  "delete_guardian_modal_title": "Uklonite Čuvara?",
+  "delete_guardian_modal_subtitle_1": "Jeste li sigurni da želite ukloniti Čuvara",
+  "delete_guardian_modal_subtitle_2": "za",
+  "delete_guardian_modal_confirm": "Ukloni Čuvara",
+  "delete_guardian_modal_cancel": "Ne sada",
 
   "404_title": "Tražena stranica ne postoji.",
   "404_subtitle": "Stranica na koju ste došli nije pronađena",

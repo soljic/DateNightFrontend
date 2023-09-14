@@ -39,6 +39,21 @@
   "delete_story_modal_subtitle": "This action cannot be undone.",
   "delete_story_modal_cancel": "Ne, keep Story",
 
+  "add_guardian_modal_title": "Add New Guardian",
+  "add_guardian_modal_subtitle_1": "Add a new Guardian for ",
+  "add_guardian_modal_subtitle_2": "Ask for their Guardian ID code.",
+  "add_guardian_modal_guardian_code_explanation": "Account -> My Guardian ID",
+  "add_guardian_modal_guardian_id_label": "Guardian ID",
+  "add_guardian_modal_confirm": "Add Guardian",
+  "add_guardian_modal_cancel": "Not now",
+  "add_guardian_modal_error": "Cannot add Guardian. Try again later.",
+
+  "delete_guardian_modal_title": "Remove Guardian?",
+  "delete_guardian_modal_subtitle_1": "Are you sure you want to remove Guardian",
+  "delete_guardian_modal_subtitle_2": "for",
+  "delete_guardian_modal_confirm": "Remove Guardian",
+  "delete_guardian_modal_cancel": "Not now",
+
   "404_title": "This page does not exist.",
   "404_subtitle": "The page you are looking for could not be found.",
   "404_subtitle_2": "Try these pages:",

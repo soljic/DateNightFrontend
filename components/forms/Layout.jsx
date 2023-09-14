@@ -54,7 +54,7 @@ const menuItems = [
       <SettingsGuardianIcon className="h-5 w-5 fill-sp-day-400 dark:fill-sp-day-200" />
     ),
     href: "guardians",
-    active: false,
+    active: true,
   },
 ];
 
