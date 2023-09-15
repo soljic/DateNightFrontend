@@ -16,7 +16,9 @@ export function SetStoryOG(spiritus, story) {
     />,
     <meta
       property="og:url"
-      content={`https://spiritus.app/en/stories/${story.slug}`}
+      content={encodeURI(
+        `https://spiritus.app/en/spiritus/${spiritus.slug}/story/${story.slug}`
+      )}
       key={`story-${story.id}-url`}
     />,
     <meta
@@ -115,7 +117,7 @@ export function SetSpiritusOG(spiritus) {
     />,
     <meta
       property="og:url"
-      content={`https://spiritus.app/en/spiritus/${spiritus.slug}`}
+      content={encodeURI(`https://spiritus.app/en/spiritus/${spiritus.slug}`)}
       key={`spiritus-${spiritus.id}-url`}
     />,
     <meta
