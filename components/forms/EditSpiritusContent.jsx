@@ -9,7 +9,7 @@ import { useTranslation } from "next-i18next";
 import DatePicker from "react-date-picker";
 
 import { Spinner } from "@/components/Status";
-import { SpiritusProfileImageUploader } from "@/components/Uploaders";
+import { SpiritusProfileCropper } from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 
 import {
@@ -95,6 +95,15 @@ export function EditContent({ spiritus, onSuccess, onError }) {
       if (images.length > 0) {
         const fileName = await HashFilename(images[0].file.name);
         form.append("file", images[0].file, fileName);
+        if (images[0].cropped) {
+          const data = await fetch(images[0].previewURL);
+          const croppedBlob = await data.blob();
+          const croppedFile = new File([croppedBlob], fileName, {
+            type: croppedBlob.type,
+          });
+          const coppedFilename = "C_" + fileName;
+          form.append("cropped", croppedFile, coppedFilename);
+        }
         await AddSpiritusProfileImage(
           session.user.accessToken,
           spiritus.id,
@@ -218,11 +227,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
           </h2>
           <div className="my-1 flex flex-col gap-2 md:flex-row">
             <div className="w-full flex-1">
-              <SpiritusProfileImageUploader
-                name={name ? name : "Spiritus"}
-                images={images}
-                setImages={setImages}
-              />
+              <SpiritusProfileCropper images={images} setImages={setImages} />
             </div>
           </div>
         </div>

@@ -21,7 +21,6 @@ import {
 import {
   AddSpiritusImage,
   DeleteSpiritusImage,
-  SetSpiritusProfileImage,
 } from "@/service/http/spiritus_crud";
 import { SetSpiritusCoverImage } from "@/service/http/spiritus_crud";
 
@@ -136,19 +135,6 @@ export function EditImages({ spiritus, onSuccess, onError }) {
     }
   };
 
-  const setProfileImage = async (imageId) => {
-    try {
-      await SetSpiritusProfileImage(
-        session.user.accessToken,
-        spiritus.id,
-        imageId
-      );
-      onSuccess();
-    } catch (error) {
-      onError(error.message);
-    }
-  };
-
   const cancel = () => {
     setSelectedCoverId(spiritus?.coverImage.id || 0);
   };
@@ -206,10 +192,10 @@ export function EditImages({ spiritus, onSuccess, onError }) {
               </button>
             </div>
             <SpiritusImageEditor
+              spiritusId={spiritus.id}
               images={images}
               setImages={setImages}
               setDeletedImages={setDeletedImages}
-              setProfileImage={setProfileImage}
             />
           </div>
         </>

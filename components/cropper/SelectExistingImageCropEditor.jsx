@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Image from "next/image";
+import { useRouter } from "next/router";
 
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import AvatarEditor from "react-avatar-editor";
 
@@ -13,61 +15,95 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import { cn } from "@/utils/cn";
+import { SetSpiritusProfileImage } from "@/service/http/spiritus_crud";
 
-import { ImageIcon } from "../Icons";
+import { cn } from "@/utils/cn";
+import { HashFilename } from "@/utils/filenames";
+
 import { Spinner } from "../Status";
 import { Slider } from "../ui/slider";
 
-export function CropEditor({ open, setOpen, onAdd, onRemove }) {
+export function SelectExistingImageCropEditor({
+  spiritusId,
+  open,
+  setOpen,
+  imageToCrop,
+}) {
   const { t } = useTranslation(["common", "settings"]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
   const [saving, setSaving] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const editorRef = useRef(null);
-  const [canvasImage, setCanvasImage] = useState(null);
-  const [initialImage, setInitialImage] = useState(null);
+  const croppedImageRef = useRef(null);
+  const [originalImage, setOriginalImage] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
 
-  const inputFile = useRef(null);
+  useEffect(() => {
+    const getImage = async () => {
+      // hash the URL and use as name
+      const fileName = await HashFilename(imageToCrop.url);
+      const image = await fetch(imageToCrop.url);
+      const blob = await image.blob();
+      const file = new File([blob], fileName, {
+        type: blob.type,
+      });
+      setOriginalImage(file);
+    };
+    getImage();
+  }, []);
 
-  const onOpenFileDialog = (event) => {
-    event.preventDefault();
-    inputFile.current.click();
+  const onSave = async () => {
+    try {
+      setSaving(true);
+      if (!session?.user?.accessToken) {
+        return;
+      }
+      // useState is async; it's not guaranteed that the croppedImage is set
+      // so we take the current croppedImage and recalculate the crop if needed
+      let imgToSaveDataURL = croppedImage;
+      if (!imgToSaveDataURL) {
+        imgToSaveDataURL = getCroppedImageDataURL();
+        setCroppedImage(imgToSaveDataURL);
+      }
+      const form = new FormData();
+      const fileName = originalImage.name;
+      const data = await fetch(imgToSaveDataURL);
+      const croppedBlob = await data.blob();
+      const croppedFile = new File([croppedBlob], fileName, {
+        type: croppedBlob.type,
+      });
+      const croppedFilename = "C_" + fileName;
+      form.append("file", croppedFile, croppedFilename);
+      await SetSpiritusProfileImage(
+        session.user.accessToken,
+        spiritusId,
+        imageToCrop.id,
+        form
+      );
+      router.reload();
+    } catch (error) {
+      setSaving(false);
+      setErrorMsg(error.message);
+    }
   };
 
-  const onChangeFile = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const files = event.target.files;
-    if (files.length === 0) return;
-    setInitialImage(files[0]);
-    cropImage();
+  const getCroppedImageDataURL = () => {
+    return croppedImageRef.current?.getImageScaledToCanvas().toDataURL();
   };
 
-  const cropImage = () => {
-    const dataUrl = editorRef.current?.getImageScaledToCanvas().toDataURL();
-    setCanvasImage(dataUrl);
+  const onCropImage = () => {
+    const dataUrl = getCroppedImageDataURL();
+    setCroppedImage(dataUrl);
   };
 
   const onCancel = () => {
-    editorRef.current?.clearImage();
-    setInitialImage(null);
-    setCanvasImage(null);
+    croppedImageRef.current?.clearImage();
+    setCroppedImage(null);
     setOpen(false);
-  };
-
-  // if image was not cropped return initial image
-  const onSave = () => {
-    setSaving(true);
-    if (!canvasImage) {
-      // image was not cropped
-      onAdd(URL.createObjectURL(initialImage), initialImage, false);
-      return;
-    }
-    onAdd(canvasImage, initialImage, true);
-    setSaving(false);
   };
 
   return (
@@ -83,21 +119,13 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
               {t("settings:crop_dialog_subtitle")}
             </DialogDescription>
           </DialogHeader>
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row md:justify-between">
-            <input
-              type="file"
-              id="crop-image-select"
-              className="sr-only"
-              ref={inputFile}
-              accept="image/*"
-              onChange={onChangeFile}
-            />
-            {initialImage ? (
-              <>
+          {originalImage ? (
+            <>
+              <div className="flex flex-col items-center justify-between gap-6 md:flex-row md:justify-between">
                 <AvatarEditor
-                  ref={editorRef}
+                  ref={croppedImageRef}
                   className="mt-5 rounded-sp-10 shadow"
-                  image={initialImage}
+                  image={originalImage}
                   width={192}
                   height={220}
                   border={20}
@@ -130,29 +158,13 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
                   </div>
                   <button
                     className="w-full rounded-sp-10 border border-sp-day-400 py-2"
-                    onClick={() => cropImage()}
+                    onClick={() => onCropImage()}
                   >
                     {t("settings:crop_dialog_action_crop")}
                   </button>
                 </div>
-              </>
-            ) : (
-              <div className="flex h-[220px] w-[200px] rounded-sp-10 border border-dashed border-sp-day-400 bg-sp-day-50 p-12 font-medium text-sp-day-400 text-sm dark:bg-sp-black">
-                <button
-                  onClick={onOpenFileDialog}
-                  className="relative mx-auto cursor-pointer rounded-sp-10 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2"
-                >
-                  <ImageIcon
-                    className="mx-auto h-7 w-7 fill-sp-day-400"
-                    aria-hidden="true"
-                  />
-                  <p className="mt-1">{t("upload_spiritus_images_button")}</p>
-                </button>
               </div>
-            )}
-          </div>
-          {initialImage && (
-            <>
+
               <div>
                 <h3 className="font-medium">
                   {t("settings:crop_dialog_preview_title")}
@@ -162,10 +174,10 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
                 </p>
               </div>
               <div className="flex flex-col items-center justify-between space-y-4 md:block">
-                {canvasImage ? (
+                {croppedImage ? (
                   <div className="h-[220px] w-[192px] overflow-hidden rounded-sp-10 border border-dashed border-sp-day-400">
                     <Image
-                      src={canvasImage}
+                      src={croppedImage}
                       className=""
                       alt="cropped-image"
                       height={220}
@@ -179,10 +191,10 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
                   <button
                     type="button"
                     onClick={() => onSave()}
-                    disabled={saving || !canvasImage}
+                    disabled={saving || !croppedImage || errorMsg}
                     className={cn(
                       "w-full rounded-sp-10 border border-sp-day-400 py-2",
-                      saving || !canvasImage
+                      saving || !croppedImage || errorMsg
                         ? "cursor-not-allowed opacity-50"
                         : ""
                     )}
@@ -196,8 +208,13 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
                     {t("common:cancel")}
                   </button>
                 </div>
+                {!!errorMsg && (
+                  <p className="font-medium text-red-500 text-sm">{errorMsg}</p>
+                )}
               </div>
             </>
+          ) : (
+            <Spinner />
           )}
         </div>
       </DialogContent>

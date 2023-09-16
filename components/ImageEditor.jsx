@@ -1,31 +1,39 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import Image from "next/image";
 
 import { Popover } from "@headlessui/react";
 import { DotsHorizontalIcon, TrashIcon, XIcon } from "@heroicons/react/outline";
-import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 
 import { ImageIcon } from "./Icons";
+import { SelectExistingImageCropEditor } from "./cropper/SelectExistingImageCropEditor";
 
 export const IMG_ACTION_ADD = "add";
 export const IMG_ACTION_KEEP = "keep";
 export const IMG_ACTION_REMOVE = "remove";
 
 export function SpiritusImageEditor({
+  spiritusId,
   images,
   setImages,
-  setProfileImage,
   setDeletedImages,
 }) {
   const { t } = useTranslation("common");
 
   const inputFile = useRef(null);
 
+  const [cropperOpen, setCropperOpen] = useState(false);
+  const [imageToCrop, setImageToCrop] = useState(null);
+
   const onOpenFileDialog = (event) => {
     event.preventDefault();
     inputFile.current.click();
+  };
+
+  const onSelectProfileImage = (imageObject) => {
+    setImageToCrop(imageObject);
+    setCropperOpen(true);
   };
 
   const onChangeFile = (event) => {
@@ -78,7 +86,14 @@ export function SpiritusImageEditor({
         onChange={onChangeFile}
         multiple
       />
-
+      {cropperOpen && imageToCrop && (
+        <SelectExistingImageCropEditor
+          spiritusId={spiritusId}
+          open={cropperOpen}
+          setOpen={setCropperOpen}
+          imageToCrop={imageToCrop || null}
+        />
+      )}
       <div className="gap-4 space-y-4 py-2">
         {!images.length ? (
           <div className="flex h-48 justify-center rounded-sp-10 border border-dashed border-sp-day-400 bg-sp-day-50 p-12 font-medium text-sp-day-400 text-sm dark:bg-sp-black">
@@ -115,7 +130,7 @@ export function SpiritusImageEditor({
                     key={idx}
                     index={idx}
                     onRemove={onRemove}
-                    onSetProfile={setProfileImage}
+                    onSetProfile={() => onSelectProfileImage(img)}
                   />
                 );
               })}
@@ -129,7 +144,6 @@ export function SpiritusImageEditor({
 
 function Thumbnail({ image, onRemove, onSetProfile, index }) {
   const { t } = useTranslation("common");
-
   return (
     <div key={index} className="relative h-full w-full">
       <div key={index} className="h-full w-full">
@@ -155,7 +169,7 @@ function Thumbnail({ image, onRemove, onSetProfile, index }) {
                   <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
                     <button
                       onClick={() => {
-                        onSetProfile(image.id);
+                        onSetProfile();
                       }}
                       className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
                     >

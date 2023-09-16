@@ -61,5 +61,13 @@
   "400_subtitle": "Nemate potrebna ovlaštenja za pristup ovoj stranice. Pokušajte se ponovno prijeviti ili nas kontaktirajte ukoliko trebate pomoć.",
   "400_subtitle_2": "Posjetite ove stranice:",
 
-  "sign_out": "Odjavi se"
+  "sign_out": "Odjavi se",
+
+  "crop_dialog_title": "Obreži sliku profila",
+  "crop_dialog_subtitle": "Slike profila su veličine 192x220px.\nPovucite sliku u prozorčiću do željenog i koristite opcije uvećanje i zakreni za prilagodbu slike.",
+  "crop_dialog_action_zoom": "Uvećaj",
+  "crop_dialog_action_rotate": "Rotiraj",
+  "crop_dialog_action_crop": "Obreži",
+  "crop_dialog_preview_title": "Pretpregled",
+  "crop_dialog_preview_subtitle": "Ovako će izgledati vaša slika profila."
 }

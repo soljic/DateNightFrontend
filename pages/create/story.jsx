@@ -27,6 +27,7 @@ export default function CreateStoryPage({ spiritus, isGuardian, tags }) {
   const [toastMessage, setToastMessage] = useState("");
 
   function onError(message) {
+    setIsSuccess(false);
     setToastMessage(message);
     setToastOpen(true);
   }
@@ -38,6 +39,7 @@ export default function CreateStoryPage({ spiritus, isGuardian, tags }) {
   const clearToast = () => {
     setToastOpen(false);
     setToastMessage("");
+    setIsSuccess(true);
   };
 
   // scroll to top and redirect user to new story after 6 seconds
@@ -49,6 +51,7 @@ export default function CreateStoryPage({ spiritus, isGuardian, tags }) {
       const url = `/spiritus/${spiritus.slug}/story/${storySlug}`;
     }
     setRedirectURL(url);
+    setIsSuccess(true);
 
     setTimeout(async () => {}, 7000);
     router.push(url);

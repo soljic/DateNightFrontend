@@ -102,14 +102,16 @@ export async function AddSpiritusProfileImage(
 export async function SetSpiritusProfileImage(
   accessToken,
   spiritusId,
-  profileImageId
+  profileImageId,
+  imageFormData // cropped image inside form data
 ) {
   return await axios.put(
     `${API_URL}/wapi/spiritus/${spiritusId}/profileImage?profileImageId=${profileImageId}`,
-    {},
+    imageFormData,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
       },
     }
   );

@@ -62,5 +62,13 @@
   "400_subtitle": "You are not authorized to access this page. Please sign in to continue or contact us in case you need assistence.",
   "400_subtitle_2": "Try these pages:",
 
-  "sign_out": "Sign Out"
+  "sign_out": "Sign Out",
+
+  "crop_dialog_title": "Resize profile image",
+  "crop_dialog_subtitle": "Profile images are required to be 192x220 pixel images.\nDrag the image in the box to position it and use the zoom or rotate functions to adjust the image.",
+  "crop_dialog_action_zoom": "Zoom",
+  "crop_dialog_action_rotate": "Rotate",
+  "crop_dialog_action_crop": "Crop",
+  "crop_dialog_preview_title": "Preview",
+  "crop_dialog_preview_subtitle": "This is how your profile image will look like."
 }
