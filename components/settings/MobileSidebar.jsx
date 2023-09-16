@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { Popover, Transition } from "@headlessui/react";
+import { BellIcon } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
@@ -40,6 +41,11 @@ export function MobileSidebar({ selectedIndex }) {
       name: t("spiritus"),
       href: "/account/settings/my-spiritus",
       icon: <SettingsSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn" />,
+    },
+    {
+      name: t("notifications"),
+      href: "/account/settings/notifications",
+      icon: <BellIcon className="h-6 w-6 text-sp-dark-fawn" />,
     },
     // {
     //   name: t("saved"),

@@ -72,7 +72,7 @@ export function Navbar() {
                 {t("create_spiritus")}
               </Link>
               <ProfileMenu
-                // token={session.user.accessToken}
+                token={session.user.accessToken}
                 profileName={session?.user.name}
               />
             </>

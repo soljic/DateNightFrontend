@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { BellIcon } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -44,11 +45,11 @@ export function Sidebar({ selectedIndex }) {
     //     <BookmarkIcon className="w-5 h-5 text-sp-fawn dark:text-sp-white" />
     //   ),
     // },
-    // {
-    //   name: t("suggestions"),
-    //   href: "/",
-    //   icon: <SettingsSuggestionsIcon width={5} height={5} />,
-    // },
+    {
+      name: t("notifications"),
+      href: "/account/settings/notifications",
+      icon: <BellIcon className="h-6 w-6 text-sp-dark-fawn" />,
+    },
     {
       name: t("guardian_id"),
       href: "/account/settings/my-guardian-id",

@@ -70,5 +70,8 @@
   "crop_dialog_action_rotate": "Rotate",
   "crop_dialog_action_crop": "Crop",
   "crop_dialog_preview_title": "Preview",
-  "crop_dialog_preview_subtitle": "This is how your profile image will look like."
+  "crop_dialog_preview_subtitle": "This is how your profile image will look like.",
+
+  "notifications": "Notifications",
+  "notifications_read_all": "Read all"
 }

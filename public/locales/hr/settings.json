@@ -69,5 +69,8 @@
   "crop_dialog_action_rotate": "Rotiraj",
   "crop_dialog_action_crop": "Obreži",
   "crop_dialog_preview_title": "Pretpregled",
-  "crop_dialog_preview_subtitle": "Ovako će izgledati vaša slika profila."
+  "crop_dialog_preview_subtitle": "Ovako će izgledati vaša slika profila.",
+
+  "notifications": "Obavijesti",
+  "notifications_read_all": "Pročitaj sve"
 }
