@@ -460,6 +460,7 @@ function SpiritusActions({
   memoryGuardians,
   isGuardian,
   saved,
+  hideBacklink,
 }) {
   const { t } = useTranslation("common");
   const [copied, setCopied] = useState(false);
@@ -495,14 +496,14 @@ function SpiritusActions({
           <h3 className=" font-semibold ">{t("share_spiritus")}</h3>
         </div>
 
-        {!!spiritusSlug && (
-          <a
+        {!!spiritusSlug && !hideBacklink && (
+          <Link
             href={`/spiritus/${spiritusSlug}`}
             className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
           >
             {t("spiritus_view_spiritus")}{" "}
             <ArrowUpRightIcon className="ml-3 fill-black dark:fill-white" />
-          </a>
+          </Link>
         )}
 
         <CopyToClipboard text={shortLink} onCopy={() => setCopied(true)}>
@@ -603,6 +604,7 @@ export function Links({
   memoryGuardians,
   isGuardian,
   saved,
+  hideBacklink, // hide link leading back to spiritus
 }) {
   const { t } = useTranslation("common");
   const organization = funeralOrg || null;
@@ -676,6 +678,7 @@ export function Links({
         memoryGuardians={memoryGuardians}
         isGuardian={isGuardian}
         saved={saved}
+        hideBacklink={hideBacklink}
       />
     </div>
   );

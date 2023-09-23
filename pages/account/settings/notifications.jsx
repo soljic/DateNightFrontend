@@ -11,7 +11,7 @@ import { Sidebar } from "@/components/settings/Sidebar";
 
 import { GetNotifications } from "@/service/http/notifications";
 
-export default function NotificationsPage({ notifications }) {
+export default function NotificationsPage({ read, unread }) {
   const { t } = useTranslation(["settings"]);
 
   return (
@@ -30,7 +30,7 @@ export default function NotificationsPage({ notifications }) {
             <MobileSidebar selectedIndex={2} />
           </div>
           <div className="col-span-1 md:col-span-3">
-            <NotificationList notifications={notifications} />
+            <NotificationList read={read} unread={unread} />
           </div>
         </div>
       </section>
@@ -55,10 +55,24 @@ export async function getServerSideProps(context) {
     context.locale
   );
 
+  let read = [];
+  let unread = [];
+
+  if (res.data) {
+    res.data.forEach((n) => {
+      if (n.read) {
+        read.push(n);
+      } else {
+        unread.push(n);
+      }
+    });
+  }
+
   return {
     props: {
       key: `${context.locale}-settings-notification-list`,
-      notifications: res.data || [],
+      unread: unread,
+      read: read,
       ...(await serverSideTranslations(context.locale, ["common", "settings"])),
     },
   };

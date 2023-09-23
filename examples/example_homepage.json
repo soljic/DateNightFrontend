@@ -1,867 +1,956 @@
 {
-	"homeListItems": [
-	  {
-		"id": 1,
-		"viewType": "FEATURED",
-		"title": null,
-		"state": null,
-		"subtitle": null,
-		"flags": [
-		  "FEATURED_SECTION"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 1,
-			  "title": "STORY OF THE WEEK",
-			  "subtitle": "Fran Galović",
-			  "placeholderText": "Pojava avangarde i postmodernizma Frana Galovića",
-			  "actionButtonText": "Read story",
-			  "negativeActionButtonText": null,
-			  "parentId": 50427,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 40,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/522/spiritus",
-			  "flags": []
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 1,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 1,
-		  "totalPages": 1,
-		  "last": true,
-		  "size": 1,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 1,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 2,
-		"viewType": "LARGE",
-		"title": "Discover",
-		"state": null,
-		"subtitle": null,
-		"flags": [
-		  "DISCOVERY_SECTION",
-		  "SHOW_ALL"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 50427,
-			  "title": " Fran Galović kao „Hrvatski đak“",
-			  "subtitle": "Fran Galović",
-			  "placeholderText": "Nejasna teorija ostaje",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50427,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 39,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/522/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50420,
-			  "title": "Velimir Chytil - poetično lutkarstvo",
-			  "subtitle": "Velimir Chytil",
-			  "placeholderText": "Ugledni hrvatski lutkarski umjetnik",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50420,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 26,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/508/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 13359,
-			  "title": "Reincarnation: the path to invention",
-			  "subtitle": "Henry Ford",
-			  "placeholderText": "Ford's realization of life – and objects",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 13359,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 14,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/495/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 13346,
-			  "title": "Elizabeth Arden or The Queen – or maybe both?",
-			  "subtitle": "Elizabeth Arden",
-			  "placeholderText": "How did Florence Nightingale become Elizabeth Arden?",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 13346,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 1,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/465/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50418,
-			  "title": "Zlata Bartl – Teta Vegeta",
-			  "subtitle": "Zlata Bartl",
-			  "placeholderText": "Kraj 1950-ih godina obilježio našu današnjicu",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50418,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 23,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/504/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50419,
-			  "title": "Vinko Vošicki – koprivnički tiskar",
-			  "subtitle": "Vinko Vošicki",
-			  "placeholderText": "Ideali koji ne posustaju",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50419,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 25,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/506/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50433,
-			  "title": "Tomo Šestak – hrvatski glazbenik ",
-			  "subtitle": "Tomo Šestak",
-			  "placeholderText": "Osnivanje prvog limenog orkestra",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50433,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 46,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/532/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50421,
-			  "title": "Pavao Vuk – Pavlović : \"Pavao Wolf\"",
-			  "subtitle": "Pavao Vuk Pavlović",
-			  "placeholderText": " Filozofska i pedagoška aktivnost",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50421,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 28,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/510/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50422,
-			  "title": "Mariška Holoubek Funjak – domaća rock zvijezda",
-			  "subtitle": "Mariška Holoubek Funjak",
-			  "placeholderText": "Vitalnost i u zalasku dana.",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50422,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 30,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/512/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50424,
-			  "title": "Josip Vargović – čovjek koji je modernizirao Koprivnicu",
-			  "subtitle": "Josip Vargović",
-			  "placeholderText": "Gradonačelnik i vizionar",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50424,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 34,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/516/spiritus",
-			  "flags": []
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 10,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 18,
-		  "totalPages": 2,
-		  "last": false,
-		  "size": 10,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 10,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 3,
-		"viewType": "MEDIUM",
-		"title": "Categories",
-		"state": null,
-		"subtitle": null,
-		"flags": [
-		  "CATEGOIRES_SECTION"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 31,
-			  "title": "Ljubav",
-			  "subtitle": null,
-			  "placeholderText": null,
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 31,
-			  "itemNavigationType": "STORIES_LIST_CATEGORY",
-			  "itemPayload": null,
-			  "imageUrl": "/images/558/tag",
-			  "flags": null
-			},
-			{
-			  "id": 32,
-			  "title": "Rat",
-			  "subtitle": null,
-			  "placeholderText": null,
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 32,
-			  "itemNavigationType": "STORIES_LIST_CATEGORY",
-			  "itemPayload": null,
-			  "imageUrl": "/images/559/tag",
-			  "flags": null
-			},
-			{
-			  "id": 33,
-			  "title": "Život",
-			  "subtitle": null,
-			  "placeholderText": null,
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 33,
-			  "itemNavigationType": "STORIES_LIST_CATEGORY",
-			  "itemPayload": null,
-			  "imageUrl": "/images/560/tag",
-			  "flags": null
-			},
-			{
-			  "id": 34,
-			  "title": "Family",
-			  "subtitle": null,
-			  "placeholderText": null,
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 34,
-			  "itemNavigationType": "STORIES_LIST_CATEGORY",
-			  "itemPayload": null,
-			  "imageUrl": "/images/561/tag",
-			  "flags": null
-			},
-			{
-			  "id": 35,
-			  "title": "Posveta",
-			  "subtitle": null,
-			  "placeholderText": null,
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 35,
-			  "itemNavigationType": "STORIES_LIST_CATEGORY",
-			  "itemPayload": null,
-			  "imageUrl": "/images/562/tag",
-			  "flags": null
-			},
-			{
-			  "id": 36,
-			  "title": "Hobi",
-			  "subtitle": null,
-			  "placeholderText": null,
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 36,
-			  "itemNavigationType": "STORIES_LIST_CATEGORY",
-			  "itemPayload": null,
-			  "imageUrl": "/images/563/tag",
-			  "flags": null
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 10,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 6,
-		  "totalPages": 1,
-		  "last": true,
-		  "size": 10,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 6,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 4,
-		"viewType": "LARGE",
-		"title": "Anniversaries",
-		"state": null,
-		"subtitle": null,
-		"flags": [
-		  "SHOW_ALL",
-		  "ANNIVERSARIES_SECTION"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 50423,
-			  "title": "Leander Brozović",
-			  "subtitle": "02 Oct 1897 — 31 Aug 1962",
-			  "placeholderText": "Povjesničar vrijedan spomena",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 50423,
-			  "itemNavigationType": "SPIRITUS_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/514/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 50430,
-			  "title": "Fedor Malančec",
-			  "subtitle": "12 Feb 1902 — 09 Aug 1985",
-			  "placeholderText": "Od slikanja do glazbe",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 50430,
-			  "itemNavigationType": "SPIRITUS_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/526/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 13350,
-			  "title": "Maria Montessori",
-			  "subtitle": "31 Aug 1870 — 06 May 1952",
-			  "placeholderText": "The woman for people",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 13350,
-			  "itemNavigationType": "SPIRITUS_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/474/spiritus",
-			  "flags": []
-			},
-			{
-			  "id": 13352,
-			  "title": "Coco Chanel",
-			  "subtitle": "19 Aug 1883 — 10 Jan 1971",
-			  "placeholderText": "How did The Queen of fashion influence even when it was not her intention",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 13352,
-			  "itemNavigationType": "SPIRITUS_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/478/spiritus",
-			  "flags": []
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 10,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 4,
-		  "totalPages": 1,
-		  "last": true,
-		  "size": 10,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 4,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 10,
-		"viewType": "BANNER",
-		"title": null,
-		"state": null,
-		"subtitle": null,
-		"flags": [
-		  "BANNERS_SECTION"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 6,
-			  "title": "Login or register account!",
-			  "subtitle": "Keep memories of loved ones",
-			  "placeholderText": null,
-			  "actionButtonText": "Create account",
-			  "negativeActionButtonText": "Login",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": null,
-			  "itemNavigationType": "REGISTER_ACCOUNT",
-			  "itemPayload": null,
-			  "imageUrl": null,
-			  "flags": []
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 1,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 1,
-		  "totalPages": 1,
-		  "last": true,
-		  "size": 1,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 1,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 6,
-		"viewType": "LARGE",
-		"title": "Featured stories",
-		"state": null,
-		"subtitle": "The best stories that we think are on Spiritus.",
-		"flags": [
-		  "SHOW_ALL",
-		  "FEATURED_STORIES"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 39,
-			  "title": " Fran Galović kao „Hrvatski đak“",
-			  "subtitle": "Fran Galović",
-			  "placeholderText": "Nejasna teorija ostaje",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50427,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 39,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/522/spiritus",
-			  "flags": [
-				"FEATURED",
-				"PUBLIC"
-			  ]
-			},
-			{
-			  "id": 27,
-			  "title": " „Pošten odnos prema lutki, predstavi i teatru“",
-			  "subtitle": "Velimir Chytil",
-			  "placeholderText": "Lutke kao stil života",
-			  "actionButtonText": null,
-			  "negativeActionButtonText": null,
-			  "parentId": 50420,
-			  "parentNavigationType": "SPIRITUS_DETAILS",
-			  "itemId": 27,
-			  "itemNavigationType": "STORY_DETAILS",
-			  "itemPayload": null,
-			  "imageUrl": "/images/508/spiritus",
-			  "flags": [
-				"FEATURED",
-				"PUBLIC"
-			  ]
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 10,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 2,
-		  "totalPages": 1,
-		  "last": true,
-		  "size": 10,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 2,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 11,
-		"viewType": "BANNER",
-		"title": null,
-		"state": null,
-		"subtitle": null,
-		"flags": [
-		  "BANNERS_SECTION"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 7,
-			  "title": null,
-			  "subtitle": "Turn on location for Memory Walks and graveyards in your area.",
-			  "placeholderText": "Turn on location for Memory Walks and graveyards in your area.",
-			  "actionButtonText": "Turn on location",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": null,
-			  "itemNavigationType": "ENABLE_LOCATION",
-			  "itemPayload": null,
-			  "imageUrl": null,
-			  "flags": []
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 1,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 1,
-		  "totalPages": 1,
-		  "last": true,
-		  "size": 1,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 1,
-		  "first": true,
-		  "empty": false
-		}
-	  },
-	  {
-		"id": 7,
-		"viewType": "MEMORY_WALK",
-		"title": "Memory Walk",
-		"state": null,
-		"subtitle": "Explore cemeteries and all of the beautiful Stories that are near you",
-		"flags": [
-		  "SHOW_ALL",
-		  "MEMORY_WALK_SECTION"
-		],
-		"listPayload": null,
-		"version": "v1",
-		"items": {
-		  "content": [
-			{
-			  "id": 8,
-			  "title": "Memory walk",
-			  "subtitle": "Pri Sv. Duhu Koprivnica,Koprivnic,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 8,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'15.8k',  'numberOfFeaturedSpiritus':18 }",
-			  "imageUrl": "/images/544/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 35,
-			  "title": "Memory walk",
-			  "subtitle": "Novo groblje Dubrava,Vukovar,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 35,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'8.7k',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/545/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 39,
-			  "title": "Memory walk",
-			  "subtitle": "Vukovar - staro katoličko groblje,Vukovar,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 39,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'2.0k',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/553/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 12,
-			  "title": "Memory walk",
-			  "subtitle": "Reka,Koprivnic,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 12,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'1.7k',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/552/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 38,
-			  "title": "Memory walk",
-			  "subtitle": "Vukovar - pravoslavno groblje,Vukovar,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 38,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'1.3k',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/549/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 36,
-			  "title": "Memory walk",
-			  "subtitle": "Sotin - katoličko groblje,Vukovar,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 36,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'600+',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/546/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 11,
-			  "title": "Memory walk",
-			  "subtitle": "Jagnjedovec,Koprivnic,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 11,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'400+',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/551/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 10,
-			  "title": "Memory walk",
-			  "subtitle": "Herešin,Koprivnic,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 10,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'300+',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/550/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 9,
-			  "title": "Memory walk",
-			  "subtitle": "Bakovčice,Koprivnic,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 9,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'300+',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/547/graveyard",
-			  "flags": null
-			},
-			{
-			  "id": 34,
-			  "title": "Memory walk",
-			  "subtitle": "Lipovača,Vukovar,Croatia",
-			  "placeholderText": null,
-			  "actionButtonText": "Enter Memory Walk",
-			  "negativeActionButtonText": "About",
-			  "parentId": null,
-			  "parentNavigationType": null,
-			  "itemId": 34,
-			  "itemNavigationType": "MEMORY_WALK",
-			  "itemPayload": "{  'numberOfSpiritus':'300+',  'numberOfFeaturedSpiritus':0 }",
-			  "imageUrl": "/images/555/graveyard",
-			  "flags": null
-			}
-		  ],
-		  "pageable": {
-			"sort": {
-			  "sorted": false,
-			  "unsorted": true,
-			  "empty": true
-			},
-			"offset": 0,
-			"pageNumber": 0,
-			"pageSize": 10,
-			"paged": true,
-			"unpaged": false
-		  },
-		  "totalElements": 12,
-		  "totalPages": 2,
-		  "last": false,
-		  "size": 10,
-		  "number": 0,
-		  "sort": {
-			"sorted": false,
-			"unsorted": true,
-			"empty": true
-		  },
-		  "numberOfElements": 10,
-		  "first": true,
-		  "empty": false
-		}
-	  }
-	]
-  }
+  "homeListItems": [
+    {
+      "id": 79,
+      "viewType": "MEDIUM",
+      "title": "Novi",
+      "state": null,
+      "subtitle": "Novi memorijali",
+      "flags": [
+        "SHOW_ALL",
+        "NEW_SECTION"
+      ],
+      "listPayload": null,
+      "version": "1",
+      "items": {
+        "content": [
+          {
+            "id": 647496,
+            "code": null,
+            "title": "dsfasd dasfsd",
+            "subtitle": "06 Jul 2023 — 12 Jul 2023",
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "dsfasd-dasfsd-51c2aefe",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89907/spiritus",
+            "imageObject": {
+              "id": 89907,
+              "url": "/images/89907/spiritus",
+              "height": 701,
+              "width": 1080
+            },
+            "flags": []
+          },
+          {
+            "id": 647495,
+            "code": null,
+            "title": "Dinina Ping Pong Vladavina",
+            "subtitle": "21 Jun 2023 — 06 Jul 2023",
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "dinina-ping-pong-vladavina-46d88fb4",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89906/spiritus",
+            "imageObject": {
+              "id": 89906,
+              "url": "/images/89906/spiritus",
+              "height": 1080,
+              "width": 810
+            },
+            "flags": []
+          },
+          {
+            "id": 647491,
+            "code": null,
+            "title": "VINKO DINKO",
+            "subtitle": "01 Jun 2023 — 02 Jun 2023",
+            "placeholderText": "Nemamo svoje mapbox tokene",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "vinko-dinko-0f6b6c7b",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89898/spiritus",
+            "imageObject": {
+              "id": 89898,
+              "url": "/images/89898/spiritus",
+              "height": 256,
+              "width": 256
+            },
+            "flags": []
+          },
+          {
+            "id": 647490,
+            "code": null,
+            "title": "d cx",
+            "subtitle": "? — ?",
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "d-cx-8de46758",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89897/spiritus",
+            "imageObject": {
+              "id": 89897,
+              "url": "/images/89897/spiritus",
+              "height": 75,
+              "width": 75
+            },
+            "flags": []
+          },
+          {
+            "id": 647488,
+            "code": null,
+            "title": "Ime Prezime",
+            "subtitle": "12 Jun 2023 — 12 Jun 2023",
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "ime-prezime-386a42f3",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89896/spiritus",
+            "imageObject": {
+              "id": 89896,
+              "url": "/images/89896/spiritus",
+              "height": 175,
+              "width": 333
+            },
+            "flags": []
+          },
+          {
+            "id": 647487,
+            "code": null,
+            "title": "Create test Test cto",
+            "subtitle": "23 May 2023 — 23 May 2023",
+            "placeholderText": "",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "create-test-test-cto-758d7909",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89894/spiritus",
+            "imageObject": {
+              "id": 89894,
+              "url": "/images/89894/spiritus",
+              "height": 1080,
+              "width": 486
+            },
+            "flags": []
+          },
+          {
+            "id": 647486,
+            "code": null,
+            "title": "Mufinjo Tester CTO Tester",
+            "subtitle": "23 May 2018 — 23 May 2023",
+            "placeholderText": "Description",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "mufinjo-tester-cto-tester-c6d230a4",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89892/spiritus",
+            "imageObject": {
+              "id": 89892,
+              "url": "/images/89892/spiritus",
+              "height": 1080,
+              "width": 486
+            },
+            "flags": []
+          },
+          {
+            "id": 647485,
+            "code": null,
+            "title": "Mufinjo Tester CTO Tester",
+            "subtitle": "23 May 2018 — 23 May 2023",
+            "placeholderText": "Description",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "mufinjo-tester-cto-tester-d343e0d2",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89890/spiritus",
+            "imageObject": {
+              "id": 89890,
+              "url": "/images/89890/spiritus",
+              "height": 1080,
+              "width": 486
+            },
+            "flags": []
+          },
+          {
+            "id": 647484,
+            "code": null,
+            "title": "Spiritus Create Test Spiritus Create Test",
+            "subtitle": "16 May 2023 — 25 May 2023",
+            "placeholderText": "",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "spiritus-create-test-spiritus-create-test-19dbae1a",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89888/spiritus",
+            "imageObject": {
+              "id": 89888,
+              "url": "/images/89888/spiritus",
+              "height": 701,
+              "width": 1080
+            },
+            "flags": []
+          },
+          {
+            "id": 647483,
+            "code": null,
+            "title": "Novi Test Novi Test",
+            "subtitle": "23 May 2023 — 16 May 2023",
+            "placeholderText": "",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "novi-test-novi-test-490976ee",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89887/spiritus",
+            "imageObject": {
+              "id": 89887,
+              "url": "/images/89887/spiritus",
+              "height": 701,
+              "width": 1080
+            },
+            "flags": []
+          }
+        ],
+        "pageable": {
+          "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+          },
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 10,
+          "paged": true,
+          "unpaged": false
+        },
+        "totalElements": 511551,
+        "totalPages": 51156,
+        "last": false,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "sorted": false,
+          "unsorted": true,
+          "empty": true
+        },
+        "numberOfElements": 10,
+        "first": true,
+        "empty": false
+      }
+    },
+    {
+      "id": 82,
+      "viewType": "LARGE",
+      "title": "Godišnjice",
+      "state": null,
+      "subtitle": null,
+      "flags": [
+        "SHOW_ALL",
+        "ANNIVERSARIES_SECTION"
+      ],
+      "listPayload": null,
+      "version": "1",
+      "items": {
+        "content": [
+          {
+            "id": 1480,
+            "code": null,
+            "title": "Kata  Merdita",
+            "subtitle": "21 Jul 1935 — 21 Jul 2007",
+            "placeholderText": "Duhovi su posvuda i Bog pažljivo osluškuje.",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "kata--merdita-4f37d79a",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/1482/spiritus",
+            "imageObject": {
+              "id": 1482,
+              "url": "/images/1482/spiritus",
+              "height": 1080,
+              "width": 826
+            },
+            "flags": []
+          },
+          {
+            "id": 1497,
+            "code": null,
+            "title": "Anton Merdita",
+            "subtitle": "21 Jul 1959 — 21 Jul 2020",
+            "placeholderText": "Dvije lokacije, tri žene i mnogo planova.",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "anton-merdita-6cc776e5",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/1499/spiritus",
+            "imageObject": {
+              "id": 1499,
+              "url": "/images/1499/spiritus",
+              "height": 1080,
+              "width": 613
+            },
+            "flags": []
+          },
+          {
+            "id": 647440,
+            "code": null,
+            "title": "Sakiro Sasaki",
+            "subtitle": "22 Sep 2022 — 22 Jul 1977",
+            "placeholderText": "",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "sakiro-sasaki-5e6189bf",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89753/spiritus",
+            "imageObject": {
+              "id": 89753,
+              "url": "/images/89753/spiritus",
+              "height": 562,
+              "width": 460
+            },
+            "flags": []
+          },
+          {
+            "id": 60553,
+            "code": null,
+            "title": "Toni Godena",
+            "subtitle": "21 Nov 1975 — 22 Jul 1996",
+            "placeholderText": "Bravery is not the absence of fear, but the action in the face of fear.",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "toni-godena-30a4039d",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/89036/spiritus",
+            "imageObject": {
+              "id": 89036,
+              "url": "/images/89036/spiritus",
+              "height": 213,
+              "width": 181
+            },
+            "flags": []
+          },
+          {
+            "id": 12970,
+            "code": null,
+            "title": "Jozo Grgić",
+            "subtitle": "29 Jul 1946 — 22 Jul 2002",
+            "placeholderText": "Veliki čovjek još većeg srca😔",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "jozo-grgic-599297cd",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/12972/spiritus",
+            "imageObject": {
+              "id": 12972,
+              "url": "/images/12972/spiritus",
+              "height": 296,
+              "width": 219
+            },
+            "flags": []
+          },
+          {
+            "id": 86391,
+            "code": null,
+            "title": "Stjepan  Lajtman ",
+            "subtitle": "10 Sep 1938 — 24 Jul 2018",
+            "placeholderText": "",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "stjepan--lajtman--4560d110",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/86393/spiritus",
+            "imageObject": {
+              "id": 86393,
+              "url": "/images/86393/spiritus",
+              "height": 1080,
+              "width": 810
+            },
+            "flags": []
+          },
+          {
+            "id": 13428,
+            "code": null,
+            "title": "Elizabeta Kujundžić",
+            "subtitle": "15 May 1958 — 25 Jul 2014",
+            "placeholderText": "Velika osoba i najbolja teta.. Za sve što dolazi nedostaješ..",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "elizabeta-kujundzic-cd524383",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/13430/spiritus",
+            "imageObject": {
+              "id": 13430,
+              "url": "/images/13430/spiritus",
+              "height": 595,
+              "width": 404
+            },
+            "flags": []
+          },
+          {
+            "id": 50418,
+            "code": null,
+            "title": "Zlata Bartl",
+            "subtitle": "20 Feb 1920 — 28 Jul 2008",
+            "placeholderText": "Kraj 1950-ih godina obilježio našu današnjicu",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "zlata-bartl-40c1d88f",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/504/spiritus",
+            "imageObject": {
+              "id": 504,
+              "url": "/images/504/spiritus",
+              "height": 500,
+              "width": 426
+            },
+            "flags": []
+          },
+          {
+            "id": 2208,
+            "code": null,
+            "title": "Antonela  Ševo",
+            "subtitle": "05 Mar 1994 — 28 Jul 2020",
+            "placeholderText": "Šumska vila čarobnog pogleda i osmijeha",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "antonela--sevo-15a9f783",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/2286/spiritus",
+            "imageObject": {
+              "id": 2286,
+              "url": "/images/2286/spiritus",
+              "height": 720,
+              "width": 1080
+            },
+            "flags": []
+          },
+          {
+            "id": 9891,
+            "code": null,
+            "title": "Oliver Dragojević",
+            "subtitle": "07 Dec 1947 — 29 Jul 2018",
+            "placeholderText": "Ostavio je trag u beskraju",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "oliver-dragojevic-00bb2584",
+            "itemNavigationType": "SPIRITUS_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/9893/spiritus",
+            "imageObject": {
+              "id": 9893,
+              "url": "/images/9893/spiritus",
+              "height": 1080,
+              "width": 660
+            },
+            "flags": []
+          }
+        ],
+        "pageable": {
+          "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+          },
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 10,
+          "paged": true,
+          "unpaged": false
+        },
+        "totalElements": 45,
+        "totalPages": 5,
+        "last": false,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "sorted": false,
+          "unsorted": true,
+          "empty": true
+        },
+        "numberOfElements": 10,
+        "first": true,
+        "empty": false
+      }
+    },
+    {
+      "id": 81,
+      "viewType": "MEDIUM",
+      "title": "Teme",
+      "state": null,
+      "subtitle": null,
+      "flags": [
+        "CATEGOIRES_SECTION"
+      ],
+      "listPayload": null,
+      "version": "1",
+      "items": {
+        "content": [
+          {
+            "id": 33,
+            "code": "BIO",
+            "title": "Biografija",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "33",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/574/tag",
+            "imageObject": {
+              "id": 574,
+              "url": "/images/574/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 8,
+            "code": "FAM",
+            "title": "Znameniti",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "8",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/565/tag",
+            "imageObject": {
+              "id": 565,
+              "url": "/images/565/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 31,
+            "code": "LVE",
+            "title": "Ljubav",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "31",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/566/tag",
+            "imageObject": {
+              "id": 566,
+              "url": "/images/566/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 39,
+            "code": "ACD",
+            "title": "Anegdote",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "39",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/564/tag",
+            "imageObject": {
+              "id": 564,
+              "url": "/images/564/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 34,
+            "code": "FMY",
+            "title": "Obitelj",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "34",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/567/tag",
+            "imageObject": {
+              "id": 567,
+              "url": "/images/567/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 40,
+            "code": "MTV",
+            "title": "Motivacija",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "40",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/568/tag",
+            "imageObject": {
+              "id": 568,
+              "url": "/images/568/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 41,
+            "code": "SPT",
+            "title": "Sport",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "41",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/569/tag",
+            "imageObject": {
+              "id": 569,
+              "url": "/images/569/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 42,
+            "code": "ART",
+            "title": "Umjetnost",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "42",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/570/tag",
+            "imageObject": {
+              "id": 570,
+              "url": "/images/570/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 32,
+            "code": "WAR",
+            "title": "Rat",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "32",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/571/tag",
+            "imageObject": {
+              "id": 571,
+              "url": "/images/571/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          },
+          {
+            "id": 36,
+            "code": "HBY",
+            "title": "Hobi",
+            "subtitle": null,
+            "placeholderText": null,
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": null,
+            "parentNavigationType": null,
+            "itemId": "36",
+            "itemNavigationType": "STORIES_LIST_CATEGORY",
+            "itemPayload": null,
+            "imageUrl": "/images/573/tag",
+            "imageObject": {
+              "id": 573,
+              "url": "/images/573/tag",
+              "height": 496,
+              "width": 880
+            },
+            "flags": null
+          }
+        ],
+        "pageable": {
+          "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+          },
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 10,
+          "paged": true,
+          "unpaged": false
+        },
+        "totalElements": 11,
+        "totalPages": 2,
+        "last": false,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "sorted": false,
+          "unsorted": true,
+          "empty": true
+        },
+        "numberOfElements": 10,
+        "first": true,
+        "empty": false
+      }
+    },
+    {
+      "id": 80,
+      "viewType": "LARGE",
+      "title": "Istaknute priče",
+      "state": null,
+      "subtitle": "Istraži najljepše i najzanimljivije priče.",
+      "flags": [
+        "SHOW_ALL",
+        "FEATURED_STORIES"
+      ],
+      "listPayload": null,
+      "version": "1",
+      "items": {
+        "content": [
+          {
+            "id": 99,
+            "code": null,
+            "title": "The Book Thief",
+            "subtitle": "Mirko Kovač",
+            "placeholderText": "Why did the famous writer steal books as a kid?",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": "mirko-kovac-573f08b0",
+            "parentNavigationType": "SPIRITUS_DETAILS",
+            "itemId": "the-book-thief-3aa70fab",
+            "itemNavigationType": "STORY_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/626/story",
+            "imageObject": {
+              "id": 626,
+              "url": "/images/626/story",
+              "height": 254,
+              "width": 390
+            },
+            "flags": [
+              "PUBLIC",
+              "FEATURED"
+            ]
+          },
+          {
+            "id": 121,
+            "code": null,
+            "title": "A Small Town Boy's Ambition",
+            "subtitle": "Dino Škrapić",
+            "placeholderText": "Dino's incredible ambition to this day inspires Rovinj's youth.",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": "dino-skrapic-f1edf128",
+            "parentNavigationType": "SPIRITUS_DETAILS",
+            "itemId": "a-small-town-boy-s-ambition-9e8275eb",
+            "itemNavigationType": "STORY_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/607/story",
+            "imageObject": {
+              "id": 607,
+              "url": "/images/607/story",
+              "height": 748,
+              "width": 1080
+            },
+            "flags": [
+              "FEATURED",
+              "PRIVATE"
+            ]
+          },
+          {
+            "id": 169,
+            "code": null,
+            "title": "Beren and Lúthien",
+            "subtitle": "John Ronald Reuel Tolkien",
+            "placeholderText": "– May you each be a light for one another when all other lights go out. –",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": "john-ronald reuel-tolkien-8c6af4aa",
+            "parentNavigationType": "SPIRITUS_DETAILS",
+            "itemId": "beren-and-luthien-2800fedf",
+            "itemNavigationType": "STORY_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/683/story",
+            "imageObject": {
+              "id": 683,
+              "url": "/images/683/story",
+              "height": 271,
+              "width": 186
+            },
+            "flags": [
+              "FEATURED",
+              "PRIVATE"
+            ]
+          },
+          {
+            "id": 202,
+            "code": null,
+            "title": "Meeting „Mrs. President\"",
+            "subtitle": "Stan Lee",
+            "placeholderText": "Unforgetable encounter between the First Lady and clumsy Stan. ",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": "stan-lee-0010755f",
+            "parentNavigationType": "SPIRITUS_DETAILS",
+            "itemId": "meeting-mrs-president-5d7696b3",
+            "itemNavigationType": "STORY_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/705/story",
+            "imageObject": {
+              "id": 705,
+              "url": "/images/705/story",
+              "height": 356,
+              "width": 565
+            },
+            "flags": [
+              "FEATURED",
+              "PRIVATE"
+            ]
+          },
+          {
+            "id": 224,
+            "code": null,
+            "title": "The Enigma",
+            "subtitle": "Alan Turing",
+            "placeholderText": "How did Turing decipher Nazi's secret code?",
+            "actionButtonText": null,
+            "negativeActionButtonText": null,
+            "parentId": "alan-turing-f61f9e37",
+            "parentNavigationType": "SPIRITUS_DETAILS",
+            "itemId": "the-enigma-1651d485",
+            "itemNavigationType": "STORY_DETAILS",
+            "itemPayload": null,
+            "imageUrl": "/images/720/story",
+            "imageObject": {
+              "id": 720,
+              "url": "/images/720/story",
+              "height": 560,
+              "width": 380
+            },
+            "flags": [
+              "FEATURED",
+              "PRIVATE"
+            ]
+          }
+        ],
+        "pageable": {
+          "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+          },
+          "offset": 0,
+          "pageNumber": 0,
+          "pageSize": 10,
+          "paged": true,
+          "unpaged": false
+        },
+        "totalElements": 5,
+        "totalPages": 1,
+        "last": true,
+        "size": 10,
+        "number": 0,
+        "sort": {
+          "sorted": false,
+          "unsorted": true,
+          "empty": true
+        },
+        "numberOfElements": 5,
+        "first": true,
+        "empty": false
+      }
+    }
+  ]
+}

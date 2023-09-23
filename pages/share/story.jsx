@@ -1,9 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { useTranslation } from "next-i18next";
-
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 // This componenent renders a page that displays "Redirecting..." on screen
@@ -43,7 +42,7 @@ export default function StoryShareLinkRedirect({ slug }) {
           className="inline-flex rounded-sp-40 border-5 border-sp-fawn bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-7 py-3 text-sp-white dark:border-sp-medium dark:border-opacity-80 dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black"
         >
           <ArrowCircleRightIcon className="h-6 w-6" />
-          <span className="ml-1 font-semibold">{t("redirect_button")}</span>Í{" "}
+          <span className="ml-1 font-semibold">{t("redirect_button")}</span>
         </Link>
       </main>
     </>

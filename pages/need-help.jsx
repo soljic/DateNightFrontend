@@ -142,9 +142,9 @@ function Accordion({ title, text }) {
         onClick={toggleOpen}
         className="flex w-full items-center justify-between rounded-sp-10 px-4 py-4 hover:bg-gradient-to-r hover:from-day-gradient-start  hover:to-day-gradient-stop dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown lg:py-5"
       >
-        <div className="text-left font-medium leading-[22px] text-lg tracking-sp-tighten lg:text-xl">
+        <h2 className="whitespace-pre-line text-left font-medium leading-[22px] text-lg tracking-sp-tighten lg:text-xl">
           {title}
-        </div>
+        </h2>
         {open ? (
           <XIcon className="h-5 w-5 text-sp-lighter" />
         ) : (

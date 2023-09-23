@@ -122,6 +122,7 @@ export default function SpiritusPage({
               memoryGuardians={guardians}
               isGuardian={isGuardian}
               saved={saved}
+              hideBacklink={true}
             />
           </div>
         </div>
