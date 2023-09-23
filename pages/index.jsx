@@ -125,7 +125,7 @@ export async function getStaticProps(context) {
         "auth",
         "about",
       ])),
-      key: `${context.locale}-stories-index-page`,
+      key: `${context.locale}-main-index-page`,
       featured,
       anniversaries,
       recent,

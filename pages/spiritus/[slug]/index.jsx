@@ -26,6 +26,7 @@ export default function SpiritusPage({
   isLastPage,
   isGuardian,
   saved,
+  claimable,
 }) {
   const { t } = useTranslation("common");
 
@@ -122,6 +123,7 @@ export default function SpiritusPage({
               memoryGuardians={guardians}
               isGuardian={isGuardian}
               saved={saved}
+              claimable={claimable || false}
               hideBacklink={true}
             />
           </div>
@@ -137,6 +139,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let isGuardian = false;
   let saved = false;
+  let claimable = false;
 
   try {
     let res;
@@ -148,6 +151,7 @@ export async function getServerSideProps(context) {
       );
       isGuardian = res?.data?.flags.includes("GUARDIAN");
       saved = res?.data?.flags.includes("SAVED");
+      claimable = res?.data?.flags.includes("CLAIMABLE");
     } else {
       res = await GetSpiritusBySlug(slug, null, context.locale);
     }
@@ -172,6 +176,7 @@ export async function getServerSideProps(context) {
         isLastPage: resTributes.data?.last || true,
         isGuardian,
         saved,
+        claimable,
       },
     };
   } catch (err) {

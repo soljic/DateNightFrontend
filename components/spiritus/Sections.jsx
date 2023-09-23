@@ -460,6 +460,7 @@ function SpiritusActions({
   memoryGuardians,
   isGuardian,
   saved,
+  claimable,
   hideBacklink,
 }) {
   const { t } = useTranslation("common");
@@ -562,9 +563,23 @@ function SpiritusActions({
           <MemoryGuardianAlterIcon className="h-5 w-5 fill-black dark:fill-white" />
           <h3 className="font-semibold ">{t("memory_guardian")}</h3>
         </div>
-        <p className=" text-center font-normal text-sp-day-400">
-          {memoryGuardians ? memoryGuardians : t("no_memory_guardian")}
-        </p>
+        {claimable ? (
+          <>
+            <p className="text-center font-normal text-sp-day-400">
+              {t("no_memory_guardian")}
+            </p>
+            <Link
+              href={`/claim/${spiritusSlug}`}
+              className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
+            >
+              {t("claim_spiritus_button")}
+            </Link>
+          </>
+        ) : (
+          <p className="text-center font-normal text-sp-day-400">
+            {memoryGuardians}
+          </p>
+        )}
       </div>
 
       {/* notifications */}
@@ -604,6 +619,7 @@ export function Links({
   memoryGuardians,
   isGuardian,
   saved,
+  claimable,
   hideBacklink, // hide link leading back to spiritus
 }) {
   const { t } = useTranslation("common");
@@ -678,6 +694,7 @@ export function Links({
         memoryGuardians={memoryGuardians}
         isGuardian={isGuardian}
         saved={saved}
+        claimable={claimable}
         hideBacklink={hideBacklink}
       />
     </div>
