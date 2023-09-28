@@ -8,6 +8,8 @@ import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import {
+  CLAIM_SPIRITUS_ACTION,
+  CREATE_SPIRITUS_ACTION,
   CheckoutSpiritus,
   ClaimSpiritus,
   GetCouponProduct,
@@ -184,7 +186,11 @@ export function Checkout({
       }
 
       try {
-        const res = await GetCouponProduct(session?.user.accessToken, coupon);
+        const res = await GetCouponProduct(
+          session?.user.accessToken,
+          isClaim ? CLAIM_SPIRITUS_ACTION : CREATE_SPIRITUS_ACTION,
+          coupon
+        );
         if (res?.data) {
           setIsInvalid(false);
           setId(res.data.pkgServerId);
