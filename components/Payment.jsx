@@ -7,7 +7,11 @@ import { CheckCircleIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
-import { CheckoutSpiritus, GetCouponProduct } from "../service/http/payment";
+import {
+  CheckoutSpiritus,
+  ClaimSpiritus,
+  GetCouponProduct,
+} from "../service/http/payment";
 import { ImagePath, localFormatDate } from "../service/util";
 import {
   AddPhotosIcon,
@@ -108,6 +112,7 @@ export function Checkout({
   productCurrency,
   productPrice,
   productId,
+  isClaim,
 }) {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -205,12 +210,21 @@ export function Checkout({
   const handleSubmit = async (event) => {
     event.preventDefault();
     let res;
-    res = await CheckoutSpiritus(
-      session?.user.accessToken,
-      spiritus.id,
-      id,
-      coupon
-    );
+    if (isClaim) {
+      res = await ClaimSpiritus(
+        session?.user.accessToken,
+        spiritus.id,
+        id,
+        coupon
+      );
+    } else {
+      res = await CheckoutSpiritus(
+        session?.user.accessToken,
+        spiritus.id,
+        id,
+        coupon
+      );
+    }
     router.push(res.data);
   };
 
@@ -249,7 +263,7 @@ export function Checkout({
                   <p className="font-semibold dark:text-sp-white">
                     {t(item.title)}
                   </p>
-                  <p className="text-sm dark:text-sp-white dark:text-opacity-60">
+                  <p className="max-w-sm text-sm dark:text-sp-white dark:text-opacity-60">
                     {t(item.subtitle)}
                   </p>
                 </div>

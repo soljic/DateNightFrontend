@@ -140,7 +140,6 @@ export async function getServerSideProps(context) {
   let isGuardian = false;
   let saved = false;
   let claimable = false;
-
   try {
     let res;
     if (session && session?.user?.accessToken) {

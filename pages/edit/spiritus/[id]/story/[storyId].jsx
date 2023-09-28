@@ -9,7 +9,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Alert } from "@/components/Status";
 import { EditStoryForm } from "@/components/forms/EditStory";
 import { EditorLayout } from "@/components/forms/Layout";
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 import { GetStoryById } from "@/service/http/story";
@@ -39,7 +39,7 @@ export default function EditStoryPage({ spiritus, story, tags }) {
   };
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("edit_story_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -75,7 +75,7 @@ export default function EditStoryPage({ spiritus, story, tags }) {
           />
         </EditorLayout>
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 

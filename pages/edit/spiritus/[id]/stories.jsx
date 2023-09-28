@@ -10,7 +10,7 @@ import { Alert } from "@/components/Status";
 import { DeleteSpiritusModal } from "@/components/forms/DeleteSpiritusModal";
 import { EditStories } from "@/components/forms/EditStories";
 import { EditorLayout } from "@/components/forms/Layout";
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById } from "@/service/http/spiritus";
 import { GetSpiritusStoriesBySlug } from "@/service/http/story";
@@ -54,7 +54,7 @@ export default function EditSpiritusStories({ spiritus, stories }) {
   }
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("edit_spiritus_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -97,7 +97,7 @@ export default function EditSpiritusStories({ spiritus, stories }) {
           />
         </EditorLayout>
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 

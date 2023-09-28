@@ -593,7 +593,13 @@ function SpiritusActions({
             {t("remind_me_subtitle")}
           </p>
           <button
-            onClick={() => (isSaved ? unSaveSpiritus() : saveSpiritus())}
+            onClick={() => {
+              !session?.user.name
+                ? openModal()
+                : isSaved
+                ? unSaveSpiritus()
+                : saveSpiritus();
+            }}
             className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
           >
             {isSaved ? (

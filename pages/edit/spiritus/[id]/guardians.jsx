@@ -9,7 +9,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Alert } from "@/components/Status";
 import { DeleteSpiritusModal } from "@/components/forms/DeleteSpiritusModal";
 import { EditorLayout } from "@/components/forms/Layout";
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 import { Guardian } from "@/components/settings/EditGuardians";
 import {
   AddGuardianModal,
@@ -63,7 +63,7 @@ export default function EditSpiritusGuardians({
   }
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("edit_spiritus_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -149,7 +149,7 @@ export default function EditSpiritusGuardians({
           </div>
         </EditorLayout>
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 

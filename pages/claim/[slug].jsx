@@ -7,7 +7,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Checkout } from "@/components/Payment";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import { GetDefaultProduct } from "@/service/http/payment";
+import { GetClaimSpiritusProduct } from "@/service/http/payment";
 import { GetSpiritusBySlug } from "@/service/http/spiritus";
 
 export default function ClaimSpiritusPage({ spiritus, product }) {
@@ -28,6 +28,7 @@ export default function ClaimSpiritusPage({ spiritus, product }) {
           productCurrency={product.currency}
           productPrice={product.price}
           productId={product.pkgServerId}
+          isClaim={true}
         />
       </div>
     </FullWidthLayout>
@@ -66,7 +67,7 @@ export async function getServerSideProps(context) {
     }
 
     spiritus = spRes.data;
-    const res = await GetDefaultProduct(session?.user?.accessToken);
+    const res = await GetClaimSpiritusProduct(session?.user?.accessToken);
     productData = res.data;
   } catch (err) {
     console.log(err);

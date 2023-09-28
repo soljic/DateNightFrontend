@@ -74,46 +74,48 @@ export function EditorLayout({
   const router = useRouter();
 
   return (
-    <div className="mt-8 grid w-full grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-      <div className="col-span-1">
-        <div className="hidden space-y-4 rounded-sp-10 border border-sp-day-200 px-3.5 py-6 md:col-span-1 md:block">
-          <div className="px-1.5">
-            <h2 className="font-medium">{`${name} ${surname}`}</h2>
-            <p className="text-sp-day-400">
-              {`${
-                birthDate
-                  ? new Intl.DateTimeFormat(
-                      router.locale || "en",
-                      dateOptions
-                    ).format(birthDate)
-                  : "?"
-              } - ${
-                deathDate
-                  ? new Intl.DateTimeFormat(
-                      router.locale || "en",
-                      dateOptions
-                    ).format(deathDate)
-                  : "?"
-              }`}
-            </p>
+    <div className="mx-auto mt-8 max-w-6xl">
+      <div className="grid w-full grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div className="col-span-1">
+          <div className="hidden space-y-4 rounded-sp-10 border border-sp-day-200 px-3.5 py-6 md:col-span-1 md:block">
+            <div className="px-1.5">
+              <h2 className="font-medium">{`${name} ${surname}`}</h2>
+              <p className="text-sp-day-400">
+                {`${
+                  birthDate
+                    ? new Intl.DateTimeFormat(
+                        router.locale || "en",
+                        dateOptions
+                      ).format(birthDate)
+                    : "?"
+                } - ${
+                  deathDate
+                    ? new Intl.DateTimeFormat(
+                        router.locale || "en",
+                        dateOptions
+                      ).format(deathDate)
+                    : "?"
+                }`}
+              </p>
+            </div>
+            <Sidebar
+              menuId={menuId}
+              spiritusId={spiritusId}
+              spiritusSlug={spiritusSlug}
+              onDelete={onDelete}
+            />
           </div>
-          <Sidebar
+        </div>
+        <div className="md:col-span-1 md:hidden">
+          <MobileSidebar
             menuId={menuId}
             spiritusId={spiritusId}
             spiritusSlug={spiritusSlug}
             onDelete={onDelete}
           />
         </div>
+        <div className="col-span-1 md:col-span-2 lg:col-span-3">{children}</div>
       </div>
-      <div className="md:col-span-1 md:hidden">
-        <MobileSidebar
-          menuId={menuId}
-          spiritusId={spiritusId}
-          spiritusSlug={spiritusSlug}
-          onDelete={onDelete}
-        />
-      </div>
-      <div className="col-span-1 md:col-span-2 lg:col-span-3">{children}</div>
     </div>
   );
 }

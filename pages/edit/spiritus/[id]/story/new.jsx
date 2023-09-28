@@ -13,7 +13,7 @@ import {
   CreateStorySuccess,
 } from "@/components/forms/CreateStory";
 import { EditorLayout } from "@/components/forms/Layout";
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 
@@ -54,7 +54,7 @@ export default function NewStory({ spiritus, tags }) {
   }
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("edit_spiritus_meta_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -101,7 +101,7 @@ export default function NewStory({ spiritus, tags }) {
           </div>
         </EditorLayout>
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 

@@ -67,7 +67,7 @@ export function Navbar() {
             <>
               <Link
                 href="/create/spiritus"
-                className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
               >
                 {t("create_spiritus")}
               </Link>
@@ -86,7 +86,7 @@ export function Navbar() {
               </button>
               <button
                 onClick={openModal}
-                className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                className="flex h-10 w-36 items-center justify-center rounded-sp-10  bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
               >
                 {t("create_spiritus")}
               </button>
