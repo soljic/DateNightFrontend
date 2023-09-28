@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 
+import CookieConsent from "@/components/banners/CookieConsent";
 import { MediaSizeIndicator } from "@/components/layout/MediaSizeIndicator";
 
 import nextI18nConfig from "../next-i18next.config";
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session} refetchInterval={0}>
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
+        <CookieConsent />
         <Component {...pageProps} /> <MediaSizeIndicator />
       </ThemeProvider>
     </SessionProvider>

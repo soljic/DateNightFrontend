@@ -284,5 +284,9 @@
   "spiritus_about": "About",
   "spiritus_stories": "Stories",
   "spiritus_gallery": "Gallery",
-  "spiritus_view_spiritus": "View Spiritus"
+  "spiritus_view_spiritus": "View Spiritus",
+
+  "cookie_consent": "We use cookies to enhance your user experience. By using our website, you agree to our use of cookies.",
+  "cookie_read_more": "Read more about how we use cookies.",
+  "cookie_accept_button": "Accept"
 }

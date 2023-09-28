@@ -282,5 +282,9 @@
   "spiritus_about": "Osnovno",
   "spiritus_stories": "Priče",
   "spiritus_gallery": "Galerija",
-  "spiritus_view_spiritus": "Vidi Spiritus"
+  "spiritus_view_spiritus": "Vidi Spiritus",
+
+  "cookie_consent": "Koristimo kolačiće kako bismo poboljšali za poboljšanje korisničkog iskustva. Korištenjem naše web stranice, pristajete na naše korištenje kolačića.",
+  "cookie_read_more": "Pročitajte više o tome kako koristimo kolačiće.",
+  "cookie_accept_button": "Prihvaćam"
 }
