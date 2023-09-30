@@ -1,13 +1,25 @@
 import Link from "next/link";
 
-export function NavItem({ text, link }) {
+// asHref uses regular <a> tag instead of next/link
+export function NavItem({ text, link, asHref }) {
   return (
-    <Link
-      href={link || "/"}
-      className="from-day-gradient-start to-day-gradient-stop px-1.5 py-2 text-center leading-5 hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:mx-0.5 xl:text-lg"
-    >
-      {text}
-    </Link>
+    <>
+      {asHref ? (
+        <a
+          href={link || "/"}
+          className="from-day-gradient-start to-day-gradient-stop px-1.5 py-2 text-center leading-5 hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:mx-0.5 xl:text-lg"
+        >
+          {text}
+        </a>
+      ) : (
+        <Link
+          href={link || "/"}
+          className="from-day-gradient-start to-day-gradient-stop px-1.5 py-2 text-center leading-5 hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:mx-0.5 xl:text-lg"
+        >
+          {text}
+        </Link>
+      )}
+    </>
   );
 }
 

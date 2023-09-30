@@ -1,4 +1,5 @@
 import Image from "next/legacy/image";
+import { useRouter } from "next/router";
 
 import { useTranslation } from "next-i18next";
 
@@ -6,24 +7,25 @@ import { NavItem } from "./Common";
 
 export function Footer() {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
   return (
     <div className="mt-44 text-sp-medium dark:text-sp-white">
       <div className="flex flex-col justify-start md:flex-row md:justify-center">
-        <NavItem text={t("about")} textsize={"sm"} link={"/about"} />
-        <NavItem text={t("stories")} textsize={"sm"} />
-        <NavItem text={t("mobile")} link="/mobile-app" textsize={"sm"} />
+        <NavItem text={t("about")} link={"/about"} />
+        <NavItem text={t("stories")} />
+        <NavItem text={t("mobile")} link="/mobile-app" />
         <NavItem
+          asHref={true}
           text={t("tos")}
-          textsize={"sm"}
-          link="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
+          link={
+            router.locale === "hr"
+              ? "/tos/hr/eula_hr.pdf"
+              : "/tos/en/eula_en.pdf"
+          }
         />
-        <NavItem text={t("privacy")} link="/privacy-policy" textsize={"sm"} />
-        <NavItem
-          text={t("contact")}
-          link="mailto:hello@spiritus.app"
-          textsize={"sm"}
-        />
+        <NavItem text={t("privacy")} link="/privacy-policy" />
+        <NavItem text={t("contact")} link="mailto:hello@spiritus.app" />
       </div>
       <div className="mx-auto my-2 border-t border-sp-day-200 pb-4 dark:border-sp-lighter"></div>
       {/* partners and socials */}
