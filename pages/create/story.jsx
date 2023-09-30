@@ -16,7 +16,12 @@ import Layout from "@/components/layout/Layout";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 
-export default function CreateStoryPage({ spiritus, isGuardian, tags }) {
+export default function CreateStoryPage({
+  spiritus,
+  isGuardian,
+  tags,
+  locale,
+}) {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -108,6 +113,7 @@ export default function CreateStoryPage({ spiritus, isGuardian, tags }) {
                 onError={onError}
                 onSuccess={onSuccess}
                 onCancel={onCancel}
+                locale={locale}
               />
             </div>
           </div>
@@ -146,6 +152,7 @@ export async function getServerSideProps(context) {
         spiritus: data,
         isGuardian,
         tags,
+        locale: context.locale || "en",
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",

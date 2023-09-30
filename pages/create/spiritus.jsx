@@ -42,6 +42,7 @@ export default function CreateSpiritusPage({
   product,
   initialName,
   initialSurname,
+  locale,
 }) {
   const { t } = useTranslation("common");
 
@@ -98,7 +99,7 @@ export default function CreateSpiritusPage({
         }
       }
 
-      const res = await CreateSpiritus(user.accessToken, form);
+      const res = await CreateSpiritus(user.accessToken, form, locale);
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
@@ -417,6 +418,7 @@ export async function getServerSideProps(context) {
       product: productData,
       initialName: name || null,
       initialSurname: surname || null,
+      locale: context.locale || "en",
     },
   };
 }

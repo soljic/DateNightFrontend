@@ -17,7 +17,7 @@ import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 
-export default function NewStory({ spiritus, tags }) {
+export default function NewStory({ spiritus, tags, locale }) {
   const { t } = useTranslation("common");
   const router = useRouter();
 
@@ -96,6 +96,7 @@ export default function NewStory({ spiritus, tags }) {
                 onError={onError}
                 onSuccess={onSuccess}
                 onCancel={onCancel}
+                locale={locale}
               />
             )}
           </div>
@@ -126,6 +127,7 @@ export async function getServerSideProps(context) {
       props: {
         spiritus,
         tags,
+        locale: context.locale || "en",
         ...(await serverSideTranslations(context.locale, [
           "common",
           "settings",

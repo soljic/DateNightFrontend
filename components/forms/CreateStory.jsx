@@ -58,6 +58,7 @@ export function CreateStoryFormV2({
   onSuccess,
   onError,
   onCancel,
+  locale,
 }) {
   const { t } = useTranslation("common");
 
@@ -112,7 +113,7 @@ export function CreateStoryFormV2({
         const fileName = await HashFilename(images[0].file.name);
         form.append("file", images[0].file, fileName);
       }
-      const res = await CreateStory(session.user.accessToken, form);
+      const res = await CreateStory(session.user.accessToken, form, locale);
       onSuccess(res.data.slug);
       setPending(false);
     } catch (err) {

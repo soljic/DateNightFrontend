@@ -1,11 +1,13 @@
 import axios from "axios";
+
 import { API_URL } from "../constants";
 
-export async function CreateStory(accessToken, storyFormData) {
+export async function CreateStory(accessToken, storyFormData, locale) {
   return await axios.post(`${API_URL}/wapi/story`, storyFormData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "multipart/form-data",
+      "Accept-Language": locale,
     },
   });
 }
@@ -35,10 +37,14 @@ export async function DeleteStoryImage(accessToken, imageId) {
 }
 
 export async function AddStoryImage(accessToken, storyId, imageFormData) {
-  return await axios.put(`${API_URL}/wapi/story/${storyId}/image`, imageFormData, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return await axios.put(
+    `${API_URL}/wapi/story/${storyId}/image`,
+    imageFormData,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
 }

@@ -3,11 +3,12 @@ import axios from "axios";
 import { API_URL } from "../constants";
 
 // uses v2/spiritus web API endpoint
-export async function CreateSpiritus(accessToken, spiritusFormData) {
+export async function CreateSpiritus(accessToken, spiritusFormData, locale) {
   return await axios.post(`${API_URL}/wapi/spiritus`, spiritusFormData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "multipart/form-data",
+      "Accept-Language": locale,
     },
   });
 }
