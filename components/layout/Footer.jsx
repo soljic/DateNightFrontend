@@ -24,7 +24,15 @@ export function Footer() {
               : "/tos/en/eula_en.pdf"
           }
         />
-        <NavItem text={t("privacy")} link="/privacy-policy" />
+        <NavItem
+          asHref={true}
+          text={t("privacy")}
+          link={
+            router.locale === "hr"
+              ? "/privacy-policy/hr/Spiritus_Privacy_Policy_HR.pdf"
+              : "/privacy-policy/en/Spiritus_Privacy_Policy_EN.pdf"
+          }
+        />
         <NavItem text={t("contact")} link="mailto:hello@spiritus.app" />
       </div>
       <div className="mx-auto my-2 border-t border-sp-day-200 pb-4 dark:border-sp-lighter"></div>
