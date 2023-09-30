@@ -83,18 +83,14 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
             </p>
           </div>
           <Link
-            href={`/create/story?spiritus=${spiritus.id}`}
+            href={`/edit/spiritus/${spiritus.id}/story/new`}
             className="rounded-full border-5 border-sp-fawn bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-7 py-3 font-medium text-sp-black dark:border-sp-medium dark:border-opacity-80 dark:from-sp-dark-fawn dark:to-sp-fawn"
           >
             {t("create_story")}
           </Link>
           <div className="mx-auto mt-8 flex items-center justify-center gap-4 text-sp-lighter dark:text-sp-white">
             <Link
-              href={
-                spiritus?.slug
-                  ? `/spiritus/${spiritus.slug}`
-                  : `/spiritus/id/${spiritus.id}`
-              }
+              href={`/spiritus/${spiritus.slug}`}
               className="flex flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
               <LinkIcon className="h-6 w-6" />
