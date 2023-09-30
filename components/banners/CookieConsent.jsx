@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { useTranslation } from "next-i18next";
 import { useCookies } from "react-cookie";
 
 export default function CookieConsent() {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
   const [show, setShow] = useState(false);
   const [cookies, setCookie] = useCookies(["cookieConsent"]);
@@ -29,9 +31,16 @@ export default function CookieConsent() {
           <div className="pointer-events-auto mx-auto max-w-2xl rounded-sp-14 bg-sp-day-50 p-6 shadow-lg ring-1 ring-gray-900/10">
             <div className="flex flex-col space-y-2">
               <p className="text-gray-900">{t("cookie_consent")}</p>
-              <Link href="/privacy-policy" className=" text-indigo-600 text-sm">
+              <a
+                href={
+                  router.locale === "hr"
+                    ? "/privacy-policy/hr/Spiritus_Privacy_Policy_HR.pdf"
+                    : "/privacy-policy/en/Spiritus_Privacy_Policy_EN.pdf"
+                }
+                className=" text-indigo-600 text-sm"
+              >
                 {t("cookie_read_more")}
-              </Link>
+              </a>
             </div>
             <div className="mt-4 flex items-center gap-x-5">
               <button
