@@ -72,15 +72,20 @@ function MobilePopover() {
       description: "museums",
       href: "/museums",
     },
-    {
-      name: "pricing",
-      description: "pricing",
-      href: "/pricing",
-    },
+    // {
+    //   name: "pricing",
+    //   description: "pricing",
+    //   href: "/pricing",
+    // },
     {
       name: "why-us",
       description: "why-us",
       href: "/why-us",
+    },
+    {
+      name: "our-tech",
+      description: "our-tech",
+      href: "/our-tech",
     },
     {
       name: "mobile",
