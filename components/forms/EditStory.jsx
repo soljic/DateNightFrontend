@@ -23,7 +23,6 @@ import {
 import { HashFilename } from "@/utils/filenames";
 
 import { MultiSelectInput } from "../Dropdowns";
-import { StoryType } from "./CreateStory";
 
 export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
   const { t } = useTranslation("common");

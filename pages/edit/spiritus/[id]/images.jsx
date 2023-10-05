@@ -112,7 +112,11 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const { data: spiritus } = await GetSpiritusById(id);
+    const { data: spiritus } = await GetSpiritusById(
+      id,
+      session.user.accessToken,
+      context.locale
+    );
 
     if (!spiritus || !spiritus?.users) {
       throw "missing spiritus data";

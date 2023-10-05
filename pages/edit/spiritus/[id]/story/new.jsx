@@ -120,7 +120,11 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const { data: spiritus } = await GetSpiritusById(id);
+    const { data: spiritus } = await GetSpiritusById(
+      id,
+      session.user.accessToken,
+      context.locale
+    );
     const { data: tags } = await GetTags();
 
     return {

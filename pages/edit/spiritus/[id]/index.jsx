@@ -12,15 +12,13 @@ import { EditContent } from "@/components/forms/EditSpiritusContent";
 import { EditorLayout } from "@/components/forms/Layout";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import { GetSpiritusById } from "@/service/http/spiritus";
+import { GetSpiritusInOriginalLanguage } from "@/service/http/spiritus_crud";
 
-export default function EditSpiritusPage({ spiritus, coverImages }) {
+export default function EditSpiritusPage({ spiritus }) {
   const { t } = useTranslation("common");
   const [isSuccess, setIsSuccess] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-
-  const [selectedMenuId, setSelectedMenuId] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -114,7 +112,10 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const { data: spiritus } = await GetSpiritusById(id);
+    const { data: spiritus } = await GetSpiritusInOriginalLanguage(
+      id,
+      session.user.accessToken
+    );
 
     if (!spiritus || !spiritus?.users) {
       throw "missing spiritus data";
@@ -142,12 +143,13 @@ export async function getServerSideProps(context) {
         permanent: false,
       },
     };
-  } catch {
+  } catch (error) {
+    console.log(error);
     // redirect to home in case of err
     // known errs: 404 Not Found Spiritus
     return {
       redirect: {
-        destination: "/",
+        destination: "/400",
         permanent: false,
       },
     };

@@ -12,6 +12,15 @@ export async function CreateStory(accessToken, storyFormData, locale) {
   });
 }
 
+// Get story in its original language, useful in story editor.
+export async function GetStoryInOriginalLang(accessToken, storyId) {
+  return await axios.get(`${API_URL}/wapi/stories/id/${storyId}/original`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
 export async function EditStory(accessToken, storyId, storyData) {
   return await axios.put(`${API_URL}/wapi/story/${storyId}`, storyData, {
     headers: {

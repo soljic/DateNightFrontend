@@ -13,6 +13,7 @@ import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 import { GetStoryById } from "@/service/http/story";
+import { GetStoryInOriginalLang } from "@/service/http/story_crud";
 
 export default function EditStoryPage({ spiritus, story, tags }) {
   const { t } = useTranslation("common");
@@ -93,8 +94,15 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    const { data: story } = await GetStoryById(id);
-    const { data: spiritus } = await GetSpiritusById(story.spiritus.id);
+    const { data: story } = await GetStoryInOriginalLang(
+      session.user.accessToken,
+      id
+    );
+    const { data: spiritus } = await GetSpiritusById(
+      story.spiritus.id,
+      session.user.accessToken,
+      context.locale
+    );
     const { data: tags } = await GetTags();
 
     if (!spiritus || !spiritus?.users) {
