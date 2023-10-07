@@ -26,7 +26,7 @@ export function MobileMenu() {
   const router = useRouter();
 
   return (
-    <div className="flex w-full items-center justify-between space-x-2 pt-2 text-sp-black dark:text-sp-white md:hidden md:px-2">
+    <div className="flex w-full items-center justify-between space-x-2 text-sp-black dark:text-sp-white md:hidden md:px-2">
       <Link href="/" className="flex items-center">
         <div className="rounded-sp-10 bg-white p-2 dark:bg-transparent">
           <div className="relative h-6 w-6">

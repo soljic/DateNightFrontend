@@ -67,8 +67,8 @@ export default function OurTech() {
         <meta property="og:image:height" content="630" />
       </Head>
       <div className="mx-auto mb-96 h-full min-h-screen max-w-5xl flex-col px-4">
-        <div className="lg:mx mx-4 mt-12 md:mt-32">
-          <article className="mx-8 flex flex-col items-start">
+        <div className="mx-4 mt-12 md:mt-32">
+          <article className="flex flex-col items-start md:mx-8">
             <div className="mb-5 rounded-sp-10 bg-sp-fawn-subtle p-2.5 dark:bg-sp-fawn dark:bg-opacity-40">
               <OurTechCheckboxIcon />
             </div>
@@ -94,7 +94,7 @@ export default function OurTech() {
             height={540}
             className="my-24 h-auto w-full"
           />
-          <div className="mx-auto flex w-2/3 flex-col items-start space-y-12">
+          <div className="mx-auto flex flex-col items-start space-y-12 md:w-2/3">
             {features.map((elem, index) => (
               <div
                 key={`our-tech-elem-index-${index}`}
@@ -104,7 +104,7 @@ export default function OurTech() {
                   {elem.icon}
                 </div>
                 <div>
-                  <h2 className="max-w-lg font-bold text-2xl dark:text-sp-white md:text-4xl">
+                  <h2 className="max-w-lg font-bold text-2xl dark:text-sp-white md:text-3xl">
                     {elem.title}
                   </h2>
                   <p className="whitespace-pre-line">{elem.text}</p>

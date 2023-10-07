@@ -5,9 +5,7 @@ import { Navbar } from "./NavBar";
 export default function FullWidthLayout({ children }) {
   return (
     <div className="mx-auto min-h-screen w-full">
-      <div className="mx-auto w-full max-w-7xl p-2">
-        <Navbar />
-      </div>
+      <Navbar />
       <main>{children}</main>
 
       <div className="mx-auto w-full max-w-7xl">

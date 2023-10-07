@@ -44,12 +44,8 @@ export default function Home({ featured, categories, anniversaries, recent }) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
+      <Navbar />
       <main>
-        <div className="w-full bg-sp-day-50 dark:bg-sp-black">
-          <div className="z-10 mx-auto w-full max-w-7xl p-2">
-            <Navbar />
-          </div>
-        </div>
         <div className="relative h-[100svh] lg:h-screen">
           <div className="overflow-none absolute h-full w-full">
             <Image

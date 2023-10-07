@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Fragment } from "react";
 
 import Image from "next/image";
@@ -9,6 +9,10 @@ import { ChevronDownIcon, SearchIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
+import { useScrollPosition } from "@/hooks/scroll";
+
+import { cn } from "@/utils/cn";
+
 import { LoginModal } from "../auth/Login";
 import { AccesibilityMenu } from "./Accesibility";
 import { NavItem, SubNavItem } from "./Common";
@@ -18,6 +22,17 @@ import { ProfileMenu } from "./Profile";
 export function Navbar() {
   const { data: session } = useSession();
   const { t } = useTranslation(["common", "settings", "about"]);
+
+  const { scrollPosition, show } = useScrollPosition();
+  const [shadow, setShadow] = useState(false);
+
+  useEffect(() => {
+    if (scrollPosition > 1) {
+      setShadow(true);
+    } else {
+      setShadow(false);
+    }
+  }, [scrollPosition]);
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -30,76 +45,83 @@ export function Navbar() {
   }
 
   return (
-    <div className="bg-sp-day-50 py-2 dark:bg-sp-black">
+    <>
       <LoginModal isOpen={isOpen} closeModal={closeModal} />
-      <div className="hidden w-full items-center justify-evenly px-3 text-sp-black dark:text-sp-white md:flex md:px-0">
-        <div className="flex w-full items-center justify-start">
-          <Link href="/" className="flex items-center" key="desktop-nav-home">
-            <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
-              <div className="relative h-6 w-6">
-                <Image src="/images/logo/spiritus.svg" fill alt="logo" />
+      <header
+        className={cn(
+          "sticky top-0 z-20 w-full bg-sp-day-50 px-2 py-2 transition-shadow dark:bg-sp-black",
+          shadow ? "shadow-lg dark:shadow-sp-medlight" : ""
+        )}
+      >
+        <div className="mx-auto hidden max-w-7xl items-center justify-evenly px-3 text-sp-black dark:text-sp-white md:flex md:px-0">
+          <div className="flex w-full items-center justify-start">
+            <Link href="/" className="flex items-center" key="desktop-nav-home">
+              <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
+                <div className="relative h-6 w-6">
+                  <Image src="/images/logo/spiritus.svg" fill alt="logo" />
+                </div>
               </div>
-            </div>
-            <div className="ml-2.5 font-semibold text-xl">Spiritus</div>
-          </Link>
-          <nav className="ml-3 flex items-center justify-center">
-            <SubnavigationMenu
-              title={t("about")}
-              links={[
-                { text: t("why-us"), href: "/why-us" },
-                // { text: t("pricing"), href: "/pricing" },
-                { text: t("our-story"), href: "/about" },
-                { text: t("our-tech"), href: "/our-tech" },
-              ]}
-            />
-            <NavItem text={t("need-help")} link={"/need-help"} />
-            <NavItem text={t("museums")} link={"/museums"} />
-            <NavItem text={t("mobile")} link={"/mobile-app"} />
-          </nav>
-        </div>
-        <div className="flex items-center justify-end space-x-1 md:w-1/3 md:space-x-2">
-          <Link
-            href="/search"
-            className="from-sp-day-300 to-sp-day-100 p-2 hover:rounded-full hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-          >
-            <SearchIcon className="h-6 w-6 text-sp-black dark:text-sp-white" />
-          </Link>
-          {session?.user.name ? (
-            <>
-              <Link
-                href="/create/spiritus"
-                className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
-              >
-                {t("create_spiritus")}
-              </Link>
-              <ProfileMenu
-                token={session.user.accessToken}
-                profileName={session?.user.name}
+              <div className="ml-2.5 font-semibold text-xl">Spiritus</div>
+            </Link>
+            <nav className="ml-3 flex items-center justify-center">
+              <SubnavigationMenu
+                title={t("about")}
+                links={[
+                  { text: t("why-us"), href: "/why-us" },
+                  // { text: t("pricing"), href: "/pricing" },
+                  { text: t("our-story"), href: "/about" },
+                  { text: t("our-tech"), href: "/our-tech" },
+                ]}
               />
-            </>
-          ) : (
-            <>
-              <button
-                onClick={openModal}
-                className="w-24 rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-              >
-                {t("login")}
-              </button>
-              <button
-                onClick={openModal}
-                className="flex h-10 w-36 items-center justify-center rounded-sp-10  bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
-              >
-                {t("create_spiritus")}
-              </button>
-            </>
-          )}
+              <NavItem text={t("need-help")} link={"/need-help"} />
+              <NavItem text={t("museums")} link={"/museums"} />
+              <NavItem text={t("mobile")} link={"/mobile-app"} />
+            </nav>
+          </div>
+          <div className="flex items-center justify-end space-x-1 md:w-1/3 md:space-x-2">
+            <Link
+              href="/search"
+              className="from-sp-day-300 to-sp-day-100 p-2 hover:rounded-full hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+            >
+              <SearchIcon className="h-6 w-6 text-sp-black dark:text-sp-white" />
+            </Link>
+            {session?.user.name ? (
+              <>
+                <Link
+                  href="/create/spiritus"
+                  className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                >
+                  {t("create_spiritus")}
+                </Link>
+                <ProfileMenu
+                  token={session.user.accessToken}
+                  profileName={session?.user.name}
+                />
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={openModal}
+                  className="w-24 rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                >
+                  {t("login")}
+                </button>
+                <button
+                  onClick={openModal}
+                  className="flex h-10 w-36 items-center justify-center rounded-sp-10  bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                >
+                  {t("create_spiritus")}
+                </button>
+              </>
+            )}
 
-          <AccesibilityMenu />
+            <AccesibilityMenu />
+          </div>
         </div>
-      </div>
 
-      <MobileMenu key="mobile-home-nav" />
-    </div>
+        <MobileMenu key="mobile-home-nav" />
+      </header>
+    </>
   );
 }
 
