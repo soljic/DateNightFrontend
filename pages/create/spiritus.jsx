@@ -58,6 +58,7 @@ export default function CreateSpiritusPage({
   // form fields
   const [name, setName] = useState(initialName || "");
   const [surname, setSurname] = useState(initialSurname || "");
+  const [maidenName, setMaidenName] = useState("");
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState();
   const [quote, setQuote] = useState("");
@@ -79,6 +80,7 @@ export default function CreateSpiritusPage({
       const body = {
         name,
         surname,
+        maidenName: maidenName || null,
         birth: birth ? getISOLocalDate(birth) : null,
         death: birth ? getISOLocalDate(death) : null,
         description: description || null,
@@ -215,6 +217,20 @@ export default function CreateSpiritusPage({
                               }}
                               placeholder={t(
                                 "create_spiritus_lastname_placeholder"
+                              )}
+                              className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                            />
+                          </div>
+                        </div>
+                        <div className="w-full flex-1">
+                          <div className="my-1 rounded-sp-10">
+                            <input
+                              value={maidenName}
+                              onChange={(e) => {
+                                setMaidenName(e.target.value);
+                              }}
+                              placeholder={t(
+                                "create_spiritus_maidenname_placeholder"
                               )}
                               className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
                             />

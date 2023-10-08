@@ -29,6 +29,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
 
   const [name, setName] = useState(spiritus.name);
   const [surname, setSurname] = useState(spiritus.surname);
+  const [maidenName, setMaidenName] = useState(spiritus.maidenName || "");
   const [birth, setBirth] = useState();
   const [death, setDeath] = useState();
   const [dpLoaded, setDpLooaded] = useState(false);
@@ -77,6 +78,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
         id: spiritus.id, // id required for BE
         name,
         surname,
+        maidenName,
         description,
         birth: birth ? getISOLocalDate(birth) : null,
         death: death ? getISOLocalDate(death) : null,
@@ -123,6 +125,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
   const cancel = () => {
     setName(spiritus.name);
     setSurname(spiritus.surname);
+    setMaidenName(spiritus.maidenName);
     setBirth(spiritus.birth ? new Date(spiritus.birth) : null);
     setDeath(spiritus.death ? new Date(spiritus.death) : null);
     setDescription(spiritus.description);
@@ -165,6 +168,18 @@ export function EditContent({ spiritus, onSuccess, onError }) {
                       setSurname(e.target.value);
                     }}
                     placeholder={t("create_spiritus_lastname_placeholder")}
+                    className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
+                  />
+                </div>
+              </div>
+              <div className="w-full flex-1">
+                <div className="my-1 rounded-sp-10">
+                  <input
+                    value={maidenName}
+                    onChange={(e) => {
+                      setMaidenName(e.target.value);
+                    }}
+                    placeholder={t("create_spiritus_maidenname_placeholder")}
                     className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
                   />
                 </div>
