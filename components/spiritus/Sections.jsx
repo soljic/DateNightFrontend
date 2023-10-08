@@ -105,7 +105,15 @@ export function ProfileHeader({
               </div>
             )}
             <div className="z-10 flex flex-col items-center justify-center text-center drop-shadow-3xl">
-              <p className="text-center font-bold leading-6 text-white text-2xl lg:leading-8 lg:text-3xl xl:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
+              <div>
+                <p className="text-center font-bold leading-6 text-white text-2xl lg:leading-8 lg:text-3xl xl:text-4xl">{`${spiritus.name} ${spiritus.surname}`}</p>
+                {!!spiritus.maidenName && (
+                  <p className="text-center font-bold leading-6 text-white text-2xl lg:leading-8 lg:text-3xl xl:text-4xl">
+                    {`(${t("term_born")} ${spiritus.maidenName})`}
+                  </p>
+                )}
+              </div>
+
               <p className="text-center font-bold leading-6 text-white text-base lg:text-lg">
                 {`${
                   birthDate
