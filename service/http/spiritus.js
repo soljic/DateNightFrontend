@@ -150,8 +150,12 @@ export async function PaginatePopularSpiritus(offset, limit) {
   return res;
 }
 
-export async function GetTags() {
-  return await axios.get(`${API_URL}/wapi/tag`);
+export async function GetTags(lang) {
+  return await axios.get(`${API_URL}/wapi/tag`, {
+    headers: {
+      "Accept-Language": lang ? lang : "hr",
+    },
+  });
 }
 
 export async function SearchSpiritusNames(fullName, offset, limit) {

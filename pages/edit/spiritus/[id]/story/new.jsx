@@ -125,7 +125,7 @@ export async function getServerSideProps(context) {
       session.user.accessToken,
       context.locale
     );
-    const { data: tags } = await GetTags();
+    const { data: tags } = await GetTags(context.locale);
 
     return {
       props: {

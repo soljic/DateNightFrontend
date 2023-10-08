@@ -12,7 +12,7 @@ import {
   CreateStoryFormV2,
   CreateStorySuccess,
 } from "@/components/forms/CreateStory";
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById, GetTags } from "@/service/http/spiritus";
 
@@ -63,13 +63,13 @@ export default function CreateStoryPage({
   };
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_create_story_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_create_story_description")} />
       </Head>
-      <div className="min-h-screen py-5">
+      <div className="mx-auto min-h-screen max-w-7xl py-5">
         {toastOpen && (
           <div className="sticky right-0 top-8 z-50 mb-5">
             <div className="flex justify-end">
@@ -119,7 +119,7 @@ export default function CreateStoryPage({
           </div>
         )}
       </div>
-    </Layout>
+    </FullWidthLayout>
   );
 }
 
@@ -145,7 +145,7 @@ export async function getServerSideProps(context) {
     const data = resSpiritus.data;
     const isGuardian = data?.flags.includes("GUARDIAN");
 
-    const { data: tags } = await GetTags();
+    const { data: tags } = await GetTags(context.locale);
 
     return {
       props: {
