@@ -9,46 +9,46 @@ import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
 
-export default function About() {
+export default function PricingPage() {
   const { t } = useTranslation("pricing");
 
   const pricingPlans = [
     {
-      title: t("pricing_plan_1_title"),
-      subtitle: t("pricing_plan_1_subtitle"),
-      price: t("pricing_plan_1_price"),
+      title: t("pricing_plan_free_title"),
+      subtitle: t("pricing_plan_free_subtitle"),
+      price: t("pricing_plan_free_price"),
       list: [
-        t("pricing_plan_1_list_1"),
-        t("pricing_plan_1_list_2"),
-        t("pricing_plan_1_list_3"),
-        t("pricing_plan_1_list_4"),
+        t("pricing_plan_free_list_1"),
+        t("pricing_plan_free_list_2"),
+        t("pricing_plan_free_list_3"),
+        t("pricing_plan_free_list_4"),
       ],
     },
     {
-      title: t("pricing_plan_2_title"),
-      subtitle: t("pricing_plan_2_subtitle"),
-      price: t("pricing_plan_2_price"),
+      title: t("pricing_plan_subscribe_title"),
+      subtitle: t("pricing_plan_subscribe_subtitle"),
+      price: t("pricing_plan_subscribe_price"),
       list: [
-        t("pricing_plan_2_list_1"),
-        t("pricing_plan_2_list_2"),
-        t("pricing_plan_2_list_3"),
-        t("pricing_plan_2_list_4"),
-        t("pricing_plan_2_list_5"),
-        t("pricing_plan_2_list_6"),
+        t("pricing_plan_subscribe_list_1"),
+        t("pricing_plan_subscribe_list_2"),
+        t("pricing_plan_subscribe_list_3"),
+        t("pricing_plan_subscribe_list_4"),
+        t("pricing_plan_subscribe_list_5"),
+        t("pricing_plan_subscribe_list_6"),
       ],
     },
     {
-      title: t("pricing_plan_3_title"),
-      subtitle: t("pricing_plan_3_subtitle"),
-      price: t("pricing_plan_3_price"),
+      title: t("pricing_plan_lifetime_title"),
+      subtitle: t("pricing_plan_lifetime_subtitle"),
+      price: t("pricing_plan_lifetime_price"),
       list: [
-        t("pricing_plan_3_list_1"),
-        t("pricing_plan_3_list_2"),
-        t("pricing_plan_3_list_3"),
-        t("pricing_plan_3_list_4"),
-        t("pricing_plan_3_list_5"),
-        t("pricing_plan_3_list_6"),
-        t("pricing_plan_3_list_7"),
+        t("pricing_plan_lifetime_list_1"),
+        t("pricing_plan_lifetime_list_2"),
+        t("pricing_plan_lifetime_list_3"),
+        t("pricing_plan_lifetime_list_4"),
+        t("pricing_plan_lifetime_list_5"),
+        t("pricing_plan_lifetime_list_6"),
+        t("pricing_plan_lifetime_list_7"),
       ],
     },
   ];
@@ -126,9 +126,6 @@ export default function About() {
                   ))}
                 </ul>
               </div>
-              <button className="mx-auto w-full items-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-6 py-4 text-center font-medium leading-5 text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn">
-                {t("pricing_plan_get_started")}
-              </button>
             </div>
           ))}
         </div>
@@ -136,9 +133,14 @@ export default function About() {
         {/* Still have questions section */}
         <div className="mx-6 flex flex-col gap-2 rounded-sp-10 border-2 border-sp-day-200 px-4 py-6 md:gap-1">
           <div className="flex w-full items-center justify-between gap-3">
-            <p className="font-semibold text-lg tracking-tight dark:text-sp-white">
-              {t("still_have_questions_heading")}
-            </p>
+            <div>
+              <h2 className="font-semibold text-lg tracking-tight dark:text-sp-white">
+                {t("still_have_questions_heading")}
+              </h2>
+              <p className="text-md tracking-sp-tighten dark:text-sp-white">
+                {t("still_have_questions_subheading")}
+              </p>
+            </div>
             <Link
               href="/need-help"
               className="w-64 rounded-sp-10 border-2 border-sp-day-400 px-12 py-2 text-center"
@@ -146,9 +148,6 @@ export default function About() {
               {t("still_have_questions_need_help")}
             </Link>
           </div>
-          <p className="text-md tracking-sp-tighten dark:text-sp-white">
-            {t("still_have_questions_subheading")}
-          </p>
         </div>
 
         {/* Become a guardian section */}

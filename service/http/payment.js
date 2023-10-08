@@ -7,6 +7,9 @@ const DEFAULT_ACTION = "CREATE_SPIRITUS";
 export const CLAIM_SPIRITUS_ACTION = "CLAIM_SPIRITUS";
 export const CREATE_SPIRITUS_ACTION = "CREATE_SPIRITUS";
 
+export const PAYMENT_MODE_LIFETIME = "LIFETIME";
+export const PAYMENT_MODE_SUBSCRIPTION = "SUBSCRIPTION";
+
 // Get the default product (price and metadata for purchasing a single spiritus)
 export async function GetDefaultProduct(accessToken) {
   return await axios.get(

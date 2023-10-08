@@ -14,9 +14,13 @@
 	"list_elem_4_title": "Save your memories, forever",
 	"list_elem_4_subtitle": "We are ensuring the eternity of your memories through modern technology.",
 
+	"select_payment_plan": "Select a payment plan:",
 	"init_payment_title": "Spiritus Ready!",
 	"init_payment_total": "Total to pay:",
 	"init_payment_coupon_placeholder": "Enter coupon code",
 	"init_payment_button": "Proceed to payment",
-	"init_payment_redirect_notice": "You will be redirected to stripe.com to complete the payment"
+	"init_payment_redirect_notice": "You will be redirected to stripe.com to complete the payment",
+
+	"init_claim_title": "Become a Memory Guardian",
+	"init_claim_subtitle": "You can claim this Spiritus Memorial by completing the payment process."
 }

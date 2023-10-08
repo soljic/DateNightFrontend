@@ -17,7 +17,11 @@ import { SpiritusProfileCropper } from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import { GetDefaultProduct } from "@/service/http/payment";
+import {
+  GetDefaultProduct,
+  PAYMENT_MODE_LIFETIME,
+  PAYMENT_MODE_SUBSCRIPTION,
+} from "@/service/http/payment";
 import { CreateSpiritus } from "@/service/http/spiritus_crud";
 
 // const mockSpiritus = {
@@ -39,7 +43,9 @@ import { CreateSpiritus } from "@/service/http/spiritus_crud";
 
 export default function CreateSpiritusPage({
   user,
-  product,
+  lifetimeProduct,
+  subscriptionProduct,
+  allProducts,
   initialName,
   initialSurname,
   locale,
@@ -144,16 +150,17 @@ export default function CreateSpiritusPage({
         {spiritus ? (
           <Checkout
             spiritus={spiritus}
-            productCurrency={product.currency}
-            productPrice={product.price}
-            productId={product.pkgServerId}
+            lifetimeProduct={lifetimeProduct}
+            subscriptionProduct={subscriptionProduct}
+            allProducts={allProducts}
+            isClaim={false}
           />
         ) : (
           <>
             {!paywallSeen ? (
               <Paywall
-                price={product.price}
-                currency={product.currency}
+                price={lifetimeProduct.price}
+                currency={lifetimeProduct.currency}
                 acceptPaywall={() => setPaywallSeen(true)}
               />
             ) : (
@@ -392,11 +399,38 @@ export async function getServerSideProps(context) {
     };
   }
 
-  let productData;
+  let lifetimeProduct = null;
+  let subscriptionProduct = null;
+  let allProducts = [];
   try {
     const res = await GetDefaultProduct(session?.user?.accessToken);
-    productData = res.data;
-  } catch {
+    if (!res?.data?.stripePackages) {
+      throw new Error("no checkout packages found");
+    }
+
+    allProducts = res?.data.stripePackages || [];
+    // get first occurence of lifetime and subscription product
+    for (const product of allProducts) {
+      if (product.mode === PAYMENT_MODE_LIFETIME) {
+        lifetimeProduct = product;
+        continue;
+      }
+      if (product.mode === PAYMENT_MODE_SUBSCRIPTION) {
+        subscriptionProduct = product;
+        continue;
+      }
+
+      if (lifetimeProduct && subscriptionProduct) {
+        break;
+      }
+    }
+
+    // both plans must be available to proceed
+    if (!lifetimeProduct || !subscriptionProduct) {
+      throw new Error("missing lifetime or subscription product");
+    }
+  } catch (err) {
+    console.log(err);
     // TODO: handle errs and not just redirect to 400
     return {
       redirect: {
@@ -413,9 +447,12 @@ export async function getServerSideProps(context) {
         "settings",
         "auth",
         "paywall",
+        "pricing",
       ])),
       user: session.user,
-      product: productData,
+      lifetimeProduct,
+      subscriptionProduct,
+      allProducts,
       initialName: name || null,
       initialSurname: surname || null,
       locale: context.locale || "en",

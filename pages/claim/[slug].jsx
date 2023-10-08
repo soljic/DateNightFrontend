@@ -7,10 +7,19 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { Checkout } from "@/components/Payment";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import { GetClaimSpiritusProduct } from "@/service/http/payment";
+import {
+  GetClaimSpiritusProduct,
+  PAYMENT_MODE_LIFETIME,
+  PAYMENT_MODE_SUBSCRIPTION,
+} from "@/service/http/payment";
 import { GetSpiritusBySlug } from "@/service/http/spiritus";
 
-export default function ClaimSpiritusPage({ spiritus, product }) {
+export default function ClaimSpiritusPage({
+  spiritus,
+  lifetimeProduct,
+  subscriptionProduct,
+  allProducts,
+}) {
   const { t } = useTranslation("common");
   return (
     <FullWidthLayout>
@@ -25,9 +34,9 @@ export default function ClaimSpiritusPage({ spiritus, product }) {
       <div className="mx-auto min-h-screen max-w-7xl py-5">
         <Checkout
           spiritus={spiritus}
-          productCurrency={product.currency}
-          productPrice={product.price}
-          productId={product.pkgServerId}
+          lifetimeProduct={lifetimeProduct}
+          subscriptionProduct={subscriptionProduct}
+          allProducts={allProducts}
           isClaim={true}
         />
       </div>
@@ -48,8 +57,10 @@ export async function getServerSideProps(context) {
     };
   }
 
-  let productData;
   let spiritus;
+  let lifetimeProduct = null;
+  let subscriptionProduct = null;
+  let allProducts = [];
   try {
     const spRes = await GetSpiritusBySlug(
       slug,
@@ -68,7 +79,31 @@ export async function getServerSideProps(context) {
 
     spiritus = spRes.data;
     const res = await GetClaimSpiritusProduct(session?.user?.accessToken);
-    productData = res.data;
+    if (!res?.data?.stripePackages) {
+      throw new Error("no checkout packages found");
+    }
+
+    allProducts = res?.data.stripePackages || [];
+    // get first occurence of lifetime and subscription product
+    for (const product of allProducts) {
+      if (product.mode === PAYMENT_MODE_LIFETIME) {
+        lifetimeProduct = product;
+        continue;
+      }
+      if (product.mode === PAYMENT_MODE_SUBSCRIPTION) {
+        subscriptionProduct = product;
+        continue;
+      }
+
+      if (lifetimeProduct && subscriptionProduct) {
+        break;
+      }
+    }
+
+    // both plans must be available to proceed
+    if (!lifetimeProduct || !subscriptionProduct) {
+      throw new Error("missing lifetime or subscription product");
+    }
   } catch (err) {
     console.log(err);
     // TODO: handle errs and not just redirect to 400
@@ -87,9 +122,12 @@ export async function getServerSideProps(context) {
         "settings",
         "auth",
         "paywall",
+        "pricing",
       ])),
       spiritus,
-      product: productData,
+      lifetimeProduct,
+      subscriptionProduct,
+      allProducts,
     },
   };
 }

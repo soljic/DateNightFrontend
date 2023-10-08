@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
-import { CheckCircleIcon } from "@heroicons/react/outline";
+import { CheckCircleIcon, CheckIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
+
+import { cn } from "@/utils/cn";
 
 import {
   CLAIM_SPIRITUS_ACTION,
@@ -27,6 +29,7 @@ import {
   TagIcon,
   UserOutlineIcon,
 } from "./Icons";
+import { SettingsSpiritusIcon } from "./SettingsIcons";
 import { Spinner } from "./Status";
 
 export function Paywall({ price, currency, acceptPaywall }) {
@@ -108,31 +111,132 @@ export function Paywall({ price, currency, acceptPaywall }) {
 }
 4;
 
+/* Stripe checkout has multiple products: LIFETIME and SUBSCRIPTION.
+LIFETIME is a one-time payment for a single spiritus and is selected by default.
+SUBSCRIPTION is a recurring payment.
+
+example:
+{
+  id: 41,
+  pkgServerId: 'price_1NuuMGADy47RIDRpbY598CFw',
+  title: '44.99€',
+  subtitle: null,
+  description: 'Claimanje spiritusa ',
+  originalPrice: 44.99,
+  price: 44.99,
+  currency: 'EUR',
+  mode: 'LIFETIME',
+  platform: null,
+  stripePackages: [
+    {
+      id: 41,
+      pkgServerId: 'price_1NuuMGADy47RIDRpbY598CFw',
+      title: '44.99€',
+      subtitle: null,
+      description: 'Claimanje spiritusa ',
+      originalPrice: 44.99,
+      price: 44.99,
+      currency: 'EUR',
+      mode: 'LIFETIME',
+      platform: 'STRIPE',
+      stripePackages: null
+    },
+    {
+      id: 42,
+      pkgServerId: 'price_1NuuNdADy47RIDRpGM6qcv4g',
+      title: '10.00€',
+      subtitle: null,
+      description: 'Pretplata na claim spiritusa ',
+      originalPrice: 10,
+      price: 10,
+      currency: 'EUR',
+      mode: 'SUBSCRIPTION',
+      platform: 'STRIPE',
+      stripePackages: null
+    }
+  ]
+}
+*/
 export function Checkout({
-  user,
   spiritus,
-  productCurrency,
-  productPrice,
-  productId,
+  lifetimeProduct,
+  subscriptionProduct,
+  allProducts,
   isClaim,
 }) {
   const router = useRouter();
-  const { data: session, status } = useSession();
-  const [fetching, setFetching] = useState(false);
+  const { t } = useTranslation("paywall", "common", "pricing");
 
+  const { data: session, status } = useSession();
+
+  // set default product
+  const [selectedPlan, setSelectedPlan] = useState(0); // corresponds to lifetime product
+  const [id, setId] = useState(lifetimeProduct.pkgServerId);
+  const [price, setPrice] = useState(lifetimeProduct.price);
+  const [currency, setCurrency] = useState(lifetimeProduct.currency);
+
+  const onChangeSelectedPlan = (idx) => {
+    setSelectedPlan(idx);
+    if (idx === 0) {
+      setCoupon("");
+      setId(lifetimeProduct.pkgServerId);
+      setPrice(lifetimeProduct.price);
+      setCurrency(lifetimeProduct.currency);
+    } else {
+      setCoupon("");
+      setId(subscriptionProduct.pkgServerId);
+      setPrice(subscriptionProduct.price);
+      setCurrency(subscriptionProduct.currency);
+    }
+  };
+
+  const [fetching, setFetching] = useState(false);
   const [coupon, setCoupon] = useState("");
   const [couponSubtitle, setCouponSubtitle] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
-  const [id, setId] = useState(productId);
-  const [price, setPrice] = useState(productPrice);
-  const [currency, setCurrency] = useState(productCurrency);
+  const onChangeCoupon = (data) => {
+    setId(data.pkgServerId);
+    setPrice(data.price);
+    setCurrency(data.currency);
+    setCouponSubtitle(data.subtitle);
+  };
 
-  const { t } = useTranslation("paywall", "common");
+  // change names to be more descriptive
+  const pricingPlans = [
+    {
+      title: t("pricing:pricing_plan_lifetime_title"),
+      subtitle: t("pricing:pricing_plan_lifetime_subtitle"),
+      price: `${lifetimeProduct.title}`,
+      list: [
+        t("pricing:pricing_plan_lifetime_list_1"),
+        t("pricing:pricing_plan_lifetime_list_2"),
+        t("pricing:pricing_plan_lifetime_list_3"),
+        t("pricing:pricing_plan_lifetime_list_4"),
+        t("pricing:pricing_plan_lifetime_list_5"),
+        t("pricing:pricing_plan_lifetime_list_6"),
+        t("pricing:pricing_plan_lifetime_list_7"),
+      ],
+    },
+    {
+      title: t("pricing:pricing_plan_subscribe_title"),
+      subtitle: t("pricing:pricing_plan_subscribe_subtitle"),
+      price: `${subscriptionProduct.title}/${t("pricing:pricing_plan_month")}`,
+      list: [
+        t("pricing:pricing_plan_subscribe_list_1"),
+        t("pricing:pricing_plan_subscribe_list_2"),
+        t("pricing:pricing_plan_subscribe_list_3"),
+        t("pricing:pricing_plan_subscribe_list_4"),
+        t("pricing:pricing_plan_subscribe_list_5"),
+        t("pricing:pricing_plan_subscribe_list_6"),
+      ],
+    },
+  ];
+
   const priceFormatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: productCurrency,
+    currency: currency,
   });
 
   const dates = `${
@@ -157,34 +261,20 @@ export function Checkout({
       subtitle: spiritus?.description ? spiritus.description : "",
       icon: <DescriptionTextIcon width={8} height={8} />,
     },
-    // {
-    //   title: t("list_elem_4_title"),
-    //   subtitle: t("list_elem_4_subtitle"),
-    //   icon: <TagIcon width={8} height={8} />,
-    // },
   ];
 
   items = items.filter((item) => item.subtitle);
 
-  const reset = () => {
-    setId(productId);
-    setPrice(productPrice);
-    setCurrency(productCurrency);
-    setCouponSubtitle("");
-    setIsValid(false);
-  };
-
   useEffect(() => {
+    if (!coupon) {
+      setIsValid(false);
+      setFetching(false);
+      setIsInvalid(false);
+      return;
+    }
+
     const debounce = setTimeout(async () => {
       setFetching(true);
-
-      if (!coupon) {
-        setFetching(false);
-        setIsInvalid(false);
-        reset();
-        return;
-      }
-
       try {
         const res = await GetCouponProduct(
           session?.user.accessToken,
@@ -193,18 +283,13 @@ export function Checkout({
         );
         if (res?.data) {
           setIsInvalid(false);
-          setId(res.data.pkgServerId);
-          setPrice(res.data.price);
-          setCurrency(res.data.currency);
-          setCouponSubtitle(res.data.subtitle);
+          onChangeCoupon(res.data);
           setIsValid(true);
         } else {
           setIsInvalid(true);
-          reset();
         }
       } catch (e) {
         setIsInvalid(true);
-        reset();
       }
 
       setFetching(false);
@@ -214,6 +299,7 @@ export function Checkout({
   }, [coupon]);
 
   const handleSubmit = async (event) => {
+    setFetching(true);
     event.preventDefault();
     let res;
     if (isClaim) {
@@ -236,14 +322,28 @@ export function Checkout({
 
   return (
     <div
-      className="mb-96 flex flex-col items-center justify-center dark:text-sp-white lg:mt-12"
+      className="flex flex-col items-center justify-center px-4 dark:text-sp-white lg:mt-12"
       key="checkout-init-screen"
     >
       <div className="flex w-full flex-col items-center justify-center space-y-4">
-        <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
-          <CheckmarkIcon width={8} height={8} />
-        </div>
-        <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
+        {isClaim ? (
+          <>
+            <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
+              <SettingsSpiritusIcon className="h-8 w-8 fill-sp-dark-fawn" />
+            </div>
+            <div className="flex flex-col items-center justify-center text-center">
+              <h1 className="font-bold text-3xl">{t("init_claim_title")}</h1>
+              <p>{t("init_claim_subtitle")}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
+              <CheckmarkIcon width={8} height={8} />
+            </div>
+            <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
+          </>
+        )}
         {!!spiritus?.profileImage?.url && (
           <div className="overflow-hidden rounded-sp-14">
             <Image
@@ -275,60 +375,73 @@ export function Checkout({
                 </div>
               </li>
             ))}
-            <li
-              key={`checkout-item-coupon`}
-              className="flex items-center p-2.5"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center">
-                <TagIcon width={8} height={8} />
-              </div>
-              <div className="ml-4">
-                <div className="relative">
-                  <input
-                    value={coupon}
-                    onChange={(e) => {
-                      setCoupon(e.target.value);
-                    }}
-                    placeholder={t("create_spiritus_coupon_placeholder")}
-                    className={`${
-                      coupon && isInvalid
-                        ? "border-red-400 dark:border-red-700"
-                        : "border-sp-lighter/60 dark:border-sp-medium"
-                    } min-w-52 appearance-none rounded-md border-2 bg-sp-day-50  p-3 placeholder-gray-500 outline-none dark:bg-sp-black dark:text-sp-white`}
-                  />
-                  {!fetching && isValid && (
-                    <CheckCircleIcon className="absolute inset-y-4 right-2 h-5 w-5 text-green-600 dark:text-green-400" />
-                  )}
-                </div>
-                {couponSubtitle && (
-                  <p className="py-0.5 font-medium text-sp-black/70 text-sm tracking-tighter">
-                    {couponSubtitle}
-                  </p>
-                )}
-                {isInvalid && (
-                  <p className="font-medium text-red-400 text-sm dark:text-red-700">
-                    {t("create_spiritus_coupon_invalid")}
-                  </p>
-                )}
-              </div>
-            </li>
           </ul>
         </div>
       </div>
-      {!isInvalid && (
-        <form
-          // action={`/api/checkout/${spiritus.id}?service=STRIPE&packageId=${productId}`}
-          // method="POST"
-          onSubmit={handleSubmit}
-          className="mt-20 flex-col space-y-1.5 pb-14"
-          key="init-checkout-form"
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-1.5 px-4 py-12"
+        key="init-checkout-form"
+      >
+        <div
+          className="flex justify-between font-semibold text-xl"
+          key="checkout-prices"
         >
+          <h2>{t("select_payment_plan")}</h2>
+        </div>
+        <PricingPlanList
+          plans={pricingPlans}
+          selectedIdx={selectedPlan}
+          onSetSelectedPlan={onChangeSelectedPlan}
+        />
+        <div className="flex items-center py-2.5">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+            <TagIcon width={8} height={8} />
+          </div>
+          <div className="ml-4">
+            <div className="w-full">
+              <div className="relative">
+                <input
+                  value={coupon}
+                  onChange={(e) => {
+                    setCoupon(e.target.value);
+                    console.log("SET VALUE", e.target.value);
+                  }}
+                  placeholder={t("create_spiritus_coupon_placeholder")}
+                  className={cn(
+                    "min-w-[240px] max-w-md appearance-none rounded-md border-2 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:bg-sp-black dark:text-sp-white",
+                    coupon && isInvalid
+                      ? "border-red-400 dark:border-red-700"
+                      : "border-sp-lighter/60 dark:border-sp-medium"
+                  )}
+                />
+                {!fetching && isValid && (
+                  <CheckCircleIcon className="absolute inset-y-4 right-2 h-5 w-5 text-green-600 dark:text-green-400" />
+                )}
+              </div>
+              {!!couponSubtitle && (
+                <p className="py-0.5 font-medium text-sp-black/70 text-sm tracking-tighter">
+                  {couponSubtitle}
+                </p>
+              )}
+              {!!isInvalid && (
+                <p className="font-medium text-red-400 text-sm dark:text-red-700">
+                  {t("create_spiritus_coupon_invalid")}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+        <div key="finalize-checkout">
           <div
-            className="flex justify-between font-semibold text-xl"
+            className="my-2 flex justify-between font-semibold text-xl"
             key="checkout-prices"
           >
             <div>{t("init_payment_total")}</div>
-            <div>{priceFormatter.format(price)}</div>
+            <div>
+              {priceFormatter.format(price)}
+              {selectedPlan === 1 ? `/${t("pricing:pricing_plan_month")}` : ""}
+            </div>
           </div>
           <button
             type="submit"
@@ -343,13 +456,59 @@ export function Checkout({
             {fetching ? <Spinner /> : t("init_payment_button")}
           </button>
           <p
-            className="text-center text-sp-black text-sm dark:text-sp-white dark:text-opacity-60"
+            className="text-sp-black text-sm dark:text-sp-white dark:text-opacity-60"
             key="redirect-notice"
           >
             {t("init_payment_redirect_notice")}
           </p>
-        </form>
-      )}
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function PricingPlanList({ selectedIdx, plans, onSetSelectedPlan }) {
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {plans.map((plan, idx) => (
+        <div
+          onClick={() => onSetSelectedPlan(idx)}
+          key={`plan-index-${idx}`}
+          className={cn(
+            "flex max-w-sm flex-col justify-between gap-4 rounded-xl border-2 bg-green-200 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-4 py-10 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown",
+            idx === selectedIdx
+              ? "border-sp-fawn"
+              : "border-transparent opacity-60"
+          )}
+        >
+          <div>
+            <p className="mb-8 text-center font-bold text-3xl tracking-tight dark:text-sp-white">
+              {plan.price}
+            </p>
+            <p className="text-center font-bold text-xl tracking-tight dark:text-sp-white">
+              {plan.title}
+            </p>
+            <p className="text-md mb-8 text-center font-medium leading-6 tracking-sp-tighten dark:text-sp-white">
+              {plan.subtitle}
+            </p>
+            <ul className="mb-8 flex list-none flex-col justify-center gap-4 px-2 text-sm tracking-sp-tighten dark:text-sp-white">
+              {plan.list.map((item, i) => (
+                <li
+                  className="flex items-center gap-2"
+                  key={`${i}-item-${idx}`}
+                >
+                  <div className="rounded-full bg-sp-fawn p-0.5">
+                    <CheckIcon className="h-3.5 w-3.5 text-sp-white" />
+                  </div>
+                  <p className="text-md mb-1 mt-0 px-2 text-[17px] opacity-70 tracking-sp-tighten dark:text-sp-white">
+                    {item}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

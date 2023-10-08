@@ -14,9 +14,13 @@
 	"list_elem_4_title": "Sačuvajte uspomene, vječno",
 	"list_elem_4_subtitle": "Omogućavamo vječno čuvanje digitalnih uspomena primjenom modernih tehnologija.",
 
+	"select_payment_plan": "Odaberite način plaćanja:",
 	"init_payment_title": "Spiritus je spreman!",
 	"init_payment_total": "Ukupno za naplatu:",
 	"init_payment_coupon_placeholder": "Unesite kupon kod",
 	"init_payment_button": "Nastavi na naplatu",
-	"init_payment_redirect_notice": "Bit ćete preusmjereni na stranicu za plaćanje (stripe.com)"
+	"init_payment_redirect_notice": "Bit ćete preusmjereni na stranicu za plaćanje (stripe.com)",
+
+	"init_claim_title": "Postani Čuvar Uspomene",
+	"init_claim_subtitle": "Nakon završetka plaćanja postat ćeš Čuvar uspomene ovog Spiritusa"
 }
