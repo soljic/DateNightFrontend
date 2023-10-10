@@ -12,5 +12,8 @@
   "deactivate_account": "Deaktiviraj račun",
 
   "message_save_success": "Promjene spremljene.",
-  "message_save_failed": "Promjene nisu spremljene."
+  "message_save_failed": "Promjene nisu spremljene.",
+
+  "subscriptions": "Pretplate",
+  "manage_subscriptions": "Upravljaj pretplatama"
 }

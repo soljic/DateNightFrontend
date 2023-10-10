@@ -1,11 +1,59 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import Link from "next/link";
 
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
 import { UpdateProfile } from "@/service/http/auth";
+import { GetAccountSubscriptions } from "@/service/http/subscription";
+
+import { cn } from "@/utils/cn";
 
 import { Alert, Spinner } from "../Status";
+
+export function AccountSubscriptions() {
+  const { t } = useTranslation("account");
+
+  const { data: session, status } = useSession();
+
+  const [redirectUrl, setReditectUrl] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await GetAccountSubscriptions(session.user.accessToken);
+        if (res?.data.redirectUrl) {
+          setReditectUrl(res.data.redirectUrl);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (session?.user && status === "authenticated") {
+      getData();
+    }
+  }, [status, session]);
+
+  return (
+    <div className="space-y-4 px-2 md:px-8">
+      <h1 className="mx-2 text-start font-bold text-sp-black text-2xl dark:text-sp-white">
+        {t("subscriptions")}
+      </h1>
+      <Link
+        href={redirectUrl}
+        disabled={!redirectUrl}
+        className={cn(
+          "mx-2 inline-flex w-full justify-center rounded-sp-14 border border-sp-day-400 px-7 py-3 text-sp-black dark:text-sp-day-400 md:w-1/3",
+          !redirectUrl ? "pointer-events-none opacity-20" : ""
+        )}
+      >
+        {t("manage_subscriptions")}
+      </Link>
+    </div>
+  );
+}
 
 export function AccountSettings({
   initialName,
@@ -202,6 +250,8 @@ export function AccountSettings({
           </div>
         </div>
       </form>
+      <AccountSubscriptions />
+
       <div>
         <div className="my-4 space-y-4 px-2 md:px-8">
           <h1 className="mx-2 text-start font-bold text-sp-black text-2xl dark:text-sp-white">

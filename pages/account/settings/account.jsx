@@ -5,11 +5,15 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import FullWidthLayout from "@/components/layout/LayoutV2";
-import { AccountSettings } from "@/components/settings/Account";
+import {
+  AccountSettings,
+  AccountSubscriptions,
+} from "@/components/settings/Account";
 import { MobileSidebar } from "@/components/settings/MobileSidebar";
 import { Sidebar } from "@/components/settings/Sidebar";
 
 import { GetBasicProfileInfo, GetProfile } from "@/service/http/auth";
+import { GetAccountSubscriptions } from "@/service/http/subscription";
 
 export default function AccountSettingsPage({
   name,
@@ -60,7 +64,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
+  const see = await GetAccountSubscriptions(session.user.accessToken);
   const res = await GetProfile(session.user.accessToken);
   return {
     props: {
