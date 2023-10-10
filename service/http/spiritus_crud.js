@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { API_URL } from "../constants";
+import { ImagePath } from "../util";
 
 // uses v2/spiritus web API endpoint
 export async function CreateSpiritus(accessToken, spiritusFormData, locale) {
