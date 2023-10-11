@@ -1,19 +1,18 @@
-import Link from "next/link";
-import Head from "next/head";
-
-import Router from "next/router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 
-import { getSession, signIn } from "next-auth/react";
+import Head from "next/head";
+import Link from "next/link";
+import Router from "next/router";
+
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
-
-import { ShieldIcon } from "../../../components/Icons";
-import LayoutNoNav from "../../../components/layout/LayoutNoNav";
-import { Spinner } from "../../../components/Status";
-
+import { getSession, signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useForm } from "react-hook-form";
+
+import { ShieldIcon } from "../../../components/Icons";
+import { Spinner } from "../../../components/Status";
+import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 import { Register } from "../../../service/http/auth";
 
 function isEmailValid(email) {
@@ -244,7 +243,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["auth"])),
+      ...(await serverSideTranslations(context.locale, ["auth", "common"])),
     },
   };
 }

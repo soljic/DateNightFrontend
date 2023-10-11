@@ -1,18 +1,18 @@
-import Link from "next/link";
-import Head from "next/head";
-
-import Router from "next/router";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+
+import Head from "next/head";
+import Link from "next/link";
+import Router from "next/router";
+
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { getSession, signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
-import { getSession, signIn } from "next-auth/react";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { useForm } from "react-hook-form";
 
 import { ShieldIcon } from "../../../components/Icons";
-import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 import { Spinner } from "../../../components/Status";
+import LayoutNoNav from "../../../components/layout/LayoutNoNav";
 
 function isEmailValid(email) {
   return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -62,7 +62,7 @@ export default function EmailLogin() {
       });
 
       if (!res.error) {
-        Router.back()
+        Router.back();
       }
 
       handleErr(res.error);
@@ -172,7 +172,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["auth"])),
+      ...(await serverSideTranslations(context.locale, ["auth", "common"])),
     },
   };
 }

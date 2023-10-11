@@ -1,17 +1,15 @@
-import Link from "next/link";
 import Head from "next/head";
 import Image from "next/legacy/image";
+import Link from "next/link";
 
 import { getSession } from "next-auth/react";
-
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { ShieldIcon } from "../../../components/Icons";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
-
-import { API_URL } from "../../../service/constants";
 import Auth0Logo from "../../../public/images/logo/auth0.svg";
+import { API_URL } from "../../../service/constants";
 
 export default function LoginComponent() {
   const { t } = useTranslation("auth");
@@ -144,7 +142,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["auth"])),
+      ...(await serverSideTranslations(context.locale, ["auth", "common"])),
     },
   };
 }

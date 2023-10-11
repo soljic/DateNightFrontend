@@ -40,21 +40,30 @@ export default function Category({
 export async function getServerSideProps(context) {
   const { section, id, title } = context.query;
 
-  const res = await GetSectionItem(section, id);
-  return {
-    props: {
-      key: `${context.locale}-category-${section}-${id}`,
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "settings",
-        "auth",
-      ])),
-      section: section,
-      id: id,
-      title: title,
-      totalPages: res.data.items.totalPages,
-      isLastPage: res.data.items.last,
-      initialItems: res.data.items.content,
-    },
-  };
+  try {
+    const res = await GetSectionItem(section, id);
+    return {
+      props: {
+        key: `${context.locale}-category-${section}-${id}`,
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+          "auth",
+        ])),
+        section: section,
+        id: id,
+        title: title,
+        totalPages: res.data.items.totalPages,
+        isLastPage: res.data.items.last,
+        initialItems: res.data.items.content,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 }

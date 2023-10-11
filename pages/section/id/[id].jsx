@@ -53,22 +53,30 @@ export default function Section({
 export async function getServerSideProps(context) {
   const { id, title } = context.query;
 
-  const res = await GetSection(id, 0, context.locale);
-
-  return {
-    props: {
-      key: `${context.locale}-section-id-${id}`,
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "settings",
-        "auth",
-      ])),
-      id: res.data.id,
-      title: title,
-      lang: context.locale,
-      totalPages: res.data.items.totalPages,
-      isLastPage: res.data.items.last,
-      initialItems: res.data.items.content,
-    },
-  };
+  try {
+    const res = await GetSection(id, 0, context.locale);
+    return {
+      props: {
+        key: `${context.locale}-section-id-${id}`,
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+          "auth",
+        ])),
+        id: res.data.id,
+        title: title,
+        lang: context.locale,
+        totalPages: res.data.items.totalPages,
+        isLastPage: res.data.items.last,
+        initialItems: res.data.items.content,
+      },
+    };
+  } catch {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
 }
