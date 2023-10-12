@@ -1,15 +1,19 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { Disclosure } from "@headlessui/react";
 import { Popover, Transition } from "@headlessui/react";
-import { DotsHorizontalIcon, MenuIcon } from "@heroicons/react/outline";
+import { CurrencyDollarIcon, MenuIcon } from "@heroicons/react/outline";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 import { useTheme } from "next-themes";
+
+import { CurrencyContext } from "@/hooks/currency";
+
+import { cn } from "@/utils/cn";
 
 import {
   SettingsCheckSelectedIcon,
@@ -22,9 +26,10 @@ import {
 export function AccesibilityMenu() {
   const [mounted, setMounted] = useState(false);
 
+  const { t } = useTranslation("settings");
   const router = useRouter();
   const { theme, setTheme } = useTheme();
-  const { t } = useTranslation("settings");
+  const { currency, updateCurrency } = useContext(CurrencyContext);
 
   // wait for component to mount to avoid hydration errs
   useEffect(() => {
@@ -98,6 +103,57 @@ export function AccesibilityMenu() {
                           >
                             HR
                           </Link>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                  <Disclosure>
+                    {({ open }) => (
+                      <>
+                        <Disclosure.Button className="flex w-56 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+                          {open ? (
+                            <ChevronLeftIcon className="h-6 w-6 text-sp-lighter" />
+                          ) : (
+                            <div>
+                              <CurrencyDollarIcon className="h-6 w-6 text-sp-dark-fawn dark:text-sp-white" />
+                            </div>
+                          )}
+                          <div className="flex w-full justify-between">
+                            <div className="ml-4">
+                              <p className="font-medium capitalize text-sm">
+                                {t("settings:currency")}
+                              </p>
+                            </div>
+                          </div>
+                          {!open && (
+                            <ChevronRightIcon className="h-6 w-6 text-sp-lighter" />
+                          )}
+                        </Disclosure.Button>
+                        <Disclosure.Panel className="grid grid-cols-2 items-center">
+                          <button
+                            onClick={() => updateCurrency("USD")}
+                            disabled={currency === "USD"}
+                            className={cn(
+                              currency === "USD"
+                                ? "pointer-events-none border border-sp-day-400"
+                                : "",
+                              "flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                            )}
+                          >
+                            USD
+                          </button>
+                          <button
+                            onClick={() => updateCurrency("EUR")}
+                            disabled={currency === "EUR"}
+                            className={cn(
+                              currency === "EUR"
+                                ? "pointer-events-none border border-sp-day-400"
+                                : "",
+                              "flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                            )}
+                          >
+                            EUR
+                          </button>
                         </Disclosure.Panel>
                       </>
                     )}

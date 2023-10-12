@@ -46,7 +46,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
           content={t("meta_create_spiritus_description")}
         />
       </Head>
-      <div className="min-h-screen py-5">
+      <div className="min-h-screen pt-12 md:pt-24">
         <div className="mx-auto my-4 flex w-full flex-col items-center gap-1 dark:text-sp-white sm:w-full md:w-1/2">
           <div className="mb-2 rounded-xl bg-sp-fawn bg-opacity-25 p-2">
             <Logo className="h-8 w-8" />

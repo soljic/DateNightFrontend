@@ -378,7 +378,6 @@ export function WriteTribute({ spiritusId }) {
     try {
       setPending(true);
       await SendRose(spiritusId, text, session?.user?.accessToken || null);
-      // console.log(text, session?.user?.accessToken || null)
       setSent(true);
       setText("");
     } catch (err) {

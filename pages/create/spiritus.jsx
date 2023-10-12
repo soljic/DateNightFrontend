@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import { CalendarIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { getISOLocalDate } from "@wojtekmaj/date-utils";
 import { getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import DatePicker from "react-date-picker";
@@ -17,11 +19,6 @@ import { SpiritusProfileCropper } from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import {
-  GetDefaultProduct,
-  PAYMENT_MODE_LIFETIME,
-  PAYMENT_MODE_SUBSCRIPTION,
-} from "@/service/http/payment";
 import { CreateSpiritus } from "@/service/http/spiritus_crud";
 
 // const mockSpiritus = {
@@ -41,17 +38,11 @@ import { CreateSpiritus } from "@/service/http/spiritus_crud";
 //   images: [],
 // };
 
-export default function CreateSpiritusPage({
-  user,
-  lifetimeProduct,
-  subscriptionProduct,
-  allProducts,
-  initialName,
-  initialSurname,
-  locale,
-}) {
+export default function CreateSpiritusPage({ initialName, initialSurname }) {
   const { t } = useTranslation("common");
+  const { data: session, status } = useSession();
 
+  const router = useRouter();
   const [pending, setPending] = useState(false);
   const [paywallSeen, setPaywallSeen] = useState(false);
 
@@ -107,7 +98,11 @@ export default function CreateSpiritusPage({
         }
       }
 
-      const res = await CreateSpiritus(user.accessToken, form, locale);
+      const res = await CreateSpiritus(
+        session?.user?.accessToken,
+        form,
+        router.locale
+      );
       setSpiritus(res.data);
       setPending(false);
     } catch (err) {
@@ -138,33 +133,12 @@ export default function CreateSpiritusPage({
         />
       </Head>
       <div className="mx-auto min-h-screen max-w-7xl py-5">
-        {/* <p className="text-sp-black dark:text-sp-white">
-          {JSON.stringify({
-            birth,
-            death,
-            name,
-            surname,
-            description,
-            location,
-            images,
-          })}
-        </p> */}
         {spiritus ? (
-          <Checkout
-            spiritus={spiritus}
-            lifetimeProduct={lifetimeProduct}
-            subscriptionProduct={subscriptionProduct}
-            allProducts={allProducts}
-            isClaim={false}
-          />
+          <Checkout spiritus={spiritus} isClaim={false} />
         ) : (
           <>
             {!paywallSeen ? (
-              <Paywall
-                price={lifetimeProduct.price}
-                currency={lifetimeProduct.currency}
-                acceptPaywall={() => setPaywallSeen(true)}
-              />
+              <Paywall acceptPaywall={() => setPaywallSeen(true)} />
             ) : (
               <form id="create-form" className="mx-auto space-y-4 pb-96">
                 {toastOpen && (
@@ -415,47 +389,6 @@ export async function getServerSideProps(context) {
     };
   }
 
-  let lifetimeProduct = null;
-  let subscriptionProduct = null;
-  let allProducts = [];
-  try {
-    const res = await GetDefaultProduct(session?.user?.accessToken);
-    if (!res?.data?.stripePackages) {
-      throw new Error("no checkout packages found");
-    }
-
-    allProducts = res?.data.stripePackages || [];
-    // get first occurence of lifetime and subscription product
-    for (const product of allProducts) {
-      if (product.mode === PAYMENT_MODE_LIFETIME) {
-        lifetimeProduct = product;
-        continue;
-      }
-      if (product.mode === PAYMENT_MODE_SUBSCRIPTION) {
-        subscriptionProduct = product;
-        continue;
-      }
-
-      if (lifetimeProduct && subscriptionProduct) {
-        break;
-      }
-    }
-
-    // both plans must be available to proceed
-    if (!lifetimeProduct || !subscriptionProduct) {
-      throw new Error("missing lifetime or subscription product");
-    }
-  } catch (err) {
-    console.log(err);
-    // TODO: handle errs and not just redirect to 400
-    return {
-      redirect: {
-        destination: "/400",
-        permanent: false,
-      },
-    };
-  }
-
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
@@ -465,13 +398,8 @@ export async function getServerSideProps(context) {
         "paywall",
         "pricing",
       ])),
-      user: session.user,
-      lifetimeProduct,
-      subscriptionProduct,
-      allProducts,
       initialName: name || null,
       initialSurname: surname || null,
-      locale: context.locale || "en",
     },
   };
 }

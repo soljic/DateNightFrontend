@@ -5,6 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import { appWithTranslation } from "next-i18next";
 import { ThemeProvider } from "next-themes";
 
+import { CurrencyProvider } from "@/hooks/currency";
+
 import CookieConsent from "@/components/banners/CookieConsent";
 import { MediaSizeIndicator } from "@/components/layout/MediaSizeIndicator";
 
@@ -14,10 +16,16 @@ import "../styles/globals.css";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session} refetchInterval={0}>
-      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
-        <CookieConsent />
-        <Component {...pageProps} /> <MediaSizeIndicator />
-      </ThemeProvider>
+      <CurrencyProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={true}
+        >
+          <CookieConsent />
+          <Component {...pageProps} /> <MediaSizeIndicator />
+        </ThemeProvider>
+      </CurrencyProvider>
     </SessionProvider>
   );
 }

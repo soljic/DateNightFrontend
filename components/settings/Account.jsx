@@ -19,6 +19,7 @@ export function AccountSubscriptions() {
 
   const [redirectUrl, setReditectUrl] = useState("");
 
+  // TODO: connect to the toaster
   useEffect(() => {
     const getData = async () => {
       try {
@@ -84,7 +85,6 @@ export function AccountSettings({
       setPending(false);
     } catch (err) {
       setPending(false);
-      console.log(err);
       const errMsg = err?.response?.data || err;
       onError(errMsg);
     }
@@ -99,7 +99,7 @@ export function AccountSettings({
 
   const deactivate = async (e) => {
     setPending(true);
-    console.log({ name, surname, email, phone: phoneNumber });
+    // console.log({ name, surname, email, phone: phoneNumber });
     setPending(false);
   };
 
