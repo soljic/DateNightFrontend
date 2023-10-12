@@ -214,9 +214,6 @@ export function Checkout({ spiritus, isClaim }) {
   };
 
   const updatePricingPlans = (lifetimeProduct, subscriptionProduct) => {
-    // lifetime is default
-    setId(lifetimeProduct.pkgServerId);
-    setPrice(lifetimeProduct.price);
     setPricingPlans([
       {
         price: lifetimeProduct.price,
@@ -250,6 +247,14 @@ export function Checkout({ spiritus, isClaim }) {
         ],
       },
     ]);
+
+    if (selectedPlan === 0) {
+      setId(lifetimeProduct.pkgServerId);
+      setPrice(lifetimeProduct.price);
+    } else {
+      setId(subscriptionProduct.pkgServerId);
+      setPrice(subscriptionProduct.price);
+    }
   };
 
   const dates = `${
