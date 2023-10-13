@@ -126,8 +126,9 @@
   "new_story_subtitle": "Share your story about this Spiritus.",
   "claim_spiritus_button": "Send claim for Memorial",
 
-  "spiritus_success_first_story": "Write first story",
-  "spiritus_success_text": "must have done many beautiful things. Save those memories forever.",
+  "spiritus_success_first_story": "Start saving memories!",
+  "spiritus_success_text_p1": "Great! You became the Memory Guardian of ",
+  "spiritus_success_text_p2": "! Share their beautiful life and make it remembered – forever!",
   "story_success_title": "Nice work!",
   "story_success_subtitle": "You've just created a Story for",
   "new_story": "New story",
@@ -165,13 +166,13 @@
 
   "create_spiritus_location_title": "Select your loved one's birthplace or the place they lived in.",
   "create_spiritus_location_subtitle": "It can be place of birth, death, or the place where he/she lived the longest.",
-  "create_spiritus_location_placeholder": "Enter sentence",
+  "create_spiritus_location_placeholder": "Search location",
 
   "create_spiritus_profile_image_button": "Upload profile image",
   "create_spiritus_image_title1": "Does",
   "create_spiritus_image_title2": "have any images from his/her life? If yes, please add them here.",
   "create_story_image_title": "Do you have an image for this story? If yes, please add it here.",
-  "upload_spiritus_images_button": "Upload images",
+  "upload_spiritus_images_button": "Upload image",
 
   "create_story_type_title": "What type of Story do you want to create?",
   "public": "Public",

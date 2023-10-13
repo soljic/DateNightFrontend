@@ -126,8 +126,9 @@
   "new_story_subtitle": "Podijelite svoju priču o ovom Spiritusu.",
   "claim_spiritus_button": "Pošalji zahtjev",
 
-  "spiritus_success_first_story": "Napišite prvu priču",
-  "spiritus_success_text": "vjerojatno Vas podsjeća na lijepe trenutke i draga mjesta. Sačuvajte te uspomene.",
+  "spiritus_success_first_story": "Ispričajte prvu Priču!",
+  "spiritus_success_text_p1": "Odlično! Postali ste Čuvar Uspomena memorijala ",
+  "spiritus_success_text_p2": "! Sada podijelite dragocjena sjećanja i učinite ih - vječnima!",
   "story_success_title": "Odlično!",
   "story_success_subtitle": "Kreirali ste priču za",
   "new_story": "Nova priča",
@@ -164,13 +165,13 @@
 
   "create_spiritus_location_title": "Odaberite mjesto rođenja ili mjesto u kojemu je živjela Vaša voljena osoba.",
   "create_spiritus_location_subtitle": "Ovo može biti mjesto rođenja, mjesto gdje je osoba pokopana ili gdje je najdulje živjela.",
-  "create_spiritus_location_placeholder": "Unesi lokaciju",
+  "create_spiritus_location_placeholder": "Pretraži lokacije",
 
   "create_spiritus_profile_image_button": "Postavite sliku",
   "create_spiritus_image_title1": "Imate li slike iz života Spiritusa",
   "create_spiritus_image_title2": "? Ako da, možete ih dodati",
   "create_story_image_title": "Image li sliku vezanu uz ovu priču? Ovdje ju možete dodati.",
-  "upload_spiritus_images_button": "Dodajte slike",
+  "upload_spiritus_images_button": "Dodajte sliku",
 
   "create_story_type_title": "Kakvu priču želite kreirati?",
   "public": "Javna",

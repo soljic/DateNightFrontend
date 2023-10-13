@@ -65,7 +65,7 @@
   "sign_out": "Odjavi se",
 
   "crop_dialog_title": "Obreži sliku profila",
-  "crop_dialog_subtitle": "Slike profila su veličine 192x220px.\nPovucite sliku u prozorčiću do željenog i koristite opcije uvećanje i zakreni za prilagodbu slike.",
+  "crop_dialog_subtitle": "Slika profila treba biti veličine 192x220px.\nNakon što učitate sliku, povucite sliku u prozorčiću do željene pozicije te zumirajte i rotirajte kako biste ju prilagodili. Kada ste zadovoljni izgledom slike, pritisnite gumb obreži kako biste vidjeli Pretpregled.",
   "crop_dialog_action_zoom": "Uvećaj",
   "crop_dialog_action_rotate": "Rotiraj",
   "crop_dialog_action_crop": "Obreži",

@@ -104,7 +104,9 @@ export function SpiritusLocationInput({ location, setLocation }) {
           value={inputLocation}
           className="w-full appearance-none rounded-sp-10 border border-sp-day-400 bg-sp-day-50 p-3 placeholder-gray-500 outline-none dark:border-sp-medium dark:bg-sp-black dark:text-sp-white"
           type="text"
-          placeholder={"Pretraži lokacije"}
+          placeholder={t(
+            "create_spiritus_location_placeholder"
+          )}
         />
         {!!results.length && visible && (
           <Suggestions

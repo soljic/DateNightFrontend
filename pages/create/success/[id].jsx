@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/legacy/image";
 import Link from "next/link";
@@ -29,13 +30,13 @@ import { ImagePath, localFormatDate } from "@/service/util";
 export default function SpiritusCreatedSuccess({ spiritus }) {
   const { t } = useTranslation("common");
   const router = useRouter();
-
+  
   const dates = `${
     spiritus.birth ? localFormatDate(spiritus.birth, router.locale) : "\uE132"
-  } — ${
+    } — ${
     spiritus.death ? localFormatDate(spiritus.death, router.locale) : "\uE132"
-  }`;
-
+    }`;
+    const [copied, setCopied] = useState(false);
   return (
     <FullWidthLayout>
       <Head>
@@ -79,7 +80,7 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
               {t("spiritus_success_first_story")}
             </h2>
             <p className="mb-8 mt-1 w-3/4 text-center opacity-50 text-sm md:text-base">
-              <span> {spiritus.name} </span> {t("spiritus_success_text")}
+            {t("spiritus_success_text_p1")}<span> {spiritus.name} </span> {t("spiritus_success_text_p2")}
             </p>
           </div>
           <Link
@@ -95,15 +96,26 @@ export default function SpiritusCreatedSuccess({ spiritus }) {
             >
               <LinkIcon className="h-6 w-6" />
               <p className="text-center font-semibold">
-                {t("term_view")} Spiritus
+                {t("term_view")} Memorial
               </p>
             </Link>
-            <CopyToClipboard text={spiritus.shortLink}>
+            <CopyToClipboard text={spiritus.shortLink} onCopy={() => setCopied(true)}>
               <button className="flex flex-col items-center justify-center gap-2 rounded-sp-14 p-4 hover:bg-sp-day-900 hover:bg-opacity-10 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
-                <UploadIcon className="h-6 w-6" />
-                <p className="text-center font-semibold">
-                  {t("share")} Spiritus
-                </p>
+                {copied ? (
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <UploadIcon className="h-6 w-6" />
+                    <p className="text-center font-semibold">
+                      {t("copied")}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <UploadIcon className="h-6 w-6" />
+                    <p className="text-center font-semibold">
+                      {t("copy_link")}
+                    </p>
+                  </div>
+                )}
               </button>
             </CopyToClipboard>
           </div>
