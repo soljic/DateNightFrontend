@@ -151,6 +151,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
               <div className="w-full flex-1">
                 <div className="my-1 rounded-sp-10">
                   <input
+                    maxLength={50}
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
@@ -163,6 +164,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
               <div className="w-full flex-1">
                 <div className="my-1 rounded-sp-10">
                   <input
+                    maxLength={50}
                     value={surname}
                     onChange={(e) => {
                       setSurname(e.target.value);
@@ -175,6 +177,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
               <div className="w-full flex-1">
                 <div className="my-1 rounded-sp-10">
                   <input
+                    maxLength={50}
                     value={maidenName}
                     onChange={(e) => {
                       setMaidenName(e.target.value);

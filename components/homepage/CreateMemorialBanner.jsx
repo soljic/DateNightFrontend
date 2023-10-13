@@ -58,6 +58,7 @@ export function CreateMemorialBanner() {
           <div className="block rounded-sp-10">
             <input
               value={name}
+              maxLength={50}
               onChange={(e) => {
                 setName(e.target.value);
               }}
@@ -68,6 +69,7 @@ export function CreateMemorialBanner() {
 
           <div className="block rounded-sp-10">
             <input
+              maxLength={50}
               value={surname}
               onChange={(e) => {
                 setSurname(e.target.value);
