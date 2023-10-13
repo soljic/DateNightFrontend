@@ -52,7 +52,7 @@ export default function SocialLoginCallbackPage({ code }) {
           ></path>
         </svg>
         <p className="mt-0.5 text-center font-semibold leading-6 text-sp-lighter tracking-sp-tighten">
-          {"Loggin in..."}
+          {"Logging in..."}
         </p>
       </main>
     </>
