@@ -26,11 +26,16 @@ export async function GetSection(id, page, lang) {
   return res;
 }
 
-export async function GetSectionItem(sectionId, itemId, page) {
+export async function GetSectionItem(sectionId, itemId, page, lang) {
   const p = page ? page : 0;
 
   const res = await axios.get(
-    `${API_URL}/wapi/homepage/section/${sectionId}/item/${itemId}?page=${p}&size=${12}`
+    `${API_URL}/wapi/homepage/section/${sectionId}/item/${itemId}?page=${p}&size=${12}`,
+    {
+      headers: {
+        "Accept-Language": lang ? lang : "hr",
+      },
+    }
   );
 
   res.data.items.content.forEach((item) => {

@@ -39,9 +39,10 @@ export default function Category({
 
 export async function getServerSideProps(context) {
   const { section, id, title } = context.query;
+  console.log("## CALLING WITH LOCALE: ", context.locale);
 
   try {
-    const res = await GetSectionItem(section, id);
+    const res = await GetSectionItem(section, id, 0, context.locale);
     return {
       props: {
         key: `${context.locale}-category-${section}-${id}`,
@@ -59,7 +60,8 @@ export async function getServerSideProps(context) {
         initialItems: res.data.items.content,
       },
     };
-  } catch {
+  } catch (err) {
+    console.log("## ERROR: ", err);
     return {
       redirect: {
         destination: "/404",

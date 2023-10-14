@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { useTranslation } from "next-i18next";
 
@@ -24,12 +25,13 @@ export function ProjectItemGrid({
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(initialItems);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const loadMore = async () => {
     setIsLoading(true);
 
     try {
-      const res = await GetSectionItem(section, id, current + 1);
+      const res = await GetSectionItem(section, id, current + 1, router.locale);
       setItems((prev) => [...prev, ...res.data.items.content]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.items.last);
@@ -114,12 +116,13 @@ export function SectionItemGrid({
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(initialItems);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const loadMore = async () => {
     setIsLoading(true);
 
     try {
-      const res = await GetSectionItem(section, id, current + 1);
+      const res = await GetSectionItem(section, id, current + 1, router.locale);
       setItems((prev) => [...prev, ...res.data.items.content]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.items.last);
