@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { BellIcon } from "@heroicons/react/outline";
 import { signOut, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
+import { useCookies } from "react-cookie";
 
 import {
   SettingsAccountIcon,
@@ -22,9 +23,15 @@ export function Sidebar({ selectedIndex }) {
   const router = useRouter();
   const { data: session } = useSession();
 
+  // this is needed here so logoutUser can clear all cookies
+  const [, , removeCookie] = useCookies("cookieConsent");
+
   const logoutUser = async () => {
     await signOut({ redirect: false });
-    router.push("/");
+    removeCookie("cookieConsent", { path: "/" });
+    router.push("/").then(() => {
+      router.reload();
+    });
   };
 
   const menuItems = [
@@ -98,7 +105,9 @@ export function Sidebar({ selectedIndex }) {
         </Link>
       ))}
       <button
-        onClick={() => logoutUser()}
+        onClick={() => {
+          logoutUser();
+        }}
         className="flex w-full items-center justify-start rounded-sp-14 p-4 hover:bg-gradient-to-r hover:from-day-gradient-start hover:to-day-gradient-stop focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
       >
         <div>

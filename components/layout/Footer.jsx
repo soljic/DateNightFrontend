@@ -37,7 +37,7 @@ export function Footer() {
       </div>
       <div className="mx-auto my-2 border-t border-sp-day-200 pb-4 dark:border-sp-lighter"></div>
       {/* partners and socials */}
-      <div className="mb-4 flex flex-col justify-between gap-4 md:flex-row">
+      <div className="mb-4 flex flex-col items-center justify-center gap-4 px-5 md:flex-row md:items-start md:justify-between">
         <div className="mix-blend-difference">
           <Image
             src="/images/partners_single_image.png"
@@ -49,7 +49,7 @@ export function Footer() {
         <div className="flex flex-col items-center gap-4">
           <div className="flex flex-row gap-2">
             <a
-              href="https://www.facebook.com/spiritusmemoria"
+              href="https://www.facebook.com/spiritus.application/"
               target="_blank"
               rel="noreferrer"
             >

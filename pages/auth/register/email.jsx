@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Head from "next/head";
 import Link from "next/link";
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { getSession, signIn } from "next-auth/react";
@@ -31,6 +31,7 @@ export default function EmailRegister() {
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [err, setErr] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -67,7 +68,7 @@ export default function EmailRegister() {
           password: data.password,
         });
         if (!res.error) {
-          return Router.push("/");
+          return router.push("/");
         }
       }
 
@@ -97,21 +98,33 @@ export default function EmailRegister() {
           </h4>
           <p className="text-center">
             {t("register_disclaimer_1")}{" "}
-            <Link
-              href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
+            <a
+              href={
+                router.locale === "hr"
+                  ? "/tos/hr/eula_hr.pdf"
+                  : "/tos/en/eula_en.pdf"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
               key="terms"
               className="underline underline-offset-4"
             >
               {t("register_disclaimer_terms")}
-            </Link>
+            </a>
             <span> {t("register_disclaimer_2")} </span>
-            <Link
-              href="/privacy-policy"
+            <a
+              href={
+                router.locale === "hr"
+                  ? "/privacy-policy/hr/Spiritus_Privacy_Policy_HR.pdf"
+                  : "/privacy-policy/en/Spiritus_Privacy_Policy_EN.pdf"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
               key="priv"
               className="underline underline-offset-4"
             >
               {t("register_disclaimer_privacy")}
-            </Link>
+            </a>
             .
           </p>
         </div>
@@ -243,7 +256,11 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["auth", "common"])),
+      ...(await serverSideTranslations(context.locale, [
+        "auth",
+        "common",
+        "cookies",
+      ])),
     },
   };
 }

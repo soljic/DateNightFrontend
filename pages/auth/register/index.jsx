@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
@@ -13,6 +14,8 @@ import { API_URL } from "../../../service/constants";
 
 export default function LoginComponent() {
   const { t } = useTranslation("auth");
+
+  const router = useRouter();
 
   return (
     <LayoutNoNav>
@@ -31,21 +34,33 @@ export default function LoginComponent() {
         <div className="flex w-full flex-col items-center justify-center gap-3 text-center">
           <p className="text-center text-xs">
             {t("register_disclaimer_1")}{" "}
-            <Link
-              href="https://spiritus-memoria-privacy-doc.s3.eu-central-1.amazonaws.com/spiritus_terms.pdf"
+            <a
+              href={
+                router.locale === "hr"
+                  ? "/tos/hr/eula_hr.pdf"
+                  : "/tos/en/eula_en.pdf"
+              }
               key="terms"
+              target="_blank"
+              rel="noopener noreferrer"
               className="underline underline-offset-4"
             >
               {t("register_disclaimer_terms")}
-            </Link>
+            </a>
             <span> {t("register_disclaimer_2")} </span>
-            <Link
-              href="/privacy-policy"
+            <a
+              href={
+                router.locale === "hr"
+                  ? "/privacy-policy/hr/Spiritus_Privacy_Policy_HR.pdf"
+                  : "/privacy-policy/en/Spiritus_Privacy_Policy_EN.pdf"
+              }
               key="priv"
+              target="_blank"
+              rel="noopener noreferrer"
               className="underline underline-offset-4"
             >
               {t("register_disclaimer_privacy")}
-            </Link>
+            </a>
             .
           </p>
           <a
@@ -142,7 +157,11 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["auth", "common"])),
+      ...(await serverSideTranslations(context.locale, [
+        "auth",
+        "common",
+        "cookies",
+      ])),
     },
   };
 }

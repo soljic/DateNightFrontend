@@ -68,7 +68,7 @@ export function Navbar() {
                 title={t("about")}
                 links={[
                   { text: t("why-us"), href: "/why-us" },
-                  // { text: t("pricing"), href: "/pricing" },
+                  { text: t("pricing"), href: "/pricing" },
                   { text: t("our-story"), href: "/about" },
                   { text: t("our-tech"), href: "/our-tech" },
                 ]}

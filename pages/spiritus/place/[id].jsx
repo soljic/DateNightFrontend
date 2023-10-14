@@ -47,6 +47,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "cookies",
         ])),
         id: id,
         title: location,

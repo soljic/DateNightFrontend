@@ -1,12 +1,13 @@
 import { Fragment, useEffect, useState } from "react";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 import { Popover, Transition } from "@headlessui/react";
 import { BellIcon } from "@heroicons/react/outline";
 import { signOut } from "next-auth/react";
 import { useTranslation } from "next-i18next";
+import { useCookies } from "react-cookie";
 
 import { GetNotificationsCount } from "@/service/http/notifications";
 
@@ -24,6 +25,8 @@ export function ProfileMenu({ token }) {
   const router = useRouter();
 
   const [notifications, setNotifications] = useState(0);
+  // this is needed here so logoutUser can clear all cookies
+  const [, , removeCookie] = useCookies("cookieConsent");
 
   useEffect(() => {
     const checkNotifications = async () => {
@@ -37,7 +40,10 @@ export function ProfileMenu({ token }) {
 
   const logoutUser = async () => {
     await signOut({ redirect: false });
-    router.push("/");
+    removeCookie("cookieConsent", { path: "/" });
+    router.push("/").then(() => {
+      router.reload();
+    });
   };
 
   return (

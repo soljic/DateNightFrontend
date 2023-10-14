@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useTranslation } from "next-i18next";
 import { useCookies } from "react-cookie";
 
 export default function CookieConsent() {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation("cookies");
   const router = useRouter();
 
   const [show, setShow] = useState(false);
@@ -37,6 +36,8 @@ export default function CookieConsent() {
                     ? "/privacy-policy/hr/Spiritus_Privacy_Policy_HR.pdf"
                     : "/privacy-policy/en/Spiritus_Privacy_Policy_EN.pdf"
                 }
+                target="_blank"
+                rel="noopener noreferrer"
                 className=" text-indigo-600 text-sm"
               >
                 {t("cookie_read_more")}

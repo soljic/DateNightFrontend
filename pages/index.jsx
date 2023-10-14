@@ -120,6 +120,7 @@ export async function getStaticProps(context) {
         "settings",
         "auth",
         "about",
+        "cookies",
       ])),
       key: `${context.locale}-main-index-page`,
       featured,

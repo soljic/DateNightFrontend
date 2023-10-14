@@ -73,7 +73,11 @@ export async function getServerSideProps(context) {
       key: `${context.locale}-settings-notification-list`,
       unread: unread,
       read: read,
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "cookies",
+      ])),
     },
   };
 }

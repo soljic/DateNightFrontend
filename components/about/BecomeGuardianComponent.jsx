@@ -15,29 +15,48 @@ function BecomeGuardianCTA() {
     <section className="mt-48 rounded-sp-14 bg-gradient-to-b from-sp-day-50 to-day-gradient-stop pb-10 dark:from-sp-black dark:via-sp-dark-gradient-mid dark:to-sp-brown">
       <div className="flex flex-col items-center justify-center gap-6 px-5 md:flex-row">
         <div className="flex w-full flex-col items-center justify-center gap-2.5 pb-8 md:w-1/2 md:items-start md:justify-start lg:w-1/3">
-          <div className="flex h-14 w-12 items-center justify-center rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-3 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
+          <div className="flex items-center justify-center rounded-sp-10">
             <svg
-              width="12"
-              height="20"
-              viewBox="0 0 12 20"
+              width="38"
+              height="38"
+              viewBox="0 0 38 38"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
+              <rect
+                x="0.5"
+                y="0.5"
+                width="37"
+                height="37"
+                rx="10.5"
+                stroke="url(#paint0_linear_9853_57303)"
+              />
               <path
-                d="M4.8 14.7999C4.46863 14.7999 4.2 15.0685 4.2 15.3999C4.2 15.7313 4.46863 15.9999 4.8 15.9999L7.2 15.9999C7.53137 15.9999 7.8 15.7313 7.8 15.3999C7.8 15.0685 7.53137 14.7999 7.2 14.7999L4.8 14.7999ZM2.4 0.399902C1.07452 0.399902 0 1.47442 0 2.7999L0 17.1999C0 18.5254 1.07452 19.5999 2.4 19.5999H9.6C10.9255 19.5999 12 18.5254 12 17.1999L12 2.7999C12 1.47442 10.9255 0.399902 9.6 0.399902L2.4 0.399902ZM1.2 2.7999C1.2 2.13716 1.73726 1.5999 2.4 1.5999L9.6 1.5999C10.2627 1.5999 10.8 2.13716 10.8 2.7999L10.8 17.1999C10.8 17.8626 10.2627 18.3999 9.6 18.3999H2.4C1.73726 18.3999 1.2 17.8626 1.2 17.1999L1.2 2.7999Z"
-                fill="url(#paint0_linear_7364_1020)"
+                d="M14.8 9.3999C13.8059 9.3999 13 10.2058 13 11.1999L13 26.7999C13 27.794 13.8059 28.5999 14.8 28.5999H23.2C24.1941 28.5999 25 27.794 25 26.7999L25 11.1999C25 10.2058 24.1941 9.3999 23.2 9.3999L14.8 9.3999ZM17.8 23.7999H20.2C20.5314 23.7999 20.8 24.0685 20.8 24.3999C20.8 24.7313 20.5314 24.9999 20.2 24.9999H17.8C17.4686 24.9999 17.2 24.7313 17.2 24.3999C17.2 24.0685 17.4686 23.7999 17.8 23.7999Z"
+                fill="url(#paint1_linear_9853_57303)"
               />
               <defs>
                 <linearGradient
-                  id="paint0_linear_7364_1020"
-                  x1="1.55775e-08"
-                  y1="9.99989"
-                  x2="12"
-                  y2="9.99989"
+                  id="paint0_linear_9853_57303"
+                  x1="1"
+                  y1="19"
+                  x2="37"
+                  y2="19"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stopColor="#ED9A4C" />
-                  <stop offset="1" stopColor="#E3AA6D" />
+                  <stop stop-color="#D67915" />
+                  <stop offset="1" stop-color="#ED9A4C" />
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_9853_57303"
+                  x1="13"
+                  y1="18.9999"
+                  x2="25"
+                  y2="18.9999"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#D67915" />
+                  <stop offset="1" stop-color="#ED9A4C" />
                 </linearGradient>
               </defs>
             </svg>

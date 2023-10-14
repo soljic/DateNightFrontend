@@ -157,6 +157,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "cookies",
         ])),
       },
     };

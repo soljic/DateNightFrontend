@@ -62,6 +62,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "cookies",
         ])),
         id: res.data.id,
         title: title,

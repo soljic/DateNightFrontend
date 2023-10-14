@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import LayoutNoNav from "../components/layout/LayoutNoNav";
 import {
-  StoriesIcon,
-  MobileAppIcon,
   AboutIcon,
+  MobileAppIcon,
+  StoriesIcon,
 } from "../components/layout/Icons";
+import LayoutNoNav from "../components/layout/LayoutNoNav";
 
 export default function Custom404() {
   const { t } = useTranslation("settings");
@@ -120,7 +120,11 @@ function Nav() {
 export async function getStaticProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "cookies",
+      ])),
     },
   };
 }

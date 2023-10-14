@@ -383,6 +383,7 @@ export async function getStaticProps(context) {
         "faq",
         "auth",
         "museums",
+        "cookies",
       ])),
     },
   };

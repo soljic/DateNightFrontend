@@ -101,6 +101,7 @@ export async function getStaticProps(context) {
         "mobile",
         "settings",
         "auth",
+        "cookies",
       ])),
     },
   };

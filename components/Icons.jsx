@@ -397,7 +397,7 @@ export function ShieldIcon({ width, height }) {
 
   return (
     <svg
-      className={`${w} ${h} fill-sp-black dark:fill-sp-white`}
+      className={`${w} ${h} fill-sp-white`}
       width="49"
       height="54"
       viewBox="0 0 49 54"

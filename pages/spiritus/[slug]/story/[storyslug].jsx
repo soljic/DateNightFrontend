@@ -212,6 +212,7 @@ export async function getServerSideProps(context) {
           "settings",
           "auth",
           "about",
+          "cookies",
         ])),
         key: `${context.locale}-${storyslug}`,
         // spiritus info

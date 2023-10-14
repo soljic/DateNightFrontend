@@ -58,7 +58,11 @@ export async function getServerSideProps(context) {
   return {
     props: {
       key: `${context.locale}-settings-my-spiritus`,
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "cookies",
+      ])),
       spiritus: res.data.content,
       isLastPage: res.data.last,
     },

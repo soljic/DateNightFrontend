@@ -1,21 +1,20 @@
-import Head from "next/head";
 import { useState } from "react";
 
-import { useTranslation } from "next-i18next";
-import { useSession, getSession } from "next-auth/react";
+import Head from "next/head";
 
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { PencilIcon } from "@heroicons/react/outline";
+import { getSession, useSession } from "next-auth/react";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import Layout from "../../../components/layout/Layout";
+import { SpiritusCarousel } from "../../../components/spiritus/Carousel";
+import { SpiritusOverview } from "../../../components/spiritus/Overview";
 import {
   CTAAddMemory,
   MoreStories,
   PageActions,
 } from "../../../components/stories/StoryPage";
-import { SpiritusOverview } from "../../../components/spiritus/Overview";
-import { SpiritusCarousel } from "../../../components/spiritus/Carousel";
-
 import { GetSpiritusById } from "../../../service/http/spiritus";
 import { GetSpiritusStoriesBySlug } from "../../../service/http/story";
 
@@ -134,6 +133,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "cookies",
         ])),
         stories,
         spiritus,

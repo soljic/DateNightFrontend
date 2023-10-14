@@ -169,6 +169,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "cookies",
         ])),
         spiritus: data.spiritus,
         obituary: data.obituary,

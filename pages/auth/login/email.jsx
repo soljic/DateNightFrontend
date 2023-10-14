@@ -172,7 +172,11 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["auth", "common"])),
+      ...(await serverSideTranslations(context.locale, [
+        "auth",
+        "common",
+        "cookies",
+      ])),
     },
   };
 }

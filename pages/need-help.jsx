@@ -65,6 +65,7 @@ export async function getStaticProps(context) {
         "faq",
         "auth",
         "needhelp",
+        "cookies",
       ])),
     },
   };

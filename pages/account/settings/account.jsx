@@ -77,6 +77,7 @@ export async function getServerSideProps(context) {
         "common",
         "account",
         "settings",
+        "cookies",
       ])),
     },
   };

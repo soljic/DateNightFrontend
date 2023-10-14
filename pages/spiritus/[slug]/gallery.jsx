@@ -110,6 +110,7 @@ export async function getServerSideProps(context) {
           "common",
           "settings",
           "auth",
+          "cookies",
         ])),
         spiritus,
         images: resGallery.data.images.content,

@@ -51,7 +51,11 @@ export async function getServerSideProps(context) {
   return {
     props: {
       key: `${context.locale}-settings-theme`,
-      ...(await serverSideTranslations(context.locale, ["common", "settings"])),
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "cookies",
+      ])),
     },
   };
 }

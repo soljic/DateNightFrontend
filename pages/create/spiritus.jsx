@@ -407,6 +407,7 @@ export async function getServerSideProps(context) {
         "auth",
         "paywall",
         "pricing",
+        "cookies",
       ])),
       initialName: name || null,
       initialSurname: surname || null,
