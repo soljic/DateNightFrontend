@@ -576,7 +576,7 @@ function SpiritusActions({
               {t("no_memory_guardian")}
             </p>
             <Link
-              href={`/claim/${spiritusSlug}`}
+              href={`/checkout/claim/${spiritusSlug}`}
               className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
             >
               {t("claim_spiritus_button")}

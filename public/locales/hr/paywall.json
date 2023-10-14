@@ -22,5 +22,8 @@
 	"init_payment_redirect_notice": "Bit ćete preusmjereni na stranicu za plaćanje (stripe.com)",
 
 	"init_claim_title": "Postani Čuvar Uspomene",
-	"init_claim_subtitle": "Nakon završetka plaćanja postat ćeš Čuvar uspomene ovog Spiritusa"
+	"init_claim_subtitle": "Nakon završetka plaćanja postat ćeš Čuvar uspomene ovog Spiritusa",
+
+	"payment_failed_title": "Pokušaj plaćanja nije uspio",
+	"payment_failed_subtitle":  "Naplata nije uspjela. Molimo provjerite svoje podatke za plaćanje i pokušajte ponovo."
 }

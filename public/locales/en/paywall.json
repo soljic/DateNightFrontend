@@ -22,5 +22,8 @@
 	"init_payment_redirect_notice": "You will be redirected to stripe.com to complete the payment",
 
 	"init_claim_title": "Become a Memory Guardian",
-	"init_claim_subtitle": "You can claim this Spiritus Memorial by completing the payment process."
+	"init_claim_subtitle": "You can claim this Spiritus Memorial by completing the payment process.",
+
+	"payment_failed_title": "Payment attempt failed",
+	"payment_failed_subtitle":  "Your payment was not successful. Please retry check your payment information and try again."
 }

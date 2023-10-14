@@ -3,6 +3,8 @@ import axios from "axios";
 import { API_URL, defaultLimit, defaultOffset } from "../constants";
 import { ImagePath } from "../util";
 
+// Works on both PAID and UNPAID spiritus
+// -> used in checkout pages and redirect pages like /spiritus/id/[id]
 export async function GetSpiritusById(id, accessToken, lang) {
   let res;
   if (accessToken) {
@@ -25,10 +27,11 @@ export async function GetSpiritusById(id, accessToken, lang) {
   return res;
 }
 
-export async function GetUnpaidSpiritusList(accessToken) {
+export async function GetUnpaidSpiritusList(accessToken, lang) {
   const res = await axios.get(`${API_URL}/v2/spiritus/unpaid`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Accept-Language": lang ? lang : "hr",
     },
   });
 

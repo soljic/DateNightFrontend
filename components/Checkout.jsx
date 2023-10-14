@@ -4,7 +4,7 @@ import { useContext } from "react";
 import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 
-import { CheckCircleIcon, CheckIcon } from "@heroicons/react/outline";
+import { CheckCircleIcon, CheckIcon, XIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -22,92 +22,14 @@ import {
 } from "../service/http/payment";
 import { ImagePath, localFormatDate } from "../service/util";
 import {
-  AddPhotosIcon,
   CheckmarkIcon,
   DescriptionTextIcon,
-  EnterInfoIcon,
-  ForeverBadgeIcon,
   LocationPinIcon,
-  PurchaseIcon,
-  SpiritusIcon,
   TagIcon,
   UserOutlineIcon,
 } from "./Icons";
 import { SettingsSpiritusIcon } from "./SettingsIcons";
 import { Spinner } from "./Status";
-
-export function Paywall({ acceptPaywall }) {
-  const { t } = useTranslation("paywall");
-
-  const items = [
-    {
-      title: t("list_elem_1_title"),
-      subtitle: t("list_elem_1_subtitle"),
-      icon: <EnterInfoIcon width={8} height={8} />,
-    },
-    {
-      title: t("list_elem_2_title"),
-      subtitle: t("list_elem_2_subtitle"),
-      icon: <AddPhotosIcon width={8} height={8} />,
-    },
-    {
-      title: t("list_elem_3_title"),
-      subtitle: t("list_elem_3_subtitle"),
-      icon: <PurchaseIcon width={8} height={8} />,
-    },
-    {
-      title: t("list_elem_4_title"),
-      subtitle: t("list_elem_4_subtitle"),
-      icon: <ForeverBadgeIcon width={8} height={8} />,
-    },
-  ];
-
-  return (
-    <div className="flex min-h-screen flex-col items-center py-24">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <div className="rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
-          <SpiritusIcon fill />
-        </div>
-        <h1 className="text-center font-bold text-sp-black text-2xl dark:text-sp-white">
-          {`${t("create_spiritus")}`}
-        </h1>
-        <div className="mx-auto my-5 flex w-3/4 justify-center text-sp-black dark:text-sp-white">
-          <ul className="flex flex-col justify-center">
-            {items.map((item) => (
-              <li
-                key={`pw-item-${item.title}`}
-                className="mx-auto flex w-full p-2.5 md:w-4/5"
-              >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center sm:h-12 sm:w-12">
-                  {item.icon}
-                </div>
-                <div className="ml-4">
-                  <p className="font-semibold text-lg dark:text-sp-white">
-                    {t(item.title)}
-                  </p>
-                  <p className="text-sm dark:text-sp-white dark:text-opacity-60">
-                    {t(item.subtitle)}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <button
-          onClick={() => {
-            acceptPaywall();
-          }}
-          className="w-80 rounded-sp-40 border border-sp-lighter px-4 py-3 text-center font-semibold"
-        >
-          {t("start_button")}
-        </button>
-        <p className="text-sp-black text-sm dark:text-sp-white dark:text-opacity-60">
-          {t("start_button_hint")}
-        </p>
-      </div>
-    </div>
-  );
-}
 
 /* Stripe checkout has multiple products: LIFETIME and SUBSCRIPTION.
 LIFETIME is a one-time payment for a single spiritus and is selected by default.
@@ -155,13 +77,17 @@ example:
   ]
 }
 */
-export function Checkout({ spiritus, isClaim }) {
+export function Checkout({ spiritus, isClaim, paymentFailed }) {
   const router = useRouter();
   const { t } = useTranslation("paywall", "common", "pricing");
   // context is set from Accessibility menu component
   const { currency } = useContext(CurrencyContext);
 
   const { data: session, status } = useSession();
+
+  const [displayFailedBanner, setDisplayFailedBanner] = useState(
+    paymentFailed || false
+  );
 
   // pricing related variables
   const [selectedPlan, setSelectedPlan] = useState(0); // corresponds to lifetime product
@@ -351,9 +277,24 @@ export function Checkout({ spiritus, isClaim }) {
 
   return (
     <div
-      className="flex flex-col items-center justify-center px-4 dark:text-sp-white lg:mt-12"
+      className="mt-8 flex flex-col items-center justify-center px-4 dark:text-sp-white lg:mt-12"
       key="checkout-init-screen"
     >
+      {displayFailedBanner && (
+        <div className="mb-12 flex w-full max-w-4xl items-start justify-between rounded-xl border border-red-600 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-5 shadow dark:bg-gradient-to-r dark:from-sp-dark-brown/80 dark:to-sp-brown/80">
+          <div className="w-full">
+            <h2 className="font-bold text-xl tracking-tight dark:text-sp-white">
+              {t("paywall:payment_failed_title")}
+            </h2>
+            <h2 className="text-lg tracking-tight dark:text-sp-white">
+              {t("paywall:payment_failed_subtitle")}
+            </h2>
+          </div>
+          <button onClick={() => setDisplayFailedBanner(false)}>
+            <XIcon className="h-6 w-6 text-sp-lighter" />
+          </button>
+        </div>
+      )}
       <div className="flex w-full flex-col items-center justify-center space-y-4">
         {isClaim ? (
           <>
