@@ -56,6 +56,13 @@ export function SelectExistingImageCropEditor({
     getImage();
   }, []);
 
+  const onChangeSetOpen = (openState) => {
+    if (!openState) {
+      onCancel();
+    }
+    setOpen(openState);
+  };
+
   const onSave = async () => {
     try {
       setSaving(true);
@@ -104,10 +111,12 @@ export function SelectExistingImageCropEditor({
     croppedImageRef.current?.clearImage();
     setCroppedImage(null);
     setOpen(false);
+    setScale(1);
+    setRotate(0);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onChangeSetOpen}>
       {/* <DialogTrigger>Open</DialogTrigger> */}
       <DialogContent className="block w-full flex-col px-2 py-12 md:max-w-3xl md:p-12">
         <div className="flex flex-col space-y-6">

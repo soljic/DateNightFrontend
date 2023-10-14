@@ -32,6 +32,13 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
 
   const inputFile = useRef(null);
 
+  const onChangeSetOpen = (openState) => {
+    if (!openState) {
+      onCancel();
+    }
+    setOpen(openState);
+  };
+
   const onOpenFileDialog = (event) => {
     event.preventDefault();
     inputFile.current.click();
@@ -56,6 +63,8 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
     setInitialImage(null);
     setCanvasImage(null);
     setOpen(false);
+    setScale(1);
+    setRotate(0);
   };
 
   // if image was not cropped return initial image
@@ -71,10 +80,15 @@ export function CropEditor({ open, setOpen, onAdd, onRemove }) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onChangeSetOpen}>
       {/* <DialogTrigger>Open</DialogTrigger> */}
-      <DialogContent className="block w-full flex-col px-2 py-12 md:max-w-3xl md:p-12">
-        <div className="flex flex-col space-y-6">
+      <DialogContent
+        className={cn(
+          initialImage ? "bottom-0 min-h-screen md:min-h-fit" : "",
+          "w-full overflow-y-auto rounded-sp-10 py-12 md:max-w-3xl md:p-10"
+        )}
+      >
+        <div className="flex flex-col space-y-4 md:space-y-6">
           <DialogHeader>
             <DialogTitle className="text-xl">
               {t("settings:crop_dialog_title")}

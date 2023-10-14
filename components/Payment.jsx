@@ -63,7 +63,7 @@ export function Paywall({ acceptPaywall }) {
   ];
 
   return (
-    <div className="flex h-screen flex-col items-center pt-24">
+    <div className="flex min-h-screen flex-col items-center py-24">
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
           <SpiritusIcon fill />
@@ -71,7 +71,7 @@ export function Paywall({ acceptPaywall }) {
         <h1 className="text-center font-bold text-sp-black text-2xl dark:text-sp-white">
           {`${t("create_spiritus")}`}
         </h1>
-        <div className="mx-auto mt-5 flex w-3/4 justify-center text-sp-black dark:text-sp-white">
+        <div className="mx-auto my-5 flex w-3/4 justify-center text-sp-black dark:text-sp-white">
           <ul className="flex flex-col justify-center">
             {items.map((item) => (
               <li
@@ -97,7 +97,7 @@ export function Paywall({ acceptPaywall }) {
           onClick={() => {
             acceptPaywall();
           }}
-          className="mt-20 w-80 rounded-sp-40 border border-sp-lighter px-4 py-3 text-center font-semibold"
+          className="w-80 rounded-sp-40 border border-sp-lighter px-4 py-3 text-center font-semibold"
         >
           {t("start_button")}
         </button>
