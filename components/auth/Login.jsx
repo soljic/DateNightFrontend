@@ -1,15 +1,15 @@
-import Link from "next/link";
-import Image from "next/legacy/image";
-
 import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
 
+import Image from "next/legacy/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+
+import { Dialog, Transition } from "@headlessui/react";
 import { useTranslation } from "next-i18next";
 
-import { ShieldIcon } from "../Icons";
-
-import { API_URL } from "../../service/constants";
 import Auth0Logo from "../../public/images/logo/auth0.svg";
+import { API_URL } from "../../service/constants";
+import { ShieldIcon } from "../Icons";
 
 export function LoginModal({ isOpen, closeModal }) {
   const { t } = useTranslation("auth");
@@ -30,7 +30,7 @@ export function LoginModal({ isOpen, closeModal }) {
         </Transition.Child>
 
         <div className="fixed inset-0 z-40 overflow-y-auto">
-          <div className="flex min-h-full min-w-full items-center justify-center p-4 text-center">
+          <div className="min flex min-h-full items-center justify-center text-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-1000"
@@ -42,7 +42,7 @@ export function LoginModal({ isOpen, closeModal }) {
             >
               <Dialog.Panel
                 onClick={closeModal}
-                className="w-full transform content-center px-5 transition-all md:w-1/2 md:px-0 lg:w-1/3 xl:w-1/5"
+                className="w-full max-w-lg transform content-center px-5 transition-all"
               >
                 <LoginForm />
               </Dialog.Panel>
@@ -56,14 +56,44 @@ export function LoginModal({ isOpen, closeModal }) {
 
 function LoginForm() {
   const { t } = useTranslation("auth");
+  const router = useRouter();
 
   return (
-    <section className="flex flex-col items-center justify-center rounded-sp-14 border border-sp-lighter bg-sp-black p-8 text-sp-white">
+    <section className="flex flex-col items-center justify-center rounded-sp-14 border border-sp-lighter bg-sp-black px-4 py-8 text-sp-white md:p-8">
       <div className="flex flex-col items-center justify-center gap-8">
         <ShieldIcon width={12} height={12} />
-        <h4 className="mb-6 text-center font-bold text-2xl">
-          {t("login_title")}
-        </h4>
+        <h2 className="text-center font-bold text-2xl">{t("login_title")}</h2>
+        <p className="pb-2 text-center text-xs md:px-5">
+          {t("register_disclaimer_1")}{" "}
+          <a
+            href={
+              router.locale === "hr"
+                ? "/tos/hr/eula_hr.pdf"
+                : "/tos/en/eula_en.pdf"
+            }
+            key="terms"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4"
+          >
+            {t("register_disclaimer_terms")}
+          </a>
+          <span> {t("register_disclaimer_2")} </span>
+          <a
+            href={
+              router.locale === "hr"
+                ? "/privacy-policy/hr/Spiritus_Privacy_Policy_HR.pdf"
+                : "/privacy-policy/en/Spiritus_Privacy_Policy_EN.pdf"
+            }
+            key="priv"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4"
+          >
+            {t("register_disclaimer_privacy")}
+          </a>
+          .
+        </p>
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-3 text-center">
         <a

@@ -17,7 +17,7 @@ export default function NotificationsPage({ read, unread }) {
   return (
     <FullWidthLayout>
       <Head>
-        <title>{`Spiritus | ${t("settings")} | ${t("guardian_id")}`}</title>
+        <title>{`Spiritus | ${t("settings")} | ${t("notifications")}`}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Get your unique guardian ID" />
       </Head>
@@ -67,6 +67,7 @@ export async function getServerSideProps(context) {
       }
     });
   }
+  console.log(res.data);
 
   return {
     props: {

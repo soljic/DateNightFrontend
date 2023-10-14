@@ -1,13 +1,9 @@
 import { useState } from "react";
 
+import Link from "next/link";
 import { useRouter } from "next/router";
 
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  PlusIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 
@@ -56,9 +52,14 @@ export function NotificationList({ unread, read }) {
         {unread && unread.length > 0
           ? unread.map((n, idx) => (
               <Notification
-                key={`notification-elem-${idx}-read`}
+                key={`notification-elem-${idx}-unread`}
                 title={n.title}
                 subtitle={n.subtitle}
+                itemId={n.itemId}
+                itemSlug={n.itemSlug}
+                itemNavigationType={n.itemNavigationType}
+                parentNavigationType={n.parentNavigationType}
+                parentSlug={n.parentSlug}
                 date={n.createdDate}
                 read={n.read}
                 createdDate={n.createdDate}
@@ -73,18 +74,48 @@ export function NotificationList({ unread, read }) {
   );
 }
 
-function Notification({ title, subtitle, createdDate, read }) {
+function getNotificationRedirectURL(itemId, itemNavigationType, itemSlug) {
+  if (itemNavigationType !== "SPIRITUS") {
+    return "";
+  }
+
+  if (itemSlug) {
+    return `/spiritus/${itemSlug}`;
+  }
+
+  return `/spiritus/id/${itemId}`;
+}
+
+function Notification({
+  title,
+  subtitle,
+  itemId,
+  itemSlug,
+  itemNavigationType,
+  parentNavigationType,
+  parentSlug,
+  createdDate,
+  read,
+}) {
+  const redirectUrl = getNotificationRedirectURL(
+    itemId,
+    itemNavigationType,
+    itemSlug
+  );
+
   return (
-    <div
+    <Link
+      disabled={!redirectUrl}
+      href={redirectUrl}
       className={cn(
-        "flex flex-col items-start justify-between px-4 py-3.5",
+        "flex flex-col items-start justify-between px-5 py-3.5",
         read ? "opacity-50" : ""
       )}
     >
-      <h2>{title}</h2>
+      <h2 className={cn("pb-2", !read ? "font-medium" : "")}>{title}</h2>
       {!!subtitle && <p>{subtitle}</p>}
       <div className="opacity-60 text-sm">{createdDate}</div>
-    </div>
+    </Link>
   );
 }
 
@@ -121,6 +152,11 @@ function SeenNotificationsAccordion({ notifications }) {
                 <Notification
                   key={`notification-elem-${idx}-read`}
                   title={n.title}
+                  subtitle={n.subtitle}
+                  itemSlug={n.itemSlug}
+                  itemNavigationType={n.itemNavigationType}
+                  parentNavigationType={n.parentNavigationType}
+                  parentSlug={n.parentSlug}
                   date={n.createdDate}
                   read={n.read}
                   createdDate={n.createdDate}
