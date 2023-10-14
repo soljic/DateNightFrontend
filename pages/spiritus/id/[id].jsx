@@ -55,7 +55,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: `/${context.locale || "en"}/spiritus/${spiritus.slug}`,
-        permanent: false,
+        permanent: true, // the page is redirected permanently!
       },
     };
   } catch {
