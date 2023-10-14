@@ -18,10 +18,16 @@ import { Alert, Spinner } from "@/components/Status";
 import { SpiritusProfileCropper } from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 import FullWidthLayout from "@/components/layout/LayoutV2";
+import { UnpaidSpiritusList } from "@/components/spiritus/Unpaid";
 
+import { GetUnpaidSpiritusList } from "@/service/http/spiritus";
 import { CreateSpiritus } from "@/service/http/spiritus_crud";
 
-export default function CreateSpiritusPage({ initialName, initialSurname }) {
+export default function CreateSpiritusPage({
+  initialName,
+  initialSurname,
+  spiritusList,
+}) {
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
 
@@ -116,7 +122,12 @@ export default function CreateSpiritusPage({ initialName, initialSurname }) {
       </Head>
       <div className="mx-auto min-h-screen max-w-7xl py-5">
         {!paywallSeen ? (
-          <Paywall acceptPaywall={() => setPaywallSeen(true)} />
+          <div className="min-h-screen space-y-36 py-12">
+            <Paywall acceptPaywall={() => setPaywallSeen(true)} />
+            <div className="mx-auto flex">
+              <UnpaidSpiritusList spiritusList={spiritusList} />
+            </div>
+          </div>
         ) : (
           <div className="mx-auto">
             <form
@@ -368,18 +379,35 @@ export async function getServerSideProps(context) {
     };
   }
 
-  return {
-    props: {
-      ...(await serverSideTranslations(context.locale, [
-        "common",
-        "settings",
-        "auth",
-        "paywall",
-        "pricing",
-        "cookies",
-      ])),
-      initialName: name || null,
-      initialSurname: surname || null,
-    },
-  };
+  try {
+    const res = await GetUnpaidSpiritusList(
+      session.user.accessToken,
+      context.locale
+    );
+    console.log("HAVE RES", res);
+
+    return {
+      props: {
+        ...(await serverSideTranslations(context.locale, [
+          "common",
+          "settings",
+          "auth",
+          "paywall",
+          "pricing",
+          "cookies",
+        ])),
+        initialName: name || null,
+        initialSurname: surname || null,
+        spiritusList: res.data || [],
+      },
+    };
+  } catch (err) {
+    console.log("err loading create page", err);
+    return {
+      redirect: {
+        destination: "/400",
+        permanent: false,
+      },
+    };
+  }
 }
