@@ -35,9 +35,7 @@ export async function GetUnpaidSpiritusList(accessToken, lang) {
     },
   });
 
-  console.log(res);
   res.data.forEach((elem) => {
-    console.log(elem.image);
     if (elem?.image?.url) {
       elem.image.url = ImagePath(elem.image.url);
     }

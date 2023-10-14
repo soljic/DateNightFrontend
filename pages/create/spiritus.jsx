@@ -384,7 +384,6 @@ export async function getServerSideProps(context) {
       session.user.accessToken,
       context.locale
     );
-    console.log("HAVE RES", res);
 
     return {
       props: {
