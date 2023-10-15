@@ -4,7 +4,6 @@ import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import BecomeGuardianCTA from "@/components/about/BecomeGuardianComponent";
 import { CTA } from "@/components/homepage/CTA";
 import { HorizontalDivider } from "@/components/layout/Common";
 import FullWidthLayout from "@/components/layout/LayoutV2";
@@ -65,11 +64,6 @@ export default function StoryPage({
     {
       name: t("spiritus_gallery"),
       href: `/spiritus/${spiritus.slug}/gallery`,
-      current: false,
-    },
-    {
-      name: t("funeral_notice"),
-      href: `/spiritus/${spiritus.slug}/funeral-notice`,
       current: false,
     },
   ];

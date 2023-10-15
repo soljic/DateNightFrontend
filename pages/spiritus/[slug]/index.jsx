@@ -64,11 +64,6 @@ export default function SpiritusPage({
       href: `/spiritus/${spiritus.slug}/gallery`,
       current: false,
     },
-    {
-      name: t("funeral_notice"),
-      href: `/spiritus/${spiritus.slug}/funeral-notice`,
-      current: false,
-    },
   ];
 
   return (

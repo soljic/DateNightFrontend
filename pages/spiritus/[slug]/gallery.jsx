@@ -42,11 +42,6 @@ export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
       href: `/spiritus/${spiritus.slug}/gallery`,
       current: true,
     },
-    {
-      name: t("funeral_notice"),
-      href: `/spiritus/${spiritus.slug}/funeral-notice`,
-      current: false,
-    },
   ];
 
   return (
