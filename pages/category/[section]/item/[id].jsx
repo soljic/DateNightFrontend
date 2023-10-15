@@ -39,7 +39,6 @@ export default function Category({
 
 export async function getServerSideProps(context) {
   const { section, id, title } = context.query;
-  console.log("## CALLING WITH LOCALE: ", context.locale);
 
   try {
     const res = await GetSectionItem(section, id, 0, context.locale);
@@ -61,7 +60,9 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
-    console.log("## ERROR: ", err);
+    console.log(
+      `Failed to fetch section '${section}' item '${item}' with err: ${err}`
+    );
     return {
       redirect: {
         destination: "/404",

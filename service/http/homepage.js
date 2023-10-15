@@ -19,7 +19,10 @@ export async function GetHomepage(lang) {
 // to include the full image URL.
 export async function GetParsedHomepage(lang) {
   const res = await GetHomepage(lang);
+  return parseHomepage(res.data);
+}
 
+export function parseHomepage(data) {
   const sections = {
     featured: {},
     categories: {},
@@ -27,12 +30,12 @@ export async function GetParsedHomepage(lang) {
     recent: {},
   };
 
-  if (!res?.data?.homeListItems) {
+  if (!data?.homeListItems) {
     return sections;
   }
 
   // does in-place replacements on imageUrl string while iterating
-  res.data.homeListItems.forEach((section) => {
+  data.homeListItems.forEach((section) => {
     if (section.flags.includes("CATEGOIRES_SECTION")) {
       sections.categories.id = section.id;
       sections.categories.title = section.title;

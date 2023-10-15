@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { parse } from "postcss";
 
 import { CTA } from "@/components/homepage/CTA";
 import { CategoryTiles } from "@/components/homepage/Categories";
@@ -12,7 +13,11 @@ import { TabSections } from "@/components/homepage/TabSections";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/NavBar";
 
-import { GetParsedHomepage } from "../service/http/homepage";
+import {
+  GetHomepage,
+  GetParsedHomepage,
+  parseHomepage,
+} from "../service/http/homepage";
 
 export default function Home({ featured, categories, anniversaries, recent }) {
   const { t } = useTranslation("common");
@@ -108,9 +113,17 @@ export default function Home({ featured, categories, anniversaries, recent }) {
 // It may be called again, on a serverless function, if
 // revalidation is enabled and a new request comes in
 export async function getStaticProps(context) {
-  const { featured, anniversaries, recent, categories } =
-    // { locales: [ 'hr', 'en' ], locale: 'en', defaultLocale: 'hr' }
-    await GetParsedHomepage(context.locale);
+  // { locales: [ 'hr', 'en' ], locale: 'en', defaultLocale: 'hr' }
+  const res = await GetHomepage(context.locale);
+  if (res.status !== 200) {
+    throw new Error(
+      `Failed to fetch homepage, received statusL ${res.status} with data: ${res.data}`
+    );
+  }
+
+  const { featured, anniversaries, recent, categories } = parseHomepage(
+    res.data
+  );
 
   return {
     props: {
