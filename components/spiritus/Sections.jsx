@@ -168,7 +168,7 @@ export function Tabs({ tabs }) {
           }}
           value={activeTab}
         >
-          <SelectTrigger className="w-full rounded-sp-10 border-6 border-sp-fawn/30 bg-opacity-100 px-4 py-5 font-medium text-black text-base dark:text-white">
+          <SelectTrigger className="w-full rounded-2xl border-6 border-sp-fawn/30 bg-opacity-100 px-4 py-5 font-medium text-black text-base dark:text-white">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="w-inherit border-2 border-sp-fawn/30 bg-sp-day-50 bg-opacity-100 dark:bg-sp-black">

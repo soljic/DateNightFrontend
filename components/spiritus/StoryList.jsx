@@ -43,35 +43,42 @@ export function StoryList({ stories, spiritus, isGuardian, isLastPage }) {
   };
 
   return (
-    <div className="mx-auto mt-5 w-11/12 text-sp-black dark:text-sp-white md:w-full lg:mt-2">
-      {items && items.length ? (
-        <div className="w-full columns-2 space-y-8 md:columns-3 md:space-y-12 xl:columns-3">
-          {items.map((s) => (
-            <StoryCard spiritusSlug={spiritus.slug} {...s} key={s.title} />
-          ))}
+    <div className="mx-auto">
+      <section className="mx-4 md:mx-0">
+        <h2 className="text-[22px] font-bold text-black tracking-sp-tighten dark:text-sp-white lg:text-[24px]">
+          {t("story_more_stories")}
+        </h2>
+        <div className="mt-5 text-sp-black dark:text-sp-white md:w-full lg:mt-2">
+          {items && items.length ? (
+            <div className="w-full columns-2 space-y-8 md:columns-3 md:space-y-12 xl:columns-3">
+              {items.map((s) => (
+                <StoryCard spiritusSlug={spiritus.slug} {...s} key={s.title} />
+              ))}
+            </div>
+          ) : (
+            <p className="mt-8 text-sp-lighter dark:text-sp-lighter">
+              {t("more_stories_no_stories")}
+            </p>
+          )}
+          {!isLast && (
+            <div className="mt-5 flex items-center justify-center">
+              <button
+                onClick={() => {
+                  loadMore();
+                }}
+                disabled={isLast}
+                className="w-full cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown sm:w-1/3"
+              >
+                {isLoading ? (
+                  <Spinner text={t("loading")} />
+                ) : (
+                  t("action_load_more")
+                )}
+              </button>
+            </div>
+          )}
         </div>
-      ) : (
-        <p className="mt-8 text-sp-lighter dark:text-sp-lighter">
-          {t("more_stories_no_stories")}
-        </p>
-      )}
-      {!isLast && (
-        <div className="mt-5 flex items-center justify-center">
-          <button
-            onClick={() => {
-              loadMore();
-            }}
-            disabled={isLast}
-            className="w-full cursor-pointer rounded-full border border-sp-lighter from-sp-day-300 to-sp-day-100 px-8 py-3 font-semibold hover:bg-gradient-to-r focus:outline-none dark:border-sp-medium dark:bg-sp-medlight dark:hover:from-sp-dark-brown dark:hover:to-sp-brown sm:w-1/3"
-          >
-            {isLoading ? (
-              <Spinner text={t("loading")} />
-            ) : (
-              t("action_load_more")
-            )}
-          </button>
-        </div>
-      )}
+      </section>
     </div>
   );
 }
