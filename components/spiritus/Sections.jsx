@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -322,6 +322,11 @@ export function About({ age, birth, death, quote, description, location }) {
 
 export function Tributes({ spiritusId, tributes, isLastPage }) {
   const { t } = useTranslation("common");
+  const [displayTributes, setDisplayTributes] = useState(tributes);
+
+  const onAddTribute = (tribute) => {
+    setDisplayTributes([tribute, ...displayTributes]);
+  };
 
   return (
     <div className="mt-6 w-full">
@@ -330,11 +335,11 @@ export function Tributes({ spiritusId, tributes, isLastPage }) {
           {t("tributes_title")}
         </h3>
       </div>
-      <WriteTribute spiritusId={spiritusId} />
+      <WriteTribute spiritusId={spiritusId} onAddTribute={onAddTribute} />
       {tributes && tributes.length > 0 && (
         <div className="mt-6 rounded-sp-10 border border-sp-day-200">
           <dl className="divide-y divide-sp-day-200">
-            {tributes.map((msg, index) => {
+            {displayTributes.map((msg, index) => {
               return (
                 <div
                   className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
@@ -380,7 +385,7 @@ export function Tributes({ spiritusId, tributes, isLastPage }) {
   );
 }
 
-export function WriteTribute({ spiritusId }) {
+export function WriteTribute({ spiritusId, onAddTribute }) {
   const { t } = useTranslation("common");
   const { data: session, status } = useSession();
 
@@ -393,6 +398,13 @@ export function WriteTribute({ spiritusId }) {
       setPending(true);
       await SendRose(spiritusId, text, session?.user?.accessToken || null);
       setSent(true);
+      const username =
+        session?.user?.name + session?.user?.surname || "Anonymous";
+      onAddTribute({
+        sender: username,
+        tribute: text,
+        date: new Date().toISOString().slice(0, 10),
+      });
       setText("");
     } catch (err) {
       setPending(false);
