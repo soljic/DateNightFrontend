@@ -111,7 +111,7 @@ function MobilePopover() {
   ];
 
   return (
-    <div className="z-30">
+    <div className="z-[100]">
       <Popover>
         {({ open }) => (
           <>
@@ -137,7 +137,7 @@ function MobilePopover() {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel className="z-100 absolute w-64 -translate-x-52 overflow-hidden rounded-sp-10 border border-sp-day-200 bg-sp-day-50 font-medium drop-shadow-lg dark:border-sp-medium dark:bg-sp-black">
+              <Popover.Panel className="absolute left-0 z-[100] mt-2 h-screen w-full overflow-y-auto rounded-sp-10 border border-sp-day-200 bg-sp-day-50 pb-32 font-medium drop-shadow-lg dark:border-sp-medium dark:bg-sp-black sm:right-0 sm:pb-0">
                 <div className="flex flex-col items-center justify-center space-y-2 p-3">
                   <Link
                     href="/create/spiritus"
