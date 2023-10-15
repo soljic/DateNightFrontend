@@ -11,6 +11,7 @@ import { Links, ProfileHeader, Tributes } from "@/components/spiritus/Sections";
 import { SpiritusStory } from "@/components/spiritus/Story";
 import { StoryList } from "@/components/spiritus/StoryList";
 
+import { defaultLimit, defaultOffset } from "@/service/constants";
 import { GetSpiritusStoriesBySlug, GetStoryBySlug } from "@/service/http/story";
 
 import { SetStoryOG } from "@/utils/metaTags";
@@ -138,7 +139,10 @@ export async function getServerSideProps(context) {
 
     const resAllStories = await GetSpiritusStoriesBySlug(
       data.spiritus.slug,
-      (accessToken = context.locale)
+      defaultOffset,
+      defaultLimit,
+      session?.user?.accessToken || null,
+      context.locale
     );
 
     let content = resAllStories.data?.content
@@ -197,6 +201,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
+    console.log("Failed to fetch story page:", err);
     return {
       redirect: {
         destination: "/404",
