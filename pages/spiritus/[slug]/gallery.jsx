@@ -71,12 +71,14 @@ export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
       />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={spiritus.obituaryId ? tabs : tabs.slice(0, 3)} />
-        <div className="px-4 md:px-0">
-          <div className="mt-7">
-            <CreateStoryCTA spiritusId={spiritus.id} />
-          </div>
-          {!!images && images.length > 0 && <Gallery images={images} />}
+        <div className="mt-7">
+          <CreateStoryCTA spiritusId={spiritus.id} />
         </div>
+        {!!images && images.length > 0 && (
+          <div className="px-4 md:px-0">
+            <Gallery images={images} />
+          </div>
+        )}
       </section>
     </FullWidthLayout>
   );

@@ -22,6 +22,13 @@ import { SettingsCreateStorySolidIcon } from "../SettingsIcons";
 import { LoginModal } from "../auth/Login";
 import { ArrowUpRightIcon } from "../layout/Icons";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import {
   AgeIcon,
   CalendarIcon,
   FuneralOrgIcon,
@@ -150,26 +157,33 @@ export function ProfileHeader({
 
 export function Tabs({ tabs }) {
   const router = useRouter();
+  const activeTab = tabs.find((tab) => tab.current)?.href;
 
   return (
     <div className="mt-4 w-full">
-      <div className="px-2 sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label>
-        {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-        <select
-          id="tabs"
-          name="tabs"
-          onChange={(event) => router.push(event.target.value)}
-          className="block w-full rounded-sp-10 border border-sp-lighter bg-inherit px-2 py-2 pr-10 text-black dark:border-white dark:text-white"
+      <div className="mx-4 sm:hidden">
+        <Select
+          onValueChange={(value) => {
+            router.push(value);
+          }}
+          value={activeTab}
         >
-          {tabs.map((tab) => (
-            <option key={tab.name} value={tab.href} selected={tab.current}>
-              {tab.name}
-            </option>
-          ))}
-        </select>
+          <SelectTrigger className="w-full rounded-sp-10 border-6 border-sp-fawn/30 bg-opacity-100 px-4 py-5 font-medium text-black text-base dark:text-white">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent className="w-inherit border-2 border-sp-fawn/30 bg-sp-day-50 bg-opacity-100 dark:bg-sp-black">
+            {tabs.map((tab) => (
+              <SelectItem
+                key={tab.name}
+                value={tab.href}
+                selected={tab.current}
+                className="p-4 text-base"
+              >
+                {tab.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
       <div className="hidden sm:block">
         <div className="border-b border-gray-300">

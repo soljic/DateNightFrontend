@@ -2,7 +2,11 @@
 
 import * as React from "react";
 
-import { CheckIcon, SelectorIcon } from "@heroicons/react/outline";
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  SelectorIcon,
+} from "@heroicons/react/outline";
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { cn } from "@/utils/cn";
@@ -26,8 +30,11 @@ const SelectTrigger = React.forwardRef<
     {...props}
   >
     {children}
-    <SelectPrimitive.Icon asChild>
-      <SelectorIcon className="h-4 w-4 opacity-50" />
+    <SelectPrimitive.Icon
+      asChild
+      className="flex justify-center rounded-full bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1"
+    >
+      <ChevronDownIcon className="h-5 w-5 text-sp-white" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));
