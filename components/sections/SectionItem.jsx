@@ -134,7 +134,7 @@ export function SectionItemGrid({
   };
 
   return (
-    <div className="mx-auto mb-8 mt-16 flex max-w-7xl flex-col items-center lg:mb-24 lg:mt-12">
+    <div className="mx-auto mb-8 mt-16 flex max-w-6xl flex-col items-center lg:mb-24 lg:mt-12">
       <div className="mb-16 flex flex-col items-center">
         <h1 className="font-bold text-sp-black subpixel-antialiased tracking-tight text-cta dark:text-sp-white">
           {t(translateCategoryTitle(title))}
