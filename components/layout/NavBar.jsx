@@ -54,7 +54,7 @@ export function Navbar() {
         )}
       >
         <div className="mx-auto hidden max-w-7xl items-center justify-evenly px-3 text-sp-black dark:text-sp-white md:flex md:px-0">
-          <div className="flex w-full items-center justify-start">
+          <div className="flex w-full flex-wrap items-center justify-start">
             <Link href="/" className="flex items-center" key="desktop-nav-home">
               <div className="rounded-sp-10 bg-white p-1 dark:bg-transparent">
                 <div className="relative h-6 w-6">
@@ -63,7 +63,7 @@ export function Navbar() {
               </div>
               <div className="ml-2.5 font-semibold text-xl">Spiritus</div>
             </Link>
-            <nav className="ml-3 flex items-center justify-center">
+            <nav className="flex items-center justify-center lg:ml-3">
               <SubnavigationMenu
                 title={t("about")}
                 links={[
@@ -78,18 +78,19 @@ export function Navbar() {
               <NavItem text={t("mobile")} link={"/mobile-app"} />
             </nav>
           </div>
-          <div className="flex items-center justify-end space-x-1 md:w-1/3 md:space-x-2">
+          <div className="flex items-center justify-end space-x-1 md:w-1/2 md:space-x-2">
             <Link
               href="/search"
-              className="from-sp-day-300 to-sp-day-100 p-2 hover:rounded-full hover:bg-gradient-to-r focus:outline-none dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+              className="inline-flex items-center rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
             >
-              <SearchIcon className="h-6 w-6 text-sp-black dark:text-sp-white" />
+              <SearchIcon className="mr-1 h-5 w-5 text-sp-black dark:text-sp-white" />
+              {t("term_search")}
             </Link>
             {session?.user.name ? (
               <>
                 <Link
                   href="/create/spiritus"
-                  className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                  className="flex h-10 w-36 items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-none text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
                 >
                   {t("create_spiritus")}
                 </Link>
@@ -102,13 +103,13 @@ export function Navbar() {
               <>
                 <button
                   onClick={openModal}
-                  className="w-24 rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                  className="w-24 rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-medium hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                 >
                   {t("login")}
                 </button>
                 <button
                   onClick={openModal}
-                  className="flex h-10 w-36 items-center justify-center rounded-sp-10  bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                  className="flex h-10 w-36 items-center justify-center rounded-sp-10  bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-none text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
                 >
                   {t("create_spiritus")}
                 </button>
