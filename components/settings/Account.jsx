@@ -46,7 +46,7 @@ export function AccountSubscriptions() {
         href={redirectUrl}
         disabled={!redirectUrl}
         className={cn(
-          "mx-2 inline-flex w-full justify-center rounded-sp-14 border border-sp-day-400 px-7 py-3 text-sp-black dark:text-sp-day-400 md:w-1/3",
+          "mx-2 inline-flex w-full justify-center rounded-sp-14 border border-sp-day-400 px-7 py-3 text-sp-black dark:text-sp-day-200 md:w-1/3",
           !redirectUrl ? "pointer-events-none opacity-20" : ""
         )}
       >
@@ -252,21 +252,19 @@ export function AccountSettings({
       </form>
       <AccountSubscriptions />
 
-      <div>
-        <div className="my-4 space-y-4 px-2 md:px-8">
-          <h1 className="mx-2 text-start font-bold text-sp-black text-2xl dark:text-sp-white">
-            {t("deactivate_account")}
-          </h1>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              deactivate();
-            }}
-            className="mx-2 inline-flex w-full justify-center rounded-sp-14 border border-sp-day-400 px-7 py-3 text-sp-black dark:text-sp-day-400 md:w-52"
-          >
-            {t("deactivate_account")}
-          </button>
-        </div>
+      <div className="my-4 space-y-4 px-2 md:px-8">
+        <h1 className="mx-2 text-start font-bold text-sp-black text-2xl dark:text-sp-white">
+          {t("deactivate_account")}
+        </h1>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            deactivate();
+          }}
+          className="mx-2 inline-flex w-full justify-center rounded-sp-14 border border-red-600 px-7 py-3 text-red-500 md:w-52"
+        >
+          {t("deactivate_account")}
+        </button>
       </div>
     </div>
   );
