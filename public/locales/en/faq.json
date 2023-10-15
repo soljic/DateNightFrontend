@@ -30,15 +30,12 @@
 	"faq_10_question": "Can I delete a Spiritus?",
 	"faq_10_answer": "Every Memory Guardian can delete the data of his Spiritus. He can not delete the data which was permanently saved through an Eternity token.",
 
-	"faq_11_question": "What is the “Eternity token”?",
-	"faq_11_answer": "“Eternity token” is an in-app ticket by which Memory Guardians can permanently save the life story and other information of a particular Spiritus.\n\nEvery Memory Guardian can have multiple “Eternity tokens” and use them to save life stories of Spirituses they guard.",
+	"faq_11_question": "Can harmful content be saved eternally?",
+	"faq_11_answer": "No. Each and every Story or Spiritus first needs to get our approval to be eternally saved. We insist that every life story must be appropriate and written in good faith. We value our stories and it is important to us to be proud of every saved life story.",
 
-	"faq_12_question": "Can harmful content be saved eternally?",
-	"faq_12_answer": "No. Each and every Story or Spiritus first needs to get our approval to be eternally saved. We insist that every life story must be appropriate and written in good faith. We value our stories and it is important to us to be proud of every saved life story.",
+	"faq_12_question": "Can other users post harmful content?",
+	"faq_12_answer": "If you are a Memory Guardian, you are the only person that can post content on your Spiritus. All other users are only able to suggest content for you to review. For the suggested content to become publicly visible, it first needs to be approved by the Memory Guardian.\n\nIn case a Memory Guardian posts something harmful, other users have the right and are encouraged to report that content. Spiritus ensures that the report is thoroughly examined and acted upon.",
 
-	"faq_13_question": "Can other users post harmful content?",
-	"faq_13_answer": "If you are a Memory Guardian, you are the only person that can post content on your Spiritus. All other users are only able to suggest content for you to review. For the suggested content to become publicly visible, it first needs to be approved by the Memory Guardian.\n\nIn case a Memory Guardian posts something harmful, other users have the right and are encouraged to report that content. Spiritus ensures that the report is thoroughly examined and acted upon.",
-
-	"faq_14_question": "I am not so confident in my writing skills. Can you help?",
-	"faq_14_answer": "Absolutely! If you are worried that your story is not as you want it to be, help is on the way! We have a team of dedicated writers who will make the story as beautiful as possible. Currently, the help is free."
+	"faq_13_question": "I am not so confident in my writing skills. Can you help?",
+	"faq_13_answer": "Absolutely! If you are worried that your story is not as you want it to be, help is on the way! We have a team of dedicated writers who will make the story as beautiful as possible. Currently, the help is free."
 }
