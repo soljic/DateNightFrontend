@@ -139,8 +139,8 @@ export function AddGuardianModal({
                             y2="32.0004"
                             gradientUnits="userSpaceOnUse"
                           >
-                            <stop stop-color="#ED9A4C" />
-                            <stop offset="1" stop-color="#E3AA6D" />
+                            <stop stopColor="#ED9A4C" />
+                            <stop offset="1" stopColor="#E3AA6D" />
                           </linearGradient>
                         </defs>
                       </svg>

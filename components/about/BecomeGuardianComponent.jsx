@@ -44,8 +44,8 @@ function BecomeGuardianCTA() {
                   y2="19"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#D67915" />
-                  <stop offset="1" stop-color="#ED9A4C" />
+                  <stop stopColor="#D67915" />
+                  <stop offset="1" stopColor="#ED9A4C" />
                 </linearGradient>
                 <linearGradient
                   id="paint1_linear_9853_57303"
@@ -55,8 +55,8 @@ function BecomeGuardianCTA() {
                   y2="18.9999"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#D67915" />
-                  <stop offset="1" stop-color="#ED9A4C" />
+                  <stop stopColor="#D67915" />
+                  <stop offset="1" stopColor="#ED9A4C" />
                 </linearGradient>
               </defs>
             </svg>

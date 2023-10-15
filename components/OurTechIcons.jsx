@@ -21,8 +21,8 @@ export function OurTechCheckboxIcon({ className }) {
           y2="19.3993"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#D67915" />
-          <stop offset="1" stop-color="#ED9A4C" />
+          <stop stopColor="#D67915" />
+          <stop offset="1" stopColor="#ED9A4C" />
         </linearGradient>
       </defs>
     </svg>
@@ -52,8 +52,8 @@ export function OurTechNotesIcon({ className }) {
           y2="20"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#D67915" />
-          <stop offset="1" stop-color="#ED9A4C" />
+          <stop stopColor="#D67915" />
+          <stop offset="1" stopColor="#ED9A4C" />
         </linearGradient>
       </defs>
     </svg>
@@ -83,8 +83,8 @@ export function OurTechShieldIcon({ className }) {
           y2="21.2"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#D67915" />
-          <stop offset="1" stop-color="#ED9A4C" />
+          <stop stopColor="#D67915" />
+          <stop offset="1" stopColor="#ED9A4C" />
         </linearGradient>
       </defs>
     </svg>
@@ -114,8 +114,8 @@ export function OurTechTargetIcon({ className }) {
           y2="19.9931"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#D67915" />
-          <stop offset="1" stop-color="#ED9A4C" />
+          <stop stopColor="#D67915" />
+          <stop offset="1" stopColor="#ED9A4C" />
         </linearGradient>
       </defs>
     </svg>
