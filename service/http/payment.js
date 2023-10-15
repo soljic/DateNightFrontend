@@ -97,7 +97,8 @@ export async function CheckoutSpiritus(
   accessToken,
   spiritusId,
   productId,
-  coupon
+  coupon,
+  lang
 ) {
   let url = `${API_URL}/wapi/order/spiritus/${spiritusId}?service=${DEFAULT_PLATFORM}&packageId=${productId}`;
   if (coupon) {
@@ -107,26 +108,17 @@ export async function CheckoutSpiritus(
   return await axios.post(url, null, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Accept-Language": lang ? lang : "en",
     },
   });
-}
-
-export async function GetClaimSpiritusProduct(accessToken) {
-  return await axios.get(
-    `${API_URL}/v2/payment/package/default?platform=${DEFAULT_PLATFORM}&action=${CLAIM_SPIRITUS_ACTION}`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
 }
 
 export async function ClaimSpiritus(
   accessToken,
   spiritusId,
   productId,
-  coupon
+  coupon,
+  lang
 ) {
   let url = `${API_URL}/wapi/spiritus/${spiritusId}/claim?service=${DEFAULT_PLATFORM}&packageId=${productId}`;
   if (coupon) {
@@ -136,6 +128,7 @@ export async function ClaimSpiritus(
   return await axios.post(url, null, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Accept-Language": lang ? lang : "en",
     },
   });
 }

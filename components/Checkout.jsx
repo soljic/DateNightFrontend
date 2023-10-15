@@ -88,6 +88,7 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
   const [displayFailedBanner, setDisplayFailedBanner] = useState(
     paymentFailed || false
   );
+  const [serverPaymentErrMsg, setServerPaymentErrMsg] = useState("");
 
   // pricing related variables
   const [selectedPlan, setSelectedPlan] = useState(0); // corresponds to lifetime product
@@ -253,26 +254,40 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
     return () => clearTimeout(debounce);
   }, [coupon]);
 
+  // submit payment request
+  // scroll to top if payment fails and display the error banner
   const handleSubmit = async (event) => {
     setFetching(true);
     event.preventDefault();
     let res;
-    if (isClaim) {
-      res = await ClaimSpiritus(
-        session?.user.accessToken,
-        spiritus.id,
-        id,
-        coupon
+    try {
+      if (isClaim) {
+        res = await ClaimSpiritus(
+          session?.user.accessToken,
+          spiritus.id,
+          id,
+          coupon,
+          router.locale || "en"
+        );
+      } else {
+        res = await CheckoutSpiritus(
+          session?.user.accessToken,
+          spiritus.id,
+          id,
+          coupon,
+          router.locale || "en"
+        );
+      }
+      router.push(res.data);
+    } catch (err) {
+      setServerPaymentErrMsg(
+        err?.response?.data ||
+          `${t("message_error")} ${t("message_save_failed")}`
       );
-    } else {
-      res = await CheckoutSpiritus(
-        session?.user.accessToken,
-        spiritus.id,
-        id,
-        coupon
-      );
+      setDisplayFailedBanner(true);
+      setFetching(false);
+      window.scrollTo(0, 0);
     }
-    router.push(res.data);
   };
 
   return (
@@ -286,9 +301,11 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
             <h2 className="font-bold text-xl tracking-tight dark:text-sp-white">
               {t("paywall:payment_failed_title")}
             </h2>
-            <h2 className="text-lg tracking-tight dark:text-sp-white">
-              {t("paywall:payment_failed_subtitle")}
-            </h2>
+            <p className="text-lg tracking-tight dark:text-sp-white">
+              {serverPaymentErrMsg
+                ? serverPaymentErrMsg
+                : t("paywall:payment_failed_subtitle")}
+            </p>
           </div>
           <button onClick={() => setDisplayFailedBanner(false)}>
             <XIcon className="h-6 w-6 text-sp-lighter" />
