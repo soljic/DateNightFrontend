@@ -112,11 +112,12 @@ export function SectionItemGrid({
   initialItems,
 }) {
   const { t } = useTranslation("common");
+  const router = useRouter();
+
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(initialItems);
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const loadMore = async () => {
     setIsLoading(true);
@@ -133,7 +134,7 @@ export function SectionItemGrid({
   };
 
   return (
-    <div className="mb-8 mt-16 flex flex-col items-center lg:mb-24 lg:mt-12">
+    <div className="mx-auto mb-8 mt-16 flex max-w-7xl flex-col items-center lg:mb-24 lg:mt-12">
       <div className="mb-16 flex flex-col items-center">
         <h1 className="font-bold text-sp-black subpixel-antialiased tracking-tight text-cta dark:text-sp-white">
           {t(translateCategoryTitle(title))}

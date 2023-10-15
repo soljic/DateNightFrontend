@@ -27,7 +27,6 @@ export default function Section({
   totalPages,
   isLastPage,
   initialItems,
-  lang,
 }) {
   const { t } = useTranslation("common");
 
@@ -44,7 +43,6 @@ export default function Section({
         totalPages={totalPages}
         isLastPage={isLastPage}
         initialItems={initialItems}
-        lang={lang}
       />
     </FullWidthLayout>
   );
@@ -66,7 +64,6 @@ export async function getServerSideProps(context) {
         ])),
         id: res.data.id,
         title: title,
-        lang: context.locale,
         totalPages: res.data.items.totalPages,
         isLastPage: res.data.items.last,
         initialItems: res.data.items.content,

@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useRouter } from "next/router";
+
 import { useTranslation } from "next-i18next";
 
 import { Spinner } from "@/components/Status";
@@ -10,8 +12,10 @@ import { translateSectionTitle } from "@/utils/translations";
 
 import { SpiritusCard, StoryCard } from "../spiritus/Card";
 
-export function SectionGrid({ id, title, isLastPage, initialItems, lang }) {
+export function SectionGrid({ id, title, isLastPage, initialItems }) {
   const { t } = useTranslation("common");
+  const router = useRouter();
+
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(isLastPage);
   const [items, setItems] = useState(initialItems);
@@ -21,7 +25,7 @@ export function SectionGrid({ id, title, isLastPage, initialItems, lang }) {
     setIsLoading(true);
 
     try {
-      const res = await GetSection(id, current + 1, lang);
+      const res = await GetSection(id, current + 1, router.locale);
       setItems((prev) => [...prev, ...res.data.items.content]);
       setCurrent((current) => current + 1);
       setIsLast(res.data.items.last);

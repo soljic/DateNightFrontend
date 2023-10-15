@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import Layout from "@/components/layout/Layout";
+import FullWidthLayout from "@/components/layout/LayoutV2";
 import { SectionItemGrid } from "@/components/sections/SectionItem";
 
 import { GetSectionItem } from "@/service/http/sections";
@@ -19,7 +19,7 @@ export default function Category({
   const { t } = useTranslation("common");
 
   return (
-    <Layout>
+    <FullWidthLayout>
       <Head>
         <title>{t("meta_section_title")}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,7 +33,7 @@ export default function Category({
         isLastPage={isLastPage}
         initialItems={initialItems}
       />
-    </Layout>
+    </FullWidthLayout>
   );
 }
 
