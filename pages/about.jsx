@@ -3,16 +3,14 @@ import Head from "next/head";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import BecomeGuardianCTA from "@/components/about/BecomeGuardianComponent";
+import FAQSection from "@/components/about/FAQ";
+import Facts from "@/components/about/Facts";
+import Features from "@/components/about/Features";
+import Hero from "@/components/about/Hero";
+import Partnership from "@/components/about/Partnership";
+import Team from "@/components/about/Team";
 import FullWidthLayout from "@/components/layout/LayoutV2";
-
-import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
-import FAQSection from "../components/about/FAQ";
-import Facts from "../components/about/Facts";
-import Features from "../components/about/Features";
-import Hero from "../components/about/Hero";
-import Partnership from "../components/about/Partnership";
-import Team from "../components/about/Team";
-import Layout from "../components/layout/Layout";
 
 export default function About() {
   const { t } = useTranslation("about");
@@ -51,9 +49,13 @@ export default function About() {
           <Hero />
         </div>
         <Features />
-        <Partnership />
+        <div className="pt-8">
+          <Partnership />
+        </div>
         <Facts />
-        <Team />
+        <div className="py-16">
+          <Team />
+        </div>
         <FAQSection />
         <BecomeGuardianCTA />
       </div>

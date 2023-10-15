@@ -12,14 +12,14 @@ export default function FeaturesSection() {
   return (
     <section id="features" key={"features-section"}>
       <div className="mx-auto my-24 flex items-center justify-center subpixel-antialiased">
-        <div className="flex w-2/3 flex-col items-center justify-start lg:w-1/2">
-          <h2 className="text-center font-bold leading-5 text-sp-fawn tracking-sp-tighten">
+        <div className="flex w-2/3 flex-col items-center justify-start">
+          <h2 className="text-center font-bold leading-5 text-sp-fawn text-lg tracking-sp-tighten">
             {t("term_mission")}
           </h2>
-          <p className="my-2.5 text-center font-bold text-2xl tracking-tight dark:text-sp-white sm:w-full md:w-3/4">
+          <p className="my-2.5 text-center font-bold text-2xl tracking-tight dark:text-sp-white sm:w-full md:w-3/4 md:text-3xl">
             {t("features_title")}
           </p>
-          <p className="text-center font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white md:w-full">
+          <p className="text-center font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white md:text-xl">
             {t("features_subtitle")}
           </p>
         </div>
@@ -85,21 +85,21 @@ function FeatureElements() {
               <div className="rounded-sp-10 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-2.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
                 {elem.icon}
               </div>
-              <h3 className="my-4 text-[22px] font-bold leading-6 tracking-wide dark:text-sp-white">
+              <h3 className="my-4 font-bold leading-snug text-2xl tracking-sp-tighten dark:text-sp-white">
                 {elem.title}
               </h3>
-              <p className="mb-4 text-[13px] font-medium leading-[18px] opacity-70 tracking-sp-tighten dark:text-sp-white">
+              <p className="mb-4 leading-6 opacity-70 text-lg tracking-sp-tighten dark:text-sp-white">
                 {elem.subtitle}
               </p>
 
-              <ul className="list-none text-[13px] font-medium leading-[18px] tracking-sp-tighten dark:text-sp-white">
+              <ul className="list-none space-y-1 text-base tracking-sp-tighten dark:text-sp-white">
                 {elem.list.map((item, i) => {
                   return (
                     <li className="flex items-center" key={`item-${idx}-${i}`}>
                       <div className="rounded-full bg-gradient-to-r from-day-gradient-start to-day-gradient-stop p-0.5 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
-                        <CheckIcon className="h-3.5 w-3.5 text-sp-dark-fawn" />
+                        <CheckIcon className="h-4 w-4 text-sp-dark-fawn" />
                       </div>
-                      <p className="mb-1 mt-0 px-2  font-medium not-italic leading-5 opacity-70 tracking-normal dark:text-sp-white">
+                      <p className="mb-1 mt-0 px-2 font-medium leading-5 opacity-70 tracking-normal dark:text-sp-white">
                         {item}
                       </p>
                     </li>

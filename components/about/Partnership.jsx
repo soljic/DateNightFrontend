@@ -1,16 +1,17 @@
 import Link from "next/link";
+
 import { useTranslation } from "next-i18next";
 
 export default function Partnership() {
   const { t } = useTranslation("about");
 
   return (
-    <section className="my-16 mb-3 flex flex-col items-center justify-center gap-4 px-4 md:flex-row">
+    <section className="my-16 mb-3 flex flex-col items-center justify-center gap-8 px-4 md:flex-row">
       <div className="flex w-full flex-col items-start justify-start md:w-1/2">
-        <p className="text-center font-bold leading-5 text-sp-fawn tracking-sp-tighten">
+        <p className="text-center font-bold leading-5 text-sp-fawn text-lg tracking-sp-tighten">
           {t("partnerships_title")}
         </p>
-        <p className="mt-2.5 w-full font-bold leading-5 text-xl tracking-wide dark:text-sp-white lg:w-3/4">
+        <p className="font-bold leading-snug text-2xl tracking-sp-tighten dark:text-sp-white">
           {t("partnerships_subtitle")}
         </p>
         <Link
@@ -35,7 +36,7 @@ export default function Partnership() {
         </Link>
       </div>
       <div className="w-full md:w-1/2 lg:pr-20">
-        <p className="tracking-sp-tighter leading-4 opacity-70 text-sm dark:text-sp-white">
+        <p className="tracking-sp-tighter leading-5 opacity-70 text-base dark:text-sp-white">
           {t("partnerships_text")}
         </p>
       </div>

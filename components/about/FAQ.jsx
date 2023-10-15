@@ -12,10 +12,10 @@ export default function FAQSection() {
     <section id="features" key={"features-section"}>
       <div className="mx-auto my-24 flex items-center justify-center subpixel-antialiased">
         <div className="flex w-2/3 flex-col items-center justify-start lg:w-1/2">
-          <h2 className="text-center font-bold leading-5 text-sp-fawn tracking-sp-tighten">
+          <h2 className="text-center font-bold leading-5 text-sp-fawn text-lg tracking-sp-tighten">
             {t("faq_title")}
           </h2>
-          <p className="text-2xlh my-2.5 text-center font-bold tracking-tight dark:text-sp-white sm:w-full md:w-3/4">
+          <p className="my-2.5 text-center font-bold leading-snug text-2xl tracking-sp-tighten dark:text-sp-white md:w-3/4">
             {t("faq_subtitle")}
           </p>
           <p className="text-center font-medium leading-5 opacity-70 tracking-sp-tighten dark:text-sp-white md:w-full">
