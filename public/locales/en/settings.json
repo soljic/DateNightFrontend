@@ -3,6 +3,8 @@
 
   "spiritus": "My Spiritus",
   "account": "My Account",
+  "unfinished": "Unfinished Memorials",
+  "unfinished_subtitle": "Continue creating or delete unfinished Spiritus Memorials.",
 
   "guardian_id": "My Guardian ID",
   "guardian_id_text": "You can ask another person to add you as another Guardian for their Spiritus. Send them your own Guardian ID.",
@@ -75,5 +77,7 @@
 
   "notifications": "Notifications",
   "read_notifications": "Seen",
-  "notifications_read_all": "Read all"
+  "notifications_read_all": "Read all",
+
+  "redirect_payment": "Continue creating"
 }

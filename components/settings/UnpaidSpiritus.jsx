@@ -4,13 +4,8 @@ import { Fragment } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 
-import { Dialog, Popover, Transition } from "@headlessui/react";
-import {
-  ChevronDownIcon,
-  PencilIcon,
-  TrashIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { Dialog, Transition } from "@headlessui/react";
+import { TrashIcon, XIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
@@ -18,9 +13,8 @@ import { useForm } from "react-hook-form";
 import { Spinner } from "../../components/Status";
 import { ProfileSpiritus } from "../../service/http/auth";
 import { DeleteSpiritus } from "../../service/http/spiritus_crud";
-import { SettingsEditSpiritusIcon } from "../SettingsIcons";
 
-export function MySpiritusGrid({ spiritus, isLastPage }) {
+export function UnpaidSpiritusGrid({ spiritus, isLastPage }) {
   const { t } = useTranslation(["common", "settings"]);
   const { data: session, status } = useSession();
 
@@ -53,7 +47,6 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
       setIsLast(res.data.last);
       setIsLoading(false);
     } catch (err) {
-      // TODO: handle this
       setIsLoading(false);
     }
   };
@@ -67,21 +60,26 @@ export function MySpiritusGrid({ spiritus, isLastPage }) {
         closeModal={closeModal}
       />
 
-      <div className="flex flex-col items-center justify-between gap-y-2 pb-2 xs:flex-row">
+      <div className="gap-y-2 pb-2">
         <h1 className="font-bold text-sp-black subpixel-antialiased text-2xl tracking-tight dark:text-sp-white">
-          {t("settings:spiritus")}
+          {t("settings:unfinished")}
         </h1>
+        <p className="text-sp-black text-opacity-60 text-sm tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
+          {t("settings:unfinished_subtitle")}
+        </p>
       </div>
 
       <div className="mb-12 mt-2 columns-2 space-y-4 md:columns-3 md:space-y-8 xl:columns-3">
         {items.map((item) => {
           return (
             <div className="h-full w-full" key={item.id}>
-              <PaidSpiritusTile
+              <UnpaidSpiritusTile
                 id={item.id}
-                slug={item.slug}
-                title={item.title}
-                subtitle={item.subtitle}
+                name={item.name}
+                surname={item.surname}
+                maidenName={item.maidenName}
+                death={item.death}
+                birth={item.birth}
                 image={item.image}
                 openModal={openModal}
               />
@@ -271,14 +269,27 @@ function DeleteModal({ deleteId, setItems, isOpen, closeModal }) {
   );
 }
 
+const dateOptions = { year: "numeric", month: "short", day: "numeric" };
+
 // Passes setItems to DeleteModal
-function PaidSpiritusTile({ id, slug, title, subtitle, image, openModal }) {
+function UnpaidSpiritusTile({
+  id,
+  name,
+  surname,
+  maidenName,
+  birth,
+  death,
+  image,
+  openModal,
+}) {
   const { t } = useTranslation(["common", "settings"]);
+  const birthDate = birth ? new Date(birth) : null;
+  const deathDate = death ? new Date(death) : null;
 
   return (
     <>
       <div className="flex break-inside-avoid flex-col">
-        <Link href={`/spiritus/${slug}`}>
+        <div>
           {image?.url ? (
             <div className="h-full w-full">
               <Image
@@ -308,125 +319,40 @@ function PaidSpiritusTile({ id, slug, title, subtitle, image, openModal }) {
           )}
 
           <div className="mt-1">
-            <h3 className="font-semibold leading-6 text-lg dark:text-sp-white">
-              {title}
-            </h3>
-            <p className="text-sp-black text-opacity-60 text-sm dark:text-sp-white dark:text-opacity-60">
-              {subtitle}
+            <h2 className="break-words pr-4 capitalize text-lg">{`${name} ${surname}${
+              maidenName ? " (" + maidenName + ")" : ""
+            }`}</h2>
+            <p className="capitalize text-sp-black text-opacity-60 text-sm tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
+              {`${
+                birthDate
+                  ? new Intl.DateTimeFormat("en", dateOptions).format(birthDate)
+                  : "?"
+              } - ${
+                deathDate
+                  ? new Intl.DateTimeFormat("en", dateOptions).format(deathDate)
+                  : "?"
+              }`}
             </p>
           </div>
-        </Link>
-        <div className="mt-1 flex space-x-1">
+        </div>
+        <div className="mt-1 flex justify-between space-x-1 text-center text-sm">
           <Link
-            href={`/spiritus/${slug}`}
-            className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm"
+            href={`/checkout/create/${id}`}
+            key={`${t("settings:redirect_payment")}-${id}`}
+            className="flex flex-1 items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5"
           >
-            {t("term_view")}
+            {t("settings:redirect_payment")}
           </Link>
-          <Popover className="flex w-full">
-            {({ open }) => (
-              <>
-                <Popover.Button className="flex w-full flex-1 items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5 font-semibold text-sm">
-                  {t("term_options")}
-                  <ChevronDownIcon className="ml-1 h-4 w-4" />
-                </Popover.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1"
-                >
-                  <Popover.Panel className="absolute z-50 mt-2 -translate-x-16 translate-y-7">
-                    <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
-                      <Link
-                        href={`/edit/spiritus/${id}`}
-                        key={`${t("settings:edit_spiritus")}-${id}`}
-                        className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
-                      >
-                        <SettingsEditSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn" />
-                        <div className="ml-4">
-                          <p>{t("settings:edit_spiritus")}</p>
-                        </div>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          openModal(id);
-                        }}
-                        className="flex w-44 items-center justify-start p-4 text-center hover:bg-sp-day-50 focus:outline-none"
-                      >
-                        <TrashIcon className="h-6 w-6 text-sp-cotta" />
-                        <p className="ml-4 font-semibold text-sp-cotta">
-                          {t("term_delete")}
-                        </p>
-                      </button>
-                    </div>
-                  </Popover.Panel>
-                </Transition>
-              </>
-            )}
-          </Popover>
+          <button
+            onClick={() => {
+              openModal(id);
+            }}
+            className="flex items-center justify-center rounded-sp-10 border border-sp-day-400 p-1.5"
+          >
+            <TrashIcon className="h-6 w-6 text-sp-cotta" />
+          </button>
         </div>
       </div>
     </>
-  );
-}
-
-function EditBtn({ id, openModal }) {
-  const { t } = useTranslation(["common", "settings"]);
-
-  return (
-    <Popover>
-      {({ open }) => (
-        <>
-          <Popover.Button className="mt-2 flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400 px-3 py-1.5">
-            <PencilIcon className="h-5 w-5 text-sp-black dark:text-sp-white" />
-            <span className="ml-2 text-sp-black dark:text-sp-white">
-              {t("settings:edit")}
-            </span>
-          </Popover.Button>
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-200"
-            enterFrom="opacity-0 translate-y-1"
-            enterTo="opacity-100 translate-y-0"
-            leave="transition ease-in duration-150"
-            leaveFrom="opacity-100 translate-y-0"
-            leaveTo="opacity-0 translate-y-1"
-          >
-            <Popover.Panel className="absolute z-50 mt-2 max-w-md">
-              <div className="overflow-hidden rounded-sp-10 border-2 border-sp-fawn bg-sp-day-300 font-semibold text-gray-700 shadow-lg text-sm dark:border-sp-medium">
-                <div className="flex flex-col justify-evenly gap-y-1 p-3">
-                  <Link
-                    href={`/edit/spiritus/${id}`}
-                    key={`${t("settings:edit_spiritus")}-${id}`}
-                    className="flex w-52 items-center justify-start rounded-sp-14 px-4 py-3  hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-                  >
-                    <SettingsEditSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn dark:fill-sp-white" />
-                    <div className="ml-4">
-                      <p className="text-sm">{t("settings:edit_spiritus")}</p>
-                    </div>
-                  </Link>
-
-                  <button
-                    onClick={() => openModal(id)}
-                    className="flex w-52 items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-                  >
-                    <TrashIcon className="h-6 w-6 text-sp-cotta" />
-                    <div className="ml-3 flex w-full justify-between">
-                      <p className="text-sp-cotta text-sm">
-                        {t("settings:delete")}
-                      </p>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </Popover.Panel>
-          </Transition>
-        </>
-      )}
-    </Popover>
   );
 }

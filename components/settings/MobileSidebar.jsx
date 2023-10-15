@@ -43,6 +43,11 @@ export function MobileSidebar({ selectedIndex }) {
       icon: <SettingsSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn" />,
     },
     {
+      name: t("unfinished"),
+      href: "/account/settings/unfinished-spiritus",
+      icon: <SettingsSuggestionsIcon className="h-5 w-5 fill-sp-dark-fawn" />,
+    },
+    {
       name: t("notifications"),
       href: "/account/settings/notifications",
       icon: <BellIcon className="h-6 w-6 text-sp-dark-fawn" />,
@@ -142,7 +147,7 @@ export function MobileSidebar({ selectedIndex }) {
                         className="flex w-full items-center justify-start rounded-sp-14 p-4 hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
                       >
                         <div>
-                          <SettingsSignOutIcon />
+                          <SettingsSignOutIcon className="h-6 w-6 fill-sp-cotta" />
                         </div>
                         <div className="ml-3 flex w-full justify-between">
                           <p className="font-semibold text-sp-cotta text-sm">

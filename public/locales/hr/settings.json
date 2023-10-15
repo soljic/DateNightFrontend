@@ -3,6 +3,8 @@
 
   "spiritus": "Moj Spiritus",
   "account": "Moj Račun",
+  "unfinished": "Nedovršeni Memorijali",
+  "unfinished_subtitle": "Dovršite kreiranje ili izbrišete nedovršene Spiritus memorijale.",
 
   "guardian_id": "Moj ID Čuvara",
   "guardian_id_text": "Drugi korisnici mogu vas dodati kao Čuvara njihovih Spiritusa. Pošaljite im svoj ID Čuvara.",
@@ -26,6 +28,7 @@
   "dark": "Tamna",
 
   "edit": "Uredi",
+
   "delete": "Izbriši...",
   "delete_err": "Greška pri brisanju. Pokušaj kasnije.",
   "delete_modal_title": "Izbriši Spiritus?",
@@ -74,5 +77,7 @@
 
   "notifications": "Obavijesti",
   "read_notifications": "Pročitano",
-  "notifications_read_all": "Pročitaj sve"
+  "notifications_read_all": "Pročitaj sve",
+
+  "redirect_payment": "Dovrši kreiranje"
 }

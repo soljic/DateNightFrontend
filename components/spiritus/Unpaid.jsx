@@ -47,7 +47,7 @@ function UnpaidSpiritus({ spiritus, locale }) {
         <div className="relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
           <Image
             src={spiritus.image.url}
-            alt={`${spiritus.name} ${spiritus.maidenName} profile`}
+            alt={`${spiritus.name} ${spiritus.surname} profile`}
             layout="fill"
           />
         </div>
@@ -56,9 +56,11 @@ function UnpaidSpiritus({ spiritus, locale }) {
           <ClockIcon className="h-7 w-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
         </div>
       )}
-      <div className="flex w-full flex-col justify-center px-2 py-2 text-lg tracking-sp-tighten">
-        <p className="break-words pr-4 capitalize">{`${spiritus.name} ${spiritus.maidenName}`}</p>
-        <p className="capitalize text-sp-black text-opacity-60 tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
+      <div className="flex w-full flex-col justify-center px-2 py-2 tracking-sp-tighten">
+        <p className="break-words pr-4 capitalize text-lg">{`${spiritus.name} ${
+          spiritus.surname
+        }${spiritus.maidenName ? " (" + spiritus.maidenName + ")" : ""}`}</p>
+        <p className="capitalize text-sp-black text-opacity-60 text-sm tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
           {`${
             birthDate
               ? new Intl.DateTimeFormat(locale || "en", dateOptions).format(

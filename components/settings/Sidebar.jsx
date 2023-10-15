@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useCookies } from "react-cookie";
 
+import { ShieldIcon } from "../Icons";
 import {
   SettingsAccountIcon,
   SettingsDevicesIcon,
@@ -44,6 +45,11 @@ export function Sidebar({ selectedIndex }) {
       name: t("spiritus"),
       href: "/account/settings/my-spiritus",
       icon: <SettingsSpiritusIcon className="h-5 w-5 fill-sp-dark-fawn" />,
+    },
+    {
+      name: t("unfinished"),
+      href: "/account/settings/unfinished-spiritus",
+      icon: <SettingsSuggestionsIcon className="h-5 w-5 fill-sp-dark-fawn" />,
     },
     // {
     //   name: t("saved"),

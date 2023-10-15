@@ -7,11 +7,11 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { MobileSidebar } from "@/components/settings/MobileSidebar";
 import { Sidebar } from "@/components/settings/Sidebar";
-import { MySpiritusGrid } from "@/components/settings/Spiritus";
+import { UnpaidSpiritusGrid } from "@/components/settings/UnpaidSpiritus";
 
-import { ProfileSpiritus } from "@/service/http/auth";
+import { GetUnpaidSpiritusList } from "@/service/http/spiritus";
 
-export default function SpiritusPage({ spiritus, isLastPage }) {
+export default function UnpaidSpiritusPage({ spiritus, isLastPage }) {
   const { t } = useTranslation("settings");
 
   return (
@@ -27,17 +27,13 @@ export default function SpiritusPage({ spiritus, isLastPage }) {
       <section className="mx-auto min-h-screen w-full p-2 pt-5 lg:w-2/3 xl:w-2/3 2xl:w-2/5">
         <div className="grid w-full grid-cols-1 md:grid-cols-4">
           <div className="col-span-1 hidden sm:hidden md:block">
-            <Sidebar selectedIndex={1} />
+            <Sidebar selectedIndex={2} />
           </div>
           <div className="md:col-span-1 md:hidden">
-            <MobileSidebar selectedIndex={1} />
+            <MobileSidebar selectedIndex={2} />
           </div>
           <div className="col-span-1 md:col-span-3">
-            <MySpiritusGrid
-              spiritus={spiritus}
-              isLastPage={isLastPage}
-              viewable={true}
-            />
+            <UnpaidSpiritusGrid spiritus={spiritus} isLastPage={isLastPage} />
           </div>
         </div>
       </section>
@@ -57,7 +53,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const res = await ProfileSpiritus(session.user.accessToken);
+  const res = await GetUnpaidSpiritusList(session.user.accessToken);
 
   return {
     props: {
@@ -67,8 +63,8 @@ export async function getServerSideProps(context) {
         "settings",
         "cookies",
       ])),
-      spiritus: res.data.content,
-      isLastPage: res.data.last,
+      spiritus: res.data,
+      isLastPage: res.data?.last || true,
     },
   };
 }
