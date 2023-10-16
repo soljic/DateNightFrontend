@@ -56,7 +56,6 @@ export default function About() {
         <div className="py-16">
           <Team />
         </div>
-        <FAQSection />
         <BecomeGuardianCTA />
       </div>
     </FullWidthLayout>
