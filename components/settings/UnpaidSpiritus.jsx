@@ -295,7 +295,7 @@ function UnpaidSpiritusTile({
               <Image
                 src={image.url}
                 className="rounded-sp-14"
-                alt={`${title} ${subtitle} `}
+                alt={`Unifinished Spiritus of ${name || "Anonymous"}`}
                 width={192}
                 height={248}
                 layout="responsive"
