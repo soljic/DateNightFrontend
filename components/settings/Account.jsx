@@ -46,7 +46,7 @@ export function AccountSubscriptions() {
         href={redirectUrl}
         disabled={!redirectUrl}
         className={cn(
-          "mx-2 inline-flex w-full justify-center rounded-sp-14 border border-sp-day-400 px-7 py-3 text-sp-black dark:text-sp-day-200 md:w-1/3",
+          "mx-2 flex w-full items-center justify-center rounded-sp-14 border border-sp-day-400 px-7 py-3 text-center text-sp-black dark:text-sp-day-200 md:w-1/3",
           !redirectUrl ? "pointer-events-none opacity-20" : ""
         )}
       >

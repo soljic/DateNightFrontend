@@ -21,7 +21,7 @@ export function UnpaidSpiritusList({ spiritusList }) {
           {t("continue_create_spiritus_subtitle")}
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {spiritusList.map((spiritus, idx) => (
           <UnpaidSpiritus
             spiritus={spiritus}

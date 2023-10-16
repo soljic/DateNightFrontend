@@ -3,6 +3,7 @@ import Head from "next/head";
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import is from "sharp/lib/is";
 
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
@@ -74,11 +75,10 @@ export default function SpiritusStoriesPage({
         birthDate={birthDate}
         isGuardian={isGuardian}
       />
-      {/* <section className="min-h-screen mx-auto flex flex-col md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5 h-full items-center text-sp-white"> */}
       <section className="mx-auto text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={spiritus.obituaryId ? tabs : tabs.slice(0, 3)} />
         <div className="mt-7">
-          <CreateStoryCTA spiritusId={spiritus.id} />
+          <CreateStoryCTA spiritusId={spiritus.id} isGuardian={isGuardian} />
         </div>
 
         <StoryList

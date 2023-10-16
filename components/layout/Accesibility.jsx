@@ -8,10 +8,13 @@ import { Popover, Transition } from "@headlessui/react";
 import { CurrencyDollarIcon, MenuIcon } from "@heroicons/react/outline";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { useTheme } from "next-themes";
 
 import { CurrencyContext } from "@/hooks/currency";
+
+import { GetProfile } from "@/service/http/auth";
 
 import { cn } from "@/utils/cn";
 
@@ -25,16 +28,32 @@ import {
 
 export function AccesibilityMenu() {
   const [mounted, setMounted] = useState(false);
+  const { data: session, status } = useSession();
 
   const { t } = useTranslation("settings");
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const { currency, updateCurrency } = useContext(CurrencyContext);
 
+  // set if user has already made a purchase -> stripe does not allow mixing currencies
+  const [usedCurrency, setUsedCurrency] = useState("");
+
   // wait for component to mount to avoid hydration errs
   useEffect(() => {
     setMounted(true);
-  }, []);
+
+    const getProfileData = async () => {
+      const res = await GetProfile(session.user.accessToken);
+      console.log(res);
+      if (res?.data?.currency) {
+        setUsedCurrency(res.data.currency);
+        updateCurrency(res.data.currency);
+      }
+    };
+    if (status === "authenticated") {
+      getProfileData();
+    }
+  }, [status]);
 
   if (!mounted) {
     return null;
@@ -130,30 +149,38 @@ export function AccesibilityMenu() {
                           )}
                         </Disclosure.Button>
                         <Disclosure.Panel className="grid grid-cols-2 items-center">
-                          <button
-                            onClick={() => updateCurrency("USD")}
-                            disabled={currency === "USD"}
-                            className={cn(
-                              currency === "USD"
-                                ? "pointer-events-none border border-sp-day-400"
-                                : "",
-                              "flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-                            )}
-                          >
-                            USD
-                          </button>
-                          <button
-                            onClick={() => updateCurrency("EUR")}
-                            disabled={currency === "EUR"}
-                            className={cn(
-                              currency === "EUR"
-                                ? "pointer-events-none border border-sp-day-400"
-                                : "",
-                              "flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-                            )}
-                          >
-                            EUR
-                          </button>
+                          {!!usedCurrency ? (
+                            <div className="pointer-events-none col-span-2 flex items-center justify-center rounded-sp-14 border border-sp-day-400 p-4 font-medium text-sm focus:outline-none">
+                              {usedCurrency.toUpperCase()}
+                            </div>
+                          ) : (
+                            <>
+                              <button
+                                onClick={() => updateCurrency("USD")}
+                                disabled={currency === "USD"}
+                                className={cn(
+                                  currency === "USD"
+                                    ? "pointer-events-none border border-sp-day-400"
+                                    : "",
+                                  "flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                                )}
+                              >
+                                USD
+                              </button>
+                              <button
+                                onClick={() => updateCurrency("EUR")}
+                                disabled={currency === "EUR"}
+                                className={cn(
+                                  currency === "EUR"
+                                    ? "pointer-events-none border border-sp-day-400"
+                                    : "",
+                                  "flex items-center justify-center rounded-sp-14 p-4 font-medium text-sm hover:bg-sp-day-50 focus:outline-none dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                                )}
+                              >
+                                EUR
+                              </button>
+                            </>
+                          )}
                         </Disclosure.Panel>
                       </>
                     )}

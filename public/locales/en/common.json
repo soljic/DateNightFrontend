@@ -132,6 +132,9 @@
   "new_story_title": "Add Story",
   "new_story_subtitle": "Share your story about this Spiritus.",
   "claim_spiritus_button": "Send claim for Memorial",
+  "upgrade_subscription_title": "Lifetime Guardian",
+  "upgrade_subscription_subtitle": "Upgrade your subscription and save this memorial forever!",
+  "upgrade_subscription_button": "Choose plan",
 
   "spiritus_success_first_story": "Start saving memories!",
   "spiritus_success_text_p1": "Great! You became the Memory Guardian of ",

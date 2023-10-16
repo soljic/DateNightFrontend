@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Dialog, Transition } from "@headlessui/react";
+import { PlusCircleIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
 
 import { InfoIcon, InfoIconColored, LockIcon } from "@/components/Icons";
@@ -141,7 +142,7 @@ export function StoryCard({
   );
 }
 
-export function CreateStoryCTA({ spiritusId }) {
+export function CreateStoryCTA({ spiritusId, isGuardian }) {
   const { t } = useTranslation("common");
 
   return (
@@ -155,8 +156,17 @@ export function CreateStoryCTA({ spiritusId }) {
           href={`/create/story?spiritus=${spiritusId}`}
           className="flex items-center justify-center rounded-2xl border-4 border-sp-fawn-subtle bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-4 py-2.5 text-center font-medium leading-5 text-sp-white dark:border-none dark:from-sp-dark-fawn dark:to-sp-fawn"
         >
-          <PaperPlaneIcon className="mr-2 h-5 w-5 fill-white" />
-          {t("send_story")}
+          {isGuardian ? (
+            <>
+              <PlusCircleIcon className="mr-2 h-5 w-5" />
+              {t("create_story")}
+            </>
+          ) : (
+            <>
+              <PaperPlaneIcon className="mr-2 h-5 w-5 fill-white" />
+              {t("send_story")}
+            </>
+          )}
         </Link>
       </div>
     </div>

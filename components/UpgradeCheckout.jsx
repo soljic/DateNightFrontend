@@ -13,12 +13,11 @@ import { CurrencyContext } from "@/hooks/currency";
 import { cn } from "@/utils/cn";
 
 import {
-  CLAIM_SPIRITUS_ACTION,
-  CREATE_SPIRITUS_ACTION,
   CheckoutSpiritus,
-  ClaimSpiritus,
   GetCouponProduct,
   GetLocalizedProducts,
+  UPGRADE_SUBSCRIPTION_ACTION,
+  UpgradeSpiritus,
 } from "../service/http/payment";
 import { ImagePath, localFormatDate } from "../service/util";
 import {
@@ -31,53 +30,10 @@ import {
 import { SettingsSpiritusIcon } from "./SettingsIcons";
 import { Spinner } from "./Status";
 
-/* Stripe checkout has multiple products: LIFETIME and SUBSCRIPTION.
-LIFETIME is a one-time payment for a single spiritus and is selected by default.
-SUBSCRIPTION is a recurring payment.
-
-example:
-{
-  id: 41,
-  pkgServerId: 'price_1NuuMGADy47RIDRpbY598CFw',
-  title: '44.99€',
-  subtitle: null,
-  description: 'Claimanje spiritusa ',
-  originalPrice: 44.99,
-  price: 44.99,
-  currency: 'EUR',
-  mode: 'LIFETIME',
-  platform: null,
-  stripePackages: [
-    {
-      id: 41,
-      pkgServerId: 'price_1NuuMGADy47RIDRpbY598CFw',
-      title: '44.99€',
-      subtitle: null,
-      description: 'Claimanje spiritusa ',
-      originalPrice: 44.99,
-      price: 44.99,
-      currency: 'EUR',
-      mode: 'LIFETIME',
-      platform: 'STRIPE',
-      stripePackages: null
-    },
-    {
-      id: 42,
-      pkgServerId: 'price_1NuuNdADy47RIDRpGM6qcv4g',
-      title: '10.00€',
-      subtitle: null,
-      description: 'Pretplata na claim spiritusa ',
-      originalPrice: 10,
-      price: 10,
-      currency: 'EUR',
-      mode: 'SUBSCRIPTION',
-      platform: 'STRIPE',
-      stripePackages: null
-    }
-  ]
-}
+/* Stripe checkout for LIFETIME_TRANSFER -> logic is slightly different from regular Checkout.
+LIFETIME_TRANSFER is a one-time payment for a single spiritus and is very similar to regular LIFERIME product.
 */
-export function Checkout({ spiritus, isClaim, paymentFailed }) {
+export function UpgradeCheckout({ spiritus, paymentFailed }) {
   const router = useRouter();
   const { t } = useTranslation("paywall", "common", "pricing");
   // context is set from Accessibility menu component
@@ -91,10 +47,10 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
   const [serverPaymentErrMsg, setServerPaymentErrMsg] = useState("");
 
   // pricing related variables
-  const [selectedPlan, setSelectedPlan] = useState(0); // corresponds to lifetime product
   const [id, setId] = useState("");
   const [price, setPrice] = useState("");
-  const [pricingPlans, setPricingPlans] = useState([]);
+
+  const [product, setProduct] = useState(null);
 
   // coupon related variables
   const [fetching, setFetching] = useState(false);
@@ -114,60 +70,19 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
       setCoupon("");
       // get stripe products
       const getProducts = async () => {
-        const { lifetime, subscription } = await GetLocalizedProducts(
+        const { lifetime } = await GetLocalizedProducts(
           session?.user?.accessToken,
-          isClaim ? CLAIM_SPIRITUS_ACTION : CREATE_SPIRITUS_ACTION,
+          UPGRADE_SUBSCRIPTION_ACTION,
           currency ? currency.toLowerCase() : "usd",
           router.locale || "en"
         );
-        updatePricingPlans(lifetime, subscription);
+        setProduct(lifetime);
+        setId(lifetime.pkgServerId);
+        setPrice(lifetime.price);
       };
       getProducts();
     }
   }, [status, currency]);
-
-  const onChangeSelectedPlan = (idx) => {
-    setSelectedPlan(idx);
-    if (coupon) {
-      setCoupon("");
-    }
-    if (idx === 0) {
-      setId(pricingPlans[0].pkgServerId);
-      setPrice(pricingPlans[0].price);
-    } else {
-      setId(pricingPlans[1].pkgServerId);
-      setPrice(pricingPlans[1].price);
-    }
-  };
-
-  const updatePricingPlans = (lifetimeProduct, subscriptionProduct) => {
-    setPricingPlans([
-      {
-        price: lifetimeProduct.price,
-        displayPrice: lifetimeProduct.title,
-        pkgServerId: lifetimeProduct.pkgServerId,
-        title: lifetimeProduct.title,
-        subtitle: lifetimeProduct.subtitle,
-        list: lifetimeProduct.listDescription,
-      },
-      {
-        price: subscriptionProduct.price,
-        displayPrice: subscriptionProduct.title,
-        pkgServerId: subscriptionProduct.pkgServerId,
-        title: subscriptionProduct.title,
-        subtitle: subscriptionProduct.subtitle,
-        list: subscriptionProduct.listDescription,
-      },
-    ]);
-
-    if (selectedPlan === 0) {
-      setId(lifetimeProduct.pkgServerId);
-      setPrice(lifetimeProduct.price);
-    } else {
-      setId(subscriptionProduct.pkgServerId);
-      setPrice(subscriptionProduct.price);
-    }
-  };
 
   const dates = `${
     spiritus.birth ? localFormatDate(spiritus.birth, router.locale) : "\uE132"
@@ -200,14 +115,11 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
       setIsValid(false);
       setFetching(false);
       setIsInvalid(false);
-      if (!pricingPlans.length) return;
 
-      if (selectedPlan === 0 && pricingPlans.length > 0) {
-        setId(pricingPlans[0].pkgServerId);
-        setPrice(pricingPlans[0].price);
-      } else {
-        setId(pricingPlans[1].pkgServerId);
-        setPrice(pricingPlans[1].price);
+      if (product) {
+        console.log("product", product);
+        setId(product.pkgServerId);
+        setPrice(product.price);
       }
       return;
     }
@@ -217,7 +129,7 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
       try {
         const res = await GetCouponProduct(
           session?.user.accessToken,
-          isClaim ? CLAIM_SPIRITUS_ACTION : CREATE_SPIRITUS_ACTION,
+          UPGRADE_SUBSCRIPTION_ACTION,
           coupon,
           currency ? currency.toLocaleLowerCase() : "usd",
           router.locale || "en"
@@ -244,25 +156,14 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
   const handleSubmit = async (event) => {
     setFetching(true);
     event.preventDefault();
-    let res;
     try {
-      if (isClaim) {
-        res = await ClaimSpiritus(
-          session?.user.accessToken,
-          spiritus.id,
-          id,
-          coupon,
-          router.locale || "en"
-        );
-      } else {
-        res = await CheckoutSpiritus(
-          session?.user.accessToken,
-          spiritus.id,
-          id,
-          coupon,
-          router.locale || "en"
-        );
-      }
+      const res = await UpgradeSpiritus(
+        session?.user.accessToken,
+        spiritus.id,
+        id,
+        coupon,
+        router.locale || "en"
+      );
       router.push(res.data);
     } catch (err) {
       setServerPaymentErrMsg(
@@ -298,24 +199,10 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
         </div>
       )}
       <div className="flex w-full flex-col items-center justify-center space-y-4">
-        {isClaim ? (
-          <>
-            <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
-              <SettingsSpiritusIcon className="h-8 w-8 fill-sp-dark-fawn" />
-            </div>
-            <div className="flex flex-col items-center justify-center text-center">
-              <h1 className="font-bold text-3xl">{t("init_claim_title")}</h1>
-              <p>{t("init_claim_subtitle")}</p>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
-              <CheckmarkIcon width={8} height={8} />
-            </div>
-            <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
-          </>
-        )}
+        <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
+          <CheckmarkIcon width={8} height={8} />
+        </div>
+        <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
         {!!spiritus?.profileImage?.url && (
           <div className="overflow-hidden rounded-sp-14">
             <Image
@@ -362,13 +249,9 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
           >
             <h2>{t("select_payment_plan")}</h2>
           </div>
-          <PricingPlanList
-            plans={pricingPlans}
-            selectedIdx={selectedPlan}
-            onSetSelectedPlan={onChangeSelectedPlan}
-          />
-          <div className="flex items-center py-2.5">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+          {product && <PricingPlan plan={product} />}
+          <div className="flex items-start py-2.5">
+            <div className="mt-2 flex h-10 w-10 shrink-0 items-center justify-center">
               <TagIcon width={8} height={8} />
             </div>
             <div className="ml-4">
@@ -444,48 +327,31 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
   );
 }
 
-function PricingPlanList({ selectedIdx, plans, onSetSelectedPlan }) {
+function PricingPlan({ plan }) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {plans.map((plan, idx) => (
-        <div
-          onClick={() => onSetSelectedPlan(idx)}
-          key={`plan-index-${idx}`}
-          className={cn(
-            "flex max-w-sm flex-col justify-between gap-4 rounded-xl border-2 bg-green-200 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-4 py-10 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown",
-            idx === selectedIdx
-              ? "border-sp-fawn"
-              : "border-transparent opacity-95"
-          )}
-        >
-          <div>
-            <p className="mb-8 text-center font-bold text-3xl tracking-tight dark:text-sp-white">
-              {plan.displayPrice}
-            </p>
-            <p className="text-center font-bold text-xl tracking-tight dark:text-sp-white">
-              {plan.title}
-            </p>
-            <p className="text-md mb-8 text-center font-medium leading-6 tracking-sp-tighten dark:text-sp-white">
-              {plan.subtitle}
-            </p>
-            <ul className="mb-8 flex list-none flex-col justify-center gap-4 px-2 text-sm tracking-sp-tighten dark:text-sp-white">
-              {plan.list.map((item, i) => (
-                <li
-                  className="flex items-center gap-2"
-                  key={`${i}-item-${idx}`}
-                >
-                  <div className="rounded-full bg-sp-fawn p-0.5">
-                    <CheckIcon className="h-3.5 w-3.5 text-sp-white" />
-                  </div>
-                  <p className="text-md mb-1 mt-0 px-2 text-[17px] opacity-70 tracking-sp-tighten dark:text-sp-white">
-                    {item}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <div className="grid grid-cols-1 items-center">
+      <div className="flex max-w-sm flex-col justify-between gap-4 rounded-xl border-2 border-sp-fawn bg-green-200 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-4 py-10 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown">
+        <div>
+          <p className="mb-2 text-center font-bold text-3xl tracking-tight dark:text-sp-white">
+            {plan.title}
+          </p>
+          <p className="text-md mb-8 text-center font-medium leading-6 tracking-sp-tighten dark:text-sp-white">
+            {plan.subtitle}
+          </p>
+          <ul className="mb-8 flex list-none flex-col justify-center gap-4 px-2 text-sm tracking-sp-tighten dark:text-sp-white">
+            {plan.listDescription.map((item, i) => (
+              <li className="flex items-center gap-2" key={`${i}-item`}>
+                <div className="rounded-full bg-sp-fawn p-0.5">
+                  <CheckIcon className="h-3.5 w-3.5 text-sp-white" />
+                </div>
+                <p className="text-md mb-1 mt-0 px-2 text-[17px] opacity-70 tracking-sp-tighten dark:text-sp-white">
+                  {item}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
-      ))}
+      </div>
     </div>
   );
 }

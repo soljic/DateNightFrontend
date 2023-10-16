@@ -27,6 +27,7 @@ export default function SpiritusPage({
   isGuardian,
   saved,
   claimable,
+  upgradeable,
 }) {
   const { t } = useTranslation("common");
 
@@ -118,6 +119,7 @@ export default function SpiritusPage({
               memoryGuardians={guardians}
               isGuardian={isGuardian}
               saved={saved}
+              upgradeable={upgradeable || false}
               claimable={claimable || false}
               hideBacklink={true}
             />
@@ -135,6 +137,7 @@ export async function getServerSideProps(context) {
   let isGuardian = false;
   let saved = false;
   let claimable = false;
+  let upgradeable = false;
   try {
     let res;
     if (session && session?.user?.accessToken) {
@@ -146,6 +149,7 @@ export async function getServerSideProps(context) {
       isGuardian = res?.data?.flags.includes("GUARDIAN");
       saved = res?.data?.flags.includes("SAVED");
       claimable = res?.data?.flags.includes("CLAIMABLE");
+      upgradeable = res?.data?.flags.includes("SUBSCRIPTION");
     } else {
       res = await GetSpiritusBySlug(slug, null, context.locale);
     }
@@ -172,6 +176,7 @@ export async function getServerSideProps(context) {
         isGuardian,
         saved,
         claimable,
+        upgradeable,
       },
     };
   } catch (err) {

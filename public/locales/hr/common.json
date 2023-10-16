@@ -132,7 +132,10 @@
   "new_story_title": "Dodaj priču",
   "new_story_subtitle": "Podijelite svoju priču o ovom Spiritusu.",
   "claim_spiritus_button": "Pošalji zahtjev",
-
+  "upgrade_subscription_title": "Doživotna sjećanja",
+  "upgrade_subscription_subtitle": "Postanite trajni vlasnik i vječno sačuvajte memorijal!",
+  "upgrade_subscription_button": "Odaberi plan",
+  
   "spiritus_success_first_story": "Ispričajte prvu Priču!",
   "spiritus_success_text_p1": "Odlično! Postali ste Čuvar Uspomena memorijala ",
   "spiritus_success_text_p2": "! Sada podijelite dragocjena sjećanja i učinite ih - vječnima!",

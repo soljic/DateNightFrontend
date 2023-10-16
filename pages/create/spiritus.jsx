@@ -124,9 +124,11 @@ export default function CreateSpiritusPage({
         {!paywallSeen ? (
           <div className="min-h-screen space-y-36 py-12">
             <Paywall acceptPaywall={() => setPaywallSeen(true)} />
-            <div className="mx-auto flex">
-              <UnpaidSpiritusList spiritusList={spiritusList} />
-            </div>
+            {spiritusList && spiritusList.length > 0 && (
+              <div className="mx-auto flex">
+                <UnpaidSpiritusList spiritusList={spiritusList} />
+              </div>
+            )}
           </div>
         ) : (
           <div className="mx-auto">
@@ -369,6 +371,7 @@ export default function CreateSpiritusPage({
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   const { name, surname } = context.query;
+  let unpaidSpiritus = [];
 
   if (!session) {
     return {
@@ -384,29 +387,24 @@ export async function getServerSideProps(context) {
       session.user.accessToken,
       context.locale
     );
-
-    return {
-      props: {
-        ...(await serverSideTranslations(context.locale, [
-          "common",
-          "settings",
-          "auth",
-          "paywall",
-          "pricing",
-          "cookies",
-        ])),
-        initialName: name || null,
-        initialSurname: surname || null,
-        spiritusList: res.data || [],
-      },
-    };
+    unpaidSpiritus = res.data;
   } catch (err) {
-    console.log("err loading create page", err);
-    return {
-      redirect: {
-        destination: "/400",
-        permanent: false,
-      },
-    };
+    console.log("failed to fetch unpaid on create page", err);
   }
+
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, [
+        "common",
+        "settings",
+        "auth",
+        "paywall",
+        "pricing",
+        "cookies",
+      ])),
+      initialName: name || null,
+      initialSurname: surname || null,
+      spiritusList: unpaidSpiritus,
+    },
+  };
 }

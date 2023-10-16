@@ -5,11 +5,12 @@ import { CheckIcon } from "@heroicons/react/outline";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import BecomeGuardianCTA from "@/components/about/BecomeGuardianComponent";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
-import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
+import { PricingPageInfo } from "@/service/http/payment";
 
-export default function PricingPage() {
+export default function PricingPage({ plans, locale }) {
   const { t } = useTranslation("pricing");
 
   const pricingPlans = [
@@ -25,31 +26,16 @@ export default function PricingPage() {
       ],
     },
     {
-      title: t("pricing_plan_subscribe_title"),
-      subtitle: t("pricing_plan_subscribe_subtitle"),
-      price: t("pricing_plan_subscribe_price"),
-      list: [
-        t("pricing_plan_subscribe_list_1"),
-        t("pricing_plan_subscribe_list_2"),
-        t("pricing_plan_subscribe_list_3"),
-        t("pricing_plan_subscribe_list_4"),
-        t("pricing_plan_subscribe_list_5"),
-        t("pricing_plan_subscribe_list_6"),
-      ],
+      title: plans[0].title,
+      subtitle: plans[0].subtitle,
+      price: `${plans[0].price}${plans[0].currency === "eur" ? "€" : "$"}`,
+      list: plans[0].listDescription,
     },
     {
-      title: t("pricing_plan_lifetime_title"),
-      subtitle: t("pricing_plan_lifetime_subtitle"),
-      price: t("pricing_plan_lifetime_price"),
-      list: [
-        t("pricing_plan_lifetime_list_1"),
-        t("pricing_plan_lifetime_list_2"),
-        t("pricing_plan_lifetime_list_3"),
-        t("pricing_plan_lifetime_list_4"),
-        t("pricing_plan_lifetime_list_5"),
-        t("pricing_plan_lifetime_list_6"),
-        t("pricing_plan_lifetime_list_7"),
-      ],
+      title: plans[1].title,
+      subtitle: plans[1].subtitle,
+      price: `${plans[1].price}${plans[1].currency === "eur" ? "€" : "$"}`,
+      list: plans[1].listDescription,
     },
   ];
 
@@ -101,10 +87,7 @@ export default function PricingPage() {
               className="flex flex-col justify-between gap-4 rounded-xl bg-green-200 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-4 py-10 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
             >
               <div>
-                <p className="mb-8 text-center font-bold tracking-tight text-cta dark:text-sp-white">
-                  {plan.price}
-                </p>
-                <p className="text-center font-bold text-xl tracking-tight dark:text-sp-white">
+                <p className="mb-2 text-center font-bold text-3xl tracking-tight dark:text-sp-white">
                   {plan.title}
                 </p>
                 <p className="text-md mb-8 text-center font-medium leading-6 tracking-sp-tighten dark:text-sp-white">
@@ -157,8 +140,31 @@ export default function PricingPage() {
   );
 }
 
-// fetch top 10 popular spirituses
+export async function getStaticPaths(context) {
+  return {
+    paths: context.locales.map((loc) => ({
+      params: {
+        slug: "usd",
+      },
+      locale: loc,
+    })),
+    fallback: false,
+  };
+}
+
 export async function getStaticProps(context) {
+  const res = await PricingPageInfo(context.locale);
+  // sort so lower is first
+  res.data.sort((a, b) => {
+    if (a.price > b.price) {
+      return 1;
+    }
+    if (a.price < b.price) {
+      return -1;
+    }
+    return 0;
+  });
+
   return {
     props: {
       ...(await serverSideTranslations(context.locale, [
@@ -170,6 +176,8 @@ export async function getStaticProps(context) {
         "pricing",
         "cookies",
       ])),
+      plans: res.data,
+      locale: context.locale,
     },
   };
 }

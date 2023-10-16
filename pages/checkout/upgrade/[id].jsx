@@ -1,16 +1,18 @@
-import { redirect } from "next/dist/server/api-utils";
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-import { Checkout } from "@/components/Checkout";
+import { UpgradeCheckout } from "@/components/UpgradeCheckout";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GetSpiritusById } from "@/service/http/spiritus";
 
-export default function CheckoutSpiritusPage({ spiritus, paymentFailed }) {
+export default function UpgradeSubscriptionSpiritusPage({
+  spiritus,
+  paymentFailed,
+}) {
   const { t } = useTranslation("common");
 
   return (
@@ -24,11 +26,7 @@ export default function CheckoutSpiritusPage({ spiritus, paymentFailed }) {
         />
       </Head>
       <div className="mx-auto min-h-screen max-w-7xl py-5">
-        <Checkout
-          spiritus={spiritus}
-          isClaim={false}
-          paymentFailed={paymentFailed}
-        />
+        <UpgradeCheckout spiritus={spiritus} paymentFailed={paymentFailed} />
       </div>
     </FullWidthLayout>
   );

@@ -6,13 +6,21 @@ const DEFAULT_PLATFORM = "STRIPE";
 
 export const CLAIM_SPIRITUS_ACTION = "CLAIM_SPIRITUS";
 export const CREATE_SPIRITUS_ACTION = "CREATE_SPIRITUS";
+export const UPGRADE_SUBSCRIPTION_ACTION = "LIFETIME_TRANSFER";
+
+export const SUPPORTED_ACTIONS = [
+  CLAIM_SPIRITUS_ACTION,
+  CREATE_SPIRITUS_ACTION,
+  UPGRADE_SUBSCRIPTION_ACTION,
+];
 
 export const PAYMENT_MODE_LIFETIME = "LIFETIME";
 export const PAYMENT_MODE_SUBSCRIPTION = "SUBSCRIPTION";
 
 // fetch products from stripe
 // returns lifetime, subscription and a list of other products that
-// also includes lifetime and subscription
+// also includes lifetime and subscription.
+// If selected action is UPGRADE_SUBSCRIPTION_ACTION, subscription product will be null.
 export async function GetLocalizedProducts(
   accessToken,
   action,
@@ -26,6 +34,15 @@ export async function GetLocalizedProducts(
   const res = await GetProducts(accessToken, action, currency, lang);
   if (!res?.data?.stripePackages) {
     throw new Error("no checkout packages found");
+  }
+
+  if (action === UPGRADE_SUBSCRIPTION_ACTION) {
+    lifetimeProduct = res?.data;
+    return {
+      lifetime: lifetimeProduct,
+      subscription: null,
+      allProducts: [lifetimeProduct],
+    };
   }
 
   allProducts = res?.data.stripePackages || [];
@@ -113,6 +130,26 @@ export async function CheckoutSpiritus(
   });
 }
 
+export async function UpgradeSpiritus(
+  accessToken,
+  spiritusId,
+  productId,
+  coupon,
+  lang
+) {
+  let url = `${API_URL}/wapi/order/spiritus/lifetime/${spiritusId}?service=${DEFAULT_PLATFORM}&packageId=${productId}`;
+  if (coupon) {
+    url = `${API_URL}/wapi/order/spiritus/lifetime/${spiritusId}?service=${DEFAULT_PLATFORM}&packageId=${productId}&coupon=${coupon}`;
+  }
+
+  return await axios.post(url, null, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Accept-Language": lang ? lang : "en",
+    },
+  });
+}
+
 export async function ClaimSpiritus(
   accessToken,
   spiritusId,
@@ -128,6 +165,14 @@ export async function ClaimSpiritus(
   return await axios.post(url, null, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Accept-Language": lang ? lang : "en",
+    },
+  });
+}
+
+export async function PricingPageInfo(lang) {
+  return await axios.get(`${API_URL}/v2/payment/package/default/info`, {
+    headers: {
       "Accept-Language": lang ? lang : "en",
     },
   });

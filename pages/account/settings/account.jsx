@@ -64,7 +64,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const see = await GetAccountSubscriptions(session.user.accessToken);
+
   const res = await GetProfile(session.user.accessToken);
   return {
     props: {

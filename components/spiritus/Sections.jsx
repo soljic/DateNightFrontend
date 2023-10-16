@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRouter as useNavigationRouter } from "next/router";
 
+import { ReceiptCube24Filled } from "@fluentui/react-icons";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { CheckCircleIcon, PencilIcon } from "@heroicons/react/solid";
 import { countryCodeEmoji } from "country-code-emoji";
@@ -494,6 +495,7 @@ function SpiritusActions({
   isGuardian,
   saved,
   claimable,
+  upgradeable,
   hideBacklink,
 }) {
   const { t } = useTranslation("common");
@@ -578,17 +580,38 @@ function SpiritusActions({
             href={`/create/story?spiritus=${spiritusId}`}
             className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
           >
-            {t("create_story")}
+            {isGuardian ? t("create_story") : t("send_story")}
           </Link>
         ) : (
           <button
             onClick={openModal}
             className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
           >
-            {t("create_story")}
+            {t("send_story")}
           </button>
         )}
       </div>
+
+      {/* upgrade to lifetime */}
+      {session?.user.name && upgradeable && (
+        <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
+          <div className="flex items-center space-x-2.5">
+            <ReceiptCube24Filled className="h-7 w-7 fill-black dark:fill-white" />
+            <h3 className=" font-semibold ">
+              {t("upgrade_subscription_title")}
+            </h3>
+          </div>
+          <p className=" text-center font-normal text-sp-day-400">
+            {t("upgrade_subscription_subtitle")}
+          </p>
+          <Link
+            href={`/checkout/upgrade/${spiritusId}`}
+            className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
+          >
+            {t("upgrade_subscription_button")}
+          </Link>
+        </div>
+      )}
 
       {/* guardians */}
       <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
@@ -659,6 +682,7 @@ export function Links({
   isGuardian,
   saved,
   claimable,
+  upgradeable,
   hideBacklink, // hide link leading back to spiritus
 }) {
   const { t } = useTranslation("common");
@@ -734,6 +758,7 @@ export function Links({
         isGuardian={isGuardian}
         saved={saved}
         claimable={claimable}
+        upgradeable={upgradeable}
         hideBacklink={hideBacklink}
       />
     </div>

@@ -50,10 +50,18 @@ export async function getServerSideProps(context) {
     // NOTE: this is a naive check
     // spiritus that failed creation should not be claimable in most cases
     // refactor if this becomes a problem
+    //
+    // upgradeable spiritus already have a subscription active
     const claimable = spiritus.flags.includes("CLAIMABLE");
-    const redirectURL = claimable
+    const upgradeable = spiritus?.flags.includes("SUBSCRIPTION");
+
+    let redirectURL = claimable
       ? `/${context.locale}/checkout/claim/${spiritus.slug}?payment_failed=true`
       : `/${context.locale}/checkout/create/${spiritus.id}?payment_failed=true`;
+
+    if (upgradeable) {
+      redirectURL = `/${context.locale}/checkout/upgrade/${spiritus.id}?payment_failed=true`;
+    }
 
     return {
       redirect: {
