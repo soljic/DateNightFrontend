@@ -44,7 +44,6 @@ export function AccesibilityMenu() {
 
     const getProfileData = async () => {
       const res = await GetProfile(session.user.accessToken);
-      console.log(res);
       if (res?.data?.currency) {
         setUsedCurrency(res.data.currency);
         updateCurrency(res.data.currency);

@@ -13,7 +13,7 @@ export function TabSections({ featured, anniversaries, recent }) {
   return (
     <Tabs defaultValue="featured">
       <TabsList className="w-full pb-4 lg:pb-8">
-        <nav className="flex w-full justify-start rounded-none border-b border-sp-day-400 lg:space-x-4">
+        <nav className="flex w-full justify-start space-x-3 rounded-none border-b border-sp-day-400 lg:space-x-4">
           <TabsTrigger value="featured">
             <TabPill text={t("featured")} />
           </TabsTrigger>
@@ -53,8 +53,8 @@ export function TabSections({ featured, anniversaries, recent }) {
 // uses group-data-[state=active] to set the active state of the tab depending on parent state
 function TabPill({ text }) {
   return (
-    <div className="w-32 rounded-sp-10 from-day-gradient-start to-day-gradient-stop p-2 font-medium text-black hover:bg-gradient-to-r group-data-[state=active]:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:w-full">
-      <h2 className="flex w-full whitespace-break-spaces text-center">
+    <div className="rounded-sp-10 from-day-gradient-start to-day-gradient-stop p-2 font-medium text-black hover:bg-gradient-to-r group-data-[state=active]:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown md:w-full">
+      <h2 className="flex w-full items-center justify-center whitespace-break-spaces text-center">
         {text}
       </h2>
     </div>
