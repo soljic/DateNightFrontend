@@ -56,7 +56,8 @@ export async function getServerSideProps(context) {
         initialItems: res.content,
       },
     };
-  } catch {
+  } catch (err) {
+    console.log("failed to fetch spiritus by placeID", err);
     return {
       redirect: {
         destination: "/404",

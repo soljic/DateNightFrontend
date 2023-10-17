@@ -218,9 +218,11 @@ export async function GetSpiritusByPlaceId(placeId, offset, limit) {
   );
 
   res.data.content.forEach((spiritus) => {
-    spiritus.images.forEach((img) => {
-      img.url = img.url ? ImagePath(img.url) : null;
-    });
+    if (spiritus?.profileImage) {
+      spiritus.profileImage.url = spiritus.profileImage.url
+        ? ImagePath(spiritus.profileImage.url)
+        : null;
+    }
   });
 
   return res;
