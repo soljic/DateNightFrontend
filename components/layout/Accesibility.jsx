@@ -36,22 +36,22 @@ export function AccesibilityMenu() {
   const { currency, updateCurrency } = useContext(CurrencyContext);
 
   // set if user has already made a purchase -> stripe does not allow mixing currencies
-  const [usedCurrency, setUsedCurrency] = useState("");
+  const [usedCurrency, setUsedCurrency] = useState("usd");
 
   // wait for component to mount to avoid hydration errs
   useEffect(() => {
     setMounted(true);
 
-    const getProfileData = async () => {
-      const res = await GetProfile(session.user.accessToken);
-      if (res?.data?.currency) {
-        setUsedCurrency(res.data.currency);
-        updateCurrency(res.data.currency);
-      }
-    };
-    if (status === "authenticated") {
-      getProfileData();
-    }
+    // const getProfileData = async () => {
+    //   const res = await GetProfile(session.user.accessToken);
+    //   if (res?.data?.currency) {
+    //     setUsedCurrency(res.data.currency);
+    //     updateCurrency(res.data.currency);
+    //   }
+    // };
+    // if (status === "authenticated") {
+    //   getProfileData();
+    // }
   }, [status]);
 
   if (!mounted) {
