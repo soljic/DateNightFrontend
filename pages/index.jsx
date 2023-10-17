@@ -3,7 +3,6 @@ import Image from "next/image";
 
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { parse } from "postcss";
 
 import { CTA } from "@/components/homepage/CTA";
 import { CategoryTiles } from "@/components/homepage/Categories";
@@ -13,11 +12,7 @@ import { TabSections } from "@/components/homepage/TabSections";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/NavBar";
 
-import {
-  GetHomepage,
-  GetParsedHomepage,
-  parseHomepage,
-} from "../service/http/homepage";
+import { GetHomepage, parseHomepage } from "../service/http/homepage";
 
 export default function Home({ featured, categories, anniversaries, recent }) {
   const { t } = useTranslation("common");
