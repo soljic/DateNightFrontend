@@ -111,6 +111,7 @@ export function EditImages({ spiritus, onSuccess, onError }) {
       setPending(true);
       await addNewImages();
       await deleteImages();
+      setDeletedImages([]);
       onSuccess();
       setPending(false);
     } catch (err) {
