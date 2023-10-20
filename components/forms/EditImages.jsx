@@ -71,6 +71,9 @@ export function EditImages({ spiritus, onSuccess, onError }) {
           .toLowerCase()}.${split[split.length - 1]}`;
         form.append("files", img.file, fname);
         doAdd = true;
+
+        // set set action so the image does not get reuploaded
+        img.action = IMG_ACTION_KEEP;
       }
     }
     if (doAdd) {

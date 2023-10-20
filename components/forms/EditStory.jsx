@@ -18,6 +18,7 @@ import {
   DeleteStory,
   DeleteStoryImage,
   EditStory,
+  GetStoryInOriginalLang,
 } from "@/service/http/story_crud";
 
 import { HashFilename } from "@/utils/filenames";
@@ -104,6 +105,13 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
       form.append("file", images[0].file, fileName);
       await AddStoryImage(session.user.accessToken, story.id, form);
     }
+
+    const currentStoryData = await GetStoryInOriginalLang(
+      session.user.accessToken,
+      story.id
+    );
+
+    setImages(currentStoryData?.data?.images || []);
   };
 
   const cancel = () => {
