@@ -1,6 +1,7 @@
 import axios from "axios";
 
 import { API_URL } from "../constants";
+import { ImagePath } from "../util";
 
 export async function CreateStory(accessToken, storyFormData, locale) {
   return await axios.post(`${API_URL}/wapi/story`, storyFormData, {
@@ -14,11 +15,21 @@ export async function CreateStory(accessToken, storyFormData, locale) {
 
 // Get story in its original language, useful in story editor.
 export async function GetStoryInOriginalLang(accessToken, storyId) {
-  return await axios.get(`${API_URL}/wapi/stories/id/${storyId}/original`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const res = await axios.get(
+    `${API_URL}/wapi/stories/id/${storyId}/original`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  if (res?.data?.images) {
+    res.data.images.forEach((image) => {
+      image.url = image.url ? ImagePath(image.url) : null;
+    });
+  }
+  return res;
 }
 
 export async function EditStory(accessToken, storyId, storyData) {
