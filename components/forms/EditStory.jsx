@@ -41,9 +41,11 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
 
   const [dpLoaded, setDpLooaded] = useState(false);
 
-  const [images, setImages] = useState(
+  const [savedImages, setSavedImages] = useState(
     story?.images && story.images.length > 0 ? story.images : []
   );
+
+  const [images, setImages] = useState([...savedImages]);
 
   useEffect(() => {
     setDpLooaded(true);
@@ -83,7 +85,7 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
   const updateImages = async () => {
     const rmImages = [];
     let newImage = null;
-    story.images.forEach((img) => {
+    savedImages.forEach((img) => {
       if (!images.find((i) => i.url === img.url)) {
         rmImages.push(img.id);
       }
@@ -112,6 +114,7 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
     );
 
     setImages(currentStoryData?.data?.images || []);
+    setSavedImages(currentStoryData?.data?.images || []);
   };
 
   const cancel = () => {
