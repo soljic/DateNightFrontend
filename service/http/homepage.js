@@ -5,11 +5,11 @@ import { ImagePath } from "../util";
 
 // import { MockResponse } from "./hp";
 
-// default language is "hr"
+// default language is "en"
 export async function GetHomepage(lang) {
   return await axios.get(`${API_URL}/wapi/homepage`, {
     headers: {
-      "Accept-Language": lang ? lang : "hr",
+      "Accept-Language": lang ? lang : "en",
     },
   });
 }

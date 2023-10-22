@@ -8,7 +8,7 @@ export async function CreateStory(accessToken, storyFormData, locale) {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "multipart/form-data",
-      "Accept-Language": locale,
+      "Accept-Language": locale || "en",
     },
   });
 }

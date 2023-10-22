@@ -10,7 +10,7 @@ export async function GetSection(id, page, lang) {
     `${API_URL}/wapi/homepage/section/${id}?page=${p}&size=${12}`,
     {
       headers: {
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     }
   );
@@ -33,7 +33,7 @@ export async function GetSectionItem(sectionId, itemId, page, lang) {
     `${API_URL}/wapi/homepage/section/${sectionId}/item/${itemId}?page=${p}&size=${12}`,
     {
       headers: {
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     }
   );

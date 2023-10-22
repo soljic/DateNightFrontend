@@ -83,7 +83,7 @@ export async function GetProducts(accessToken, action, currency, lang) {
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     }
   );
@@ -104,7 +104,7 @@ export async function GetCouponProduct(
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     }
   );

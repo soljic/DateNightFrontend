@@ -14,7 +14,7 @@ export async function GetNotifications(accessToken, lang) {
   return await axios.get(`${API_URL}/v2/notification`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      "Accept-Language": lang ? lang : "hr",
+      "Accept-Language": lang ? lang : "en",
     },
   });
 }

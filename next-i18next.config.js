@@ -5,11 +5,15 @@ module.exports = {
     locales: ["en", "hr"],
     // This is the default locale you want to be used when visiting
     // a non-locale prefixed path e.g. `/hello`
-    defaultLocale: "hr",
-    localeDetection: false,
+    defaultLocale: "en",
+    // localeDetection: false,
     // defaultLocale: "en",
-    // localeDetection: true,
+    localeDetection: true,
     localePath: path.resolve("./public/locales"),
   },
+  fallbackLng: {
+    default: ["en"],
+  },
+  nonExplicitSupportedLngs: true,
   // react: { useSuspense: false }, //this line
 };

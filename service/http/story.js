@@ -6,7 +6,7 @@ import { ImagePath } from "../util";
 export async function GetStoryById(id, lang) {
   const res = await axios.get(`${API_URL}/wapi/stories/id/${id}`, {
     headers: {
-      "Accept-Language": lang ? lang : "hr",
+      "Accept-Language": lang ? lang : "en",
     },
   });
   res.data?.images?.forEach((img) => {
@@ -17,7 +17,7 @@ export async function GetStoryById(id, lang) {
 
 export async function GetStoryBySlug(slug, accessToken, lang) {
   const headers = {
-    "Accept-Language": lang ? lang : "hr",
+    "Accept-Language": lang ? lang : "en",
   };
   if (accessToken) {
     headers.Authorization = `Bearer ${accessToken}`;
@@ -55,7 +55,7 @@ export async function GetSpiritusStoriesBySlug(
   const l = limit ? limit : defaultLimit;
 
   const headers = {
-    "Accept-Language": lang ? lang : "hr",
+    "Accept-Language": lang ? lang : "en",
   };
   if (accessToken) {
     headers.Authorization = `Bearer ${accessToken}`;
@@ -82,7 +82,7 @@ export async function GetSpiritusStoriesByID(id, offset, limit, lang) {
     `${API_URL}/stories/spiritus/${id}?page=${o}&size=${l}`,
     {
       headers: {
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     }
   );

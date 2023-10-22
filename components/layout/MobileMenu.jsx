@@ -91,7 +91,7 @@ function MobilePopover() {
     {
       name: "pricing",
       description: "pricing",
-      href: "/pricing",
+      href: "/pricing/usd",
     },
     {
       name: "why-us",

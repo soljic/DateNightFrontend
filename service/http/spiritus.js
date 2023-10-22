@@ -11,7 +11,7 @@ export async function GetSpiritusById(id, accessToken, lang) {
     res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     });
   } else {
@@ -31,7 +31,7 @@ export async function GetUnpaidSpiritusList(accessToken, lang) {
   const res = await axios.get(`${API_URL}/v2/spiritus/unpaid`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-      "Accept-Language": lang ? lang : "hr",
+      "Accept-Language": lang ? lang : "en",
     },
   });
 
@@ -107,7 +107,7 @@ export async function GetSpiritusTributes(spiritusId, offset, limit, lang) {
     `${API_URL}/wapi/rose/spiritus/${spiritusId}/tribute?page=${o}&size=${l}`,
     {
       headers: {
-        "Accept-Language": lang ? lang : "hr",
+        "Accept-Language": lang ? lang : "en",
       },
     }
   );
@@ -117,7 +117,7 @@ export async function GetSpiritusTributes(spiritusId, offset, limit, lang) {
 
 export async function GetSpiritusBySlug(slug, accessToken, lang) {
   const headers = {
-    "Accept-Language": lang ? lang : "hr",
+    "Accept-Language": lang ? lang : "en",
   };
   if (accessToken) {
     headers.Authorization = `Bearer ${accessToken}`;
@@ -156,7 +156,7 @@ export async function PaginatePopularSpiritus(offset, limit) {
 export async function GetTags(lang) {
   return await axios.get(`${API_URL}/wapi/tag`, {
     headers: {
-      "Accept-Language": lang ? lang : "hr",
+      "Accept-Language": lang ? lang : "en",
     },
   });
 }
