@@ -215,9 +215,7 @@ export default function CreateSpiritusPage({
                 {/* dates */}
                 <div className="mx-2 mt-4">
                   <h2 className="text-sp-black dark:text-sp-white">
-                    {t("create_spiritus_dates_title1")}{" "}
-                    <span> {name ? name : "Spiritus"} </span>{" "}
-                    {t("create_spiritus_dates_title2")}
+                    {t("create_spiritus_dates_title")}
                   </h2>
                   <div className="my-1 flex flex-col gap-2 md:flex-row">
                     <div className="w-full flex-1">

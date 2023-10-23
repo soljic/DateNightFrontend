@@ -119,9 +119,6 @@ export default function About() {
                 <h2 className="text-[22px] font-bold leading-6 tracking-wide dark:text-sp-white">
                   {t("feature_1_title")}
                 </h2>
-                <p className="mb-3 mt-2 pb-2 text-start font-medium leading-6 text-lg tracking-sp-tighten dark:text-sp-white">
-                  {t("feature_1_subtitle_1")}
-                </p>
                 <p className="mb-4 opacity-70 text-base tracking-sp-tighten dark:text-sp-white">
                   {t("feature_1_subtitle_2")}
                 </p>

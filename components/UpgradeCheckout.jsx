@@ -202,7 +202,7 @@ export function UpgradeCheckout({ spiritus, paymentFailed }) {
         <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
           <CheckmarkIcon width={8} height={8} />
         </div>
-        <h1 className="font-bold text-3xl">{t("init_payment_title")}</h1>
+        <h1 className="font-bold text-3xl text-center">{t("init_payment_title")}</h1>
         {!!spiritus?.profileImage?.url && (
           <div className="overflow-hidden rounded-sp-14">
             <Image

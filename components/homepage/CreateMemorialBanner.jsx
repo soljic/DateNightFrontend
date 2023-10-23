@@ -14,7 +14,7 @@ import { StarIcon, UsersIcon } from "./Icons";
 const stats = [
   {
     icon: MemoryGuardianIcon,
-    number: "700k",
+    number: "1M+",
     text: "memorials_count_text",
   },
   {

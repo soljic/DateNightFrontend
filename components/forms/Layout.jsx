@@ -22,7 +22,7 @@ const baseHref = "/edit/spiritus";
 const menuItems = [
   {
     id: 0,
-    name: "Spiritus",
+    name: "Memorial",
     icon: (
       <SettingsSpiritusIcon className="h-5 w-5 fill-sp-day-400 dark:fill-sp-day-200" />
     ),

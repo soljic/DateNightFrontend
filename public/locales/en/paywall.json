@@ -1,28 +1,31 @@
 {
-	"create_spiritus": "Create Spiritus",
+	"create_spiritus": "Save your loved one's legacy through storytelling.",
 	"create_spiritus_coupon_placeholder": "Enter a coupon",
 	"create_spiritus_coupon_invalid": "Invalid coupon",
-	"start_button": "Start",
+	"start_button": "Continue creating",
+	"start_claim_button":"Become a Guardian",
 	"start_button_hint": "Payment is the last step in creation.",
 
-	"list_elem_1_title": "Enter basic info",
-	"list_elem_1_subtitle": "Write your loved one's name and other necessary information.",
-	"list_elem_2_title": "Add photos and quotes",
-	"list_elem_2_subtitle": "Save memories of your loved one by preserving their photos and quotes.",
-	"list_elem_3_title": "Purchase Spiritus digital memorial",
-	"list_elem_3_subtitle": "Immediately after payment, you can write stories and save memories.",
-	"list_elem_4_title": "Save your memories, forever",
-	"list_elem_4_subtitle": "We are ensuring the eternity of your memories through modern technology.",
+	"claim_spiritus": "Save your loved one's legacy through storytelling.",
+
+	"list_elem_1_title": "Personalize quickly",
+	"list_elem_1_subtitle": "Become a Memory Guardian by simply crafting a unique memorial, built on shared family stories and photographs.",
+	"list_elem_2_title": "Share memories easily",
+	"list_elem_2_subtitle": "Commemorate and contribute easily through shared Guardianship and anniversary alerts. Send or receive stories, photographs, roses, and tributes.",
+	"list_elem_3_title": "Locate the place of burial",
+	"list_elem_3_subtitle": "Lifetime option guarantees your memorial will be visible on the gravesite, through the Memory Walk.",
+	"list_elem_4_title": "One-time fee for Generational Ownership",
+	"list_elem_4_subtitle": "Convenient one-time fee option, after which our technology ensures shared memories will be beautifully preserved for generations to come.",
 
 	"select_payment_plan": "Select a payment plan:",
-	"init_payment_title": "Spiritus Ready!",
+	"init_payment_title": "Your Spiritus Memorial is almost finished!",
 	"init_payment_total": "Total to pay:",
 	"init_payment_coupon_placeholder": "Enter coupon code",
 	"init_payment_button": "Proceed to payment",
 	"init_payment_redirect_notice": "You will be redirected to stripe.com to complete the payment",
 
 	"init_claim_title": "Become a Memory Guardian",
-	"init_claim_subtitle": "You can claim this Spiritus Memorial by completing the payment process.",
+	"init_claim_subtitle": "Share memories, receive heartfelt stories, and tailor your memorial to perfection right after payment.",
 
 	"payment_failed_title": "Payment attempt failed",
 	"payment_failed_subtitle":  "Your payment was not successful. Please retry check your payment information and try again."

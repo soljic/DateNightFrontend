@@ -15,6 +15,7 @@ export default function PricingPage({ plans, locale }) {
 
   const pricingPlans = [
     {
+      displayPrice: "$0",
       title: t("pricing_plan_free_title"),
       subtitle: t("pricing_plan_free_subtitle"),
       price: t("pricing_plan_free_price"),
@@ -26,12 +27,14 @@ export default function PricingPage({ plans, locale }) {
       ],
     },
     {
+      displayPrice: `${plans[0].currency === "eur" ? "€" : "$"}${plans[0].price}${plans[0].price===10?t("subscription_recurring_sign"):""}`,
       title: plans[0].title,
       subtitle: plans[0].subtitle,
       price: `${plans[0].price}${plans[0].currency === "eur" ? "€" : "$"}`,
       list: plans[0].listDescription,
     },
     {
+      displayPrice: `${plans[1].currency === "eur" ? "€" : "$"}${plans[1].price}`,
       title: plans[1].title,
       subtitle: plans[1].subtitle,
       price: `${plans[1].price}${plans[1].currency === "eur" ? "€" : "$"}`,
@@ -87,6 +90,9 @@ export default function PricingPage({ plans, locale }) {
               className="flex flex-col justify-between gap-4 rounded-xl bg-green-200 bg-gradient-to-r from-day-gradient-start to-day-gradient-stop px-4 py-10 dark:bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
             >
               <div>
+                <p className="mb-8 text-center font-bold text-3xl tracking-tight dark:text-sp-white">
+                  {plan.displayPrice}
+                </p>
                 <p className="mb-2 text-center font-bold text-3xl tracking-tight dark:text-sp-white">
                   {plan.title}
                 </p>

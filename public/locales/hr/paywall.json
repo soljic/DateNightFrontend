@@ -1,8 +1,10 @@
 {
 	"create_spiritus": "Kreiraj Spiritus",
+	"claim_spiritus": "Sačuvajte sjećanje na svoje voljene kroz pričanje njihove priče.",
 	"create_spiritus_coupon_placeholder": "Unesi kupon",
 	"create_spiritus_coupon_invalid": "Neispravan kupon",
 	"start_button": "Započni",
+	"start_claim_button":"Postani Čuvar Uspomene",
 	"start_button_hint": "Naplata je posljednji korak.",
 
 	"list_elem_1_title": "Unesite osnovne podatke",

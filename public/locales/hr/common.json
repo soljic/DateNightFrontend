@@ -60,10 +60,13 @@
   "continue_create_spiritus_subtitle": "Klikni na nedovršeni Spiritus i nastavi sa kreiranjem i naplatom.",
 
   "create_spiritus": "Kreiraj Spiritus",
+  "create_spiritus_homepage_button":"Kreiraj Spiritus",
   "create_spiritus_memorial": "Kreiraj memorijal",
   "create_spiritus_subtitle": "Spiritus je digitalna uspomena sačuvana kroz priče.",
   "goto_search": "Pretraži",
   "search_placeholder": "Traži memorijal",
+  "search_place_placeholder": "Upišite ime grada",
+  "search_story_placeholder": "Traži priču",
   "search_memorials_placeholder": "Upišite ime",
   "search_memorials_title": "Spiritus je platforma za vječno čuvanje uspomena kroz životne priče.",
   "search_memorials_subtitle": "Pretražite jesu li memorijali Vaših najmilijih već postali dio našega muzeja.",
@@ -144,6 +147,7 @@
   "new_story": "Nova priča",
 
   "create_story": "Kreiraj priču",
+  "create_story_spiritus_view": "Pošaljite priču",
   "suggest_story": "Predloži priču",
   "suggest_story_subtitle": "Čuvari uspomene mogu odobriti priču i dodati je Spiritusu.",
 
@@ -162,16 +166,15 @@
   "create_spiritus_lastname_placeholder": "Unesi prezime",
   "create_spiritus_maidenname_placeholder": "Djevojačko prezime",
 
-  "create_spiritus_dates_title1": "Kada je",
-  "create_spiritus_dates_title2": "rođen/a i kada je preminuo/la?",
+  "create_spiritus_dates_title": "Kada je rođena vaša voljena osoba, i kada je preminula?",
   "create_spiritus_birth_placeholder": "Datum rođenja",
   "create_spiritus_death_placeholder": "Datum smrti",
 
-  "create_spiritus_quote_title": "Upišite omiljeni citat Vaše voljene osobe.",
-  "create_spiritus_quote_placeholder": "Upišite citat",
-  "create_spiritus_description_title": "Ukratko opišite svoju voljenu osobu.",
-  "create_spiritus_description_placeholder": "Unesite kratki opis",
-  "create_spiritus_description_char_limit": "Molimo unesite 30-150 znakova",
+  "create_spiritus_quote_title": "Po čemu će vaša voljena osoba ostati upamćena?",
+  "create_spiritus_quote_placeholder": "Upišite",
+  "create_spiritus_description_title": "Ukratko opišite život svoje voljene osobe.",
+  "create_spiritus_description_placeholder": "Unesite kratku biografiju",
+  "create_spiritus_description_char_limit": "Molimo unesite 30-150 znakova. Tekst se može mijenjati nakon dodavanja.",
 
   "create_spiritus_location_title": "Odaberite mjesto rođenja ili mjesto u kojemu je živjela Vaša voljena osoba.",
   "create_spiritus_location_subtitle": "Ovo može biti mjesto rođenja, mjesto gdje je osoba pokopana ili gdje je najdulje živjela.",
@@ -182,6 +185,10 @@
   "create_spiritus_image_title2": "? Ako da, možete ih dodati",
   "create_story_image_title": "Image li sliku vezanu uz ovu priču? Ovdje ju možete dodati.",
   "upload_spiritus_images_button": "Dodajte sliku",
+
+  "edit_spiritus_names_title": "Unesite ime i prezime svoje voljene osobe.",
+  "edit_spiritus_dates_title_p1": "Kada je ",
+  "edit_spiritus_dates_title_p2": " rođen/a, i kada je preminuo/la?",
 
   "create_story_type_title": "Kakvu priču želite kreirati?",
   "public": "Javna",

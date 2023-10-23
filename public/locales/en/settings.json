@@ -1,13 +1,13 @@
 {
   "settings": "Settings",
 
-  "spiritus": "My Spiritus",
+  "spiritus": "My Memorials",
   "account": "My Account",
   "unfinished": "Unfinished Memorials",
-  "unfinished_subtitle": "Continue creating or delete unfinished Spiritus Memorials.",
+  "unfinished_subtitle": "Continue creating memorials you started saving.",
 
   "guardian_id": "My Guardian ID",
-  "guardian_id_text": "You can ask another person to add you as another Guardian for their Spiritus. Send them your own Guardian ID.",
+  "guardian_id_text": "You can ask other Guardians to add you as an additional Guardian of their memorial. Just send them your Guardian ID.",
   "guardian_id_code": "My code is",
   "guardian_id_copy_code": "Copy my ID",
 
@@ -32,7 +32,7 @@
   "delete": "Delete...",
   "delete_err": "Unable to delete. Try again later.",
   "delete_modal_title": "Delete Spiritus?",
-  "delete_modal_subtitle": "You must be certain that you want to delete this Spiritus. This action cannot be undone upon completion.",
+  "delete_modal_subtitle": "You must be certain that you want to delete this Spiritus memorial. This action can not be undone upon completion.",
   "delete_modal_confirm": "Type DELETE to confirm",
 
   "delete_modal_confirm_err": "Text must match 'DELETE'",

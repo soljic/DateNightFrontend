@@ -10,13 +10,19 @@ export default function Hero() {
 
   return (
     <section id="hero" key="hero-section">
+      <div className="flex max-h-fit max-w-full items-center justify-center text-neutral-800">
+        <Image src={hero} alt="Representative spiritus" priority />
+      </div>
       <div className="my-20 flex justify-center">
         <div className="mt-4 flex w-full flex-col items-center justify-center sm:w-full md:w-3/4 lg:w-2/3">
           <h1 className="mb-3 text-center font-bold tracking-tight text-cta dark:text-sp-white">
             {t("hero_title")}
           </h1>
+          <h2 className="mb-3 text-center font-bold tracking-tight text-cta dark:text-sp-white">
+            {t("hero_subtitle")}
+          </h2>
           <p className="mb-3 mt-2 text-center font-medium leading-6 text-lg tracking-sp-tighten dark:text-sp-white">
-            {t("hero_subtitle")}{" "}
+            {t("hero_explanation")}{" "}
             <span className="text-[#D17615]">
               <a
                 className="hover:underline"
@@ -28,9 +34,7 @@ export default function Hero() {
           </p>
         </div>
       </div>
-      <div className="flex max-h-fit max-w-full items-center justify-center text-neutral-800">
-        <Image src={hero} alt="Representative spiritus" priority />
-      </div>
+
     </section>
   );
 }

@@ -144,7 +144,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
         <div className="mx-2">
           <h2 className="text-sp-black dark:text-sp-white">
             <span className="text-red-500">*</span>
-            {t("create_spiritus_names_title")}
+            {t("edit_spiritus_names_title")}
           </h2>
           <div className="">
             <div className="flex flex-col gap-2 md:flex-row">
@@ -195,9 +195,10 @@ export function EditContent({ spiritus, onSuccess, onError }) {
         {dpLoaded && (
           <div className="mx-2 mt-4">
             <h2 className="text-sp-black dark:text-sp-white">
-              {t("create_spiritus_dates_title1")}{" "}
-              <span> {name ? name : "Spiritus"} </span>{" "}
-              {t("create_spiritus_dates_title2")}
+              {t("edit_spiritus_dates_title_p1")}{" "}
+                    <span> {name ? name : "Spiritus"} </span>{" "}
+                    <span> {surname ? surname : "Spiritus"} </span>{" "}
+              {t("edit_spiritus_dates_title_p2")}
             </h2>
             <div className="my-1 flex flex-col gap-2 md:flex-row">
               <div className="w-full flex-1">

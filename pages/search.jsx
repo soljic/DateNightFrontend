@@ -33,6 +33,7 @@ export default function Search({ defaultFilter, defaultName }) {
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(true);
   const [total, setTotal] = useState(0);
+  const [placeholder, setPlaceholder] = useState("search_placeholder")
 
   const clear = () => {
     setResults([]);
@@ -117,7 +118,7 @@ export default function Search({ defaultFilter, defaultName }) {
               value={searchTerm}
               className="mr-2 w-full bg-inherit p-1.5 text-sp-black placeholder-sp-lighter caret-sp-fawn outline-none text-lg dark:text-sp-white"
               type="text"
-              placeholder={t("search_placeholder")}
+              placeholder={t(placeholder)}
               autoFocus
             />
             {!!searchTerm && (
@@ -131,6 +132,7 @@ export default function Search({ defaultFilter, defaultName }) {
           filter={searchFilter}
           setFilter={setSearchFilter}
           clear={clear}
+          setPlaceholder={setPlaceholder}
         />
         {!!results.length && !searching && (
           <GlobalSearchResults results={results} total={total} />
@@ -159,7 +161,7 @@ export default function Search({ defaultFilter, defaultName }) {
   );
 }
 
-function Filter({ filter, setFilter, clear }) {
+function Filter({ filter, setFilter, clear , setPlaceholder}) {
   const { t } = useTranslation("common");
 
   return (
@@ -168,6 +170,7 @@ function Filter({ filter, setFilter, clear }) {
         onClick={() => {
           clear();
           setFilter(FILTER_SPIRITUS);
+          setPlaceholder("search_placeholder");
         }}
         className={`px-0.5 pb-1.5 font-semibold text-sm tracking-sp-tighten ${
           filter === FILTER_SPIRITUS
@@ -181,6 +184,7 @@ function Filter({ filter, setFilter, clear }) {
         onClick={() => {
           clear();
           setFilter(FILTER_PLACE);
+          setPlaceholder("search_place_placeholder");
         }}
         className={`px-0.5 pb-1.5 font-semibold text-sm tracking-sp-tighten ${
           filter === FILTER_PLACE
@@ -194,6 +198,7 @@ function Filter({ filter, setFilter, clear }) {
         onClick={() => {
           clear();
           setFilter(FILTER_STORY);
+          setPlaceholder("search_story_placeholder");
         }}
         className={`px-0.5 pb-1.5 font-semibold text-sm tracking-sp-tighten ${
           filter === FILTER_STORY

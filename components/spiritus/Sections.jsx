@@ -142,7 +142,7 @@ export function ProfileHeader({
               </p>
               {isGuardian && (
                 <Link href={`/edit/spiritus/${spiritus.id}`} className="mt-2">
-                  <button className="flex w-36 items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 font-semibold text-black text-sm">
+                  <button className="w-50 flex items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 pr-3 font-semibold text-black text-sm">
                     <PencilIcon className="h-6 w-6" />
                     {t("edit_spiritus_menu_title")}
                   </button>
@@ -580,7 +580,7 @@ function SpiritusActions({
             href={`/create/story?spiritus=${spiritusId}`}
             className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
           >
-            {isGuardian ? t("create_story") : t("send_story")}
+            {isGuardian ? t("create_story_spiritus_view") : t("send_story")}
           </Link>
         ) : (
           <button
@@ -625,7 +625,7 @@ function SpiritusActions({
               {t("no_memory_guardian")}
             </p>
             <Link
-              href={`/checkout/claim/${spiritusSlug}`}
+              href={`/claim/spiritus/${spiritusSlug}`}
               className="flex w-full items-center justify-center rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
             >
               {t("claim_spiritus_button")}

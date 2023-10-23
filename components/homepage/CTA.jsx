@@ -52,7 +52,7 @@ export function CTA() {
           </div>
           <div className="mt-2 flex w-full md:w-64">
             <Link
-              href="/about"
+              href="/why-us"
               className="flex w-full items-center justify-between rounded-sp-10 border border-sp-day-400 px-5 py-3 text-sm"
             >
               {t("learn_more_about_us")}
