@@ -65,8 +65,8 @@
   "create_spiritus_subtitle": "Preserve the life of your loved one through storytelling.",
   "goto_search": "Go to search",
   "search_placeholder": "Find a Memorial",
-  "search_place_placeholder": "Write the Name of the City",
-  "search_story_placeholder": "Find a Story",
+  "search_place_placeholder": "Name of the city",
+  "search_story_placeholder": "Keywords",
   "search_memorials_placeholder": "Enter name",
   "search_memorials_title": "Spiritus is a platform for creating digital memorials through storytelling.",
   "search_memorials_subtitle": "Explore if the memorial of your dearly departed already resides within the museum.",
@@ -95,6 +95,7 @@
   "term_on": "on",
   "term_for": "za",
 
+  "term_memorial":"Memorial",
   "term_place": "Place",
   "term_story": "Story",
   "term_thanks": "Thank you!",
@@ -105,7 +106,7 @@
   "term_age": "Age",
   "term_view": "View",
   "term_born": "born",
-  "term_search": "Find a Memorial",
+  "term_search": "Search",
 
   "tributes_title": "Tributes Wall",
   "write_tribute": "Send a rose with you memories and condolences",

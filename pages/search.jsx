@@ -178,7 +178,7 @@ function Filter({ filter, setFilter, clear , setPlaceholder}) {
             : ""
         }`}
       >
-        Spiritus
+        {t("term_memorial")}
       </button>
       <button
         onClick={() => {

@@ -58,7 +58,7 @@
 
   "continue_create_spiritus": "...ili nastavi sa postojećim Spiritusom",
   "continue_create_spiritus_subtitle": "Klikni na nedovršeni Spiritus i nastavi sa kreiranjem i naplatom.",
-
+  
   "create_spiritus": "Kreiraj Spiritus",
   "create_spiritus_homepage_button":"Kreiraj Spiritus",
   "create_spiritus_memorial": "Kreiraj memorijal",
@@ -95,6 +95,7 @@
   "term_on": "na",
   "term_for": "za",
 
+  "term_memorial":"Spiritus",
   "term_place": "Mjesto",
   "term_story": "Priča",
   "term_thanks": "Hvala!",

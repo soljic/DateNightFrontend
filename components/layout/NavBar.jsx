@@ -111,7 +111,7 @@ export function Navbar() {
                   onClick={openModal}
                   className="flex h-10 w-36 items-center justify-center rounded-sp-10  bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-2.5 text-center font-medium leading-none text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
                 >
-                  {t("create_spiritus")}
+                  {t("create_spiritus_homepage_button")}
                 </button>
               </>
             )}
