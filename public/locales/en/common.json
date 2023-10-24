@@ -109,7 +109,7 @@
   "term_search": "Search",
 
   "tributes_title": "Tributes Wall",
-  "write_tribute": "Send a rose with you memories and condolences",
+  "write_tribute": "Send a rose with your memories and condolences",
   "write_tribute_placeholder": "Write your tribute text here",
   "send_tribute": "Send a Rose",
   "give_rose": "Send Rose",
@@ -133,9 +133,9 @@
   "creating": "Creating...",
   "optional": "Optional",
   "loading": "Loading...",
-  "new_story_title": "Add Story",
+  "new_story_title": "Share Memories",
   "new_story_subtitle": "Enrich the memorial with you story.",
-  "claim_spiritus_button": "Send claim for Memorial",
+  "claim_spiritus_button": "Become a Guardian",
   "upgrade_subscription_title": "Lifetime Guardian",
   "upgrade_subscription_subtitle": "Upgrade your subscription and save this memorial forever!",
   "upgrade_subscription_button": "Choose plan",
@@ -303,6 +303,7 @@
   "obituary_bereaved": "Bereaved",
   "obituary_farewell": "Farewell",
 
+  "spiritus_tab": "Memorial",
   "spiritus_about": "About",
   "spiritus_stories": "Stories",
   "spiritus_gallery": "Gallery",

@@ -234,7 +234,7 @@ function Article({ idx, elem }) {
             {elem.list.map((item, i) => {
               return (
                 <li
-                  className="flex items-start justify-center"
+                  className="flex items-start justify-start"
                   key={`item-${idx}-${i}`}
                 >
                   <div className="mt-1 rounded-full bg-sp-fawn p-0.5">

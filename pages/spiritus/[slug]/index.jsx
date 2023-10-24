@@ -51,7 +51,7 @@ export default function SpiritusPage({
 
   const tabs = [
     {
-      name: "Spiritus",
+      name: t("spiritus_tab"),
       href: `/spiritus/${spiritus.slug}`,
       current: true,
     },
