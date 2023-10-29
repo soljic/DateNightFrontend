@@ -107,6 +107,11 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
     setId(data.pkgServerId);
     setPrice(data.price);
     setCouponSubtitle(data.subtitle);
+    if (data.mode === "LIFETIME") {
+      setSelectedPlan(0);
+    } else {
+      setSelectedPlan(1);
+    }
   };
 
   useEffect(() => {
@@ -141,13 +146,15 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
   };
 
   const updatePricingPlans = (lifetimeProduct, subscriptionProduct) => {
-    var lifetimeCurrency = lifetimeProduct.currency.toLowerCase()==="eur" ? "€":"$";
-    var subscriptionCurrency = subscriptionProduct.currency.toLowerCase()==="eur" ? "€":"$";
+    var lifetimeCurrency =
+      lifetimeProduct.currency.toLowerCase() === "eur" ? "€" : "$";
+    var subscriptionCurrency =
+      subscriptionProduct.currency.toLowerCase() === "eur" ? "€" : "$";
 
     setPricingPlans([
       {
         price: lifetimeProduct.price,
-        displayPrice: lifetimeCurrency+lifetimeProduct.price,
+        displayPrice: lifetimeCurrency + lifetimeProduct.price,
         pkgServerId: lifetimeProduct.pkgServerId,
         title: lifetimeProduct.title,
         subtitle: lifetimeProduct.subtitle,
@@ -155,7 +162,10 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
       },
       {
         price: subscriptionProduct.price,
-        displayPrice: subscriptionCurrency+subscriptionProduct.price+t("pricing:subscription_recurring_sign"),
+        displayPrice:
+          subscriptionCurrency +
+          subscriptionProduct.price +
+          t("pricing:subscription_recurring_sign"),
         pkgServerId: subscriptionProduct.pkgServerId,
         title: subscriptionProduct.title,
         subtitle: subscriptionProduct.subtitle,
@@ -225,6 +235,7 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
           currency ? currency.toLocaleLowerCase() : "usd",
           router.locale || "en"
         );
+        console.log(res);
         if (res?.data) {
           setIsInvalid(false);
           onChangeCoupon(res.data);
@@ -316,7 +327,9 @@ export function Checkout({ spiritus, isClaim, paymentFailed }) {
             <div className="rounded-xl bg-sp-fawn bg-opacity-25 p-2">
               <CheckmarkIcon width={8} height={8} />
             </div>
-            <h1 className="font-bold text-3xl text-center">{t("init_payment_title")}</h1>
+            <h1 className="text-center font-bold text-3xl">
+              {t("init_payment_title")}
+            </h1>
           </>
         )}
         {!!spiritus?.profileImage?.url && (
