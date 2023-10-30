@@ -9,7 +9,10 @@ import { useTranslation } from "next-i18next";
 import DatePicker from "react-date-picker";
 
 import { Spinner } from "@/components/Status";
-import { SpiritusProfileCropper } from "@/components/Uploaders";
+import {
+  SUPPORTED_IMAGES,
+  SpiritusProfileCropper,
+} from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 
 import {
@@ -34,8 +37,8 @@ export function EditContent({ spiritus, onSuccess, onError }) {
   const [death, setDeath] = useState();
   const [dpLoaded, setDpLooaded] = useState(false);
 
-  const [description, setDescription] = useState(spiritus.description);
-  const [quote, setQuote] = useState(spiritus.quote);
+  const [description, setDescription] = useState(spiritus.description || "");
+  const [quote, setQuote] = useState(spiritus.quote || "");
   const [location, setLocation] = useState(spiritus.location);
   const [images, setImages] = useState(
     spiritus.profileImage ? [spiritus.profileImage] : []
@@ -54,6 +57,9 @@ export function EditContent({ spiritus, onSuccess, onError }) {
   }, []);
 
   const update = async () => {
+    let hasImageSaveErrors = false;
+    let msg = t("message_save_failed");
+
     try {
       setPending(true);
 
@@ -79,7 +85,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
         name,
         surname,
         maidenName,
-        description,
+        description: description || null,
         birth: birth ? getISOLocalDate(birth) : null,
         death: death ? getISOLocalDate(death) : null,
         location: newLocation,
@@ -95,6 +101,12 @@ export function EditContent({ spiritus, onSuccess, onError }) {
 
       const form = new FormData();
       if (images.length > 0) {
+        if (!SUPPORTED_IMAGES.includes(images[0].file.type)) {
+          setPending(false);
+          onError(t("INVALID_FORMAT"));
+          return;
+        }
+
         const fileName = await HashFilename(images[0].file.name);
         form.append("file", images[0].file, fileName);
         if (images[0].cropped) {
@@ -106,19 +118,40 @@ export function EditContent({ spiritus, onSuccess, onError }) {
           const coppedFilename = "C_" + fileName;
           form.append("cropped", croppedFile, coppedFilename);
         }
-        await AddSpiritusProfileImage(
-          session.user.accessToken,
-          spiritus.id,
-          form
-        );
+
+        try {
+          await AddSpiritusProfileImage(
+            session.user.accessToken,
+            spiritus.id,
+            form
+          );
+        } catch (error) {
+          if (error?.response?.data?.errors) {
+            // Possible error messages:
+            // INVALID_FORMAT
+            // INVALID_FILENAME
+            // INVALID_FILE
+            // UNKNOWN_ERR
+            if (error.response.data.errors[0]?.messages) {
+              msg = `${msg} ${t(error.response.data.errors[0].messages[0])}`;
+            }
+          }
+          hasImageSaveErrors = true;
+          throw error;
+        }
       }
 
-      onSuccess();
       setPending(false);
+      if (!hasImageSaveErrors) {
+        onSuccess();
+      }
     } catch (err) {
+      if (hasImageSaveErrors) {
+        // Reset spiritus image on error
+        setImages(spiritus.profileImage ? [spiritus.profileImage] : []);
+      }
       setPending(false);
-      const msg = err?.response?.data;
-      onError(msg ? msg : t("message_save_failed"));
+      onError(msg);
     }
   };
 
@@ -196,8 +229,8 @@ export function EditContent({ spiritus, onSuccess, onError }) {
           <div className="mx-2 mt-4">
             <h2 className="text-sp-black dark:text-sp-white">
               {t("edit_spiritus_dates_title_p1")}{" "}
-                    <span> {name ? name : "Spiritus"} </span>{" "}
-                    <span> {surname ? surname : "Spiritus"} </span>{" "}
+              <span> {name ? name : "Spiritus"} </span>{" "}
+              <span> {surname ? surname : "Spiritus"} </span>{" "}
               {t("edit_spiritus_dates_title_p2")}
             </h2>
             <div className="my-1 flex flex-col gap-2 md:flex-row">
@@ -268,7 +301,7 @@ export function EditContent({ spiritus, onSuccess, onError }) {
               <div className="w-full flex-1">
                 <div className="my-1 rounded">
                   <textarea
-                    value={quote || ""}
+                    value={quote}
                     onChange={(e) => {
                       setQuote(e.target.value);
                     }}

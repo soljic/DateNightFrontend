@@ -278,7 +278,7 @@
   "message_save_success": "Promjene spremljene.",
   "message_save_failed": "Promjene nisu spremljene.",
 
-  "INVALID_FORMAT": "Nepodržan format (podržani su .png, .jpg)",
+  "INVALID_FORMAT": "Nepodržan format slike (podržani su .png, .jpg)",
   "INVALID_FILENAME": "Neispravan naziv datoteke",
   "INVALID_FILE": "Neispravna datoteka",
   "UNKNOWN_ERR": "Nepoznata greška",

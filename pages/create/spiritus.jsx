@@ -15,7 +15,10 @@ import { HashFilename } from "utils/filenames";
 
 import { Paywall } from "@/components/Paywall";
 import { Alert, Spinner } from "@/components/Status";
-import { SpiritusProfileCropper } from "@/components/Uploaders";
+import {
+  SUPPORTED_IMAGES,
+  SpiritusProfileCropper,
+} from "@/components/Uploaders";
 import { SpiritusLocationInput } from "@/components/forms/SpiritusLocation";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { UnpaidSpiritusList } from "@/components/spiritus/Unpaid";
@@ -72,6 +75,12 @@ export default function CreateSpiritusPage({
       form.append("request", blob);
 
       if (images.length > 0) {
+        if (!SUPPORTED_IMAGES.includes(images[0].file.type)) {
+          setPending(false);
+          onError(t("INVALID_FORMAT"));
+          return;
+        }
+
         const fileName = await HashFilename(images[0].file.name);
         form.append("original_profile", images[0].file, fileName);
         if (images[0].cropped) {
@@ -94,7 +103,15 @@ export default function CreateSpiritusPage({
       // redirect user to checkout page
       await router.push(`/checkout/create/${res.data.id}`);
     } catch (err) {
-      const errMsg = err?.response?.data || err;
+      // Possible error messages:
+      // INVALID_FORMAT
+      // INVALID_FILENAME
+      // INVALID_FILE
+      // UNKNOWN_ERR
+      const errMsg =
+        err?.response?.data?.errors.length > 0
+          ? t(err.response.data.errors?.[0]?.messages?.[0]) || ""
+          : t("message_save_failed");
       onError(errMsg);
       setPending(false);
     }

@@ -280,7 +280,7 @@
   "message_save_success": "Changes saved.",
   "message_save_failed": "Changes were not saved.",
 
-  "INVALID_FORMAT": "Unsupported format (use .png, .jpg)",
+  "INVALID_FORMAT": "Unsupported image format (use .png, .jpg)",
   "INVALID_FILENAME": "Invalid filename",
   "INVALID_FILE": "Invalid file",
   "UNKNOWN_ERR": "Unknown error",

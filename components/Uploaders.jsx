@@ -9,6 +9,8 @@ import { useTranslation } from "next-i18next";
 import { ImageIcon } from "./Icons";
 import { CropEditor } from "./cropper/SpiritusProfileImage";
 
+export const SUPPORTED_IMAGES = ["image/jpeg", "image/png"];
+
 // Image uploader for stories.
 // There are subtle differences between this uploader
 // and the one for spiritus, they are not interchangeable.
