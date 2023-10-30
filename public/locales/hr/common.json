@@ -305,5 +305,11 @@
   "spiritus_about": "Osnovno",
   "spiritus_stories": "Priče",
   "spiritus_gallery": "Galerija",
-  "spiritus_view_spiritus": "Vidi Spiritus"
+  "spiritus_links": "Poveznice",
+  "spiritus_view_spiritus": "Vidi Spiritus",
+
+  "link": "Poveznica",
+  "links": "Poveznice",
+  "edit_link": "Uredi poveznicu",
+  "add_link": "Dodaj poveznicu"
 }

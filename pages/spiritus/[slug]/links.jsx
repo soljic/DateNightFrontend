@@ -5,26 +5,18 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import FullWidthLayout from "@/components/layout/LayoutV2";
-import {
-  About,
-  Links,
-  ProfileHeader,
-  Tabs,
-  Tributes,
-} from "@/components/spiritus/Sections";
+import { Links, ProfileHeader, Tabs } from "@/components/spiritus/Sections";
+import { SpiritusLinks } from "@/components/spiritus/SpiritusLinks";
 
-import {
-  GetSpiritusBySlug,
-  GetSpiritusTributes,
-} from "@/service/http/spiritus";
+import { GetLinks } from "@/service/http/links";
+import { GetSpiritusBySlug } from "@/service/http/spiritus";
 
 import { dateDiffYears } from "@/utils/dateDiff";
 import { SetSpiritusOG } from "@/utils/metaTags";
 
-export default function SpiritusPage({
+export default function LinksPage({
   spiritus,
-  tributes,
-  isLastPage,
+  links,
   isGuardian,
   saved,
   claimable,
@@ -50,7 +42,7 @@ export default function SpiritusPage({
     {
       name: t("spiritus_tab"),
       href: `/spiritus/${spiritus.slug}`,
-      current: true,
+      current: false,
     },
     {
       name: t("spiritus_stories"),
@@ -65,7 +57,7 @@ export default function SpiritusPage({
     {
       name: t("spiritus_links"),
       href: `/spiritus/${spiritus.slug}/links`,
-      current: false,
+      current: true,
     },
   ];
 
@@ -98,18 +90,10 @@ export default function SpiritusPage({
 
         <div className="mt-7 grid w-full gap-8 px-4 sm:space-y-0 md:grid-cols-3 md:px-0">
           <div className="col-span-1 md:col-span-2">
-            <About
-              age={age}
-              birth={birthDate}
-              death={deathDate}
-              quote={spiritus.quote}
-              description={spiritus.description}
-              location={spiritus.location}
-            />
-            <Tributes
-              spiritusId={spiritus.id}
-              tributes={tributes}
-              isLastPage={isLastPage}
+            <SpiritusLinks
+              links={links}
+              isGuardian={isGuardian}
+              spiritus_id={spiritus.id}
             />
           </div>
           <div className="relative col-span-1">
@@ -157,17 +141,11 @@ export async function getServerSideProps(context) {
     }
     const spiritus = res.data;
 
-    let resTributes;
-    try {
-      resTributes = await GetSpiritusTributes(
-        spiritus.id,
-        0,
-        12,
-        context.locale
-      );
-    } catch (err) {
-      console.log("Failed fetching tributes", err?.response?.data);
-    }
+    const links = await GetLinks(
+      spiritus.id,
+      session?.user?.accessToken,
+      context.locale
+    );
 
     return {
       props: {
@@ -179,8 +157,7 @@ export async function getServerSideProps(context) {
           "cookies",
         ])),
         spiritus,
-        tributes: resTributes?.data?.content || [],
-        isLastPage: resTributes?.data?.last || true,
+        links: links?.data || [],
         isGuardian,
         saved,
         claimable,

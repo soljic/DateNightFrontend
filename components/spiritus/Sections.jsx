@@ -19,6 +19,8 @@ import { Spinner } from "@/components/Status";
 import { SendRose } from "@/service/http/rose";
 import { SaveSpiritus, UnSaveSpiritus } from "@/service/http/save";
 
+import { cn } from "@/utils/cn";
+
 import { SettingsCreateStorySolidIcon } from "../SettingsIcons";
 import { LoginModal } from "../auth/Login";
 import { ArrowUpRightIcon } from "../layout/Icons";
@@ -208,7 +210,14 @@ export function Tabs({ tabs }) {
                 )}
                 aria-current={tab.current ? "page" : "hr"}
               >
-                <span className="from-day-gradient-start to-day-gradient-stop p-2 font-medium text-black hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+                <span
+                  className={cn(
+                    "from-day-gradient-start to-day-gradient-stop p-2 font-medium text-black hover:rounded-sp-10 hover:bg-gradient-to-r focus:outline-none dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown",
+                    tab.current
+                      ? "rounded-sp-10 bg-gradient-to-r dark:from-sp-dark-brown dark:to-sp-brown"
+                      : "bg-transparent"
+                  )}
+                >
                   {tab.name}
                 </span>
               </Link>

@@ -39,6 +39,11 @@ export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
       href: `/spiritus/${spiritus.slug}/gallery`,
       current: true,
     },
+    {
+      name: t("spiritus_links"),
+      href: `/spiritus/${spiritus.slug}/links`,
+      current: false,
+    },
   ];
 
   return (
@@ -67,7 +72,7 @@ export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
         isGuardian={isGuardian}
       />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-        <Tabs tabs={spiritus.obituaryId ? tabs : tabs.slice(0, 3)} />
+        <Tabs tabs={tabs} />
         <div className="mt-7">
           <CreateStoryCTA spiritusId={spiritus.id} isGuardian={isGuardian} />
         </div>

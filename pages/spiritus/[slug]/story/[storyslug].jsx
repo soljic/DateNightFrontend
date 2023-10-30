@@ -62,6 +62,11 @@ export default function StoryPage({
       href: `/spiritus/${spiritus.slug}/gallery`,
       current: false,
     },
+    {
+      name: t("spiritus_links"),
+      href: `/spiritus/${spiritus.slug}/links`,
+      current: false,
+    },
   ];
 
   return (
@@ -89,7 +94,7 @@ export default function StoryPage({
         isGuardian={isGuardian}
       />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-        <Tabs tabs={spiritus.obituaryId ? tabs : tabs.slice(0, 3)} />
+        <Tabs tabs={tabs} />
 
         <div className="mt-7 grid w-full gap-8 px-4 sm:space-y-0 md:grid-cols-3 md:px-0">
           <div className="col-span-1 md:col-span-2">

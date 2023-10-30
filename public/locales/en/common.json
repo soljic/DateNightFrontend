@@ -307,5 +307,11 @@
   "spiritus_about": "About",
   "spiritus_stories": "Stories",
   "spiritus_gallery": "Gallery",
-  "spiritus_view_spiritus": "View Memorial"
+  "spiritus_links": "Links",
+  "spiritus_view_spiritus": "View Memorial",
+
+  "link": "Link",
+  "links": "Links",
+  "edit_link": "Edit link",
+  "add_link": "Add link"
 }
