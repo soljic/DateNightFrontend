@@ -573,7 +573,7 @@ function SpiritusActions({
         </CopyToClipboard>
         {!!fbShareUrl && (
           <div
-            className="fb-share-button  w-full rounded-sp-10 border  border-sp-day-400 p-1.5 text-center md:p-2"
+            className="w-full rounded-sp-10 border border-sp-day-400 p-1.5 text-center md:p-2"
             data-href={fbShareUrl}
             data-layout=""
             data-size=""
