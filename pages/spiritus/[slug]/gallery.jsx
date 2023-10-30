@@ -11,6 +11,7 @@ import { CreateStoryCTA } from "@/components/spiritus/StoryList";
 
 import { GetSpiritusGalleryImagesV2 } from "@/service/http/spiritus";
 
+import { dateDiffYears } from "@/utils/dateDiff";
 import { SetSpiritusOG } from "@/utils/metaTags";
 
 export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
@@ -20,11 +21,7 @@ export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
   // number of years
   const age =
-    birthDate && deathDate
-      ? Math.round(
-          Math.abs(deathDate - birthDate) / (1000 * 60 * 60 * 24 * 365)
-        )
-      : null;
+    birthDate && deathDate ? dateDiffYears(deathDate, birthDate) : null;
 
   const tabs = [
     {
@@ -115,6 +112,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
+    console.log(err);
     return {
       redirect: {
         destination: "/404",

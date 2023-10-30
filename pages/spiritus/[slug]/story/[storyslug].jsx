@@ -44,11 +44,7 @@ export default function StoryPage({
       : "";
   // number of years
   const age =
-    birthDate && deathDate
-      ? Math.round(
-          Math.abs(deathDate - birthDate) / (1000 * 60 * 60 * 24 * 365)
-        )
-      : null;
+    birthDate && deathDate ? dateDiffYears(deathDate, birthDate) : null;
 
   const tabs = [
     {

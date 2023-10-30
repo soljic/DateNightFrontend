@@ -12,6 +12,7 @@ import { CreateStoryCTA, StoryList } from "@/components/spiritus/StoryList";
 import { GetSpiritusBySlug } from "@/service/http/spiritus";
 import { GetSpiritusStoriesBySlug } from "@/service/http/story";
 
+import { dateDiffYears } from "@/utils/dateDiff";
 import { SetSpiritusOG } from "@/utils/metaTags";
 
 export default function SpiritusStoriesPage({
@@ -26,11 +27,7 @@ export default function SpiritusStoriesPage({
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
   // number of years
   const age =
-    birthDate && deathDate
-      ? Math.round(
-          Math.abs(deathDate - birthDate) / (1000 * 60 * 60 * 24 * 365)
-        )
-      : null;
+    birthDate && deathDate ? dateDiffYears(deathDate, birthDate) : null;
 
   const tabs = [
     {

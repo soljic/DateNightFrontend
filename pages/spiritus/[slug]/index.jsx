@@ -18,6 +18,7 @@ import {
   GetSpiritusTributes,
 } from "@/service/http/spiritus";
 
+import { dateDiffYears } from "@/utils/dateDiff";
 import { SetSpiritusOG } from "@/utils/metaTags";
 
 export default function SpiritusPage({
@@ -43,11 +44,7 @@ export default function SpiritusPage({
       : "";
   // number of years
   const age =
-    birthDate && deathDate
-      ? Math.round(
-          Math.abs(deathDate - birthDate) / (1000 * 60 * 60 * 24 * 365)
-        )
-      : null;
+    birthDate && deathDate ? dateDiffYears(deathDate, birthDate) : null;
 
   const tabs = [
     {
@@ -154,12 +151,18 @@ export async function getServerSideProps(context) {
       res = await GetSpiritusBySlug(slug, null, context.locale);
     }
     const spiritus = res.data;
-    const resTributes = await GetSpiritusTributes(
-      spiritus.id,
-      0,
-      12,
-      context.locale
-    );
+
+    let resTributes;
+    try {
+      resTributes = await GetSpiritusTributes(
+        spiritus.id,
+        0,
+        12,
+        context.locale
+      );
+    } catch (err) {
+      console.log("Failed fetching tributes", err?.response?.data);
+    }
 
     return {
       props: {
@@ -171,8 +174,8 @@ export async function getServerSideProps(context) {
           "cookies",
         ])),
         spiritus,
-        tributes: resTributes.data?.content || [],
-        isLastPage: resTributes.data?.last || true,
+        tributes: resTributes?.data?.content || [],
+        isLastPage: resTributes?.data?.last || true,
         isGuardian,
         saved,
         claimable,

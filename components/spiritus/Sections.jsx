@@ -89,7 +89,7 @@ export function ProfileHeader({
       <script
         async
         defer
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
         src="https://connect.facebook.net/hr_HR/sdk.js#xfbml=1&version=v18.0"
         nonce="JCJ1x1wt"
       ></script>
@@ -330,7 +330,7 @@ export function About({ age, birth, death, quote, description, location }) {
 
 export function Tributes({ spiritusId, tributes, isLastPage }) {
   const { t } = useTranslation("common");
-  const [displayTributes, setDisplayTributes] = useState(tributes);
+  const [displayTributes, setDisplayTributes] = useState(tributes || []);
 
   const onAddTribute = (tribute) => {
     setDisplayTributes([tribute, ...displayTributes]);
