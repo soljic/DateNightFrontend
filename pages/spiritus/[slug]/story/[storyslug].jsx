@@ -18,6 +18,7 @@ import { StoryList } from "@/components/spiritus/StoryList";
 
 import { GetSpiritusStoriesBySlug, GetStoryBySlug } from "@/service/http/story";
 
+import { dateDiffYears } from "@/utils/dateDiff";
 import { SetStoryOG } from "@/utils/metaTags";
 
 export default function StoryPage({
