@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -86,6 +86,13 @@ export function ProfileHeader({
 
   return (
     <header className="h-[50vh] w-full sm:h-[60vh] md:h-[384px] xl:h-[448px]">
+      <script
+        async
+        defer
+        crossorigin="anonymous"
+        src="https://connect.facebook.net/hr_HR/sdk.js#xfbml=1&version=v18.0"
+        nonce="JCJ1x1wt"
+      ></script>
       <div className="relative h-full w-full overflow-hidden py-10">
         {spiritus.coverImage ? (
           <Image
@@ -499,10 +506,20 @@ function SpiritusActions({
   hideBacklink,
 }) {
   const { t } = useTranslation("common");
+  const router = useNavigationRouter();
+  const [fbShareUrl, setFbShareUrl] = useState("");
   const [copied, setCopied] = useState(false);
   const [isSaved, setIsSaved] = useState(saved || false);
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
+
+  useEffect(() => {
+    setFbShareUrl(
+      window && window?.location
+        ? encodeURIComponent(`${window.location.origin}${router.asPath}`)
+        : ""
+    );
+  }, []);
 
   function closeModal() {
     setIsOpen(false);
@@ -554,10 +571,22 @@ function SpiritusActions({
             )}
           </button>
         </CopyToClipboard>
-
-        {/* <a className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2">
-          {t("share_facebook")}
-        </a> */}
+        {!!fbShareUrl && (
+          <div
+            className="fb-share-button  w-full rounded-sp-10 border  border-sp-day-400 p-1.5 text-center md:p-2"
+            data-href={fbShareUrl}
+            data-layout=""
+            data-size=""
+          >
+            <a
+              className="fb-xfbml-parse-ignore"
+              target="_blank"
+              href={`https://www.facebook.com/sharer/sharer.php?u=${fbShareUrl}&amp;src=sdkpreparse`}
+            >
+              {t("share_facebook")}
+            </a>
+          </div>
+        )}
         <a
           href={`mailto:?subject=In loving memory of our dearest&body=The loving memory of our dearest lives on: ${shortLink}`}
           className="w-full rounded-sp-10 border border-sp-day-400  p-1.5 text-center md:p-2 "
