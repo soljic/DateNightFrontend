@@ -11,7 +11,10 @@ import DatePicker from "react-date-picker";
 import { useForm } from "react-hook-form";
 
 import { Spinner } from "@/components/Status";
-import { SpiritusProfileImageUploader } from "@/components/Uploaders";
+import {
+  SUPPORTED_IMAGES,
+  SpiritusProfileImageUploader,
+} from "@/components/Uploaders";
 
 import {
   AddStoryImage,
@@ -71,12 +74,17 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
         tags: tags.map((t) => t.id),
         private: isPrivate,
       };
+      if (!validateImages()) {
+        onError(t("INVALID_FORMAT"));
+        setPending(false);
+        return;
+      }
       await EditStory(session.user.accessToken, story.id, body);
       await updateImages();
       setPending(false);
       onSuccess();
     } catch (err) {
-      const msg = err?.response?.data;
+      const msg = err?.response?.data?.errors?.[0]?.message?.[0] || "";
       onError(msg ? msg : t("message_save_failed"));
       setPending(false);
     }
@@ -115,6 +123,22 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
 
     setImages(currentStoryData?.data?.images || []);
     setSavedImages(currentStoryData?.data?.images || []);
+  };
+
+  const validateImages = () => {
+    let newImage = null;
+
+    for (const img of images) {
+      if (!img.id && !img.url) {
+        newImage = img;
+        break;
+      }
+    }
+    // check new image format is correct
+    if (!SUPPORTED_IMAGES.includes(newImage.file.type)) {
+      return false;
+    }
+    return true;
   };
 
   const cancel = () => {

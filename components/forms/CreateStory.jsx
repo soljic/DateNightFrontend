@@ -10,7 +10,10 @@ import { useTranslation } from "next-i18next";
 import DatePicker from "react-date-picker";
 
 import { Spinner } from "@/components/Status";
-import { SpiritusProfileImageUploader } from "@/components/Uploaders";
+import {
+  SUPPORTED_IMAGES,
+  SpiritusProfileImageUploader,
+} from "@/components/Uploaders";
 
 import { CreateStory } from "@/service/http/story_crud";
 
@@ -110,6 +113,11 @@ export function CreateStoryFormV2({
       form.append("request", blob);
 
       if (images.length > 0) {
+        if (!SUPPORTED_IMAGES.includes(images[0].file.type)) {
+          setPending(false);
+          onError(t("INVALID_FORMAT"));
+          return;
+        }
         const fileName = await HashFilename(images[0].file.name);
         form.append("file", images[0].file, fileName);
       }
@@ -117,7 +125,7 @@ export function CreateStoryFormV2({
       onSuccess(res.data.slug);
       setPending(false);
     } catch (err) {
-      const msg = err?.response?.data;
+      const msg = err?.response?.data?.errors?.[0]?.message?.[0] || "";
       onError(msg ? msg : t("message_save_failed"));
       setPending(false);
     }
