@@ -404,11 +404,17 @@ function QuickSettings() {
 }
 
 function SocialMedia() {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex w-full flex-row justify-center space-x-12">
         <a
-          href="https://www.facebook.com/spiritus.application/"
+          href={
+            router.locale === "hr"
+              ? "https://www.facebook.com/spiritus.application/"
+              : "https://www.facebook.com/savelifestoriesforever/"
+          }
           target="_blank"
           rel="noreferrer"
           className="rounded-sp-10 p-3 hover:bg-sp-day-100 dark:hover:bg-gradient-to-r dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"

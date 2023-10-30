@@ -49,7 +49,11 @@ export function Footer() {
         <div className="flex flex-col items-center gap-4">
           <div className="flex flex-row gap-2">
             <a
-              href="https://www.facebook.com/spiritus.application/"
+              href={
+                router.locale === "hr"
+                  ? "https://www.facebook.com/spiritus.application/"
+                  : "https://www.facebook.com/savelifestoriesforever/"
+              }
               target="_blank"
               rel="noreferrer"
             >
