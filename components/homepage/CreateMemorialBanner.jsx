@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
@@ -44,9 +44,7 @@ export function CreateMemorialBanner() {
 
   return (
     <div className="z-40 mx-3.5 mt-6 flex flex-col items-center sm:mx-5 sm:mt-10 md:mx-0 md:mt-16 lg:mt-28 2xl:mt-32">
-      {!session?.user ? (
-        <LoginModal isOpen={isOpen} closeModal={closeModal} />
-      ) : null}
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
       <h1 className="mb-6 text-center font-bold leading-none subpixel-antialiased text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
         {t("create_memorial_title")}
       </h1>
@@ -80,14 +78,26 @@ export function CreateMemorialBanner() {
           </div>
         </div>
         <div className="mt-2 flex overflow-hidden rounded-2xl border-5 border-sp-fawn/30 md:border-6">
-          <Link
-            onClick={openModal}
-            className="flex w-full items-center justify-center bg-sp-black px-4 py-2 text-center font-medium text-sp-white dark:bg-sp-day-50 dark:text-sp-black md:text-lg xl:py-3"
-            href={`/create/spiritus?name=${name}&surname=${surname}`}
-          >
-            {t("create_memorial")}
-            <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
-          </Link>
+          {!session?.user ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                openModal();
+              }}
+              className="flex w-full items-center justify-center bg-sp-black px-4 py-2 text-center font-medium text-sp-white dark:bg-sp-day-50 dark:text-sp-black md:text-lg xl:py-3"
+            >
+              {t("create_memorial")}
+              <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
+            </button>
+          ) : (
+            <Link
+              className="flex w-full items-center justify-center bg-sp-black px-4 py-2 text-center font-medium text-sp-white dark:bg-sp-day-50 dark:text-sp-black md:text-lg xl:py-3"
+              href={`/create/spiritus?name=${name}&surname=${surname}`}
+            >
+              {t("create_memorial")}
+              <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
+            </Link>
+          )}
         </div>
       </div>
       <div className="mx-auto flex w-full flex-wrap justify-center space-x-1 pt-2 md:space-x-2">

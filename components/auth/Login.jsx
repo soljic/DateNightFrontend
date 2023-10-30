@@ -12,11 +12,9 @@ import { API_URL } from "../../service/constants";
 import { ShieldIcon } from "../Icons";
 
 export function LoginModal({ isOpen, closeModal }) {
-  const { t } = useTranslation("auth");
-
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="z-100 relative" onClose={closeModal}>
+      <Dialog as="div" className="relative z-[100]" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-1000"

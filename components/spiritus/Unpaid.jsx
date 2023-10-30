@@ -12,7 +12,7 @@ export function UnpaidSpiritusList({ spiritusList }) {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col items-start gap-3">
+    <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3">
       <div>
         <h2 className="font-bold text-sp-black text-2xl dark:text-sp-white">
           {t("continue_create_spiritus")}

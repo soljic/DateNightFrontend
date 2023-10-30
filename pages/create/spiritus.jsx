@@ -122,10 +122,10 @@ export default function CreateSpiritusPage({
       </Head>
       <div className="mx-auto min-h-screen max-w-7xl py-5">
         {!paywallSeen ? (
-          <div className="min-h-screen space-y-36 py-12">
+          <div className="mx-4 min-h-screen space-y-36 py-12">
             <Paywall acceptPaywall={() => setPaywallSeen(true)} />
             {spiritusList && spiritusList.length > 0 && (
-              <div className="mx-auto flex">
+              <div className="mx-auto">
                 <UnpaidSpiritusList spiritusList={spiritusList} />
               </div>
             )}

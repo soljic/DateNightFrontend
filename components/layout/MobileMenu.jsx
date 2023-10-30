@@ -26,6 +26,7 @@ import { cn } from "@/utils/cn";
 
 import { UserIcon } from "../Icons";
 import { SettingsDevicesIcon, SettingsSignOutIcon } from "../SettingsIcons";
+import { LoginModal } from "../auth/Login";
 
 export function MobileMenu() {
   const { data: session } = useSession();
@@ -63,6 +64,13 @@ function MobilePopover() {
   const { data: session } = useSession();
   // this is needed here so logoutUser can clear all cookies
   const [, , removeCookie] = useCookies("cookieConsent");
+
+  // TODO: Login modal needs to be refactored to be a singleton
+  // Login modal should use a React.Context to determine if it should be open or not
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   const logoutUser = async () => {
     await signOut({ redirect: false });
@@ -111,7 +119,8 @@ function MobilePopover() {
   ];
 
   return (
-    <div className="z-[100]">
+    <div className="z-[80]">
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
       <Popover>
         {({ open }) => (
           <>
@@ -139,18 +148,30 @@ function MobilePopover() {
             >
               <Popover.Panel className="absolute left-0 z-[100] mt-2 h-screen w-full overflow-y-auto rounded-sp-10 border border-sp-day-200 bg-sp-day-50 pb-32 font-medium drop-shadow-lg dark:border-sp-medium dark:bg-sp-black sm:right-0 sm:pb-0">
                 <div className="flex flex-col items-center justify-center space-y-2 p-3">
-                  <Link
-                    href="/create/spiritus"
-                    className="mt-1 w-full rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-3 py-2 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
-                  >
-                    {t("create_spiritus")}
-                  </Link>
-                  {!session?.user?.name && (
+                  {!session?.user?.name ? (
+                    <>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          openModal();
+                        }}
+                        className="mt-1 w-full rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-3 py-2 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
+                      >
+                        {t("create_spiritus")}
+                      </button>
+                      <Link
+                        href="/auth/login"
+                        className="w-full rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      >
+                        {t("login")}
+                      </Link>
+                    </>
+                  ) : (
                     <Link
-                      href="/auth/login"
-                      className="w-full rounded-sp-10 border border-sp-day-200 px-3 py-2 text-center font-semibold hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 focus:outline-none dark:border-sp-medium dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
+                      href="/create/spiritus"
+                      className="mt-1 w-full rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-3 py-2 text-center font-medium text-sp-white dark:from-sp-dark-fawn dark:to-sp-fawn"
                     >
-                      {t("login")}
+                      {t("create_spiritus")}
                     </Link>
                   )}
                 </div>
