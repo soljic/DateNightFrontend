@@ -133,6 +133,9 @@ export function SpiritusLinks({ links, spiritus_id, isGuardian }) {
         onAdd={onAdd}
         onEdit={onEdit}
       />
+      {displayLinks?.length === 0 && (
+        <p className="text-sp-lighter dark:text-sp-day-400">{t("no_links")}</p>
+      )}
       {displayLinks?.map((link, idx) => (
         <EditableLink
           key={`link-edit-${idx}`}

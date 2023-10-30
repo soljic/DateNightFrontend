@@ -311,5 +311,7 @@
   "link": "Poveznica",
   "links": "Poveznice",
   "edit_link": "Uredi poveznicu",
-  "add_link": "Dodaj poveznicu"
+  "add_link": "Dodaj poveznicu",
+
+  "no_links": "Nema poveznica za prikazati."
 }

@@ -313,5 +313,7 @@
   "link": "Link",
   "links": "Links",
   "edit_link": "Edit link",
-  "add_link": "Add link"
+  "add_link": "Add link",
+
+  "no_links": "No links to show."
 }

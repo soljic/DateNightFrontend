@@ -165,6 +165,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (err) {
+    console.log("Failed to fetch links: ", err?.response);
     return {
       redirect: {
         destination: "/404",

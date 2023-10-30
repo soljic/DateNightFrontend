@@ -5,14 +5,14 @@ import { API_URL } from "../constants";
 export async function GetLinks(id, accessToken, locale) {
   let res;
   if (accessToken) {
-    res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}/link`, {
+    res = await axios.get(`${API_URL}/v2/spiritus/${id}/link`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Accept-Language": locale ? locale : "en",
       },
     });
   } else {
-    res = await axios.get(`${API_URL}/wapi/spiritus/id/${id}/link`);
+    res = await axios.get(`${API_URL}/v2/spiritus/${id}/link`);
   }
 
   return res;
@@ -36,7 +36,6 @@ export async function AddLink(accessToken, spiritus_id, data, locale) {
 // data: { id: link_id, text, link }
 // I guess BE checks link_id is valid and user has access to it
 export async function EditLink(accessToken, data, locale) {
-  console.log(data)
   return await axios.put(`${API_URL}/wapi/spiritus/link/`, data, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
