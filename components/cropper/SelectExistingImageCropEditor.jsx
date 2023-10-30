@@ -135,8 +135,8 @@ export function SelectExistingImageCropEditor({
                   ref={croppedImageRef}
                   className="mt-5 rounded-sp-10 shadow"
                   image={originalImage}
-                  width={192}
-                  height={220}
+                  width={220}
+                  height={238}
                   border={20}
                   color={[255, 255, 255, 0.85]} // RGBA
                   scale={scale}
