@@ -1,19 +1,18 @@
 import Image from "next/legacy/image";
-import Link from "next/link";
 
 import { useTranslation } from "next-i18next";
 
-import hero from "../../public/images/about/hero.png";
+import hero from "../../public/images/need-help/img_spiritus_grid_faq.png";
 
 export default function Hero() {
   const { t } = useTranslation("needhelp");
 
   return (
     <section id="hero" key="hero-section">
-      <div className="flex max-h-fit max-w-full items-center justify-center text-neutral-800">
-        <Image src={hero} alt="Representative spiritus" priority />
+      <div className="flex max-h-fit max-w-full items-center justify-center">
+        <Image src={hero} alt="Representative spiritus" priority className="" />
       </div>
-      <div className="my-20 flex justify-center">
+      <div className="my-12 flex justify-center">
         <div className="mt-4 flex w-full flex-col items-center justify-center sm:w-full md:w-3/4 lg:w-2/3">
           <h1 className="mb-3 text-center font-bold tracking-tight text-cta dark:text-sp-white">
             {t("hero_title")}
@@ -34,7 +33,6 @@ export default function Hero() {
           </p>
         </div>
       </div>
-
     </section>
   );
 }

@@ -43,10 +43,10 @@ export default function NeedHelp() {
         <meta property="og:image:height" content="630" />
       </Head>
       <div className="mx-auto mb-96 h-full min-h-screen flex-col md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-        <div className="mx-4 lg:mx-0">
+        <div className="mx-4 mt-20 lg:mx-0">
           <Hero />
         </div>
-        <div className="my-24 px-4 md:my-32">
+        <div className="my-16 px-4">
           <Questions />
         </div>
       </div>
