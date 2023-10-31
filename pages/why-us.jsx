@@ -11,7 +11,7 @@ import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import BecomeGuardianCTA from "../components/about/BecomeGuardianComponent";
 import WhyUsImage1 from "../public/images/why-us/img_whyus_01.png";
-import WhyUsImage2 from "../public/images/why-us/img_whyus_02.png";
+import WhyUsImage2 from "../public/images/why-us/img_whyus_02_alter.png";
 import WhyUsImage3 from "../public/images/why-us/img_whyus_03.png";
 
 export default function About() {

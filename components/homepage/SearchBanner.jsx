@@ -24,7 +24,7 @@ export function SearchBanner() {
       </div>
       <div className="hidden lg:block">
         <Image
-          src="/images/img_spiritus_grid.png"
+          src="/images/img_spiritus_grid_alter.png"
           alt="popular-spiritus"
           className="aspect-auto h-auto max-h-story-mobile min-h-story-mobile w-full rounded-sp-14 object-cover lg:max-h-story-desktop"
           height={0}

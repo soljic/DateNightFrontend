@@ -89,7 +89,7 @@ export function CTA() {
           </div>
         </div>
         <Image
-          src="/images/homepage_cta.png"
+          src="/images/homepage_cta_alter.png"
           width={510}
           height={580}
           sizes="100vw"
