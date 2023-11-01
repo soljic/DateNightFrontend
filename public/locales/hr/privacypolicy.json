@@ -1,0 +1,40 @@
+{
+    "meta_privacy_title": "Spiritus | Privacy Policy",
+    "meta_privacy_description": "Privacy Policy for Spiritus Memoria",
+    
+    "privacy_title": "Politika privatnosti i uvjeti korištenja osobnih podataka",
+    "privacy_subtitle": "Spiritus Memoria d.o.o. Ulica Ivana Meštrovića 35, 10360 Sesvete, Hrvatska",
+    
+    "updated_date":"Ažurirano 1. listopada 2023.",
+    "address":"Spiritus Memoria d.o.o. Privacy Policy",
+
+    "chapter_1_title":"(01) PODACI KOJE PRIKUPLJAMO",
+    "chapter_2_title":"(02) KAKO KORISTIMO VAŠE OSOBNE PODATKE?",
+    "chapter_3_title":"(03) DIJELJENJE VAŠIH OSOBNIH PODATAKA",
+    "chapter_4_title":"(04) BIHEVIORALNI MARKETING",
+    "chapter_5_title":"(05) NE PRATI",
+    "chapter_6_title":"(06) VAŠA PRAVA",
+    "chapter_7_title":"(07) ČUVANJE PODATAKA",
+    "chapter_8_title":"(08) MALOLJETNICI",
+    "chapter_9_title":"(09) PROMJENE",
+    "chapter_10_title":"(10) KONTAKTIRAJTE NAS",
+
+    "chapter_1_text_p1":"Prilikom posjeta Stranici vlasnika Spiritus Memoria d.o.o.,  automatski prikupljamo određene informacije o vašem uređaju, uključujući podatke o vašem web pregledniku, IP adresi, vremenskoj zoni i nekim kolačićima koji su instalirani na vašem uređaju. Također, dok pregledavate Stranicu, prikupljamo informacije o pojedinačnim web stranicama ili proizvodima koje pregledavate, o tome koje Vas web stranice ili pojmovi pretraživanja upućuju na Stranicu te informacije o načinu na koji interagirate sa Stranicom. Ove automatski prikupljene informacije nazivamo \"Podaci o uređaju\".",
+    "chapter_1_text_p2":"Podatke o uređaju prikupljamo pomoću sljedećih tehnologija:\"Kolačići\" su datoteke koje se pohranjuju na vašem uređaju ili računalu i često uključuju anonimni jedinstveni identifikator. Za više informacija o kolačićima i kako ih onemogućiti, posjetite http://www.allaboutcookies.org.\"Log datoteke\" prate radnje na Stranici i prikupljaju podatke, uključujući Vašu IP adresu, vrstu preglednika, davatelja internetske usluge, referalne/izlazne stranice i vremenske žigove.\"Web znakovi\", \"oznake\" i \"pikseli\" su elektroničke datoteke koje se koriste za zapisivanje informacija o načinu na koji pregledavate Stranicu.",
+    "chapter_1_text_p3":"Dodatno, kada obavljate kupnju ili pokušavate obaviti kupnju putem Stranice prikupljamo određene informacije, kao što su Vaše ime, adresa za naplatu, adresa za dostavu i podaci o plaćanju (uključujući brojeve kreditnih kartica, adresu e-pošte i broj telefona). Ove informacije nazivamo \"Informacije o narudžbi\".”",
+    "chapter_1_text_p4":"Kada govorimo o \"Osobnim podacima\" u ovoj Politici privatnosti, ovo se odnosi i na Podatke o uređaju i na Informacije o narudžbi.",
+
+    "chapter_2_text_p1":"Informacije o narudžbi koje prikupljamo uglavnom koristimo kako bismo ispunili sve narudžbe koje ste postavili putem Stranice (što uključuje obradu Vaših podataka o plaćanju, organiziranje dostave i pružanje računa i/ili potvrda o narudžbi). Osim toga, koristimo Informacije o narudžbi kako bismo komunicirali s Vama, provjeravali narudžbe radi potencijalnih rizika ili prijevare i, u skladu s postavkama koje ste s nama podijelili, pružali Vam informacije ili oglase o našim proizvodima ili uslugama. Također, prihvaćanjem ovih uvjeta, korisnici dopuštaju Stranici praćenje sadržaja koji su korisnici stvorili i dopuštaju Stranici korištenje tog sadržaja u marketinške svrhe i za buduće stvaranje sadržaja. Podatke o uređaju koje prikupljamo koristimo kako bismo bolje prepoznali potencijalne rizike i prijevare (posebno vašu IP adresu) i općenito kako bismo poboljšali i optimizirali našu Stranicu (na primjer, kreiranje analitika o tome kako naši korisnici pregledavaju Stranicu kako bismo ocijenili uspješnost naših marketinških kampanja i oglasa).",
+
+    "chapter_3_text_p1":"Dijelimo Vaše Osobne podatke s trećim stranama koje omogućavaju ključne funkcionalnosti naše Stranice, kao što je prethodno opisano. Na primjer, koristimo Stripe za održavanje našeg internetskog dućana - više informacija o tome kako Stripe koristi vaše Osobne podatke možete pronaći ovdje: https://stripe.com/en-gb-hr/privacy. Također koristimo Google Analytics kako bismo bolje razumjeli kako naši korisnici koriste Stranicu - više informacija o tome kako Google koristi vaše Osobne podatke možete pronaći ovdje: https://www.google.com/intl/en/policies/privacy/. Možete se odjaviti iz Google Analyticsa ovdje: https://tools.google.com/dlpage/gaoptout. Najzad, Vaše Osobne podatke možemo dijeliti kako bismo se pridržavali primjenjivih zakona i propisa, odgovorili na sudski poziv, nalog za pretres ili drugi zakoniti zahtjev za informacijama koji primimo ili kako bismo na drugi način zaštitili svoja prava.",
+
+    "chapter_4_text_p1":"Kao što je prethodno opisano, koristimo vaše Osobne podatke kako bismo Vam pružili ciljane oglase ili marketinške komunikacije za koje vjerujemo da bi vas mogli zanimati. Za više informacija o tome kako ciljano oglašavanje funkcionira, možete posjetiti edukacijsku stranicu Network Advertising Initiative (\"NAI\") na http://www.networkadvertising.org/understanding-onlineadvertising/how-does-it-work. Možete se odjaviti iz ciljanog oglašavanja na sljedećim poveznicama:FACEBOOK - https://www.facebook.com/settings/?tab=ads GOOGLE - https://www.google.com/settings/ads/anonymous BING - https://advertise.bingads.microsoft.com/en-us/resources/policies/personalized-ads Dodatno, možete se odjaviti od nekih od ovih usluga posjetom portalu za odjavu Digital Advertising Alliance na http://optout.aboutads.info/.",
+
+    "chapter_5_text_p1":"Napomena da ne mijenjamo prakse prikupljanja i korištenja podataka naše Web stranice kada primimo signal \"Ne pratiti\" iz vašeg preglednika.",
+    "chapter_6_text_p1":"Ako ste stanovnik Europe ili Sjedinjenih Američkih Država imate pravo pristupiti osobnim podacima koje čuvamo o Vama i zatražiti da se Vaši osobni podaci isprave, ažuriraju ili izbrišu. Ako želite iskoristiti to pravo, kontaktirajte nas putem kontaktnih podataka navedenih u nastavku. Osim toga, ako ste stanovnik Europe ili Sjedinjenih Američkih Država, napominjemo da obrađujemo Vaše podatke i kako bismo ispunili ugovore koje imamo s Vama (primjerice, ako napravite narudžbu putem Stranice) ili kako bismo ostvarivali naše legitimne, prethodno navedene poslovne interese. Također, Vaši podaci mogu se prenositi izvan Europe, uključujući Kanadu i Sjedinjene Američke Države.",
+    "chapter_7_text_p1":"Kada postavite narudžbu putem Stranice čuvat ćemo Vaše Informacije o narudžbi u evidenciji sve dok nas ne zamolite da te informacije izbrišemo.",
+    "chapter_8_text_p1":"Web stranica nije namijenjena osobama mlađim od 18 godina.",
+    "chapter_9_text_p1":"Povremeno možemo ažurirati ovu politiku privatnosti kako bismo odražavali, primjerice, promjene u našim poslovnim praksama ili iz drugih operativnih, pravnih ili regulatornih razloga.",
+    "chapter_10_text_p1":"Za više informacija o našim praksama privatnosti te ako imate pitanja ili želite podnijeti prigovor, molimo da nas kontaktirate putem e-pošte na hello@spiritus.app ili putem poštanske adrese navedene u nastavku:Spiritus Memoria d.o.o. Ulica Ivana Meštrovića 35, 10360 Sesvete, Hrvatska"
+
+}
