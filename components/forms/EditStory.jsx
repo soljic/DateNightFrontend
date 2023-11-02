@@ -84,6 +84,7 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
       setPending(false);
       onSuccess();
     } catch (err) {
+      console.log(err);
       const msg = err?.response?.data?.errors?.[0]?.message?.[0] || "";
       onError(msg ? msg : t("message_save_failed"));
       setPending(false);
@@ -110,6 +111,7 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
     }
 
     if (newImage) {
+      console.log("new image", newImage);
       const form = new FormData();
       const fileName = await HashFilename(images[0].file.name);
       form.append("file", images[0].file, fileName);
@@ -135,7 +137,7 @@ export function EditStoryForm({ story, tagChoices, onSuccess, onError }) {
       }
     }
     // check new image format is correct
-    if (!SUPPORTED_IMAGES.includes(newImage.file.type)) {
+    if (newImage && !SUPPORTED_IMAGES.includes(newImage.file.type)) {
       return false;
     }
     return true;
