@@ -319,6 +319,7 @@ function GlobalSearchRow({
   subtitle,
   imageUrl,
   navigationType,
+  flags,
 }) {
   const { t } = useTranslation("common");
   const { data: session } = useSession();
@@ -369,7 +370,7 @@ function GlobalSearchRow({
           )}
         </div>
       </Link>
-      {navigationType === "SPIRITUS_DETAILS" && (
+      {navigationType === "SPIRITUS_DETAILS" && flags.includes("CLAIMABLE") && (
         <div className="flex flex-col justify-center">
           {!session?.user ? (
             <button
@@ -377,7 +378,7 @@ function GlobalSearchRow({
                 e.preventDefault();
                 openModal();
               }}
-              className="flex items-center rounded-sp-10 border border-sp-day-200 p-1.5"
+              className="flex items-center rounded-sp-14 border border-sp-day-200 p-1.5"
             >
               {t("cta_claim_spiritus_button_search")}
             </button>

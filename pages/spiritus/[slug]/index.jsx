@@ -91,6 +91,7 @@ export default function SpiritusPage({
         deathDate={deathDate}
         birthDate={birthDate}
         isGuardian={isGuardian}
+        claimable={claimable || false}
       />
 
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">

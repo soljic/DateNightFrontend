@@ -61,6 +61,7 @@ export function ProfileHeader({
   birthDate,
   deathDate,
   isGuardian,
+  claimable,
 }) {
   const { t } = useTranslation("common");
   const router = useNavigationRouter();
@@ -155,6 +156,14 @@ export function ProfileHeader({
                     <PencilIcon className="h-6 w-6" />
                     {t("edit_spiritus_menu_title")}
                   </button>
+                </Link>
+              )}
+              {claimable && (
+                <Link
+                  href={`/claim/spiritus/${spiritus.slug}`}
+                  className="mt-2 flex items-center justify-center rounded-sp-10 bg-sp-white p-1.5 font-semibold text-black text-sm"
+                >
+                  {t("claim_spiritus_button")}
                 </Link>
               )}
             </div>
