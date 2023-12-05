@@ -1,7 +1,7 @@
 import { useState } from "react";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { useSession } from "next-auth/react";
@@ -32,6 +32,30 @@ const stats = [
 export function CreateMemorialBanner() {
   const { t } = useTranslation("common");
 
+  return (
+    <div className="mx-5 flex min-h-[40vh] items-center justify-center md:mx-0 lg:h-[55vh] lg:justify-center">
+      <div className="flex w-full max-w-2xl flex-col items-center space-y-4 md:space-y-8 lg:items-start">
+        <div className="max-w-lg">
+          <CreateInputFields />
+        </div>
+      </div>
+      <div className="hidden lg:block">
+        <Image
+          src="/images/img_spiritus_grid_alter.png"
+          alt="popular-spiritus"
+          className="aspect-auto h-auto max-h-story-mobile min-h-story-mobile w-full rounded-sp-14 object-cover lg:max-h-story-desktop"
+          height={0}
+          width={0}
+          sizes="100vw"
+        />
+      </div>
+    </div>
+  );
+}
+
+function CreateInputFields() {
+  const { t } = useTranslation("common");
+
   const { data: session } = useSession();
 
   const [name, setName] = useState("");
@@ -43,16 +67,16 @@ export function CreateMemorialBanner() {
   const closeModal = () => setIsOpen(false);
 
   return (
-    <div className="z-40 mx-3.5 mt-6 flex flex-col items-center sm:mx-5 sm:mt-10 md:mx-0 md:mt-16 lg:mt-28 2xl:mt-32">
+    <div className="z-40 mt-6 flex flex-col items-center sm:mx-5 md:items-start">
       <LoginModal isOpen={isOpen} closeModal={closeModal} />
-      <h1 className="mb-6 text-center font-bold leading-none subpixel-antialiased text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
-        {t("create_memorial_title")}
-      </h1>
-      <div className="w-full md:max-w-md">
-        <h2 className="mb-2 px-2 text-sp-black subpixel-antialiased text-sm dark:text-sp-white md:font-medium md:text-base">
+      <h2 className="mb-5 text-center font-bold subpixel-antialiased text-3xl tracking-sp-tighten sm:text-4xl lg:text-start">
+        {t("search_memorials_title")}
+      </h2>
+      <div className="mx-auto flex w-full flex-col md:max-w-md lg:mx-0">
+        <h2 className="mb-2 text-sp-black subpixel-antialiased text-sm dark:text-sp-white md:font-medium md:text-base">
           {t("create_memorial_subtitle")}
         </h2>
-        <div className="space-y-2 px-1">
+        <div className="space-y-2">
           <div className="block rounded-sp-10">
             <input
               value={name}
@@ -99,17 +123,20 @@ export function CreateMemorialBanner() {
             </Link>
           )}
         </div>
-      </div>
-      <div className="mx-auto flex w-full flex-wrap justify-center space-x-1 pt-2 md:space-x-2">
-        {stats.map((elem, index) => (
-          <div className="inline-flex items-center" key={`stat-elem-${index}`}>
-            <elem.icon className="inline-block h-4 w-4 fill-sp-black dark:fill-sp-white md:h-5 md:w-5" />
-            <span className="mx-1 font-medium text-sm md:font-semibold">
-              {elem.number}
-            </span>
-            <span className="text-sm md:text-base">{t(elem.text)}</span>
-          </div>
-        ))}
+        <div className="mx-auto flex w-full flex-wrap justify-center space-x-1 pt-2 md:space-x-4 lg:mx-0">
+          {stats.map((elem, index) => (
+            <div
+              className="inline-flex items-center"
+              key={`stat-elem-${index}`}
+            >
+              <elem.icon className="inline-block h-4 w-4 fill-sp-black dark:fill-sp-white md:h-5 md:w-5" />
+              <span className="mx-1 font-medium text-sm md:font-semibold">
+                {elem.number}
+              </span>
+              <span className="text-sm md:text-base">{t(elem.text)}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

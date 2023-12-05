@@ -4,33 +4,32 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { SearchIcon } from "@heroicons/react/outline";
+import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
+
+import { MemoryGuardianIcon } from "../spiritus/Icons";
 
 export function SearchBanner() {
   const { t } = useTranslation("common");
 
   return (
-    <div className="mx-5 flex min-h-[40vh] items-center justify-center md:mx-0 lg:h-[55vh] lg:justify-evenly">
-      <div className="flex w-full max-w-2xl flex-col items-center space-y-4 md:space-y-8 lg:items-start">
-        <h2 className="text-center font-bold subpixel-antialiased text-3xl tracking-sp-tighten sm:text-4xl md:text-[44px] md:leading-[3rem] lg:pr-10 lg:text-start xl:text-5xl">
-          {t("search_memorials_title")}
-        </h2>
-        <div className="max-w-lg">
+    <div className="z-40 mx-3.5 mt-6 flex flex-col items-center justify-center sm:mx-5 sm:mt-10 md:mx-0 md:mt-16 lg:mt-28 2xl:mt-36">
+      <h1 className="mb-6 text-center font-bold leading-none subpixel-antialiased text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
+        {t("create_memorial_title")}
+      </h1>
+      <div className="w-full md:max-w-md">
+        <div className="mx-auto max-w-lg">
           <SearchInput />
-          <p className="mt-2.5 whitespace-pre-line font-medium leading-5 text-sm">
-            {t("search_memorials_subtitle")}
+          <p className="mt-2.5 text-center font-medium leading-5 text-sm">
+            {t("search_memorials_subtitle_1")}{" "}
+            <MemoryGuardianIcon
+              className="inline-block h-5 w-5 fill-sp-day-200"
+              aria-hidden="true"
+            />
+            <span className="font-medium"> 700k </span>
+            <span> {t("search_memorials_subtitle_2")}</span>
           </p>
         </div>
-      </div>
-      <div className="hidden lg:block">
-        <Image
-          src="/images/img_spiritus_grid_alter.png"
-          alt="popular-spiritus"
-          className="aspect-auto h-auto max-h-story-mobile min-h-story-mobile w-full rounded-sp-14 object-cover lg:max-h-story-desktop"
-          height={0}
-          width={0}
-          sizes="100vw"
-        />
       </div>
     </div>
   );
@@ -44,61 +43,35 @@ function SearchInput() {
       <label htmlFor="search-spiritus" className="sr-only">
         {t("search_memorials_placeholder")}
       </label>
-      <div className="hidden md:flex">
-        <div className="relative flex flex-grow items-stretch focus-within:z-10">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <SearchIcon
-              className="h-5 w-5 text-sp-day-400"
-              aria-hidden="true"
+      <div className="relative flex flex-grow flex-col focus-within:z-10">
+        <div className="space-y-2 px-1">
+          <div className="relative flex rounded-sp-10">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <SearchIcon
+                className="h-5 w-5 text-sp-day-400"
+                aria-hidden="true"
+              />
+            </div>
+            <input
+              value={searchTerm}
+              maxLength={120}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+              }}
+              placeholder={t("search_memorials_placeholder")}
+              className="block w-full rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 pl-10 text-gray-900 placeholder-sp-day-400 outline-none ring-inset placeholder:text-sm dark:border-sp-gray dark:bg-sp-black dark:text-sp-white md:placeholder:text-base"
             />
           </div>
-          <input
-            type="search-spiritus"
-            name="search-spiritus"
-            id="search-spiritus"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-            className="block w-full rounded-none rounded-l-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 pl-10 text-gray-900 placeholder-sp-day-400 outline-none ring-inset dark:border-sp-gray dark:bg-sp-black dark:text-sp-white"
-            placeholder={t("search_memorials_placeholder")}
-          />
         </div>
-        <Link
-          type="button"
-          href={`/search?name=${searchTerm}`}
-          className="relative -ml-px inline-flex items-center rounded-r-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-4 py-3 font-semibold text-sp-white outline-none ring-inset focus:ring-2 focus:ring-sp-cotta dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black"
-        >
-          {t("search_placeholder")}
-        </Link>
-      </div>
-      <div className="flex flex-col space-y-2 md:hidden">
-        <div className="relative flex flex-grow items-stretch focus-within:z-10">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <SearchIcon
-              className="h-5 w-5 text-sp-day-400"
-              aria-hidden="true"
-            />
-          </div>
-          <input
-            type="search-spiritus"
-            name="search-spiritus"
-            id="search-spiritus"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-            className="block w-full rounded-sp-10 border-2 border-sp-day-400 bg-sp-day-50 p-3 pl-10 text-gray-900 placeholder-sp-day-400 outline-none ring-inset placeholder:text-sm dark:border-sp-gray dark:bg-sp-black dark:text-sp-white md:placeholder:text-base"
-            placeholder={`${t("search_memorials_placeholder")}`}
-          />
+        <div className="mt-2 flex overflow-hidden rounded-2xl border-5 border-sp-fawn/30 md:border-6">
+          <Link
+            className="flex w-full items-center justify-center bg-sp-black px-4 py-2 text-center font-medium text-sp-white dark:bg-sp-day-50 dark:text-sp-black md:text-lg xl:py-3"
+            href={`/search?name=${searchTerm}`}
+          >
+            {t("search_placeholder")}
+            <ArrowCircleRightIcon className="ml-3 inline-block h-6 w-6" />
+          </Link>
         </div>
-        <Link
-          type="button"
-          href={`/search?name=${searchTerm}`}
-          className="relative flex items-center justify-center rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn px-4 py-3 font-semibold text-sp-white outline-none ring-inset focus:ring-2 focus:ring-sp-cotta dark:from-sp-dark-fawn dark:to-sp-fawn dark:text-sp-black"
-        >
-          {t("search_placeholder")}
-        </Link>
       </div>
     </div>
   );

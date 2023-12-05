@@ -76,12 +76,12 @@ export default function Home({ featured, categories, anniversaries, recent }) {
             id="create-memorial"
           >
             <div className="z-50 mx-auto w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-              <CreateMemorialBanner />
+              <SearchBanner />
             </div>
           </div>
         </div>
         <div className="mx-auto mb-8 min-h-[60vh] w-full md:w-5/6 lg:mb-16 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
-          <SearchBanner />
+          <CreateMemorialBanner />
         </div>
         <div className="mx-auto min-h-screen w-full md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
           <TabSections
