@@ -6,10 +6,12 @@ import Link from "next/link";
 
 import { ClockIcon, SearchIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
+import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { Spinner } from "@/components/Status";
+import { LoginModal } from "@/components/auth/Login";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 
 import { GlobalSearch } from "@/service/http/search";
@@ -33,7 +35,7 @@ export default function Search({ defaultFilter, defaultName }) {
   const [current, setCurrent] = useState(0);
   const [isLast, setIsLast] = useState(true);
   const [total, setTotal] = useState(0);
-  const [placeholder, setPlaceholder] = useState("search_placeholder")
+  const [placeholder, setPlaceholder] = useState("search_placeholder");
 
   const clear = () => {
     setResults([]);
@@ -161,7 +163,7 @@ export default function Search({ defaultFilter, defaultName }) {
   );
 }
 
-function Filter({ filter, setFilter, clear , setPlaceholder}) {
+function Filter({ filter, setFilter, clear, setPlaceholder }) {
   const { t } = useTranslation("common");
 
   return (
@@ -318,6 +320,19 @@ function GlobalSearchRow({
   imageUrl,
   navigationType,
 }) {
+  const { t } = useTranslation("common");
+  const { data: session } = useSession();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   const getURL = (navType) => {
     switch (navType) {
       case "PLACE_DETAILS":
@@ -329,28 +344,54 @@ function GlobalSearchRow({
     }
   };
   return (
-    <Link
-      href={getURL(navigationType)}
-      className="flex w-full rounded-sp-14 p-2 text-sp-medlight hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown"
-    >
-      {imageUrl ? (
-        <div className="relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
-          <Image src={imageUrl} alt={"Search result thumbnail"} layout="fill" />
+    <div className="flex w-full items-center justify-between rounded-sp-14 p-2 text-sp-medlight hover:bg-gradient-to-r hover:from-sp-day-300 hover:to-sp-day-100 dark:text-sp-white dark:hover:from-sp-dark-brown dark:hover:to-sp-brown">
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+      <Link href={getURL(navigationType)} className="flex items-center">
+        {imageUrl ? (
+          <div className="relative mr-2 h-20 w-20 overflow-hidden rounded-sp-14 bg-sp-fawn bg-opacity-50 dark:bg-sp-medium">
+            <Image
+              src={imageUrl}
+              alt={"Search result thumbnail"}
+              layout="fill"
+            />
+          </div>
+        ) : (
+          <div className="flex h-20 w-20 items-center justify-center">
+            <ClockIcon className="h-7 w-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
+          </div>
+        )}
+        <div className="flex w-full flex-col justify-center px-2 py-2 text-lg tracking-sp-tighten">
+          <p className="break-words pr-4 capitalize">{title.toLowerCase()}</p>
+          {!!subtitle && (
+            <p className="capitalize text-sp-black text-opacity-60 tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
+              {subtitle.toLowerCase()}
+            </p>
+          )}
         </div>
-      ) : (
-        <div className="flex h-20 w-20 items-center justify-center">
-          <ClockIcon className="h-7 w-7 text-sp-black text-opacity-60 dark:text-sp-white dark:text-opacity-60" />
+      </Link>
+      {navigationType === "SPIRITUS_DETAILS" && (
+        <div className="flex flex-col justify-center">
+          {!session?.user ? (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                openModal();
+              }}
+              className="flex items-center rounded-sp-10 border border-sp-day-200 p-1.5"
+            >
+              {t("cta_claim_spiritus_button_search")}
+            </button>
+          ) : (
+            <Link
+              href={`/claim/spiritus/${slug}`}
+              className="flex items-center rounded-sp-10 border border-sp-day-200 p-1.5"
+            >
+              {t("cta_claim_spiritus_button_search")}
+            </Link>
+          )}
         </div>
       )}
-      <div className="flex w-full flex-col justify-center px-2 py-2 text-lg tracking-sp-tighten">
-        <p className="break-words pr-4 capitalize">{title.toLowerCase()}</p>
-        {!!subtitle && (
-          <p className="capitalize text-sp-black text-opacity-60 tracking-sp-tighten dark:text-sp-white dark:text-opacity-60">
-            {subtitle.toLowerCase()}
-          </p>
-        )}
-      </div>
-    </Link>
+    </div>
   );
 }
 
