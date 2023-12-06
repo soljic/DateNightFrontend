@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link";
 
-import { Dialog, Popover, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   BookmarkIcon,
   ChevronRightIcon,
@@ -11,7 +11,6 @@ import {
   UploadIcon,
 } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
-import Lottie from "lottie-react";
 import { useSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -20,12 +19,10 @@ import {
   InfoIcon,
   InfoIconColored,
   LockIcon,
-  RoseIcon,
   StoryHookIcon,
 } from "../../components/Icons";
 import { Spinner } from "../../components/Status";
 import { LoginModal } from "../../components/auth/Login";
-import { SendRose } from "../../service/http/rose";
 import {
   SaveSpiritus,
   SaveStory,

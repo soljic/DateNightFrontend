@@ -1,13 +1,10 @@
 import { useState } from "react";
 
-import Image from "next/image";
 import Link from "next/link";
 
 import { SearchIcon } from "@heroicons/react/outline";
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { useTranslation } from "next-i18next";
-
-import { MemoryGuardianIcon } from "../spiritus/Icons";
 
 export function SearchBanner() {
   const { t } = useTranslation("common");
@@ -17,17 +14,11 @@ export function SearchBanner() {
       <h1 className="mb-6 text-center font-bold leading-none subpixel-antialiased text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
         {t("create_memorial_title")}
       </h1>
-      <div className="w-full md:max-w-md">
+      <div className="mt-6 w-full md:max-w-md">
         <div className="mx-auto max-w-lg">
           <SearchInput />
           <p className="mt-2.5 text-center font-medium leading-5 text-sm">
-            {t("search_memorials_subtitle_1")}{" "}
-            <MemoryGuardianIcon
-              className="inline-block h-5 w-5 fill-sp-day-200"
-              aria-hidden="true"
-            />
-            <span className="font-medium"> 700k </span>
-            <span> {t("search_memorials_subtitle_2")}</span>
+            {t("search_memorials_subtitle")}
           </p>
         </div>
       </div>

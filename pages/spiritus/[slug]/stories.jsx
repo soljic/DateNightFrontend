@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
@@ -5,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import is from "sharp/lib/is";
 
+import { LoginModal } from "@/components/auth/Login";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
 import { CreateStoryCTA, StoryList } from "@/components/spiritus/StoryList";
@@ -20,8 +23,18 @@ export default function SpiritusStoriesPage({
   stories,
   isLastPage,
   isGuardian,
+  claimable,
 }) {
   const { t } = useTranslation("common");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
@@ -70,12 +83,16 @@ export default function SpiritusStoriesPage({
         />
         {SetSpiritusOG(spiritus)}
       </Head>
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+
       <ProfileHeader
         spiritus={spiritus}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
         isGuardian={isGuardian}
+        claimable={claimable}
+        setOpenModal={openModal}
       />
       <section className="mx-auto min-h-screen text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={tabs} />
@@ -100,6 +117,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
 
   let isGuardian = false;
+  let claimable = false;
 
   let res;
   try {
@@ -110,8 +128,10 @@ export async function getServerSideProps(context) {
         context.locale
       );
       isGuardian = res?.data?.flags.includes("GUARDIAN");
+      claimable = res?.data?.flags.includes("CLAIMABLE");
     } else {
       res = await GetSpiritusBySlug(slug, null, context.locale);
+      claimable = res?.data?.flags.includes("CLAIMABLE");
     }
     const spiritus = res.data;
 
@@ -139,6 +159,7 @@ export async function getServerSideProps(context) {
         stories,
         isLastPage: resStories.last,
         isGuardian,
+        claimable,
       },
     };
   } catch (err) {

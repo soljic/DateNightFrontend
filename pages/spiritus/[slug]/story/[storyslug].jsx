@@ -1,9 +1,12 @@
+import { useState } from "react";
+
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import { LoginModal } from "@/components/auth/Login";
 import { CTA } from "@/components/homepage/CTA";
 import { HorizontalDivider } from "@/components/layout/Common";
 import FullWidthLayout from "@/components/layout/LayoutV2";
@@ -29,9 +32,19 @@ export default function StoryPage({
   spiritus,
   isLastPage,
   isGuardian,
+  claimable,
   saved,
 }) {
   const { t } = useTranslation("common");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
@@ -86,6 +99,8 @@ export default function StoryPage({
         />
         {SetStoryOG(spiritus, displayStory)}
       </Head>
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+
       <ProfileHeader
         spiritus={spiritus}
         coverImages={coverImages}
@@ -93,6 +108,8 @@ export default function StoryPage({
         deathDate={deathDate}
         birthDate={birthDate}
         isGuardian={isGuardian}
+        claimable={claimable || false}
+        setOpenModal={openModal}
       />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={tabs} />
@@ -115,6 +132,7 @@ export default function StoryPage({
               memoryGuardians={guardians}
               isGuardian={isGuardian}
               saved={saved}
+              setOpenModal={openModal}
             />
           </div>
         </div>
@@ -151,6 +169,7 @@ export async function getServerSideProps(context) {
   const { storyslug } = context.query;
   const session = await getSession(context);
   let isGuardian = false;
+  let claimable = false;
   let saved = false;
 
   let data = {};
@@ -163,7 +182,7 @@ export async function getServerSideProps(context) {
       );
       data = resStory.data;
       isGuardian = data?.spiritus?.flags.includes("GUARDIAN");
-      saved = data?.spiritus?.flags.includes("SAVED");
+      claimable = data?.spiritus?.flags.includes("CLAIMABLE");
     } else {
       const resStory = await GetStoryBySlug(storyslug, null, context.locale);
       data = resStory.data;

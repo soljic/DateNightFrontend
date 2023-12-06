@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
@@ -5,6 +7,7 @@ import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import BecomeGuardianCTA from "@/components/about/BecomeGuardianComponent";
+import { LoginModal } from "@/components/auth/Login";
 import { HorizontalDivider } from "@/components/layout/Common";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { Links, ProfileHeader, Tributes } from "@/components/spiritus/Sections";
@@ -25,6 +28,16 @@ export default function StoryPage({
   isLastPage,
 }) {
   const { t } = useTranslation("common");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
   const guardians =
@@ -59,6 +72,8 @@ export default function StoryPage({
         />
         {SetStoryOG(spiritus, displayStory)}
       </Head>
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+
       <ProfileHeader
         spiritus={spiritus}
         coverImages={[]}
@@ -66,6 +81,7 @@ export default function StoryPage({
         deathDate={deathDate}
         birthDate={birthDate}
         isGuardian={isGuardian}
+        setOpenModal={openModal}
       />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <div className="mt-7 grid w-full gap-8 px-4 sm:space-y-0 md:grid-cols-3 md:px-0">
@@ -85,6 +101,7 @@ export default function StoryPage({
               spiritusSlug={spiritus.slug}
               memoryGuardians={guardians}
               isGuardian={isGuardian}
+              setOpenModal={openModal}
             />
           </div>
         </div>

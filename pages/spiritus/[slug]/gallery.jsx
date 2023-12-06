@@ -1,9 +1,12 @@
+import { useState } from "react";
+
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import { LoginModal } from "@/components/auth/Login";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import { Gallery } from "@/components/spiritus/Gallery";
 import { ProfileHeader, Tabs } from "@/components/spiritus/Sections";
@@ -14,8 +17,22 @@ import { GetSpiritusGalleryImagesV2 } from "@/service/http/spiritus";
 import { dateDiffYears } from "@/utils/dateDiff";
 import { SetSpiritusOG } from "@/utils/metaTags";
 
-export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
+export default function SpiritusGalleryPage({
+  spiritus,
+  images,
+  isGuardian,
+  claimable,
+}) {
   const { t } = useTranslation("common");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
@@ -64,12 +81,16 @@ export default function SpiritusGalleryPage({ spiritus, images, isGuardian }) {
         />
         {SetSpiritusOG(spiritus)}
       </Head>
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+
       <ProfileHeader
         spiritus={spiritus}
         age={age}
         deathDate={deathDate}
         birthDate={birthDate}
+        claimable={claimable || false}
         isGuardian={isGuardian}
+        setOpenModal={openModal}
       />
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
         <Tabs tabs={tabs} />
@@ -92,6 +113,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
 
   let isGuardian = false;
+  let claimable = false;
   try {
     const resGallery = await GetSpiritusGalleryImagesV2(
       slug,
@@ -101,6 +123,7 @@ export async function getServerSideProps(context) {
     );
     const spiritus = resGallery.data.spiritus;
     isGuardian = spiritus.flags.includes("GUARDIAN");
+    claimable = spiritus.flags.includes("CLAIMABLE");
 
     return {
       props: {
@@ -114,6 +137,7 @@ export async function getServerSideProps(context) {
         spiritus,
         images: resGallery.data.images.content,
         isGuardian,
+        claimable,
       },
     };
   } catch (err) {

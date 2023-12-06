@@ -37,6 +37,7 @@ import {
   FuneralOrgIcon,
   LinkIcon,
   MemoryGuardianAlterIcon,
+  MemoryGuardianIcon,
   MiniBioIcon,
   PlaceIcon,
   QuoteIcon,
@@ -62,9 +63,11 @@ export function ProfileHeader({
   deathDate,
   isGuardian,
   claimable,
+  setOpenModal,
 }) {
   const { t } = useTranslation("common");
   const router = useNavigationRouter();
+  const { data: session, status } = useSession();
 
   let profileImage = null;
   if (spiritus.profileImage && spiritus.profileImage?.url) {
@@ -150,22 +153,37 @@ export function ProfileHeader({
                 }`}
                 {age && <span className="ml-0.5">({age})</span>}
               </p>
-              {isGuardian && (
-                <Link href={`/edit/spiritus/${spiritus.id}`} className="mt-2">
-                  <button className="w-50 flex items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 pr-3 font-semibold text-black text-sm">
-                    <PencilIcon className="h-6 w-6" />
-                    {t("edit_spiritus_menu_title")}
-                  </button>
-                </Link>
-              )}
-              {claimable && (
-                <Link
-                  href={`/claim/spiritus/${spiritus.slug}`}
-                  className="mt-2 flex items-center justify-center rounded-sp-10 bg-sp-white p-1.5 font-semibold text-black text-sm"
-                >
-                  {t("claim_spiritus_button")}
-                </Link>
-              )}
+              <div className="flex space-x-4">
+                {isGuardian && (
+                  <Link href={`/edit/spiritus/${spiritus.id}`} className="mt-2">
+                    <button className="w-50 flex items-center justify-center gap-1 rounded-sp-10 bg-sp-white p-1.5 pr-3 font-semibold text-black text-sm">
+                      <PencilIcon className="h-6 w-6" />
+                      {t("edit_spiritus_menu_title")}
+                    </button>
+                  </Link>
+                )}
+                {claimable ? (
+                  session?.user ? (
+                    <Link
+                      href={`/claim/spiritus/${spiritus.slug}`}
+                      className="mt-2 flex items-center justify-center rounded-sp-10 bg-sp-white px-3 py-1.5 font-semibold text-black text-sm"
+                    >
+                      <MemoryGuardianIcon className="h-5 w-5 pr-1" />
+                      {t("claim_spiritus_button")}
+                    </Link>
+                  ) : (
+                    <button
+                      className="mt-2 flex items-center justify-center rounded-sp-10 bg-sp-white px-3 py-1.5 font-semibold text-black text-sm"
+                      onClick={() => {
+                        !session?.user.name ? setOpenModal() : () => {};
+                      }}
+                    >
+                      <MemoryGuardianIcon className="h-5 w-5 pr-1" />
+                      {t("claim_spiritus_button")}
+                    </button>
+                  )
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
@@ -522,13 +540,13 @@ function SpiritusActions({
   claimable,
   upgradeable,
   hideBacklink,
+  setOpenModal,
 }) {
   const { t } = useTranslation("common");
   const router = useNavigationRouter();
   const [fbShareUrl, setFbShareUrl] = useState("");
   const [copied, setCopied] = useState(false);
   const [isSaved, setIsSaved] = useState(saved || false);
-  const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -538,14 +556,6 @@ function SpiritusActions({
         : ""
     );
   }, []);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
 
   const saveSpiritus = async () => {
     await SaveSpiritus(session.user.accessToken, spiritusId);
@@ -559,7 +569,6 @@ function SpiritusActions({
 
   return (
     <div className="divide-y divide-sp-day-200 text-sm">
-      <LoginModal isOpen={isOpen} closeModal={closeModal} />
       {/* share links */}
       <div className="flex w-full flex-col items-center justify-center gap-2 p-6">
         <div className="flex items-center space-x-2.5">
@@ -631,7 +640,7 @@ function SpiritusActions({
           </Link>
         ) : (
           <button
-            onClick={openModal}
+            onClick={setOpenModal}
             className="flex w-full items-center justify-center gap-2 rounded-sp-10 bg-gradient-to-r from-sp-day-900 to-sp-dark-fawn p-1.5  text-center font-semibold leading-5 text-sp-white tracking-wide dark:from-sp-dark-fawn dark:to-sp-fawn md:p-2"
           >
             {t("send_story")}
@@ -698,7 +707,7 @@ function SpiritusActions({
           <button
             onClick={() => {
               !session?.user.name
-                ? openModal()
+                ? setOpenModal()
                 : isSaved
                 ? unSaveSpiritus()
                 : saveSpiritus();
@@ -731,6 +740,7 @@ export function Links({
   claimable,
   upgradeable,
   hideBacklink, // hide link leading back to spiritus
+  setOpenModal,
 }) {
   const { t } = useTranslation("common");
   const organization = funeralOrg || null;
@@ -807,6 +817,7 @@ export function Links({
         claimable={claimable}
         upgradeable={upgradeable}
         hideBacklink={hideBacklink}
+        setOpenModal={setOpenModal}
       />
     </div>
   );

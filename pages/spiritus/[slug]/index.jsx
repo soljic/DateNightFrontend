@@ -1,9 +1,12 @@
+import { useState } from "react";
+
 import Head from "next/head";
 
 import { getSession } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
+import { LoginModal } from "@/components/auth/Login";
 import FullWidthLayout from "@/components/layout/LayoutV2";
 import {
   About,
@@ -31,6 +34,15 @@ export default function SpiritusPage({
   upgradeable,
 }) {
   const { t } = useTranslation("common");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const birthDate = spiritus.birth ? new Date(spiritus.birth) : null;
   const deathDate = spiritus.death ? new Date(spiritus.death) : null;
@@ -85,6 +97,8 @@ export default function SpiritusPage({
         />
         {SetSpiritusOG(spiritus)}
       </Head>
+      <LoginModal isOpen={isOpen} closeModal={closeModal} />
+
       <ProfileHeader
         spiritus={spiritus}
         age={age}
@@ -92,6 +106,7 @@ export default function SpiritusPage({
         birthDate={birthDate}
         isGuardian={isGuardian}
         claimable={claimable || false}
+        setOpenModal={openModal}
       />
 
       <section className="mx-auto mb-96 h-full min-h-screen flex-col text-sp-white md:w-5/6 lg:w-3/4 xl:w-2/3 2xl:w-2/5">
@@ -125,6 +140,7 @@ export default function SpiritusPage({
               upgradeable={upgradeable || false}
               claimable={claimable || false}
               hideBacklink={true}
+              setOpenModal={openModal}
             />
           </div>
         </div>
@@ -155,6 +171,7 @@ export async function getServerSideProps(context) {
       upgradeable = res?.data?.flags.includes("SUBSCRIPTION");
     } else {
       res = await GetSpiritusBySlug(slug, null, context.locale);
+      claimable = res?.data?.flags.includes("CLAIMABLE");
     }
     const spiritus = res.data;
 
