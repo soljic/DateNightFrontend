@@ -8,7 +8,7 @@ export const CurrencyContext = createContext({
 });
 
 export function CurrencyProvider({ children }) {
-  const [currency, setCurrency] = useState("USD"); // Default USD
+  const [currency, setCurrency] = useState("EUR"); // Default USD
 
   // get the currency and set it to the state if supported; else set to default
   useEffect(() => {
@@ -16,7 +16,7 @@ export function CurrencyProvider({ children }) {
     if (currency && ALLOWED_CURRENCIES.includes(currency)) {
       setCurrency(currency);
     } else {
-      setCurrency("USD");
+      setCurrency("EUR");
     }
   }, [currency]);
 

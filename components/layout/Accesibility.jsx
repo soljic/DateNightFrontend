@@ -36,7 +36,7 @@ export function AccesibilityMenu() {
   const { currency, updateCurrency } = useContext(CurrencyContext);
 
   // set if user has already made a purchase -> stripe does not allow mixing currencies
-  const [usedCurrency, setUsedCurrency] = useState("usd");
+  const [usedCurrency, setUsedCurrency] = useState("eur");
 
   // wait for component to mount to avoid hydration errs
   useEffect(() => {

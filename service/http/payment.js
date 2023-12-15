@@ -78,7 +78,7 @@ export async function GetLocalizedProducts(
 export async function GetProducts(accessToken, action, currency, lang) {
   return await axios.get(
     `${API_URL}/v2/payment/package/default?platform=${DEFAULT_PLATFORM}&action=${action}&currency=${
-      currency || "usd"
+      currency || "eur"
     }`,
     {
       headers: {
@@ -99,7 +99,7 @@ export async function GetCouponProduct(
 ) {
   return await axios.get(
     `${API_URL}/v2/payment/package/coupon?platform=${DEFAULT_PLATFORM}&action=${action}&coupon=${coupon}&currency=${
-      currency || "usd"
+      currency || "eur"
     }`,
     {
       headers: {

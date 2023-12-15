@@ -24,6 +24,7 @@ export default function PricingPage({ plans, locale }) {
         t("pricing_plan_free_list_2"),
         t("pricing_plan_free_list_3"),
         t("pricing_plan_free_list_4"),
+        t("pricing_plan_free_list_5"),
       ],
     },
     {
@@ -150,7 +151,7 @@ export async function getStaticPaths(context) {
   return {
     paths: context.locales.map((loc) => ({
       params: {
-        slug: "usd",
+        slug: "eur",
       },
       locale: loc,
     })),

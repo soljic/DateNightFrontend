@@ -7,14 +7,15 @@
 
     "pricing_plan_month": "mjesec",
   
-    "pricing_plan_free_title": "Za posjetitelje Aleje Sjećanja",
+    "pricing_plan_free_title": "Za posjetitelje",
     "pricing_plan_free_subtitle": "Zauvijek besplatno.",
     "pricing_plan_free_price": "Besplatno",
     "pricing_plan_free_list_1": " Posjetite sve postojeće memorijale",
     "pricing_plan_free_list_2": " Pošaljite počasti za svoje bližnje, čitajte njihove priče",
     "pricing_plan_free_list_3": "Predložite priče i fotografije na memorijale",
-    "pricing_plan_free_list_4": "Posjetite Aleju Sjećanja kako biste pronašli grobne lokacije",
-  
+    "pricing_plan_free_list_4": "Pronađite lokacije grobova na gradskim grobljima",
+    "pricing_plan_free_list_5": "Pretražujte aplikaciju i web stranicu sigurno, bez oglasa",
+
     "pricing_plan_subscribe_title": "Mjesečni plan za Čuvare Uspomena",
     "pricing_plan_subscribe_subtitle": "Mjesečna cijena po memorijalu.",
     "pricing_plan_subscribe_price": "5€/mj",
@@ -38,7 +39,7 @@
   
     "pricing_plan_get_started": "Započnite",
   
-    "still_have_questions_heading": "Imate li dodatnih pitanja pitanja?",
+    "still_have_questions_heading": "Imate li dodatnih pitanja?",
     "still_have_questions_subheading": "Ako ne možete pronaći informaciju koju tražite, molimo Vas da posjetite stranicu korisničke podrške.",
     "still_have_questions_need_help": "Trebam pomoć!",
 
