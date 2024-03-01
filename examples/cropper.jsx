@@ -1,7 +1,6 @@
 import Head from "next/head";
 
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { CropEditor } from "@/components/cropper/SpiritusProfileImage";
 import { Footer } from "@/components/layout/Footer";
