@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { ShieldIcon } from "../../../components/Icons";
 import { Spinner } from "../../../components/Status";
 import LayoutNoNav from "../../../components/layout/LayoutNoNav";
+import { LoginCredentials } from "@/service/http/auth";
 
 function isEmailValid(email) {
   return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -55,16 +56,13 @@ export default function EmailLogin() {
   const onSubmit = async (data) => {
     try {
       setSubmitting(true);
-      const res = await signIn("credentials", {
-        redirect: false,
-        username: data.email,
-        password: data.password,
-      });
-
+      const res = await LoginCredentials(data.email, data.password);
+      console.log("DATA",res);
+      console.log("ERROR",res.error);
       if (!res.error) {
         Router.back();
       }
-
+     
       handleErr(res.error);
       setSubmitting(false);
     } catch (error) {
@@ -160,6 +158,7 @@ export default function EmailLogin() {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  console.log("SESSION", session);
 
   if (session) {
     return {

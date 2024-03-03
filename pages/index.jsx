@@ -24,7 +24,7 @@ export default function Home({ featured, categories, anniversaries, recent }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content={t("meta_home_description")} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Spiritus" />
+        <meta property="og:site_name" content="DateNight" />
         <meta property="og:title" content="Spiritus Stories" />
         <meta property="og:url" content="https://spiritus.app/en/" />
         <meta

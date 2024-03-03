@@ -1,13 +1,14 @@
 import axios from "axios";
 
-import { API_URL, defaultLimit, defaultOffset } from "../constants";
+import { API_URL, MOVIE_API, defaultLimit, defaultOffset } from "../constants";
 import { ImagePath } from "../util";
 
-export async function LoginCredentials(username, password) {
+export async function LoginCredentials(email, password) {
+  console.log("MOVIE_API",MOVIE_API);
   return await axios.post(
-    `${API_URL}/v2/authentication/login?grant_type=credentials`,
+    `${MOVIE_API}/api/account/login`,
     {
-      username,
+      email,
       password,
     }
   );
@@ -32,10 +33,10 @@ export async function Logout(token) {
   });
 }
 
-export async function Register(name, lastName, email, password) {
+export async function Register(name, username, email, password) {
   return await axios.post(`${API_URL}/v2/authentication/register`, {
     name,
-    lastName,
+    username,
     email,
     password,
   });

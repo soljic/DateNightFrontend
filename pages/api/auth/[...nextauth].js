@@ -41,7 +41,7 @@ export default NextAuth({
           res = await LoginCode(credentials.code);
         } else {
           res = await LoginCredentials(
-            credentials.username,
+            credentials.email,
             credentials.password
           );
         }

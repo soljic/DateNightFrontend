@@ -1,4 +1,5 @@
 export const API_URL = process.env.NEXT_API_URL;
+export const MOVIE_API = "http://localhost:5000"
 export const defaultOffset = 0;
 export const defaultLimit = 10;
 
